@@ -65,7 +65,7 @@ public class TestUserController {
 		long testUserId =  Long.parseLong(request.getParameter("email")) ;
 		System.out.println( "*****post testUserId is  "+testUserId);
 		TestUser user = testUserService.queryTestUserByUserId(1);
-		System.out.println( "aaaaa  map value is  "+user.toString());
+		System.out.println( "aaaaa111  map value is  "+user.toString());
 
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("userId", user.getTest_user_id());
