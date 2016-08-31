@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TFCC会员注册界面</title>
+    <link rel="stylesheet" href="../../css/common/reset.css"/>
+    <link rel="stylesheet" href="../../css/general/reg.css"/>
+    <script src="../../js/common/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+    <div class="mark1">
+        <div class="mark1-box">
+            <h2>恭喜你注册成功</h2>
+            <div class="real-name">
+                <a href="">实名认证获取第一桶金</a>
+            </div>
+            <div class="real-name1">
+                <a href="">实名认证获取第一桶金</a>
+            </div>
+            <div class="later-on">
+                <a href="">稍后在说</a>
+            </div>
+            <div class="later-on1">
+                <a href="">稍后在说</a>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="logo data-width">
+            <img src="../../images/reglogo_02.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="container">
+        <div class="data-width">
+            <div class="">
+                <div class="cur"><a href="html/login/login.html">你当前的位置：首页</a><span>>注册</span></div>
+            </div>
+            <div class="cur-reg">
+                  <div class="reg-pic">
+                      <img src="../../images/reg1.jpg" alt=""/>
+                  </div>
+                  <div class="reg-nav fix">
+                     <ul class="fl">
+                        <li class="active one" style="background-position:0px 0px;">普通会员注册</li>
+                        <li style="background-position:-170px  -61px">网点会员注册</li>
+                        <li style="background-position:-320px  -122px">LP 会员注册</li>
+                        <li  class="five" style="background-position:-470px  -194px">投资公司</li>
+                    </ul>
+                  </div>
+                 <div class="form">
+                    <!--普通会员-->
+                    <form action="" class="" method="post">
+                        <div>
+                            <label >手机号 <span>*</span></label>
+                            <input type="text" name="phoneA" class="phoneA" placeholder="请输入你的手机号" maxlength="11"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div class="div-yzm">
+                            <label >验证码 <span>*</span></label>
+                            <input type="text" name="yzmA" placeholder="请输入手机验证码" />
+                            <input type="button" class="yzmA" value="获取验证码" onclick="sub_phoneA()"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >密码 <span>*</span></label>
+                            <input type="password" name="passwordA"  class="passwordA" placeholder="请输入登录密码"  maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >重复密码 <span>*</span></label>
+                            <input type="password" name="resPasswordA" placeholder="请确认登陆密码" maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >推荐人 <span>*</span></label>
+                            <input type="text" name="phone1" class="phone1" maxlength="11" placeholder="输入推荐人手机号"/>
+                            <span class="error1"></span>
+                        </div>
+                        <p class="myagree"><input type="checkbox" checked="checked" /><label>我 同意</label>&nbsp;<span>《用户协议》</span></p>
+                        <div class="submitA"><a href="" onclick="ajaxA()">立即注册</a></div>
+                    </form>
+
+
+                    <!--网点会员注册-->
+                    <form  class="hide">
+                        <div>
+                            <label >手机号 <span>*</span></label>
+                            <input type="text" name="phoneB" class="phoneB" placeholder="请输入你的手机号" maxlength="11"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >验证码 <span>*</span></label>
+                            <input type="text" name="yzmB" placeholder="请输入手机验证码" />
+                            <input type="button" class="yzmB" onclick="sub_phoneB()" value="获取验证码"/>
+                            <span class="error1"></span>
+                            <span class="yzm-t"></span>
+                        </div>
+                        <div>
+                            <label >网点名称<span>*</span></label>
+                            <input type="text" name="branchB" class="branchB"  placeholder="实际网点名称" />
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >姓名<span>*</span></label>
+                            <input type="text" name="usernameB"  class="usernameB" placeholder="网点负责人真实姓名"  />
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >法人身份证<span>*</span></label>
+                            <input type="text" name="idcardB"  class="idcardB" placeholder="请输入有效的身份证号码"  maxlength="18"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >密码 <span>*</span></label>
+                            <input type="password" name="passwordB" class="passwordB" placeholder="请输入登录密码"  maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >重复密码 <span>*</span></label>
+                            <input type="password" name="resPasswordB"  class="resPasswordB" placeholder="请确认登陆密码" maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >推荐人 <span>*</span></label>
+                            <input type="text" name="phone2"   class="phone2" placeholder="请输入推荐人手机号"/>
+                            <span class="error1"></span>
+                        </div>
+                        <p class="myagree"><input type="checkbox"  checked="checked" /><label>我 同意</label>&nbsp;<span>《用户协议》</span></p>
+                        <div class="submitB"><a href="" onclick="ajaxB()">立即注册</a></div>
+                    </form>
+
+
+                     <!--lp注册会员-->
+                    <form action="" class="hide">
+                        <div><label >手机号 <span>*</span></label>
+                            <input type="text" name="phoneC" class="phoneC" placeholder="请输入你的手机号" maxlength="11"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >验证码 <span>*</span></label>
+                            <input type="text" name="yzmC" placeholder="请输入手机验证码" />
+                            <input type="button" class="yzmC" onclick="sub_phoneC()" value="获取验证码"/>
+                            <span class="error1"></span><span class="yzm-t"></span>
+                        </div>
+                        <div>
+                            <label >姓名 <span>*</span></label>
+                            <input type="text" name="usernameC" class="usernameC" placeholder="请输入您的真实姓名"  maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >身份证号码 <span>*</span></label>
+                            <input type="text" name="idcardC" class="idcardC" placeholder="请输入您的有效身份证"  maxlength="18"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >密码 <span>*</span></label>
+                            <input type="passwordC" name="passwordC" placeholder="请输入登录密码"  maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >重复密码 <span>*</span></label>
+                            <input type="passwordC" name="resPasswordC" class="resPasswordC" placeholder="请确认登陆密码" maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >推荐人 <span>*</span></label>
+                            <input type="text" name="phone3" class="phone3" placeholder="输入推荐人手机号"/>
+                            <span class="error1"></span>
+                        </div>
+                        <p class="myagree"><input type="checkbox" checked="checked"/><label>我 同意</label>&nbsp;<span>《用户协议》</span></p>
+                        <div class="submitC"><a href="">立即注册</a></div>
+                    </form>
+
+                     <!--投资商会员注册-->
+                    <form action="" class="hide">
+                        <div>
+                            <label >手机号 <span>*</span></label>
+                            <input type="text" name="phoneD" class="phoneD"  placeholder="请输入你的手机号" maxlength="11"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >验证码 <span>*</span></label>
+                            <input type="text" name="yzmD" placeholder="请输入手机验证码" />
+                            <input type="button" class="yzmD" onclick="sub_phoneD()" value="获取验证码"/>
+                            <span class="error1"></span><span class="yzm-t"></span>
+                        </div>
+                        <div>
+                            <label >公司名称 <span>*</span></label>
+                            <input type="text" name="firmD" class="firmD" placeholder="请输入公司的实际名称"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >公司法人 <span>*</span></label>
+                            <input type="" name="legalD" class="legalD" placeholder="请输入法人的真实姓名"  maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >公司法人身份证 <span>*</span></label>
+                            <input type="text" name="idcardD"class="idcardD" placeholder="请输入您的有效身份证号码"  maxlength="18"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >密码  <span>*</span></label>
+                            <input type="passwordD" name="passwordD" calss="psaawordD" placeholder="请输入登录密码"  maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >重复密码 <span>*</span></label>
+                            <input type="password" name="resPasswordD" class="resPasswordD" placeholder="请确认登陆密码" maxlength="16"/>
+                            <span class="error1"></span>
+                        </div>
+                        <div>
+                            <label >推荐人 <span>*</span></label>
+                            <input type="text" name="phone4" placeholder="输入推荐人手机号"/>
+                            <span class="error1"></span>
+                        </div>
+                        <p class="myagree"><input type="checkbox" checked="checked"/><label>我 同意</label>&nbsp;<span>《用户协议》</span></p>
+                        <div class="submitD"><a href="" onclick="ajaxD()">立即注册</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>©Copyright 2014-2016  r8exchange.COM  All Rights Reserved. Powered by TFCC（北京）科技有限公司京ICP备13025163号-1</p>
+        </div>
+    </div>
+    <script src="../../js/register/tabslist.js"></script>
+    <script src="../../js/register/reg-general.js"></script>
+    <script src="../../js/register/reg-branch.js"></script>
+    <script src="../../js/register/res-lp.js"></script>
+    <script src="../../js/register/invest.js"></script>
+</body>
+</html>

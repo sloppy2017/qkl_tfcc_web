@@ -36,7 +36,13 @@
 		<typeAlias alias="EzbSectionScoreBean" type="com.qkl.tfcc.api.po.EzbSectionScoreBean" />
 		<typeAlias alias="YsEmployeeBean" type="com.qkl.tfcc.api.po.YsEmployeeBean" /> -->
     </typeAliases>
-      
+    
+    <plugins>
+        <plugin interceptor="com.qkl.tfcc.provider.plugin.PagePlugin">
+            <property name="dialect" value="mysql"/>
+            <property name="pageSqlId" value=".*listPage.*"/>
+        </plugin>
+    </plugins>
     <!-- 指定映射器路径 -->  
     <mappers>  
 		<mapper resource="modelMapper/TestUser.xml"/>

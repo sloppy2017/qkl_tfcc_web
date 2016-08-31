@@ -20,6 +20,8 @@
 	http://www.springframework.org/schema/data/jpa 
 	http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
 	
+	<!-- 启用注解 -->
+    <context:annotation-config />
 	<context:component-scan base-package="com.qkl.tfcc">
 		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
 	</context:component-scan>

@@ -53,7 +53,7 @@ public class TestUserController {
 //		System.out.println( "aaaaa  map value is  "+user.toString());
 //		map.put("userId", user.getTest_user_id());
 //		map.put("name", user.getName());  
-//		System.out.println( "aaaaa  map value is  "+map.toString());
+//		System.out.println( "aaaaaaa  map value is  "+map.toString());
 //		return map;
 //	}
 	

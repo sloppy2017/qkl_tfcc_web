@@ -11,12 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.dubbo.common.logger.Logger;
+import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.util.help.HtmlUtil;
+import com.qkl.util.help.Page;
+import com.qkl.util.help.UUId;
+import com.qkl.util.help.pager.PageData;
 
 public class BaseAction{
-	
+    protected Logger logger = LoggerFactory.getLogger(BaseAction.class);
+    
 	public final static String SUCCESS ="success";  
 	
 	public final static String MSG ="msg";  
@@ -26,6 +34,9 @@ public class BaseAction{
 	
 	public final static String LOGOUT_FLAG = "logoutFlag";  
 	
+	protected ModelAndView mv = this.getModelAndView();
+    protected PageData pd = new PageData();
+    protected HttpServletResponse response;
 	
    @InitBinder  
    protected void initBinder(WebDataBinder binder) {  
@@ -100,4 +111,60 @@ public class BaseAction{
 		result.put(MSG, message);
 		HtmlUtil.writerJson(response, result);
 	}
+	
+	/**
+     * 得到PageData
+     */
+    public PageData getPageData(){
+        return new PageData(this.getRequest());
+    }
+    
+    /**
+     * 得到ModelAndView
+     */
+    public ModelAndView getModelAndView(){
+        return new ModelAndView();
+    }
+    
+    /**
+     * 得到request对象
+     */
+    public HttpServletRequest getRequest() {
+        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        
+        return request;
+    }
+    /**
+     * 设置response对象
+     */
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+    /**
+     * 得到32位的uuid
+     * @return
+     */
+    public String get32UUID(){
+        
+        return UUId.getUUId();
+    }
+    
+    /**
+     * 得到分页列表的信息 
+     */
+    public Page getPage(){
+        
+        return new Page();
+    }
+    
+    public static void logBefore(Logger logger, String interfaceName){
+        logger.info("");
+        logger.info("start");
+        logger.info(interfaceName);
+    }
+    
+    public static void logAfter(Logger logger){
+        logger.info("end");
+        logger.info("");
+    }
 }

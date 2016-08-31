@@ -1,9 +1,12 @@
 package com.qkl.tfcc.controller.User;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,14 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.po.acc.AccDetail;
-import com.qkl.tfcc.api.po.sys.SysMaxnum;
+import com.qkl.tfcc.api.po.sys.SysGencode;
 import com.qkl.tfcc.api.po.user.Sendsms;
 import com.qkl.tfcc.api.po.user.SendsmsDetail;
 import com.qkl.tfcc.api.po.user.User;
@@ -33,16 +38,15 @@ import com.qkl.tfcc.api.service.sms.api.SmsService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.api.service.sys.api.SysMaxnumService;
 import com.qkl.tfcc.api.service.user.api.UserService;
-import com.qkl.tfcc.sms.SmsSend;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
+import com.qkl.util.help.FileUtil;
 import com.qkl.util.help.IdcardUtils;
+import com.qkl.util.help.ImgUtil;
 import com.qkl.util.help.MD5Util;
 import com.qkl.util.help.StringUtil;
-import com.qkl.tfcc.api.po.sys.SysGencode;
-
-import java.util.List;
+import com.qkl.util.help.pager.PageData;
 /**
  * 用户的控制类
  * <p>Description： 用户的控制类 </p>
@@ -1145,7 +1149,91 @@ public class UserController extends BaseAction{
 	        return b;  
 	} 
 	
-	
+	@RequestMapping(value="/upload")
+    public void upload(HttpServletRequest request,HttpServletResponse response,
+            @RequestParam(value="tp",required=false) MultipartFile tp){
+         // 判断文件是否为空  
+        logBefore(logger, "上传头像");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setHeader("Content-Type", "text/html; charset=UTF-8");
+        PrintWriter out  = null;
+        try {
+            out = response.getWriter();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        PageData pdfile = new PageData();   
+        pdfile = this.getPageData();
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("jpg","jpg");
+        map.put("png","png");
+        map.put("jpeg","jpeg");
+        map.put("png","png");
+        map.put("gif","gif");
+        map.put("bmp","bmp");
+        try {
+            String imgname = pdfile.getString("imgname");
+            String resources_base = "";
+            String resources_local = "";
+            String resources_backup = "";
+            List<SysGencode> tSysGencodeList =sysGenCodeService.findByGroupCode("RESOURCES_PATH", Constant.VERSION_NO);
+            for(SysGencode sysGencode:tSysGencodeList){
+                if("RESOURCES_BASE".equals(sysGencode.getCodeName())){
+                    resources_base = sysGencode.getCodeName();
+                }
+                if("RESOURCES_LOCAL".equals(sysGencode.getCodeName())){
+                    resources_local = sysGencode.getCodeName();
+                }
+                if("RESOURCES_BACKUP".equals(sysGencode.getCodeName())){
+                    resources_backup = sysGencode.getCodeName();
+                }
+            }
+            if("".equals(resources_base)||"".equals(resources_local)||"".equals(resources_backup)){
+                logger.info("RESOURCES_BASE or RESOURCES_LOCAL or RESOURCES_BACKUP Error:value may be null");
+                out.print("<script>parent.window.alert(\"服务器路径有误，请联系客服！\");</script>");
+                return;
+            }
+            int lastindex = imgname.lastIndexOf(".");
+            String imgtype = imgname.substring(lastindex+1,imgname.length());
+            System.out.println("----------imgtype:"+imgtype);
+            if(!map.containsKey(imgtype)){
+                out.print("<script>parent.window.alert(\"请上传jpg、png、jpeg、png、gif、bmp格式的图片！\");</script>");
+                return;
+            }
+            
+//            long currentTimeMillis = System.currentTimeMillis();
+            String new_img_name= get32UUID()+"_"+Constant.PIC_HEAD_WIDTH+"_"+Constant.PIC_HEAD_HEIGHT+"."+imgtype;
+            String http_img_url = resources_base+Constant.PIC_HEAD_PATH+new_img_name;
+            String server_img_url = resources_local+Constant.PIC_HEAD_PATH;//图片保存服务器路径
+            String backup_img_url = resources_backup+Constant.PIC_HEAD_PATH;//图片磁盘备份路径
+            
+            
+            System.out.println("-----------server_img_url----------------->>>>>>>>>>>>>>>>>"+server_img_url);
+            System.out.println("-----------http_img_url------------------->>>>>>>>>>>>>>>>>"+http_img_url);
+            System.out.println("-----------backup_img_url----------------->>>>>>>>>>>>>>>>>"+backup_img_url);
+            
+            FileUtil.copyFile(tp.getInputStream(), server_img_url,new_img_name).replaceAll("-", "");
+            FileUtil.copyFile(tp.getInputStream(), backup_img_url,new_img_name).replaceAll("-", "");
+            Map<String, Long> imgInfo = ImgUtil.getImgInfo(server_img_url+new_img_name);
+            Long w = imgInfo.get("w");
+            Long h = imgInfo.get("h");
+            Long s = imgInfo.get("s");
+            if(w != Constant.PIC_HEAD_WIDTH && h != Constant.PIC_HEAD_HEIGHT){
+                out.print("<script>top.alert(\"请上传100*100规格的图片！\");</script>");
+                return;
+            }
+            out.print("<script>parent.document.getElementById('newsimgid').src=\""+http_img_url+"\";parent.$('#n_img_name').val('"+new_img_name+"')</script>"); 
+            out.print("<script>parent.$('#n_img_width').val('"+w+"');parent.$('#n_img_height').val('"+h+"');parent.$('#n_img_size').val('"+s+"');</script>");
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.toString(), e);
+        }finally{
+            out.close();
+            logAfter(logger);
+        }
+        return;
+    }
 	
 	
 	
