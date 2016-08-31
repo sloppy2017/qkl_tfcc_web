@@ -52,7 +52,7 @@ public class TestUserController {
 //		TestUser user = testUserService.queryTestUserByUserId(1);
 //		System.out.println( "aaaaa  map value is  "+user.toString());
 //		map.put("userId", user.getTest_user_id());
-//		map.put("name", user.getName());
+//		map.put("name", user.getName());  
 //		System.out.println( "aaaaa  map value is  "+map.toString());
 //		return map;
 //	}
@@ -63,7 +63,7 @@ public class TestUserController {
 		
 		AjaxResponse ar = new AjaxResponse();
 		long testUserId =  Long.parseLong(request.getParameter("email")) ;
-		System.out.println( "*****post testUserId is  "+testUserId);
+		System.out.println( "*******post testUserId is  "+testUserId);
 		TestUser user = testUserService.queryTestUserByUserId(1);
 		System.out.println( "aaaaa1112222  map value is  "+user.toString());
 
