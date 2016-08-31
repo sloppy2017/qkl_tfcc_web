@@ -1,0 +1,29 @@
+{
+	"id":"tb_ezb_dep_perform",
+	"text":"e租宝钰申分公司绩效",
+	"source":"E租宝",
+	"config":[
+		{
+			"title":"分公司名称",
+			"field":"dep_name"
+		},
+		{
+			"title":"分公司编码",
+			"field":"dep_code"
+		},
+		{
+			"title":"绩效业绩",
+			"field":"dep_score",
+			"type":"double",
+			"format":"#.##"
+		},
+		{
+			"title":"人均绩效",
+			"field":"avg_dep_score",
+			"type":"double",
+			"format":"#.##"
+		}
+	]	
+}
+
+	

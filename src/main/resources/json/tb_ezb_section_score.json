@@ -1,0 +1,35 @@
+{
+	"id":"tb_ezb_section_score",
+	"text":"e租宝钰申分公司业绩数据",
+	"source":"E租宝",
+	"config":[
+		{
+			"title":"区域管理部名称",
+			"field":"section_name"
+		},
+		{
+			"title":"区域管理部编码",
+			"field":"section_code"
+		},
+		{
+			"title":"投资金额",
+			"field":"invest_money",
+			"type":"double",
+			"format":"#.##"
+		},
+		{
+			"title":"赎回金额",
+			"field":"detb_money",
+			"type":"double",
+			"format":"#.##"
+		},
+		{
+			"title":"净投资额",
+			"field":"score_money",
+			"type":"double",
+			"format":"#.##"
+		}
+	]	
+}
+
+	

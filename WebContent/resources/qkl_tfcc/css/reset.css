@@ -1,0 +1,26 @@
+body,div,ul,li,a,h1,h2,h3,h4,h5,h6,span,td,dd,th,tr,table,form,input,img{
+    margin:0;padding:0;font-family:'Microsoft YaHei';color:#8d8d8d;
+}
+ul,li {
+    list-style: none;
+}
+a{text-decoration: none;color:#8d8d8d;}
+.data-width{
+    width:1000px;
+    margin:0 auto;
+}
+.fix:after{
+    display: block;
+    height:0;
+    clear:both;
+    content: '';
+}
+.fix{
+    *zoom:1;
+}
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}

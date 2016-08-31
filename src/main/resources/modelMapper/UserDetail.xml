@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserDetail">
+<!--resultMap id="BaseResultMap" type="com.qkl.tfcc.api.po.user.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="pwdhash" property="pwdhash" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="is_loginlocked" property="isLoginlocked" jdbcType="VARCHAR" />
+    <result column="loginlock_time" property="loginlockTime" jdbcType="TIMESTAMP" />
+    <result column="is_smslocked" property="isSmslocked" jdbcType="VARCHAR" />
+    <result column="smslock_time" property="smslockTime" jdbcType="TIMESTAMP" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />      
+    <result column="phone" property="phone" jdbcType="VARCHAR" />    
+  </resultMap> -->
+
+     
+      
+       <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		select count(1) cnt
+        from tb_user_detail  where phone = #{phone} 
+	   </select> 
+	
+	  <select id="findByPhone" parameterType="java.lang.String" resultType="User" >
+		select 
+		 user_code userCode,
+		 phone phone,
+		 real_name realName,
+		 idno idno,
+		 crop_name cropName,
+		 crop_person cropPerson,
+		 branch_name branchName,
+		 ref_phone refPhone,
+		 qr_code qrCode,
+		 user_type userType,
+		 real_stat realStat,
+		 create_time createTime,
+		 modify_time modifyTime,
+		 operator  operator
+        from tb_user_detail  where phone = #{phone}
+	</select>
+	
+	
+	<insert id="add" parameterType="com.qkl.tfcc.api.po.user.UserDetail" >
+	 insert into tb_user_detail ( 
+	 user_code,
+	 phone,
+	 real_name,
+	 idno,
+	 crop_name,
+	 crop_person,
+	 branch_name,
+	 ref_phone,
+	 qr_code,
+	 user_type,
+	 real_stat,
+	 create_time,
+	 modify_time,
+	 operator)
+	 values(
+	 #{userCode},
+	 #{phone},
+	 #{realName},
+	 #{idno},
+	 #{cropName},
+	 #{cropPerson},
+	 #{branchName},
+	 #{refPhone},
+	 #{qrCode},
+	 #{userType},
+	 #{realStat},
+	 #{createTime},
+	 #{modifyTime},
+	 #{operator}
+	 )	 
+	 </insert>
+	
+	
+	<update id="updatephone" parameterType="java.util.Map" >    
+	     update tb_user_detail 
+	     set phone = #{phone},
+	         modify_time = #{modify_time}
+	     where user_code = #{usercode}     
+     </update>
+     
+     <update id="updatereal" parameterType="java.util.Map" >    
+	     update tb_user_detail 
+	     set real_name = #{realname},
+	         idno = #{idno},
+	         real_stat = #{realstat},
+	         modify_time = #{modify_time}
+	     where phone = #{phone}     
+     </update>
+	 
+
+</mapper>     

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- 全部日志 -->
+	<appender name="normal_log_file" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File" value="${log4j.path}/yc_udrs_web/normal.log" />
+		<param name="DatePattern" value=".yyyyMMddHH" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyyMMddHHmmss} %p %c %t %m%n" />
+		</layout>
+	</appender>
+	<!-- 输出日志到控制台 ConsoleAppender -->
+	<!-- <appender name="console" class="org.apache.log4j.ConsoleAppender"> -->
+	<!-- <param name="Threshold" value="info"></param> -->
+	<!-- <layout class="org.apache.log4j.TTCCLayout"> -->
+	<!-- <param name="ConversionPattern" value="TTCCLayout"></param> -->
+	<!-- </layout> -->
+	<!-- </appender> -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="INFO" />
+		</filter>
+	</appender>
+	<logger name="com.ibatis" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="java.sql.Connection" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="java.sql.Statement" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<!-- <logger name="java.sql.PreparedStatement" additivity="true"> -->
+	<!-- <level value="DEBUG" /> -->
+	<!-- <appender-ref ref="console" /> -->
+	<!-- </logger> -->
+	<!-- <logger name="java.sql.ResultSet" additivity="true"> -->
+	<!-- <level value="DEBUG" /> -->
+	<!-- <appender-ref ref="console" /> -->
+	<!-- </logger> -->
+	<root>
+		<level value="${log4j.level}"></level>
+		<appender-ref ref="normal_log_file" />
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>

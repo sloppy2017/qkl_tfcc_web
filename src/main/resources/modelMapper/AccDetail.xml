@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AccDetail">
+
+  
+   
+	
+	<insert id="add" parameterType="com.qkl.tfcc.api.po.acc.AccDetail" >
+	 insert into tb_acc_detail (user_code,sub_accno,bouns_source1,bouns_source2,rela_usercode,
+	 rela_userlevel,amnt,caldate,cntflag,`status`,create_time,modify_time,operator)
+	 values(
+	 #{userCode},
+	 #{subAccno},
+	 #{bounsSource1},
+	 #{bounsSource2},
+	 #{relaUsercode},
+	 #{relaUserlevel},
+	 #{amnt},
+	 #{caldate},
+	 #{cntflag},
+	 #{status},
+	 #{createTime},
+	 #{modifyTime},
+	 #{operator}
+	 )	 
+	 </insert>
+		 
+
+</mapper>     

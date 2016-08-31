@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SendsmsDetail">
+
+
+    <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		select count(1) cnt
+        from tb_sendsms_detail  where phone = #{phone} 
+        and send_time > DATE_ADD(NOW(),INTERVAL -1  HOUR)
+	</select> 
+
+     <select id="findByPhone" parameterType="java.lang.String" resultType="java.lang.String" >
+		select vcode vode
+        from tb_sendsms_detail  where phone = #{phone} order by send_time desc 
+         LIMIT 0,1
+	</select> 
+	
+	 <insert id="add" parameterType="com.qkl.tfcc.api.po.user.SendsmsDetail" >
+	 insert into tb_sendsms_detail (phone,vcode,sys_code,send_time)
+	 values(
+	 #{phone},
+	 #{vcode},
+	 #{sysCode},	 
+	 #{sendTime}
+	 )	 
+	 </insert>
+
+</mapper>     

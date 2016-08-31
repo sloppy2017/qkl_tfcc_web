@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Sendsms">
+
+
+     <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		select count(1) cnt
+        from tb_sendsms  where phone = #{phone}
+	</select> 
+
+    <select id="findByPhone" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		select ifnull(sendsms_count,0) sendsmsCount
+        from tb_sendsms  where phone = #{phone}
+	</select> 
+	
+	
+	
+	 <insert id="add" parameterType="com.qkl.tfcc.api.po.user.Sendsms" >
+	 insert into tb_sendsms (user_code,phone,sendsms_count,send_time,locked_time)
+	 values(
+	 #{userCode},
+	 #{phone},
+	 #{sendsmsCount},
+	 #{sendTime},
+	 #{lockedTime}
+	 )	 
+	 </insert>
+	 
+	 <update id="update" parameterType="com.qkl.tfcc.api.po.user.Sendsms" >
+      update tb_sendsms
+      set 
+      user_code = #{userCode},
+      sendsms_count = #{sendsmsCount},
+      send_time = #{sendTime},
+      locked_time = #{lockedTime}
+      where phone = #{phone}
+     </update>
+	 
+
+</mapper>     

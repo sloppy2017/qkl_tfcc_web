@@ -1,0 +1,47 @@
+{
+	"id":"tb_ezb_customer_info",
+	"text":"E租宝客户明细数据",
+	"source":"E租宝",
+	"config":[
+		{
+			"title":"客户名称",
+			"field":"cust_name"
+		},
+		{
+			"title":"所在城市",
+			"field":"city"
+		},
+		{
+			"title":"手机号码",
+			"field":"call_phone"
+		},
+		{
+			"title":"e租宝账号",
+			"field":"e_username"
+		},
+		{
+			"title":"理财师e租宝账号",
+			"field":"channel_username"
+		},
+		{
+			"title":"理财师姓名",
+			"field":"channel_realname"
+		},
+		{
+			"title":"所属分公司",
+			"field":"customer_flrm"
+		},
+		{
+			"title":"所属区域管理部",
+			"field":"customer_section"
+		},
+		{
+			"title":"注册时间",
+			"field":"reg_time",
+			"type":"date",
+			"format":"yyyy-MM-dd"
+		}
+	]	
+}
+
+	
