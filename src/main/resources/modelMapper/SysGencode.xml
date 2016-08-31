@@ -35,7 +35,7 @@
 	
 	
 	  <update id="find" parameterType="com.qkl.tfcc.api.po.sys.SysGencode" >    
-	    SELECT 
+	    SELECT   
 	    a.group_code groupCode,
    	    a.group_name groupName,
 		b.code_value codeValue,
