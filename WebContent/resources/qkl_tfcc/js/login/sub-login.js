@@ -123,7 +123,16 @@ $(function() {
 					var message = data.message;
 					console.log("success is "+data.success);
 					console.log("data is "+data.data);
+					console.log("data.phone is "+data.data.phone);
+					console.log("data.password is "+data.data.password);
+					
+					$('.phone').val(data.data.phone);
 					 alert("message is "+message);
+					
+					 
+//					 if(data.success){
+//						 window.location.href ="../index.html";
+//					 }
 				}, error: function (data) {
 					alert('请求错误');
 				}
