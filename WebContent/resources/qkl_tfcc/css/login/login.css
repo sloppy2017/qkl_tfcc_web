@@ -1,0 +1,193 @@
+.container{
+    position: absolute;
+    top:50%;
+    width:100%;
+    height:610px;
+    margin-top: -300px;
+}
+.header{
+    position: relative;
+}
+.head-top{
+    width:1000px;
+    height:80px;
+    margin:0px auto;
+}
+.header .logo{
+    float:left;
+}
+.header .logo img {
+    width:248px;
+    height:54px;
+    padding-top: 23px;
+}
+.header .nav{
+    float:right;
+    padding-top: 52px;
+    padding-right: 10px;
+}
+
+.header .nav li{
+    float:left;
+
+}
+.header .nav li a{
+    font-size:12px;
+    color:#8d8d8d;
+}
+.header .nav li span{
+    margin:0 10px;
+    width:1px;
+    height:12px;
+    display:inline-block;
+    background:#8d8d8d;
+}
+
+
+/*==============================*/
+.swiper-slide div {
+        display: block;
+        width: 100%;
+        height: 475px;
+}
+.login .data-width{
+    position: relative;
+    max-width:1000px;
+    min-width:760px;
+}
+.content .register{
+    width:298px;
+    height:364px;
+    position: absolute;
+    background:#e8f2fd;
+    right:5%;
+    top:70px;
+    border-radius: 5px;
+     z-index: 111;
+}
+@media screen and(min-width:1200px){
+    .content .register{
+        right:40%;
+    }
+}
+.register form{
+    width:252px;
+    height:324px;
+    margin:20px 22px ;
+
+}
+
+.register .form-h{
+    width:252px;
+    height:36px;
+}
+.register .form-h h3{
+      float:left;
+      color:#282828;
+}
+.register .form-h h4{
+    float:right;
+}
+.form-h h4 a{
+    font-size: 12px;
+    color:#2b71b1;
+ }
+
+.form-input1 h5{
+    font-size:12px;
+}
+.form-input1 input{
+    display: inline-block;
+    width:250px;
+    height:40px;
+    margin-bottom:16px;
+    font-size:12px;
+    text-indent: 36px;
+}
+.form-input1 .submit{
+    text-align: center;
+    text-indent: 0px;
+}
+.form-input1{
+    position: relative;
+    top: 16px;
+}
+.form-input1 li{
+    position: relative;
+}
+.form-input1 .error1{
+    font-size: 12px;
+    color:red;
+    position: absolute;
+    top: 41px;
+    left: 0px;
+}
+.form-input1 .error2{
+    font-size: 12px;
+    color:red;
+    position: absolute;
+    top: 41px;
+    left: 34px;
+}
+.form-input1 .errorC{
+    border:1px solid red;
+ }
+.form-input1 .checkedC{
+    border: 1px solid #1ece6d;
+}
+.form-input1 li span{
+    display:inline-block;
+    width:20px;
+    height:30px;
+    position: absolute;
+}
+
+.form-input1 .xiaoyan{
+    width:134px;
+    text-indent: 12px;
+}
+.form-input1 .sure{
+    width:15px;
+    height:15px;
+    margin-right: 20px;
+}
+.input-reg p{
+    margin:0;
+}
+#check-code{
+    margin-right: 32px;
+    width: 62px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    margin-top: 0;
+    color:#3884c9;
+}
+.input-reg p{
+    margin:-8px 0;
+}
+.input-reg p a{
+    font-size: 12px;
+}
+
+.content .login{
+    position: relative;
+    width:100%;
+    height:500px;
+}
+.swiper-wrapper .swiper-slide{
+    width:100%;
+    height:500px;
+}
+.swiper-wrapper .swiper-slide a{
+    width:100%;
+    height:500px;
+    display: block;
+}
+
+/*====================*/
+.footer .address{
+    color:#8b8b8b;
+    font-size: 12px;
+    text-align: center;
+}

@@ -405,7 +405,7 @@
 	</dependencies>
 	<!-- compile -->
 	<build>
-		<finalName>qkl_tfcc_web</finalName>
+		<finalName>/</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
