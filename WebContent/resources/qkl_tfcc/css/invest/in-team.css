@@ -1,0 +1,42 @@
+.main-top{width:100%;height:52px;border-bottom:1px  solid #ddd;text-indent: 20px;line-height: 52px;}
+.main-top span{font-size: 14px;}
+.c28{color:#282828}
+.numb{color:#575757;font-size: 14px;margin: 20px;}
+.ce9{color:#e9382c;font-size: 24px;font-weight: bold;}
+.query ul{float:left;height:30px;margin:0 20px;}
+.query ul li{float:left;height:30px;font-size: 14px;line-height: 30px;}
+.query ul li select{width:120px;height:30px;margin: 0 30px;}
+.query ul li input{width:180px;height:26px}
+.query ul li a{display: block;height:28px;width:100px;border:1px solid #ddd;text-align: center;margin-left:258px;}
+.in-time{}
+.in-time .in-date{height:30px;margin-top: 20px;margin-left: 20px;}
+.in-time .in-date li{float:left;height:28px;line-height: 28px;font-size: 14px;}
+.in-time .in-date .time-list{margin-left: 30px;}
+.time-list span a{margin-left:20px;color:#e9382c;}
+.time-btn{width:100px;height:28px;border:1px solid #ddd;line-height: 28px;text-align: center;margin-left: 122px;}
+
+/*分页1*/
+.btm .data-container ul li{
+    float: none;
+    margin-right: 0px;
+}
+#wrapper{
+    width:100%;
+}
+#wrapper {
+    margin-right:20px;;
+}
+
+.data-container {
+    margin-top: 5px;
+}
+.data-container ul {
+    padding: 0;
+    margin: 0;
+}
+.data-container li {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    background: #eee;
+    color: #666;
+}

@@ -2,7 +2,7 @@
 .main-top{
     height:52px;
     width:100%;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 .main-top div{
     margin-left: 20px;
@@ -19,7 +19,7 @@
 .main-middle{
     margin:0 20px;
     height:130px;
-    border-bottom:2px solid #ddd;
+    border-bottom:1px solid #ddd;
 }
 .main-middle .member{
     width:840px;
@@ -72,7 +72,6 @@
     position: relative;
    margin:20px 20px;
      height: 560px;
-    background: #fad;
 }
  .btm ul li{
     float:left;
