@@ -97,7 +97,7 @@ public class UserController extends BaseAction{
 		AjaxResponse ar = new AjaxResponse();
 		try {
 			String userName  =request.getParameter("phone");
-			String passWord  =request.getParameter("password");
+			String passWord  =request.getParameter("pass");
 			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
 			if ((Integer) map.get("status") == Constant.SUCCESS) {
 				User user = (User) map.get(Constant.LOGIN_USER);

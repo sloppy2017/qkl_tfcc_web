@@ -105,13 +105,14 @@ $(function() {
 
 	$(".submit").click(function () {
 		var phoneVal = $('.phone').val();
-		console.log(phoneVal);
+		console.log("phoneVal is "+phoneVal);
 		var passVal = $('.pass').val();
-		console.log(passVal);
+		console.log("passVal is "+passVal);
+	
 		if(flag){
 			$.ajax({
 				type: 'post',
-				url: './res.php',
+				url: '../../../service/user/login/',
 				dataType: 'json',
 				data: {
 					phone: phoneVal,
@@ -119,8 +120,12 @@ $(function() {
 				},
 				success: function (data) {
 					alert('请求成功');
+					var message = data.message;
+					console.log("success is "+data.success);
+					console.log("data is "+data.data);
+					 alert("message is "+message);
 				}, error: function (data) {
-					alert('请求错误')
+					alert('请求错误');
 				}
 			})
 		}
