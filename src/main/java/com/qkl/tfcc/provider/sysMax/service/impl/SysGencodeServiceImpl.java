@@ -1,12 +1,11 @@
 package com.qkl.tfcc.provider.sysMax.service.impl;
 
 import java.util.List;
-
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.po.sys.SysGencode;
@@ -31,8 +30,8 @@ public class SysGencodeServiceImpl implements SysGenCodeService {
 
 	@Override
 	@Transactional(propagation =Propagation.SUPPORTS)
-	public List<SysGencode> findByGroupCode(String groupCode, String versionNo) {
-		List<SysGencode> tSysGencodeList =sysGencodeDao.findByGroupCode(groupCode);
+	public List<Map<String,Object>> findByGroupCode(String groupCode, String versionNo) {
+		List<Map<String,Object>> tSysGencodeList =sysGencodeDao.findByGroupCode(groupCode);
 		return tSysGencodeList;
 	}
 

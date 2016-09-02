@@ -51,14 +51,12 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
 
 	@Override
 	public UserDetail findUserDetailByUserCode(String userCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return getSqlSession().selectOne(namespace+"."+"findByUserCode", userCode);
 	}
 
 	@Override
 	public UserDetail findUserDetailById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return getSqlSession().selectOne(namespace+"."+"findById", id);
 	}
 
 	@Override
@@ -88,5 +86,13 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
 		int eCnt=  getSqlSession().selectOne(namespace+"."+"findIsExist", phone);
 		return eCnt;
 	}
+
+    @Override
+    public void modifyUserHeadPic(String userCode,String imgAddrss) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("user_code",userCode);
+        map.put("img_addrss",imgAddrss);
+        getSqlSession().update(namespace+"."+"updateHeadPic",map);   
+    }
 
 }

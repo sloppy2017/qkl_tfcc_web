@@ -1,5 +1,6 @@
 package com.qkl.tfcc.controller.User;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.alibaba.fastjson.JSON;
+import com.qkl.tfcc.api.common.CodeConstant;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.po.acc.AccDetail;
 import com.qkl.tfcc.api.po.sys.SysGencode;
@@ -1163,8 +1166,7 @@ public class UserController extends BaseAction{
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        PageData pdfile = new PageData();   
-        pdfile = this.getPageData();
+        PageData pdfile = this.getPageData();
         Map<String,String> map = new HashMap<String, String>();
         map.put("jpg","jpg");
         map.put("png","png");
@@ -1173,20 +1175,20 @@ public class UserController extends BaseAction{
         map.put("gif","gif");
         map.put("bmp","bmp");
         try {
-            String imgname = pdfile.getString("imgname");
+            String filepath = pdfile.getString("filepath");
             String resources_base = "";
             String resources_local = "";
             String resources_backup = "";
-            List<SysGencode> tSysGencodeList =sysGenCodeService.findByGroupCode("RESOURCES_PATH", Constant.VERSION_NO);
-            for(SysGencode sysGencode:tSysGencodeList){
-                if("RESOURCES_BASE".equals(sysGencode.getCodeName())){
-                    resources_base = sysGencode.getCodeName();
+            List<Map<String,Object>> tSysGencodeList =sysGenCodeService.findByGroupCode("RESOURCES_PATH", Constant.VERSION_NO);
+            for(Map<String,Object> mapObj:tSysGencodeList){
+                if("RESOURCES_BASE".equals(mapObj.get("codeName"))){
+                    resources_base = mapObj.get("codeValue").toString();
                 }
-                if("RESOURCES_LOCAL".equals(sysGencode.getCodeName())){
-                    resources_local = sysGencode.getCodeName();
+                if("RESOURCES_LOCAL".equals(mapObj.get("codeName"))){
+                    resources_local = mapObj.get("codeValue").toString();
                 }
-                if("RESOURCES_BACKUP".equals(sysGencode.getCodeName())){
-                    resources_backup = sysGencode.getCodeName();
+                if("RESOURCES_BACKUP".equals(mapObj.get("codeName"))){
+                    resources_backup = mapObj.get("codeValue").toString();
                 }
             }
             if("".equals(resources_base)||"".equals(resources_local)||"".equals(resources_backup)){
@@ -1194,8 +1196,8 @@ public class UserController extends BaseAction{
                 out.print("<script>parent.window.alert(\"服务器路径有误，请联系客服！\");</script>");
                 return;
             }
-            int lastindex = imgname.lastIndexOf(".");
-            String imgtype = imgname.substring(lastindex+1,imgname.length());
+            int lastindex = filepath.lastIndexOf(".");
+            String imgtype = filepath.substring(lastindex+1,filepath.length());
             System.out.println("----------imgtype:"+imgtype);
             if(!map.containsKey(imgtype)){
                 out.print("<script>parent.window.alert(\"请上传jpg、png、jpeg、png、gif、bmp格式的图片！\");</script>");
@@ -1218,23 +1220,104 @@ public class UserController extends BaseAction{
             Map<String, Long> imgInfo = ImgUtil.getImgInfo(server_img_url+new_img_name);
             Long w = imgInfo.get("w");
             Long h = imgInfo.get("h");
-            Long s = imgInfo.get("s");
+//            Long s = imgInfo.get("s");
             if(w != Constant.PIC_HEAD_WIDTH && h != Constant.PIC_HEAD_HEIGHT){
-                out.print("<script>top.alert(\"请上传100*100规格的图片！\");</script>");
+                out.print("<script>top.alert(\"请上传"+Constant.PIC_HEAD_WIDTH+"*"+Constant.PIC_HEAD_WIDTH+"规格的图片！\");</script>");
                 return;
             }
-            out.print("<script>parent.document.getElementById('newsimgid').src=\""+http_img_url+"\";parent.$('#n_img_name').val('"+new_img_name+"')</script>"); 
-            out.print("<script>parent.$('#n_img_width').val('"+w+"');parent.$('#n_img_height').val('"+h+"');parent.$('#n_img_size').val('"+s+"');</script>");
+            out.print("<script>parent.document.getElementById('headPicId').src=\""+http_img_url+"\";parent.document.getElementById('left_headPic').src=\""+http_img_url+"\";parent.$('#img_addrss').val('"+http_img_url+"')</script>"); 
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.toString(), e);
         }finally{
+            out.print("<script>$(\"input[type='file']\").val('')</script>");
             out.close();
             logAfter(logger);
         }
         return;
     }
+	@RequestMapping(value="delPic")
+	public AjaxResponse delPic(){
+	    logBefore(logger, "删除图片");
+	    AjaxResponse ar = new AjaxResponse();
+	    ar.setSuccess(false);
+        ar.setMessage("删除失败！");
+        try{
+            pd = this.getPageData();
+            PageData pd = this.getPageData();
+            String img_addrss = pd.getString("img_addrss");
+            String img_name = img_addrss.substring(img_addrss.lastIndexOf("/")+1);                                         //图片路径
+            if(!StringUtil.isEmpty(img_addrss)){
+                //删除硬盘上的文件 start
+                String resources_local = "";
+                String resources_backup = "";
+                List<Map<String,Object>> tSysGencodeList =sysGenCodeService.findByGroupCode("RESOURCES_PATH", Constant.VERSION_NO);
+                for(Map<String,Object> mapObj:tSysGencodeList){
+                    if("RESOURCES_LOCAL".equals(mapObj.get("codeName"))){
+                        resources_local = mapObj.get("codeValue").toString();
+                    }
+                    if("RESOURCES_BACKUP".equals(mapObj.get("codeName"))){
+                        resources_backup = mapObj.get("codeValue").toString();
+                    }
+                }
+                String server_img_url = resources_local+Constant.PIC_HEAD_PATH+img_name;//图片存放在服务器路径
+                String backup_img_url = resources_backup+Constant.PIC_HEAD_PATH+img_name;//图片存放在磁盘路径
+                File serverFile = new File(server_img_url.trim()); 
+                File backupFile = new File(backup_img_url.trim()); 
+                if(serverFile.exists()){
+                    serverFile.delete();
+                }else{
+                    logger.info("服务器文件不存在");
+                }
+                if(backupFile.exists()){
+                    serverFile.delete();
+                }else{
+                    logger.info("磁盘文件不存在");
+                }
+                //删除硬盘上的文件 end
+                userService.modifyUserHeadPic(pd.getString("user_code"), img_addrss, Constant.VERSION_NO);//删除数据库图片地址
+                ar.setSuccess(true);
+                ar.setMessage("删除成功！");
+            }   
+                
+        }catch(Exception e){
+            logger.error(e.toString(), e);
+        }
+        return ar;
+    }
 	
-	
-	
+	public UserDetail findUserDetail(HttpServletRequest request){
+//	    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+//	    if(user == null)
+//	        return null;
+	    User user = new User();
+	    user.setUserCode("10000000001");
+	    UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
+	    return userDetail;
+	}
+	/**
+	 * @describe:跳往普通会员个人中心
+	 * @author: zhangchunming
+	 * @date: 2016年9月2日上午10:08:58
+	 * @params: @return
+	 * @return: ModelAndView
+	 */
+	@RequestMapping(value="/goGeneralVipCenter", method = RequestMethod.GET)
+	@ResponseBody
+	public String goGeneralVipCenter(HttpServletRequest request){
+	    logBefore(logger,"去往用户中兴");
+	    /*UserDetail userDetail = JSON.parseObject(params,UserDetail.class);
+	    if(userDetail==null||StringUtil.isEmpty(userDetail.getUserCode())){
+	        ar.setSuccess(false);
+	        ar.setErrorCode(CodeConstant.PARAM_ERROR);
+	        ar.setMessage("请求参数有误！");
+	    }*/
+	    UserDetail userDetail = findUserDetail(request);
+	    if(userDetail != null){
+	        ar.setSuccess(true);
+	        ar.setData(userDetail);
+	    }
+	    logAfter(logger);
+	    return JSON.toJSONString(ar);
+	}
 }

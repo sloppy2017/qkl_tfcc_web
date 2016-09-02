@@ -57,7 +57,7 @@
     display: block;
     width:162px;
     height:44px;
-    background: url("../../images/save1.jpg") no-repeat;
+    background: url("/resources/qkl_tfcc/imgs/save1.jpg") no-repeat;
     margin-left: 98px;
 }
 .hint{

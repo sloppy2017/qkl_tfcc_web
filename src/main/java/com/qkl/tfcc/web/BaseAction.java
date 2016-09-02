@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.entity.Page;
+import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.HtmlUtil;
 import com.qkl.util.help.UUId;
 import com.qkl.util.help.pager.PageData;
@@ -34,6 +35,7 @@ public class BaseAction{
 	
 	public final static String LOGOUT_FLAG = "logoutFlag";  
 	
+	protected AjaxResponse ar = new AjaxResponse();
 	protected ModelAndView mv = this.getModelAndView();
     protected PageData pd = new PageData();
     protected HttpServletResponse response;

@@ -1,6 +1,7 @@
 package com.qkl.tfcc.provider.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.qkl.tfcc.api.po.sys.SysGencode;
 import com.qkl.tfcc.provider.dbhelper.DAO;
@@ -19,6 +20,6 @@ public interface SysGencodeDao extends DAO<SysGencode> {
 	 * @create author kezhiyi
 	 * @create date 2016年8月24日
 	 */	
-	public List<SysGencode> findByGroupCode(String groupid);
+	public List<Map<String,Object>> findByGroupCode(String groupid);
 	
 }

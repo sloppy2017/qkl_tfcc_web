@@ -55,6 +55,14 @@ public interface UserDetailDao extends DAO<UserDetail> {
 	 * @create date 2016年8月17日
 	 */
 	public void modifyPhone(String userCode,String phone);
+	/**
+	 * @author: zhangchunming
+	 * @date: 2016年9月1日下午8:00:13
+	 * @param: userCode
+	 * @param: img_addrss
+	 * @return void
+	 */
+	public void modifyUserHeadPic(String userCode,String imgAddrss);
 	
 	
 	

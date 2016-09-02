@@ -1,7 +1,10 @@
 package com.qkl.tfcc.provider.dao.impl;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
+
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.qkl.tfcc.api.po.sys.SysGencode;
@@ -28,8 +31,8 @@ public class SysGencodeDaoImpl extends DaoSupport<SysGencode> implements SysGenc
 	}
 
 	@Override
-	public List<SysGencode> findByGroupCode(String groupcode) {
-		List<SysGencode> tSysGencodeList =getSqlSession().selectList(namespace+"."+"find",groupcode);
+	public List<Map<String,Object>> findByGroupCode(String groupcode) {
+		List<Map<String,Object>> tSysGencodeList =getSqlSession().selectList(namespace+"."+"find",groupcode);
 		return tSysGencodeList;
 	}
 	

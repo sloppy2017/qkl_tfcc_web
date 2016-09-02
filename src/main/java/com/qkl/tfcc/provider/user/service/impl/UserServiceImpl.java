@@ -230,4 +230,22 @@ public class UserServiceImpl implements UserService {
 		return fUserFriendship;
 	}
 
+    @Override
+    public boolean modifyUserHeadPic(String userCode, String imgAddrss, String versionNo) {
+        try{                    
+            userDetailDao.modifyUserHeadPic(userCode, imgAddrss);
+            return true;
+        }catch(Exception e){
+            loger.debug("modifyUserHeadPic fail,reason is "+e.getMessage());
+            return false;
+        }
+
+    }
+
+    @Override
+    public UserDetail findUserDetailByUserCode(String userCode, String versionNo) {
+        return userDetailDao.findUserDetailByUserCode(userCode);
+    }
+
+
 }
