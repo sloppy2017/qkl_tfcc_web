@@ -156,14 +156,16 @@ public class UserController extends BaseAction{
 			tUserDetail.setImgAddrss(imgAddrss);
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
 			if(userService.modifyUserDetail(tUserDetail, Constant.VERSION_NO)){			
-				ar.setSuccess(false);
-				ar.setMessage("个人信息修改失败！");
-				return ar;
+			    ar.setSuccess(true);
+                ar.setMessage("个人信息修改成功！");
+                return ar;
+			   
+             
 			}
-				ar.setSuccess(true);
-				ar.setMessage("个人信息修改成功！");
-				return ar;
-			
+				
+			 ar.setSuccess(false);
+             ar.setMessage("个人信息修改失败！");
+             return ar;
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);
