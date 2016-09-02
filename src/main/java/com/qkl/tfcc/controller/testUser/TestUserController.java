@@ -1,6 +1,7 @@
 package com.qkl.tfcc.controller.testUser;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +71,24 @@ public class TestUserController {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("userId", user.getTest_user_id());
 		map.put("name", user.getName());		
+		ar.setSuccess(true);
+		ar.setMessage("查询成功！");
+		ar.setData(map);
+		return ar;
+	}
+	
+	@RequestMapping(value="/queryuser", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse querylist(HttpServletRequest request,HttpServletResponse response){
+		
+		AjaxResponse ar = new AjaxResponse();
+		long testUserId =  Long.parseLong(request.getParameter("email")) ;
+		System.out.println( "******queryuser  "+testUserId);
+		List<TestUser> userList = testUserService.queryTestUserList();
+	
+
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("userList", userList);	
 		ar.setSuccess(true);
 		ar.setMessage("查询成功！");
 		ar.setData(map);
