@@ -128,7 +128,7 @@ $(function() {
 					
 					$('.phone').val(data.data.phone);
 					 alert("message is "+message);
-					
+								 
 					 
 //					 if(data.success){
 //						 window.location.href ="../index.html";
