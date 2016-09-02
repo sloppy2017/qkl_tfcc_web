@@ -1,5 +1,6 @@
 package com.qkl.tfcc.controller.testUser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ import com.qkl.util.help.AjaxResponse;
  * @version v
  */
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/service/test")
 public class TestUserController {
 
 	@Autowired
@@ -82,10 +83,18 @@ public class TestUserController {
 	public AjaxResponse querylist(HttpServletRequest request,HttpServletResponse response){
 		
 		AjaxResponse ar = new AjaxResponse();
-		long testUserId =  Long.parseLong(request.getParameter("email")) ;
-		System.out.println( "******queryuser  "+testUserId);
-		List<TestUser> userList = testUserService.queryTestUserList();
-	
+//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
+//		System.out.println( "******queryuser  "+testUserId);
+//		List<TestUser> userList = testUserService.queryTestUserList();
+		List<TestUser> userList = new ArrayList<TestUser>();
+		TestUser TestUser1 = new TestUser();
+		TestUser TestUser2 = new TestUser();
+		TestUser1.setName("a1");
+		TestUser1.setTest_user_id(1);
+		TestUser2.setName("b1");
+		TestUser2.setTest_user_id(2);
+		userList.add(TestUser1);
+		userList.add(TestUser2);
 
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("userList", userList);	
