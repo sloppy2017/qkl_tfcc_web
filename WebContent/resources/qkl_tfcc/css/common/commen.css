@@ -1,0 +1,889 @@
+@charset "utf-8";
+/*通用*/
+body {
+    font: 14px "microsoft yahei", Arial, Helvetica, sans-serif;
+    color: #666;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul, li, p, h1, h2, h3, h4, h5, h6, dl, dt, dd {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    list-style: none;
+}
+
+input {
+    border: none;
+}
+
+.lf {
+    float: left;
+}
+
+.rt {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+img {
+    border: 0px;
+}
+#top_box, #top_main, #nav, #banner, #main, #foot_box, #footer {
+    margin: 0px auto;
+}
+
+#top {
+    width: 100%;
+    height: 30px;
+    background: #F7F7F7;
+    line-height: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+#top_box {
+    height: 30px;
+}
+
+#top_main {
+    height: 60px;
+    padding: 15px 0;
+}
+
+#nav {
+    height: 40px;
+}
+
+#foot_box {
+    height: 173px;
+}
+
+#footer {
+    height: 180px;
+}
+.overall{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.my{
+    overflow-x: hidden;
+}
+/*头部*/
+.header{
+    width: 1920px;
+    height: 80px;
+    background: #2b71b1;
+    margin: auto;
+}
+.header-logo{
+    width: 248px;
+    height: 80px;
+    float: left;
+}
+.header-logo img{
+    margin-left: 27px;
+    margin-top: 21px;
+}
+/*时间栏*/
+.data{
+    width: 792px;
+    height: 40px;
+    float: left;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 40px;
+    padding-left: 22px;
+}
+.time{
+    float: left;
+}
+.xt{
+    float: left;
+    margin-left: 36px;
+}
+.xt a{
+    margin: 0  5px;
+    text-decoration: none;
+    color:#FFFFFF;
+}
+.Sign{
+    float: left;
+    margin-left: 45px;
+}
+.Sign a{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/*内容*/
+.content{
+    width: 247px;
+    height: 883px;
+    background: #f6fafe;
+    position: absolute;
+}
+.content-l{
+    width: 247px;
+    padding-top: 47px;
+}
+
+.content-l dl{
+   text-align: center;
+}
+.dt_img{
+    border:1px solid #dddddd;
+    border-radius: 50%;
+    width: 135px;
+    height: 135px;
+    display: inline-block;
+    padding: 3px;
+}
+.lp{
+    margin-top: 15px;
+    color: #2b71b1;
+    font-size: 16px;
+     margin-bottom: 55px;
+}
+.qr{
+    margin-top: 15px;
+    font-size: 16px;
+    margin-bottom: 55px;
+}
+.overall{
+    width: 100%;
+    position: relative;
+}
+
+/*选项部分*/
+.xuanxiang{
+    width: 1673px;
+    height: 100%;
+    position: absolute;
+    top: 42px;
+    left: 248px;
+}
+.xuanxiang ul{
+    margin-left: 20px;
+}
+.xuanxiang ul .security{
+    color: #000000;
+    position: relative;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+
+.xuanxiang ul li{
+    float:left;
+
+}
+.xuanxiang ul li{
+    background:#518bbf ;
+    border-radius: 5px 5px 0 0;
+    margin-left: 1px;
+}
+.xuanxiang ul.security{
+    background: #ffffff;
+}
+.xuanxiang ul.security a{
+    color: #000000;
+    display: inline-block;
+}
+.xuanxiang ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0px 41px;
+    line-height: 38px;
+    display: block;
+}
+.xuanxiang ul li:hover{
+    background: #ffffff;
+    color: #000000;
+}
+.xuanxiang ul li a:hover{
+    color: #000000;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+/*安全中心选项内容*/
+.an_q{
+    width: 1673px;
+    display: inline-block;
+    border-left: 1px solid #dddddd;
+    position: absolute;
+    top:80px;
+    left: 247px;
+    background: #FFFFFF;
+    line-height: 53px;
+    font-size: 14px;
+    height: 881px;
+}
+.an_q p{
+    border-bottom: 1px solid #dddddd;
+
+}
+.an_q p span {
+    margin-left: 20px;
+}
+.an_q_n{
+    margin-left: 20px;
+}
+.an_q_n p{
+    line-height: 92px;
+}
+.an_q_n p input{
+    color: #c7c7c7;
+    display: inline-block;
+    margin-left: 38px;
+    width: 308px;
+    margin-right: 73px;
+}
+.an_q_n p a{
+    margin-left: 78px;
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background: url("../../image/anquanzhongxingbankground.png");
+    width: 160px;
+    height: 43px;
+    text-align: center;
+    line-height: 45px;
+}
+.an_q_n p a:hover{
+    margin-left: 78px;
+    display: inline-block;
+    text-decoration: none;
+    color: #737373;
+    background: url("../../image/anquanzhongxindianjibanckground.jpg");
+    width: 160px;
+    height: 43px;
+    text-align: center;
+    line-height: 45px;
+}
+/*安全中心结束*/
+
+/*个人中心选项内容部分*/
+.xuanxiang{
+    /*width: 70%;*/
+    height: 881px;
+    position: absolute;
+    top: 42px;
+    left: 248px;
+}
+.xuanxiang ul{
+    margin-left: 20px;
+}
+.xuanxiang ul .security-g{
+    color: #000000;
+    position: relative;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+
+.xuanxiang ul li{
+    float:left;
+
+}
+.xuanxiang ul li{
+    background:#518bbf ;
+    border-radius: 5px 5px 0 0;
+    margin-left: 1px;
+}
+.xuanxiang ul.security-g{
+    background: #ffffff;
+}
+.xuanxiang ul.security-g {
+    color: #000000;
+    display: inline-block;
+}
+.xuanxiang ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0px 41px;
+    line-height: 38px;
+}
+.xuanxiang ul li:hover{
+    background: #ffffff;
+    color: #000000;
+}
+.xuanxiang ul li a:hover{
+    color: #000000;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+.xuanxiang .geren_z{
+    position: absolute;
+    width: 100%;
+    background: #FFFFFF;
+    top: 40px;
+    border-left: 1px solid #DDDDDD;
+    height: 881px;
+}
+.xuanxiang .aqzx .dqwz{
+    width: 100%;
+    line-height: 82px;
+    border-bottom: 1px solid #dddddd;
+    background: #ffffff;
+    font-size: 14px;
+    display: block;
+}
+.xuanxiang ul .security-g .aqzx .dqwz span{
+    margin-left: 24px;
+}
+.xuanxiang ul .security-g .aqzx {
+    border-bottom: 1px solid #dddddd;
+    margin-left: 20px ;
+    width: 1671px;
+}
+/*个人中心选项内容部分结束*/
+/*我的股权*/
+.xuanxiang{
+    /*width: 70%;*/
+    height: 881px;
+    position: absolute;
+    top: 42px;
+    left: 248px;
+}
+.xuanxiang ul{
+    margin-left: 20px;
+}
+.xuanxiang ul .security-q{
+    color: #000000;
+    position: relative;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+
+.xuanxiang ul li{
+    float:left;
+
+}
+.xuanxiang ul li{
+    background:#518bbf ;
+    border-radius: 5px 5px 0 0;
+    margin-left: 1px;
+}
+.xuanxiang ul.security-q{
+    background: #ffffff;
+}
+.xuanxiang ul.security-q a{
+    color: #000000;
+    display: inline-block;
+}
+.xuanxiang ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0px 41px;
+    line-height: 38px;
+}
+.xuanxiang ul li:hover{
+    background: #ffffff;
+    color: #000000;
+}
+.xuanxiang ul li a:hover{
+    color: #000000;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+.gu_q{
+    display: inline-block;
+    width: 100%;
+    background: #FFFFFF;
+    border-left: 1px solid #DDDDDD;
+    height: 881px;
+}
+.gu_q .gu_q_gq{
+    line-height: 52px;
+    border-bottom: 1px solid #DDDDDD;
+    width: 100%;
+    display: inline-block;
+    padding-left: 20px;
+}
+.shoukuan{
+    margin-top: 30px;
+    margin-left: 20px;
+    float: left;
+    margin-right: 43px;
+}
+
+.shoukuan p{
+    margin-bottom: 17px;
+    font-size: 14px;
+}
+.shoukuan p b{
+    font-size: 16px;
+}
+.gu_q form{
+    margin: 30px auto 0;
+    border-left: 1px solid #DDDDDD;
+    display: inline-block;
+    padding: 0 40px;
+    font-size: 14px;
+}
+.gu_q input{
+    border:1px solid #DDDDDD;
+    width: 180px;
+    height: 30px;
+    margin-top: 17px;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 16px;
+    color: #bdbdbd;
+
+}
+.gu_q a{
+    display: inline-block;
+    margin-top: 24px;
+    margin-left: 40px;
+    width: 220px;
+    line-height:43px;
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    background: url("../../image/input_banckground.png");
+}
+
+/*我的股权结束*/
+/*我的团队*/
+.xuanxiang ul .security-t{
+    color: #000000;
+    position: relative;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+
+.xuanxiang ul li{
+    float:left;
+
+}
+.xuanxiang ul li{
+    background:#518bbf ;
+    border-radius: 5px 5px 0 0;
+    margin-left: 1px;
+}
+.xuanxiang ul.security-t{
+    background: #ffffff;
+}
+
+.xuanxiang ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0px 41px;
+    line-height: 38px;
+}
+.xuanxiang ul li:hover{
+    background: #ffffff;
+    color: #000000;
+}
+.xuanxiang ul li a:hover{
+    color: #000000;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}.xuanxiang ul.security-t a{
+     color: #000000;
+     display: inline-block;
+ }
+
+.tuandui{
+    position: absolute;
+    width: 100%;
+    height: 881px;
+    background: #FFFFFF;
+    border-left:1px solid #DDDDDD;
+    left: 247px;
+    top: 80px;
+}
+.tuandui p{
+    border-bottom: 1px solid #DDDDDD;
+    padding-left: 20px;
+    line-height: 52px;
+    font-size: 14px;
+}
+.tuandui .jilei{
+    padding:20px;
+}
+.tuandui .jilei .jilei_lp{
+    height: 30px;
+    margin-bottom: 20px;
+}
+.tuandui .jilei_lp span{
+    font-size: 14px;
+    font-weight: 600;
+    line-height:35px;
+    display: block;
+    float: left;
+}
+.tuandui .jilei_lp  b{
+    font-size: 24px;
+    font-weight: 800;
+    color:#e9382c;
+    display: block;
+    float: left;
+    margin-left: 5px;
+}
+.tuandui .jilei_zh span{
+    font-size: 14px;
+    font-weight: 600;
+}
+.tuandui .jilei_zh input{
+    border: 1px solid #b2b2b2;
+    border-radius:3px;
+    height: 30px;
+    width: 180px;
+}
+.tuandui .jilei_zh button{
+    border:1px solid #b2b2b2;
+    border-radius: 3px;
+    background: #FFFFFF;
+    width:100px;
+    height: 34px;
+    margin-left: 421px;
+}
+
+/*我的账户*/
+.xuanxiang{
+    /*width: 70%;*/
+    height: 881px;
+    position: absolute;
+    top: 42px;
+    left: 248px;
+}
+.xuanxiang ul{
+    margin-left: 20px;
+}
+.xuanxiang ul .security-z{
+    color: #000000;
+    position: relative;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+
+.xuanxiang ul li{
+    float:left;
+
+}
+.xuanxiang ul li{
+    background:#518bbf ;
+    border-radius: 5px 5px 0 0;
+    margin-left: 1px;
+}
+.xuanxiang ul.security-z{
+    background: #ffffff;
+}
+.xuanxiang ul.security-z a{
+    color: #000000;
+    display: inline-block;
+}
+.xuanxiang ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0px 41px;
+    line-height: 38px;
+}
+.xuanxiang ul li:hover{
+    background: #ffffff;
+    color: #000000;
+}
+.xuanxiang ul li a:hover{
+    color: #000000;
+    background: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+.tuandui .yu_e .zhuan_z .my_yu_e{
+    margin: 20px 0 0 20px;
+    font-size: 14px;
+    font-weight: 600;
+
+}
+.tuandui .yu_e .zhuan_z .TF_JF{
+    margin:20px 0 0  95px;
+
+}
+.tuandui .yu_e .zhuan_z .TF_JF span{
+    font-size: 14px;
+    font-weight: 600;
+    float: left;
+    display: block;
+    line-height: 33px;
+}
+.tuandui .yu_e .zhuan_z .TF_JF b{
+    font-size: 24px;
+    font-weight: 800;
+    color: #e9382c;
+    float: left;
+    display: block;
+    margin:0 40px 0 10px;
+}
+.tuandui .yu_e .zhuan_z .TF_JF a{
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: #575757;
+    margin-left: 180px;
+    width: 100px;
+    line-height: 30px;
+    background: #FFFFFF;
+    border:1px solid #b2b2b2;
+    border-radius: 3px;
+}
+.tuandui .yu_e .jiang_l{
+    margin-left: 20px;
+    margin-top:30px;
+    border-top: 1px solid #dddddd ;
+    padding-top: 20px;
+}
+.tuandui .yu_e .jiang_l .my_jiang_l{
+    font-size: 14px;
+    font-weight: 600;
+}
+.tuandui .yu_e .jiang_l .tui_j{
+    margin-left: 96px;
+    margin-top: 20px;
+}
+.tuandui .yu_e .jiang_l .tui_j li{
+    float: left;
+    margin-right: 73px;
+    padding-right: 73px;
+    text-align: center;
+}
+.tuandui .yu_e .jiang_l .tui_j .tui_j_r{
+    border-right: 1px solid #DDDDDD;
+}
+.tuandui .yu_e .jiang_l .tui_j li  span{
+    font-size: 14px;
+    font-weight: 600;
+}
+.tuandui .yu_e .jiang_l b{
+    font-size: 24px;
+    font-weight: 800;
+    color: #e9382c;
+}
+/*我的账户结束*/
+/*转账页面*/
+.zhuan_JFCC{
+    position: absolute;
+    width: 100%;
+    height: 881px;
+    background: #FFFFFF;
+    border-left: 1px solid #DDDDDD;
+    top: 80px;
+    left: 247px;
+    font-family: "Microsoft YaHei", "瀹嬩綋", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif, FreeSans, Arimo;
+}
+.zhuan_JFCC p{
+    border-bottom: 1px solid #DDDDDD;
+    line-height: 52px;
+    padding-left: 20px;
+}
+.zhuan_JFCC .zhuan_z_r8>b{
+    display: inline-block;
+    margin-left: 20px;
+    margin: 40px 0 30px 20px;
+}
+.zhuan_JFCC .zhuan_z_r8 form{
+    height: 53px;
+}
+.zhuan_JFCC .zhuan_z_r8 .xuan_b b{
+    margin-left: 20px;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+}
+.zhuan_JFCC .zhuan_z_r8 .xuan_b .xiala_cd{
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
+    margin-left: 30px;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+.zhuan_JFCC .zhuan_z_r8 .xuan_b .xialacaidan b{
+}
+.bao_c{
+    margin-left: 20px;
+    margin-top: 43px;
+}
+.bao_c a{
+    background: url("../../image/JFCC_03.png");
+    width: 114px;
+    line-height: 42px;
+    display: inline-block;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 30px;
+}
+.zhuan_zhang_j input{
+    border: 1px solid #dddddd;
+    width: 180px;
+    height: 30px;
+    margin-left: 30px;
+    border-radius: 3px;
+    color: #bdbdbd;
+    text-align: center;
+}
+.zhuan_zhang_j span{
+    color: #8c8c8c;
+}
+.zhuan_zhang_j a{
+    text-decoration: none;
+    color:#5889bd;
+    margin-left: 18px;
+}
+/*转账页面结束*/
+/*不可转账*/
+.bao_c a:hover{
+    background: url("../../image/not.png");
+    width: 114px;
+    line-height: 42px;
+    display: inline-block;
+    color: #737373;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 30px;
+}
+
+/*不可转账结束*/
+
+/*实名认证*/
+.an_q_s{
+    width: 100%;
+    display: inline-block;
+    border-left: 1px solid #dddddd;
+    position: absolute;
+    top:80px;
+    left: 247px;
+    background: #FFFFFF;
+    line-height: 53px;
+    font-size: 14px;
+    height: 881px;
+}
+.an_q_s>p{
+    line-height: 52px;
+    border-bottom: 1px solid #DDDDDD;
+    padding-left: 20px;
+}
+.shiming_t{
+    margin-left: 20px;
+}
+.shiming_t p{
+    border-bottom: 1px solid #DDDDDD;
+    line-height: 55px;
+}
+.shiming_t p b{
+    color:#e9382c;
+}
+.an_q_s .shiming_input{
+    margin: 60px 0 0 260px;
+}
+.an_q_s .shiming_input .shiming_f div{
+    margin-bottom: 20px;
+}
+.an_q_s .shiming_input .shiming_f span{
+    text-align: center;
+    display: inline-block;
+}
+.an_q_s .shiming_input .shiming_f input{
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    width: 260px;
+    height: 42px;
+    color: #999999;
+    padding-left: 17px;
+    margin-left: 20px;
+}
+.an_q_s .shiming_input .shiming_r{
+    margin-left: 92px;
+}
+.an_q_s .shiming_input .shiming_r input{
+    background: url("../../image/shiming_r_03.png");
+    width: 114px;
+    height: 42px;
+    color: #FFFFFF;
+    margin-right: 49px;
+}
+/*实名认证结束*/
+/*修改登录密码*/
+.an_q_s .gaimima{
+    margin:15px 0 0 20px;
+}
+.an_q_s .gaimima .gai_m input{
+    border: 1px solid #DDDDDD;
+    width: 260px;
+    height: 40px;
+    color:#b6b6b6;
+    border-radius: 3px;
+    padding-left: 15px;
+    margin:0 20px 20px 20px;
+}
+.an_q_s .gaimima .gai_m_t{
+    margin-left: 120px;
+}
+.an_q_s .gaimima .gai_m_t input{
+    background: url("../../image/shiming_r_03.png");
+    width: 114px;
+    line-height: 41px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-right: 46px;
+}
+
+/*修改登录密码结束*/
+/*修改手机号码*/
+.zhuan_JFCC .shiming_r{
+    margin: 30px 0 0 20px;
+}
+.zhuan_JFCC .shiming_r div{
+    margin-bottom: 20px;
+}
+.shiming_r form{
+    margin-bottom: 20px;
+    display: block;
+}
+.shiming_r span{
+    margin-right: 20px;
+}
+.shiming_r_2 input,.shiming_r_3 .shiming_r_3_y{
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    width: 260px;
+    height: 40px;
+    padding-left: 15px;
+    color: #bdbdbd;
+    margin-right: 10px;
+}
+.shiming_r_3 .huo_q{
+    width: 120px;
+    height: 40px;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    color: #737373;
+}
+.shiming_r_4{
+    margin-left: 80px;
+}
+.shiming_r_4 input{
+    background: url("../../image/shiming_r_03.png");
+    margin-right: 44px;
+    width: 114px;
+    height: 42px;
+    color: #FFFFFF;
+}
+/*修改手机号码结束*/
+
+
+
+
+
+

@@ -98,9 +98,11 @@ public class UserController extends BaseAction{
 	@ResponseBody
 	public AjaxResponse login(HttpServletRequest request,HttpServletResponse response){
 		AjaxResponse ar = new AjaxResponse();
+		Map<String,Object> data = new HashMap<String, Object>();
 		try {
 			String userName  =request.getParameter("phone");
-			String passWord  =request.getParameter("password");
+			String passWord  =request.getParameter("pass");
+			
 			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
 			if ((Integer) map.get("status") == Constant.SUCCESS) {
 				User user = (User) map.get(Constant.LOGIN_USER);
@@ -111,11 +113,14 @@ public class UserController extends BaseAction{
 				ar.setSuccess(false);
 				ar.setMessage((String)map.get("msg"));
 			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);
 			ar.setMessage("系统异常");
-		}
+		}	
+		ar.setData(data);
 		return ar;
 	}
 	

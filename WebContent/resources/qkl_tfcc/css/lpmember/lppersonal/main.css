@@ -1,0 +1,32 @@
+.main{
+    width: 100%;
+    display: inline-block;
+}
+.main_l{
+    width:280px;
+    float: left;
+    border-right: 1px solid #ccd1db;
+    height: 500px;
+}
+.container{
+    height: 300px;
+    border-bottom: 1px solid #DDDDDD;
+    margin-left: 20px;
+}
+.ssi-uploader{
+    position: relative;
+}
+#ssi-previewBox{
+    position: absolute;
+    top:50px;
+    left: 0;
+}
+#button{
+    width: 160px;
+    height: 42px;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-left: 25px;
+    border-radius: 3px;
+    background: #2e6da4;
+}

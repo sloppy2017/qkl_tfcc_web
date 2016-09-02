@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/date/dateRange.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/date/monthPicker.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/pagintaion/pagination.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/reset.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/common.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/invest/in-team.css">
+    <script src="../../../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
+    <script src="../../../resources/qkl_tfcc/js/date/dateRange.js"></script>
+    <script src="../../../resources/qkl_tfcc/js/date/monthPicker.js"></script>
+    <script src="../../../resources/qkl_tfcc/js/pagination/pagination.js"></script>
+</head>
+<body>
+<div class="mark2">
+    <div class="mark2-box">
+        <div class="success-icon"></div>
+        <p>个人信息修改成功</p>
+        <div class="achieve"><p>完成</p></div>
+    </div>
+</div>
+<div class="header fix">
+    <div class="logo fl">
+        <img src="../../../resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
+    </div>
+    <div class="nav-right fl">
+        <div class="top">
+            <span class="yearTime">2016年8月24日</span>
+            <span class="dateTime">09:18:06 </span>
+            <span class="weekTime"> 星期三 </span>
+            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
+            <span class="exit"><a href="">【退出】</a></span>
+        </div>
+        <div class="nav fix">
+            <ul class="fl">
+                <li ><a class="active" href="../invest/in-team.html">我的团队</a></li>
+                <li><a href="../invest/in-account.html">我的账户</a></li>
+                <li ><a  class="color-fff" href="../invest/in-myhelf.html">个人中心</a></li>
+                <li><a href="../invest/in-safety.html">安全中心</a></li>
+                <li><a href="http://www.r8exchange.com">R8交易所</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="main fl">
+        <div class="mains">
+            <div class="main-top"><span>您当前的位置：</span><span class="c28">我的团队</span></div>
+            <div class="numb">累计LP会员人数 &nbsp; &nbsp;<span class="ce9">107</span></div>
+            <div class="query fix">
+                <ul>
+                    <li>查询条件</li>
+                    <li >
+                        <select name="" id="">
+                            <option value="">会员账号</option>
+                            <option value="">lp账号</option>
+                        </select>
+                    </li>
+                    <li class="txt"><input type="text"></li>
+                    <li><a href="">查询</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="in-time fix">
+                    <ul class="fl in-date">
+                        <li>注册时间</li>
+                        <li class="time-list">
+                            <div class="ta_date" id="div_date_demo33">
+                                <span class="date_title" id="date_demo33"></span>
+                                <a class="opt_sel" id="input_trigger_demo33" href="#">
+                                    <i class="i_orderd"></i>
+                                </a>
+                            </div>
+                                    <span>
+                                        <a href="javascript:;" id="aRecent7DaysDemo1" >今天</a>
+                                       <a href="javascript:;" id="aRecent7DaysDemo3" >近三天</a>
+                                       <a href="javascript:;" id="aRecent7DaysDemo7" >近一周</a>
+                                         <a href="javascript:;" id="aRecent7DaysDemo30" >近一月</a>
+                                    </span>
+
+                            <div id="datePicker1"></div>
+                            <br/>
+                            <script type="text/javascript">
+                                var dateRange = new pickerDateRange('date_demo33', {
+                                    aToday : 'aRecent7DaysDemo1',
+                                    aRecent3Days:'aRecent7DaysDemo3',
+                                    aRecent7Days : 'aRecent7DaysDemo7', //最近7天
+                                    aRecent30Days:'aRecent7DaysDemo30',
+                                    isTodayValid : false,
+                                    startDate : '2016-08-14',
+                                    endDate : '2016-09-21',
+                                    // needCompare : true,
+                                    // isSingleDay : true,
+                                    // shortOpr : true,
+                                    defaultText : ' 至 ',
+                                    inputTrigger : 'input_trigger_demo33',
+                                    // theme : 'ta',
+                                    success : function(obj) {
+                                        $("#dCon_demo3").html('开始时间 : ' + obj.startDate + '<br/>结束时间 : ' + obj.endDate);
+                                    }
+                                });
+                            </script>
+                        </li>
+                        <li class="time-btn">查询</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!--查询列表-->
+            <div>
+                <div id="wrapper">
+                    <section>
+                        <div class="data-container" id="demo"></div>
+                        <div id="pagination-demo1"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="side-bar fl">
+        <div class="fl">
+            <div class="myImg">
+                <div>
+                    <img src="" alt="">
+                </div>
+                <p>普通会员</p>
+            </div>
+
+            <div class="qr-code">
+                <div>
+                    <img src="../../images/ma.jpg" alt="">
+                </div>
+                <p>我的二维码</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/common/dateCom.js"></script>
+</body>
+</html>

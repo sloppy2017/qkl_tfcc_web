@@ -5,7 +5,7 @@
 .amend ul li p{width:84px;display: inline-block;color:#282828;font-size: 14px;margin:0px;}
 .amend .txt{color:#c7c7c7;font-size: 14px;display: inline-block;height:100%;width:390px;}
 .amend .status{font-size: 14px;display: inline-block;width:52px;height:100%;margin-right: 70px}
-.amend .btn{background: url('../../imgs/safty.jpg') no-repeat;width:162px;height:44px;display: inline-block;vertical-align: middle;text-align: center;line-height: 44px;color: #fff}
+.amend .btn{background: url('../../image/safty.jpg') no-repeat;width:162px;height:44px;display: inline-block;vertical-align: middle;text-align: center;line-height: 44px;color: #fff}
 
 .pwd{height:300px;}
 .form1 .btn1{width:120px;height:40px;display: inline-block}
@@ -14,8 +14,8 @@
 .form1 input{width:260px;height:40px;margin-left: 18px; }
 .form1 label{width:106px;text-align: right;display:inline-block;font-size:14px;}
 .form1 .main-top1 span{font-size: 14px;margin-left: 20px;}
-.form1 .save{margin-left: 124px;background: url("../../imgs/safty1.jpg")no-repeat;width:116px;height:42px; display: inline-block;color:#fff;text-align: center;line-height: 42px;}
-.form1 .rest{margin-left: 34px;background: url("../../imgs/safty1.jpg")no-repeat;width:116px;height:42px; display: inline-block;color:#fff;text-align: center;line-height: 42px;}
+.form1 .save{margin-left: 124px;background: url("../../image/safty1.jpg")no-repeat;width:116px;height:42px; display: inline-block;color:#fff;text-align: center;line-height: 42px;}
+.form1 .rest{margin-left: 34px;background: url("../../image/safty1.jpg")no-repeat;width:116px;height:42px; display: inline-block;color:#fff;text-align: center;line-height: 42px;}
 .hid{display: none;}
 
 .txt1{color:red;font-size: 14px;height:56px;margin: 0px 270px 0px 20px;border-bottom:1px solid #ddd;line-height: 56px;}
@@ -44,7 +44,7 @@
     border-radius: 5px;
 }
  .success-icon{
-    background: url("../../imgs/save2.jpg")no-repeat ;
+    background: url("../../image/save2.jpg")no-repeat ;
     width:90px;
     height:90px;
     margin:36px auto 0px;
@@ -55,7 +55,7 @@
  .achieve{
     width:224px;
     height:44px;
-    background: url("../../imgs/btn1.jpg") no-repeat;
+    background: url("../../image/btn1.jpg") no-repeat;
     background-position:-116px -72px;
     text-align: center;
     margin:20px  auto;
