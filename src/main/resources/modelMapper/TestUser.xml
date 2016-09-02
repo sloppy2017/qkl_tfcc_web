@@ -5,5 +5,9 @@
 	<select id="selectTestUserByUserId" parameterType="java.lang.Long" resultType="TestUser" >
 		select test_user_id, name from test_user where test_user_id = #{testUserId}
 	</select>
+	
+	<select id="selectTestUserList"  resultType="TestUser" >
+		select test_user_id, name from test_user where 1=1
+	</select>
 
 </mapper>     

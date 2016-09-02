@@ -1,5 +1,7 @@
 package com.qkl.tfcc.provider.testUser.dao;
 
+import java.util.List;
+
 import com.qkl.tfcc.api.po.TestUser;
 import com.qkl.tfcc.provider.dbhelper.DAO;
 
@@ -22,4 +24,7 @@ public interface TestUserDao extends DAO<TestUser> {
 	 * @create date 2016年8月13日
 	 */ 
 	public TestUser selectTestUserByUserId(long testUserId);
+	
+	
+	public List<TestUser> selectTestUserList();
 }

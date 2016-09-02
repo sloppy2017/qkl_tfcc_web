@@ -1,5 +1,7 @@
 package com.qkl.tfcc.provider.testUser.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,12 @@ public class TestUserServiceImpl implements TestUserService{
 	@Override
 	public TestUser queryTestUserByUserId(long testUserId) {
 		return testUserDao.selectTestUserByUserId(testUserId);
+	}
+
+	@Override
+	public List<TestUser> queryTestUserList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

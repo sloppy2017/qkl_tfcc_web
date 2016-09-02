@@ -1,5 +1,7 @@
 package com.qkl.tfcc.provider.testUser.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.qkl.tfcc.api.po.TestUser;
@@ -24,6 +26,13 @@ public class TestUserDaoImpl extends  DaoSupport<TestUser>   implements   TestUs
 	public TestUser selectTestUserByUserId(long testUserId) {
 		TestUser tu = getSqlSession().selectOne(namespace+"."+"selectTestUserByUserId", testUserId);			
 		return tu;
+	}
+
+	@Override
+	public List<TestUser> selectTestUserList() {
+		List<TestUser> tuList = getSqlSession().selectList(namespace+"."+"selectTestUserList");
+		// TODO Auto-generated method stub
+		return tuList;
 	}
 
 }
