@@ -140,29 +140,28 @@ public class UserController extends BaseAction{
 			String phone  =request.getParameter("phone");
 			String wxnum = request.getParameter("wxnum");
 			String bankaccno = request.getParameter("bankaccno");
-			String mailAddrss =request.getParameter("mailaddrss"); 
-			String zipCode =request.getParameter("zipcode"); 			
-			String imgAddrss =request.getParameter("imgaddrss");
-			
-			
-			//头像处理
-	
+			String mailAddrss =request.getParameter("mailAddrss"); 
+			String zipCode =request.getParameter("zipCode"); 			
+//			String imgAddrss =request.getParameter("imgaddrss");
+			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+			user = new User();
+			user.setUserCode("10000000001");
+			UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
 			UserDetail tUserDetail = new UserDetail();
+			tUserDetail.setUserCode(user.getUserCode());
 			tUserDetail.setPhone(phone);
 			tUserDetail.setWxnum(wxnum);
 			tUserDetail.setBankaccno(bankaccno);
 			tUserDetail.setMailAddrss(mailAddrss);
 			tUserDetail.setZipCode(zipCode);
-			tUserDetail.setImgAddrss(imgAddrss);
+//			tUserDetail.setImgAddrss(imgAddrss);
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
+			tUserDetail.setOperator(userDetail.getRealName());
 			if(userService.modifyUserDetail(tUserDetail, Constant.VERSION_NO)){			
 			    ar.setSuccess(true);
                 ar.setMessage("个人信息修改成功！");
                 return ar;
-			   
-             
-			}
-				
+			}	
 			 ar.setSuccess(false);
              ar.setMessage("个人信息修改失败！");
              return ar;
@@ -1224,6 +1223,7 @@ public class UserController extends BaseAction{
             
             FileUtil.copyFile(tp.getInputStream(), server_img_url,new_img_name).replaceAll("-", "");
             FileUtil.copyFile(tp.getInputStream(), backup_img_url,new_img_name).replaceAll("-", "");
+            userService.modifyUserHeadPic(pdfile.getString("userCode"), http_img_url, Constant.VERSION_NO);//修改数据库图片地址
             Map<String, Long> imgInfo = ImgUtil.getImgInfo(server_img_url+new_img_name);
             Long w = imgInfo.get("w");
             Long h = imgInfo.get("h");
@@ -1232,29 +1232,28 @@ public class UserController extends BaseAction{
                 out.print("<script>top.alert(\"请上传"+Constant.PIC_HEAD_WIDTH+"*"+Constant.PIC_HEAD_WIDTH+"规格的图片！\");</script>");
                 return;
             }
-            out.print("<script>parent.document.getElementById('headPicId').src=\""+http_img_url+"\";parent.document.getElementById('left_headPic').src=\""+http_img_url+"\";parent.$('#img_addrss').val('"+http_img_url+"')</script>"); 
+            out.print("<script>parent.document.getElementById('headPicId').src=\""+http_img_url+"\";parent.document.getElementById('left_headPicId').src=\""+http_img_url+"\";parent.$('#imgAddrss').val('"+http_img_url+"')</script>"); 
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.toString(), e);
+            out.print("<script>parent.alert('上传失败！');</script>");
         }finally{
-            out.print("<script>$(\"input[type='file']\").val('')</script>");
+            out.print("<script>parent.$(\"input[type='file']\").val('');</script>");
             out.close();
             logAfter(logger);
         }
         return;
     }
-	@RequestMapping(value="delPic")
+	
+	@RequestMapping(value="delPic",method = RequestMethod.POST)
+	@ResponseBody
 	public AjaxResponse delPic(){
 	    logBefore(logger, "删除图片");
-	    AjaxResponse ar = new AjaxResponse();
-	    ar.setSuccess(false);
-        ar.setMessage("删除失败！");
         try{
             pd = this.getPageData();
-            PageData pd = this.getPageData();
-            String img_addrss = pd.getString("img_addrss");
-            String img_name = img_addrss.substring(img_addrss.lastIndexOf("/")+1);                                         //图片路径
-            if(!StringUtil.isEmpty(img_addrss)){
+            String imgAddrss = pd.getString("imgAddrss");
+            String img_name = imgAddrss.substring(imgAddrss.lastIndexOf("/")+1);                                         //图片路径
+            if(!StringUtil.isEmpty(imgAddrss)){
                 //删除硬盘上的文件 start
                 String resources_local = "";
                 String resources_backup = "";
@@ -1282,18 +1281,21 @@ public class UserController extends BaseAction{
                     logger.info("磁盘文件不存在");
                 }
                 //删除硬盘上的文件 end
-                userService.modifyUserHeadPic(pd.getString("user_code"), img_addrss, Constant.VERSION_NO);//删除数据库图片地址
+                userService.modifyUserHeadPic(pd.getString("userCode"), null, Constant.VERSION_NO);//删除数据库图片地址
                 ar.setSuccess(true);
                 ar.setMessage("删除成功！");
             }   
                 
         }catch(Exception e){
             logger.error(e.toString(), e);
+            ar.setSuccess(false);
+            ar.setMessage("删除失败！");
         }
+        logAfter(logger);
         return ar;
     }
 	
-	public UserDetail findUserDetail(HttpServletRequest request){
+	private UserDetail findUserDetail(HttpServletRequest request){
 //	    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 //	    if(user == null)
 //	        return null;
@@ -1302,6 +1304,7 @@ public class UserController extends BaseAction{
 	    UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
 	    return userDetail;
 	}
+	
 	/**
 	 * @describe:跳往普通会员个人中心
 	 * @author: zhangchunming
@@ -1309,9 +1312,9 @@ public class UserController extends BaseAction{
 	 * @params: @return
 	 * @return: ModelAndView
 	 */
-	@RequestMapping(value="/goGeneralVipCenter", method = RequestMethod.GET)
+	@RequestMapping(value="/toGeneralVipCenter", method = RequestMethod.GET)
 	@ResponseBody
-	public String goGeneralVipCenter(HttpServletRequest request){
+	public AjaxResponse toGeneralVipCenter(HttpServletRequest request){
 	    logBefore(logger,"去往用户中兴");
 	    /*UserDetail userDetail = JSON.parseObject(params,UserDetail.class);
 	    if(userDetail==null||StringUtil.isEmpty(userDetail.getUserCode())){
@@ -1321,10 +1324,14 @@ public class UserController extends BaseAction{
 	    }*/
 	    UserDetail userDetail = findUserDetail(request);
 	    if(userDetail != null){
-	        ar.setSuccess(true);
-	        ar.setData(userDetail);
-	    }
+            ar.setSuccess(true);
+            ar.setData(userDetail);
+            ar.setMessage("查询数据成功！");
+        }else{
+            ar.setSuccess(false);
+            ar.setMessage("数据不存在！");
+        }
 	    logAfter(logger);
-	    return JSON.toJSONString(ar);
+	    return ar;
 	}
 }

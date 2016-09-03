@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="my">
+<head>
+    <meta charset="UTF-8">
+    <title>我的团队</title>
+    <link rel="stylesheet" href="../css/commen/commen.css">
+</head>
+<body>
+<div class="overall ">
+    <!--头部-->
+    <div class="header">
+        <div class="header-logo">
+            <img src="../image/logo.png" alt="">
+        </div>
+        <!--时间栏-->
+        <div id="nowTime" class="data">
+            <p  class="time"><span id=localtime></span></p>
+            <div class="xt">
+                <span>尊敬的</span>
+                <a class="right" href=""></a>
+                <span>，您好！欢迎使用本系统</span>
+            </div>
+            <div class="Sign">
+                【退出】
+            </div>
+        </div>
+
+    </div>
+    <!--内容-->
+    <div class="content">
+        <div class="content-l">
+            <dl>
+                <dt class="dt_img">
+                    <!--<img src="image/LPtouxiang.jpg" alt=""></dt>-->
+                <dd class="lp">LP</dd>
+
+            </dl>
+            <dl>
+                <dt><img src="../image/erweima.png" alt=""></dt>
+                <dd class="qr">我的二维码</dd>
+
+            </dl>
+        </div>
+    </div>
+</div>
+<!--选项部分-->
+<div class="xuanxiang" style="position: absolute">
+    <ul class="fl">
+        <li><a  href="../html/lpstock.html">我的股权</a></li>
+        <li>
+            <a class="security-t" href="#">我的团队</a>
+        </li>
+        <li><a href="../html/lpaccount.html">我的账户</a></li>
+        <li ><a href="../html/lprersonal.html">个人中心</a></li>
+        <li  ><a href="../html/lpsecuritycenter.html">安全中心</a></li>
+        <li><a href="http://www.r8exchange.com">R8交易所</a></li>
+    </ul>
+</div>
+<div class="tuandui" style="position: absolute">
+    <p>您当前的位置：<b>我的团队</b></p>
+    <div class="jilei">
+        <div class="jilei_lp">
+            <span>累计LP会员</span><b>107</b>
+        </div>
+        <div class="jilei_zh">
+            <span >会员账号</span>
+            <input style="margin-left: 30px" type="text">
+            <button type="button"> 查询</button>
+        </div>
+        <div >
+            注册时间
+        </div>
+    </div>
+</div>
+<!---时间日期-->
+<script type="text/javascript">
+    function showLocale(objD){
+        var str,colorhead,colorfoot;
+        var yy = objD.getYear();
+        if(yy<1900) yy = yy+1900;
+        var MM = objD.getMonth()+1;
+        if(MM<10) MM = '0' + MM;
+        var dd = objD.getDate();
+        if(dd<10) dd = '0' + dd;
+        var hh = objD.getHours();
+        if(hh<10) hh = '0' + hh;
+        var mm = objD.getMinutes();
+        if(mm<10) mm = '0' + mm;
+        var ss = objD.getSeconds();
+        if(ss<10) ss = '0' + ss;
+        var ww = objD.getDay();
+        if  ( ww==0 )  colorhead="<font color=\"#ffffff\">";
+        if  ( ww > 0 && ww < 6 )  colorhead="<font color=\"#ffffff\">";
+        if  ( ww==6 )  colorhead="<font color=\"#ffffff\">";
+        if  (ww==0)  ww="星期日";
+        if  (ww==1)  ww="星期一";
+        if  (ww==2)  ww="星期二";
+        if  (ww==3)  ww="星期三";
+        if  (ww==4)  ww="星期四";
+        if  (ww==5)  ww="星期五";
+        if  (ww==6)  ww="星期六";
+        colorfoot="</font>"
+        str = colorhead + yy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  " + ww + colorfoot;
+        return(str);
+    }
+
+    function tick(){
+        var today;
+        today = new Date();
+        document.getElementById("localtime").innerHTML = showLocale(today);
+        window.setTimeout("tick()", 1000);
+    }
+
+    tick();
+</script>
+<!---时间日期结束-->
+
+
+</body>
+</html>

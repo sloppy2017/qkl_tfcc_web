@@ -139,6 +139,7 @@ public class UserServiceImpl implements UserService {
 	public boolean modifyUserDetail(UserDetail userDetail,String versionNo) {
 		try{					
 			userDetailDao.modifyUserDetail(userDetail);
+			userDao.modifyPhone(userDetail.getUserCode(), userDetail.getPhone());
 			return true;
 		}catch(Exception e){
 			loger.debug("modifyUserDetail fail,reason is "+e.getMessage());

@@ -39,7 +39,7 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
 
 	@Override
 	public void modifyUserDetail(UserDetail userDetail) {
-		getSqlSession().update(namespace+"."+"update", userDetail);	
+		getSqlSession().update(namespace+"."+"updateUserDetail", userDetail);	
 		
 	}
 
