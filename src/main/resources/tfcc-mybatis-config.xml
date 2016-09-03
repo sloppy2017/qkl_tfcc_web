@@ -26,6 +26,7 @@
 		<typeAlias alias="SysGencode" type="com.qkl.tfcc.api.po.sys.SysGencode" />
 		<typeAlias alias="AccDetail" type="com.qkl.tfcc.api.po.acc.AccDetail" />
 		<typeAlias alias="pd" type="com.qkl.util.help.pager.PageData" />
+		<typeAlias type="com.qkl.tfcc.api.entity.Page" alias="Page"/>
 		<!-- typeAlias alias="SourceBean" type="com.qkl.tfcc.api.po.SourceBean" />
 		<typeAlias alias="DataListBean" type="com.qkl.tfcc.api.po.DataListBean" />
 		<typeAlias alias="EzbCustomerInfoBean" type="com.qkl.tfcc.api.po.EzbCustomerInfoBean" />

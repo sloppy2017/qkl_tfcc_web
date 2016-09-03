@@ -2,6 +2,8 @@ package com.qkl.tfcc.provider.testUser.dao;
 
 import java.util.List;
 
+import com.qkl.tfcc.api.entity.Page;
+import com.qkl.tfcc.api.entity.PageDataYC;
 import com.qkl.tfcc.api.po.TestUser;
 import com.qkl.tfcc.provider.dbhelper.DAO;
 
@@ -26,5 +28,5 @@ public interface TestUserDao extends DAO<TestUser> {
 	public TestUser selectTestUserByUserId(long testUserId);
 	
 	
-	public List<TestUser> selectTestUserList();
+	public Object selectTestUserList(Page page);
 }

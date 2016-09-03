@@ -108,11 +108,13 @@ $(function() {
 		console.log("phoneVal is "+phoneVal);
 		var passVal = $('.pass').val();
 		console.log("passVal is "+passVal);
-	
+		
+	    var rsStr="";
 		if(flag){
 			$.ajax({
 				type: 'post',
-				url: '../../../service/user/login/',
+//				url: '../../../service/user/login/',
+				url: '../../../service/test/queryuser/',
 				dataType: 'json',
 				data: {
 					phone: phoneVal,
@@ -122,11 +124,24 @@ $(function() {
 					alert('请求成功');
 					var message = data.message;
 					console.log("success is "+data.success);
-					console.log("data is "+data.data);
-					console.log("data.phone is "+data.data.phone);
-					console.log("data.password is "+data.data.password);
+					console.log("data is "+data.map);
+					console.log("data.userList is "+data.data.userList);
+					var usList =data.data.userList;
+					console.log("usList.length "+usList.length);
+					console.log("data.data.page.pageStr "+data.data.page.pageStr);
+					for(var i=0;i<usList.length;i++){
+						rsStr =rsStr+"<tr>";
+						console.log("usList("+i+") name is "+usList[i].name);
+						rsStr = rsStr +"<td>" + usList[i].name+"</td>";
+						rsStr = rsStr +"<td>" + usList[i].test_user_id+"</td>";
+						rsStr =rsStr+"</tr>";
+					}
 					
-					$('.phone').val(data.data.phone);
+					console.log("rsStr "+rsStr);
+					 $(".result-tab").append(rsStr);
+					 $(".pages1").append(data.data.page.pageStr);
+					 
+//					$('.phone').val(data.data.phone);
 					 alert("message is "+message);
 								 
 					 
@@ -137,6 +152,7 @@ $(function() {
 					alert('请求错误');
 				}
 			})
+					
 		}
 
 	})

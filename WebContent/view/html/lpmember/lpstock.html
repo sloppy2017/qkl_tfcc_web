@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>我的股权</title>
-    <link rel="stylesheet" href="../css/commen/commen.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/commen.css">
 </head>
 <body>
 <div class="overall ">
     <!--头部-->
     <div class="header">
         <div class="header-logo">
-            <img src="../image/logo.png" alt="">
+            <img src="../../../resources/qkl_tfcc/imgs/logo1.png" alt="">
         </div>
         <!--时间栏-->
         <div id="nowTime" class="data">
@@ -35,7 +35,7 @@
 
             </dl>
             <dl>
-                <dt><img src="../image/erweima.png" alt=""></dt>
+                <dt><img src="../../../resources/qkl_tfcc/imgs/erweima.png" alt=""></dt>
                 <dd class="qr">我的二维码</dd>
 
             </dl>
@@ -46,10 +46,10 @@
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
         <li><a  class="security-q" href="#">我的股权</a></li>
-        <li><a href="../html/lpteam.html">我的团队</a></li>
-        <li><a href="../html/lpaccount.html">我的账户</a></li>
-        <li ><a href="../html/lprersonal.html">个人中心</a></li>
-        <li  ><a href="../html/lpsecuritycenter.html">安全中心</a></li>
+        <li><a href="../../html/lpmember/lpteam.html">我的团队</a></li>
+        <li><a href="../../html/lpmember/lpaccount.html">我的账户</a></li>
+        <li ><a href="../../html/lpmember/lprersonal.html">个人中心</a></li>
+        <li  ><a href="../../html/lpmember/lpsecuritycenter.html">安全中心</a></li>
         <li><a href="http://www.r8exchange.com">R8交易所</a></li>
     </ul>
     <div class="gu_q">
@@ -61,7 +61,7 @@
             <p>开户行：中国工商银行贵阳市开阳区支行</p>
             <p>账务对账电话：0851-26790188</p>
         </div>
-        <form >
+        <form  action="" class="gmsl">
             购买数量（股）&nbsp;&nbsp;&nbsp;
             <input type="text" maxlength='10' id="ttext" style="ime-mode:disabled" onkeypress="return myfilter(event)" value="请输入需购买数量" />
             <br>
@@ -71,9 +71,16 @@
             <a href="">确认购买</a>
         </form>
         <!--订单查询-->
-        <div style="margin-top: 30px">
+        <div class="ding_d">
             <p>订单查询</p>
-
+            <form action="" class="fkzt">
+                <span>付款状态</span>
+                <select name="cars" class="fkzt_y">
+                    <option value="volvo">已完成</option>
+                    <option value="saab">未完成</option>
+                </select>
+                <input type="button" value="查询">
+            </form>
         </div>
         <!--订单查询结束-->
     </div>
@@ -122,7 +129,7 @@
     tick();
 </script>
 <!---时间日期结束-->
-<script src="../js/stock/forminput.js"></script>
+<script src="../../../resources/qkl_tfcc/js/lpmember/stock/forminput.js"></script>
 
 </body>
 </html>

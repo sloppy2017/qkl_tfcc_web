@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.TestUser;
 import com.qkl.tfcc.api.service.testUser.api.TestUserService;
+import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
+import com.qkl.util.help.pager.PageData;
 
 /**
  * 测试用户的控制类
@@ -28,8 +31,8 @@ import com.qkl.util.help.AjaxResponse;
  * @version v
  */
 @Controller
-@RequestMapping("/test")
-public class TestUserController {
+@RequestMapping("/service/test")
+public class TestUserController  extends BaseAction{
 
 	@Autowired
 	private TestUserService testUserService;
@@ -77,18 +80,26 @@ public class TestUserController {
 		return ar;
 	}
 	
+	/**
+	 * @param request
+	 * @param response
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(value="/queryuser", method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse querylist(HttpServletRequest request,HttpServletResponse response){
+	public AjaxResponse querylist(HttpServletRequest request,HttpServletResponse response, Page page){
 		
 		AjaxResponse ar = new AjaxResponse();
-		long testUserId =  Long.parseLong(request.getParameter("email")) ;
-		System.out.println( "******queryuser  "+testUserId);
-		List<TestUser> userList = testUserService.queryTestUserList();
-	
-
+//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
+//		System.out.println( "******queryuser  "+testUserId);
+		pd = this.getPageData();
+		page.setPd(pd);
+		List<PageData> userList = testUserService.queryTestUserList(page);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("userList", userList);	
+		map.put("pd", pd);	
+		map.put("page", page);
 		ar.setSuccess(true);
 		ar.setMessage("查询成功！");
 		ar.setData(map);
