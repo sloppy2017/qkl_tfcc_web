@@ -4,17 +4,17 @@
 $(function () {
     $.ajax({
         type: "POST",
-        url: "../js/ajax/tsconfig.json",
+        url: "../../../resources/qkl_tfcc/js/tsconfig.json",
         dataType: "json",
         success: function (responseData) {
-            $("#tfcc").empty();
-            $("#tfcc").html(responseData.tfcc);
-            $("#jfcc").empty();
-            $("#jfcc").html(responseData.jfcc);
-            $("#huiyuanjiang").empty();
-            $("#huiyuanjiang").html(responseData.huiyuanjiang);
-            $("#goumaijiang").empty();
-            $("#goumaijiang").html(responseData.goumaijiang);
+            $(".tfcc").empty();
+            $(".tfcc").html(responseData.tfcc);
+            $(".jfcc").empty();
+            $(".jfcc").html(responseData.jfcc);
+            $(".myjiangli").empty();
+            $(".myjiangli").html(responseData.myjiangli);
+            $(".tuijianjiang").empty();
+            $(".tuijianjiang").html(responseData.tuijianjiang);
             $("#mygoumaijiang").empty();
             $("#mygoumaijiang").html(responseData.mygoumaijiang);
         }
