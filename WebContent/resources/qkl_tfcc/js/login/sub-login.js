@@ -108,6 +108,7 @@ $(function() {
 		console.log("phoneVal is "+phoneVal);
 		var passVal = $('.pass').val();
 		console.log("passVal is "+passVal);
+		
 	    var rsStr="";
 		if(flag){
 			$.ajax({
@@ -127,6 +128,7 @@ $(function() {
 					console.log("data.userList is "+data.data.userList);
 					var usList =data.data.userList;
 					console.log("usList.length "+usList.length);
+					console.log("data.data.page.pageStr "+data.data.page.pageStr);
 					for(var i=0;i<usList.length;i++){
 						rsStr =rsStr+"<tr>";
 						console.log("usList("+i+") name is "+usList[i].name);
@@ -137,7 +139,7 @@ $(function() {
 					
 					console.log("rsStr "+rsStr);
 					 $(".result-tab").append(rsStr);
-					 $(".pages1").append("第N页");
+					 $(".pages1").append(data.data.page.pageStr);
 					 
 //					$('.phone').val(data.data.phone);
 					 alert("message is "+message);
@@ -150,6 +152,7 @@ $(function() {
 					alert('请求错误');
 				}
 			})
+					
 		}
 
 	})

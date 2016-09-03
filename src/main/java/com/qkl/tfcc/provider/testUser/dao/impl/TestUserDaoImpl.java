@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.qkl.tfcc.api.entity.Page;
+import com.qkl.tfcc.api.entity.PageDataYC;
 import com.qkl.tfcc.api.po.TestUser;
 import com.qkl.tfcc.provider.testUser.dao.TestUserDao;
 import com.qkl.tfcc.provider.dbhelper.DaoSupport;;
@@ -29,10 +31,11 @@ public class TestUserDaoImpl extends  DaoSupport<TestUser>   implements   TestUs
 	}
 
 	@Override
-	public List<TestUser> selectTestUserList() {
-		List<TestUser> tuList = getSqlSession().selectList(namespace+"."+"selectTestUserList");
+	public Object selectTestUserList(Page page) {
+//		List<PageData> tuList =
+		Object	 tObject = getSqlSession().selectList(namespace+"."+"selectTestUserlistPage",page);
 		// TODO Auto-generated method stub
-		return tuList;
+		 return tObject;
 	}
 
 }

@@ -29,6 +29,7 @@ import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.qkl.tfcc.api.common.CodeConstant;
 import com.qkl.tfcc.api.common.Constant;
+import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.AccDetail;
 import com.qkl.tfcc.api.po.sys.SysGencode;
 import com.qkl.tfcc.api.po.user.Sendsms;
@@ -40,6 +41,7 @@ import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.sms.api.SmsService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.api.service.sys.api.SysMaxnumService;
+import com.qkl.tfcc.api.service.testUser.api.TestUserService;
 import com.qkl.tfcc.api.service.user.api.UserService;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
@@ -83,6 +85,8 @@ public class UserController extends BaseAction{
 	private SysGenCodeService sysGenCodeService;
 	@Autowired
 	private AccService accService;
+	@Autowired
+	private TestUserService testUserService;
 	
 	
 	
@@ -96,31 +100,46 @@ public class UserController extends BaseAction{
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse login(HttpServletRequest request,HttpServletResponse response){
+	public AjaxResponse login(HttpServletRequest request,HttpServletResponse response ,Page page){
+//		AjaxResponse ar = new AjaxResponse();
+//		Map<String,Object> data = new HashMap<String, Object>();
+//		try {
+//			String userName  =request.getParameter("phone");
+//			String passWord  =request.getParameter("pass");
+//			
+//			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
+//			if ((Integer) map.get("status") == Constant.SUCCESS) {
+//				User user = (User) map.get(Constant.LOGIN_USER);
+//				request.getSession().setAttribute(Constant.LOGIN_USER, user);
+//				logger.info(userName + "登录成功");
+//				ar.setSuccess(true);
+//			} else {
+//				ar.setSuccess(false);
+//				ar.setMessage((String)map.get("msg"));
+//			}
+//			
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			ar.setSuccess(false);
+//			ar.setMessage("系统异常");
+//		}	
+//		ar.setData(data);
+//		return ar;
+		
 		AjaxResponse ar = new AjaxResponse();
-		Map<String,Object> data = new HashMap<String, Object>();
-		try {
-			String userName  =request.getParameter("phone");
-			String passWord  =request.getParameter("pass");
-			
-			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
-			if ((Integer) map.get("status") == Constant.SUCCESS) {
-				User user = (User) map.get(Constant.LOGIN_USER);
-				request.getSession().setAttribute(Constant.LOGIN_USER, user);
-				logger.info(userName + "登录成功");
-				ar.setSuccess(true);
-			} else {
-				ar.setSuccess(false);
-				ar.setMessage((String)map.get("msg"));
-			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			ar.setSuccess(false);
-			ar.setMessage("系统异常");
-		}	
-		ar.setData(data);
+//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
+//		System.out.println( "******queryuser  "+testUserId);
+		pd = this.getPageData();
+		page.setPd(pd);
+		List<PageData> userList = testUserService.queryTestUserList(page);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("userList", userList);	
+		map.put("pd", pd);	
+		map.put("page", page);
+		ar.setSuccess(true);
+		ar.setMessage("查询成功！");
+		ar.setData(map);
 		return ar;
 	}
 	

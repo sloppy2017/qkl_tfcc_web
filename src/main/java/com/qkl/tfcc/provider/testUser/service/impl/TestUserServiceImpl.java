@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.TestUser;
 import com.qkl.tfcc.api.service.testUser.api.TestUserService;
 import com.qkl.tfcc.provider.testUser.dao.TestUserDao;
+import com.qkl.util.help.pager.PageData;
 
 /**测试用的接口实现
  * <p>Description： 测试用的接口实现 </p>
@@ -29,9 +31,8 @@ public class TestUserServiceImpl implements TestUserService{
 	}
 
 	@Override
-	public List<TestUser> queryTestUserList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PageData> queryTestUserList(Page page) {
+		return (List<PageData>) testUserDao.selectTestUserList(page);
 	}
 
 }
