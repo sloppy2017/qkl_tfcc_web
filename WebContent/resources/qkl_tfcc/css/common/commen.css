@@ -2,7 +2,7 @@
 /*通用*/
 body {
     font: 14px "microsoft yahei", Arial, Helvetica, sans-serif;
-    color: #666;
+    /*color: #666;*/
     margin: 0px;
     padding: 0px;
 }
@@ -216,8 +216,8 @@ img {
     display: inline-block;
     border-left: 1px solid #dddddd;
     position: absolute;
-    top:80px;
-    left: 247px;
+    top:40px;
+    left: -1px;
     background: #FFFFFF;
     line-height: 53px;
     font-size: 14px;
@@ -327,11 +327,13 @@ img {
 }
 .xuanxiang .aqzx .dqwz{
     width: 100%;
-    line-height: 82px;
+    line-height: 52px;
     border-bottom: 1px solid #dddddd;
     background: #ffffff;
     font-size: 14px;
     display: block;
+    margin-left: -20px;
+    padding-left: 20px;
 }
 .xuanxiang ul .security-g .aqzx .dqwz span{
     margin-left: 24px;
@@ -427,7 +429,7 @@ img {
     padding: 0 40px;
     font-size: 14px;
 }
-.gu_q input{
+.gu_q .goumaishuliang{
     border:1px solid #DDDDDD;
     width: 180px;
     height: 30px;
@@ -438,12 +440,12 @@ img {
     color: #bdbdbd;
 
 }
-.gu_q a{
+.gu_q .querengoumai{
     display: inline-block;
     margin-top: 24px;
     margin-left: 40px;
-    width: 220px;
-    line-height:43px;
+    width: 218px;
+    line-height:41px;
     text-align: center;
     text-decoration: none;
     color: #FFFFFF;
@@ -480,6 +482,7 @@ img {
     border-radius: 3px;
     background: none;
     color:#000000;
+    border:1px solid #dddddd;
 }
 /*我的股权结束*/
 /*我的团队*/
@@ -588,7 +591,7 @@ img {
     left: 248px;
 }
 .xuanxiang ul{
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 .xuanxiang ul .security-z{
     color: #000000;
