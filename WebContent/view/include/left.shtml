@@ -1,0 +1,18 @@
+<div class="side-bar fl">
+    <div class="fl">
+        <div class="myImg">
+            <div>
+                <img src="" alt="">
+            </div>
+            <p>普通会员</p>
+        </div>
+
+        <div class="qr-code">
+            <div>
+                <img src="/resources/qkl_tfcc/imgs/ma.jpg" alt="">
+            </div>
+            <p>我的二维码</p>
+        </div>
+    </div>
+</div>
+

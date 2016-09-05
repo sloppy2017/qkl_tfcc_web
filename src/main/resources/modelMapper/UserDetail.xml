@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDetail">
-    <resultMap id="BaseResultMap" type="com.qkl.tfcc.api.po.user.UserDetail" >
+    <resultMap id="userDetailResultMap" type="com.qkl.tfcc.api.po.user.UserDetail" >
 	    <id column="id" property="id" />
 	    <result column="user_code" property="userCode" />
 	    <result column="phone" property="phone" />
@@ -33,7 +33,7 @@
 		select count(1) cnt
         from tb_user_detail  where phone = #{phone} 
 	   </select> 
-	   <select id="findById" parameterType="java.lang.Integer" resultType="UserDetail" >
+	   <select id="findById" parameterType="java.lang.Integer" resultMap="userDetailResultMap" >
 	        select 
 	         user_code userCode,
 	         phone phone,
@@ -51,12 +51,12 @@
 	         operator  operator
 	        from tb_user_detail  where id = #{id}
       </select>
-	  <select id="findByPhone" parameterType="java.lang.String" resultType="UserDetail" >
+	  <select id="findByPhone" parameterType="java.lang.String" resultMap="userDetailResultMap" >
 		select 
 		 <include refid="Base_Column_List" />
         from tb_user_detail  where phone = #{phone}
 	</select>
-	<select id="findByUserCode" parameterType="java.lang.String" resultType="UserDetail" >
+	<select id="findByUserCode" parameterType="java.lang.String" resultMap="userDetailResultMap" >
         select 
          <include refid="Base_Column_List" />
         from tb_user_detail  where user_code = #{userCode}
@@ -115,9 +115,60 @@
      </update>
      <update id="updateHeadPic" parameterType="java.util.Map">    
 	     update tb_user_detail 
-	     set img_addrss = null
+	     set img_addrss = #{img_addrss}
 	     where user_code = #{user_code}     
      </update>
-	 
+	 <update id="updateUserDetail" parameterType="UserDetail">    
+         update tb_user_detail 
+         <set> 
+           <if test="phone != null and phone != ''">
+                phone = #{phone},
+           </if>
+           <if test="userName != null and userName != ''">
+                user_name = #{userName},
+           </if>
+           <if test="cropName != null and cropName != ''">
+                crop_name = #{cropName},
+           </if>
+           <if test="cropPerson != null and cropPerson != ''">
+                crop_person = #{cropPerson},
+           </if>
+           <if test="branchName != null and branchName != ''">
+                branch_name = #{branchName},
+           </if>
+           <if test="wxnum != null and wxnum != ''">
+                wxnum = #{wxnum},
+           </if>
+           <if test="bankaccno != null and bankaccno != ''">
+                bankaccno = #{bankaccno},
+           </if>
+           <if test="mailAddrss != null and mailAddrss != ''">
+                mail_addrss = #{mailAddrss},
+           </if>
+           <if test="zipCode != null and zipCode != ''">
+                zip_code = #{zipCode},
+           </if>
+           <if test="refPhone != null and refPhone != ''">
+                ref_phone = #{refPhone},
+           </if>
+           <if test="imgAddrss != null and imgAddrss != ''">
+                img_addrss = #{imgAddrss},
+           </if>
+           <if test="qrCode != null and qrCode != ''">
+                qr_code = #{qrCode},
+           </if>
+           <if test="userType != null and userType != ''">
+                user_type = #{userType},
+           </if>
+           <if test="realStat != null and realStat != ''">
+                real_stat = #{realStat},
+           </if>
+                modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where user_code = #{userCode}     
+     </update>
 
 </mapper>     

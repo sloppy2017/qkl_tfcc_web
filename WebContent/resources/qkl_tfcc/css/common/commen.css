@@ -248,7 +248,7 @@ img {
     display: inline-block;
     text-decoration: none;
     color: #ffffff;
-    background: url("../../image/anquanzhongxingbankground.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxingbankground.png");
     width: 160px;
     height: 43px;
     text-align: center;
@@ -259,7 +259,7 @@ img {
     display: inline-block;
     text-decoration: none;
     color: #737373;
-    background: url("../../image/anquanzhongxindianjibanckground.jpg");
+    background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxindianjibanckground.jpg");
     width: 160px;
     height: 43px;
     text-align: center;
@@ -420,7 +420,7 @@ img {
 .shoukuan p b{
     font-size: 16px;
 }
-.gu_q form{
+.gu_q .gmsl{
     margin: 30px auto 0;
     border-left: 1px solid #DDDDDD;
     display: inline-block;
@@ -447,9 +447,40 @@ img {
     text-align: center;
     text-decoration: none;
     color: #FFFFFF;
-    background: url("../../image/input_banckground.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/input_banckground.png");
 }
-
+.gu_q .ding_d{
+    margin: 30px 0 18px 20px;
+}
+.gu_q .ding_d p{
+    font-size: 16px;
+}
+.gu_q .ding_d span{
+    margin-right: 24px;
+}
+.fkzt{
+    margin-top: 18px;
+}
+.fkzt select{
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
+    background: url("../../../../resources/qkl_tfcc/imgs/zhuanzhang_j.png") no-repeat scroll 100px center transparent;
+    border: 1px solid #dddddd;
+    margin-left: 30px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding-right: 5px;
+}
+.fkzt input{
+    margin-left: 480px;
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
+    background: none;
+    color:#000000;
+}
 /*我的股权结束*/
 /*我的团队*/
 .xuanxiang ul .security-t{
@@ -699,15 +730,20 @@ img {
     font-size: 14px;
     line-height: 30px;
 }
+
 .zhuan_JFCC .zhuan_z_r8 .xuan_b .xiala_cd{
+    background: url("../../../../resources/qkl_tfcc/imgs/zhuanzhang_j.png") no-repeat scroll 100px center transparent;;
     width: 120px;
     height: 30px;
+    border: 1px solid #dddddd;
     border-radius: 3px;
     margin-left: 30px;
     appearance:none;
     -moz-appearance:none;
     -webkit-appearance:none;
+    padding-right: 5px;
 }
+.xiala_cd::-ms-expand { display: none; }
 .zhuan_JFCC .zhuan_z_r8 .xuan_b .xialacaidan b{
 }
 .bao_c{
@@ -715,7 +751,7 @@ img {
     margin-top: 43px;
 }
 .bao_c a{
-    background: url("../../image/JFCC_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/JFCC_03.png");
     width: 114px;
     line-height: 42px;
     display: inline-block;
@@ -744,7 +780,7 @@ img {
 /*转账页面结束*/
 /*不可转账*/
 .bao_c a:hover{
-    background: url("../../image/not.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/not.png");
     width: 114px;
     line-height: 42px;
     display: inline-block;
@@ -807,7 +843,7 @@ img {
     margin-left: 92px;
 }
 .an_q_s .shiming_input .shiming_r input{
-    background: url("../../image/shiming_r_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/shiming_r_03.png");
     width: 114px;
     height: 42px;
     color: #FFFFFF;
@@ -831,7 +867,7 @@ img {
     margin-left: 120px;
 }
 .an_q_s .gaimima .gai_m_t input{
-    background: url("../../image/shiming_r_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/shiming_r_03.png");
     width: 114px;
     line-height: 41px;
     text-align: center;
@@ -874,7 +910,7 @@ img {
     margin-left: 80px;
 }
 .shiming_r_4 input{
-    background: url("../../image/shiming_r_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/shiming_r_03.png");
     margin-right: 44px;
     width: 114px;
     height: 42px;
