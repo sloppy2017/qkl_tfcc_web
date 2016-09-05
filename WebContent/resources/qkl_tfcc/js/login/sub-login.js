@@ -104,7 +104,7 @@ $(function() {
 
 
 	$(".submit").click(function () {
-		
+
 		var showcnt =10; //每页页数初始值
 		var  myselect=document.getElementById("showcnt");
 		if(myselect==null||myselect=="null"){			

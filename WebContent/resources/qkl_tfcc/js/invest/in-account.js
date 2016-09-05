@@ -98,6 +98,45 @@ function jfcc_sub(){
     }
 }
 
+//查询条件
+
+function insearch(){
+    var obj = document.getElementById('mySelect')
+    alert(obj.selectedIndex);
+    if(obj.options[1].selected==true){
+        reg=/([\u4e00-\u9fa5]{2,4})/;
+        var chaxunVal = $('input[name="chaxun"]').val()
+        if(reg.test(chaxunVal)){
+            $.ajax({
+                type:'post',
+                url:'res.php',
+                data:{chaxunVal:chaxunVal},
+                dataType:'json',
+                success:function(){
+
+                },errror:function(){
+                }
+            })
+        }
+    }
+
+    if(obj.options[0].selected==true){
+        reg=/^(((13[0-9]{1})|159|153)+\d{8})$/;
+        var chaxunVal = $('input[name="chaxun"]').val()
+        if(reg.test(chaxunVal)){
+            $.ajax({
+                type:'post',
+                url:'res.php',
+                data:{chaxunVal:chaxunVal},
+                dataType:'json',
+                success:function(){
+
+                },errror:function(){
+                }
+            })
+        }
+    }
+}
 
 
 
