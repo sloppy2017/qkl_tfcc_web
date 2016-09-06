@@ -308,7 +308,7 @@ img {
     padding: 0px 41px;
     line-height: 38px;
 }
-.xuanxiang .f1 li:hover{
+.xuanxiang ul li:hover{
     background: #ffffff;
     color: #000000;
 }
