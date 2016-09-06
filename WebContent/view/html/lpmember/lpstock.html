@@ -89,7 +89,7 @@
             <p>订单查询</p>
             <form action="" class="fkzt">
                 <span>付款状态</span>
-                <select name="cars" class="fkzt_y">
+                <select name="cars" id="fkzt_y">
                     <option value="volvo">已完成</option>
                     <option value="saab">未完成</option>
                 </select>
@@ -97,9 +97,7 @@
             </form>
         </div>
         <!--订单查询结束-->
-    </div>
-    <!--选项内容部分结束-->
-<table class="result-tab" width="100%">
+        <table class="result-tab" width="100%">
                          <!--    <tr>
                                 <th>用户名</th>
                                 <th>id</th>
@@ -108,6 +106,9 @@
              <div class="pages1">
             <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->        
                         </div>
+    </div>
+    <!--选项内容部分结束-->
+
 </div>
 <!---时间日期-->
 <script type="text/javascript">
@@ -160,9 +161,11 @@
 <script>
 	var flag = true;
 $(".chaxun").click(function () {
-		
+		console.log("f11111 ");
 		var showcnt =10; //每页页数初始值
-		var  myselect=document.getElementByClass("fkzt_y");
+		var  myfkzt_y=document.getElementById("fkzt_y");
+		var  myselect=document.getElementById("showcnt");
+		console.log("2222 ");
 		if(myselect==null||myselect=="null"){			
 		}else{
 			showcnt=myselect.options[myselect.selectedIndex].value;		
@@ -201,8 +204,11 @@ $(".chaxun").click(function () {
 			console.log("usList.length "+usList.length);
 			console.log("data.data.page.pageStr "+data.data.page.pageStr);
 			var tablecols ="<tr> \n"
-                              +" <th>用户名</th> \n"
-                              + "<th>id</th> \n"
+                              +" <th>购买时间</th> \n"
+                              + "<th>购买份数</th> \n"
+                              + "<th>支付方式</th> \n"
+                              + "<th>总计金额</th> \n"
+                              + "<th>付款状态</th> \n"
                             + "</tr> \n";
 			rsStr=tablecols;
 			for(var i=0;i<usList.length;i++){
@@ -227,7 +233,7 @@ $(".chaxun").click(function () {
 //				 window.location.href ="../index.html";
 //			 }
 		}, error: function (data) {
-			alert('请求错误');
+			alert('请求错误'+data);
 		}
 	})
 }

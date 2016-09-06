@@ -59,7 +59,7 @@ import com.qkl.util.help.pager.PageData;
  * @version v1.0.0
  */
 @Controller
-@RequestMapping("/service/user")
+@RequestMapping("/service/account")
 public class AccountController extends BaseAction{
 	
 	private final Logger logger = LoggerFactory.getLogger(AccountController.class);
