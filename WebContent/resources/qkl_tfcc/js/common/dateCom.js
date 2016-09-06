@@ -1,13 +1,14 @@
-$(document).ready(function(){
-    var $tab1_li = $('.main-middle .huiyuan li');
-    // console.log($tab_li)
-    $tab1_li.click(function(){
-        $(this).addClass('act').siblings().removeClass('act');
-        var index = $tab1_li.index(this);
-        $(' .mains .btm').eq(index).show().siblings().hide();
-        $(' .main-top .top-tab').eq(index).show().siblings().hide();
-    })
-})
+//普通会员我的推荐现象
+//$(document).ready(function(){
+//    var $tab1_li = $('.main-middle .huiyuan li');
+//    // console.log($tab_li)
+//    $tab1_li.click(function(){
+//        $(this).addClass('act').siblings().removeClass('act');
+//        var index = $tab1_li.index(this);
+//        $(' .mains .btm').eq(index).show().siblings().hide();
+//        $(' .main-top .top-tab').eq(index).show().siblings().hide();
+//    })
+//})
 
 $(function(){
     function time(){

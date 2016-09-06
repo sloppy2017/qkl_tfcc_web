@@ -1,16 +1,7 @@
-/**
- * Created by qw on 2016/8/23.
- */
-/**
- * Created by qw on 2016/8/23.
- */
-/**
- * Created by qw on 2016/8/23.
- */
 //LP会员注册
-var InterValObj=null; //timer变量，控制时间
-var count = 60; //间隔函数，1秒执行
-var curCount='';//当前剩余秒数
+var InterValObjD=null; //timer变量，控制时间
+var countD = 60; //间隔函数，1秒执行
+var curCountD='';//当前剩余秒数
 // 手机验证
 function sub_phoneD()
 {
@@ -29,18 +20,18 @@ function sub_phoneD()
     }else{
         phone.next().empty();
         //判断所有的都正确时执行这个发送的函数
-        sendMessage(phoneVal);
+        sendMessageD(phoneVal);
         return true;
     }
-
+D
 }
-function sendMessage(phoneVal,InterValObj,phone) {
-    curCount = count;
+function sendMessageD(phoneVal,InterValObj,phone) {
+    curCountD = countD;
     //删除input的属性值是在60内不能重新点击
     $(".yzmD").attr("disabled", "true");
-    $(".yzmD").val("请在" + curCount + "秒内输入验证码");
-    clearInterval(InterValObj);
-    InterValObj=setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+    $(".yzmD").val("请在" + curCountD + "秒内输入验证码");
+    clearInterval(InterValObjD);
+    InterValObjD=setInterval(SetRemainTimeD, 1000); //启动计时器，1秒执行一次
     //向后台发送处理数据
     console.log(phoneVal);
     $.ajax({
@@ -63,7 +54,7 @@ function sendMessage(phoneVal,InterValObj,phone) {
     });
 }
 //timer处理函数
-function SetRemainTime() {
+function SetRemainTimeD() {
     if (curCount == 0) {
         clearInterval(InterValObj);       //停止计时器
         $(".yzmD").removeAttr("disabled"); //启用按钮
@@ -77,7 +68,7 @@ function SetRemainTime() {
 
 var flag =true; //默认情况下是成功的；
 //判断验证码发送手机收到的验证码
-$('.input input[name="yzmD"] ').blur(function(){
+$('.form input[name="yzmD"] ').blur(function(){
     //密码正则6-16字母数字或特殊字符
     reg = /^[a-zA-Z0-9]{6,}$/;
     if($(this).val()==''){
@@ -145,7 +136,7 @@ $('.idcardD').blur(function(){
     }
 })
 //密码失去焦点
-$('.input input[name="passwordD"]').blur(function () {
+$('.form input[name="passwordD"]').blur(function () {
     //密码正则6-16字母数字或特殊字符
     reg = /^[a-zA-Z][a-zA-Z0-9|*|&|%|.|@|!]{5,15}$/;
     if ($(this).val() == '') {
@@ -163,8 +154,8 @@ $('.input input[name="passwordD"]').blur(function () {
 
 
 //确认密码
-$('.input .resPasswordD').blur(function(){
-    var pVal = 	$('.input .passwordD').val();
+$('.form .resPasswordD').blur(function(){
+    var pVal = 	$('.form .passwordD').val();
     if ($(this).val() == '') {
         $(this).next().html('请输入确认密码');
         flag=false;
@@ -179,7 +170,7 @@ $('.input .resPasswordD').blur(function(){
 });
 
 //推荐人失去焦点
-$('.input input[name="phone4"]').blur(function () {
+$('.form input[name="phone4"]').blur(function () {
     //手机号正则
     reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/i;
     if ($(this).val() == ''||$(this).val().length < 11) {
@@ -198,10 +189,10 @@ $('.input input[name="phone4"]').blur(function () {
 });
 //创建ajax函数
 function ajaxD(){
-    var yzmVal=	$('.input input[name="yzmD"] ').val();
-    var psswordVal=	$('.input input[name="passwordD"] ').val();
+    var yzmVal=	$('.form input[name="yzmD"] ').val();
+    var psswordVal=	$('.form input[name="passwordD"] ').val();
     var usernameeBVal = $('.usernameeC').val();
-    var phoneVal=	$('.input input[name="phone4"] ').val();
+    var phoneVal=	$('.form input[name="phone4"] ').val();
     var idcardBVal =$('.idcardD').val();
     console.log();
     if(flag){

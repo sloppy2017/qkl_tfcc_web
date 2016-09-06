@@ -1,6 +1,7 @@
 
 /*========== reset ==========*/
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, iframe,hr{margin:0;padding:0;}
+HEAD
 body{font:12px/1.6 Tahoma,microsoft yahei,"寰蒋闆呴粦","瀹嬩綋";*font-family:"寰蒋闆呴粦","瀹嬩綋";}
 fieldset, img { border:0; }
 address, caption, cite, dfn, em, th, var{font-style:normal;font-weight:normal;}

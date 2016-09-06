@@ -8,6 +8,8 @@ $(document).ready(function(){
 	})
 })
 //
+
+
 $(document).ready(function(){
 	var $tab1_li = $('.huiyuan li');
 	// console.log($tab_li)

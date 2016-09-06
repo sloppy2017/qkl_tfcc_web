@@ -16,6 +16,7 @@ function sub_phone()
 //        phone.next().html('请输入正确的手机号');
     	phone.val("请输入正确手机号");
         phone.css("background-color","pink");
+        phone.next().html('请输入正确的手机号');
         phone.focus();
         return false;
     }else{
