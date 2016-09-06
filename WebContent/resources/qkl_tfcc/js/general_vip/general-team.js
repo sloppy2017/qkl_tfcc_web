@@ -12,12 +12,10 @@ $(function(){
             url:'sx',
             data:type,
             success:function(){
-
             }
         })
     })
 })
-
 
 //查询函数
 function querytable(){

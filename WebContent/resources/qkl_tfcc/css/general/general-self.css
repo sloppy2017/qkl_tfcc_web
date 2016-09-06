@@ -39,6 +39,9 @@
 .form div{
     margin:20px 0;
 }
+.form div span{
+    font-size: 14px;
+}
 .form input{
 
     width:260px;

@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <title>我的团队</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/date/dateRange.css">
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/date/monthPicker.css">
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/pagintaion/pagination.css">
     <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/reset.css">
     <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/common.css">
     <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/general/general-team.css">
     <script src="../../../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
-    <script src="../../../resources/qkl_tfcc/js/pagination/pagination.js"></script>
-    <script src="../../../resources/qkl_tfcc/js/date/dateRange.js"></script>
-    <script src="../../../resources/qkl_tfcc/js/date/monthPicker.js"></script>
-
 </head>
 <body>
 <div class="mark2">
@@ -87,19 +80,21 @@
                                     <li class="type-btn"><a href="#" onclick="">查询</a></li>
                                 </ul>
                             </div>
-                            <div class="fix">
-                                <ul class="serch">
-                                    <li>查询条件</li>
-                                    <li>
-                                        <select name="" id="selectedObj">
-                                            <option value="member" class="member">会员账号</option>
-                                            <option value="referrer" class="referrer">推荐人</option>
-                                        </select>
-                                    </li>
-                                    <li><input type="text" name="chaxun"></li>
-                                    <li class="ser-btn" onclick="querytable()">查询</li>
-                                </ul>
-                            </div>
+
+                              <!--先不管这个类型-->
+                            <!--<div class="fix">-->
+                                <!--<ul class="serch">-->
+                                    <!--<li>查询条件</li>-->
+                                    <!--<li>-->
+                                        <!--<select name="" id="selectedObj">-->
+                                            <!--<option value="member" class="member">会员账号</option>-->
+                                            <!--<option value="referrer" class="referrer">推荐人</option>-->
+                                        <!--</select>-->
+                                    <!--</li>-->
+                                    <!--<li><input type="text" name="chaxun"></li>-->
+                                    <!--<li class="ser-btn" onclick="querytable()">查询</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
                             <!--查询最近日期时间-->
                             <!--<div class="reg-time fix">-->
                                 <!--<ul class="fl date">-->
@@ -190,50 +185,7 @@
                             </ul>
                         </div>
                         <!--查询最近日期时间-->
-                        <div class="reg-time fix">
-                            <ul class="fl date">
-                                <li>注册时间</li>
-                                <li class="time-list">
-                                    <div class="ta_date" id="div_date_demo3">
-                                        <span class="date_title" id="date_demo3"></span>
-                                        <a class="opt_sel" id="input_trigger_demo3" href="#">
-                                            <i class="i_orderd"></i>
-                                        </a>
-                                    </div>
-                                    <span>
-                                        <a href="javascript:;" id="aRecent7DaysDemo11" >今天</a>
-                                       <a href="javascript:;" id="aRecent7DaysDemo33" >近三天</a>
-                                       <a href="javascript:;" id="aRecent7DaysDemo77" >近一周</a>
-                                         <a href="javascript:;" id="aRecent7DaysDemo300" >近一月</a>
-                                    </span>
 
-                                    <div id="datePicker"></div>
-                                    <br/>
-                                    <script type="text/javascript">
-                                        var dateRange = new pickerDateRange('date_demo3', {
-                                            aToday : 'aRecent7DaysDemo11',
-                                            aRecent3Days:'aRecent7DaysDemo33',
-                                            aRecent7Days : 'aRecent7DaysDemo77', //最近7天
-                                            aRecent30Days:'aRecent7DaysDemo300',
-                                            isTodayValid : false,
-                                            startDate : '2016-08-14',
-                                            endDate : '2016-09-21',
-                                            // needCompare : true,
-                                            // isSingleDay : true,
-                                            // shortOpr : true,
-                                            defaultText : ' 至 ',
-                                            inputTrigger : 'input_trigger_demo3',
-                                            // theme : 'ta',
-                                            success : function(obj) {
-                                                $("#dCon_demo3").html('开始时间 : ' + obj.startDate + '<br/>结束时间 : ' + obj.endDate);
-                                            }
-                                        });
-                                    </script>
-
-                                </li>
-                                <li class="time-btn">查询</li>
-                            </ul>
-                        </div>
                         <!--表格-->
                         <div class="table">
                             <div class="table-head">
