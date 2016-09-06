@@ -201,11 +201,11 @@ img {
     line-height: 38px;
     display: block;
 }
-.xuanxiang .f1 li:hover{
+.xuanxiang ul li:hover{
     background: #ffffff;
     color: #000000;
 }
-.xuanxiang .f1 li a:hover{
+.xuanxiang ul li a:hover{
     color: #000000;
     background: #ffffff;
     border-radius: 5px 5px 0 0;
@@ -275,7 +275,7 @@ img {
     top: 42px;
     left: 248px;
 }
-.xuanxiang .f1{
+.xuanxiang ul{
     margin-left: 20px;
 }
 .xuanxiang ul .security-g{
