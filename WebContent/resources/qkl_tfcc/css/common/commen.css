@@ -272,22 +272,16 @@ img {
 .xuanxiang ul{
     margin-left: 20px;
 }
-/*.xuanxiang ul .security-g{*/
-    /*color: #000000;*/
-    /*position: relative;*/
-    /*background: #ffffff;*/
-    /*border-radius: 5px 5px 0 0;*/
-/*}*/
 
 .xuanxiang ul li{
     float:left;
 
 }
-.xuanxiang ul li{
-    background:#518bbf ;
-    border-radius: 5px 5px 0 0;
-    margin-left: 1px;
-}
+/*.xuanxiang ul li{*/
+    /*background:#518bbf ;*/
+    /*border-radius: 5px 5px 0 0;*/
+    /*margin-left: 1px;*/
+/*}*/
 .xuanxiang ul.security-g{
     background: #ffffff;
 }
