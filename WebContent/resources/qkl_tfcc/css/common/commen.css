@@ -925,6 +925,7 @@ img {
     line-height: 16px;
     width:70px;
     text-align: center;
+    border: 1px solid #dddddd;
 }
 
 
