@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="my">
+<html lang="en"class="my" >
 <head>
     <meta charset="UTF-8">
     <title>我的账户</title>
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/commen.css">
+    <link rel="stylesheet" href="../tfcc/WEBcss/commen/commen.css">
+    <!--<link rel="stylesheet" href="css/ssi-uploader.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/style2.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/biaoDan.css">-->
 </head>
 <body>
 <div class="overall ">
     <!--头部-->
     <div class="header">
         <div class="header-logo">
-            <img src="../../../resources/qkl_tfcc/imgs/logo1.png" alt="">
+            <img src="../image/logo.png" alt="">
         </div>
         <!--时间栏-->
         <div id="nowTime" class="data">
@@ -36,7 +41,7 @@
 
             </dl>
             <dl>
-                <dt><img src="../../../resources/qkl_tfcc/imgs/erweima.png" alt=""></dt>
+                <dt><img src="../image/erweima.png" alt=""></dt>
                 <dd class="qr">我的二维码</dd>
 
             </dl>
@@ -46,11 +51,11 @@
 <!--选项部分-->
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
-        <li><a  href="../../html/lpmember/lpstock.html">我的股权</a></li>
-        <li><a  href="../../html/lpmember/lpteam.html">我的团队</a></li>
+        <li><a  href="../html/lpstock.html">我的股权</a></li>
+        <li><a  href="../html/lpteam.html">我的团队</a></li>
         <li><a class="security-z" href="#">我的账户</a></li>
-        <li ><a  href="../../html/lpmember/lprersonal.html">个人中心</a></li>
-        <li  ><a href="../../html/lpmember/lpsecuritycenter.html">安全中心</a></li>
+        <li ><a  href="../html/lprersonal.html">个人中心</a></li>
+        <li  ><a href="../html/lpsecuritycenter.html">安全中心</a></li>
         <li><a href="http://www.r8exchange.com">R8交易所</a></li>
     </ul>
 </div>
@@ -60,8 +65,8 @@
         <div class="zhuan_z">
             <div class="my_yu_e">我的余额</div>
             <div class="TF_JF">
-                <span>TFCC </span><b class="tfcc">800,000.00</b>
-                <span>JFCC </span><b class="jfcc">100,000.00</b>
+                <span>TFCC </span><b>800,000.00</b>
+                <span>JFCC </span><b>100,000.00</b>
                 <a href="lpaccount/lptransfer.html">转账</a>
             </div>
 
@@ -69,13 +74,14 @@
         <div class="jiang_l">
             <div class="my_jiang_l">我的奖励</div>
             <ul class="tui_j">
-                <li class="tui_j_r"><span>推荐LP会员奖励</span><br><b class="myjiangli">30,000.00</b></li>
-                <li class="tui_j_r"><span>推荐LP会员购买股权奖励</span><br><b class="tuijianjiang">30,000.00</b></li>
-                <li><span>我购买股权的奖励</span><br><b class="mygoumaijiang">30,000.00</b></li>
+                <li class="tui_j_r"><span>推荐LP会员奖励</span><br><b>30,000.00</b></li>
+                <li class="tui_j_r"><span>推荐LP会员购买股权奖励</span><br><b>30,000.00</b></li>
+                <li><span>我购买股权的奖励</span><br><b>30,000.00</b></li>
             </ul>
         </div>
-      
-         <input type="button" value="查询" class="chaxun">
+        <div  style="clear: both;border:1px solid #000000;margin-top: 35px">
+            注册时间
+        </div>
     </div>
 </div>
 <!---时间日期-->
@@ -120,84 +126,7 @@
     tick();
 </script>
 <!---时间日期结束-->
-<script src="../../../resources/qkl_tfcc/js/common/jquery-2.1.1.min.js"></script>
-<script src="../../../resources/qkl_tfcc/js/lpmember/lpaccount/lpaccount.js"></script>
 
-<!---分页表格-->
-<script>
-	var flag = true;
-$(".huiyuan_c_x").click(function () {
-		
-		var showcnt =10; //每页页数初始值
-		var  myselect=document.getElementByClass("huiyuanZhangHao");
-		if(myselect==null||myselect=="null"){			
-		}else{
-			showcnt=myselect.options[myselect.selectedIndex].value;		
-		}
-		if(flag){
-			reload_table(1,showcnt);					
-		}
 
-	})
-	
-	function reload_table(currentPage,showCount) {
-	 var rsStr="";
-	 var huiyuanZhangHaoVal = $('.huiyuanZhangHao').val();
-		console.log("huiyuanZhangHao is "+huiyuanZhangHaoVal);
-//		var passVal = $('.pass').val();
-//		console.log("passVal is "+passVal); 
-	$.ajax({
-		type: 'post',
-//		url: '../../../service/user/login/',
-		url: '../../../service/test/queryuser/',
-		dataType: 'json',
-		data: {
-			huiyuanZhangHaoVal: $('.huiyuanZhangHao').val(),
-//			pass: $('.pass').val(),
-			currentPage: currentPage,
-			showCount:showCount
-		},
-		success: function (data) {
-			alert('请求成功');
-			var message = data.message;
-			console.log("success is "+data.success);
-			console.log("data is "+data.map);
-			console.log("data.userList is "+data.data.userList);
-			var usList =data.data.userList;
-			console.log("usList.length "+usList.length);
-			console.log("data.data.page.pageStr "+data.data.page.pageStr);
-			var tablecols ="<tr> \n"
-                              +" <th>用户名</th> \n"
-                              + "<th>id</th> \n"
-                            + "</tr> \n";
-			rsStr=tablecols;
-			for(var i=0;i<usList.length;i++){
-				rsStr = rsStr+"<tr>";
-				console.log("usList("+i+") name is "+usList[i].name);
-				rsStr = rsStr +"<td>" + usList[i].name+"</td>";
-				rsStr = rsStr +"<td>" + usList[i].test_user_id+"</td>";
-				rsStr =rsStr+"</tr>";
-			}
-			
-			console.log("rsStr "+rsStr);
-//			 $(".result-tab").append(rsStr);
-			 $(".result-tab").html(rsStr);
-//			 $(".pages1").append(data.data.page.pageStr);
-			 $(".pages1").html(data.data.page.pageStr);
-			 
-//			$('.phone').val(data.data.phone);
-			 alert("message is "+message);
-						 
-			 
-//			 if(data.success){
-//				 window.location.href ="../index.html";
-//			 }
-		}, error: function (data) {
-			alert('请求错误');
-		}
-	})
-}
-
-</script>
 </body>
 </html>

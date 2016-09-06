@@ -1,7 +1,7 @@
 $(function() {
 	var flag = true;
 	//手机失去焦点
-	$('.input-input1 .phone').blur(function () {
+	$('.form-input1 .phone').blur(function () {
 		//手机号正则
 		reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/i;
 		if ($(this).val() == '' || $(this).val() == '请输入你的手机号') {
@@ -29,7 +29,7 @@ $(function() {
 		}
 	});
 	//密码失去焦点
-	$('.input-input1 .pass').blur(function () {
+	$('.form-input1 .pass').blur(function () {
 		//密码正则6-16字母数字或特殊字符
 		reg = /^[a-zA-Z][a-zA-Z0-9|*|&|%|.|@|!]{5,15}$/
 		if ($(this).val() == '' || $(this).val() == '请输入密码') {
@@ -51,7 +51,7 @@ $(function() {
 		}
 	});
 	//验证码失去焦点
-	$('.input-input1 .xiaoyan').blur(function () {
+	$('.form-input1 .xiaoyan').blur(function () {
 		//密码正则6-16字母数字或特殊字符
 		reg = /^[a-zA-Z0-9]{6}$/ig;
 		if ($(this).val() == '') {

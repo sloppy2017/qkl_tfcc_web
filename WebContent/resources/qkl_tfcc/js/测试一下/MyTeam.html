@@ -1,0 +1,283 @@
+
+<!doctype html>
+<html style="overflow: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员中心</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" href="css/pagination.css" />    <!--分页搜索-->
+    <link rel="stylesheet" type="text/css" href="css/dateRange/dateRange.css"/>       <!--时间控件-->
+    <link rel="stylesheet" type="text/css" href="css/dateRange/monthPicker.css"/>     <!--时间控件-->
+    <style type="text/css">
+        ::selection {
+            background-color: #E13300;
+            color: white;
+        }
+        ::moz-selection {
+            background-color: #E13300;
+            color: white;
+        }
+        ::webkit-selection {
+            background-color: #E13300;
+            color: white;
+        }
+        body {
+            background-color: #fff;
+            margin: 40px;
+            font: 12px     /20px normal Helvetica, Arial, sans-serif;
+            color: #4F5155;
+        }
+        a {
+            color: #003399;
+            background-color: transparent;
+            font-weight: normal;
+        }
+        input {
+            color: #333333;
+            font: 12px /1.5 Tahoma, Helvetica, 'SimSun', sans-serif;
+        }
+        code {
+            font-family: Consolas, Monaco, Courier New, Courier, monospace;
+            font-size: 12px;
+            background-color: #f9f9f9;
+            border: 1px solid #D0D0D0;
+            color: #002166;
+            display: block;
+            margin: 14px 0 14px 0;
+            padding: 12px 10px 12px 10px;
+        }
+        h1 {
+            color: #444;
+            background-color: transparent;
+            border-bottom: 1px solid #D0D0D0;
+            font-size: 19px;
+            font-weight: normal;
+            margin: 0 0 14px 0;
+            padding: 14px 15px 10px 15px;
+        }
+        .wrapper {
+            padding-top: 10px;
+        }
+        .wrapper h4{
+            float: left;
+        }
+        .wrapper .ta_date{
+            float: left;
+            width:220px;
+            margin-left: 30px;
+        }
+        .wrapper .timeDetails{
+            float: left;
+            margin-left: 50px;
+            margin-top: 5px;
+        }
+        .wrapper .timeDetails a{
+            padding-left: 20px;
+        }
+        .wrapper .daochu{
+            margin-left: 70px;
+        }
+
+    </style>
+    <!--header-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" href="css/ssi-uploader.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+
+
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>     <!--分页搜索-->
+    <script type="text/javascript" src="js/jquery.pagination.js"></script>      <!--分页搜索-->
+    <script type="text/javascript" src="js/modernizr.min.js"></script>
+    <script type="text/javascript" src="js/dateRange/dateRange.js"></script>     <!--时间控件-->
+    <script type="text/javascript" src="js/dateRange/monthPicker.js"></script>       <!--时间控件-->
+
+
+    <!--分页搜索-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#Pagination").pagination("15");
+        });
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="header_container">
+        <div class="logo">
+            <div class="logo_pic"><img src="images/logo_pic.jpg"></div>
+            <div class="logo_text">
+                <h2>TFCC发行系统</h2>
+                <h6>TFCC DISTRIBUTION SYSTEM</h6>
+            </div>
+        </div>
+        <div class="header_r">
+            <div class="header_top">
+                <p><span id=localtime></span></p>
+                <div>尊敬的<span>13810381111</span>,您好！欢迎使用本系统</div>
+                <div><a href="#">【退出】</a> </div>
+            </div>
+            <ul class="header_bottom">
+                <li><a href="#">我的团队</a></li>
+                <li><a href="../MyAccount/myAccount.html">我的账户</a></li>
+                <li><a href="../Personal%20Center/Personal%20Center.html">个人中心</a></li>
+                <li><a href="../security/Security%20Center.html">安全中心</a></li>
+                <li><a href="www.r8exchange.com">R8交易所</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div>
+    <div style="float: left;width:247px;background: #f6fafe;height: 1080px;">
+        <div>
+            <div style="padding: 43px 55px 0 57px;"><img src="images/touXiang_03.jpg"/></div>
+            <h4 style="padding-left: 85px;line-height: 40px;">普通会员</h4>
+        </div>
+        <div>
+            <div style="padding: 43px 55px 0 57px;"><img src="images/erWeiMa_11.jpg"/></div>
+            <h4 style="padding-left: 85px;line-height: 40px;">我的二维码</h4>
+        </div>
+    </div>
+
+    <div class="clearfix" style="float: left">
+        <div class="main-wrap">
+
+            <div class="crumb-wrap">
+                <div class="crumb-list"><span style="color: #8d8d8d;">您当前的位置：</span><span class="crumb-step">&gt;</span><span class="crumb-name">我的团队</span></div>
+            </div>
+            <div style="padding-top: 10px;">
+                <span style="padding-left: 38px;">累计网点绑定会员人数</span>        <span>107</span>
+            </div>
+
+            <div class="search-wrap">
+                <div class="search-content">
+                    <form action="#" method="post">
+                        <table class="search-tab">
+                            <tr>
+                                <th>查询条件</th>
+                                <td>
+                                    <select name="search-sort" id="">
+                                        <option value="">会员账号</option>
+                                        <option value="19">推荐人</option>
+                                    </select>
+                                </td>
+                                <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
+                                <td><input class="btn btn-primary btn2 chaxun" name="sub" value="查询" type="button"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <!--时间控件-->
+                <div class="wrapper">
+                    <h4 style="font-size: 14px;padding-top: 5px;">注册时间</h4>
+                    <div class="ta_date" id="div_date_demo3">
+                        <span class="date_title" id="date_demo3"></span>
+                        <a class="opt_sel" id="input_trigger_demo3" href="#">
+                            <i class="i_orderd"></i>
+                        </a>
+                    </div>
+                    <div id="datePicker"></div>
+                    <!--<br/>-->
+                    <div class="timeDetails">
+                        <a href="javascript:;" id="aTodayDemo3" >今天</a>
+                        <a href="javascript:;" id="aRecent3Days" >近三天</a>
+                        <a href="javascript:;" id="aRecent7DaysDemo3" >近一周</a>
+                        <a href="javascript:;" id="aRecent30Days" >近一月</a>
+                    </div>
+                    <input class="btn btn-primary btn2 daochu" name="sub" value="导出" type="submit">
+
+                    <script type="text/javascript">
+                        var dateRange = new pickerDateRange('date_demo3', {
+                            aRecent7Days : 'aRecent7DaysDemo3', //最近7天
+                            aToday:'aTodayDemo3',
+                            isTodayValid : false,
+                            //startDate : '2013-04-14',
+                            //endDate : '2013-04-21',
+                            //needCompare : true,
+                            //isSingleDay : true,
+                            //shortOpr : true,
+                            defaultText : ' 至 ',
+                            inputTrigger : 'input_trigger_demo3',
+                            theme : 'ta',
+                            success : function(obj) {
+                                $("#dCon_demo3").html('开始时间 : ' + obj.startDate + '<br/>结束时间 : ' + obj.endDate);
+                            }
+                        });
+
+                    </script>
+                </div>
+            </div>
+            <div class="result-wrap">
+                <form name="myform" id="myform" method="post">
+                    <div class="result-content">
+                        <table class="result-tab" width="100%">
+                            <tr>
+                                <th>注册时间</th>
+                                <th>会员账号</th>
+                                <th>推荐人</th>
+                                <th>购买股份（股）</th>
+                            </tr>
+                        </table>
+                        <div class="pages">
+                            <div id="Pagination"></div>
+                            <div class="searchPage">
+                                <span class="page-sum">共<strong class="allPage">15</strong>页</span>
+                                <span class="page-go">到第<input type="text">页</span>
+                                <a href="javascript:;" class="page-btn">确定</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--/main-->
+    </div>
+</div>
+
+<script type="text/javascript">
+    function showLocale(objD){
+        var str,colorhead,colorfoot;
+        var yy = objD.getYear();
+        if(yy<1900) yy = yy+1900;
+        var MM = objD.getMonth()+1;
+        if(MM<10) MM = '0' + MM;
+        var dd = objD.getDate();
+        if(dd<10) dd = '0' + dd;
+        var hh = objD.getHours();
+        if(hh<10) hh = '0' + hh;
+        var mm = objD.getMinutes();
+        if(mm<10) mm = '0' + mm;
+        var ss = objD.getSeconds();
+        if(ss<10) ss = '0' + ss;
+        var ww = objD.getDay();
+        if  ( ww==0 )  colorhead="<font color=\"#ffffff\">";
+        if  ( ww > 0 && ww < 6 )  colorhead="<font color=\"#ffffff\">";
+        if  ( ww==6 )  colorhead="<font color=\"#ffffff\">";
+        if  (ww==0)  ww="星期日";
+        if  (ww==1)  ww="星期一";
+        if  (ww==2)  ww="星期二";
+        if  (ww==3)  ww="星期三";
+        if  (ww==4)  ww="星期四";
+        if  (ww==5)  ww="星期五";
+        if  (ww==6)  ww="星期六";
+        colorfoot="</font>"
+        str = colorhead + yy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  " + ww + colorfoot;
+        return(str);
+    }
+
+    function tick(){
+        var today;
+        today = new Date();
+        document.getElementById("localtime").innerHTML = showLocale(today);
+        window.setTimeout("tick()", 1000);
+    }
+
+    tick();
+</script>
+<script type="text/javascript" src="ajax/ajax.js"></script>
+
+</body>
+</html>

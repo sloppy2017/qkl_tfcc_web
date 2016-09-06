@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>我的股权</title>
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/commen.css">
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/mask.css">
-
+    <link rel="stylesheet" href="../css/commen/commen.css">
 </head>
 <body>
 <div class="overall ">
     <!--头部-->
     <div class="header">
         <div class="header-logo">
-            <img src="../../../resources/qkl_tfcc/imgs/logo1.png" alt="">
+            <img src="../image/logo.png" alt="">
         </div>
         <!--时间栏-->
         <div id="nowTime" class="data">
@@ -37,7 +35,7 @@
 
             </dl>
             <dl>
-                <dt><img src="../../../resources/qkl_tfcc/imgs/erweima.png" alt=""></dt>
+                <dt><img src="../image/erweima.png" alt=""></dt>
                 <dd class="qr">我的二维码</dd>
 
             </dl>
@@ -48,10 +46,10 @@
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
         <li><a  class="security-q" href="#">我的股权</a></li>
-        <li><a href="../../html/lpmember/lpteam.html">我的团队</a></li>
-        <li><a href="../../html/lpmember/lpaccount.html">我的账户</a></li>
-        <li ><a href="../../html/lpmember/lprersonal.html">个人中心</a></li>
-        <li  ><a href="../../html/lpmember/lpsecuritycenter.html">安全中心</a></li>
+        <li><a href="../html/lpteam.html">我的团队</a></li>
+        <li><a href="../html/lpaccount.html">我的账户</a></li>
+        <li ><a href="../html/lprersonal.html">个人中心</a></li>
+        <li  ><a href="../html/lpsecuritycenter.html">安全中心</a></li>
         <li><a href="http://www.r8exchange.com">R8交易所</a></li>
     </ul>
     <div class="gu_q">
@@ -63,49 +61,21 @@
             <p>开户行：中国工商银行贵阳市开阳区支行</p>
             <p>账务对账电话：0851-26790188</p>
         </div>
-        <form  action="" class="gmsl">
+        <form >
             购买数量（股）&nbsp;&nbsp;&nbsp;
-            <input class="goumaishuliang" type="text" maxlength='10' id="ttext" style="ime-mode:disabled" onkeypress="return myfilter(event)" value="请输入需购买数量" />
+            <input type="text" maxlength='10' id="ttext" style="ime-mode:disabled" onkeypress="return myfilter(event)" value="请输入需购买数量" />
             <br>
             需支付金额（元）
-            <input  class="goumaishuliang" type="text" name="lastname" value="￥0.00">
+            <input type="text" name="lastname" value="￥0.00">
             <br>
-            <input class="querengoumai" id="button" type="button1" value="确认购买" onclick="ShowDiv('MyDiv','fade')" />
-            <!--弹出层时背景层DIV-->
-            <div id="fade" class="black_overlay">
-            </div>
-            <div id="MyDiv" class="white_content">
-                <div style="text-align: center; cursor: default; height: 40px;">
-                    <img src="../../../resources/qkl_tfcc/imgs/tanchukuan.png" alt="" style="display:block;margin:23px 0 0 210px ">
-                    <span style="display:block;margin-top: 20px;">申请购买股份成功，请及时完成付款</span>
-                    <input type="submit" value="完成" style="display: block;margin-top: 25px;margin-left:140px ">
-                    <!--<span style="font-size: 16px;" onclick="CloseDiv('MyDiv','fade')">关闭</span>-->
-                </div>
-            </div>
+            <a href="">确认购买</a>
         </form>
-
         <!--订单查询-->
-        <div class="ding_d">
+        <div style="margin-top: 30px">
             <p>订单查询</p>
-            <form action="" class="fkzt">
-                <span>付款状态</span>
-                <select name="cars" id="fkzt_y">
-                    <option value="volvo">已完成</option>
-                    <option value="saab">未完成</option>
-                </select>
-                <input type="button" value="查询" class="chaxun">
-            </form>
+
         </div>
         <!--订单查询结束-->
-        <table class="result-tab" width="100%">
-                         <!--    <tr>
-                                <th>用户名</th>
-                                <th>id</th>
-                            </tr> -->
-                        </table>
-             <div class="pages1">
-            <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->        
-                        </div>
     </div>
     <!--选项内容部分结束-->
 
@@ -152,6 +122,7 @@
     tick();
 </script>
 <!---时间日期结束-->
+<<<<<<< Upstream, based on origin/dev
 
 <script src="../../../resources/qkl_tfcc/js/lpmember/lpstock/forminput.js"></script>
 <script src="../../../resources/qkl_tfcc/js/common/mask.js"></script>
@@ -174,7 +145,11 @@ $(".chaxun").click(function () {
 			reload_table(1,showcnt);					
 		}
 
+=======
+<script src="../js/stock/forminput.js"></script>
+>>>>>>> 2725b67 替换我找回的文件
 
+<<<<<<< Upstream, based on origin/dev
 	})
 	
 	function reload_table(currentPage,showCount) {
@@ -240,5 +215,7 @@ $(".chaxun").click(function () {
 
 </script>
 <script src="../../../resources/qkl_tfcc/js/lpmember/stock/forminput.js"></script>
+=======
+>>>>>>> 2725b67 替换我找回的文件
 </body>
 </html>
