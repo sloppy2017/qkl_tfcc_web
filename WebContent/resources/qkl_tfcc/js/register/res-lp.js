@@ -74,7 +74,7 @@ function SetRemainTime() {
 
 var flag =true; //默认情况下是成功的；
 //判断验证码发送手机收到的验证码
-$('.input input[name="yzmC"] ').blur(function(){
+$('.form input[name="yzmC"] ').blur(function(){
     //密码正则6-16字母数字或特殊字符
     reg = /^[a-zA-Z0-9]{6,}$/;
     if($(this).val()==''){
@@ -125,7 +125,7 @@ $('.idcardC').blur(function(){
     }
 })
 //密码失去焦点
-$('.input input[name="passwordC"]').blur(function () {
+$('.form input[name="passwordC"]').blur(function () {
     //密码正则6-16字母数字或特殊字符
     reg = /^[a-zA-Z][a-zA-Z0-9|*|&|%|.|@|!]{5,15}$/;
     if ($(this).val() == '') {
@@ -143,8 +143,8 @@ $('.input input[name="passwordC"]').blur(function () {
 
 
 //确认密码
-$('.input .resPasswordC').blur(function(){
-    var pVal = 	$('.input .passwordC').val();
+$('.form .resPasswordC').blur(function(){
+    var pVal = 	$('.form .passwordC').val();
     if ($(this).val() == '') {
         $(this).next().html('请输入确认密码');
         flag=false;
@@ -159,7 +159,7 @@ $('.input .resPasswordC').blur(function(){
 });
 
 //推荐人失去焦点
-$('.input input[name="phone3"]').blur(function () {
+$('.form input[name="phone3"]').blur(function () {
     //手机号正则
     reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/i;
     if ($(this).val() == ''||$(this).val().length < 11) {
@@ -178,10 +178,10 @@ $('.input input[name="phone3"]').blur(function () {
 });
 //创建ajax函数
 function ajaxC(){
-    var yzmVal=	$('.input input[name="yzmC"] ').val();
-    var psswordVal=	$('.input input[name="passwordC"] ').val();
+    var yzmVal=	$('.form input[name="yzmC"] ').val();
+    var psswordVal=	$('.form input[name="passwordC"] ').val();
     var usernameeBVal = $('.usernameeC').val();
-    var phoneVal=	$('.input input[name="phone3"] ').val();
+    var phoneVal=	$('.form input[name="phone3"] ').val();
     var idcardBVal =$('.idcardC').val();
     console.log();
     if(flag){
