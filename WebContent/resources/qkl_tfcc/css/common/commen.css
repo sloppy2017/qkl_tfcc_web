@@ -914,6 +914,7 @@ img {
 }
 #pages ul{
     float: right;
+    padding-top: 20px;
 }
 #pages ul li{
     padding: 0 0;
