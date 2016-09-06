@@ -77,6 +77,17 @@
       
          <input type="button" value="查询" class="chaxun">
     </div>
+    <!--分页表格-->
+    <table class="result-tab" width="100%" id="result-tab2">
+        <!--    <tr>
+               <th>用户名</th>
+               <th>id</th>
+           </tr> -->
+    </table>
+    <div class="pages1" id="pages">
+        <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->
+    </div>
+
 </div>
 <!---时间日期-->
 <script type="text/javascript">
@@ -126,10 +137,10 @@
 <!---分页表格-->
 <script>
 	var flag = true;
-$(".huiyuan_c_x").click(function () {
+$(".chaxun").click(function () {
 		
 		var showcnt =10; //每页页数初始值
-		var  myselect=document.getElementByClass("huiyuanZhangHao");
+		var  myselect=document.getElementByClass("showcnt");
 		if(myselect==null||myselect=="null"){			
 		}else{
 			showcnt=myselect.options[myselect.selectedIndex].value;		
