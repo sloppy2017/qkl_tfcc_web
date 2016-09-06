@@ -908,6 +908,7 @@ img {
     color: #FFFFFF;
 }
 /*修改手机号码结束*/
+/*分页表格*/
 #pages{
     font-size: 16px;
     height: 36px;
@@ -927,7 +928,7 @@ img {
     padding: 0 0;
     display: block;
     color: #000000;
-    line-height: 16px;
+    line-height: 20px;
     width:70px;
     text-align: center;
 }
