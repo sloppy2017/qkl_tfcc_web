@@ -912,6 +912,9 @@ img {
     font-size: 16px;
     height: 36px;
 }
+#pages ul{
+    float: right;
+}
 #pages ul li{
     padding: 0 0;
     background: #ffffff;
