@@ -908,20 +908,20 @@ img {
     color: #FFFFFF;
 }
 /*修改手机号码结束*/
-.xuanxiang .result-tab tbody tr td{
+#pages .result-tab tbody tr td{
     text-align: center;
 }
-.xuanxiang .pages1{
+#pages .pages1{
     font-size: 16px;
     height: 36px;
 }
-body .xuanxiang .pages1 ul li{
+#pages .pages1 ul li{
     padding: 0 0;
     width:100px;
     background: #ffffff;
     border: 1px solid #000000;
 }
-body .xuanxiang .pages1 ul li a{
+#pages .pages1 ul li a{
     padding: 0 0;
     display: block;
     color: #000000;
