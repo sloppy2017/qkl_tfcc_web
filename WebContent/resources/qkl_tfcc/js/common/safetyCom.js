@@ -13,7 +13,8 @@ function sub_phone()
     var phoneVal= $('.phone-safety').val();
     var myreg = /^(((13[0-9]{1})|159|153)+\d{8})$/;
     if(phoneVal.length==''|| phoneVal.length!=11||!myreg.test(phoneVal)){
-        phone.next().html('请输入正确的手机号');
+//        phone.next().html('请输入正确的手机号');
+    	phone.val("请输入正确手机号");
         phone.css("background-color","pink");
         phone.focus();
         return false;

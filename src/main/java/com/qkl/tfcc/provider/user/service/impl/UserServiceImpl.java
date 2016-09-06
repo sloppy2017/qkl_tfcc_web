@@ -248,5 +248,19 @@ public class UserServiceImpl implements UserService {
         return userDetailDao.findUserDetailByUserCode(userCode);
     }
 
+    @Override
+    public User findUserByUserCode(String userCode) {
+        return userDao.findUserByUserCode(userCode);
+    }
 
+    @Override
+    public boolean modifypwdByUserCode(String userCode, String password, String versionNo) {
+        try{                    
+            userDao.modifypwdByUserCode(userCode, password);
+            return true;
+        }catch(Exception e){
+            loger.debug("modifypwdByUserCode fail,reason is "+e.getMessage());
+            return false;
+        }
+    }
 }

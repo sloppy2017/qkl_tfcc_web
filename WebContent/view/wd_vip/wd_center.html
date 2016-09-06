@@ -14,6 +14,8 @@
         <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
         <style type="text/css">
             .hide{display: none;}
+            #networkName,#companyName{display: none;}
+            #branch_name,#crop_name{disabled:true}
         </style>
     </head>
 <body>
@@ -39,8 +41,8 @@
         <div class="nav fix">
             <ul class="fl">
                 <li ><a href="general-team.html">我的团队</a></li>
-                <li><a href="general-account.html">我的账户</a></li>
-                <li ><a class="active" href="general-center.html'">个人中心</a></li>
+                <li><a href="javascript:location.href='/view/general_vip/general-account.html'">我的账户</a></li>
+                <li ><a class="active" href="javascript:location.href='/view/general_vip/general-center.html'">个人中心</a></li>
                 <li><a href="general-safety.html">安全中心</a></li>
                 <li><a href="http://www.r8exchange.com">R8交易所</a></li>
             </ul>
@@ -68,13 +70,15 @@
                   </div>
                 </div>
                 <form id="form"  class="form" method="post">
-                <div><label >姓名</label><input type="text" id="realName" name="realName" placeholder="请输入真实姓名，3-5个字" ><span class="hint">你还未实名认证，为保障你的交顺利进行，请及时前往安全中心进行认证</span></div>
+                <div id="networkName"><label >网点名称</label><input type="text" id="branch_name" name="branch_name" placeholder="请输入网点名称，3-10个字"></div>
+                <div id="companyName"><label >公司名称</label><input type="text" id="crop_name" name="crop_name" placeholder="请输入公司名称，3-10个字"></div>
+                <div><label >姓名</label><input type="text" id="real_name" name="real_name" placeholder="请输入真实姓名，3-5个字" ><span class="hint">你还未实名认证，为保障你的交顺利进行，请及时前往安全中心进行认证</span></div>
                 <div><label >身份证号码</label><input type="text" id="idno" name="idno" placeholder="请输入身份证号" ></div>
                 <div><label >手机号</label><input type="text" id="phone" name="phone" placeholder="请输入手机号" ><span class="hint"> 前往 ”安全中心“ 进行修改。</span></div>
                 <div><label >微信号</label><input type="text" id="wxnum" name="wxnum" placeholder="请输入微信号" ></div>
                 <div><label >支付宝账号</label><input type="text" id="bankaccno" name="bankaccno" placeholder="请输入支付宝账号" ></div>
-                <div><label >通讯地址</label><input type="text" id="mailAddrss" name="mailAddrss" placeholder="请输入通讯地址" ></div>
-                <div><label >邮编</label><input type="text" id="zipCode" name="zipCode" placeholder="请输入邮编" ></div>
+                <div><label >网点地址</label><input type="text" id="mail_addrss" name="mail_addrss" placeholder="请输入通讯地址" ></div>
+                <div><label >邮编</label><input type="text" id="zip_code" name="zip_code" placeholder="请输入邮编" ></div>
                 <div><a href="javascript:save()"></a></div>
                 <!--头像地址 -->
                 <input type="hidden" id="imgAddrss" name="imgAddrss" >
@@ -106,7 +110,7 @@
 </html>
 <script type="text/javascript" >
    $(function(){
-	　　toGeneralVipCenter();
+	　　toMyself();
 	}); 
   function uploadimg(obj){
       var filepath =$("input[type='file'][name='tp']").val();
@@ -139,8 +143,8 @@
 	  });
   }
   
-  function toGeneralVipCenter(){
-	  var url = "/service/user/toGeneralVipCenter";
+  function toMyself(){
+	  var url = "/service/user/toMyself";
 	  $.getJSON(url,function(data){
 		  if(data.success){
 			  $("#realName").val(data.data.realName);
@@ -157,7 +161,6 @@
 			  }
 			  $("#userCode").val(data.data.userCode);
 		  }
-		  
 	  })
   }
   
