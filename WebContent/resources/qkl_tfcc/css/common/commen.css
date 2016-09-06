@@ -170,12 +170,12 @@ img {
 .xuanxiang .f1{
     margin-left: 20px;
 }
-.xuanxiang .f1 .security{
-    color: #000000;
-    position: relative;
-    background: #ffffff;
-    border-radius: 5px 5px 0 0;
-}
+/*.xuanxiang .f1 .security{*/
+    /*color: #000000;*/
+    /*position: relative;*/
+    /*background: #ffffff;*/
+    /*border-radius: 5px 5px 0 0;*/
+/*}*/
 
 .xuanxiang .f1 li{
     float:left;
