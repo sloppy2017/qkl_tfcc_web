@@ -933,6 +933,8 @@ img {
     text-align: center;
     border: 1px solid #dddddd;
 }
-
+#result-tab2 tr,#result-tab2 td{
+    border: 1px solid #dddddd;
+}
 
 
