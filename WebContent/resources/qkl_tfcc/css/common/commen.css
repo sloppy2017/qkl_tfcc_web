@@ -584,7 +584,7 @@ img {
 
 /*我的账户*/
 .xuanxiang{
-    /*width: 70%;*/
+    width: 70%;
     height: 881px;
     position: absolute;
     top: 42px;
@@ -920,8 +920,19 @@ img {
     color: #FFFFFF;
 }
 /*修改手机号码结束*/
-
-
+.xuanxiang .result-tab tbody tr td{
+    text-align: center;
+}
+.xuanxiang .pages1{
+    font-size: 16px;
+}
+.xuanxiang .pages1 ul li{
+    background: #ffffff;
+}
+.xuanxiang .pages1 ul li a{
+    color: #000000;
+    line-height: 16px;
+}
 
 
 
