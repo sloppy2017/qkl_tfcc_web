@@ -935,8 +935,32 @@ img {
     border-collapse: collapse;
 }
 #result-tab2 tr{
-    background: #f6fafe;
     border-bottom: 1px solid #dddddd;
 }
+#result-tab2 tr:nth-child(odd){
+    background: #f6fafe;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
