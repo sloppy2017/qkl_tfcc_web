@@ -204,11 +204,6 @@ img {
     background: #ffffff;
     color: #000000;
 }
-/*.xuanxiang ul li a:hover{*/
-    /*color: #000000;*/
-    /*background: #ffffff;*/
-    /*border-radius: 5px 5px 0 0;*/
-/*}*/
 /*安全中心选项内容*/
 .an_q{
     width: 1673px;
@@ -277,12 +272,12 @@ img {
 .xuanxiang ul{
     margin-left: 20px;
 }
-.xuanxiang ul .security-g{
-    color: #000000;
-    position: relative;
-    background: #ffffff;
-    border-radius: 5px 5px 0 0;
-}
+/*.xuanxiang ul .security-g{*/
+    /*color: #000000;*/
+    /*position: relative;*/
+    /*background: #ffffff;*/
+    /*border-radius: 5px 5px 0 0;*/
+/*}*/
 
 .xuanxiang ul li{
     float:left;
