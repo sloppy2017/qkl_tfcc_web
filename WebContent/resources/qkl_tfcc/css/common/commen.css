@@ -516,7 +516,7 @@ img {
 
 .tuandui{
     position: absolute;
-    width: 100%;
+    width: 70%;
     height: 881px;
     background: #FFFFFF;
     border-left:1px solid #DDDDDD;
@@ -921,6 +921,7 @@ img {
     background: #ffffff;
     border: 1px solid #dddddd;
     border-radius: 0 0 0 0;
+    float: right;
 }
 #pages ul li a{
     padding: 0 0;
