@@ -932,9 +932,11 @@ img {
 #result-tab2{
     text-align: center;
     border: 1px solid #dddddd;
+    border-collapse: collapse;
 }
 #result-tab2 tr{
     background: #f6fafe;
+    border-bottom: 1px solid #dddddd;
 }
 
 
