@@ -928,6 +928,7 @@ img {
 }
 .xuanxiang .pages1 ul li{
     background: #ffffff;
+    border: 1px solid #dddddd;
 }
 .xuanxiang .pages1 ul li a{
     color: #000000;
