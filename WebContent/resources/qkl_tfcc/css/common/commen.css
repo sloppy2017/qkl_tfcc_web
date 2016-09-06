@@ -927,10 +927,12 @@ img {
     font-size: 16px;
 }
 body .xuanxiang .pages1 ul li{
+    width:50px;
     background: #ffffff;
-    border: 1px solid #dddddd;
+    border: 1px solid #000000;
 }
 body .xuanxiang .pages1 ul li a{
+    display: block;
     color: #000000;
     line-height: 16px;
 }
