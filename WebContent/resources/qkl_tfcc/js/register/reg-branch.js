@@ -2,9 +2,9 @@
  * Created by qw on 2016/8/23.
  */
 //网点会员注册
-var InterValObj=null; //timer变量，控制时间
-var count = 60; //间隔函数，1秒执行
-var curCount='';//当前剩余秒数
+var InterValObjB=null; //timer变量，控制时间
+var countB = 60; //间隔函数，1秒执行
+var curCountB='';//当前剩余秒数
 // 手机验证
 function sub_phoneB()
 {
@@ -23,18 +23,18 @@ function sub_phoneB()
     }else{
         phone.next().empty();
         //判断所有的都正确时执行这个发送的函数
-        sendMessage(phoneVal);
+        sendMessageB(phoneVal);
         return true;
     }
 
 }
-function sendMessage(phoneVal,InterValObj,phone) {
-    curCount = count;
+function sendMessageB(phoneVal,InterValObj,phone) {
+    curCountB = countB;
     //删除input的属性值是在60内不能重新点击
     $(".yzmB").attr("disabled", "true");
-    $(".yzmB").val("请在" + curCount + "秒内输入验证码");
+    $(".yzmB").val("请在" + curCountB + "秒内输入验证码");
     clearInterval(InterValObj);
-    InterValObj=setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+    InterValObj=setInterval(SetRemainTimeB, 1000); //启动计时器，1秒执行一次
     //向后台发送处理数据
     console.log(phoneVal);
     $.ajax({
@@ -57,14 +57,14 @@ function sendMessage(phoneVal,InterValObj,phone) {
     });
 }
 //timer处理函数
-function SetRemainTime() {
-    if (curCount == 0) {
-        clearInterval(InterValObj);       //停止计时器
+function SetRemainTimeB() {
+    if (curCountB == 0) {
+        clearInterval(InterValObjB);       //停止计时器
         $(".yzmB").removeAttr("disabled"); //启用按钮
         $(".yzmB").val("重新发送验证码");
     } else {
-        curCount--;
-        $(".yzmB").val("请在" + curCount + "秒内输入验证码");
+        curCountB--;
+        $(".yzmB").val("请在" + curCountB + "秒内输入验证码");
     }
 }
 //-------------------------------------------------------------//

@@ -5,9 +5,9 @@
  * Created by qw on 2016/8/23.
  */
 //LP会员注册
-var InterValObj=null; //timer变量，控制时间
-var count = 60; //间隔函数，1秒执行
-var curCount='';//当前剩余秒数
+var InterValObjC=null; //timer变量，控制时间
+var countC = 60; //间隔函数，1秒执行
+var curCountC='';//当前剩余秒数
 // 手机验证
 function sub_phoneC()
 {
@@ -26,17 +26,17 @@ function sub_phoneC()
     }else{
         phone.next().empty();
         //判断所有的都正确时执行这个发送的函数
-        sendMessage(phoneVal);
+        sendMessageC(phoneVal);
         return true;
     }
 
 }
-function sendMessage(phoneVal,InterValObj,phone) {
-    curCount = count;
+function sendMessageC(phoneVal,InterValObj,phone) {
+    curCountC = countC;
     //删除input的属性值是在60内不能重新点击
     $(".yzmC").attr("disabled", "true");
-    $(".yzmC").val("请在" + curCount + "秒内输入验证码");
-    clearInterval(InterValObj);
+    $(".yzmC").val("请在" + curCountC + "秒内输入验证码");
+    clearInterval(InterValObjC);
     InterValObj=setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
     //向后台发送处理数据
     console.log(phoneVal);
@@ -61,13 +61,13 @@ function sendMessage(phoneVal,InterValObj,phone) {
 }
 //timer处理函数
 function SetRemainTime() {
-    if (curCount == 0) {
-        clearInterval(InterValObj);       //停止计时器
+    if (curCountC == 0) {
+        clearInterval(InterValObjC);       //停止计时器
         $(".yzmC").removeAttr("disabled"); //启用按钮
         $(".yzmC").val("重新发送验证码");
     } else {
-        curCount--;
-        $(".yzmC").val("请在" + curCount + "秒内输入验证码");
+        curCountC--;
+        $(".yzmC").val("请在" + curCountC + "秒内输入验证码");
     }
 }
 //-------------------------------------------------------------//
