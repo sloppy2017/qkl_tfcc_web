@@ -925,10 +925,11 @@ img {
 }
 .xuanxiang .pages1{
     font-size: 16px;
+    height: 36px;
 }
 body .xuanxiang .pages1 ul li{
     padding: 0 0;
-    width:100px;
+    width:10px;
     background: #ffffff;
     border: 1px solid #000000;
 }
