@@ -908,20 +908,17 @@ img {
     color: #FFFFFF;
 }
 /*修改手机号码结束*/
-#pages .result-tab tbody tr td{
-    text-align: center;
-}
-#pages .pages1{
+#pages{
     font-size: 16px;
     height: 36px;
 }
-#pages .pages1 ul li{
+#pages ul li{
     padding: 0 0;
     width:100px;
     background: #ffffff;
     border: 1px solid #000000;
 }
-#pages .pages1 ul li a{
+#pages ul li a{
     padding: 0 0;
     display: block;
     color: #000000;
