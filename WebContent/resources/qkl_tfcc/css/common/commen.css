@@ -167,7 +167,7 @@ img {
     top: 42px;
     left: 248px;
 }
-.xuanxiang ul{
+.xuanxiang .f1{
     margin-left: 20px;
 }
 .xuanxiang .f1 .security{
@@ -193,7 +193,7 @@ img {
     color: #000000;
     display: inline-block;
 }
-.xuanxiang ul li a{
+.xuanxiang .f1 li a{
     text-decoration: none;
     color: #ffffff;
     font-size: 14px;
@@ -201,11 +201,11 @@ img {
     line-height: 38px;
     display: block;
 }
-.xuanxiang ul li:hover{
+.xuanxiang .f1 li:hover{
     background: #ffffff;
     color: #000000;
 }
-.xuanxiang ul li a:hover{
+.xuanxiang .f1 li a:hover{
     color: #000000;
     background: #ffffff;
     border-radius: 5px 5px 0 0;
@@ -275,7 +275,7 @@ img {
     top: 42px;
     left: 248px;
 }
-.xuanxiang ul{
+.xuanxiang .f1{
     margin-left: 20px;
 }
 .xuanxiang ul .security-g{
@@ -289,7 +289,7 @@ img {
     float:left;
 
 }
-.xuanxiang ul li{
+.xuanxiang .f1 li{
     background:#518bbf ;
     border-radius: 5px 5px 0 0;
     margin-left: 1px;
@@ -301,18 +301,18 @@ img {
     color: #000000;
     display: inline-block;
 }
-.xuanxiang ul li a{
+.xuanxiang .f1 li a{
     text-decoration: none;
     color: #ffffff;
     font-size: 14px;
     padding: 0px 41px;
     line-height: 38px;
 }
-.xuanxiang ul li:hover{
+.xuanxiang .f1 li:hover{
     background: #ffffff;
     color: #000000;
 }
-.xuanxiang ul li a:hover{
+.xuanxiang .f1 li a:hover{
     color: #000000;
     background: #ffffff;
     border-radius: 5px 5px 0 0;
