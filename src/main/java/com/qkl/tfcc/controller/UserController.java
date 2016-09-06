@@ -1,4 +1,4 @@
-package com.qkl.tfcc.controller.User;
+package com.qkl.tfcc.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -101,45 +101,29 @@ public class UserController extends BaseAction{
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse login(HttpServletRequest request,HttpServletResponse response ,Page page){
-//		AjaxResponse ar = new AjaxResponse();
-//		Map<String,Object> data = new HashMap<String, Object>();
-//		try {
-//			String userName  =request.getParameter("phone");
-//			String passWord  =request.getParameter("pass");
-//			
-//			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
-//			if ((Integer) map.get("status") == Constant.SUCCESS) {
-//				User user = (User) map.get(Constant.LOGIN_USER);
-//				request.getSession().setAttribute(Constant.LOGIN_USER, user);
-//				logger.info(userName + "登录成功");
-//				ar.setSuccess(true);
-//			} else {
-//				ar.setSuccess(false);
-//				ar.setMessage((String)map.get("msg"));
-//			}
-//			
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			ar.setSuccess(false);
-//			ar.setMessage("系统异常");
-//		}	
-//		ar.setData(data);
-//		return ar;
-		
 		AjaxResponse ar = new AjaxResponse();
-//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
-//		System.out.println( "******queryuser  "+testUserId);
-		pd = this.getPageData();
-		page.setPd(pd);
-		List<PageData> userList = testUserService.queryTestUserList(page);
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("userList", userList);	
-		map.put("pd", pd);	
-		map.put("page", page);
-		ar.setSuccess(true);
-		ar.setMessage("查询成功！");
-		ar.setData(map);
+		Map<String,Object> data = new HashMap<String, Object>();
+		try {
+			String userName  =request.getParameter("phone");
+			String passWord  =request.getParameter("pass");
+			
+			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
+			if ((Integer) map.get("status") == Constant.SUCCESS) {
+				User user = (User) map.get(Constant.LOGIN_USER);
+				request.getSession().setAttribute(Constant.LOGIN_USER, user);
+				logger.info(userName + "登录成功");
+				ar.setSuccess(true);
+			} else {
+				ar.setSuccess(false);
+				ar.setMessage((String)map.get("msg"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			ar.setSuccess(false);
+			ar.setMessage("系统异常");
+		}	
+		ar.setData(data);
 		return ar;
 	}
 	
@@ -281,7 +265,7 @@ public class UserController extends BaseAction{
 				return ar;
 			}
 			
-			Long tMaxno =sysMaxnumService.findMaxNo(notype, Constant.VERSION_NO);
+			Long tMaxno =sysMaxnumService.findMaxNo(notype, Constant.VERSION_NO); //创建用户编号
 			if(tMaxno==null){
 				logger.info("tSysMaxnum findMaxNo  is null!");
 				ar.setSuccess(false);
@@ -332,7 +316,7 @@ public class UserController extends BaseAction{
 			createUserFriendship(tUserDetail);
 			
 			//计算注册奖励
-			
+			calRegitAccDetail(tUserDetail);
 			
 			 
 			 
@@ -435,9 +419,9 @@ public class UserController extends BaseAction{
 			
 			
 			
-		}else if(userType.equals("3")){
+		}else if(userType.equals("3")){//LP会员
 			
-		}else if(userType.equals("4")){
+		}else if(userType.equals("4")){//投资公司
 			
 		}
 		

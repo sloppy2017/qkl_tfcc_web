@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TradeDetail">
+    <resultMap id="tradeDetailResultMap" type="com.qkl.tfcc.api.po.trade.TradeDetail" >
+	    <id column="id" property="id" />
+	    <result column="user_code" property="userCode" />
+	    <result column="phone" property="phone" />
+	    <result column="real_name" property="realName" />
+	    <result column="idno" property="idno" />
+	    <result column="crop_name" property="cropName" />
+	    <result column="crop_person" property="cropPerson" />
+	    <result column="branch_name" property="branchName"/>
+	    <result column="wxnum" property="wxnum" />
+	    <result column="bankaccno" property="bankaccno"/>
+	    <result column="mail_addrss" property="mailAddrss"/>
+	    <result column="zip_code" property="zipCode" />
+	    <result column="ref_phone" property="refPhone" />
+	    <result column="img_addrss" property="imgAddrss" />
+	    <result column="qr_code" property="qrCode"/>      
+	    <result column="user_type" property="userType"/>    
+	    <result column="create_time" property="createTime"/>    
+	    <result column="modify_time" property="modifyTime"/>    
+	    <result column="operator" property="operator"/>    
+    </resultMap>
+
+     <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+         id,user_code,txtype,cuy_type,txnum,txamnt,txdate,cntflag,caldate,source_system,`status`,
+		 revorgname,revbankaccno,revbankdepname,create_time,modify_time,operator
+    </sql>
+      
+       <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		select count(1) cnt
+        from tb_trade_detail  where user_code = #{userCode} 
+	   </select> 
+	   <select id="findById" parameterType="java.lang.Integer" resultMap="tradeDetailResultMap" >
+	        select 
+	        user_code userCode,
+	        txtype txtype,
+	        cuy_type cuyType,
+	        txnum txnum,
+	        txamnt txamnt,
+	        txdate txdate,
+	        cntflag cntflag,
+	        caldate caldate,
+	        source_system sourceSystem,
+	        `status` status,
+			revorgname revorgname,
+			revbankaccno revbankaccno,
+			revbankdepname revbankdepname,
+	         create_time createTime,
+	         modify_time modifyTime,
+	         operator  operator
+	        from tb_trade_detail  where id = #{id}
+      </select>
+
+	<select id="findByUserCode" parameterType="java.lang.String" resultMap="tradeDetailResultMap" >
+        select 
+         <include refid="Base_Column_List" />
+        from tb_trade_detail  where user_code = #{userCode}
+    </select>
+	
+	
+	<insert id="add" parameterType="com.qkl.tfcc.api.po.trade.TradeDetail" >
+	 insert into tb_trade_detail ( 
+	 user_code,
+	 txtype,
+	 cuy_type,
+	 txnum,
+	 txamnt,
+	 txdate,
+	 cntflag,
+	 caldate,
+	 source_system,
+	 `status`,
+	 revorgname,
+	 revbankaccno,
+	 revbankdepname,
+	 create_time,
+	 modify_time,
+	 operator)
+	 values(
+	 #{userCode},
+	 #{txtype},
+	 #{cuyType},
+	 #{txnum},
+	 #{txamnt},
+	 #{txdate},
+	 #{cntflag},
+	 #{caldate},
+	 #{sourceSystem},
+	 #{status},
+	 #{revorgname},
+	 #{revbankaccno},
+	 #{revbankdepname},	 
+	 #{createTime},
+	 #{modifyTime},
+	 #{operator}
+	 )	 
+	 </insert>
+	
+	
+	<update id="updatestatus" parameterType="java.util.Map" >    
+	     update tb_trade_detail 
+	     set status = #{status},
+	         modify_time = #{modify_time}
+	     where id = #{id}     
+     </update>
+     
+     
+	 <update id="update" parameterType="TradeDetail">    
+         update tb_trade_detail 
+         <set> 
+          
+           <if test="userName != null and userName != ''">
+                user_name = #{userName},
+           </if>
+           <if test="cropName != null and cropName != ''">
+                crop_name = #{cropName},
+           </if>
+           <if test="cropPerson != null and cropPerson != ''">
+                crop_person = #{cropPerson},
+           </if>
+           <if test="branchName != null and branchName != ''">
+                branch_name = #{branchName},
+           </if>
+           <if test="wxnum != null and wxnum != ''">
+                wxnum = #{wxnum},
+           </if>
+           <if test="bankaccno != null and bankaccno != ''">
+                bankaccno = #{bankaccno},
+           </if>
+           <if test="mailAddrss != null and mailAddrss != ''">
+                mail_addrss = #{mailAddrss},
+           </if>
+           <if test="zipCode != null and zipCode != ''">
+                zip_code = #{zipCode},
+           </if>
+           <if test="refPhone != null and refPhone != ''">
+                ref_phone = #{refPhone},
+           </if>
+           <if test="imgAddrss != null and imgAddrss != ''">
+                img_addrss = #{imgAddrss},
+           </if>
+           <if test="qrCode != null and qrCode != ''">
+                qr_code = #{qrCode},
+           </if>
+           <if test="userType != null and userType != ''">
+                user_type = #{userType},
+           </if>
+           <if test="realStat != null and realStat != ''">
+                real_stat = #{realStat},
+           </if>
+                modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where id = #{id}     
+     </update>
+
+</mapper>     

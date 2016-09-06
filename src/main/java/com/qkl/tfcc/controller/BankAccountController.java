@@ -59,10 +59,10 @@ import com.qkl.util.help.pager.PageData;
  * @version v1.0.0
  */
 @Controller
-@RequestMapping("/service/account")
-public class AccountController extends BaseAction{
+@RequestMapping("/service/bankacc")
+public class BankAccountController extends BaseAction{
 	
-	private final Logger logger = LoggerFactory.getLogger(AccountController.class);
+	private final Logger logger = LoggerFactory.getLogger(BankAccountController.class);
 	
 	private  List<SysGencode> tSysGencodeAll = new  ArrayList<SysGencode>();
  
