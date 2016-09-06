@@ -49,8 +49,8 @@ public class UserDaoImpl extends DaoSupport<User> implements UserDao {
 
 	@Override
 	public User findUserByUserCode(String userCode) {
-		// TODO Auto-generated method stub
-		return null;
+	    User tUser =getSqlSession().selectOne(namespace+"."+"findUserByUserCode", userCode);
+        return tUser;
 	}
 
 	@Override
@@ -105,5 +105,14 @@ public class UserDaoImpl extends DaoSupport<User> implements UserDao {
 		int eCnt=  getSqlSession().selectOne(namespace+"."+"findIsExist", phone);
 		return eCnt;
 	}
+
+
+    @Override
+    public void modifypwdByUserCode(String userCode, String password) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userCode",userCode);
+        map.put("pwdhash",password);
+        getSqlSession().update(namespace+"."+"updatepwdByUserCode", map); 
+    }
 	
 }

@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <title>我的账户</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!--日期组件-->
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/date/dateRange.css">
-    <link rel="stylesheet" href=../../../resources/qkl_tfcc/css/date/monthPicker.css">
     <!--reset style-->
     <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/reset.css">
     <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/common.css">
     <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/invest/in-account.css">
     <script src="../../../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
-    <script src="../../../resources/qkl_tfcc/js/date/dateRange.js"></script>
-    <script src="../../../resources/qkl_tfcc./js/date/monthPicker.js"></script>
 </head>
 <body>
 <!--遮罩层-->
@@ -97,19 +92,21 @@
                         <!--</li>-->
                     <!--</ul>-->
                 </div>
-                <div class="in-search fix">
-                    <ul>
-                        <li>查询条件</li>
-                        <li>
-                            <select name="" id="mySelect">
-                                <option value="">会员账号</option>
-                                <option value="">会员姓名</option>
-                            </select>
-                        </li>
-                        <li><input type="text" name="chaxun1"></li>
-                        <li class="in-btn"><a href="" onclick="insearch()">查询</a></li>
-                    </ul>
-                </div>
+
+                <!--暂时不考虑到时候再说-->
+                <!--<div class="in-search fix">-->
+                    <!--<ul>-->
+                        <!--<li>查询条件</li>-->
+                        <!--<li>-->
+                            <!--<select name="" id="mySelect">-->
+                                <!--<option value="">会员账号</option>-->
+                                <!--<option value="">会员姓名</option>-->
+                            <!--</select>-->
+                        <!--</li>-->
+                        <!--<li><input type="text" name="chaxun1"></li>-->
+                        <!--<li class="in-btn"><a href="" onclick="insearch()">查询</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
             </div>
             <!--日期-->
 
@@ -136,7 +133,7 @@
                         <p>转账额度</p>
                         <input type="text" name="money" placeholder="请输入需转账额度">
                         <span>您最多可转账额度为 10,000.00</span><span class="t_trans">全部转账</span>
-                        <span class="errorc">sss</span>
+                        <span class="errorc"></span>
                         <div><a href="#" class="jfcc-btn" onclick="return jfcc_sub()">提交</a> <a href="">返回</a></div>
                     </div>
                 </div>

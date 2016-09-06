@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="User">
-<!--resultMap id="BaseResultMap" type="com.qkl.tfcc.api.po.user.User" >
+   <resultMap id="BaseResultMap" type="com.qkl.tfcc.api.po.user.User" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="pwdhash" property="pwdhash" jdbcType="VARCHAR" />
     <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
@@ -16,9 +17,12 @@
     <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />      
-    <result column="phone" property="phone" jdbcType="VARCHAR" />    
-  </resultMap> -->
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_code, user_name, phone, pwdhash, start_date, end_date, is_loginlocked, loginlock_time, 
+    is_smslocked, smslock_time, user_type, reg_time, status, create_time, modify_time
+  </sql>
   
     <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
 		select count(1) cnt
@@ -39,6 +43,11 @@
         create_time createTime,modify_time modifyTime 
         from tb_user  where phone = #{phone}
 	</select> 
+	<select id="findUserByUserCode" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_user  where user_code = #{userCode}
+    </select> 
 	
 	<insert id="add" parameterType="com.qkl.tfcc.api.po.user.User" >
 	 insert into tb_user (user_code,phone,pwdhash,user_type,reg_time,status,create_time,modify_time)
@@ -68,7 +77,12 @@
 	          modify_time = #{modify_time}
 	     where phone = #{phone}     
      </update>
-     
+     <update id="updatepwdByUserCode" parameterType="java.util.Map" >    
+         update tb_user 
+         set pwdhash = #{pwdhash},
+              modify_time = now()
+         where user_code = #{userCode}     
+     </update>
       <update id="updatephone" parameterType="java.util.Map" >    
 	     update tb_user 
 	     set phone = #{phone},

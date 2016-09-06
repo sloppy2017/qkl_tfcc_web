@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>我的团队</title>
-    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/commen.css">
+    <link rel="stylesheet" href="../css/commen/commen.css">
 </head>
 <body>
 <div class="overall ">
     <!--头部-->
     <div class="header">
         <div class="header-logo">
-            <img src="../../../resources/qkl_tfcc/imgs/logo1.png" alt="">
+            <img src="../image/logo.png" alt="">
         </div>
         <!--时间栏-->
         <div id="nowTime" class="data">
@@ -36,7 +36,7 @@
 
             </dl>
             <dl>
-                <dt><img src="../../../resources/qkl_tfcc/imgs/erweima.png" alt=""></dt>
+                <dt><img src="../image/erweima.png" alt=""></dt>
                 <dd class="qr">我的二维码</dd>
 
             </dl>
@@ -46,13 +46,13 @@
 <!--选项部分-->
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
-        <li><a  href="../../html/lpmember/lpstock.html">我的股权</a></li>
+        <li><a  href="../html/lpstock.html">我的股权</a></li>
         <li>
             <a class="security-t" href="#">我的团队</a>
         </li>
-        <li><a href="../../html/lpmember/lpaccount.html">我的账户</a></li>
-        <li ><a href="../../html/lpmember/lprersonal.html">个人中心</a></li>
-        <li  ><a href="../../html/lpmember/lpsecuritycenter.html">安全中心</a></li>
+        <li><a href="../html/lpaccount.html">我的账户</a></li>
+        <li ><a href="../html/lprersonal.html">个人中心</a></li>
+        <li  ><a href="../html/lpsecuritycenter.html">安全中心</a></li>
         <li><a href="http://www.r8exchange.com">R8交易所</a></li>
     </ul>
 </div>
@@ -60,13 +60,18 @@
     <p>您当前的位置：<b>我的团队</b></p>
     <div class="jilei">
         <div class="jilei_lp">
-            <span>累计LP会员</span><b class="lphuiyuan">107</b>
+            <span>累计LP会员</span><b>107</b>
         </div>
         <div class="jilei_zh">
             <span >会员账号</span>
             <input style="margin-left: 30px" type="text" class="huiyuanZhangHao">
             <!--<button type="button" class="huiyuan_c_x"> 查询</button>-->
             <input type="button" value="查询" class="huiyuan_c_x">
+            <input style="margin-left: 30px" type="text">
+            <button type="button"> 查询</button>
+        </div>
+        <div >
+            注册时间
         </div>
     </div>
 
@@ -125,8 +130,6 @@
     tick();
 </script>
 <!---时间日期结束-->
-<script src="../../../resources/qkl_tfcc/js/common/jquery-2.1.1.min.js"></script>
-<script src="../../../resources/qkl_tfcc/js/lpmember/lpteam/lpteam.js"></script>
 
 <!---分页表格-->
 <script>
@@ -144,7 +147,6 @@
         if(flag){
             reload_table(1,showcnt);
         }
-
 
     })
 
