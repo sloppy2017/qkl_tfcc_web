@@ -198,7 +198,7 @@ img {
     /*color: #ffffff;*/
     font-size: 14px;
     padding: 0px 41px;
-    display: block;
+    display: inline-block;
 }
 .xuanxiang ul li:hover{
     background: #ffffff;
@@ -938,6 +938,7 @@ img {
 }
 #result-tab2 tr{
     border-bottom: 1px solid #dddddd;
+    height: 40px;
 }
 #result-tab2 tr:nth-child(odd){
     background: #f6fafe;
