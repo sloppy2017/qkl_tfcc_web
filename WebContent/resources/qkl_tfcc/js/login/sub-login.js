@@ -162,7 +162,7 @@ function reload_table(currentPage,showCount) {
 			
 			console.log("rsStr "+rsStr);
 //			 $(".result-tab").append(rsStr);
-			 $(".result-tab").html(rsStr);
+			 $(".resu lt-tab").html(rsStr);
 //			 $(".pages1").append(data.data.page.pageStr);
 			 $(".pages1").html(data.data.page.pageStr);
 			 
