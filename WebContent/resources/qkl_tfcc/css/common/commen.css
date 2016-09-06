@@ -917,6 +917,7 @@ img {
     width:100px;
     background: #ffffff;
     border: 1px solid #000000;
+    border-radius: 0 0 0 0;
 }
 #pages ul li a{
     padding: 0 0;
