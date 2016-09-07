@@ -102,81 +102,106 @@ $(function() {
 		show_code();
 	});
 
-
-	$(".submit").click(function () {
-
-		var showcnt =10; //每页页数初始值
-		var  myselect=document.getElementById("showcnt");
-		if(myselect==null||myselect=="null"){			
-		}else{
-			showcnt=myselect.options[myselect.selectedIndex].value;		
-		}
+	$('.submit').click(function(){
+		var phoneVal=$('.phone').val();
+		var pwdVal=$('.pass').val();
+		var yzmVal =$('.xiaoyan').val();
 		if(flag){
-			reload_table(1,showcnt);					
+			$.ajax({
+				type:"post",
+				url:'ddd',
+				data:{
+					phone:phoneVal,
+					pwd:pwdVal,
+					yzm:yzmVal
+				},success:function(data){
+					alert(1111);
+				},error:function(data){
+					alert(22222)
+				}
+			})
 		}
 
 	})
-	
+
+
+
+
+    //
+	//$(".submit").click(function () {
+    //
+	//	var showcnt =10; //每页页数初始值
+	//	var  myselect=document.getElementById("showcnt");
+	//	if(myselect==null||myselect=="null"){
+	//	}else{
+	//		showcnt=myselect.options[myselect.selectedIndex].value;
+	//	}
+	//	if(flag){
+	//		reload_table(1,showcnt);
+	//	}
+    //
+	//})
+	//
 	
 	
 	
 });
 
-function reload_table(currentPage,showCount) {
-	 var rsStr="";
-	 var phoneVal = $('.phone').val();
-		console.log("phoneVal is "+phoneVal);
-		var passVal = $('.pass').val();
-		console.log("passVal is "+passVal); 
-	$.ajax({
-		type: 'post',
-//		url: '../../../service/user/login/',
-		url: '../../../service/test/queryuser/',
-		dataType: 'json',
-		data: {
-			val:$val,
-			currentPage: currentPage,
-			showCount:showCount
-		},
-		success: function (data) {
-			alert('请求成功');
-			var message = data.message;
-			console.log("success is "+data.success);
-			console.log("data is "+data.map);
-			console.log("data.userList is "+data.data.userList);
-			var usList =data.data.userList;
-			console.log("usList.length "+usList.length);
-			console.log("data.data.page.pageStr "+data.data.page.pageStr);
-			var tablecols ="<tr> \n"
-                              +" <th>用户名</th> \n"
-                              + "<th>id</th> \n"
-                            + "</tr> \n";
-			rsStr=tablecols;
-			for(var i=0;i<usList.length;i++){
-				rsStr = rsStr+"<tr>";
-				console.log("usList("+i+") name is "+usList[i].name);
-				rsStr = rsStr +"<td>" + usList[i].name+"</td>";
-				rsStr = rsStr +"<td>" + usList[i].test_user_id+"</td>";
-				rsStr =rsStr+"</tr>";
-			}
-			
-			console.log("rsStr "+rsStr);
-//			 $(".result-tab").append(rsStr);
-			 $(".result-tab").html(rsStr);
-//			 $(".pages1").append(data.data.page.pageStr);
-			 $(".pages1").html(data.data.page.pageStr);
-			 
-//			$('.phone').val(data.data.phone);
-			 alert("message is "+message);
-						 
-			 
-//			 if(data.success){
-//				 window.location.href ="../index.html";
-//			 }
-		}, error: function (data) {
-			alert('请求错误');
-		}
-	})
-}
+//function reload_table(currentPage,showCount) {
+//	 var rsStr="";
+//	 var phoneVal = $('.phone').val();
+//		console.log("phoneVal is "+phoneVal);
+//		var passVal = $('.pass').val();
+//		console.log("passVal is "+passVal);
+//	$.ajax({
+//		type: 'post',
+////		url: '../../../service/user/login/',
+//		url: '../../../service/test/queryuser/',
+//		dataType: 'json',
+//		data: {
+//			val:$val,
+//			currentPage: currentPage,
+//			showCount:showCount
+//		},
+//		success: function (data) {
+//			alert('请求成功');
+//			var message = data.message;
+//			console.log("success is "+data.success);
+//			console.log("data is "+data.map);
+//			console.log("data.userList is "+data.data.userList);
+//			var usList =data.data.userList;
+//			console.log("usList.length "+usList.length);
+//			console.log("data.data.page.pageStr "+data.data.page.pageStr);
+//			var tablecols ="<tr> \n"
+//                              +" <th>用户名</th> \n"
+//                              + "<th>id</th> \n"
+//                            + "</tr> \n";
+//			rsStr=tablecols;
+//			for(var i=0;i<usList.length;i++){
+//				rsStr = rsStr+"<tr>";
+//				console.log("usList("+i+") name is "+usList[i].name);
+//				rsStr = rsStr +"<td>" + usList[i].name+"</td>";
+//				rsStr = rsStr +"<td>" + usList[i].test_user_id+"</td>";
+//				rsStr =rsStr+"</tr>";
+//			}
+//
+//			console.log("rsStr "+rsStr);
+////			 $(".result-tab").append(rsStr);
+//			 $(".result-tab").html(rsStr);
+////			 $(".pages1").append(data.data.page.pageStr);
+//			 $(".pages1").html(data.data.page.pageStr);
+//
+////			$('.phone').val(data.data.phone);
+//			 alert("message is "+message);
+//
+//
+////			 if(data.success){
+////				 window.location.href ="../index.html";
+////			 }
+//		}, error: function (data) {
+//			alert('请求错误');
+//		}
+//	})
+//}
 
 
