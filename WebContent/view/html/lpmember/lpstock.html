@@ -172,15 +172,14 @@
         if(flag){
             reload_table(1,showcnt);
         }
-
     })
 
     function reload_table(currentPage,showCount) {
         var rsStr="";
-        var phoneVal = $('.phone').val();
-        console.log("phoneVal is "+phoneVal);
-        var passVal = $('.pass').val();
-        console.log("passVal is "+passVal);
+//        var phoneVal = $('.phone').val();
+//        console.log("phoneVal is "+phoneVal);
+//        var passVal = $('.pass').val();
+//        console.log("passVal is "+passVal);
         $.ajax({
             type: 'post',
 //		url: '../../../service/user/login/',
