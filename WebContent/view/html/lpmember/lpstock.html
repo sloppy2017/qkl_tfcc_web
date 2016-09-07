@@ -101,15 +101,16 @@
         <!--订单查询结束-->
     </div>
     <!--选项内容部分结束-->
-    <table class="result-tab" width="100%">
-                             <!--    <tr>
-                                    <th>用户名</th>
-                                    <th>id</th>
-                                </tr> -->
-    </table>
-    <div class="pages1">
-                <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->
-     </div>
+        <table class="result-tab" width="100%">
+                                 <!--    <tr>
+                                        <th>用户名</th>
+                                        <th>id</th>
+                                    </tr> -->
+        </table>
+        <div class="pages1">
+                    <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->
+
+         </div>
 </div>
 <!---时间日期-->
 <script type="text/javascript">
@@ -201,8 +202,11 @@
                 console.log("usList.length "+usList.length);
                 console.log("data.data.page.pageStr "+data.data.page.pageStr);
                 var tablecols ="<tr> \n"
-                        +" <th>用户名</th> \n"
-                        + "<th>id</th> \n"
+                        +" <th>购买时间</th> \n"
+                        + "<th>购买份数</th> \n"
+                        + "<th>支付方式</th> \n"
+                        + "<th>总计金额</th> \n"
+                        + "<th>付款状态</th> \n"
                         + "</tr> \n";
                 rsStr=tablecols;
                 for(var i=0;i<usList.length;i++){
