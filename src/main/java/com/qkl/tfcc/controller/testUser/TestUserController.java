@@ -93,6 +93,8 @@ public class TestUserController  extends BaseAction{
 		AjaxResponse ar = new AjaxResponse();
 //		long testUserId =  Long.parseLong(request.getParameter("email")) ;
 //		System.out.println( "******queryuser  "+testUserId);
+//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
+//		System.out.println( "******queryuser  "+testUserId);
 		pd = this.getPageData();
 		page.setPd(pd);
 		List<PageData> userList = testUserService.queryTestUserList(page);
