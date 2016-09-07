@@ -252,24 +252,9 @@
         }else{
             showcnt=myselect.options[myselect.selectedIndex].value;
         }
-
-
-        var x = $('.btm input')
-        if (x.is(":checked")) {
-            // 先把所有的checkbox 都设置为不选种
-            $('input[type=checkbox]').prop('checked', false);
-            // 把自己设置为选中
-           x.prop('checked',true);
-
-        }
-
-
-
         if(flag){
             reload_table(1,showcnt);
         }
-
-
     })
 
     function reload_table(currentPage,showCount) {
