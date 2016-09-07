@@ -144,20 +144,19 @@
 
     function reload_table(currentPage,showCount) {
         var rsStr="";
-        var huiyuanzhanghaoVal = $('.huiyuanzhanghao').val();
-////        var phoneVal = $('.phone').val();
-//        console.log("phoneVal is "+phoneVal);
-//        var passVal = $('.pass').val();
-//        console.log("passVal is "+passVal);
+        var phoneVal = $('.phone').val();
+        console.log("phoneVal is "+phoneVal);
+        var passVal = $('.pass').val();
+        console.log("passVal is "+passVal);
         $.ajax({
             type: 'POST',
 //		url: '../../../service/user/login/',
             url: '../../../service/test/queryuser/',
             dataType: 'json',
             data: {
-                huiyuanzhanghao:$('.huiyuanzhanghao').val(),
-//                phone: $('.phone').val(),
-//                pass: $('.pass').val(),
+//                huiyuanzhanghao:$('.huiyuanzhanghao').val(),
+                phone: $('.phone').val(),
+                pass: $('.pass').val(),
                 currentPage: currentPage,
                 showCount:showCount
             },
@@ -184,7 +183,7 @@
                 }
 
                 console.log("rsStr "+rsStr);
-//			 $(".result-tab").append(rsStr);
+			 $(".result-tab").append(rsStr);
                 $(".result-tab").html(rsStr);
 //			 $(".pages1").append(data.data.page.pageStr);
                 $(".pages1").html(data.data.page.pageStr);
@@ -199,7 +198,6 @@
                 alert('请求错误');
             }
         })
-    }
 </script>
 </body>
 </html>
