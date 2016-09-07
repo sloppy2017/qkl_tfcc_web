@@ -171,6 +171,17 @@
 
 .pages1{
     margin-top:20px;
+    height:32px;
+}
+.btm .pages1 ul {
+    height:32px;
+}
+.btm .pages1 ul li{
+    height:32px;
+}
+.btm .pages1 ul li a{
+    display: block;
+    height:32px;
 }
 
 
