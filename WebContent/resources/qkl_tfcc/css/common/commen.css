@@ -962,6 +962,7 @@ body .xuanxiang .pages1 ul li a{
 #pages2 ul li{
     float: right;
     margin-left: 20px;
+    border: 1px solid #dddddd;
 }
 
 
