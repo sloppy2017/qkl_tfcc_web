@@ -155,7 +155,6 @@
 
     })
 
-
     function reload_table(currentPage,showCount) {
         var rsStr = "";
         var phoneVal = $('.phone').val();
@@ -205,8 +204,7 @@
                 }
                 console.log("rsStr " + rsStr);
 //			 $(".result-tab").append(rsStr);
-                $(".result-tab").html(rsStr);
-                $(".result-tab").html(rsStr);
+                $(".result-tab").append(rsStr);
 //			 $(".pages1").append(data.data.page.pageStr);
                 $(".pages1").html(data.data.page.pageStr);
 
