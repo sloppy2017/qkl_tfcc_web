@@ -91,18 +91,18 @@ public class TestUserController  extends BaseAction{
 	public AjaxResponse querylist(HttpServletRequest request,HttpServletResponse response, Page page){
 		
 		AjaxResponse ar = new AjaxResponse();
-//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
-//		System.out.println( "******queryuser  "+testUserId);
-//		pd = this.getPageData();
-//		page.setPd(pd);
-//		List<PageData> userList = testUserService.queryTestUserList(page);
-//		Map<String,Object> map = new HashMap<String, Object>();
-//		map.put("userList", userList);	
-//		map.put("pd", pd);	
-//		map.put("page", page);
-//		ar.setSuccess(true);
-//		ar.setMessage("查询成功！");
-//		ar.setData(map);
+		long testUserId =  Long.parseLong(request.getParameter("email")) ;
+		System.out.println( "******queryuser  "+testUserId);
+		pd = this.getPageData();
+		page.setPd(pd);
+		List<PageData> userList = testUserService.queryTestUserList(page);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("userList", userList);	
+		map.put("pd", pd);	
+		map.put("page", page);
+		ar.setSuccess(true);
+		ar.setMessage("查询成功！");
+		ar.setData(map);
 		return ar;
 	}
 	
