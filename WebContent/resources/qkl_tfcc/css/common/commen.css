@@ -941,6 +941,12 @@ body .xuanxiang .pages1 ul li a{
 }
 
 /*分页表格*/
+#result-tab2 tr{
+    text-align: center;
+}
+#result-tab2 tr:nth-child(odd){
+    background: #f6fafe;
+}
 #result-tab2 tr th{
     width: 300px;
 }
