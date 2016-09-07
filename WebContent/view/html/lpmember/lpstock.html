@@ -163,6 +163,7 @@
 <!---分页表格-->
 <script>
     $(".chaxun").click(function () {
+        alert("11111111");
         var showcnt =10; //每页页数初始值
         var  myselect=document.getElementById("showcnt");
         if(myselect==null||myselect=="null"){
@@ -172,7 +173,7 @@
         if(flag){
             reload_table(1,showcnt);
         }
-    })
+    });
 
     function reload_table(currentPage,showCount) {
         var rsStr="";
@@ -188,6 +189,7 @@
             data: {
 //                phone: $('.phone').val(),
 //                pass: $('.pass').val(),
+                fkzt_yVal:$('.fkzt_y option:selected').val(),
                 currentPage: currentPage,
                 showCount:showCount
             },
