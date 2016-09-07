@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" class="my" >
+<html lang="en" class="my" >
 <head>
     <meta charset="UTF-8">
     <title>我的股权</title>
@@ -106,10 +106,10 @@
                                 <th>用户名</th>
                                 <th>id</th>
                             </tr> -->
-                        </table>
-             <div class="pages1">
+</table>
+<div class="pages1">
             <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->
-                        </div>
+ </div>
 </div>
 <!---时间日期-->
 <script type="text/javascript">
@@ -153,11 +153,6 @@
     tick();
 </script>
 <!---时间日期结束-->
-
-<script src="../../../resources/qkl_tfcc/js/lpmember/lpstock/forminput.js"></script>
-<script src="../../../resources/qkl_tfcc/js/common/mask.js"></script>
-<script src="../../../resources/qkl_tfcc/js/common/jquery-2.1.1.min.js" type="text/javascript"></script>
-=======
 <!---分页表格-->
 <script>
 	var flag = true;
@@ -166,8 +161,7 @@ $(".chaxun").click(function () {
 		var showcnt =10; //每页页数初始值
 		var  myselect=document.getElementByClass("fkzt_y");
 		if(myselect==null||myselect=="null"){			
-		}
-        else{
+		}else{
 			showcnt=myselect.options[myselect.selectedIndex].value;		
 		}
 		if(flag){
@@ -236,6 +230,10 @@ $(".chaxun").click(function () {
 }
 
 </script>
+
+<script src="../../../resources/qkl_tfcc/js/common/mask.js"></script>
+<script src="../../../resources/qkl_tfcc/js/common/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="../../../resources/qkl_tfcc/js/lpmember/lpstock/forminput.js"></script>
 <script src="../../../resources/qkl_tfcc/js/lpmember/lpstock/address.js"></script>
 </body>
 </html>

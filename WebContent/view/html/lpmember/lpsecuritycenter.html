@@ -1,128 +1,136 @@
-<!-- <!DOCTYPE html>
-<html lang="zh-cn"  class="my"> -->
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en"  class="my">
 <head>
     <meta charset="UTF-8">
     <title>安全中心</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="../css/lpsecuritycenter/reset.css">
-    <link rel="stylesheet" href="../css/lpsecuritycenter/common.css">
-    <link rel="stylesheet" href="../css/lpsecuritycenter/general-safety.css">
-    <script src="../js/lpsecuritycenter/date/dateRange.js"></script>
-    <script src="../js/lpsecuritycenter/date/monthPicker.js"></script>
-    <script src="../js/comm/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/commen.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/lpmember/lpsecuritycenter/lpsecuritycenter.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/lpmember/lpsecuritycenter/masklayer.css">
+    <script src="../../../resources/qkl_tfcc/js/common/jquery-2.1.1.min.js"></script>
 </head>
 <body>
-<div class="mark">
-    <div class="mark-box">
-        <div class="success-icon"></div>
-        <p>实名认证成功</p>
-        <div class="achieve"><p>完成</p></div>
-    </div>
-</div>
-
-<div class="mark1">
-    <div class="mark-box">
-        <div class="success-icon"></div>
-        <p>修改手机成功</p>
-        <div class="achieve"><p>完成</p></div>
-    </div>
-</div>
-
-<div class="mark2">
-    <div class="mark-box">
-        <div class="success-icon"></div>
-        <p>修改密码成功</p>
-        <div class="achieve"><p>完成</p></div>
-    </div>
-</div>
-<div class="header fix">
-    <div class="logo fl">
-        <img src="../image/reglogo_02.jpg" alt="">
-    </div>
-    <div class="nav-right fl">
-        <div class="top">
-            <span id=localtime></span>
-            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
-            <span class="exit"><a href="">【退出】</a></span>
+<div class="overall " >
+    <!--头部-->
+    <div class="header">
+        <div class="header-logo">
+            <img src="../../../resources/qkl_tfcc/imgs/logo1.png" alt="">
         </div>
-        <div class="nav fix">
-            <ul class="fl">
-                <li><a  href="../html/lpstock.html">我的股权</a></li>
-                <li><a href="../html/lpteam.html">我的团队</a></li>
-                <li><a href="../html/lpaccount.html">我的账户</a></li>
-                <li ><a href="../html/lprersonal.html">个人中心</a></li>
-                <li><a  class="active"  href="">安全中心</a></li>
-                <li><a href="http://www.r8exchange.com">R8交易所</a></li>
-            </ul>
+        <!--时间栏-->
+        <div id="nowTime" class="data">
+            <p  class="time"><span id=localtime></span></p>
+            <div class="xt">
+                <span style="color: #ffffff">尊敬的</span>
+                <a style="color: #ffffff" class="right" href=""></a>
+                <span style="color: #ffffff">，您好！欢迎使用本系统</span>
+            </div>
+            <div class="Sign">
+                <a href="#">【退出】</a>
+            </div>
+        </div>
+
+    </div>
+    <!--内容-->
+    <div class="content">
+        <div class="content-l">
+            <dl>
+                <dt><img src="../../../resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt=""></dt>
+                <dd class="lp">LP</dd>
+
+            </dl>
+            <dl>
+                <dt><img src="../../../resources/qkl_tfcc/imgs/erweima.png" alt=""></dt>
+                <dd class="qr">我的二维码</dd>
+
+            </dl>
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="main fl">
-        <div class="mains">
-            <div class="main-top"><span>您当前的位置：</span><span class="c28">安全中心</span></div>
-            <div class="amend">
-                <ul>
-                    <li><div><p>手机号</p><span class="txt">通过手机同接收动态验证码，进行密码修改等操作</span ><span class="status">已锁定</span><a class="btn phone">修改</a></div></li>
-                    <li><div><p>登录密码</p><span class="txt"> 为保证账户安全，可设置更复杂的登录密码</span><span class="status">已开启</span><a class="btn pwd">修改</a></div></li>
-                    <li><div><p>实名认证</p><span class="txt"> 实名认证后，方可进行交易操作</span><span class="status">未验证</span><a class="btn renzhen">认证</a></div></li>
-                </ul>
-            </div>
-
-            <div class="rephone hid">
-                <div class="main-top1"><span>您当前的位置：安全中心></span ><span class="c28">实名认证</span></div>
-                <form action="" class="form1">
-                    <div><label >原手机号</label><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13810381111</span></div>
-                    <div><label >新手机号</label><input type="text" class="phone-safety" placeholder="请输入新手机号"><span class="error"></span></div>
-                    <div><label > 验证码</label><input type="text" name="yzm"  placeholder="请输入验证码"><input type="button" class="yzm-safety btn1" onclick="sub_phone()" value="获取验证码"><span class="error"></span></div>
-                    <div><a class="save" href="#" onclick="ajaxsub()">提交</a><a href="" class="rest" onclick="">返回</a></div>
-                </form>
-            </div>
-            <div class="pwd hid">
-                <div class="main-top1"><span>您当前的位置：安全中心></span ><span class="c28">修改登录密码</span></div>
-                <form action="" class="form1">
-                    <div class="mima"></div>
-                    <div><label>原登录密码</label><input type="password"  name="pwd" placeholder="请输入原登录密码"><span class="error"></span></div>
-                    <div><label >新登录密码</label><input type="password"  name="pwd1" placeholder="请输入新登录密码"><span class="error"></span></div>
-                    <div><label >确认登录密码</label><input type="password" name="pwd2" placeholder="请输入新登录密码"><span class="error"></span></div>
-                    <div><a href="#" onclick="subpwd()" class="save">保存</a><a href="" class="rest">返回</a></div>
-                </form>
-            </div>
-
-
-
-            <div class="rerenzhen hid">
-                <div class="main-top1"><span>您当前的位置：安全中心></span ><span class="c28">实名认证</span></div>
-                <div class="txt1">根据国家相关规定，个人资产转账、提现、充值等操作时，需要提供真实的身份信息，感谢您的配合！  实名认证获取发财网第一桶金！</div>
-                <form action="" class="form1">
-                    <div><label >姓名</label><input type="text" name="username" placeholder="请输入您的真实姓名"><span class="error"></span></div>
-                    <div><label >身份证账号</label><input type="text" name="card" placeholder="请输入您的有效身份证号码"><span class="error"></span></div>
-                    <div><a href="#" onclick="save()" class="save">保存</a><a href="" class="rest">返回</a></div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="side-bar fl">
-        <div class="fl">
-            <div class="myImg">
-                <div>
-                    <img src="" alt="">
+<!--选项部分-->
+<div class="xuanxiang" style="position: absolute">
+    <ul class="fl">
+        <li><a href="../../html/lpmember/lpstock.html">我的股权</a></li>
+        <li><a href="../../html/lpmember/lpteam.html">我的团队</a></li>
+        <li><a href="../../html/lpmember/lpaccount.html">我的账户</a></li>
+        <li><a href="../../html/lpmember/lprersonal.html">个人中心</a></li>
+        <li><a href="" class="security-g">安全中心</a></li>
+        <li><a href="http://www.r8exchange.com">R8交易所</a></li>
+    </ul>
+    <div class="an_q">
+        <ul class="aqzx">
+            <!--<li class="dqwz"><span  >您当前的位置：<b style="color:#282828">安全中心</b></span></li>-->
+            <!--选项内容部分-->
+            <div class="mark">
+                <div class="mark-box">
+                    <div class="success-icon"></div>
+                    <p>实名认证成功</p>
+                    <div class="achieve"><p>完成</p></div>
                 </div>
-                <p style="color: #2b71b1;">LP</p>
             </div>
 
-            <div class="qr-code">
-                <div>
-                    <img src="../image/ma.jpg" alt="">
+            <div class="mark1">
+                <div class="mark-box">
+                    <div class="success-icon"></div>
+                    <p>修改手机成功</p>
+                    <div class="achieve"><p>完成</p></div>
                 </div>
-                <p>我的二维码</p>
             </div>
-        </div>
+
+            <div class="mark2">
+                <div class="mark-box">
+                    <div class="success-icon"></div>
+                    <p>修改密码成功</p>
+                    <div class="achieve"><p>完成</p></div>
+                </div>
+            </div>
+            <div class="container" style="width: 1920px">
+                <div class="main fl">
+                    <div class="mains">
+                        <div class="amend" style="width: 1673px;background: none;" >
+                            <ul>
+                                <li style="width:1673px;background: none;margin-left: -20px"><div><p>手机号</p><span class="txt">通过手机同接收动态验证码，进行密码修改等操作</span ><span class="status">已锁定</span><a class="btn phone">修改</a></div></li>
+                                <li style="width:1673px;background: none;margin-left: -20px"><div><p>登录密码</p><span class="txt"> 为保证账户安全，可设置更复杂的登录密码</span><span class="status">已开启</span><a class="btn pwd">修改</a></div></li>
+                                <li style="width:1673px;background: none;margin-left: -20px"><div><p>实名认证</p><span class="txt"> 实名认证后，方可进行交易操作</span><span class="status">未验证</span><a class="btn renzhen">认证</a></div></li>
+                            </ul>
+                        </div>
+
+                        <div class="rephone hid">
+                            <div class="main-top1" style="margin-left: -20px"><span>您当前的位置：安全中心></span ><span class="c28">实名认证</span></div>
+                            <form action="" class="form1">
+                                <div><label >原手机号</label><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13810381111</span></div>
+                                <div><label >新手机号</label><input style="border-radius: 3px;border: 1px solid #dddddd" type="text" class="phone-safety" placeholder="请输入新手机号"><span class="error"></span></div>
+                                <div><label > 验证码</label><input style="border-radius: 3px;border: 1px solid #dddddd" type="text" name="yzm"  placeholder="请输入验证码"><input type="button" class="yzm-safety btn1" onclick="sub_phone()" value="获取验证码"><span class="error"></span></div>
+                                <div><a class="save" href="#" onclick="ajaxsub()">提交</a><a href="" class="rest" onclick="">返回</a></div>
+                            </form>
+                        </div>
+                        <div class="pwd hid">
+                            <div class="main-top1" style="margin-left: -20px"><span>您当前的位置：安全中心></span ><span class="c28">修改登录密码</span></div>
+                            <form action="" class="form1">
+                                <div class="mima"></div>
+                                <div><label>原登录密码</label><input style="border-radius: 3px;border: 1px solid #dddddd" type="password"  name="pwd" placeholder="请输入原登录密码"><span class="error"></span></div>
+                                <div><label >新登录密码</label><input style="border-radius: 3px;border: 1px solid #dddddd" type="password"  name="pwd1" placeholder="请输入新登录密码"><span class="error"></span></div>
+                                <div><label >确认登录密码</label><input style="border-radius: 3px;border: 1px solid #dddddd" type="password" name="pwd2" placeholder="请输入新登录密码"><span class="error"></span></div>
+                                <div><a href="#" onclick="subpwd()" class="save">保存</a><a href="" class="rest">返回</a></div>
+                            </form>
+                        </div>
+
+
+
+                        <div class="rerenzhen hid">
+                            <div class="main-top1"  style="margin-left: -20px"><span>您当前的位置：安全中心></span ><span class="c28">实名认证</span></div>
+                            <div class="txt1">根据国家相关规定，个人资产转账、提现、充值等操作时，需要提供真实的身份信息，感谢您的配合！  实名认证获取发财网第一桶金！</div>
+                            <form action="" class="form1">
+                                <div><label >姓名</label><input style="border-radius: 3px;border: 1px solid #dddddd" type="text" name="username" placeholder="请输入您的真实姓名"><span class="error"></span></div>
+                                <div><label >身份证账号</label><input style="border-radius: 3px;border: 1px solid #dddddd" type="text" name="card" placeholder="请输入您的有效身份证号码"><span class="error"></span></div>
+                                <div><a href="#" onclick="save()" class="save">保存</a><a href="" class="rest">返回</a></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--选项内容部分结束-->
+        </ul>
     </div>
 </div>
-<script src="../js/lpsecuritycenter/date/dateCom.js"></script>
 <!---时间日期-->
 <script type="text/javascript">
     function showLocale(objD){
@@ -161,6 +169,7 @@
         document.getElementById("localtime").innerHTML = showLocale(today);
         window.setTimeout("tick()", 1000);
     }
+
     tick();
 </script>
 <script>
@@ -182,6 +191,8 @@
         })
     })
 </script>
-<script src="../js/lpsecuritycenter/date/safety.js"></script>
+<!---时间日期结束-->
+<script src="../../../resources/qkl_tfcc/js/lpmember/lpsecuritycenter/safety.js"></script>
+
 </body>
 </html>
