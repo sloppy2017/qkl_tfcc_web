@@ -102,6 +102,7 @@
                             <li><div class="c57">总累计奖励 TFCC</div><div class="ce9">30,000.00</div></li>
                             <li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9">30,000.00</div></li>
                             <li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9">30,000.00</div></li>
+                            <input type="button" class="chaxun" value="查询">
                         </ul>
                     </div>
                 </div>
@@ -179,6 +180,88 @@
     tick();
 </script>
 <!---时间日期结束-->
+
+<!--分页表格-->
+<script>
+    $(function () {
+        var flag = true;
+        $(".chaxun").click(function () {
+            alert("1111111");
+            var showcnt =10; //每页页数初始值
+            var  myselect=document.getElementById("showcnt");
+            if(myselect==null||myselect=="null"){
+            }else{
+                showcnt=myselect.options[myselect.selectedIndex].value;
+            }
+            if(flag){
+                reload_table(1,showcnt);
+            }
+        })
+
+        function reload_table(currentPage,showCount) {
+            alert("22222");
+            var rsStr = "";
+            var phoneVal = $('.phone').val();
+            console.log("phoneVal is " + phoneVal);
+            var passVal = $('.pass').val();
+            console.log("passVal is " + passVal);
+            $.ajax({
+                type: 'POST',
+//		url: '../../../service/user/login/',
+                url: '../../../service/test/queryuser/',
+                dataType: 'json',
+                data: {
+                    huiyuanzhanghao:$('.huiyuanzhanghao').val(),
+//                phone: $('.phone').val(),
+//                pass: $('.pass').val(),
+                    currentPage: currentPage,
+                    showCount: showCount
+                },
+                success: function (data) {
+                    alert('请求成功');
+                    var message = data.message;
+                    console.log("success is " + data.success);
+                    console.log("data is " + data.map);
+                    console.log("data.userList is " + data.data.userList);
+                    var usList = data.data.userList;
+                    console.log("usList.length " + usList.length);
+                    console.log("data.data.page.pageStr " + data.data.page.pageStr);
+                    var tablecols = "<tr> \n"
+                            + " <th>注册时间</th> \n"
+                            + "<th>LP会员账号</th> \n"
+                            + "<th>LP会员姓名</th> \n"
+                            + "<th>购买股份（股）</th> \n"
+                            + "</tr> \n";
+                    rsStr = tablecols;
+                    for (var i = 0; i < usList.length; i++) {
+                        rsStr = rsStr + "<tr>";
+                        console.log("usList(" + i + ") name is " + usList[i].name);
+                        rsStr = rsStr + "<td>" + usList[i].name + "</td>";
+                        rsStr = rsStr + "<td>" + usList[i].test_user_id + "</td>";
+                        rsStr = rsStr + "</tr>";
+                    }
+
+                    console.log("rsStr " + rsStr);
+//                    $(".result-tab").append(rsStr);
+                    $(".result-tab").html(rsStr);
+//			 $(".pages1").append(data.data.page.pageStr);
+                    $(".pages1").html(data.data.page.pageStr);
+
+//			$('.phone').val(data.data.phone);
+                    alert("message is " + message);
+
+//			 if(data.success){
+//				 window.location.href ="../index.html";
+//			 }
+                }, error: function (data) {
+                    alert('请求错误');
+                }
+            })
+        }
+
+    })
+</script>
+
 <script src="../../../resources/qkl_tfcc/js/lpmember/lpccount/lpccount.js"></script>
 
 
