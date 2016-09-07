@@ -89,8 +89,8 @@
                             </div>
 
                             <!--table pageing start-->
-                            <div class="table">
-                                <table class="result-tab" width="100%" border="0">
+                            <div class="table-list">
+                                <table class="result-tab" width="100%" border="0" cellpadding="0" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>会员级别</th>
@@ -108,10 +108,12 @@
                                 <div class="pages1">
                                     
                                 </div>
+                                
                             </div>
+                            
+                            
                         <!--table paging end-->
-
-                    </div>
+                   </div>
             </div>
         </div>
     </div>
@@ -180,22 +182,31 @@
                 var usList = data.data.userList;
                 console.log("usList.length " + usList.length);
                 console.log("data.data.page.pageStr " + data.data.page.pageStr);
+
                 var tablecols = "<tr> \n"
-                        + " <th>用户名</th> \n"
-                        + "<th>id</th> \n"
+                        + " <th>会员级别</th> \n"
+                        + "<th>注册时间</th> \n"
+                        + "<th>会员账号</th> \n"
+                        +"<th>推荐人</th>\n"
+                        +"<th>用户名 </th>\n"
+                        +"<th>购买量(股)</th>\n"
                         + "</tr> \n";
                 rsStr = tablecols;
-                for (var i = 0; i < usList.length; i++) {
+                for (var i = 0; i < usList.length; i++) {  	
                     rsStr = rsStr + "<tr>";
                     console.log("usList(" + i + ") name is " + usList[i].name);
-                    rsStr = rsStr + "<td>" + usList[i].name + "</td>";
-                    rsStr = rsStr + "<td>" + usList[i].test_user_id + "</td>";
+                    rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
                     rsStr = rsStr + "</tr>";
                 }
-
                 console.log("rsStr " + rsStr);
 //			 $(".result-tab").append(rsStr);
-                $(".resu .lt-tab").html(rsStr);
+                $(".result-tab").html(rsStr);
+                $(".result-tab").html(rsStr);
 //			 $(".pages1").append(data.data.page.pageStr);
                 $(".pages1").html(data.data.page.pageStr);
 
@@ -211,9 +222,6 @@
             }
         })
     }
-
-
-
 </script>
 </body>
 </html>
