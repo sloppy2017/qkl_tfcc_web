@@ -81,10 +81,10 @@
                                 <ul class="fl ">
                                     <li>推荐类型</li>
                                     <li>
-                                        <input type="checkbox" value="quan">全部
-                                        <input type="checkbox" value="A" > A级会员
-                                        <input type="checkbox" value="B" > B级会员
-                                        <input type="checkbox" value="C" >C级会员
+                                        <input id ="quan" type="checkbox" >全部
+                                        <input id ="lva" type="checkbox"  > A级会员
+                                        <input id ="lvb" type="checkbox" > B级会员
+                                        <input id ="lvc" type="checkbox" >C级会员
                                     </li>
                                     <li></li>
                                     <li></li>
@@ -141,7 +141,7 @@
 <script>
 
 
-
+	var str='';
     var flag =true;
     $(".type-btn a").click(function () {
         var showcnt =10; //每页页数初始值
@@ -150,19 +150,38 @@
         }else{
             showcnt=myselect.options[myselect.selectedIndex].value;
         }
+     
+        str='';
+	    if(document.getElementById("quan").checked==true){
+	    	document.getElementById("lva").checked =true;
+	    	document.getElementById("lvb").checked =true;
+	    	document.getElementById("lvc").checked =true;
+	    }
+        
+        if(document.getElementById("quan").checked==true){
+        	str = str+'ALL,';
+        }
+    	else{
+        	if(document.getElementById("lva").checked==true){
+        		str = str+'A,';
+        	} 
+        	if(document.getElementById("lvb").checked==true){
+        		str = str+'B,';	
+        	} 
+        	if(document.getElementById("lvc").checked==true){
+        		str = str+'C,';	
+        	}
+        } 
+        alert("str is "+str);
         
         if(flag){
-            reload_table(1,showcnt);
+            
+        	reload_table(1,showcnt);
+        	
         }
-        
-        
-        
     })
     
-    
-
-    
-    
+   
 
     function reload_table(currentPage,showCount) {
         var rsStr = "";
@@ -176,8 +195,7 @@
             url: '../../../service/test/queryuser/',
             dataType: 'json',
             data: {
-                phone: $('.phone').val(),
-                pass: $('.pass').val(),
+         		str:str,
                 currentPage: currentPage,
                 showCount: showCount
             },
