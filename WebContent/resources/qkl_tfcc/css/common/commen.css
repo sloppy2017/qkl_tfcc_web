@@ -895,7 +895,10 @@ body .xuanxiang .pages1 ul li a{
     color: #000000;
     line-height: 16px;
 }
-
+.errorTip{
+    background-color: pink;
+    color:red;
+}
 
 
 
