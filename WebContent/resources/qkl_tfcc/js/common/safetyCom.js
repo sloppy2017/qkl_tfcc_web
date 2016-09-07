@@ -7,8 +7,7 @@ var InterValObj=null; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行
 var curCount='';//当前剩余秒数
 // 手机验证
-function valid_phone()
-{
+function valid_phone(){
     var oldphone = $(".oldphone").text().trim();
 	var $this = $('.phone-safety');
 	$this.val($this.val().trim());
@@ -25,13 +24,11 @@ function valid_phone()
     }else if(oldphone === phoneVal){
     	$this.val("新手机号不能与旧手机号一致");
     	$this.addClass("errorTip");
-        return false;
+   
     }else{
     	$this.removeClass("errorTip");
     	return true;
     }
-    
-    
 }
 //获取验证码
 function getVCode(phone) {

@@ -2,7 +2,7 @@
 /*通用*/
 body {
     font: 14px "microsoft yahei", Arial, Helvetica, sans-serif;
-    color: #666;
+    /*color: #666;*/
     margin: 0px;
     padding: 0px;
 }
@@ -181,7 +181,7 @@ img {
     float:left;
 
 }
-.xuanxiang .f1 li{
+.xuanxiang ul li{
     background:#518bbf ;
     border-radius: 5px 5px 0 0;
     margin-left: 1px;
@@ -216,8 +216,8 @@ img {
     display: inline-block;
     border-left: 1px solid #dddddd;
     position: absolute;
-    top:80px;
-    left: 247px;
+    top:40px;
+    left: -1px;
     background: #FFFFFF;
     line-height: 53px;
     font-size: 14px;
@@ -243,28 +243,28 @@ img {
     width: 308px;
     margin-right: 73px;
 }
-.an_q_n p a{
-    margin-left: 78px;
-    display: inline-block;
-    text-decoration: none;
-    color: #ffffff;
-    background: url("../../image/anquanzhongxingbankground.png");
-    width: 160px;
-    height: 43px;
-    text-align: center;
-    line-height: 45px;
-}
-.an_q_n p a:hover{
-    margin-left: 78px;
-    display: inline-block;
-    text-decoration: none;
-    color: #737373;
-    background: url("../../image/anquanzhongxindianjibanckground.jpg");
-    width: 160px;
-    height: 43px;
-    text-align: center;
-    line-height: 45px;
-}
+/*.an_q_n p a{*/
+    /*margin-left: 78px;*/
+    /*display: inline-block;*/
+    /*text-decoration: none;*/
+    /*color: #ffffff;*/
+    /*background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxingbankground.png");*/
+    /*width: 160px;*/
+    /*height: 43px;*/
+    /*text-align: center;*/
+    /*line-height: 45px;*/
+/*}*/
+/*.an_q_n p a:hover{*/
+    /*margin-left: 78px;*/
+    /*display: inline-block;*/
+    /*text-decoration: none;*/
+    /*color: #737373;*/
+    /*background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxindianjibanckground.jpg");*/
+    /*width: 160px;*/
+    /*height: 43px;*/
+    /*text-align: center;*/
+    /*line-height: 45px;*/
+/*}*/
 /*安全中心结束*/
 
 /*个人中心选项内容部分*/
@@ -327,11 +327,13 @@ img {
 }
 .xuanxiang .aqzx .dqwz{
     width: 100%;
-    line-height: 82px;
+    line-height: 52px;
     border-bottom: 1px solid #dddddd;
     background: #ffffff;
     font-size: 14px;
     display: block;
+    margin-left: -20px;
+    padding-left: 20px;
 }
 .xuanxiang ul .security-g .aqzx .dqwz span{
     margin-left: 24px;
@@ -420,14 +422,14 @@ img {
 .shoukuan p b{
     font-size: 16px;
 }
-.gu_q form{
+.gu_q .gmsl{
     margin: 30px auto 0;
     border-left: 1px solid #DDDDDD;
     display: inline-block;
     padding: 0 40px;
     font-size: 14px;
 }
-.gu_q input{
+.gu_q .goumaishuliang{
     border:1px solid #DDDDDD;
     width: 180px;
     height: 30px;
@@ -438,18 +440,52 @@ img {
     color: #bdbdbd;
 
 }
-.gu_q a{
+.gu_q .querengoumai{
     display: inline-block;
     margin-top: 24px;
     margin-left: 40px;
-    width: 220px;
-    line-height:43px;
+    width: 218px;
+    line-height:41px;
     text-align: center;
     text-decoration: none;
     color: #FFFFFF;
-    background: url("../../image/input_banckground.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/input_banckground.png");
+    height: 41px;
 }
-
+.gu_q .ding_d{
+    margin: 30px 0 18px 20px;
+}
+.gu_q .ding_d p{
+    font-size: 16px;
+}
+.gu_q .ding_d span{
+    margin-right: 24px;
+}
+.fkzt{
+    margin-top: 18px;
+}
+.fkzt select{
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
+    background: url("../../../../resources/qkl_tfcc/imgs/zhuanzhang_j.png") no-repeat scroll 100px center transparent;
+    border: 1px solid #dddddd;
+    margin-left: 30px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*padding-right: 5px;*/
+    /*-moz-padding-right: 5px;*/
+}
+.fkzt input{
+    margin-left: 480px;
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
+    background: none;
+    color:#000000;
+    border:1px solid #dddddd;
+}
 /*我的股权结束*/
 /*我的团队*/
 .xuanxiang ul .security-t{
@@ -550,14 +586,14 @@ img {
 
 /*我的账户*/
 .xuanxiang{
-    width: 70%;
+    /*width: 70%;*/
     height: 881px;
     position: absolute;
     top: 42px;
     left: 248px;
 }
 .xuanxiang ul{
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 .xuanxiang ul .security-z{
     color: #000000;
@@ -699,15 +735,20 @@ img {
     font-size: 14px;
     line-height: 30px;
 }
+
 .zhuan_JFCC .zhuan_z_r8 .xuan_b .xiala_cd{
+    background: url("../../../../resources/qkl_tfcc/imgs/zhuanzhang_j.png") no-repeat scroll 100px center transparent;;
     width: 120px;
     height: 30px;
+    border: 1px solid #dddddd;
     border-radius: 3px;
     margin-left: 30px;
     appearance:none;
     -moz-appearance:none;
     -webkit-appearance:none;
+    padding-right: 5px;
 }
+.xiala_cd::-ms-expand { display: none; }
 .zhuan_JFCC .zhuan_z_r8 .xuan_b .xialacaidan b{
 }
 .bao_c{
@@ -715,7 +756,7 @@ img {
     margin-top: 43px;
 }
 .bao_c a{
-    background: url("../../image/JFCC_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/JFCC_03.png");
     width: 114px;
     line-height: 42px;
     display: inline-block;
@@ -744,7 +785,7 @@ img {
 /*转账页面结束*/
 /*不可转账*/
 .bao_c a:hover{
-    background: url("../../image/not.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/not.png");
     width: 114px;
     line-height: 42px;
     display: inline-block;
@@ -807,7 +848,7 @@ img {
     margin-left: 92px;
 }
 .an_q_s .shiming_input .shiming_r input{
-    background: url("../../image/shiming_r_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/shiming_r_03.png");
     width: 114px;
     height: 42px;
     color: #FFFFFF;
@@ -831,7 +872,7 @@ img {
     margin-left: 120px;
 }
 .an_q_s .gaimima .gai_m_t input{
-    background: url("../../image/shiming_r_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/shiming_r_03.png");
     width: 114px;
     line-height: 41px;
     text-align: center;
@@ -874,13 +915,14 @@ img {
     margin-left: 80px;
 }
 .shiming_r_4 input{
-    background: url("../../image/shiming_r_03.png");
+    background: url("../../../../resources/qkl_tfcc/imgs/shiming_r_03.png");
     margin-right: 44px;
     width: 114px;
     height: 42px;
     color: #FFFFFF;
 }
 /*修改手机号码结束*/
+<<<<<<< HEAD
 .xuanxiang .result-tab tbody tr td{
     text-align: center;
 }

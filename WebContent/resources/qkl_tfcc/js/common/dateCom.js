@@ -9,7 +9,6 @@
 //        $(' .main-top .top-tab').eq(index).show().siblings().hide();
 //    })
 //})
-
 $(function(){
     function time(){
         var now = new Date();
