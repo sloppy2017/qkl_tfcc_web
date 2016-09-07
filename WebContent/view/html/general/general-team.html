@@ -102,23 +102,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
-                                                <th>会员级别</th>
-                                                <th>注册时间</th>
-                                                <th>会员账号</th>
-                                                <th>推荐人</th>
-                                                <th>用户名</th>
-                                                <th>购买量(股)</th>
-                                            </tr>
+
                                     </tbody>
                                 </table>
                                 <div class="pages1">
                                     
                                 </div>
+                                
                             </div>
+                            
+                            
                         <!--table paging end-->
-
-                    </div>
+                   </div>
             </div>
         </div>
     </div>
@@ -188,21 +183,29 @@
                 console.log("usList.length " + usList.length);
                 console.log("data.data.page.pageStr " + data.data.page.pageStr);
 
-//                var tablecols = "<tr> \n"
-//                        + " <th>1</th> \n"
-//                        + "<th>2</th> \n"
-//                        + "</tr> \n";
-//                rsStr = tablecols;
-
-                for (var i = 0; i < usList.length; i++) {
+                var tablecols = "<tr> \n"
+                        + " <th>会员级别</th> \n"
+                        + "<th>注册时间</th> \n"
+                        + "<th>会员账号</th> \n"
+                        +"<th>推荐人</th>\n"
+                        +"<th>用户名 </th>\n"
+                        +"<th>购买量(股)</th>\n"
+                        + "</tr> \n";
+                rsStr = tablecols;
+                for (var i = 0; i < usList.length; i++) {  	
                     rsStr = rsStr + "<tr>";
                     console.log("usList(" + i + ") name is " + usList[i].name);
-                    rsStr = rsStr + "<td>" + usList[i].name + "</td>";
-                    rsStr = rsStr + "<td>" + usList[i].test_user_id + "</td>";
+                    rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                    rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
                     rsStr = rsStr + "</tr>";
                 }
                 console.log("rsStr " + rsStr);
 //			 $(".result-tab").append(rsStr);
+                $(".result-tab").html(rsStr);
                 $(".result-tab").html(rsStr);
 //			 $(".pages1").append(data.data.page.pageStr);
                 $(".pages1").html(data.data.page.pageStr);
