@@ -966,7 +966,7 @@ body .xuanxiang .pages1 ul li a{
     padding: 10px 16px;
 }
 #pages2 ul li select{
-    margin: -2px;
+    border: none;
 }
 
 
