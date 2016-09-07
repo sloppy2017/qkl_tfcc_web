@@ -144,4 +144,8 @@
 .qr-code p{
     text-align: center;
 }
-.errorTip{background-color: pink;color: red;}
+.errorTip{
+	background-color: pink;
+	color:red;
+}
+

@@ -64,8 +64,8 @@
                 <div class="main-top"><span>您当前的位置：</span><span class="c28">安全中心</span></div>
                 <div class="amend">
                     <ul>
-                        <li><p>手机号</p><span class="txt">通过手机同接收动态验证码，进行密码修改等操作</span ><span id="phone" class="status">已锁定</span><a href="javascript:setPhone()" class="btn phone">修改</a></li>
-                        <li><p>登录密码</p><span class="txt"> 为保证账户安全，可设置更复杂的登录密码</span><span id="pwd" class="status">已开启</span><a href="javascript:" class="btn pwd">修改</a></li>
+                        <li><p>手机号</p><span class="txt">通过手机同接收动态验证码，进行密码修改等操作</span ><span  class="status">已锁定</span><a href="javascript:setPhone()" class="btn phone">修改</a></li>
+                        <li><p>登录密码</p><span class="txt"> 为保证账户安全，可设置更复杂的登录密码</span><span  class="status">已开启</span><a href="javascript:" class="btn pwd">修改</a></li>
                         <li><p>实名认证</p><span class="txt"> 实名认证后，方可进行交易操作</span><span id="renzheng" class="status">未验证</span><a href="javascript:" class="btn renzhen">认证</a></li>
                     </ul>
                 </div>
@@ -84,9 +84,15 @@
               <div class="rephone hid">
                   <div class="main-top1"><span>您当前的位置：安全中心></span ><span class="c28">修改手机号</span></div>
                   <form id="form2" action="" class="form1">
+<<<<<<< HEAD
+                      <div><label for="">原手机号</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="oldphone" class="oldphone">13810381111</span></div>
+                      <div><label for="">新手机号</label><input type="text" class="phone-safety" id="phone" name="phone" placeholder="请输入新手机号" onfocus="if($('#phone').hasClass('errorTip')){this.value='';$('#phone').removeClass('errorTip');}"></div>
+                      <div><label for=""> 验证码</label><input type="text" id="yzm" name="yzm" placeholder="请输入验证码" onfocus="if($('#yzm').hasClass('errorTip')){this.value='';$('#yzm').removeClass('errorTip');}"><input type="button" class="btn1 yzm-safety" value="获取验证码" onclick="getVCode($('#phone').val())"></div>
+=======
                       <div><label for="">原手机号</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="oldphone">13810381111</span></div>
                       <div><label for="">新手机号</label><input type="text" class="phone-safety" id="phone" name="phone" placeholder="请输入新手机号" onfocus="this.value=''"><span style="margin-left:17px;color: red;"></span></div>
                       <div><label for=""> 验证码</label><input type="text" id="yzm" name="yzm" placeholder="请输入验证码"><input type="button" class="btn1" value="获取验证码" onclick="getVcode($('#phone').val().trim())"></div>
+>>>>>>> refs/remotes/origin/dev
                       <div><a class="save" href="javascript:modifyPhone()">提交</a><a href="" class="rest">返回</a></div>
                   </form>
               </div>
@@ -123,7 +129,7 @@
 </div>
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script>
-    $(function(){
+    /* $(function(){
       $('.pwd').click(function(){
           $(this).hide();
           $('.main-top ,.amend').hide();
@@ -139,7 +145,7 @@
             $('.main-top ,.amend').hide();
             $('.rerenzhen').show();
         })
-    });
+    }); */
     $(function(){
     	getUserInfo();
     });
@@ -173,48 +179,35 @@
           
       });
    }
-   function getVcode(newPhone){
-	  var validPhone =  valid_phone();
-	  if(!validPhone){
-		  return;
-	  }
-	   $.ajax({
-           type:'POST',
-           url:'/service/user/sendsms?phone='+newPhone,
-//            data:{phone:newPhone},
-           dataType:'JSON',
-           success: function (json) {
-               // 验证码发送成功，把验证码先存到页面一个变量中       
-                if(json.success){
-                   // settime(this);
-                }else{
-                    alert(json.message);
-                }
-               //console.log(data);
-           },
-           error: function (a,b,c) {
-        	   //console.log(a.readyState+"\n"+b+"\n"+c);
-               console.log("获取短信验证码失败");
-           }
-       });
-   }
    //获取原手机号
    function setPhone(){
 	   $("#oldphone").text(phone);
    }
    //修改手机号
    function modifyPhone(){
-	   sub_phone();
+	   var validPhone = valid_phone();//验证手机号是否正确
+	   var validYzm = valid_yzm('yzm');//验证验证码
+       if(!validPhone||!validYzm){
+           return;
+       }
+	   alert($("#form2").serialize());
+	   return;
 	   $.ajax({
            type:'POST',
-           url:'/service/user/modifyphone?'+$("#form2").serialize()+"&oldphone="+$("#oldphone").text(),
+           url:'/service/user/modifyphone?'+$("#form2").serialize()+"&oldphone="+$("#oldphone").text().trim(),
 //            data:$("#form2").serialize(),
            dataType:'JSON',
            success: function (json) {
                 if(json.success){
                 	$(".mark1").css("display","block");
                 }else{
-                    alert(json.message);
+                    if(json.errorCode==-13){
+                    	 $("#yzm").addClass("errorTip");
+                    	 $("#yzm").val(json.message);
+                    }else{
+                    	$("#phone").addClass("errorTip");
+                        $("#phone").val(json.message);
+                    }
                 }
                //console.log(data);
            },
@@ -276,14 +269,6 @@
 	   $(".main-top,.amend,.btn").show(); */
    }
    
-   /* function submit(){
-	   var valid_phone = valid_phone();
-	   var valid_name = valid_name();
-	   if(!valid_phone&&valid_name){
-		   return;
-	   }
-	   $("#form").submit();
-   } */
 </script>
 </body>
 </html>

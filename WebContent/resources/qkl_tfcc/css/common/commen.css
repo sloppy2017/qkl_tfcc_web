@@ -922,9 +922,25 @@ img {
     color: #FFFFFF;
 }
 /*修改手机号码结束*/
-
-
-
+<<<<<<< HEAD
+.xuanxiang .result-tab tbody tr td{
+    text-align: center;
+}
+.xuanxiang .pages1{
+    font-size: 16px;
+}
+body .xuanxiang .pages1 ul li{
+    background: #ffffff;
+    border: 1px solid #000000;
+}
+body .xuanxiang .pages1 ul li a{
+    color: #000000;
+    line-height: 16px;
+}
+.errorTip{
+    background-color: pink;
+    color:red;
+}
 
 
 

@@ -53,6 +53,7 @@ import com.qkl.util.help.IdcardUtils;
 import com.qkl.util.help.ImgUtil;
 import com.qkl.util.help.MD5Util;
 import com.qkl.util.help.StringUtil;
+import com.qkl.util.help.Validator;
 import com.qkl.util.help.pager.PageData;
 /**
  * 用户的控制类
@@ -237,7 +238,7 @@ public class UserController extends BaseAction{
 			cropName=cropName==null?"":cropName.trim();
 			cropPerson=cropPerson==null?"":cropPerson.trim();
 			
-			if(!isMobile(userName)){
+			if(!Validator.isMobile(userName)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
@@ -883,7 +884,7 @@ public class UserController extends BaseAction{
 			String cfPassWord  =request.getParameter("respassword");
 			String vcode  =request.getParameter("yzm");
 			
-			if(!isMobile(userName)){
+			if(!Validator.isMobile(userName)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
@@ -1007,8 +1008,9 @@ public class UserController extends BaseAction{
 				return ar;
 			}
 			
-			if(!isMobile(phone)){
+			if(!Validator.isMobile(phone)){
 				ar.setSuccess(false);
+				ar.setErrorCode(CodeConstant.MOBILE_ERROR);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
 			}
@@ -1018,6 +1020,7 @@ public class UserController extends BaseAction{
 	        if(userService.findIsExist(phone, Constant.VERSION_NO)){
 	        	ar.setSuccess(false);
 				ar.setMessage("手机号已存在！");
+				ar.setErrorCode(CodeConstant.MOBILE_EXISTS);
 				return ar;
 	        }
 			
@@ -1026,7 +1029,8 @@ public class UserController extends BaseAction{
 			String tVcode =smsService.findSendsmsDetail(phone,Constant.CUR_SYS_CODE); 
 			if(!vcode.equals(tVcode.trim())){
 				ar.setSuccess(false);
-				ar.setMessage("验证码输入不正确！");
+				ar.setErrorCode(CodeConstant.SMS_ERROR);
+				ar.setMessage("验证码输入匹配！");
 				return ar;
 			}
 			
@@ -1083,7 +1087,7 @@ public class UserController extends BaseAction{
 		AjaxResponse ar = new AjaxResponse();
 		try {
 			String phone  =request.getParameter("phone");
-			if(!isMobile(phone)){
+			if(!Validator.isMobile(phone)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
@@ -1183,16 +1187,7 @@ public class UserController extends BaseAction{
 		return new ModelAndView("/index");
 	}
 	
-	public static boolean isMobile(String str) {   
-	        Pattern p = null;  
-	        Matcher m = null;  
-	        boolean b = false;   
-	        str = str.trim();
-	        p = Pattern.compile("^[1][3,4,5,8][0-9]{9}$"); // 验证手机号  
-	        m = p.matcher(str);  
-	        b = m.matches();   
-	        return b;  
-	} 
+	
 	
 	@RequestMapping(value="/upload")
     public void upload(HttpServletRequest request,HttpServletResponse response,
