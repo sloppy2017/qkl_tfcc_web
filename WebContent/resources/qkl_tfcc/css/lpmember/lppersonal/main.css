@@ -20,6 +20,8 @@
     position: absolute;
     top:50px;
     left: 0;
+    height: 215px;
+    border: 1px solid #dddddd;
 }
 #button{
     width: 160px;
@@ -28,5 +30,6 @@
     margin-top: 20px;
     margin-left: 25px;
     border-radius: 3px;
-    background: #2e6da4;
+   background: url("../../../../../resources/qkl_tfcc/imgs/ge-1_03.png");
+    
 }

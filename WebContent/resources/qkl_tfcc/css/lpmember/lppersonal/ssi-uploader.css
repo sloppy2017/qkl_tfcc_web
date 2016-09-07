@@ -1,9 +1,9 @@
 .icon, span.ban7, span.ban7w, span.ban10, span.ban23, span.check7, span.check23, span.exclamation7, span.exclamation23, span.trash7, span.trash10 {
-  background-image: url("images/sprite.png");
+  background-image: url("../../../../../resources/qkl_tfcc/imgs/sprite.png");
 }
 
 .icon, span.ban7, span.ban7w, span.ban10, span.ban23, span.check7, span.check23, span.exclamation7, span.exclamation23, span.trash7, span.trash10 {
-  background-image: url("images/sprite.png");
+  background-image: url("../../../../../resources/qkl_tfcc/imgs/sprite.png");
 }
 
 .ssi-infoTooltip, .ssi-tooltipText {
@@ -32,7 +32,10 @@
   margin: 0 0 0 2px;
   border-radius: 3px;
   color: whitesmoke;
-  margin-top: 50px;
+  margin-top: 20px;
+  width: 140px;
+  height: 30px;
+  background: none;
 }
 
 .ssi-button.error {
