@@ -10,6 +10,7 @@
     <script src="../../../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
 </head>
 <body>
+<!--mark start-->
 <div class="mark2">
     <div class="mark2-box">
         <div class="success-icon"></div>
@@ -17,6 +18,10 @@
         <div class="achieve"><p>完成</p></div>
     </div>
 </div>
+<!--mark end-->
+
+
+<!--header common start-->
 <div class="header fix">
     <div class="logo fl">
         <img src="../../../resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
@@ -40,6 +45,8 @@
         </div>
     </div>
 </div>
+<!--header common end-->
+
 <div class="container">
     <div class="main fl">
         <div class="mains">
@@ -81,149 +88,28 @@
                                 </ul>
                             </div>
 
-                              <!--先不管这个类型-->
-                            <!--<div class="fix">-->
-                                <!--<ul class="serch">-->
-                                    <!--<li>查询条件</li>-->
-                                    <!--<li>-->
-                                        <!--<select name="" id="selectedObj">-->
-                                            <!--<option value="member" class="member">会员账号</option>-->
-                                            <!--<option value="referrer" class="referrer">推荐人</option>-->
-                                        <!--</select>-->
-                                    <!--</li>-->
-                                    <!--<li><input type="text" name="chaxun"></li>-->
-                                    <!--<li class="ser-btn" onclick="querytable()">查询</li>-->
-                                <!--</ul>-->
-                            <!--</div>-->
-                            <!--查询最近日期时间-->
-                            <!--<div class="reg-time fix">-->
-                                <!--<ul class="fl date">-->
-                                    <!--<li>注册时间</li>-->
-                                    <!--<li class="time-list">-->
-                                        <!--<div class="ta_date" id="div_date_demo33">-->
-                                            <!--<span class="date_title" id="date_demo33"></span>-->
-                                            <!--<a class="opt_sel" id="input_trigger_demo33" href="#">-->
-                                                <!--<i class="i_orderd"></i>-->
-                                            <!--</a>-->
-                                        <!--</div>-->
-                                        <!--<span>-->
-                                            <!--<a href="javascript:;" id="aRecent7DaysDemo1" >今天</a>-->
-                                            <!--<a href="javascript:;" id="aRecent7DaysDemo3" >近三天</a>-->
-                                            <!--<a href="javascript:;" id="aRecent7DaysDemo7" >近一周</a>-->
-                                            <!--<a href="javascript:;" id="aRecent7DaysDemo30" >近一月</a>-->
-                                        <!--</span>-->
-                                        <!--<div id="datePicker1"></div>-->
-                                        <!--<br/>-->
-                                        <!--<script type="text/javascript">-->
-                                            <!--var dateRange = new pickerDateRange('date_demo33', {-->
-                                                <!--aToday : 'aRecent7DaysDemo1',-->
-                                                <!--aRecent3Days:'aRecent7DaysDemo3',-->
-                                                <!--aRecent7Days : 'aRecent7DaysDemo7', //最近7天-->
-                                                <!--aRecent30Days:'aRecent7DaysDemo30',-->
-                                                <!--isTodayValid : false,-->
-                                                <!--startDate : '2016-08-14',-->
-                                                <!--endDate : '2016-09-21',-->
-                                                <!--// needCompare : true,-->
-                                                <!--// isSingleDay : true,-->
-                                                <!--// shortOpr : true,-->
-                                                <!--defaultText : ' 至 ',-->
-                                                <!--inputTrigger : 'input_trigger_demo33',-->
-                                                <!--// theme : 'ta',-->
-                                                <!--success : function(obj) {-->
-                                                    <!--$("#dCon_demo3").html('开始时间 : ' + obj.startDate + '<br/>结束时间 : ' + obj.endDate);-->
-                                                <!--}-->
-                                            <!--});-->
-                                        <!--</script>-->
-                                    <!--</li>-->
-                                    <!--<li class="time-btn">查询</li>-->
-                                <!--</ul>-->
-                            <!--</div>-->
-                            <!--表格-->
+                            <!--table pageing start-->
                             <div class="table">
-                                <div class="table-head">
-                                    <div class="row">
-                                        <div class="col-lg">会员级别</div>
-                                        <div class="col-lg">注册时间</div>
-                                        <div class="col-lg">会员账号</div>
-                                        <div class="col-lg">推荐人</div>
-                                        <div class="col-lg">购买量(股)</div>
-                                    </div>
-                                </div>
+                                <table class="result-tab" width="100%" border="0">
+                                    <thead>
+                                        <tr>
+                                            <th>会员级别</th>
+                                            <th>注册时间</th>
+                                            <th>会员账号</th>
+                                            <th>推荐人</th>
+                                            <th>用户名</th>
+                                            <th>购买量(股)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            </div>
-                        <!--分页-->
-                        <!--<div id="wrapper">-->
-                            <!--<section>-->
-                                <!--<div class="data-container" id="demo">111111111</div>-->
-                                <!--<div id="pagination-demo1"></div>-->
-                            <!--</section>-->
-                        <!--</div>-->
-                    </div>
-
-                    <!--会员推荐-->
-                    <div class="btm" style="display: none">
-                        <div class="fix">
-                            <ul class="fl ">
-                                <li>推荐类型</li>
-                                <li><input type="checkbox"> A级会员</li>
-                                <li><input type="checkbox"> B级会员</li>
-                                <li><input type="checkbox"> C级会员</li>
-                                <li><input type="checkbox"> D级会员</li>
-                            </ul>
-                        </div>
-                        <div class="fix">
-                            <ul class="serch">
-                                <li>查询条件</li>
-                                <li>
-                                    <select name="" >
-                                        <option value="">会员账号</option>
-                                        <option value="">网点账号</option>
-                                    </select>
-                                </li>
-                                <li><input type="text"></li>
-                                <li class="ser-btn">查询</li>
-                            </ul>
-                        </div>
-                        <!--查询最近日期时间-->
-
-                        <!--表格-->
-                        <div class="table">
-                            <div class="table-head">
-                                <div class="row">
-                                    <div class="col-lg">会员级别</div>
-                                    <div class="col-lg">注册时间</div>
-                                    <div class="col-lg">会员账号</div>
-                                    <div class="col-lg">推荐人</div>
-                                    <div class="col-lg">购买量(股)</div>
+                                    </tbody>
+                                </table>
+                                <div class="pages1">
+                                    
                                 </div>
                             </div>
-                        </div>
-                        <!--&lt;!&ndash;分页&ndash;&gt;-->
-                        <!--<div id="wrapper1">-->
-                            <!--<section>-->
-                                <!--<div class="data-container" id="demo2">111111111</div>-->
-                                <!--<div id="pagination-demo2"></div>-->
-                            <!--</section>-->
-                        <!--</div>-->
-
-                     <!--表格分页啊-->
-
-                        <table class="result-tab" width="100%">
-                            <tr>
-                                <th>用户名</th>
-                                <th>id</th>
-                            </tr>
-                         </table>
-                           <div class="pages1">
-
-                           </div>
-
-                        <!--表格分页结束-->
-
-
-
-
-                        <!--表格分页啊-->
+                        <!--table paging end-->
 
                     </div>
             </div>
@@ -250,86 +136,6 @@
 
 
 <script src="../../../resources/qkl_tfcc/js/common/dateCom.js"></script>
-<<<<<<< HEAD
-<!--<script src="../../../resources/qkl_tfcc/js/general_vip/general-team.js"></script>-->
-<script>
-    var flag =true;
-    $(".type-btn a").click(function () {
-        var showcnt =10; //每页页数初始值
-        var  myselect=document.getElementById("showcnt");
-        if(myselect==null||myselect=="null"){
-        }else{
-            showcnt=myselect.options[myselect.selectedIndex].value;
-        }
-        if(flag){
-            reload_table(1,showcnt);
-        }
-    })
-
-    function reload_table(currentPage,showCount) {
-        var rsStr = "";
-        var phoneVal = $('.quan').val();
-        console.log("phoneVal is " + phoneVal);
-        var passVal = $('.pass').val();
-        console.log("passVal is " + passVal);
-
-        $.ajax({
-            type: 'post',
-//		url: '../../..rvice/user/login/',
-            url: '../../..rvice/test/queryuser/',
-            dataType: 'json',
-            data: {
-                phone: $('.phone').val(),
-                pass: $('.pass').val(),
-                currentPage: currentPage,
-                showCount: showCount
-            },
-            success: function (data) {
-                alert('请求成功');
-                var message = data.message;
-                console.log("success is " + data.success);
-                console.log("data is " + data.map);
-                console.log("data.userList is " + data.data.userList);
-                var usList = data.data.userList;
-                console.log("usList.length " + usList.length);
-                console.log("data.data.page.pageStr " + data.data.page.pageStr);
-                var tablecols = "<tr> \n"
-                        + " <th>会员级别</th> \n"
-                        + "<th>注册时间</th> \n"
-                        + "<th>会员账号</th> \n"
-                        + "<th>推荐人</th> \n"
-                        + "<th>购买量(股)</th> \n"
-                        + "</tr> \n";
-                rsStr = tablecols;
-
-
-                for (var i = 0; i < usList.length; i++) {
-                    rsStr = rsStr + "<tr>";
-                    console.log("usList(" + i + ") name is " + usList[i].name);
-                    rsStr = rsStr + "<td>" + usList[i].name + "</td>";
-                    rsStr = rsStr + "<td>" + usList[i].test_user_id + "</td>";
-                    rsStr = rsStr + "</tr>";
-                }
-
-                console.log("rsStr " + rsStr);
-//			 $(".result-tab").append(rsStr);
-                $(".resu .lt-tab").html(rsStr);
-//			 $(".pages1").append(data.data.page.pageStr);
-                $(".pages1").html(data.data.page.pageStr);
-
-//			$('.phone').val(data.data.phone);
-                alert("message is " + message);
-
-
-//			 if(data.success){
-//				 window.location.href ="../index.html";
-//			 }
-            }, error: function (data) {
-                alert('请求错误');
-            }
-        })
-    }
-=======
 <script src="../../../resources/qkl_tfcc/js/general_vip/general-team.js"></script>
 
 <script>
@@ -357,7 +163,7 @@
         $.ajax({
             type: 'post',
 //		url: '../../..rvice/user/login/',
-            url: '../../..rvice/test/queryuser/',
+            url: '../../../service/test/queryuser/',
             dataType: 'json',
             data: {
                 phone: $('.phone').val(),
@@ -406,7 +212,7 @@
         })
     }
 
->>>>>>> refs/remotes/origin/dev
+
 
 </script>
 </body>
