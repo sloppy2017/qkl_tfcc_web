@@ -80,10 +80,15 @@
                             <div class="fix btm-type">
                                 <ul class="fl ">
                                     <li>推荐类型</li>
-                                    <li><input type="checkbox" name="type" value="quan"> 全部</li>
-                                    <li><input type="checkbox" name="type" value="A"> A级会员</li>
-                                    <li><input type="checkbox" name="type" value="B"> B级会员</li>
-                                    <li><input type="checkbox" name="type" value="C">C级会员</li>
+                                    <li>
+                                        <input type="checkbox" name="types" value="quan" onclick='show_x(this)'>全部
+                                        <input type="checkbox" name="types" value="A" onclick='show_x(this)'> A级会员
+                                        <input type="checkbox" name="types" value="B" onclick='show_x(this)'> B级会员
+                                        <input type="checkbox" name="types" value="C" onclick='show_x(this)'>C级会员
+                                    </li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
                                     <li class="type-btn"><a href="#" onclick="">查询</a></li>
                                 </ul>
                             </div>
@@ -134,6 +139,9 @@
 <script src="../../../resources/qkl_tfcc/js/general_vip/general-team.js"></script>
 
 <script>
+
+
+
     var flag =true;
     $(".type-btn a").click(function () {
         var showcnt =10; //每页页数初始值
@@ -145,8 +153,16 @@
         if(flag){
             reload_table(1,showcnt);
         }
-
+        
     })
+    
+    
+	function  show_x(){
+    	
+    }
+
+    
+    
 
     function reload_table(currentPage,showCount) {
         var rsStr = "";
@@ -166,15 +182,14 @@
                 showCount: showCount
             },
             success: function (data) {
-                alert('请求成功');
+               /*  alert('请求成功');/*  */
                 var message = data.message;
-                console.log("success is " + data.success);
+             /*    console.log("success is " + data.success);
                 console.log("data is " + data.map);
-                console.log("data.userList is " + data.data.userList);
+                console.log("data.userList is " + data.data.userList); */
                 var usList = data.data.userList;
                 console.log("usList.length " + usList.length);
-                console.log("data.data.page.pageStr " + data.data.page.pageStr);
-
+              /*   console.log("data.data.page.pageStr " + data.data.page.pageStr); */
                 var tablecols = "<tr> \n"
                         + " <th>会员级别</th> \n"
                         + "<th>注册时间</th> \n"
@@ -183,9 +198,9 @@
                         +"<th>用户名 </th>\n"
                         +"<th>购买量(股)</th>\n"
                         + "</tr> \n";
-                rsStr = tablecols;
+               rsStr= tablecols;
                 for (var i = 0; i < usList.length; i++) {  	
-                    rsStr = rsStr + "<tr>";
+                    rsStr = rsStr + "<tr class='ss'>";
                     console.log("usList(" + i + ") name is " + usList[i].name);
                     rsStr = rsStr + "<th>" + usList[i].name + "</th>";
                     rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
@@ -195,24 +210,32 @@
                     rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
                     rsStr = rsStr + "</tr>";
                 }
+               
                 console.log("rsStr " + rsStr);
+        	
+            
 //			 $(".result-tab").append(rsStr);
-                $(".result-tab").append(rsStr);
+				var x =$(".result-tab").html( rsStr)
+		
+				console.log(x)
+             
 //			 $(".pages1").append(data.data.page.pageStr);
                 $(".pages1").html(data.data.page.pageStr);
 
 //			$('.phone').val(data.data.phone);
-                alert("message is " + message);
+               /*  alert("message is " + message); */
 
 
 //			 if(data.success){
 //				 window.location.href ="../index.html";
 //			 }
             }, error: function (data) {
-                alert('请求错误');
+                
             }
         })
     }
+    
+
 </script>
 </body>
 </html>
