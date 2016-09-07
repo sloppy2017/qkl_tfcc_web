@@ -943,6 +943,7 @@ body .xuanxiang .pages1 ul li a{
 /*分页表格*/
 #result-tab2{
     padding-bottom: 50px;
+    border-collapse: collapse;
 }
 #result-tab2 tr{
     text-align: center;
