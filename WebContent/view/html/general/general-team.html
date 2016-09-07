@@ -81,10 +81,10 @@
                                 <ul class="fl ">
                                     <li>推荐类型</li>
                                     <li>
-                                        <input type="checkbox" name="types" value="quan" onclick='show_x(this)'>全部
-                                        <input type="checkbox" name="types" value="A" onclick='show_x(this)'> A级会员
-                                        <input type="checkbox" name="types" value="B" onclick='show_x(this)'> B级会员
-                                        <input type="checkbox" name="types" value="C" onclick='show_x(this)'>C级会员
+                                        <input type="checkbox" value="quan">全部
+                                        <input type="checkbox" value="A" > A级会员
+                                        <input type="checkbox" value="B" > B级会员
+                                        <input type="checkbox" value="C" >C级会员
                                     </li>
                                     <li></li>
                                     <li></li>
@@ -150,16 +150,16 @@
         }else{
             showcnt=myselect.options[myselect.selectedIndex].value;
         }
+        
         if(flag){
             reload_table(1,showcnt);
         }
         
+        
+        
     })
     
     
-	function  show_x(){
-    	
-    }
 
     
     
