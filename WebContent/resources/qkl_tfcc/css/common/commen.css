@@ -945,9 +945,11 @@ body .xuanxiang .pages1 ul li a{
     padding-bottom: 50px;
     border-collapse: collapse;
 }
-#result-tab2 tr td{
+#result-tab2 tr{
     text-align: center;
     height: 40px;
+}
+#result-tab2 tr td{
     border-top: 1px;
     border-bottom: 1px;
 }
