@@ -950,8 +950,8 @@ body .xuanxiang .pages1 ul li a{
     height: 40px;
 }
 #result-tab2 tr td{
-    border-top: 1px;
-    border-bottom: 1px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
 }
 #result-tab2 tr:nth-child(odd){
     background: #f6fafe;
