@@ -953,6 +953,9 @@ body .xuanxiang .pages1 ul li a{
 #result-tab2 tr th{
     width: 300px;
 }
+#pages2 ul li{
+    float: right;
+}
 
 
 
