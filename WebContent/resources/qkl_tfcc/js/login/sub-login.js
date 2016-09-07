@@ -118,10 +118,9 @@ $(function() {
 	})
 	
 	
+	
+	
 });
-
-
-
 
 function reload_table(currentPage,showCount) {
 	 var rsStr="";
@@ -135,8 +134,7 @@ function reload_table(currentPage,showCount) {
 		url: '../../../service/test/queryuser/',
 		dataType: 'json',
 		data: {
-			phone: $('.phone').val(),
-			pass: $('.pass').val(),
+			val:$val,
 			currentPage: currentPage,
 			showCount:showCount
 		},

@@ -1,57 +1,105 @@
-/**
- * Created by qw on 2016/9/3.
- */
 
-//选择盒子
-$(function(){
-    $('.type-btn').on('click',function(){
-       var type =$('input[name="type"]:checked').serialize();
-        console.log(type);
-        $.ajax({
-            type:'post',
-            url:'sx',
-            data:type,
-            success:function(){
-            }
-        })
-    })
+var str='';
+var flag =true;
+$(".type-btn a").click(function () {
+    var showcnt =10; //每页页数初始值
+    var  myselect=document.getElementById("showcnt");
+    if(myselect==null||myselect=="null"){
+    }else{
+        showcnt=myselect.options[myselect.selectedIndex].value;
+    }
+    str='';
+    if(document.getElementById("quan").checked==true){
+        document.getElementById("lva").checked =true;
+        document.getElementById("lvb").checked =true;
+        document.getElementById("lvc").checked =true;
+    }
+    if(document.getElementById("quan").checked==true){
+        str = str+'ALL,';
+    }
+    else{
+        if(document.getElementById("lva").checked==true){
+            str = str+'A,';
+        }
+        if(document.getElementById("lvb").checked==true){
+            str = str+'B,';
+        }
+        if(document.getElementById("lvc").checked==true){
+            str = str+'C,';
+        }
+    }
+    alert("str is "+str);
+    if(flag){
+        reload_table(1,showcnt);
+    }
 })
 
-//查询函数
-function querytable(){
-    var obj = document.getElementById('selectedObj')
-    alert(obj.selectedIndex);
-    if(obj.options[obj.selectedIndex].selected==true){
-        console.log(obj.value);
-        $.ajax({
-            type:'post',
-            url:'res.php',
-            data:{member:obj.value},
-            dataType:'json',
-            success:function(){
-
-            },errror:function(){
+function reload_table(currentPage,showCount) {
+    console.log(str)
+    var rsStr = "";
+    $.ajax({
+        type: 'post',
+//		url: '../../..rvice/user/login/',
+        url: '../../../service/test/queryuser/',
+        dataType: 'json',
+        data: {
+            str:str,
+            currentPage: currentPage,
+            showCount: showCount
+        },
+        success: function (data) {
+            /*  alert('请求成功');/*  */
+            var message = data.message;
+            /*    console.log("success is " + data.success);
+             console.log("data is " + data.map);
+             console.log("data.userList is " + data.data.userList); */
+            var usList = data.data.userList;
+            console.log("usList.length " + usList.length);
+            /*   console.log("data.data.page.pageStr " + data.data.page.pageStr); */
+            var tablecols = "<tr> \n"
+                + " <th>会员级别</th> \n"
+                + "<th>注册时间</th> \n"
+                + "<th>会员账号</th> \n"
+                +"<th>推荐人</th>\n"
+                +"<th>用户名 </th>\n"
+                +"<th>购买量(股)</th>\n"
+                + "</tr> \n";
+            rsStr= tablecols;
+            for (var i = 0; i < usList.length; i++) {
+                rsStr = rsStr + "<tr class='ss'>";
+                console.log("usList(" + i + ") name is " + usList[i].name);
+                rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                rsStr = rsStr + "</tr>";
             }
-        })
-    }
-    reg=/([\u4e00-\u9fa5]{2,4})/;
-    var chaxunVal = $('input[name="chaxun"]').val()
-    if(reg.test(chaxunVal)){
-        $.ajax({
-            type:'post',
-            url:'res.php',
-            data:{chaxunVal:chaxunVal},
-            dataType:'json',
-            success:function(){
 
-            },errror:function(){
-            }
-        })
-    }
+            console.log("rsStr " + rsStr);
+
+
+//			 $(".result-tab").append(rsStr);
+            var x =$(".result-tab").html( rsStr)
+
+            console.log(x)
+
+//			 $(".pages1").append(data.data.page.pageStr);
+            $(".pages1").html(data.data.page.pageStr);
+
+//			$('.phone').val(data.data.phone);
+            /*  alert("message is " + message); */
+
+
+//			 if(data.success){
+//				 window.location.href ="../index.html";
+//			 }
+        }, error: function (data) {
+
+        }
+    })
 }
-
-
-//A,B,C选择表格函数
 
 
 
