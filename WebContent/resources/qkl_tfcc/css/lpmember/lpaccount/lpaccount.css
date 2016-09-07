@@ -35,3 +35,11 @@
 .dividend-box p{font-size: 18px;color:#282828;width:184px;margin:54px auto;text-align: center}
 .dividend-box a{font-size: 18px;border-top: 1px solid #ddd;height:55px;width:180px;text-align: center;display: inline-block;line-height: 55px;}
 .dividend-box .yes{color:#2b71b1;border-right: 1px solid #ddd}
+/*查询*/
+.chaxun{
+    width: 103px;
+    line-height: 30px;
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    margin-left: 73px;
+}
