@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +53,7 @@ import com.qkl.util.help.IdcardUtils;
 import com.qkl.util.help.ImgUtil;
 import com.qkl.util.help.MD5Util;
 import com.qkl.util.help.StringUtil;
+import com.qkl.util.help.Validator;
 import com.qkl.util.help.pager.PageData;
 /**
  * 用户的控制类
@@ -101,29 +104,45 @@ public class UserController extends BaseAction{
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse login(HttpServletRequest request,HttpServletResponse response ,Page page){
+//		AjaxResponse ar = new AjaxResponse();
+//		Map<String,Object> data = new HashMap<String, Object>();
+//		try {
+//			String userName  =request.getParameter("phone");
+//			String passWord  =request.getParameter("pass");
+//			
+//			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
+//			if ((Integer) map.get("status") == Constant.SUCCESS) {
+//				User user = (User) map.get(Constant.LOGIN_USER);
+//				request.getSession().setAttribute(Constant.LOGIN_USER, user);
+//				logger.info(userName + "登录成功");
+//				ar.setSuccess(true);
+//			} else {
+//				ar.setSuccess(false);
+//				ar.setMessage((String)map.get("msg"));
+//			}
+//			
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			ar.setSuccess(false);
+//			ar.setMessage("系统异常");
+//		}	
+//		ar.setData(data);
+//		return ar;
+		
 		AjaxResponse ar = new AjaxResponse();
-		Map<String,Object> data = new HashMap<String, Object>();
-		try {
-			String userName  =request.getParameter("phone");
-			String passWord  =request.getParameter("pass");
-			
-			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
-			if ((Integer) map.get("status") == Constant.SUCCESS) {
-				User user = (User) map.get(Constant.LOGIN_USER);
-				request.getSession().setAttribute(Constant.LOGIN_USER, user);
-				logger.info(userName + "登录成功");
-				ar.setSuccess(true);
-			} else {
-				ar.setSuccess(false);
-				ar.setMessage((String)map.get("msg"));
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			ar.setSuccess(false);
-			ar.setMessage("系统异常");
-		}	
-		ar.setData(data);
+//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
+//		System.out.println( "******queryuser  "+testUserId);
+		pd = this.getPageData();
+		page.setPd(pd);
+		List<PageData> userList = testUserService.queryTestUserList(page);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("userList", userList);	
+		map.put("pd", pd);	
+		map.put("page", page);
+		ar.setSuccess(true);
+		ar.setMessage("查询成功！");
+		ar.setData(map);
 		return ar;
 	}
 	
@@ -135,31 +154,36 @@ public class UserController extends BaseAction{
 	 * @create author kezhiyi
 	 * @create date 2016年8月18日
 	 */
-	@RequestMapping(value="/modifyuser", method=RequestMethod.POST)
+	@RequestMapping(value="/modifyuser", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse modifyuser(HttpServletRequest request,HttpServletResponse response){
-		AjaxResponse ar = new AjaxResponse();
-		try {
-			String phone  =request.getParameter("phone");
+	public AjaxResponse modifyuser(UserDetail tUserDetail,HttpServletRequest request){
+		logBefore(logger, "修改用户信息");
+	    try {
+		    /*String phone  =request.getParameter("phone");
 			String wxnum = request.getParameter("wxnum");
 			String bankaccno = request.getParameter("bankaccno");
 			String mailAddrss =request.getParameter("mailAddrss"); 
-			String zipCode =request.getParameter("zipCode"); 			
+			String zipCode =request.getParameter("zipCode");		*/
 //			String imgAddrss =request.getParameter("imgaddrss");
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			user = new User();
 			user.setUserCode("10000000001");
 			UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
-			UserDetail tUserDetail = new UserDetail();
+//			UserDetail tUserDetail = new UserDetail();
 			tUserDetail.setUserCode(user.getUserCode());
-			tUserDetail.setPhone(phone);
+			/*tUserDetail.setPhone(phone);
 			tUserDetail.setWxnum(wxnum);
 			tUserDetail.setBankaccno(bankaccno);
 			tUserDetail.setMailAddrss(mailAddrss);
-			tUserDetail.setZipCode(zipCode);
+			tUserDetail.setZipCode(zipCode);*/
 //			tUserDetail.setImgAddrss(imgAddrss);
-			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
-			tUserDetail.setOperator(userDetail.getRealName());
+//			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
+			if(!StringUtil.isEmpty(userDetail.getRealName().trim())){
+			    tUserDetail.setOperator(userDetail.getRealName());
+			}else{
+			    tUserDetail.setOperator(userDetail.getPhone());
+			}
+			
 			if(userService.modifyUserDetail(tUserDetail, Constant.VERSION_NO)){			
 			    ar.setSuccess(true);
                 ar.setMessage("个人信息修改成功！");
@@ -172,6 +196,8 @@ public class UserController extends BaseAction{
 			e.printStackTrace();
 			ar.setSuccess(false);
 			ar.setMessage("系统异常");
+		}finally{
+		    logAfter(logger);
 		}
 		return ar;
 	}
@@ -212,7 +238,7 @@ public class UserController extends BaseAction{
 			cropName=cropName==null?"":cropName.trim();
 			cropPerson=cropPerson==null?"":cropPerson.trim();
 			
-			if(!isMobile(userName)){
+			if(!Validator.isMobile(userName)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
@@ -265,7 +291,7 @@ public class UserController extends BaseAction{
 				return ar;
 			}
 			
-			Long tMaxno =sysMaxnumService.findMaxNo(notype, Constant.VERSION_NO); //创建用户编号
+			Long tMaxno =sysMaxnumService.findMaxNo(notype, Constant.VERSION_NO);
 			if(tMaxno==null){
 				logger.info("tSysMaxnum findMaxNo  is null!");
 				ar.setSuccess(false);
@@ -315,8 +341,8 @@ public class UserController extends BaseAction{
 			//添加用户关系
 			createUserFriendship(tUserDetail);
 			
-			//计算注册及推荐奖励
-			calRegitAccDetail(tUserDetail);
+			//计算注册奖励
+			
 			
 			 
 			 
@@ -419,9 +445,9 @@ public class UserController extends BaseAction{
 			
 			
 			
-		}else if(userType.equals("3")){//LP会员
+		}else if(userType.equals("3")){
 			
-		}else if(userType.equals("4")){//投资公司
+		}else if(userType.equals("4")){
 			
 		}
 		
@@ -788,17 +814,20 @@ public class UserController extends BaseAction{
 	public AjaxResponse modifypwd(HttpServletRequest request,HttpServletResponse response){
 		AjaxResponse ar = new AjaxResponse();
 		try {
-			String userName  =request.getParameter("phone");
+//			String userName  =request.getParameter("phone");
+//		    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+//		    String userCode = user.getUserCode();
+		    String userCode = "10000000001";
 			String oldPassWord  =request.getParameter("oldpassword");
 			String passWord  =request.getParameter("newpassword");
 			String cfPassWord  =request.getParameter("resnewpassword");
 
 			
-			if(!isMobile(userName)){
+			/*if(!isMobile(userName)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
-			}
+			}*/
 			
 			if(StringUtil.isEmpty(passWord)||StringUtil.isEmpty(cfPassWord)){
 				ar.setSuccess(false);
@@ -812,15 +841,15 @@ public class UserController extends BaseAction{
 				return ar;
 			}
 			
-		    User fUser =userService.findbyPhone(userName, Constant.VERSION_NO);
-
+//		    User fUser =userService.findbyPhone(userName, Constant.VERSION_NO);
+			User fUser = userService.findUserByUserCode(userCode);
 		    if(fUser!=null&&!MD5Util.getMd5Code(oldPassWord).equals(fUser.getPwdhash())){
 		    	ar.setSuccess(false);
 				ar.setMessage("输入原密码错误,请重新输入！");
 				return ar;
 		    }
 
-			if(userService.modifyPwd(userName, MD5Util.getMd5Code(passWord),Constant.VERSION_NO )){			
+			if(!userService.modifypwdByUserCode(userCode, MD5Util.getMd5Code(passWord), Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("修改密码失败！");
 				return ar;
@@ -855,7 +884,7 @@ public class UserController extends BaseAction{
 			String cfPassWord  =request.getParameter("respassword");
 			String vcode  =request.getParameter("yzm");
 			
-			if(!isMobile(userName)){
+			if(!Validator.isMobile(userName)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
@@ -909,18 +938,23 @@ public class UserController extends BaseAction{
 	@RequestMapping(value="/realname", method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse realname(HttpServletRequest request,HttpServletResponse response){
-		AjaxResponse ar = new AjaxResponse();
-		try {
-			String userName  =request.getParameter("phone");
-			String realName  =request.getParameter("realname");
+	    try {
+//		    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+//            String userName = user.getPhone();
+            String userName = "18618382548";
+//		    String userName  =request.getParameter("phone");
+			String realName  = request.getParameter("realName");
+			if(!StringUtil.isEmpty(realName)){
+			    realName = URLDecoder.decode(realName, "UTF-8");
+			}
 			String idno  =request.getParameter("idno");
 	
 			
-			if(!isMobile(userName)){
+			/*if(!isMobile(userName)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
-			}
+			}*/
 			
 			if(StringUtil.isEmpty(realName)||StringUtil.isEmpty(idno)){
 				ar.setSuccess(false);
@@ -935,7 +969,7 @@ public class UserController extends BaseAction{
 			};
 			
 
-			if(userService.realUser(userName, realName, idno, Constant.VERSION_NO)){			
+			if(!userService.realUser(userName, realName, idno, Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("用户实名失败！");
 				return ar;
@@ -974,8 +1008,9 @@ public class UserController extends BaseAction{
 				return ar;
 			}
 			
-			if(!isMobile(phone)){
+			if(!Validator.isMobile(phone)){
 				ar.setSuccess(false);
+				ar.setErrorCode(CodeConstant.MOBILE_ERROR);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
 			}
@@ -985,6 +1020,7 @@ public class UserController extends BaseAction{
 	        if(userService.findIsExist(phone, Constant.VERSION_NO)){
 	        	ar.setSuccess(false);
 				ar.setMessage("手机号已存在！");
+				ar.setErrorCode(CodeConstant.MOBILE_EXISTS);
 				return ar;
 	        }
 			
@@ -993,7 +1029,8 @@ public class UserController extends BaseAction{
 			String tVcode =smsService.findSendsmsDetail(phone,Constant.CUR_SYS_CODE); 
 			if(!vcode.equals(tVcode.trim())){
 				ar.setSuccess(false);
-				ar.setMessage("验证码输入不正确！");
+				ar.setErrorCode(CodeConstant.SMS_ERROR);
+				ar.setMessage("验证码输入匹配！");
 				return ar;
 			}
 			
@@ -1018,7 +1055,7 @@ public class UserController extends BaseAction{
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
 			
 			
-			if(userService.modifyPhone(tUserCode, phone, Constant.VERSION_NO)){			
+			if(!userService.modifyPhone(tUserCode, phone, Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("修改手机号失败！");
 				return ar;
@@ -1050,7 +1087,7 @@ public class UserController extends BaseAction{
 		AjaxResponse ar = new AjaxResponse();
 		try {
 			String phone  =request.getParameter("phone");
-			if(!isMobile(phone)){
+			if(!Validator.isMobile(phone)){
 				ar.setSuccess(false);
 				ar.setMessage("手机号格式不正确！");
 				return ar;
@@ -1068,7 +1105,7 @@ public class UserController extends BaseAction{
 				return ar;
 			}
 //			String vCode =SmsSend.sendSms(phone);
-			String vCode =String.valueOf((int)((Math.random()*9+1)*100000)) ;
+			String vCode =String.valueOf((int)((Math.random()*9+1)*100000));
 			if(vCode.equals("0")){				
 				ar.setSuccess(false);
 				ar.setMessage("短信发送失败！");
@@ -1150,16 +1187,7 @@ public class UserController extends BaseAction{
 		return new ModelAndView("/index");
 	}
 	
-	public static boolean isMobile(String str) {   
-	        Pattern p = null;  
-	        Matcher m = null;  
-	        boolean b = false;   
-	        str = str.trim();
-	        p = Pattern.compile("^[1][3,4,5,8][0-9]{9}$"); // 验证手机号  
-	        m = p.matcher(str);  
-	        b = m.matches();   
-	        return b;  
-	} 
+	
 	
 	@RequestMapping(value="/upload")
     public void upload(HttpServletRequest request,HttpServletResponse response,
@@ -1313,11 +1341,11 @@ public class UserController extends BaseAction{
 	 * @author: zhangchunming
 	 * @date: 2016年9月2日上午10:08:58
 	 * @params: @return
-	 * @return: ModelAndView
+	 * @return: AjaxResponse
 	 */
-	@RequestMapping(value="/toGeneralVipCenter", method = RequestMethod.GET)
+	@RequestMapping(value="/toMyself", method = RequestMethod.GET)
 	@ResponseBody
-	public AjaxResponse toGeneralVipCenter(HttpServletRequest request){
+	public AjaxResponse toMyself(HttpServletRequest request){
 	    logBefore(logger,"去往用户中兴");
 	    /*UserDetail userDetail = JSON.parseObject(params,UserDetail.class);
 	    if(userDetail==null||StringUtil.isEmpty(userDetail.getUserCode())){
@@ -1337,4 +1365,26 @@ public class UserController extends BaseAction{
 	    logAfter(logger);
 	    return ar;
 	}
+	
+	@RequestMapping(value="/getUserInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public AjaxResponse getHeadPic(HttpServletRequest request){
+        logBefore(logger,"获取用户信息");
+        Map<String,String> map = new HashMap<String,String>();
+        UserDetail userDetail = findUserDetail(request);
+        if(userDetail != null){
+            ar.setSuccess(true);
+            map.put("imgAddrss", userDetail.getImgAddrss());
+            map.put("userType", userDetail.getUserType());
+            map.put("phone", userDetail.getPhone());
+            map.put("realName", userDetail.getRealName());
+            ar.setData(map);
+            ar.setMessage("查询数据成功！");
+        }else{
+            ar.setSuccess(false);
+            ar.setMessage("数据不存在！");
+        }
+        logAfter(logger);
+        return ar;
+    }
 }
