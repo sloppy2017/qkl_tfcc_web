@@ -960,6 +960,7 @@ body .xuanxiang .pages1 ul li a{
 }
 #result-tab2 tr th{
     width: 300px;
+    border-right: 1px solid #dddddd;
 }
 #pages2 ul{
     height: 36px;
