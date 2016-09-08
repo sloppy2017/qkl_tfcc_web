@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Acc">
+
+  
+   
+	
+	<insert id="add" parameterType="com.qkl.tfcc.api.po.acc.Acc" >
+	 insert into tb_acc (
+	 user_code,
+	 sub_acc_no,
+	 avb_amnt,
+	 froze_amnt,
+	 total_amnt,
+	 last_caldate,
+	 create_time,
+	 modify_time,
+	 operator)
+	 values(
+	 #{userCode},
+	 #{subAccno},
+	 #{avbAmnt},
+	 #{frozeAmnt},
+	 #{totalAmnt},
+	 #{lastCaldate},
+	 #{createTime},
+	 #{modifyTime},
+	 #{operator}
+	 )	 
+	 </insert>
+	 
+	 <update id="update" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
+         update tb_acc 
+         <set> 
+                avb_amnt = #{avbAmnt},
+                froze_amnt = #{frozeAmnt},
+                total_amnt = #{totalAmnt},
+                last_caldate = #{lastCaldate},
+                modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where user_code = #{userCode}     
+               and sub_acc_no = #{subAccno}
+     </update>
+     
+     
+	 
+		 
+
+</mapper>     
