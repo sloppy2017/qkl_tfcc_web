@@ -154,16 +154,22 @@
 
 /*分页*/
 .table-list{
-    margin: 0px 12px;
+    margin: 22px 0px;
     height:370px;
+}
+.result-tab{
+	/*border:0*/
 }
 .result-tab tr{
     height:42px;
-    background:#f6fafe;
-    border:none;
+    border:1px solid #ddd;
 }
-.result-tab tr hr{
-    border:0px;
+.result-tab tr:nth-child(odd){
+	 background:#f6fafe;
+}
+.result-tab tr th{
+   border:1px solid #ddd;
+    
 }
 .result-tab tr th{
     font-size: 14px;
