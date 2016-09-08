@@ -964,10 +964,10 @@ body .xuanxiang .pages1 ul li a{
     height: 36px;
 }
 #pages2 ul li{
-    float: right;
-    margin-left: 20px;
+    float: left;
+    margin-left: 10px;
     border: 1px solid #dddddd;
-    padding: 10px 16px;
+    padding: 5px 10px;
 }
 #pages2 ul li select{
     border: none;
