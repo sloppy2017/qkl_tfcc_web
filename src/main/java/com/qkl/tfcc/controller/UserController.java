@@ -1030,7 +1030,7 @@ public class UserController extends BaseAction{
 			if(!vcode.equals(tVcode.trim())){
 				ar.setSuccess(false);
 				ar.setErrorCode(CodeConstant.SMS_ERROR);
-				ar.setMessage("验证码输入匹配！");
+				ar.setMessage("验证码输入不匹配！");
 				return ar;
 			}
 			
