@@ -40,7 +40,7 @@ function reload_table(currentPage,showCount) {
     $.ajax({
         type: 'post',
 //		url: '../../..rvice/user/login/',
-        url: '../../../service/test/queryuser/',
+        url: '../../../service/team/findVipPage/',
         dataType: 'json',
         data: {
             str:str,

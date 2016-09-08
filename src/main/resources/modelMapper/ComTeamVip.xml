@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ComTeamVip">
+<!--resultMap id="BaseResultMap" type="com.qkl.tfcc.api.po.user.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="pwdhash" property="pwdhash" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="is_loginlocked" property="isLoginlocked" jdbcType="VARCHAR" />
+    <result column="loginlock_time" property="loginlockTime" jdbcType="TIMESTAMP" />
+    <result column="is_smslocked" property="isSmslocked" jdbcType="VARCHAR" />
+    <result column="smslock_time" property="smslockTime" jdbcType="TIMESTAMP" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />      
+    <result column="phone" property="phone" jdbcType="VARCHAR" />    
+  </resultMap> -->
+  
+  
+	<!-- 查询各类会员的数量 -->
+	<select id="fingcount" parameterType="java.lang.String" resultType="ComTeamVip">
+		select 
+        sum(tt)  rNum,
+        sum(lva) aNum,
+        sum(lvb) bNum,
+        sum(lvc) cNum,
+        from 
+        (select 
+        1 as tt,
+        case when rela_level='A' then 1 else 0 end as lva,
+        case when rela_level='B' then 1 else 0 end as lvb,
+        case when rela_level='C' then 1 else 0 end as lvc,
+         from tb_user_friendship 
+        where user_code =#{userCode}) a 
+	</select>
+	<!-- 查询各类会员的信息列表 --><!-- 按照会员账号和推荐人进行查询条件拼接有问题 -->
+	<select id="findViplistPage" parameterType="page"  resultType="pd" >
+	
+	    select rela_level,reg_time,u.phone,d.ref_phone 
+        from tb_user u,tb_user_friendship f ,tb_user_detail d 
+        where    u.user_code=f.user_code and d.user_code=u.user_code and u.user_code=#{userCode} 
+        
+            <if test ="relaLevel != null and relaLevel !=''">           
+                and rela_level in( #{relaLevel})
+            </if>  
+            
+	        <if test ="querycontdiction1 != null and querycontdiction1 !='' and querycontdiction2 !=null and querycontdiction2 !='' and querycontdiction1='1' ">
+          
+                and (u.user_name like '%${query}%' )
+            </if>
+            <if test ="querycontdiction1 != null and querycontdiction1 !='' and querycontdiction2 !=null and querycontdiction2 !='' and querycontdiction1='2' ">
+             
+            </if>
+        
+            
+	</select>
+	
+</mapper>     
