@@ -953,6 +953,7 @@ body .xuanxiang .pages1 ul li a{
 
 }
 #result-tab2 tr td{
+    border-right: 1px solid #dddddd;
 }
 #result-tab2 tr:nth-child(odd){
     background: #f6fafe;
