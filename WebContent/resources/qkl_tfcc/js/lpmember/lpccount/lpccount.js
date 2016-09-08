@@ -65,40 +65,48 @@ function exit(){
 }
 
 
-
-
-
-
-//jfcc提交函数
-function jfcc_sub(){
-    var money =  $('.trans-jfcc input[name="money"]').val();
-    //var reg =/^([1-9][0-9]*)?[0-9]\.[0-9]{2}$/;
-    var reg =/^([1-9][0-9]*)?[0-9]$/;
-    if(money==''){
-        $('.errorc').html('输入金额不能为空')
-        return false;
-    }else if(!reg.test(money)){
-        $('.errorc').html('输入金额方式不对')
-        return false;
-    }else{
-        $('.errorc').empty();
-        //console.log(money);
+////jfcc提交函数
+//function jfcc_sub(){
+//    var money =  $('.trans-jfcc input[name="money"]').val();
+//    //var reg =/^([1-9][0-9]*)?[0-9]\.[0-9]{2}$/;
+//    var reg =/^([1-9][0-9]*)?[0-9]$/;
+//    if(money==''){
+//        $('.errorc').html('输入金额不能为空')
+//        return false;
+//    }else if(!reg.test(money)){
+//        $('.errorc').html('输入金额方式不对')
+//        return false;
+//    }else{
+//        $('.errorc').empty();
+//        //console.log(money);
+//        $.ajax({
+//            type:'post',
+//            url:'.../',
+//            data:{money:money},
+//            success:function(data){
+//
+//                $(".mark2").fadeOut(500);
+//            },
+//            error:function(){
+//            }
+//        })
+//        return true;
+//    }
+//}
+$(function () {
+    $("security-z").click(function () {
         $.ajax({
-            type:'post',
-            url:'.../',
-            data:{money:money},
-            success:function(data){
-
-                $(".mark2").fadeOut(500);
-            },
-            error:function(){
+            type:'POST',
+            url:'',
+            success: function (responseData) {
+                $('.chengjiaojia').empty();
+                $('.chengjiaojia').html(responseData);
+                $('.chengjiaojia_TFCC').empty();
+                $('.chengjiaojia_TFCC').html(responseData);
             }
         })
-        return true;
-    }
-}
-
-
+    })
+})
 
 
 

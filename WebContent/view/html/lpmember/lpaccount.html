@@ -49,7 +49,7 @@
 <!--选项部分-->
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
-        <li><a  href="../../html/lpmember/lpstock.html">我的股权</a></li>
+        <!--<li><a  href="../../html/lpmember/lpstock.html">我的股权</a></li>-->
         <li><a  href="../../html/lpmember/lpteam.html">我的团队</a></li>
         <li><a class="security-z" href="#">我的账户</a></li>
         <li ><a  href="../../html/lpmember/lprersonal.html">个人中心</a></li>
@@ -85,37 +85,43 @@
                 <div class="main-top">
                     <span>你当前的位置：</span><span class="c28">我的账户</span>
                 </div>
-                <div class="my-sum">
-                    <h4>我的余额</h4>
-                    <div>
-                        <ul>
-                            <li><div>TFCC</div>&nbsp;&nbsp;<span>800,000.00</span></li>
-                            <li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li>
-                            <li class="zhuanzhang">转账</li>
-                        </ul>
-                    </div>
+                <div class="my-sum" style="border: none">
+                    <h4>TFCC最新成交价：￥<span class="chengjiaojia"></span></h4>
+                    <h4>我的余额:&nbsp;&nbsp;&nbsp;
+                        <span>TFCC:</span>
+                        &nbsp;&nbsp;
+                        <span class="chengjiaojia chengjiaojia_TFCC"></span>
+                        <li class="zhuanzhang" style="display: inline-block;margin-left:100px;border:1px solid #dddddd;border-radius: 3px;width: 160px;line-height: 30px; text-align: center;">转账</li>
+                    </h4>
+                    <!--<div>-->
+                        <!--<ul>-->
+                            <!--&lt;!&ndash;<li><div >TFCC</div>&nbsp;&nbsp;<span class="chengjiaojia">100000000</span></li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li>&ndash;&gt;-->
+                            <!--<li class="zhuanzhang">转账</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
                 </div>
-                <div class="my-award">
-                    <h4>我的奖励</h4>
-                    <div>
-                        <ul>
-                            <li><div class="c57">总累计奖励 TFCC</div><div class="ce9">30,000.00</div></li>
-                            <li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9">30,000.00</div></li>
-                            <li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9">30,000.00</div></li>
-                            <input type="button" class="chaxun" value="查询">
-                        </ul>
-                    </div>
-                </div>
+                <!--<div class="my-award">-->
+                    <!--<h4>我的奖励</h4>-->
+                    <!--<div>-->
+                        <!--<ul>-->
+                            <!--<li><div class="c57">总累计奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
+                            <!--<li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
+                            <!--<li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
+                            <!--<input type="button" class="chaxun" value="查询">-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
             <div class="trans-account">
                 <div class="main-top"><span>您当前的位置：</span><span>我的账户</span>><span class="c28">账户</span></div>
                 <div class="trans-wrap">
-                    <p>转账至R8交易所账户中</p>
+                    <p style="border: none">转账至R8交易所账户中</p>
                     <div class="trans-type">
                         <p style="border: none">选择币种</p>
                         <select name="" id="pid" onchange="gradeChange()">
                             <option value="">TFCC</option>
-                            <option value="">JFCC</option>
+                            <!--<option value="">JFCC</option>-->
                         </select>
                     </div>
                     <div class="trans-tfcc">
@@ -137,16 +143,16 @@
             </div>
         </div>
     </div>
-    <table class="result-tab" id="result-tab2">
-        <!--    <tr>
-               <th>用户名</th>
-               <th>id</th>
-           </tr> -->
-    </table>
-    <div class="pages1" id="pages2">
-        <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->
+    <!--<table class="result-tab" id="result-tab2">-->
+        <!--&lt;!&ndash;    <tr>-->
+               <!--<th>用户名</th>-->
+               <!--<th>id</th>-->
+           <!--</tr> &ndash;&gt;-->
+    <!--</table>-->
+    <!--<div class="pages1" id="pages2">-->
+        <!--&lt;!&ndash;  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       &ndash;&gt;-->
 
-    </div>
+    <!--</div>-->
 
 </div>
 <!---时间日期-->
@@ -193,88 +199,87 @@
 <!---时间日期结束-->
 
 <!--分页表格-->
-<script>
-    $(function () {
-        var flag = true;
-        $(".chaxun").click(function () {
-            alert("1111111");
-            var showcnt =10; //每页页数初始值
-            var  myselect=document.getElementById("showcnt");
-            if(myselect==null||myselect=="null"){
-            }else{
-                showcnt=myselect.options[myselect.selectedIndex].value;
-            }
-            if(flag){
-                reload_table(1,showcnt);
-            }
-        })
+<!--<script>-->
+    <!--$(function () {-->
+        <!--var flag = true;-->
+        <!--$(".chaxun").click(function () {-->
+            <!--alert("1111111");-->
+            <!--var showcnt =10; //每页页数初始值-->
+            <!--var  myselect=document.getElementById("showcnt");-->
+            <!--if(myselect==null||myselect=="null"){-->
+            <!--}else{-->
+                <!--showcnt=myselect.options[myselect.selectedIndex].value;-->
+            <!--}-->
+            <!--if(flag){-->
+                <!--reload_table(1,showcnt);-->
+            <!--}-->
+        <!--})-->
 
-        function reload_table(currentPage,showCount) {
-            alert("22222");
-            var rsStr = "";
-            var phoneVal = $('.phone').val();
-            console.log("phoneVal is " + phoneVal);
-            var passVal = $('.pass').val();
-            console.log("passVal is " + passVal);
-            $.ajax({
-                type: 'POST',
-//		url: '../../../service/user/login/',
-                url: '../../../service/test/queryuser/',
-                dataType: 'json',
-                data: {
-                    huiyuanzhanghao:$('.huiyuanzhanghao').val(),
-//                phone: $('.phone').val(),
-//                pass: $('.pass').val(),
-                    currentPage: currentPage,
-                    showCount: showCount
-                },
-                success: function (data) {
-                    alert('请求成功');
-                    var message = data.message;
-                    console.log("success is " + data.success);
-                    console.log("data is " + data.map);
-                    console.log("data.userList is " + data.data.userList);
-                    var usList = data.data.userList;
-                    console.log("usList.length " + usList.length);
-                    console.log("data.data.page.pageStr " + data.data.page.pageStr);
-                    var tablecols = "<tr> \n"
-                            + " <th>注册时间</th> \n"
-                            + "<th>LP会员账号</th> \n"
-                            + "<th>LP会员姓名</th> \n"
-                            + "<th>购买股份（股）</th> \n"
-                            + "</tr> \n";
-                    rsStr = tablecols;
-                    for (var i = 0; i < usList.length; i++) {
-                        rsStr = rsStr + "<tr>";
-                        console.log("usList(" + i + ") name is " + usList[i].name);
-                        rsStr = rsStr + "<td>" + usList[i].name + "</td>";
-                        rsStr = rsStr + "<td>" + usList[i].test_user_id + "</td>";
-                        rsStr = rsStr + "</tr>";
-                    }
+        <!--function reload_table(currentPage,showCount) {-->
+            <!--alert("22222");-->
+            <!--var rsStr = "";-->
+            <!--var phoneVal = $('.phone').val();-->
+            <!--console.log("phoneVal is " + phoneVal);-->
+            <!--var passVal = $('.pass').val();-->
+            <!--console.log("passVal is " + passVal);-->
+            <!--$.ajax({-->
+                <!--type: 'POST',-->
+<!--//		url: '../../../service/user/login/',-->
+                <!--url: '../../../service/test/queryuser/',-->
+                <!--dataType: 'json',-->
+                <!--data: {-->
+                    <!--huiyuanzhanghao:$('.huiyuanzhanghao').val(),-->
+<!--//                phone: $('.phone').val(),-->
+<!--//                pass: $('.pass').val(),-->
+                    <!--currentPage: currentPage,-->
+                    <!--showCount: showCount-->
+                <!--},-->
+                <!--success: function (data) {-->
+                    <!--alert('请求成功');-->
+                    <!--var message = data.message;-->
+                    <!--console.log("success is " + data.success);-->
+                    <!--console.log("data is " + data.map);-->
+                    <!--console.log("data.userList is " + data.data.userList);-->
+                    <!--var usList = data.data.userList;-->
+                    <!--console.log("usList.length " + usList.length);-->
+                    <!--console.log("data.data.page.pageStr " + data.data.page.pageStr);-->
+                    <!--var tablecols = "<tr> \n"-->
+                            <!--+ " <th>注册时间</th> \n"-->
+                            <!--+ "<th>LP会员账号</th> \n"-->
+                            <!--+ "<th>LP会员姓名</th> \n"-->
+                            <!--+ "<th>购买股份（股）</th> \n"-->
+                            <!--+ "</tr> \n";-->
+                    <!--rsStr = tablecols;-->
+                    <!--for (var i = 0; i < usList.length; i++) {-->
+                        <!--rsStr = rsStr + "<tr>";-->
+                        <!--console.log("usList(" + i + ") name is " + usList[i].name);-->
+                        <!--rsStr = rsStr + "<td>" + usList[i].name + "</td>";-->
+                        <!--rsStr = rsStr + "<td>" + usList[i].test_user_id + "</td>";-->
+                        <!--rsStr = rsStr + "</tr>";-->
+                    <!--}-->
 
-                    console.log("rsStr " + rsStr);
-//                    $(".result-tab").append(rsStr);
-                    $(".result-tab").html(rsStr);
-//			 $(".pages1").append(data.data.page.pageStr);
-                    $(".pages1").html(data.data.page.pageStr);
+                    <!--console.log("rsStr " + rsStr);-->
+<!--//                    $(".result-tab").append(rsStr);-->
+                    <!--$(".result-tab").html(rsStr);-->
+<!--//			 $(".pages1").append(data.data.page.pageStr);-->
+                    <!--$(".pages1").html(data.data.page.pageStr);-->
 
-//			$('.phone').val(data.data.phone);
-                    alert("message is " + message);
+<!--//			$('.phone').val(data.data.phone);-->
+                    <!--alert("message is " + message);-->
 
-//			 if(data.success){
-//				 window.location.href ="../index.html";
-//			 }
-                }, error: function (data) {
-                    alert('请求错误');
-                }
-            })
-        }
+<!--//			 if(data.success){-->
+<!--//				 window.location.href ="../index.html";-->
+<!--//			 }-->
+                <!--}, error: function (data) {-->
+                    <!--alert('请求错误');-->
+                <!--}-->
+            <!--})-->
+        <!--}-->
 
-    })
-</script>
+    <!--})-->
+<!--</script>-->
 
 <script src="../../../resources/qkl_tfcc/js/lpmember/lpccount/lpccount.js"></script>
-
 
 </body>
 </html>
