@@ -5,7 +5,7 @@
     border-bottom: 1px solid #ddd;
 }
 .main-top div{
-    margin-left: 20px;
+    margin-left: 10px;
     font-size: 14px;
     line-height: 52px;
 }
@@ -27,7 +27,7 @@
 .main-middle .member li{
     float:left;
     width:160px;
-    margin:8px 10px 0 ;
+    margin:8px 10px 0 0 ;
 
     font-size: 14px;
     color:#575757;
@@ -73,6 +73,9 @@
    margin:20px 20px;
      height: 560px;
 }
+ .btm .btm-type ul{
+     width:820px;
+ }
  .btm ul li{
     float:left;
     text-align: left;
@@ -82,6 +85,18 @@
     margin-right:30px;
     color:#575755;
 }
+
+.type-btn a{
+    display: block;
+    font-size: 14px;
+    width:100px;
+    height:28px;
+    color:#575757;
+    border:1px solid #ddd;
+    text-align: center;
+    line-height: 28px;
+    margin-left: 222px;
+}
  .btm ul input{
     width:14px;
     height:14px;
@@ -89,7 +104,7 @@
 }
  .btm .serch {
     height:30px;
-    width:100%;
+    width:820px;
     margin-top:20px;
     line-height: 30px;
 }
@@ -135,61 +150,55 @@
     text-align: center;
     margin-left: -38px;
 }
-.table{
-    margin-top:20px;
-    width:100%;
-    height:368px;
+
+
+
+/*active pageing*/
+.table-list{
+    margin-top: 20px;
+    height:370px;
     border:1px solid #ddd;
 }
-.table .row{
-    width:100%;
-    height:40px;
-    border-bottom:1px solid #ddd;
+.result-tab tr{
+    height:42px;
+    background:#f6fafe;
+    border:none;
 }
-.col-lg{
+.result-tab tr hr{
+    border:0px;
+}
+.result-tab tr th{
     font-size: 14px;
-    line-height: 40px;
-    width:20%;
-    float:left;
-    height:40px;
-    text-align: center;
     color:#575757;
 }
-.table-head .row{
-    background:#f6fafe;
-}
-.table-head .row div{
-    color:#282828;
-}
-.c-red {
-    color:#e9382c;
-}
 
-/*分页1*/
-.btm .data-container ul li{
-    float: none;
-    margin-right: 0px;
+.pages1{
+    margin-top:20px;
+    height:32px;
 }
-#wrapper{
-    width:100%;
+.btm .pages1 ul {
+   width: 900px;
+    margin: 0 auto;
 }
-#wrapper {
-    margin-right:20px;;
+.btm .pages1 ul li{
+    margin: 0px 20px;
+    height:32px;
+    line-height: 32px;
 }
-
-.data-container {
+.btm .pages1 ul li input{
+    height:18px;
     margin-top: 5px;
 }
-.data-container ul {
-    padding: 0;
-    margin: 0;
+.btm .pages1 ul li a{
+    display: block;
+    height:32px;
 }
-.data-container li {
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    background: #eee;
-    color: #666;
+.btm .pages1 ul li select{
+        margin-top: 5px;
 }
+
+
+
 
 
 

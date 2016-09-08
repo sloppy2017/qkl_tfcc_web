@@ -49,6 +49,13 @@ public interface UserDao extends DAO<User> {
 	 * @create date 2016年8月17日
 	 */
 	public void modifyPwd(String phone,String password);
+	/** 修改密码
+     * @return modifypwdByUserCode  修改密码
+     * @create author zhangchunming
+     * @create date 2016年9月6日
+     */
+	public void modifypwdByUserCode(String userCode,String password);
+	
 	/** 修改手机号
 	 * @return modifyPhone  修改手机号
 	 * @create author kezhiyi

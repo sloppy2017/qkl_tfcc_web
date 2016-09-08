@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>安全中兴</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/reset.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/general/general-safety.css">
+    <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
+     <script src="/resources/qkl_tfcc/js/date/dateRange.js"></script>
+    <script src="/resources/qkl_tfcc/js/date/monthPicker.js"></script>
+    <script src="/resources/qkl_tfcc/js/common/safetyCom.js"></script>
+</head>
+<body>
+<div class="mark">
+    <div class="mark-box">
+        <div class="success-icon"></div>
+        <p>实名认证成功</p>
+        <div class="achieve" onclick="toPart1(this)"><p>完成</p></div>
+    </div>
+</div>
+<div class="mark1">
+    <div class="mark-box">
+        <div class="success-icon"></div>
+        <p>修改手机成功</p>
+        <div class="achieve" onclick="toPart1(this)"><p>完成</p></div>
+    </div>
+</div>
+<div class="mark2">
+    <div class="mark-box">
+        <div class="success-icon"></div>
+        <p>修改密码成功</p>
+        <div class="achieve" onclick="toPart1(this)"><p>完成</p></div>
+    </div>
+</div>
+<div class="header fix">
+    <div class="logo fl">
+        <img src="/resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
+    </div>
+    <div class="nav-right fl">
+        <div class="top">
+            <span class="yearTime">2016年8月24日</span>
+            <span class="dateTime">09:18:06 </span>
+            <span class="weekTime"> 星期三 </span>
+            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
+            <span class="exit"><a href="">【退出】</a></span>
+        </div>
+        <div class="nav fix">
+            <ul class="fl">
+                <li ><a href="../team/general-team.html">我的团队</a></li>
+                <li><a href="../myaccount/general-account.html">我的账户</a></li>
+                <li ><a  href="../myself/myself.html">个人中心</a></li>
+                <li><a class="active" href="../safety/general-safety.html">安全中心</a></li>
+                <li><a href="http://www.r8exchange.com">R8交易所</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="main fl">
+        <div class="mains">
+            <div id="part1">
+                <div class="main-top"><span>您当前的位置：</span><span class="c28">安全中心</span></div>
+                <div class="amend">
+                    <ul>
+                        <li><p>手机号</p><span class="txt">通过手机同接收动态验证码，进行密码修改等操作</span ><span  class="status">已锁定</span><a href="javascript:setPhone()" class="btn phone">修改</a></li>
+                        <li><p>登录密码</p><span class="txt"> 为保证账户安全，可设置更复杂的登录密码</span><span  class="status">已开启</span><a href="javascript:" class="btn pwd">修改</a></li>
+                        <li><p>实名认证</p><span class="txt"> 实名认证后，方可进行交易操作</span><span id="renzheng" class="status">未验证</span><a href="javascript:" class="btn renzhen">认证</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="part2">
+              <div class="rerenzhen hid">
+                  <div class="main-top1"><span>您当前的位置：安全中心></span ><span class="c28">实名认证</span></div>
+                  <div class="txt1">根据国家相关规定，个人资产转账、提现、充值等操作时，需要提供真实的身份信息，感谢您的配合！  实名认证获取发财网第一桶金！</div>
+                  <form id="form1" action="" class="form1">
+                      <div><label >姓名</label><input type="text" id="realName" name="realName" placeholder="请输入您的真实姓名"></div>
+                      <div><label >身份证账号</label><input type="text" id="idno" name="idno" placeholder="请输入您的有效身份证号码"></div>
+                      <div><a href="javascript:realname()" class="save">保存</a><a href="" class="rest">返回</a></div>
+                  </form>
+              </div>
+              
+              <div class="rephone hid">
+                  <div class="main-top1"><span>您当前的位置：安全中心></span ><span class="c28">修改手机号</span></div>
+                  <form id="form2" action="" class="form1">
+<<<<<<< HEAD
+                      <div><label for="">原手机号</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="oldphone" class="oldphone">13810381111</span></div>
+                      <div><label for="">新手机号</label><input type="text" class="phone-safety" id="phone" name="phone" placeholder="请输入新手机号" onfocus="if($('#phone').hasClass('errorTip')){this.value='';$('#phone').removeClass('errorTip');}"></div>
+                      <div><label for=""> 验证码</label><input type="text" id="yzm" name="yzm" placeholder="请输入验证码" onfocus="if($('#yzm').hasClass('errorTip')){this.value='';$('#yzm').removeClass('errorTip');}"><input type="button" class="btn1 yzm-safety" value="获取验证码" onclick="getVCode($('#phone').val())"></div>
+=======
+                      <div><label for="">原手机号</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="oldphone">13810381111</span></div>
+                      <div><label for="">新手机号</label><input type="text" class="phone-safety" id="phone" name="phone" placeholder="请输入新手机号" onfocus="this.value=''"><span style="margin-left:17px;color: red;"></span></div>
+                      <div><label for=""> 验证码</label><input type="text" id="yzm" name="yzm" placeholder="请输入验证码"><input type="button" class="btn1" value="获取验证码" onclick="getVcode($('#phone').val().trim())"></div>
+>>>>>>> refs/remotes/origin/dev
+                      <div><a class="save" href="javascript:modifyPhone()">提交</a><a href="" class="rest">返回</a></div>
+                  </form>
+              </div>
+              
+              <div class="pwd hid">
+                  <div class="main-top1"><span>您当前的位置：安全中心></span ><span class="c28">修改登录密码</span></div>
+                  <form id="form3" action="" class="form1">
+                      <div><label>原登录密码</label><input type="password" id="oldpassword" name="oldpassword" placeholder="请输入原登录密码"></div>
+                      <div><label >新登录密码</label><input type="password" id="newpassword" name="newpassword" placeholder="请输入新登录密码"></div>
+                      <div><label >确认登录密码</label><input type="text" id="resnewpassword" name="resnewpassword" placeholder="请输入新登录密码"><span>请输入6-20位字母，数字或者字符组合</span></div>
+                      <div><a href="javascript:modifypwd()" class="save">保存</a><a href="" class="rest">返回</a></div>
+                  </form>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="side-bar fl">
+        <div class="fl">
+            <div class="myImg">
+                <div>
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png" alt="">
+                </div>
+                <p>普通会员</p>
+            </div>
+
+            <div class="qr-code">
+                <div>
+                    <img src="/resources/qkl_tfcc/imgs/ma.jpg" alt="">
+                </div>
+                <p>我的二维码</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
+<script>
+    /* $(function(){
+      $('.pwd').click(function(){
+          $(this).hide();
+          $('.main-top ,.amend').hide();
+          $('.pwd').show();
+      })
+        $('.phone').click(function(){
+            $(this).hide();
+            $('.main-top ,.amend').hide();
+            $('.rephone').show();
+        })
+        $('.renzhen').click(function(){
+            $(this).hide();
+            $('.main-top ,.amend').hide();
+            $('.rerenzhen').show();
+        })
+    }); */
+    $(function(){
+    	getUserInfo();
+    });
+    var phone = "";
+    function getUserInfo(){
+      var url = "/service/user/getUserInfo";
+      $.getJSON(url,function(json){
+          if(json.success){
+        	  if(json.data.userType==1){
+            	  $(".myImg").children("p").html("普通会员");
+              }else if(json.data.userType==2){
+            	  $(".myImg").children("p").html("网点会员");
+              }else if(json.data.userType==3){
+            	  $(".myImg").children("p").html("LP会员");
+              }else if(json.data.userType==4){
+                  $(".myImg").children("p").html("投资公司");
+              }else if(json.data.userType==5){
+                  $(".myImg").children("p").html("众筹会员");
+              }
+        	  $("#left_headPicId").attr("src",json.data.imgAddrss);
+        	  phone = json.data.phone;
+        	  if(json.data.realName!=null&&json.data.realName!=''&&json.data.realName.trim()!=undefined){
+        		  $('.renzhen').unbind("click");
+        		  $("#renzheng").text("已验证");
+        		  $("#renzheng").next("a").text("已认证");
+        		  $("#renzheng").next("a").css("background","url('/resources/qkl_tfcc/imgs/grey.png')no-repeat 0px");
+        	  }
+          }else{
+        	  alert(json.message);
+          }
+          
+      });
+   }
+   //获取原手机号
+   function setPhone(){
+	   $("#oldphone").text(phone);
+   }
+   //修改手机号
+   function modifyPhone(){
+	   var validPhone = valid_phone();//验证手机号是否正确
+	   var validYzm = valid_yzm('yzm');//验证验证码
+       if(!validPhone||!validYzm){
+           return;
+       }
+	   alert($("#form2").serialize());
+	   return;
+	   $.ajax({
+           type:'POST',
+           url:'/service/user/modifyphone?'+$("#form2").serialize()+"&oldphone="+$("#oldphone").text().trim(),
+//            data:$("#form2").serialize(),
+           dataType:'JSON',
+           success: function (json) {
+                if(json.success){
+                	$(".mark1").css("display","block");
+                }else{
+                    if(json.errorCode==-13){
+                    	 $("#yzm").addClass("errorTip");
+                    	 $("#yzm").val(json.message);
+                    }else{
+                    	$("#phone").addClass("errorTip");
+                        $("#phone").val(json.message);
+                    }
+                }
+               //console.log(data);
+           },
+           error: function (a,b,c) {
+               //console.log(a.readyState+"\n"+b+"\n"+c);
+               console.log("修改手机号失败");
+           }
+       });
+   }
+   //修改密码
+   function modifypwd(){
+	   $.ajax({
+           type:'POST',
+           url:'/service/user/modifypwd?'+$("#form3").serialize(),
+//            data:$("#form2").serialize(),
+           dataType:'JSON',
+           success: function (json) {
+                if(json.success){
+                    $(".mark2").css("display","block");
+                }else{
+                    alert(json.message);
+                }
+               //console.log(data);
+           },
+           error: function (a,b,c) {
+               //console.log(a.readyState+"\n"+b+"\n"+c);
+               console.log("修改登陆密码失败");
+           }
+       });
+   }
+   //实名认证
+   function realname(){
+	   var url = '/service/user/realname?'+$("#form1").serialize();
+	   url = encodeURI(url);
+	   $.ajax({
+           type:'POST',
+           url:url,
+//            data:$("#form2").serialize(),
+           dataType:'JSON',
+           success: function (json) {
+                if(json.success){
+                	$(".mark").css("display","block");
+                }else{
+                    alert(json.message);
+                }
+               //console.log(data);
+           },
+           error: function (a,b,c) {
+               //console.log(a.readyState+"\n"+b+"\n"+c);
+               console.log("修改登陆密码失败");
+           }
+       });
+   }
+   function toPart1(obj){
+	   location.reload();
+	   /* var markDiv = $(obj).parent().parent();
+	   markDiv.css("display","none");
+	   $(".rerenzhen,.rephone,.pwd").hide();
+	   $(".main-top,.amend,.btn").show(); */
+   }
+   
+</script>
+</body>
+</html>

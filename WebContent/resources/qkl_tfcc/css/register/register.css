@@ -33,7 +33,7 @@
    margin-left:110px;
 }
 .reg-nav ul{
-    background: url('../../qkl_tfcc/imgs/reg.jpg') no-repeat 0px -255px;
+    background: url('../../imgs/reg.jpg') no-repeat 0px -255px;
     width: 790px;
     height: 42px;
 
@@ -56,7 +56,7 @@
 
 .reg-nav .active{
     color:#fff;
-    background: url('../../qkl_tfcc/imgs/reg.jpg') no-repeat;
+    background: url('../../imgs/reg.jpg') no-repeat;
 }
 .form {
     margin: 32px 0 0 64px;
@@ -131,7 +131,7 @@ form .myagree span{
     width:163px;
     height:42px;
     margin-left:89px;
-    background:url('../../qkl_tfcc/imgs/reg3.jpg');
+    background:url('../../imgs/reg3.jpg');
     display:inline-block;
     text-align: center;
     line-height: 42px;

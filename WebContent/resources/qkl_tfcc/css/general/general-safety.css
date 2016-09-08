@@ -5,8 +5,7 @@
 .amend ul li p{width:84px;display: inline-block;color:#282828;font-size: 14px;margin:0px;}
 .amend .txt{color:#c7c7c7;font-size: 14px;display: inline-block;height:100%;width:390px;}
 .amend .status{font-size: 14px;display: inline-block;width:52px;height:100%;margin-right: 70px}
-.amend .btn{background: url('../../imgs/safty.jpg') no-repeat;width:162px;height:44px;display: inline-block;vertical-align: middle;text-align: center;line-height: 44px;color: #fff}
-
+.amend .btn{background: url('../../imgs/safty.jpg') no-repeat 0px;width:162px;height:44px ;display: inline-block;vertical-align: middle;text-align: center;line-height: 44px;color: #fff}
 .pwd{height:300px;}
 .form1 .btn1{width:120px;height:40px;display: inline-block}
 .form1{margin-left: 20px;}
@@ -17,8 +16,9 @@
 .form1 .save{margin-left: 124px;background: url("../../imgs/safty1.jpg")no-repeat;width:116px;height:42px; display: inline-block;color:#fff;text-align: center;line-height: 42px;}
 .form1 .rest{margin-left: 34px;background: url("../../imgs/safty1.jpg")no-repeat;width:116px;height:42px; display: inline-block;color:#fff;text-align: center;line-height: 42px;}
 .hid{display: none;}
-
+.error{color:red;font-size: 14px;}
 .txt1{color:red;font-size: 14px;height:56px;margin: 0px 270px 0px 20px;border-bottom:1px solid #ddd;line-height: 56px;}
+
 
 /*遮罩*/
 .mark,.mark1,.mark2{

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>我的股权</title>
     <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/commen.css">
+    <link rel="stylesheet" href="../../../resources/qkl_tfcc/css/common/mask.css">
+
 </head>
 <body>
 <div class="overall ">
@@ -55,21 +57,35 @@
     <div class="gu_q">
         <p class="gu_q_gq"><span>您当前的位置：</span><b>我的股权</b></p>
         <div class="shoukuan">
-            <p><b>收款账户信息</b></p>
-            <p>有限公司：北京中联共识区块链技术有限公司</p>
-            <p>账号：010-204569888</p>
-            <p>开户行：中国工商银行贵阳市开阳区支行</p>
-            <p>账务对账电话：0851-26790188</p>
+            <p><b class="shou_k">收款账户信息</b></p>
+            <p class="dizhi">有限公司：北京中联共识区块链技术有限公司</p>
+            <p class="zhanghao">账号：010-204569888</p>
+            <p class="yinhang">开户行：中国工商银行贵阳市开阳区支行</p>
+            <p class="dianhua">账务对账电话：0851-26790188</p>
         </div>
         <form  action="" class="gmsl">
             购买数量（股）&nbsp;&nbsp;&nbsp;
-            <input type="text" maxlength='10' id="ttext" style="ime-mode:disabled" onkeypress="return myfilter(event)" value="请输入需购买数量" />
+            <input class="goumaishuliang" type="text" maxlength='10' id="ttext"
+                   style="ime-mode:disabled" onkeypress="return myfilter(event)" value="请输入需购买数量"
+                   onfocus="if(value=='请输入需购买数量') {value=''}" onblur="if (value=='') {value='请输入需购买数量'}"
+            />
             <br>
             需支付金额（元）
-            <input type="text" name="lastname" value="￥0.00">
+            <input  class="goumaishuliang" type="text" name="lastname" value="￥0.00" readonly="readonly">
             <br>
-            <a href="">确认购买</a>
+            <input class="querengoumai" id="button" type="button1" value="确认购买" onclick="ShowDiv('MyDiv','fade')" />
+            <!--弹出层时背景层DIV-->
+            <div id="fade" class="black_overlay">
+            </div>
+            <div id="MyDiv" class="white_content">
+                <div style="text-align: center; cursor: default; height: 40px;">
+                    <img src="../../../resources/qkl_tfcc/imgs/tanchukuan.png" alt="" style="display:block;margin:23px 0 0 210px ">
+                    <span style="display:block;margin-top: 20px;">申请购买股份成功，请及时完成付款</span>
+                    <input type="submit" value="完成" style="display: block;margin-top: 25px;margin-left:140px ">
+                </div>
+            </div>
         </form>
+
         <!--订单查询-->
         <div class="ding_d">
             <p>订单查询</p>
@@ -79,13 +95,24 @@
                     <option value="volvo">已完成</option>
                     <option value="saab">未完成</option>
                 </select>
-                <input type="button" value="查询">
+                <input type="button" value="查询" class="chaxun">
             </form>
         </div>
         <!--订单查询结束-->
-    </div>
-    <!--选项内容部分结束-->
 
+        <!--选项内容部分结束-->
+        <table class="result-tab" width="100%">
+            <!--    <tr>
+                   <th>用户名</th>
+                   <th>id</th>
+               </tr> -->
+        </table>
+        <div class="pages1">
+            <!--  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       -->
+
+        </div>
+
+    </div>
 </div>
 <!---时间日期-->
 <script type="text/javascript">
@@ -129,7 +156,90 @@
     tick();
 </script>
 <!---时间日期结束-->
-<script src="../../../resources/qkl_tfcc/js/lpmember/stock/forminput.js"></script>
+
+<script src="../../../resources/qkl_tfcc/js/common/mask.js"></script>
+<script src="../../../resources/qkl_tfcc/js/common/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="../../../resources/qkl_tfcc/js/lpmember/lpstock/forminput.js"></script>
+<script src="../../../resources/qkl_tfcc/js/lpmember/lpstock/address.js"></script>
+
+<!---分页表格-->
+<script>
+    var flag=true;
+    $(".chaxun").click(function () {
+//        alert("11111111");
+        var showcnt =10; //每页页数初始值
+        var  myselect=document.getElementById("showcnt");
+        if(myselect==null||myselect=="null"){
+        }else{
+            showcnt=myselect.options[myselect.selectedIndex].value;
+        }
+        if(flag){
+            reload_table(1,showcnt);
+        }
+    });
+
+    function reload_table(currentPage,showCount) {
+        var rsStr="";
+//        var phoneVal = $('.phone').val();
+//        console.log("phoneVal is "+phoneVal);
+//        var passVal = $('.pass').val();
+//        console.log("passVal is "+passVal);
+        $.ajax({
+            type: 'post',
+//		url: '../../../service/user/login/',
+            url: '../../../service/test/queryuser/',
+            dataType: 'json',
+            data: {
+//                phone: $('.phone').val(),
+//                pass: $('.pass').val(),
+                fkzt_yVal:$('.fkzt_y option:selected').val(),
+                currentPage: currentPage,
+                showCount:showCount
+            },
+            success: function (da ta) {
+                alert('请求成功');
+                var message = data.message;
+                console.log("success is "+data.success);
+                console.log("data is "+data.map);
+                console.log("data.userList is "+data.data.userList);
+                var usList =data.data.userList;
+                console.log("usList.length "+usList.length);
+                console.log("data.data.page.pageStr "+data.data.page.pageStr);
+                var tablecols ="<tr> \n"
+                        +" <th>购买时间</th> \n"
+                        + "<th>购买份数</th> \n"
+                        + "<th>支付方式</th> \n"
+                        + "<th>总计金额</th> \n"
+                        + "<th>付款状态</th> \n"
+                        + "</tr> \n";
+                rsStr=tablecols;
+                for(var i=0;i<usList.length;i++){
+                    rsStr = rsStr+"<tr>";
+                    console.log("usList("+i+") name is "+usList[i].name);
+                    rsStr = rsStr +"<td>" + usList[i].name+"</td>";
+                    rsStr = rsStr +"<td>" + usList[i].test_user_id+"</td>";
+                    rsStr =rsStr+"</tr>";
+                }
+
+                console.log("rsStr "+rsStr);
+//			 $(".result-tab").append(rsStr);
+                $(".result-tab").html(rsStr);
+//			 $(".pages1").append(data.data.page.pageStr);
+                $(".pages1").html(data.data.page.pageStr);
+
+//			$('.phone').val(data.data.phone);
+                alert("message is "+message);
+
+
+//			 if(data.success){
+//				 window.location.href ="../index.html";
+//			 }
+            }, error: function (data) {
+                alert('请求错误');
+            }
+        })
+    }
+</script>
 
 </body>
 </html>

@@ -39,6 +39,9 @@
 .form div{
     margin:20px 0;
 }
+.form div span{
+    font-size: 14px;
+}
 .form input{
 
     width:260px;
@@ -55,10 +58,11 @@
 }
 .form div a{
     display: block;
+    margin-left:98px;
     width:162px;
     height:44px;
-    background: url("/resources/qkl_tfcc/imgs/save1.jpg") no-repeat;
-    margin-left: 98px;
+    background: url("../../imgs/save1.jpg") no-repeat;
+
 }
 .hint{
     color:#e9382c;

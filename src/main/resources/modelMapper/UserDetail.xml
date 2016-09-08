@@ -121,11 +121,25 @@
 	 <update id="updateUserDetail" parameterType="UserDetail">    
          update tb_user_detail 
          <set> 
+                wxnum = #{wxnum},
+                bankaccno = #{bankaccno},
+                mail_addrss = #{mailAddrss},
+                zip_code = #{zipCode},
+                modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where user_code = #{userCode}     
+     </update>
+    <update id="updateUserDetailCore" parameterType="UserDetail">    
+         update tb_user_detail 
+         <set> 
+           <if test="realName != null and realName != ''">
+                real_name = #{realName},
+           </if>
            <if test="phone != null and phone != ''">
                 phone = #{phone},
-           </if>
-           <if test="userName != null and userName != ''">
-                user_name = #{userName},
            </if>
            <if test="cropName != null and cropName != ''">
                 crop_name = #{cropName},
@@ -136,33 +150,6 @@
            <if test="branchName != null and branchName != ''">
                 branch_name = #{branchName},
            </if>
-           <if test="wxnum != null and wxnum != ''">
-                wxnum = #{wxnum},
-           </if>
-           <if test="bankaccno != null and bankaccno != ''">
-                bankaccno = #{bankaccno},
-           </if>
-           <if test="mailAddrss != null and mailAddrss != ''">
-                mail_addrss = #{mailAddrss},
-           </if>
-           <if test="zipCode != null and zipCode != ''">
-                zip_code = #{zipCode},
-           </if>
-           <if test="refPhone != null and refPhone != ''">
-                ref_phone = #{refPhone},
-           </if>
-           <if test="imgAddrss != null and imgAddrss != ''">
-                img_addrss = #{imgAddrss},
-           </if>
-           <if test="qrCode != null and qrCode != ''">
-                qr_code = #{qrCode},
-           </if>
-           <if test="userType != null and userType != ''">
-                user_type = #{userType},
-           </if>
-           <if test="realStat != null and realStat != ''">
-                real_stat = #{realStat},
-           </if>
                 modify_time = now(),
            <if test="operator != null and operator != ''">
                 operator = #{operator}
@@ -170,5 +157,4 @@
          </set>
          where user_code = #{userCode}     
      </update>
-
 </mapper>     

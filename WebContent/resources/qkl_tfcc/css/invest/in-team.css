@@ -15,28 +15,47 @@
 .time-list span a{margin-left:20px;color:#e9382c;}
 .time-btn{width:100px;height:28px;border:1px solid #ddd;line-height: 28px;text-align: center;margin-left: 122px;}
 
-/*分页1*/
-.btm .data-container ul li{
-    float: none;
-    margin-right: 0px;
+/*!*分页1**/
+
+.table-list{
+    margin-top: 20px;
+    height:370px;
+    border:1px solid #ddd;
 }
-#wrapper{
-    width:100%;
+.result-tab tr{
+    height:42px;
+    background:#f6fafe;
+    border:none;
 }
-#wrapper {
-    margin-right:20px;;
+.result-tab tr hr{
+    border:0px;
+}
+.result-tab tr th{
+    font-size: 14px;
+    color:#575757;
 }
 
-.data-container {
+.pages1{
+    margin-top:20px;
+    height:32px;
+}
+.btm .pages1 ul {
+   width: 900px;
+    margin: 0 auto;
+}
+.btm .pages1 ul li{
+    margin: 0px 20px;
+    height:32px;
+    line-height: 32px;
+}
+.btm .pages1 ul li input{
+    height:18px;
     margin-top: 5px;
 }
-.data-container ul {
-    padding: 0;
-    margin: 0;
+.btm .pages1 ul li a{
+    display: block;
+    height:32px;
 }
-.data-container li {
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    background: #eee;
-    color: #666;
+.btm .pages1 ul li select{
+        margin-top: 5px;
 }

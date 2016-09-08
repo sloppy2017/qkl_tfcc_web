@@ -2,7 +2,7 @@
 /*通用*/
 body {
     font: 14px "microsoft yahei", Arial, Helvetica, sans-serif;
-    color: #666;
+    /*color: #666;*/
     margin: 0px;
     padding: 0px;
 }
@@ -216,8 +216,8 @@ img {
     display: inline-block;
     border-left: 1px solid #dddddd;
     position: absolute;
-    top:80px;
-    left: 247px;
+    top:40px;
+    left: -1px;
     background: #FFFFFF;
     line-height: 53px;
     font-size: 14px;
@@ -243,28 +243,28 @@ img {
     width: 308px;
     margin-right: 73px;
 }
-.an_q_n p a{
-    margin-left: 78px;
-    display: inline-block;
-    text-decoration: none;
-    color: #ffffff;
-    background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxingbankground.png");
-    width: 160px;
-    height: 43px;
-    text-align: center;
-    line-height: 45px;
-}
-.an_q_n p a:hover{
-    margin-left: 78px;
-    display: inline-block;
-    text-decoration: none;
-    color: #737373;
-    background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxindianjibanckground.jpg");
-    width: 160px;
-    height: 43px;
-    text-align: center;
-    line-height: 45px;
-}
+/*.an_q_n p a{*/
+    /*margin-left: 78px;*/
+    /*display: inline-block;*/
+    /*text-decoration: none;*/
+    /*color: #ffffff;*/
+    /*background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxingbankground.png");*/
+    /*width: 160px;*/
+    /*height: 43px;*/
+    /*text-align: center;*/
+    /*line-height: 45px;*/
+/*}*/
+/*.an_q_n p a:hover{*/
+    /*margin-left: 78px;*/
+    /*display: inline-block;*/
+    /*text-decoration: none;*/
+    /*color: #737373;*/
+    /*background: url("../../../../resources/qkl_tfcc/imgs/anquanzhongxindianjibanckground.jpg");*/
+    /*width: 160px;*/
+    /*height: 43px;*/
+    /*text-align: center;*/
+    /*line-height: 45px;*/
+/*}*/
 /*安全中心结束*/
 
 /*个人中心选项内容部分*/
@@ -327,11 +327,13 @@ img {
 }
 .xuanxiang .aqzx .dqwz{
     width: 100%;
-    line-height: 82px;
+    line-height: 52px;
     border-bottom: 1px solid #dddddd;
     background: #ffffff;
     font-size: 14px;
     display: block;
+    margin-left: -20px;
+    padding-left: 20px;
 }
 .xuanxiang ul .security-g .aqzx .dqwz span{
     margin-left: 24px;
@@ -397,7 +399,6 @@ img {
     width: 100%;
     background: #FFFFFF;
     border-left: 1px solid #DDDDDD;
-    height: 881px;
 }
 .gu_q .gu_q_gq{
     line-height: 52px;
@@ -427,7 +428,7 @@ img {
     padding: 0 40px;
     font-size: 14px;
 }
-.gu_q input{
+.gu_q .goumaishuliang{
     border:1px solid #DDDDDD;
     width: 180px;
     height: 30px;
@@ -438,16 +439,17 @@ img {
     color: #bdbdbd;
 
 }
-.gu_q a{
+.gu_q .querengoumai{
     display: inline-block;
     margin-top: 24px;
     margin-left: 40px;
-    width: 220px;
-    line-height:43px;
+    width: 218px;
+    line-height:41px;
     text-align: center;
     text-decoration: none;
     color: #FFFFFF;
     background: url("../../../../resources/qkl_tfcc/imgs/input_banckground.png");
+    height: 41px;
 }
 .gu_q .ding_d{
     margin: 30px 0 18px 20px;
@@ -471,7 +473,8 @@ img {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    padding-right: 5px;
+    /*padding-right: 5px;*/
+    /*-moz-padding-right: 5px;*/
 }
 .fkzt input{
     margin-left: 480px;
@@ -480,6 +483,7 @@ img {
     border-radius: 3px;
     background: none;
     color:#000000;
+    border:1px solid #dddddd;
 }
 /*我的股权结束*/
 /*我的团队*/
@@ -525,7 +529,7 @@ img {
 
 .tuandui{
     position: absolute;
-    width: 100%;
+    /*width: 100%;*/
     height: 881px;
     background: #FFFFFF;
     border-left:1px solid #DDDDDD;
@@ -588,7 +592,7 @@ img {
     left: 248px;
 }
 .xuanxiang ul{
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 .xuanxiang ul .security-z{
     color: #000000;
@@ -917,6 +921,75 @@ img {
     color: #FFFFFF;
 }
 /*修改手机号码结束*/
+.xuanxiang .result-tab tbody tr td{
+    text-align: center;
+}
+.xuanxiang .pages1{
+    font-size: 16px;
+}
+body .xuanxiang .pages1 ul li{
+    background: #ffffff;
+    border: 1px solid #000000;
+}
+body .xuanxiang .pages1 ul li a{
+    color: #000000;
+    line-height: 16px;
+}
+.errorTip{
+    background-color: pink;
+    color:red;
+}
+
+/*分页表格*/
+#result-tab2{
+    margin-bottom: 50px;
+    border-collapse: collapse;
+}
+#result-tab2 tr{
+    text-align: center;
+    height: 40px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+
+}
+#result-tab2 tr td{
+}
+#result-tab2 tr:nth-child(odd){
+    background: #f6fafe;
+}
+#result-tab2 tr th{
+    width: 300px;
+}
+#pages2 ul{
+    height: 36px;
+}
+#pages2 ul li{
+    float: right;
+    margin-left: 20px;
+    border: 1px solid #dddddd;
+    padding: 10px 16px;
+}
+#pages2 ul li select{
+    border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
