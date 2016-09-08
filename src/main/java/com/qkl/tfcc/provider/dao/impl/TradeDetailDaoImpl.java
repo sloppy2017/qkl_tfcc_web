@@ -7,6 +7,7 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.qkl.tfcc.api.po.trade.TradeDetail;
 import com.qkl.tfcc.provider.dao.TradeDetailDao;
 import com.qkl.tfcc.provider.dbhelper.DaoSupport;
+import com.qkl.util.help.pager.PageData;
 
 
 @Repository
@@ -17,20 +18,20 @@ public class TradeDetailDaoImpl extends DaoSupport<TradeDetail> implements Trade
 	private String namespace = "TradeDetail";
 	    
 	@Override
-	public void addTradeDetail(TradeDetail tradeDetail) {
-		getSqlSession().insert(namespace+"."+"add", tradeDetail);	
+	public void addTradeDetail(PageData pd) {
+		getSqlSession().insert(namespace+"."+"add", pd);	
 		
 	}
 
 	@Override
-	public void modifyTradeDetail(TradeDetail tradeDetail) {
-		getSqlSession().insert(namespace+"."+"update", tradeDetail);	
+	public void modifyTradeDetail(PageData pd) {
+		getSqlSession().insert(namespace+"."+"update", pd);	
 		
 	}
 
 	@Override
-	public void modifyTradeStatus(TradeDetail tradeDetail) {
-		getSqlSession().update(namespace+"."+"updatestatus", tradeDetail);
+	public void modifyTradeStatus(PageData pd) {
+		getSqlSession().update(namespace+"."+"updatestatus", pd);
 		
 	}
 

@@ -61,7 +61,7 @@
     </select>
 	
 	
-	<insert id="add" parameterType="com.qkl.tfcc.api.po.trade.TradeDetail" >
+	<insert id="add" parameterType="pd" >
 	 insert into tb_trade_detail ( 
 	 user_code,
 	 txtype,
@@ -90,10 +90,10 @@
 	 #{caldate},
 	 #{sourceSystem},
 	 #{status},
-	 #{revorgname},
-	 #{revbankaccno},
+	 #{bankAccInfo.revorgname},
+	 #{bankAccInfo.revbankaccno},
 	 #{revbankdepname},	 
-	 #{createTime},
+	 #{bankAccInfo.createTime},
 	 #{modifyTime},
 	 #{operator}
 	 )	 

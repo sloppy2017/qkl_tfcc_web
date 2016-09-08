@@ -68,14 +68,8 @@ public class BankAccountController extends BaseAction{
  
 	@Autowired
 	private UserService userService;
-	@Autowired
-    private SysGenCodeService sysGenCodeService;
-	@Autowired
-	private SmsService smsService;
-	@Autowired
-	private SysMaxnumService sysMaxnumService;
-	@Autowired
-	private AccService accService;
+
+   
 	
 	
 	

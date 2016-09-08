@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberLimit">
+
+  <select id="findByuserCode" parameterType="java.lang.String" resultType="MemberLimit" >
+		select 
+		user_code userCode,
+		rela_usercode relaUsercode,
+		acc_no accNo,
+		cuy_type cuyType,
+		credit_limit creditLimit,
+		description description,
+		status status,
+		create_time createTime,
+		modify_time modifyTime,
+		operator operator
+ 		from  tb_member_limit  where user_code =#{userCode} 
+	</select> 
+   
+	<insert id="add" parameterType="com.qkl.tfcc.api.po.acc.MemberLimit" >
+	 insert into tb_member_limit ( 
+	 user_code,
+	 rela_usercode,
+	 acc_no,
+	 cuy_type,
+	 credit_limit,
+	 description,
+	 create_time,
+	 modify_time,
+	 operator)
+	 values(
+	 #{userCode},
+	 #{relaUsercode},
+	 #{accNo},
+	 #{cuyType},
+	 #{creditLimit},
+	 #{description},
+	 #{branchName},
+	 #{refPhone},
+	 #{qrCode},
+	 #{userType},
+	 #{realStat},
+	 #{createTime},
+	 #{modifyTime},
+	 #{operator}
+	 )	 
+	 </insert>
+	 
+	 
+	 
+	 
+
+</mapper>     
