@@ -6,7 +6,7 @@
 		select 
 		acc_no accNo,
 		acc_name accName,
-		amnt amnt,
+		credit_limit creditLimit,
 		cuy_type cuyType,
 		description description,
 		create_time createTime,
