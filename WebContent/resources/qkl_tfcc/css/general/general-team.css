@@ -154,48 +154,82 @@
 
 
 /*active pageing*/
-.table-list{
-    margin-top: 20px;
-    height:370px;
-    border:1px solid #ddd;
-}
-.result-tab tr{
-    height:42px;
-    background:#f6fafe;
-    border:none;
-}
-.result-tab tr hr{
-    border:0px;
-}
-.result-tab tr th{
-    font-size: 14px;
-    color:#575757;
-}
+/*.table-list{*/
+    /*margin: 0px 12px;*/
+    /*height:370px;*/
+/*}*/
+/*.result-tab tr{*/
+    /*height:42px;*/
+    /*background:#f6fafe;*/
+    /*border:none;*/
+/*}*/
+/*.result-tab tr hr{*/
+    /*border:0px;*/
+/*}*/
+/*.result-tab tr th{*/
+    /*font-size: 14px;*/
+    /*color:#575757;*/
+/*}*/
 
-.pages1{
-    margin-top:20px;
-    height:32px;
+/*.pages1{*/
+    /*margin-top:20px;*/
+    /*height:32px;*/
+/*}*/
+/*.btm .pages1 ul {*/
+   /*width: 900px;*/
+    /*margin: 0 auto;*/
+/*}*/
+/*.btm .pages1 ul li{*/
+    /*margin: 0px 20px;*/
+    /*height:32px;*/
+    /*line-height: 32px;*/
+/*}*/
+/*.btm .pages1 ul li input{*/
+    /*height:18px;*/
+    /*margin-top: 5px;*/
+/*}*/
+/*.btm .pages1 ul li a{*/
+    /*display: block;*/
+    /*height:32px;*/
+/*}*/
+/*.btm .pages1 ul li select{*/
+        /*margin-top: 5px;*/
+/*}*/
+
+/*分页表格*/
+#result-tab2{
+    margin-bottom: 50px;
+    border-collapse: collapse;
 }
-.btm .pages1 ul {
-   width: 900px;
-    margin: 0 auto;
+#result-tab2 tr{
+    text-align: center;
+    height: 40px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+
 }
-.btm .pages1 ul li{
-    margin: 0px 20px;
-    height:32px;
-    line-height: 32px;
+#result-tab2 tr td{
 }
-.btm .pages1 ul li input{
-    height:18px;
-    margin-top: 5px;
+#result-tab2 tr:nth-child(odd){
+    background: #f6fafe;
 }
-.btm .pages1 ul li a{
-    display: block;
-    height:32px;
+#result-tab2 tr th{
+    width: 300px;
 }
-.btm .pages1 ul li select{
-        margin-top: 5px;
+#pages2 ul{
+    height: 36px;
 }
+#pages2 ul li{
+    float: right;
+    margin-left: 20px;
+    border: 1px solid #dddddd;
+    padding: 10px 16px;
+}
+#pages2 ul li select{
+    border: none;
+}
+2016/9/7 20:39:47
+梁冰 2016/9/7 20:39:47
 
 
 
