@@ -76,7 +76,6 @@ $(function() {
 		}
 	});
 
-
 	// 生成验证码
 	function auth_code() {
 		var arr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -115,9 +114,19 @@ $(function() {
 					pwd:pwdVal,
 					yzm:yzmVal
 				},success:function(data){
-					alert(1111);
+					//判断返回的用户注册的是哪个类型
+					if(data.dataType==1){
+						window.location.href='./grneral/general-myself.html'
+					}else if(data.dataType==2){
+						window.location.href='./lp/lp.html'
+
+					}else if(data.dataType==3) {
+						window.location.href = './lp/lp.html'
+					}else{
+						window.location.href = './lp/lp.html'
+					}
 				},error:function(data){
-					alert(22222)
+
 				}
 			})
 		}

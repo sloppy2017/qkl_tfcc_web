@@ -32,6 +32,10 @@ $(".type-btn a").click(function () {
     if(flag){
         reload_table(1,showcnt);
     }
+    
+    $('.page1 ul li').click(function(){
+        $(this).addClass('bg-color').siblings().removeClass('bg-color');
+    })
 })
 
 function reload_table(currentPage,showCount) {
@@ -40,7 +44,7 @@ function reload_table(currentPage,showCount) {
     $.ajax({
         type: 'post',
 //		url: '../../..rvice/user/login/',
-        url: '../../../service/test/queryuser/',
+        url: '../../../service/team/findVipPage/',
         dataType: 'json',
         data: {
             str:str,
@@ -100,6 +104,8 @@ function reload_table(currentPage,showCount) {
         }
     })
 }
+
+
 
 
 

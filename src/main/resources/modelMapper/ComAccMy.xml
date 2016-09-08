@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ComAccMy">
+
+     <!-- 查询TFCC余额 -->
+    <select id="findTB" parameterType="java.lang.String" resultType="ComAccMy" >
+		        select sum(a.total_amnt) tfcc 
+		          from tb_acc_def d ,tb_acc a 
+                 where a.sub_acc_no = d.sub_accno 
+                   and d.cuy_type='1'
+                   and a.user_code=#{userCode}
+	</select> 
+	
+     <!-- 查询JFCC余额 -->
+     <select id="findJB" parameterType="java.lang.String" resultType="ComAccMy" >
+		select sum(a.total_amnt) jfcc 
+                  from tb_acc_def d ,tb_acc a 
+                 where a.sub_acc_no = d.sub_accno 
+                   and d.cuy_type='2'
+                   and a.user_code=#{userCode}
+	 </select> 
+	 
+	 <!-- 查询我累计推荐会员奖励的TFCC -->
+	 <select id="findReward"  parameterType="java.lang.String" resultType="ComAccMy" > 
+		 select sum(amnt) 
+		 from tb_acc_def f,tb_acc_detail d  
+		 where  f.sub_accno=d.sub_accno 
+		 and acc_type='1' 
+		 and cuy_type='1' 
+		 and d.bouns_source1='11' 
+		 and d.user_code=#{userCode}
+	 </select>
+	
+	 <!-- 查询我累计推荐网点奖励的TFCC -->
+	 <select id="findWReward"  parameterType="java.lang.String" resultType="ComAccMy" > 
+	     select sum(amnt) 
+	     from tb_acc_def f,tb_acc_detail d  
+	     where  f.sub_accno=d.sub_accno 
+	     and acc_type='1' 
+	     and cuy_type='1' 
+	     and d.bouns_source1='12' 
+	     and d.user_code=#{userCode}
+     </select>
+    
+     <!-- 查询我总计奖励的TFCC -->
+     <select id="findTTReward"  parameterType="java.lang.String" resultType="ComAccMy" > 
+        select sum(amnt) 
+         from tb_acc_def f,tb_acc_detail d  
+         where  f.sub_accno=d.sub_accno 
+         and acc_type='1' 
+         and cuy_type='1' 
+         and d.user_code=#{userCode}
+     </select>
+     
+      <!-- 查询列表 -->
+     <select id="findAll" parameterType="map" resultType="ComAccMy" >
+	 select caldate rewardDate,sum(lvajl) aReward,sum(lvbjl) bReward,sum(lvcjl) cReward from 
+	(select date_format(caldate,'%Y-%m-%d') caldate,user_code,
+			case when bouns_source2='1101' then amnt else 0 end lvajl ,
+			case when bouns_source2='1102' then amnt else 0 end lvbjl ,
+			case when bouns_source2='1103' then amnt else 0 end lvcjl 
+	from tb_acc_detail ) a
+	where a.user_code=#{userCode}
+        <if test ="startTime !=null and startTime !=''">
+            and  caldate &gt;= #{startTime}    
+        </if>
+        
+        <if test ="endTime !=null and endTime !=''">
+            and  caldate &lt;= #{endTime} 
+        </if>
+	group by caldate;
+ 
+    </select>
+</mapper>     
