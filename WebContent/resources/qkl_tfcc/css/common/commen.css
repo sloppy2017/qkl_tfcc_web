@@ -962,6 +962,7 @@ body .xuanxiang .pages1 ul li a{
 }
 #pages2 ul{
     height: 36px;
+    padding-left: 445px;
 }
 #pages2 ul li{
     float: left;
