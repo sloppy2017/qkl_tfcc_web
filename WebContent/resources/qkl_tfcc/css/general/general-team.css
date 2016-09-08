@@ -193,6 +193,7 @@
     height:28px;
   	text-indent:8px;
     border:none;
+    margin: 1px 6px;
 }
 .btm .pages1 ul li a{
     display: block;
@@ -203,6 +204,9 @@
     border: none;
     text-indent: 12px;
     line-height: 32px;
+}
+.bg-color{
+    background: cyan;
 }
 
 
