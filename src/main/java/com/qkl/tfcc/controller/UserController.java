@@ -1,4 +1,4 @@
-package com.qkl.tfcc.controller.User;
+package com.qkl.tfcc.controller;
 
 import java.io.File;
 import java.io.IOException;

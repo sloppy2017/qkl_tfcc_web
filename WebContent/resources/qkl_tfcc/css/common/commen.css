@@ -953,21 +953,24 @@ body .xuanxiang .pages1 ul li a{
 
 }
 #result-tab2 tr td{
+    border-right: 1px solid #dddddd;
 }
 #result-tab2 tr:nth-child(odd){
     background: #f6fafe;
 }
 #result-tab2 tr th{
     width: 300px;
+    border-right: 1px solid #dddddd;
 }
 #pages2 ul{
     height: 36px;
+    padding-left: 445px;
 }
 #pages2 ul li{
-    float: right;
-    margin-left: 20px;
+    float: left;
+    margin-left: 10px;
     border: 1px solid #dddddd;
-    padding: 10px 16px;
+    padding: 5px 10px;
 }
 #pages2 ul li select{
     border: none;

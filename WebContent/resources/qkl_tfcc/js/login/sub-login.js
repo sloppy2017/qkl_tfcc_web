@@ -76,7 +76,6 @@ $(function() {
 		}
 	});
 
-
 	// 生成验证码
 	function auth_code() {
 		var arr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -115,9 +114,19 @@ $(function() {
 					pwd:pwdVal,
 					yzm:yzmVal
 				},success:function(data){
-					alert(1111);
+					//判断返回的用户注册的是哪个类型
+					if(data.dataType==1){
+						window.location.href='./grneral/general-myself.html'
+					}else if(data.dataType==2){
+						window.location.href='./lp/lp.html'
+
+					}else if(data.dataType==3) {
+						window.location.href = './lp/lp.html'
+					}else{
+						window.location.href = './lp/lp.html'
+					}
 				},error:function(data){
-					alert(22222)
+
 				}
 			})
 		}
@@ -147,6 +156,66 @@ $(function() {
 	
 });
 
+/*<<<<<<< HEAD
+
+function reload_table(currentPage,showCount) {
+	 var rsStr="";
+	 var phoneVal = $('.phone').val();
+		console.log("phoneVal is "+phoneVal);
+		var passVal = $('.pass').val();
+		console.log("passVal is "+passVal); 
+	$.ajax({
+		type: 'post',
+//		url: '../../../service/user/login/',
+		url: '../../../service/test/queryuser/',
+		dataType: 'json',
+		data: {
+			phone: $('.phone').val(),
+			pass: $('.pass').val(),
+			currentPage: currentPage,
+			showCount:showCount
+		},
+		success: function (data) {
+			alert('请求成功');
+			var message = data.message;
+			console.log("success is "+data.success);
+			console.log("data is "+data.map);
+			console.log("data.userList is "+data.data.userList);
+			var usList =data.data.userList;
+			console.log("usList.length "+usList.length);
+			console.log("data.data.page.pageStr "+data.data.page.pageStr);
+			var tablecols ="<tr> \n"
+                              +" <th>用户名</th> \n"
+                              + "<th>id</th> \n"
+                            + "</tr> \n";
+			rsStr=tablecols;
+			for(var i=0;i<usList.length;i++){
+				rsStr = rsStr+"<tr>";
+				console.log("usList("+i+") name is "+usList[i].name);
+				rsStr = rsStr +"<td>" + usList[i].name+"</td>";
+				rsStr = rsStr +"<td>" + usList[i].test_user_id+"</td>";
+				rsStr =rsStr+"</tr>";
+			}
+			
+			console.log("rsStr "+rsStr);
+//			 $(".result-tab").append(rsStr);
+			 $(".resu lt-tab").html(rsStr);
+//			 $(".pages1").append(data.data.page.pageStr);
+			 $(".pages1").html(data.data.page.pageStr);
+			 
+//			$('.phone').val(data.data.phone);
+			 alert("message is "+message);
+						 
+			 
+//			 if(data.success){
+//				 window.location.href ="../index.html";
+//			 }
+		}, error: function (data) {
+			alert('请求错误');
+		}
+	})
+}*/
+//=======
 //function reload_table(currentPage,showCount) {
 //	 var rsStr="";
 //	 var phoneVal = $('.phone').val();
@@ -203,5 +272,6 @@ $(function() {
 //		}
 //	})
 //}
+//>>>>>>> refs/remotes/origin/dev
 
 
