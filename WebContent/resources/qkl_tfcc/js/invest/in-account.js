@@ -121,7 +121,7 @@ function insearch(){
     }
 
     if(obj.options[0].selected==true){
-        reg=/^(((13[0-9]{1})|159|153)+\d{8})$/;
+        reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|70)\\d{8}$/;
         var chaxunVal = $('input[name="chaxun"]').val()
         if(reg.test(chaxunVal)){
             $.ajax({
@@ -137,6 +137,40 @@ function insearch(){
         }
     }
 }
+
+//给不同的用户发放额度
+
+var x = [];
+function sub_money(){
+    var phoneVal = $('.award-num input[name="phone"]')
+    console.log(phoneVal)
+
+    regP =/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|70)\\d{8}$/;
+    regM =/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
+    var phoneVal = $('.award-num input[name="phone"]').val();
+    console.log(phoneVal)
+    var moneyVal = $('.award-num input[name="money"]').val();
+    if(!regP.test(phoneVal) && !regM.test(moneyVal)){
+        return false;
+    }
+
+    alert(phoneVal+'.....'+moneyVal)
+        $.ajax({
+            type:'post',
+            url:'res.php',
+            data:{chaxunVal:chaxunVal},
+            dataType:'json',
+            success:function(){
+
+            },errror:function(){
+            }
+        })
+
+}
+
+
+
+
 
 
 
