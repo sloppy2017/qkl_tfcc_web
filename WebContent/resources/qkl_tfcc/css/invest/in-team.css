@@ -16,23 +16,24 @@
 .time-btn{width:100px;height:28px;border:1px solid #ddd;line-height: 28px;text-align: center;margin-left: 122px;}
 
 /*!*分页1**/
-
 .table-list{
-    margin-top: 20px;
+    margin: 22px 0px;
     height:370px;
-    border:1px solid #ddd;
+}
+.result-tab{
+    border-collapse: collapse;
 }
 .result-tab tr{
     height:42px;
-    background:#f6fafe;
-    border:none;
+    border:1px solid #ddd;
 }
-.result-tab tr hr{
-    border:0px;
+.result-tab tr:nth-child(odd){
+    background:#f6fafe;
 }
 .result-tab tr th{
     font-size: 14px;
     color:#575757;
+    border:none;
 }
 
 .pages1{
@@ -40,22 +41,33 @@
     height:32px;
 }
 .btm .pages1 ul {
-   width: 900px;
+    width: 900px;
     margin: 0 auto;
 }
 .btm .pages1 ul li{
-    margin: 0px 20px;
-    height:32px;
+    margin: 0px 5px;
+    height: 32px;
     line-height: 32px;
+    width: 57px;
+    border: 1px solid #ddd;
+    text-align: center;
 }
 .btm .pages1 ul li input{
-    height:18px;
-    margin-top: 5px;
+    height:28px;
+    text-indent:8px;
+    border:none;
+    margin: 1px 6px;
 }
 .btm .pages1 ul li a{
     display: block;
     height:32px;
 }
 .btm .pages1 ul li select{
-        margin-top: 5px;
+    height: 32px;
+    border: none;
+    text-indent: 12px;
+    line-height: 32px;
+}
+.bg-color{
+    background: cyan;
 }
