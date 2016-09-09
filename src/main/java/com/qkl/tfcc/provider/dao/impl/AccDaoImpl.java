@@ -1,6 +1,7 @@
 package com.qkl.tfcc.provider.dao.impl;
 
 import org.springframework.stereotype.Repository;
+
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.qkl.tfcc.api.po.acc.Acc;
@@ -15,26 +16,35 @@ public class AccDaoImpl extends DaoSupport<Acc> implements AccDao {
 protected static final Log logger = LogFactory.getLog(AccDaoImpl.class);
 	
 	private String namespace = "Acc";
+
+    @Override
+    public void addAcc(Acc acc) {
+        getSqlSession().insert(namespace+"."+"addAcc", acc);    
+    }
+
+    @Override
+    public void modifyAcc(Acc acc) {
+        getSqlSession().update(namespace+"."+"modifyAcc", acc);    
+    }
+
+    @Override
+    public Acc findAcc(Acc acc) {
+        return (Acc)getSqlSession().selectOne(namespace+"."+"findAcc", acc);    
+    }
+
+    @Override
+    public Integer getAvailableBalance(Acc acc) {
+        return (Integer)getSqlSession().selectOne(namespace+"."+"getAvailableBalance", acc); 
+    }
+
+    @Override
+    public void updateIn(Acc acc) {
+         getSqlSession().update(namespace+"."+"updateIn", acc); 
+    }
+
+    @Override
+    public void updateOut(Acc acc) {
+        getSqlSession().update(namespace+"."+"updateOut", acc); 
+    }
 	
-
-	@Override
-	public void addAcc(PageData pd) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modifyAcc(PageData pd) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void findAcc(String userCode) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
 }

@@ -5,7 +5,7 @@
   
    
 	
-	<insert id="add" parameterType="com.qkl.tfcc.api.po.acc.AccDetail" >
+	<insert id="addAccDetail" parameterType="com.qkl.tfcc.api.po.acc.AccDetail" >
 	 insert into tb_acc_detail (user_code,sub_accno,bouns_source1,bouns_source2,rela_usercode,
 	 rela_userlevel,amnt,caldate,cntflag,`status`,create_time,modify_time,operator)
 	 values(
@@ -24,6 +24,46 @@
 	 #{operator}
 	 )	 
 	 </insert>
-		 
-
+	 <update id="updateAccDetail" parameterType="com.qkl.tfcc.api.po.acc.AccDetail">
+	       update tb_acc_detail
+	       set amnt = amnt + #{amnt},
+	           caldate = now(),
+	           modify_time = now(),
+           <if test="operator != null and operator != ''">
+               operator = #{operator}
+           </if>   
+	       where  user_code = #{userCode}
+	       <if test="subAccno != null and subAccno != ''">
+                and    sub_accno = #{subAccno} 
+           </if>
+                and    rela_user_code = #{rela_user_code}
+	       <if test="bounsSource1 != null and bounsSource1 != ''">
+                and    bouns_source1 = #{bounsSource1}
+	       </if>
+	       <if test="bounsSource2 != null and bounsSource2 != ''">
+                and    bouns_source2 = #{bounsSource2}
+	       </if>
+	 </update>
+<!-- 	 分页查询账户明细  -->
+     <select id="findAccDetailPage" parameterType="page" resultType="pd">
+        
+     </select>
+<!--      不分页查询账户明细 -->
+     <select id="findAccDetailList" parameterType="pd" resultType="pd">
+        
+     </select>
+     <select id="findAccDetail" parameterType="com.qkl.tfcc.api.po.acc.AccDetail" resultType="com.qkl.tfcc.api.po.acc.AccDetail">
+        select * from tc_acc_detail 
+        where user_code = #{userCode} 
+            and rela_user_code = #{relaUsercode}
+        <if test="subAccno != null and subAccno != ''">
+            and sub_accno = #{subAccno}
+        </if>
+        <if test="bounsSource1 != null and bounsSource1 != ''">
+             and    bouns_source1 = #{bounsSource1}
+        </if>
+        <if test="bounsSource2 != null and bounsSource2 != ''">
+             and    bouns_source2 = #{bounsSource2}
+        </if>
+     </select>
 </mapper>     

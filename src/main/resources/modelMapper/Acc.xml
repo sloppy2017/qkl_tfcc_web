@@ -3,7 +3,10 @@
 <mapper namespace="Acc">
 
   
-   
+    <!--查询可用余额 -->
+	<select id="getAvailableBalance" parameterType="com.qkl.tfcc.api.po.acc.Acc" resultType="java.lang.Integer">
+	       select avb_amnt from tb_acc where user_code = #{userCode} and sub_acc_no = #{subAccno}
+	</select>
 	
 	<insert id="add" parameterType="com.qkl.tfcc.api.po.acc.Acc" >
 	 insert into tb_acc (
@@ -28,14 +31,13 @@
 	 #{operator}
 	 )	 
 	 </insert>
-	 
-	 <update id="update" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
+<!-- 	 获取奖励 -->
+	 <update id="updateIn" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
          update tb_acc 
          <set> 
-                avb_amnt = #{avbAmnt},
-                froze_amnt = #{frozeAmnt},
-                total_amnt = #{totalAmnt},
-                last_caldate = #{lastCaldate},
+                avb_amnt = avb_amnt + #{avbAmnt},
+                total_amnt = total_amnt + #{avbAmnt},
+                last_caldate = now(),
                 modify_time = now(),
            <if test="operator != null and operator != ''">
                 operator = #{operator}
@@ -44,8 +46,28 @@
          where user_code = #{userCode}     
                and sub_acc_no = #{subAccno}
      </update>
-     
-     
+<!--      发放奖励 -->
+     <update id="updateOut" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
+         update tb_acc 
+         <set> 
+                avb_amnt = avb_amnt - #{avbAmnt},
+                total_amnt = total_amnt - #{avbAmnt},
+                last_caldate = now(),
+                modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where user_code = #{userCode}     
+               and sub_acc_no = #{subAccno}
+     </update>
+     <select id="findAcc" parameterType="com.qkl.tfcc.api.po.acc.Acc" resultType="com.qkl.tfcc.api.po.acc.Acc">
+           select * from tb_acc 
+           where user_code = #{userCode} 
+           <if test="subAccno != null and subAccno !='' ">
+                and sub_acc_no = #{subAccno}
+           </if>
+     </select>
 	 
 		 
 
