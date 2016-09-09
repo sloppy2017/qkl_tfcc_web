@@ -140,16 +140,16 @@ function insearch(){
 
 //给不同的用户发放额度
 
-var x = [];
+
 function sub_money(){
     var phoneVal = $('.award-num input[name="phone"]')
     console.log(phoneVal)
 
     regP =/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|70)\\d{8}$/;
     regM =/^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-    var phoneVal = $('.award-num input[name="phone"]').val();
+    var phoneVal = $('.award-num input[name="phone"]').serialize()
     console.log(phoneVal)
-    var moneyVal = $('.award-num input[name="money"]').val();
+    var moneyVal = $('.award-num input[name="money"]').serialize();
     if(!regP.test(phoneVal) && !regM.test(moneyVal)){
         return false;
     }
@@ -158,11 +158,11 @@ function sub_money(){
         $.ajax({
             type:'post',
             url:'res.php',
-            data:{chaxunVal:chaxunVal},
+            data:{phoneVal:phoneVal,moneyVal:moneyVal},
             dataType:'json',
-            success:function(){
+            success:function(data){
 
-            },errror:function(){
+            },errror:function(data){
             }
         })
 
