@@ -111,8 +111,9 @@ public class SmsSend {
 	}
 	public static void main(String [] args) {
 		
-		String vcode =sendSms("13522737092");
-		
+//		String vcode =sendSms("13522737092");
+	    String content = new String("尊敬的用户您好"); 
+        SmsSend.sendSms("18618382548", content);
 	}
 	
 	

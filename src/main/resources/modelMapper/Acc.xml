@@ -8,7 +8,7 @@
 	       select avb_amnt from tb_acc where user_code = #{userCode} and sub_acc_no = #{subAccno}
 	</select>
 	
-	<insert id="add" parameterType="com.qkl.tfcc.api.po.acc.Acc" >
+	<insert id="addAcc" parameterType="com.qkl.tfcc.api.po.acc.Acc" >
 	 insert into tb_acc (
 	 user_code,
 	 sub_acc_no,

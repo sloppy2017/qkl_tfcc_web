@@ -36,7 +36,7 @@
 	       <if test="subAccno != null and subAccno != ''">
                 and    sub_accno = #{subAccno} 
            </if>
-                and    rela_user_code = #{rela_user_code}
+                and    rela_usercode = #{rela_user_code}
 	       <if test="bounsSource1 != null and bounsSource1 != ''">
                 and    bouns_source1 = #{bounsSource1}
 	       </if>
@@ -53,9 +53,9 @@
         
      </select>
      <select id="findAccDetail" parameterType="com.qkl.tfcc.api.po.acc.AccDetail" resultType="com.qkl.tfcc.api.po.acc.AccDetail">
-        select * from tc_acc_detail 
+        select * from tb_acc_detail 
         where user_code = #{userCode} 
-            and rela_user_code = #{relaUsercode}
+            and rela_usercode = #{relaUsercode}
         <if test="subAccno != null and subAccno != ''">
             and sub_accno = #{subAccno}
         </if>

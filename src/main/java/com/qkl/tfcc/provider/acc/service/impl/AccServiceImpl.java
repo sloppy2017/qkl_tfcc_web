@@ -134,11 +134,11 @@ public class AccServiceImpl implements AccService {
         Map<String,String> submap = new HashMap<String,String>();
         List<Map<String,String>> successList = new ArrayList<Map<String,String>>();//存储发放成功的电话号
         List<String> failList = new ArrayList<String>();//存储发放失败的电话号
-        for(int i=1;i<jsonArray.size();i++){
+        for(int i = 0;i<jsonArray.size();i++){
             JSONObject obj = (JSONObject)jsonArray.get(i);
             String phone = obj.getString("phone").trim();
-            String tfccNum = obj.getString("tcffNum").trim();
-            if(!Validator.isMobile(phone)&&!Validator.isNumber(tfccNum)){
+            String tfccNum = obj.getString("tfccNum").trim();
+            if(Validator.isMobile(phone)&&Validator.isNumber(tfccNum)){
                 User user  = userDao.findUserByPhone(phone);
                 if(user != null&&"1".equals(user.getStatus())){
                     //账户支出
@@ -155,7 +155,7 @@ public class AccServiceImpl implements AccService {
                     if(tacc == null){
                         accIn.setAvbAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
                         accIn.setTotalAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
-                        accDao.insertSelective(accIn);
+                        accDao.addAcc(accIn);
                     }else{
                         accIn.setAvbAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
                         accDao.updateIn(tacc);

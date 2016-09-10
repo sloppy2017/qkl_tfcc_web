@@ -63,11 +63,13 @@ public class AccController extends BaseAction{
 			 }
 			 JSONArray jsonArray = JSONArray.parseArray(pd.get("params").toString());
 			 User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			 Map<String,List> mapPhone = accService.rewardTfcc(jsonArray,user.getUserCode(),Constant.VERSION_NO);
+			 Map<String,List> mapPhone = accService.rewardTfcc(jsonArray,"10000000001",Constant.VERSION_NO);
 			 List successList = mapPhone.get("successPhone");
-			 for(int i=0;i<successList.size();i++){
-			     SmsSend.sendSms(((Map)successList.get(i)).get("phone").toString(), "尊敬的用户，恭喜您获得"+((Map)successList.get(i)).get("tfccNum")+"TFCC奖励。");
-			 }
+			 /*for(int i=0;i<successList.size();i++){
+			     String phone = ((Map)successList.get(i)).get("phone").toString();
+			     String tfccNum = ((Map)successList.get(i)).get("tfccNum").toString();
+			     SmsSend.sendSms(phone, "尊敬的【"+phone+"】会员您好，恭喜您获得"+tfccNum+"TFCC奖励。");
+			 }*/
 			 ar.setSuccess(true);
 			 ar.setData(mapPhone);
              ar.setMessage("发放成功");

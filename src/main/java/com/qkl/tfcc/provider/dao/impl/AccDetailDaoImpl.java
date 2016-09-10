@@ -29,7 +29,7 @@ public class AccDetailDaoImpl extends DaoSupport<AccDetail> implements AccDetail
 	
 	protected static final Log logger = LogFactory.getLog(SmsSendDaoImpl.class);
 	
-	private String namespace = "Accdetail";
+	private String namespace = "AccDetail";
 
 	@Override
 	public void addAccDetail(AccDetail accDetail) {
