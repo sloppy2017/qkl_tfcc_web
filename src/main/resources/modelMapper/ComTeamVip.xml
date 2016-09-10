@@ -22,39 +22,39 @@
   
   
 	<!-- 查询各类会员的数量 -->
-	<select id="fingcount" parameterType="java.lang.String" resultType="ComTeamVip">
+	<select id="findcount" parameterType="java.lang.String" resultType="ComTeamVip">
 		select 
         sum(tt)  rNum,
         sum(lva) aNum,
         sum(lvb) bNum,
-        sum(lvc) cNum,
+        sum(lvc) cNum
         from 
         (select 
         1 as tt,
         case when rela_level='A' then 1 else 0 end as lva,
         case when rela_level='B' then 1 else 0 end as lvb,
-        case when rela_level='C' then 1 else 0 end as lvc,
+        case when rela_level='C' then 1 else 0 end as lvc
          from tb_user_friendship 
         where user_code =#{userCode}) a 
 	</select>
-	<!-- 查询各类会员的信息列表 --><!-- 按照会员账号和推荐人进行查询条件拼接有问题 -->
+	<!-- 查询各类会员的信息列表按照会员账号和推荐人进行查询条件拼接有问题 -->
 	<select id="findViplistPage" parameterType="page"  resultType="pd" >
 	
-	    select rela_level,reg_time,u.phone,d.ref_phone 
+	    select rela_level,reg_time,u.phone,d.real_name  
         from tb_user u,tb_user_friendship f ,tb_user_detail d 
-        where    u.user_code=f.user_code and d.user_code=u.user_code and u.user_code=#{userCode} 
+        where    u.user_code=f.user_code and d.user_code=u.user_code and u.user_code=#{pd.userCode} 
         
-            <if test ="relaLevel != null and relaLevel !=''">           
-                and rela_level in( #{relaLevel})
-            </if>  
-            
+            <if test ="pd.relalevel != null and pd.relalevel !=''">           
+                and rela_level in(#{pd.relalevel})
+            </if>   
+           <!--  
 	        <if test ="querycontdiction1 != null and querycontdiction1 !='' and querycontdiction2 !=null and querycontdiction2 !='' and querycontdiction1='1' ">
           
                 and (u.user_name like '%${query}%' )
             </if>
             <if test ="querycontdiction1 != null and querycontdiction1 !='' and querycontdiction2 !=null and querycontdiction2 !='' and querycontdiction1='2' ">
              
-            </if>
+            </if> -->
         
             
 	</select>

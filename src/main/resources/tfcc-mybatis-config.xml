@@ -65,6 +65,8 @@
 		<mapper resource="modelMapper/Acc.xml"/>
 		<mapper resource="modelMapper/ComTeamVip.xml"/>
 		<mapper resource="modelMapper/ComAccMy.xml"/>
+		<mapper resource="modelMapper/LPmemberTeam.xml"/>
+		<mapper resource="modelMapper/LPacc.xml"/>
 		<mapper resource="modelMapper/Bankacc.xml"/>
 		<mapper resource="modelMapper/TradeDetail.xml"/>
 		<!-- mapper resource="modelMapper/SourceBean.xml"/>

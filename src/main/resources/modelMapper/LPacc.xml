@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AccDetail">
+
+    <!-- 查询LP会员我的TFCC余额 -->
+    <select id="findLPBalance" parameterType="java.lang.String" resultType="long" >
+		select avb_amnt from tb_acc where user_code=#{Balance}
+	</select> 
+</mapper>     

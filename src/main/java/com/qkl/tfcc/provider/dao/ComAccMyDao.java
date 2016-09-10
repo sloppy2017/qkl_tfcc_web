@@ -52,5 +52,5 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * 查询推荐各级别会员所得奖励列表
 	 * @return
 	 */
-	public List<PageData> findAll(Page page);
+	public List<PageData> findAllPage(Page page);
 }
