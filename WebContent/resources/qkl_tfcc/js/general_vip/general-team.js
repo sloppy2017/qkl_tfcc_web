@@ -51,9 +51,7 @@ function reload_table(currentPage,showCount) {
             showCount: showCount
         },*/
         success: function (data) {
-            var message = data.message;
             var tviplist = data.data.tviplist;
-            console.log("tviplist.length " + tviplist.length);
             var tablecols = "<tr> \n"
                 + " <th>会员级别</th> \n"
                 + "<th>注册时间</th> \n"
@@ -64,16 +62,13 @@ function reload_table(currentPage,showCount) {
             rsStr= tablecols;
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
-                console.log("usList(" + i + ") name is " + tviplist[i].name);
                 rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].reg_time + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
                 rsStr = rsStr + "</tr>";
             }
-            console.log("rsStr " + rsStr);
-            var x =$(".result-tab").html( rsStr);
-            console.log(x);
+            $(".result-tab").html( rsStr);
             $(".pages1").html(data.data.page.pageStr);
 
         }, 
