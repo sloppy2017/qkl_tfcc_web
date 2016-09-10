@@ -1,8 +1,7 @@
 
 var str='';
 var flag =true;
-
-function query(){
+$(".type-btn a").click(function(){
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
     if(myselect==null||myselect=="null"){
@@ -37,19 +36,19 @@ function query(){
     $('.page1 ul li').click(function(){
         $(this).addClass('bg-color').siblings().removeClass('bg-color');
     });
-}
+
 function reload_table(currentPage,showCount) {
     var rsStr = "";
     alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
     $.ajax({
         type: 'post',
-        url: '/service/team/findVipPage?str='+str+"&currentPage="+currentPage+"&showCount="+showCount,
+        url: '/service/team/findVipPage',
         dataType: 'json',
-        /*data: {
+        data: {
             str:str,
             currentPage: currentPage,
             showCount: showCount
-        },*/
+        },
         success: function (data) {
             var tviplist = data.data.tviplist;
             var tablecols = "<tr> \n"
@@ -77,9 +76,9 @@ function reload_table(currentPage,showCount) {
         }
     });
 }
+});
+	
 
-	
-	
 
 
 

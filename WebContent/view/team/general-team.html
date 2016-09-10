@@ -155,26 +155,6 @@ $.ajax({
     }
 })
 
-$(".type-btn a").click(function(){
-	
-	$.ajax({
-	    type:'post',
-	    url:'/service/team/findVipPage',
-	    dataType:'json',
-	    success:function(data){
-	        var message = data.message;
-	        alert(message);
-	        $(".member1").html(data.data.rNum);
-	        $(".member2").html(data.data.aNum);
-	        $(".member3").html(data.data.bNum);
-	        $(".member4").html(data.data.cNum)
-	    }
-	})
-
-	
-	
-});
-
 </script>
 </body>
 </html>
