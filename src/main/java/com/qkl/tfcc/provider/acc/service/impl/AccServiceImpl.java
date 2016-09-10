@@ -32,52 +32,52 @@ import com.qkl.util.help.pager.PageData;
 @Service
 public class AccServiceImpl implements AccService {
 
-	private Logger loger = LoggerFactory.getLogger(AccServiceImpl.class);
+    private Logger loger = LoggerFactory.getLogger(AccServiceImpl.class);
 
-	@Autowired
-	private AccDetailDao accDetailDao;
-	@Autowired
-	private AccDao accDao;
-	@Autowired
-	private UserDao userDao;
-	
-	@Override
-	public boolean addAccDetail(AccDetail accDetail, String versionNo) {
-		try{			
-			accDetailDao.addAccDetail(accDetail);
-			return true;
-		}catch(Exception e){
-			loger.error("addAccDetail fail,reason is "+e.getMessage());
-			return false;
-		}
-	}
+    @Autowired
+    private AccDetailDao accDetailDao;
+    @Autowired
+    private AccDao accDao;
+    @Autowired
+    private UserDao userDao;
+    
+    @Override
+    public boolean addAccDetail(AccDetail accDetail, String versionNo) {
+        try{            
+            accDetailDao.addAccDetail(accDetail);
+            return true;
+        }catch(Exception e){
+            loger.error("addAccDetail fail,reason is "+e.getMessage());
+            return false;
+        }
+    }
 
-	@Override
-	public boolean addAcc(Acc acc, String versionNo) {
-		try{			
-			accDao.addAcc(acc);
-			return true;
-		}catch(Exception e){
-			loger.error("addAcc fail,reason is "+e.getMessage());
-			return false;
-		}
-	}
+    @Override
+    public boolean addAcc(Acc acc, String versionNo) {
+        try{            
+            accDao.addAcc(acc);
+            return true;
+        }catch(Exception e){
+            loger.error("addAcc fail,reason is "+e.getMessage());
+            return false;
+        }
+    }
 
-	@Override
-	public boolean modifyAcc(Acc acc, String versionNo) {
-		try{			
-			accDao.addAcc(acc);
-			return true;
-		}catch(Exception e){
-			loger.error("modifyAcc fail,reason is "+e.getMessage());
-			return false;
-		}
-	}
+    @Override
+    public boolean modifyAcc(Acc acc, String versionNo) {
+        try{            
+            accDao.addAcc(acc);
+            return true;
+        }catch(Exception e){
+            loger.error("modifyAcc fail,reason is "+e.getMessage());
+            return false;
+        }
+    }
 
-	@Override
-	public Acc findAcc(Acc acc, String versionNo) {
-		return accDao.findAcc(acc);
-	}
+    @Override
+    public Acc findAcc(Acc acc, String versionNo) {
+        return accDao.findAcc(acc);
+    }
 
     @Override
     public boolean modifyAccDetail(AccDetail accDetail, String versionNo) {
@@ -129,11 +129,10 @@ public class AccServiceImpl implements AccService {
 
     @Override
     @Transactional(propagation =Propagation.REQUIRED)
-    public Map<String,List> rewardTfcc(JSONArray jsonArray,String userCode,String versionNo) {
-        Map<String,List> map = new HashMap<String,List>();
-        Map<String,String> submap = new HashMap<String,String>();
-        List<Map<String,String>> successList = new ArrayList<Map<String,String>>();//存储发放成功的电话号
-        List<String> failList = new ArrayList<String>();//存储发放失败的电话号
+    public Map<String,String> rewardTfcc(JSONArray jsonArray,String userCode,String versionNo) {
+        Map<String,String> map = new HashMap<String,String>();
+        StringBuffer successStr = new StringBuffer("[");
+        StringBuffer failStr = new StringBuffer("发放失败的手机号：");
         for(int i = 0;i<jsonArray.size();i++){
             JSONObject obj = (JSONObject)jsonArray.get(i);
             String phone = obj.getString("phone").trim();
@@ -175,18 +174,26 @@ public class AccServiceImpl implements AccService {
                         accDetail.setAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
                         accDetailDao.updateAccDetail(accDetail);
                     }
-                    submap.put("phone", phone);
-                    submap.put("tfccNum", tfccNum);
-                    successList.add(submap);
+                    successStr.append("{phone:'"+phone+"',tfccNum:'"+tfccNum+"'},");
                 }else{
-                    failList.add(phone);
+                    failStr.append(phone+",");
                 }
             }else{
-                failList.add(phone);
+                failStr.append(phone+",");
             }
         }
-        map.put("successPhone", successList);
-        map.put("failPhone", failList);
+        if(successStr.toString().equals("[")){
+            successStr = null;
+        }else{
+            successStr = new StringBuffer(successStr.substring(0, successStr.length()-1)+"]");
+            map.put("successStr", successStr.toString());
+        }
+        if(failStr.toString().equals("发放失败的手机号：")){
+            failStr.append("无");  
+        }else{
+            failStr = new StringBuffer(failStr.substring(0, failStr.length()-1));
+        }
+        map.put("failStr", failStr.toString());
         return map;
     }
 
