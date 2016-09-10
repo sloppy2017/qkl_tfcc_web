@@ -1,7 +1,8 @@
 
 var str='';
 var flag =true;
-$(".type-btn a").click(function () {
+
+function query(){
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
     if(myselect==null||myselect=="null"){
@@ -19,13 +20,13 @@ $(".type-btn a").click(function () {
     }
     else{
         if(document.getElementById("lva").checked==true){
-            str = str+'A,';
+            str = str+"'A',";
         }
         if(document.getElementById("lvb").checked==true){
-            str = str+'B,';
+            str = str+"'B',";
         }
         if(document.getElementById("lvc").checked==true){
-            str = str+'C,';
+            str = str+"'C',";
         }
     }
     alert("str is "+str);
@@ -35,77 +36,55 @@ $(".type-btn a").click(function () {
     
     $('.page1 ul li').click(function(){
         $(this).addClass('bg-color').siblings().removeClass('bg-color');
-    })
-})
-
+    });
+}
 function reload_table(currentPage,showCount) {
-    console.log(str)
     var rsStr = "";
+    alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
     $.ajax({
         type: 'post',
-//		url: '../../..rvice/user/login/',
-        url: '../../../service/team/findVipPage/',
+        url: '/service/team/findVipPage?str='+str+"&currentPage="+currentPage+"&showCount="+showCount,
         dataType: 'json',
-        data: {
+        /*data: {
             str:str,
             currentPage: currentPage,
             showCount: showCount
-        },
+        },*/
         success: function (data) {
-            /*  alert('请求成功');/*  */
             var message = data.message;
-            /*    console.log("success is " + data.success);
-             console.log("data is " + data.map);
-             console.log("data.userList is " + data.data.userList); */
-            var usList = data.data.userList;
-            console.log("usList.length " + usList.length);
-            /*   console.log("data.data.page.pageStr " + data.data.page.pageStr); */
+            var tviplist = data.data.tviplist;
+            console.log("tviplist.length " + tviplist.length);
             var tablecols = "<tr> \n"
                 + " <th>会员级别</th> \n"
                 + "<th>注册时间</th> \n"
                 + "<th>会员账号</th> \n"
-                +"<th>推荐人</th>\n"
-                +"<th>用户名 </th>\n"
-                +"<th>购买量(股)</th>\n"
+                +"<th>会员姓名 </th>\n"
+//                +"<th>购买量(股)</th>\n"
                 + "</tr> \n";
             rsStr= tablecols;
-            for (var i = 0; i < usList.length; i++) {
+            for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
-                console.log("usList(" + i + ") name is " + usList[i].name);
-                rsStr = rsStr + "<th>" + usList[i].name + "</th>";
-                rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
-                rsStr = rsStr + "<th>" + usList[i].name + "</th>";
-                rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
-                rsStr = rsStr + "<th>" + usList[i].name + "</th>";
-                rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                console.log("usList(" + i + ") name is " + tviplist[i].name);
+                rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].reg_time + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
                 rsStr = rsStr + "</tr>";
             }
-
             console.log("rsStr " + rsStr);
-
-
-//			 $(".result-tab").append(rsStr);
-            var x =$(".result-tab").html( rsStr)
-
-            console.log(x)
-
-//			 $(".pages1").append(data.data.page.pageStr);
+            var x =$(".result-tab").html( rsStr);
+            console.log(x);
             $(".pages1").html(data.data.page.pageStr);
 
-//			$('.phone').val(data.data.phone);
-            /*  alert("message is " + message); */
-
-
-//			 if(data.success){
-//				 window.location.href ="../index.html";
-//			 }
-        }, error: function (data) {
+        }, 
+        error: function (data) {
 
         }
-    })
+    });
 }
 
-
+	
+	
 
 
 

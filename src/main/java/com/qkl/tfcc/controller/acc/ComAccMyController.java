@@ -71,12 +71,8 @@ public class ComAccMyController extends BaseAction {
 		AjaxResponse ar = new AjaxResponse();
 		List<PageData> findAll=null;
 		try {
-			 pd=this.getPageData();
-			 String startTime = request.getParameter("startTime");
-			 String endTime = request.getParameter("endtTime");
-			 pd.put("startTime", startTime);
-			 pd.put("endTime", endTime);
-			 page.setPd(pd);
+			
+			
 			findAll = cams.findAll(page);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
