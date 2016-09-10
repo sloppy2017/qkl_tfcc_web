@@ -11,6 +11,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+import com.qkl.util.help.HttpTool;
 import com.qkl.util.help.MD5Util;
 
 public class SmsSend {
@@ -22,7 +23,7 @@ public class SmsSend {
 	
 	private static String password="654321";
 	
-	
+	//发送验证码
 	public static  String sendSms(String phone) {
 		
 		HttpClient client = new HttpClient(); 
@@ -92,12 +93,27 @@ public class SmsSend {
 		}	
 		
 	}
-	
-	
+	//发送短信
+	public static boolean sendSms(String phone,String content) {
+	    NameValuePair[] data = PackMobileParas(phone, content);// 封装手机参数
+        return HttpTool.sendData(Url,data);
+    }
+	// 封装手机参数
+	public static NameValuePair[] PackMobileParas(String phone, String content){
+	    NameValuePair[] data = {//提交短信
+                new NameValuePair("account", account), 
+//              new NameValuePair("password", "密码"), //密码可以使用明文密码或使用32位MD5加密
+                new NameValuePair("password",  MD5Util.getMd5Code(password)),
+                new NameValuePair("mobile", phone), 
+                new NameValuePair("content", content),
+        };
+	    return data;
+	}
 	public static void main(String [] args) {
 		
-		String vcode =sendSms("13522737092");
-		
+//		String vcode =sendSms("13522737092");
+	    String content = new String("尊敬的用户您好"); 
+        SmsSend.sendSms("18618382548", content);
 	}
 	
 	

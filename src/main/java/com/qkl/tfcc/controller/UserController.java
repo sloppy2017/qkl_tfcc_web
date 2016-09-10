@@ -295,7 +295,7 @@ public class UserController extends BaseAction{
 			if(tMaxno==null){
 				logger.info("tSysMaxnum findMaxNo  is null!");
 				ar.setSuccess(false);
-				ar.setMessage("系统麻烦,请稍后重试！");
+				ar.setMessage("系统繁忙,请稍后重试！");
 				return ar;
 			}
 			//生成用户编号

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="my">
+<html lang="en"class="my" >
 <head>
     <meta charset="UTF-8">
-    <title>我的团队</title>
-    <link rel="stylesheet" href="../css/commen/commen.css">
+    <title>我的账户</title>
+    <link rel="stylesheet" href="../tfcc/WEBcss/commen/commen.css">
+    <!--<link rel="stylesheet" href="css/ssi-uploader.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/style2.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/biaoDan.css">-->
 </head>
 <body>
 <div class="overall ">
     <!--头部-->
     <div class="header">
         <div class="header-logo">
-            <img src="../image/logo.png" alt="">
+            <img src="/resources/qkl_tfcc/imgs/logo.png" alt="">
         </div>
         <!--时间栏-->
         <div id="nowTime" class="data">
@@ -36,7 +41,7 @@
 
             </dl>
             <dl>
-                <dt><img src="../image/erweima.png" alt=""></dt>
+                <dt><img src="/resources/qkl_tfcc/imgs/erweima.png" alt=""></dt>
                 <dd class="qr">我的二维码</dd>
 
             </dl>
@@ -46,28 +51,35 @@
 <!--选项部分-->
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
-        <li><a  href="../html/lpstock.html">我的股权</a></li>
-        <li>
-            <a class="security-t" href="#">我的团队</a>
-        </li>
-        <li><a href="../html/lpaccount.html">我的账户</a></li>
-        <li ><a href="../html/lprersonal.html">个人中心</a></li>
-        <li  ><a href="../html/lpsecuritycenter.html">安全中心</a></li>
+<!--         <li><a  href="../html/lpstock.html">我的股权</a></li> -->
+        <li><a  href="../lp_vip/lp_team.html">我的团队</a></li>
+        <li><a class="active" href="#">我的账户</a></li>
+        <li ><a  href="../lp_vip/lp_myself.html">个人中心</a></li>
+        <li  ><a href="../lp_vip/lp_safety.html">安全中心</a></li>
         <li><a href="http://www.r8exchange.com">R8交易所</a></li>
     </ul>
 </div>
-<div class="tuandui" style="position: absolute">
-    <p>您当前的位置：<b>我的团队</b></p>
-    <div class="jilei">
-        <div class="jilei_lp">
-            <span>累计LP会员</span><b>107</b>
+<div class="tuandui">
+    <p>您当前的位置：<b>我的账户</b></p>
+    <div class="yu_e">
+        <div class="zhuan_z">
+            <div class="my_yu_e">我的余额</div>
+            <div class="TF_JF">
+                <span>TFCC </span><b>800,000.00</b>
+                <span>JFCC </span><b>100,000.00</b>
+                <a href="lpaccount/lptransfer.html">转账</a>
+            </div>
+
         </div>
-        <div class="jilei_zh">
-            <span >会员账号</span>
-            <input style="margin-left: 30px" type="text">
-            <button type="button"> 查询</button>
+        <div class="jiang_l">
+            <div class="my_jiang_l">我的奖励</div>
+            <ul class="tui_j">
+                <li class="tui_j_r"><span>推荐LP会员奖励</span><br><b>30,000.00</b></li>
+                <li class="tui_j_r"><span>推荐LP会员购买股权奖励</span><br><b>30,000.00</b></li>
+                <li><span>我购买股权的奖励</span><br><b>30,000.00</b></li>
+            </ul>
         </div>
-        <div >
+        <div  style="clear: both;border:1px solid #000000;margin-top: 35px">
             注册时间
         </div>
     </div>

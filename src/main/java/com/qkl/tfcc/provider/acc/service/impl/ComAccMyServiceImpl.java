@@ -17,7 +17,7 @@ import com.qkl.util.help.pager.PageData;
 @Service
 public class ComAccMyServiceImpl implements ComAccMyService {
 
-	
+	private Logger loger = LoggerFactory.getLogger(ComAccMyServiceImpl.class);
 	
 	@Autowired
 	private ComAccMyDao comAccMyDao;
@@ -25,6 +25,7 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	@Override
 	public ComAccMy findTB(String userCode) {
 		// TODO Auto-generated method stub
+		
 		return comAccMyDao.findTB(userCode);
 	}
 
@@ -57,7 +58,7 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	@Override
 	public List<PageData> findAll(Page page) {
 		// TODO Auto-generated method stub
-		return null;
+		return comAccMyDao.findAllPage(page);
 	}
 
 }

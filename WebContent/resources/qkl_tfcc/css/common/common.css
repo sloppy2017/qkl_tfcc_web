@@ -145,7 +145,16 @@
     text-align: center;
 }
 .errorTip{
-	background-color: pink;
-	color:red;
+    background-color: pink;
+    color:red;
+    font-size: 14px;
+}
+.error{
+    color:red;
+    font-size: 14px;
+}
+.error18{
+    color:red;
+    font-size: 18px;
 }
 

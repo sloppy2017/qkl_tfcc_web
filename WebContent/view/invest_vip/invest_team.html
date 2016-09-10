@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/reset.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/invest/in-team.css">
+    <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="mark2">
+    <div class="mark2-box">
+        <div class="success-icon"></div>
+        <p>个人信息修改成功</p>
+        <div class="achieve"><p>完成</p></div>
+    </div>
+</div>
+<div class="header fix">
+    <div class="logo fl">
+        <img src="/resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
+    </div>
+    <div class="nav-right fl">
+        <div class="top">
+            <span class="yearTime">2016年8月24日</span>
+            <span class="dateTime">09:18:06 </span>
+            <span class="weekTime"> 星期三 </span>
+            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
+            <span class="exit"><a href="">【退出】</a></span>
+        </div>
+        <div class="nav fix">
+            <ul class="fl">
+                <li ><a class="active" href="../invest/in-team.html">我的团队</a></li>
+                <li><a href="../invest/in-account.html">我的账户</a></li>
+                <li ><a  class="color-fff" href="../invest/in-myhelf.html">个人中心</a></li>
+                <li><a href="../invest/in-safety.html">安全中心</a></li>
+                <li><a href="http://www.r8exchange.com">R8交易所</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="main fl">
+        <div class="mains">
+            <div class="main-top"><span>您当前的位置：</span><span class="c28">我的团队</span></div>
+            <div class="numb">累计LP会员人数 &nbsp; &nbsp;<span class="ce9">107</span></div>
+            <div class="query fix">
+                <ul>
+                    <li>查询条件</li>
+                    <li >
+                      <!--   <select name="" id="">
+                            <option value="" id="lv">会员账号</option>
+                            <option value="" id="lp-lv">lp账号</option>
+                        </select> -->
+                    </li>
+                    <li class="txt"><input type="text" placeholder="会员账号" class="lp-lv"></li>
+                    <li  class="type-btn1"> <a href="">查询</a></li>
+                </ul>
+            </div>
+
+            <!--table pageing start-->
+            <div class="table-list">
+                <table class="result-tab" width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div class="pages1">
+                </div>
+            </div>
+            <!--table paging end-->
+            <!--查询列表结束====================================-->
+
+        </div>
+    </div>
+    <div class="side-bar fl">
+        <div class="fl">
+            <div class="myImg">
+                <div>
+                    <img src="" alt="">
+                </div>
+                <p>普通会员</p>
+            </div>
+
+            <div class="qr-code">
+                <div>
+                    <img src="/resources/qkl_tfcc/imgs/ma.jpg" alt="">
+                </div>
+                <p>我的二维码</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
+<script>
+    $(".type-btn1 a").click(function () {
+        var showcnt =10; //每页页数初始值
+        var  myselect=document.getElementById("showcnt");
+        if(myselect==null||myselect=="null"){
+        }else{
+            showcnt=myselect.options[myselect.selectedIndex].value;
+        }
+        var lpVal =$('.lp-lv').val();
+        if((/^1[3|4|5|7|8]\d{9}$/.test(lpVal))){
+            reload_table(1,showcnt);
+        }
+    })
+
+    function reload_table(currentPage,showCount) {
+        alert(22222)
+       var lpVal =$('.lp-lv').val();
+       alert(lpVal)
+          var rsStr = "";
+          $.ajax({
+              type: 'post',
+  //		url: 'rvice/user/login/',
+              url: '/service/test/queryuser/',
+              dataType: 'json',
+              data: {
+            	  lpVal:lpVal,
+                  currentPage: currentPage,
+                  showCount: showCount
+              },
+              success: function (data) {
+                  /*  alert('请求成功');/*  */
+                  var message = data.message;
+                  /*    console.log("success is " + data.success);
+                   console.log("data is " + data.map);
+                   console.log("data.userList is " + data.data.userList); */
+                  var usList = data.data.userList;
+                  console.log("usList.length " + usList.length);
+                  /*   console.log("data.data.page.pageStr " + data.data.page.pageStr); */
+                  var tablecols = "<tr> \n"
+                          + " <th>会员级别</th> \n"
+                          + "<th>注册时间</th> \n"
+                          + "<th>会员账号</th> \n"
+                          +"<th>推荐人</th>\n"
+                          +"<th>用户名 </th>\n"
+                          +"<th>购买量(股)</th>\n"
+                          + "</tr> \n";
+                  rsStr= tablecols;
+                  for (var i = 0; i < usList.length; i++) {
+                      rsStr = rsStr + "<tr class='ss'>";
+                      console.log("usList(" + i + ") name is " + usList[i].name);
+                      rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                      rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                      rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                      rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                      rsStr = rsStr + "<th>" + usList[i].name + "</th>";
+                      rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>";
+                      rsStr = rsStr + "</tr>";
+                  }
+                  console.log("rsStr " + rsStr);
+  //			 $(".result-tab").append(rsStr);
+                  var x =$(".result-tab").html( rsStr)
+                  console.log(x)
+  //			 $(".pages1").append(data.data.page.pageStr);
+                  $(".pages1").html(data.data.page.pageStr);
+  //			$('.phone').val(data.data.phone);
+                  /*  alert("message is " + message); */
+  //			 if(data.success){
+  //				 window.location.href ="../index.html";
+  //			 }
+              }, error: function (data) {
+
+              }
+          })
+
+    }
+</script>
+</body>
+</html>
