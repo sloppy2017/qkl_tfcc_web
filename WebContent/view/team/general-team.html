@@ -55,10 +55,10 @@
                 
                 
                     <div class="top-tab">
-                        <div class="fl ">你当前的位置：</div><span>我的团队</span>><span class="c28">我推荐的会员</span>
+                        <div class="fl ">你当前的位置：</div><span>我的团队</span><span class="c28">我推荐的会员</span>
                     </div>
                     <div class="top-tab">
-                        <div class="fl ">你当前的位置：</div><span>我的团队</span>><span class="c28">我推荐的网点</span>
+                        <div class="fl ">你当前的位置：</div><span>我的团队</span><span class="c28">我推荐的网点</span>
                     </div>
                 </div>
                 <div class="main-middle fix">
@@ -91,7 +91,7 @@
                                     <li></li>
                                     <li></li>
                                     <li></li>
-                                    <li class="type-btn"><a href="javascript:query()" >查询</a></li>
+                                    <li class="type-btn"><a href="#" >查询</a></li>
                                 </ul>
                             </div>
 
@@ -154,6 +154,26 @@ $.ajax({
         $(".member4").html(data.data.cNum)
     }
 })
+
+$(".type-btn a").click(function(){
+	
+	$.ajax({
+	    type:'post',
+	    url:'/service/team/findVipPage',
+	    dataType:'json',
+	    success:function(data){
+	        var message = data.message;
+	        alert(message);
+	        $(".member1").html(data.data.rNum);
+	        $(".member2").html(data.data.aNum);
+	        $(".member3").html(data.data.bNum);
+	        $(".member4").html(data.data.cNum)
+	    }
+	})
+
+	
+	
+});
 
 </script>
 </body>
