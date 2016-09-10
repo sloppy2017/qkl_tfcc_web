@@ -48,10 +48,10 @@
         </div>
         <div class="nav fix">
             <ul class="fl">
-                <li ><a  href="../invest/in-team.html">我的团队</a></li>
-                <li><a class="active" href="../invest/in-account.html">我的账户</a></li>
-                <li ><a  href="../invest/in-myhelf.html">个人中心</a></li>
-                <li><a href="../invest/in-safety.html">安全中心</a></li>
+                <li ><a href="../invest_vip/invest_team.html">我的团队</a></li>
+                <li><a class="active" href="../invest_vip/invest_account.html">我的账户</a></li>
+                <li ><a  href="../invest_vip/invest_myself.html">个人中心</a></li>
+                <li><a  href="../invest_vip/invest_safety.html">安全中心</a></li>
                 <li><a href="http://www.r8exchange.com">R8交易所</a></li>
             </ul>
         </div>
@@ -84,9 +84,10 @@
                             <li><span>8</span><label >手机号</label><input type="text" name="phone" maxlength="11"  placeholder="请输入发送手机号"><label >发放额度</label><input type="text" name="money" placeholder="请输入发送额度"></li>
                             <li><span>9</span><label >手机号</label><input type="text" name="phone" maxlength="11"  placeholder="请输入发送手机号"><label >发放额度</label><input type="text" name="money" placeholder="请输入发送额度"></li>
                             <li><span>10</span><label >手机号</label><input type="text" name="phone" maxlength="11"  placeholder="请输入发送手机号"><label >发放额度</label><input type="text" name="money" placeholder="请输入发送额度"></li>
-                            <li class="subBtn"><a href="" onclick="sub_money()">提交</a></li>
+                            <li class="subBtn"><a href="javascript:sub_money()">提交</a></li>
                         </ul>
                     </form>
+                    <div id="showTip"></div>
                 </div>
 
             </div>
@@ -168,8 +169,10 @@
 	        }
 	    });
 	  jsonStr = jsonStr.substring(0, jsonStr.length-1)+"]";
-	  alert(jsonStr)
-// 	  return ;
+	  if(jsonStr == ']'){
+		  $("#showTip").html("<p style='margin-left:100px;' class='error18'>请填写对应的手机号和发放额度！</p>");
+		  return;
+	  }
 	    $.ajax({
 	        type:'post',
 	        url:'/service/acc/rewardTfcc?params='+jsonStr,
@@ -177,14 +180,16 @@
 	        dataType:'json',
 	        success:function(data){
 	        	 if(data.success){
-	        		 alert(123)
+	        		 $("#showTip").html("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p><p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
 	        	 }
 	        },
 	        errror:function(data){
+	        	alert("系统异常！")
 	        }
 	    });
 	}
 //手机验证
+  
   function valid_phone($this){
 	  var phone = $this.val().trim();
       var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
