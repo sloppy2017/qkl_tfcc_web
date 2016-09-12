@@ -149,6 +149,127 @@ form .myagree span{
     font-size: 12px;
     text-align: center;
 }
+.mark1,.mark2{
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    background: rgba(5, 5, 5, 0.47);
+    z-index: 9999;
+    display: none;
+
+}
+ .mark1-box{
+     position: absolute;
+     top:50%;
+     left:50%;
+     width:500px;
+     height:256px;
+     margin-left:-250px;
+     margin-top:-128px;
+     background: #fff;
+     box-shadow: 1px 1px 1px;
+     border-radius: 5px;
+ }
+.mark1 .mark1-box h2{
+    text-align: center;
+    margin-top:42px;
+    color:#282828;
+}
+
+.mark1-box .real-name{
+    width:224px;
+    height:44px;
+    background: url("../../imgs/btn1.jpg") no-repeat;
+    background-position:-116px -72px;
+    text-align: center;
+    margin:42px auto 0px;
+    line-height: 44px;
+}
+.mark1-box .real-name1{
+    position: absolute;
+    top:115px;
+    left:138px;
+    width:224px;
+    height:44px;
+    background: url("../../imgs/btn1.jpg") no-repeat;
+    background-position:-116px -134px;
+    text-align: center;
+    line-height: 44px;
+    display: none;
+}
+.mark1-box .real-name a,.mark1-box .real-name1 a,.mark1-box .later-on1 a,.mark1-box .succ a{
+    color:#fff;
+}
+.mark1-box .later-on{
+    width:224px;
+    height:44px;
+    background: url("../../imgs/btn1.jpg") no-repeat;
+    background-position:-116px -192px;
+    text-align: center;
+    margin:20px  auto;
+    line-height: 44px;
+}
+.mark1-box .later-on1{
+    position: absolute;
+    top:157px;
+    left:138px;
+    width:224px;
+    height:44px;
+    background: url("../../imgs/btn1.jpg") no-repeat;
+    background-position:-116px -72px;
+    text-align: center;
+    margin:20px  auto;
+    line-height: 44px;
+    /*display: none;*/
+}
+.mark1-box.later-on{
+    color:#575757;
+}
+.mark1-box .icon{
+    background: url("../../imgs/btn2.jpg") no-repeat;
+    width:84px;
+    height:84px;
+    background-position:-68px -12px;
+    margin:38px auto 10px;
+}
+.mark1-box p{
+    text-align: center;
+    color:#282828;
+    font-size: 18px;
+    margin:0;
+}
+.mark1-box .succ{
+    background: url("../../imgs/btn2.jpg") no-repeat;
+    width:224px;
+    height:44px;
+    background-position:-6px -106px;
+    margin:24px auto 10px;
+    text-align: center;
+    line-height: 44px;
+}
+.success-icon{
+    width:82px;
+    height:82px;
+    background: url("../../imgsve2.jpg");
+    margin:38px auto 16px;
+}
+.achieve{
+    background: url("../../imgs/btn2.jpg") no-repeat;
+    width:224px;
+    height:44px;
+    background-position:-6px -106px;
+    margin:24px auto 10px;
+    text-align: center;
+    line-height: 44px;
+}
+.achieve p{
+    color:#fff;
+    font-size: 14px;
+}
+
+
 
 
 

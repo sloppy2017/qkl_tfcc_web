@@ -10,6 +10,14 @@
 			var index = $tab_li.index(this);
 			$(' .form >form').eq(index).show().siblings().hide();
 			userType = index + 1;
+			$(".form").find("input").each(function(){
+				if(!$(this).hasClass("yzm")){
+					$(this).val('');
+				}
+			});
+			$(".form").find(".error1").each(function(){
+				$(this).html('');
+			});
 		});
 	});
 	$('.mark1-box .real-name').bind('mousedown',function(){
@@ -209,6 +217,58 @@
 	        }
 	    });
 	}
+	
+	/**
+	 * 身份认证
+	 */
+	//姓名
+	$('.form input[name="realName"]').blur(function(){
+	    // 4、2~5个汉字
+	   valid_realName($(this));
+	});
+	function valid_realName($this){
+		 var reg=/^[\u4E00-\u9FA5]{2,5}$/;
+	        if ($this.val() == '') {
+	        	$this.next().html('姓名不能为空');
+				return false;
+	        }if(!reg.test($this.val())){
+	        	$this.next().html('请输入2-5个汉字');
+	            return false;
+	        }else {
+	        	$this.next().empty();
+	            return true;
+	        }
+	}
+	//身份证号的验证
+	$('.form input[name="idno"]').blur(function(){
+		valid_idno($(this));
+	});
+	function valid_idno($this){
+		var reg = /^(\d{6})(18|19|20)?(\d{2})([01]\d)([0123]\d)(\d{3})(\d|X)?$/;
+	    if ($this.val() == '') {
+	    	$this.next().html('身份证号不能为空');
+	        return false;
+	    }if(!reg.test($this.val())){
+	    	$this.next().html('请输入正确的身份证号');
+	        return false;
+	    }else {
+	    	$this.next().empty();
+	        return true;
+	    }
+	}
+	
+	$('.form input[name="cropPerson"]').blur(function(){
+		valid_cropPerson($(this));
+	});
+	function valid_cropPerson($this){
+	    if ($this.val() == '') {
+	    	$this.next().html('公司法人不能为空');
+	        return false;
+	    }else {
+	    	$this.next().empty();
+	        return true;
+	    }
+	}
 	$('.form1 .submit').click(function(){
 		var validPhone = valid_phone($(this).parent().find("input[name='phone']"));
 		var validPassword = valid_password($(this).parent().find("input[name='password']"));
@@ -237,12 +297,18 @@
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
-		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
+		var validIdno = valid_idno($(this).parent().find("input[name='idno']"));
+		var validName = valid_realName($(this).parent().find("input[name='realName']"));
+		
+		
+		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validName)){
 			return;
 		}
+		var url= '/service/user/register?'+$(".form2").serialize()+"&userType="+userType;
+		url = encodeURI(url);
 		$.ajax({
 			type:'POST',
-			url:'/service/user/register?'+$("form:not(.hide)").serialize(),
+			url:url,
 			success:function(data){
 				if(data.success){
 //					$(".mark2").show();
@@ -259,12 +325,18 @@
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
-		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
+		var validIdno = valid_idno($(this).parent().find("input[name='idno']"));
+		var validName = valid_realName($(this).parent().find("input[name='realName']"));
+		var validCropPerson = valid_cropPerson($(this).parent().find("input[name='cropPerson']"));
+		
+		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validName&&validCropPerson)){
 			return;
 		}
+		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
+		url = encodeURI(url);
 		$.ajax({
 			type:'POST',
-			url:'/service/user/register?'+$("form:not(.hide)").serialize(),
+			url:url,
 			success:function(data){
 				if(data.success){
 //					$(".mark3").show();
