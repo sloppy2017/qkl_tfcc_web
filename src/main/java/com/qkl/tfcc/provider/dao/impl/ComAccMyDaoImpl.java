@@ -21,14 +21,14 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 	private String namespace="ComAccMy";
 	
 	@Override
-	public long findTB(String userCode) {
-		long cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
+	public double findTB(String userCode) {
+		double cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
 		return cad;
 	}
 
 	@Override
-	public long findJB(String userCode) {
-		long cad = getSqlSession().selectOne(namespace+"."+"findJB", userCode);
+	public double findJB(String userCode) {
+		double cad = getSqlSession().selectOne(namespace+"."+"findJB", userCode);
 		return cad;
 	}
 
@@ -39,20 +39,20 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 	}
 
 	@Override
-	public long findReward(String userCode) {
-		long cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
+	public double findReward(String userCode) {
+		double cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
 		return cad;
 	}
 
 	@Override
-	public long findWReward(String userCode) {
-		long cad = getSqlSession().selectOne(namespace+"."+"findWReward", userCode);
+	public double findWReward(String userCode) {
+		double cad = getSqlSession().selectOne(namespace+"."+"findWReward", userCode);
 		return cad;
 	}
 
 	@Override
-	public long findTTReward(String userCode) {
-		long cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
+	public double findTTReward(String userCode) {
+		double cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
 		return cad;
 	}
 

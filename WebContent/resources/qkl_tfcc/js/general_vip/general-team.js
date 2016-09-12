@@ -28,7 +28,7 @@ $(".type-btn a").click(function(){
             str = str+"C,";
         }
     }
-    alert("str is "+str);
+   // alert("str is "+str);
     if(flag){
         reload_table(1,showcnt);
     }
@@ -43,7 +43,7 @@ $(".type-btn a").click(function(){
 function reload_table(currentPage,showCount) {
 	
     var rsStr = "";
-    alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
+   // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
     $.ajax({
         type: 'post',
         url: '/service/team/findVipPage?str='+str+'&currentPage='+currentPage+'&showCount='+showCount,

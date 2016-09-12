@@ -25,14 +25,14 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	private ComAccMyDao comAccMyDao;
 
 	@Override
-	public long findTB(String userCode) {
+	public double findTB(String userCode) {
 		// TODO Auto-generated method stub
 		
 		return comAccMyDao.findTB(userCode);
 	}
 
 	@Override
-	public long findJB(String userCode) {
+	public double findJB(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findJB(userCode);
 	}
@@ -40,19 +40,19 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	
 
 	@Override
-	public long findReward(String userCode) {
+	public double findReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findReward(userCode);
 	}
 
 	@Override
-	public long findWReward(String userCode) {
+	public double findWReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findWReward(userCode);
 	}
 
 	@Override
-	public long findTTReward(String userCode) {
+	public double findTTReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findTTReward(userCode);
 	}
@@ -67,9 +67,9 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	public Map<String, Object> findNum(String userCode) {
 		Map<String, Object> map=new HashMap<String, Object>();
 		
-		long findTTReward = comAccMyDao.findTTReward(userCode);
-		long findTB = comAccMyDao.findTB(userCode);
-		long findReward = comAccMyDao.findReward(userCode);
+		double findTTReward = comAccMyDao.findTTReward(userCode);
+		double findTB = comAccMyDao.findTB(userCode);
+		double findReward = comAccMyDao.findReward(userCode);
 		
 		map.put("findTTReward", findTTReward);
 		map.put("findTB", findTB);

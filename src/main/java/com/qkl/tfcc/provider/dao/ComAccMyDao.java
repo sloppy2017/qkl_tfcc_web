@@ -14,7 +14,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	  * @param userCode
 	  * @return
 	  */
-	public long findTB(String userCode);
+	public double findTB(String userCode);
 	
 
 	/**
@@ -22,7 +22,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public long findJB(String userCode);
+	public double findJB(String userCode);
 	
 	
 	/**
@@ -30,7 +30,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public long findReward(String userCode);
+	public double findReward(String userCode);
 	
 
 	/**
@@ -38,7 +38,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public long findWReward(String userCode);
+	public double findWReward(String userCode);
 	
 
 	/**
@@ -46,7 +46,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public long findTTReward(String userCode);
+	public double findTTReward(String userCode);
 
 	/**
 	 * 查询推荐各级别会员所得奖励列表

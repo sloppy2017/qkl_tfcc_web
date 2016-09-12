@@ -51,56 +51,8 @@ public class ComAccMyController extends BaseAction {
 		return ar;	
 	}
 
-	@RequestMapping(value="/findNume",method=RequestMethod.POST)
-	@ResponseBody
-	public AjaxResponse findJB(HttpServletRequest request){
-		AjaxResponse ar = new AjaxResponse();
-			long fingJB=0;
-			try {
-				User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-				fingJB = cams.findJB(user.getUserCode());
-				ar.setSuccess(true);
-				ar.setMessage("查询成功");
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				ar.setSuccess(false);
-				ar.setMessage("查询失败");
-			}
-			ar.setData(fingJB);
-		   return ar;
-	}
 	
-	
-	
-	
-	@RequestMapping(value="/findNumr",method=RequestMethod.POST)
-	@ResponseBody
-	public AjaxResponse find(HttpServletRequest request){
-		AjaxResponse ar = new AjaxResponse();
-		try {
-			pd=this.getPageData();
-			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			long c1 = cams.findReward(user.getUserCode());
-			long c2 = cams.findWReward(user.getUserCode());
-			long c3 = cams.findTTReward(user.getUserCode());
-			pd.put("c1", c1);
-			pd.put("c2", c2);
-			pd.put("c3", c3);
-			ar.setSuccess(true);
-			ar.setMessage("查询成功");
-			 ar.setData(pd);
-		} catch (Exception e) {
-			e.printStackTrace();
-			ar.setSuccess(false);
-			ar.setMessage("查询失败");
-		}
-       
-		return ar;
-	}
-	
-	
-	@RequestMapping(value="/fall",method=RequestMethod.POST)
+	/*@RequestMapping(value="/fall",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse findAll(HttpServletRequest request,Page page){
 		AjaxResponse ar = new AjaxResponse();
@@ -118,5 +70,5 @@ public class ComAccMyController extends BaseAction {
 		}
 		ar.setData(findAll);
 		return ar;
-	}
+	}*/
 }

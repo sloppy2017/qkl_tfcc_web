@@ -3,7 +3,7 @@
 <mapper namespace="ComAccMy">
 
      <!-- 查询TFCC余额 -->
-    <select id="findTB" parameterType="java.lang.String" resultType="java.lang.Long" >
+    <select id="findTB" parameterType="java.lang.String" resultType="java.lang.Double" >
 		        select sum(amnt) tfcc
 		        from tb_acc_def d , tb_acc_detail a 
 		        where d.sub_accno=a.sub_accno 
@@ -13,7 +13,7 @@
 	</select> 
 	
      <!-- 查询JFCC余额 -->
-     <select id="findJB" parameterType="java.lang.String" resultType="java.lang.Long" >
+     <select id="findJB" parameterType="java.lang.String" resultType="java.lang.Double" >
 			select sum(amnt) jfcc
 			from tb_acc_def d , tb_acc_detail a 
 			where d.sub_accno=a.sub_accno 
@@ -23,7 +23,7 @@
 	 </select> 
 	 
 	 <!-- 查询我累计推荐会员奖励的TFCC -->
-	 <select id="findReward"  parameterType="java.lang.String" resultType="java.lang.Long" > 
+	 <select id="findReward"  parameterType="java.lang.String" resultType="java.lang.Double" > 
 		 select sum(amnt) mtfcc
 		 from tb_acc_def f,tb_acc_detail d  
 		 where  f.sub_accno=d.sub_accno 
@@ -34,7 +34,7 @@
 	 </select>
 	
 	 <!-- 查询我累计推荐网点奖励的TFCC -->
-	 <select id="findWReward"  parameterType="java.lang.String" resultType="java.lang.Long" > 
+	 <select id="findWReward"  parameterType="java.lang.String" resultType="java.lang.Double" > 
 	     select sum(amnt) wtfcc
 	     from tb_acc_def f,tb_acc_detail d  
 	     where  f.sub_accno=d.sub_accno 
@@ -45,7 +45,7 @@
      </select>
     
      <!-- 查询我总计奖励的TFCC -->
-     <select id="findTTReward"  parameterType="java.lang.String" resultType="java.lang.Long" > 
+     <select id="findTTReward"  parameterType="java.lang.String" resultType="java.lang.Double" > 
         select sum(amnt) ttfcc
          from tb_acc_def f,tb_acc_detail d  
          where  f.sub_accno=d.sub_accno 
