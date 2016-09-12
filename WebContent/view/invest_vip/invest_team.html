@@ -27,14 +27,14 @@
             <span class="dateTime">09:18:06 </span>
             <span class="weekTime"> 星期三 </span>
             <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
-            <span class="exit"><a href="">【退出】</a></span>
+            <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
         <div class="nav fix">
             <ul class="fl">
-                <li ><a class="active" href="../invest/in-team.html">我的团队</a></li>
-                <li><a href="../invest/in-account.html">我的账户</a></li>
-                <li ><a  class="color-fff" href="../invest/in-myhelf.html">个人中心</a></li>
-                <li><a href="../invest/in-safety.html">安全中心</a></li>
+                <li ><a class="active" href="../invest_vip/invest_team.html">我的团队</a></li>
+                <li><a href="../invest_vip/invest_account.html">我的账户</a></li>
+                <li ><a class="active" href="../invest_vip/invest_myself.html">个人中心</a></li>
+                <li><a href="../invest_vip/invest_safety.html">安全中心</a></li>
                 <li><a href="http://www.r8exchange.com">R8交易所</a></li>
             </ul>
         </div>
@@ -81,9 +81,9 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img src="" alt="">
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png" alt="">
                 </div>
-                <p>普通会员</p>
+                <p>投资公司</p>
             </div>
 
             <div class="qr-code">
@@ -194,6 +194,25 @@
         }
     })
 
+   $(function(){
+    　　toMyself();
+    }); 
+    function toMyself(){
+      var url = "/service/user/toMyself";
+      $.getJSON(url,function(data){
+          if(data.success){
+              if(data.data.imgAddrss){
+                  $("#left_headPicId").attr("src",data.data.imgAddrss);
+              }
+              /* if(data.data.userType==2){//网点会员
+                  $(".myImg").children("p").html("网点会员");
+              }else if(data.data.userType==4){//投资公司
+                  $(".myImg").children("p").html("投资公司");
+              } */
+          }
+          
+      })
+  }
    
 </script>
 </body>

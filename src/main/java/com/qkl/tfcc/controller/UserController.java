@@ -214,11 +214,11 @@ public class UserController extends BaseAction{
 			String vcode  =request.getParameter("yzm");
 			String refPhone  =request.getParameter("phone1");
 			String userType =request.getParameter("userType");
-			String branchName =request.getParameter("branchName"); 
-			String realName =request.getParameter("realName");  
+			String branchName =request.getParameter("branchName")==null?"":URLDecoder.decode(request.getParameter("branchName"), "UTF-8"); 
+			String realName = request.getParameter("realName")==null?"":URLDecoder.decode(request.getParameter("realName"), "UTF-8");  
 			String idno =request.getParameter("idno");
-			String cropName  =request.getParameter("cropName");
-			String cropPerson  =request.getParameter("cropPerson");
+			String cropName  =request.getParameter("cropName")==null?"":URLDecoder.decode(request.getParameter("cropName"), "UTF-8");
+			String cropPerson  =request.getParameter("cropPerson")==null?"":URLDecoder.decode(request.getParameter("cropPerson"), "UTF-8");
 			
 			userName=userName==null?"":userName.trim();
 			passWord=passWord==null?"":passWord.trim();

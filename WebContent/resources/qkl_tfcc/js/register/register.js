@@ -258,13 +258,17 @@
 	}
 	
 	$('.form input[name="cropPerson"]').blur(function(){
-		valid_cropPerson($(this));
+		valid_realName($(this));
 	});
-	function valid_cropPerson($this){
-	    if ($this.val() == '') {
-	    	$this.next().html('公司法人不能为空');
+	$('.form input[name="cropName"]').blur(function(){
+		$(this).val($(this).val().trim());
+		valid_cropName($(this));
+	});
+	function valid_cropName($this){
+		if($this.val()==''){
+			$this.next().html('请输入公司名称');
 	        return false;
-	    }else {
+		}else {
 	    	$this.next().empty();
 	        return true;
 	    }
@@ -326,10 +330,10 @@
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
 		var validIdno = valid_idno($(this).parent().find("input[name='idno']"));
-		var validName = valid_realName($(this).parent().find("input[name='realName']"));
-		var validCropPerson = valid_cropPerson($(this).parent().find("input[name='cropPerson']"));
+		var validCropPerson = valid_realName($(this).parent().find("input[name='cropPerson']"));
+		var validCropName = valid_cropName($(this).parent().find("input[name='cropName']"));
 		
-		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validName&&validCropPerson)){
+		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
