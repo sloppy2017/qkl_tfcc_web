@@ -10,25 +10,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.fastjson.JSON;
 import com.qkl.tfcc.api.common.CodeConstant;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
@@ -217,10 +210,10 @@ public class UserController extends BaseAction{
 		try {
 			String userName  =request.getParameter("phone");
 			String passWord  =request.getParameter("password");
-			String cfPassWord  =request.getParameter("respassword");
+			String cfPassWord  =request.getParameter("resPassword");
 			String vcode  =request.getParameter("yzm");
 			String refPhone  =request.getParameter("phone1");
-			String userType =request.getParameter("usertype");
+			String userType =request.getParameter("userType");
 			String branchName =request.getParameter("branchname"); 
 			String realName =request.getParameter("realname");  
 			String idno =request.getParameter("idno");
@@ -307,11 +300,11 @@ public class UserController extends BaseAction{
 			tUser.setPwdhash(MD5Util.getMd5Code(passWord));
 			tUser.setUserType(userType);
 			tUser.setRegTime(DateUtil.getCurrentDate());
-			if(userType.equals("2")){
+			/*if(userType.equals("2")){//网点会员
 			tUser.setStatus("0");
 			}else {
 			tUser.setStatus("1");
-			}		
+			}	*/	
 			tUser.setCreateTime(DateUtil.getCurrentDate());
 			tUser.setModifyTime(DateUtil.getCurrentDate());
 		
@@ -328,11 +321,13 @@ public class UserController extends BaseAction{
 			tUserDetail.setUserType(userType);
 			if(realName!=null&&!realName.equals("")&&idno!=null&&!idno.equals("")){
 				tUserDetail.setRealStat("1");	
+			}else{
+			    tUserDetail.setRealStat("0");    
 			}			
 			tUserDetail.setCreateTime(DateUtil.getCurrentDate());
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
-			tUserDetail.setOperator("sys");
-			if(userService.addUser(tUser,tUserDetail,Constant.VERSION_NO)){			
+			tUserDetail.setOperator(userName);
+			if(!userService.addUser(tUser,tUserDetail,Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("注册失败！");
 				return ar;

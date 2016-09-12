@@ -105,7 +105,7 @@ function valid_yzm(id){
 	var $this = $("#"+id);
 	$this.val($this.val().trim());
 	var code = $this.val().trim();
-	var reg = /^[0-9]\d{5}$/;
+	var reg = /^\d[0-9]{5}$/;
     if(code==''){
     	$this.val('请输入验证码');
     	$this.addClass('errorTip');
@@ -163,7 +163,6 @@ function modifyPhone(){
    $.ajax({
        type:'POST',
        url:'/service/user/modifyphone?'+$("#form2").serialize()+"&oldphone="+$("#oldphone").text().trim(),
-//        data:$("#form2").serialize(),
        dataType:'JSON',
        success: function (json) {
             if(json.success){
