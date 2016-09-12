@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean addUserFriendShip(UserFriendship userFriendship,String versionNo) {
 		try{			
-			userFriendshipDao.insert(userFriendship);			
+			userFriendshipDao.addUserFriendship(userFriendship);			
 			return true;
 		}catch(Exception e){
 			loger.debug("addUserFriendShip fail,reason is "+e.getMessage());
