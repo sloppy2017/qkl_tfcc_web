@@ -77,9 +77,7 @@
 	<welcome-file-list>
 		<!-- welcome-file>view/index.jsp</welcome-file> -->
 		<!-- welcome-file>view/login.jsp</welcome-file> -->
-		<welcome-file>view/register.html</welcome-file>
 		<welcome-file>view/login.html</welcome-file>
-		<welcome-file>view/myself/myself.html</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
