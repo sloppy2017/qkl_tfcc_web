@@ -1,11 +1,13 @@
 package com.qkl.tfcc.controller.acc;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.LPaccService;
@@ -27,7 +29,8 @@ public class LPaccController extends BaseAction {
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			pd = this.getPageData();
-			long Balance = lpService.findLPBalance(user.getUserCode());
+			String userCode="10000000001";
+			long Balance = lpService.findLPBalance(userCode);
 			pd.put("Balance", Balance);
 			ar.setData(pd);
 			ar.setSuccess(true);

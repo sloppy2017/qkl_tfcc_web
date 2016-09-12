@@ -40,13 +40,32 @@
 	<!-- 查询各类会员的信息列表按照会员账号和推荐人进行查询条件拼接有问题 -->
 	<select id="findViplistPage" parameterType="page"  resultType="pd" >
 	
-	    select rela_level,reg_time,u.phone,d.real_name  
+	<!--  #   select rela_level memberLevel,reg_time regTime,u.phone referee,d.real_name  memberAcc  -->
+	 select rela_level,reg_time ,u.phone ,d.real_name
         from tb_user u,tb_user_friendship f ,tb_user_detail d 
         where    u.user_code=f.user_code and d.user_code=u.user_code and u.user_code=#{pd.userCode} 
         
-            <if test ="pd.relalevel != null and pd.relalevel !=''">           
-                and rela_level in(#{pd.relalevel})
-            </if>   
+             <if test ="pd.relalva != null and pd.relalva !='' and pd.relalvb != null and pd.relalvb !='' and pd.relalvc != null and pd.relalvc !='' ">           
+                and rela_level in (#{pd.relalva},#{pd.relalvb},#{pd.relalvc})
+             </if> 
+              <if test ="pd.relalva != null and pd.relalva !='' and pd.relalvb != null and pd.relalvb !=''  and pd.relalvc =='' ">           
+                and rela_level in (#{pd.relalva},#{pd.relalvb})
+             </if>  
+            <if test ="pd.relalva != null and pd.relalva !=''  and pd.relalvc != null and pd.relalvc !=''  and pd.relalvb =='' ">           
+                and rela_level in (#{pd.relalva},#{pd.relalvc})
+             </if>
+             <if test =" pd.relalvb != null and pd.relalvb !='' and pd.relalvc != null and pd.relalvc !='' and pd.relalva =='' ">           
+                and rela_level in (#{pd.relalvb},#{pd.relalvc})
+             </if> 
+              <if test ="pd.relalva != null and pd.relalva !='' and pd.relalvb =='' and pd.relalvc ==''  ">           
+                and rela_level in (#{pd.relalva})
+             </if>
+             <if test ="pd.relalvc != null and pd.relalvc !='' and pd.relalvb =='' and pd.relalva ==''  ">           
+                and rela_level in (#{pd.relalvc})
+             </if>
+              <if test ="pd.relalvb != null and pd.relalvb !='' and pd.relalva =='' and pd.relalvc ==''  ">           
+                and rela_level in (#{pd.relalvb})
+             </if> 
            <!--  
 	        <if test ="querycontdiction1 != null and querycontdiction1 !='' and querycontdiction2 !=null and querycontdiction2 !='' and querycontdiction1='1' ">
           

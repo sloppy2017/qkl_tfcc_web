@@ -28,6 +28,7 @@
 		<typeAlias alias="AccDetail" type="com.qkl.tfcc.api.po.acc.AccDetail" />
 		<typeAlias alias="ComTeamVip" type="com.qkl.tfcc.api.po.user.ComTeamVip" />
 		<typeAlias alias="ComAccMy" type="com.qkl.tfcc.api.po.acc.ComAccMy" />
+		<typeAlias alias="CorpTeam" type="com.qkl.tfcc.api.po.user.CorpTeam" />
 		<typeAlias alias="Bankacc" type="com.qkl.tfcc.api.po.acc.BankAccInfo" />
 		<typeAlias alias="pd" type="com.qkl.util.help.pager.PageData" />
 		<typeAlias alias="TradeDetail" type="com.qkl.tfcc.api.po.trade.TradeDetail" />
@@ -67,6 +68,7 @@
 		<mapper resource="modelMapper/ComAccMy.xml"/>
 		<mapper resource="modelMapper/LPmemberTeam.xml"/>
 		<mapper resource="modelMapper/LPacc.xml"/>
+		<mapper resource="modelMapper/CorpTeam.xml"/>
 		<mapper resource="modelMapper/Bankacc.xml"/>
 		<mapper resource="modelMapper/TradeDetail.xml"/>
 		<!-- mapper resource="modelMapper/SourceBean.xml"/>

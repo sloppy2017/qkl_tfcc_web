@@ -2,16 +2,14 @@
  * Created by Administrator on 2016/9/1 0001.
  */
 
-$(function () {
-    $('.security-t').click(function () {
-        $.ajax({
+
+       /* $.ajax({
             type: "POST",
-            url: "../../../resources/qkl_tfcc/js/tsconfig.json",
+            url: "../../../service/lp/getnum",
             dataType: "json",
             success: function (responseData) {
-                $(".lphuiyuan").empty();
-                $(".lphuiyuan").html(responseData.lphuiyuan);
+       
+                $(".lphuiyuan").html(responseData.responseData);
             }
-        })
-    })
-});
+        });*/
+    

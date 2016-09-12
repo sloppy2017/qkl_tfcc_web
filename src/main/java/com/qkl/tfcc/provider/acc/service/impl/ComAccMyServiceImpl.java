@@ -1,5 +1,7 @@
 package com.qkl.tfcc.provider.acc.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,14 +25,14 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	private ComAccMyDao comAccMyDao;
 
 	@Override
-	public ComAccMy findTB(String userCode) {
+	public long findTB(String userCode) {
 		// TODO Auto-generated method stub
 		
 		return comAccMyDao.findTB(userCode);
 	}
 
 	@Override
-	public ComAccMy findJB(String userCode) {
+	public long findJB(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findJB(userCode);
 	}
@@ -38,19 +40,19 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	
 
 	@Override
-	public ComAccMy findReward(String userCode) {
+	public long findReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findReward(userCode);
 	}
 
 	@Override
-	public ComAccMy findWReward(String userCode) {
+	public long findWReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findWReward(userCode);
 	}
 
 	@Override
-	public ComAccMy findTTReward(String userCode) {
+	public long findTTReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findTTReward(userCode);
 	}
@@ -59,6 +61,20 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	public List<PageData> findAll(Page page) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findAllPage(page);
+	}
+
+	@Override
+	public Map<String, Object> findNum(String userCode) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		long findTTReward = comAccMyDao.findTTReward(userCode);
+		long findTB = comAccMyDao.findTB(userCode);
+		long findReward = comAccMyDao.findReward(userCode);
+		
+		map.put("findTTReward", findTTReward);
+		map.put("findTB", findTB);
+		map.put("findReward", findReward);
+		return map;
 	}
 
 }

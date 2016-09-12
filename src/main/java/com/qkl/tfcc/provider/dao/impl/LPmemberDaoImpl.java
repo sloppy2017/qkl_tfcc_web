@@ -26,7 +26,7 @@ public class LPmemberDaoImpl extends DaoSupport<UserDetail> implements LPmemberD
 
 	@Override
 	public List<PageData> findLPmemberInfo(Page page) {
-		List<PageData> list = getSqlSession().selectList(namespace+"."+"findLPmemberInfoPage", page);
+		List<PageData> list = getSqlSession().selectList(namespace+"."+"findLPmemberInfolistPage", page);
 		return list;
 	}
 

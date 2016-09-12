@@ -19,13 +19,13 @@ $(".type-btn a").click(function(){
     }
     else{
         if(document.getElementById("lva").checked==true){
-            str = str+"'A',";
+            str = str+"A,";
         }
         if(document.getElementById("lvb").checked==true){
-            str = str+"'B',";
+            str = str+"B,";
         }
         if(document.getElementById("lvc").checked==true){
-            str = str+"'C',";
+            str = str+"C,";
         }
     }
     alert("str is "+str);
@@ -37,12 +37,16 @@ $(".type-btn a").click(function(){
         $(this).addClass('bg-color').siblings().removeClass('bg-color');
     });
 
+
+});
+	
 function reload_table(currentPage,showCount) {
+	
     var rsStr = "";
     alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
     $.ajax({
         type: 'post',
-        url: '/service/team/findVipPage',
+        url: '/service/team/findVipPage?str='+str+'&currentPage='+currentPage+'&showCount='+showCount,
         dataType: 'json',
         data: {
             str:str,
@@ -68,6 +72,7 @@ function reload_table(currentPage,showCount) {
                 rsStr = rsStr + "</tr>";
             }
             $(".result-tab").html( rsStr);
+//            console.log(data.data.page.pageStr);
             $(".pages1").html(data.data.page.pageStr);
 
         }, 
@@ -76,9 +81,6 @@ function reload_table(currentPage,showCount) {
         }
     });
 }
-});
-	
-
 
 
 

@@ -27,7 +27,7 @@ public class CorpTeamDaoImpl extends DaoSupport<CorpTeam> implements CorpTeamDao
 
 	@Override
 	public List<PageData> findlpInfo(Page page) {
-		List<PageData> lpInfo = getSqlSession().selectList(namespace+"."+"findlpInfoPage", page);
+		List<PageData> lpInfo = getSqlSession().selectList(namespace+"."+"findlpInfolistPage", page);
 		return lpInfo;
 	}
 
