@@ -33,7 +33,7 @@
    margin-left:110px;
 }
 .reg-nav ul{
-    background: url('../../imgs/reg.jpg') no-repeat 0px -255px;
+    /*background: url('../../imgs/reg.png') no-repeat 0px -255px;*/
     width: 790px;
     height: 42px;
 
@@ -56,7 +56,7 @@
 
 .reg-nav .active{
     color:#fff;
-    background: url('../../imgs/reg.jpg') no-repeat;
+    /*background: url('../../imgs/reg.png') no-repeat;*/
 }
 .form {
     margin: 32px 0 0 64px;

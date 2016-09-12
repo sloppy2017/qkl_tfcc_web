@@ -164,10 +164,10 @@ form .myagree span{
     height:100%;
     background: rgba(5, 5, 5, 0.47);
     z-index: 9999;
-    display: none;
     /*display: none;*/
+
 }
-.mark1 .mark1-box{
+ .mark1-box{
      position: absolute;
      top:50%;
      left:50%;
@@ -178,11 +178,11 @@ form .myagree span{
      background: #fff;
      box-shadow: 1px 1px 1px;
      border-radius: 5px;
-
  }
 .mark1 .mark1-box h2{
     text-align: center;
     margin-top:42px;
+    color:#282828;
 }
 
 .mark1-box .real-name{
@@ -244,6 +244,8 @@ form .myagree span{
 .mark1-box p{
     text-align: center;
     color:#282828;
+    font-size: 18px;
+    margin:0;
 }
 .mark1-box .succ{
     background: url("../../imgs/btn2.jpg") no-repeat;
@@ -253,8 +255,27 @@ form .myagree span{
     margin:24px auto 10px;
     text-align: center;
     line-height: 44px;
-
 }
+.success-icon{
+    width:82px;
+    height:82px;
+    background: url("../../imgs/save2.jpg");
+    margin:38px auto 16px;
+}
+.achieve{
+    background: url("../../imgs/btn2.jpg") no-repeat;
+    width:224px;
+    height:44px;
+    background-position:-6px -106px;
+    margin:24px auto 10px;
+    text-align: center;
+    line-height: 44px;
+}
+.achieve p{
+    color:#fff;
+    font-size: 14px;
+}
+
 
 
 
