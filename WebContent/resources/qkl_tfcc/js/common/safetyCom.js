@@ -141,6 +141,13 @@ function getUserInfo(){
     	  if(json.data.imgAddrss){
     		  $("#left_headPicId").attr("src",json.data.imgAddrss);
     	  }
+    	  if(data.data.userName){
+              $("#user").html(data.data.userName);
+          }else if(data.data.realName){
+              $("#user").html(data.data.realName);
+          }else{
+        	  $("#user").html(data.data.phone);
+          }
     	  phone = json.data.phone;
     	  if(json.data.realName!=null&&json.data.realName.trim()!=''&&json.data.realName.trim()!=undefined){
     		  $('.renzhen').unbind("click");

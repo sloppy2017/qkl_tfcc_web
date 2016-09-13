@@ -33,7 +33,7 @@
             <span class="yearTime">2016年8月24日</span>
             <span class="dateTime">09:18:06 </span>
             <span class="weekTime"> 星期三 </span>
-            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
+            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
             <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
         <div class="nav fix">
@@ -179,6 +179,13 @@
                   $("#idno").prev("label").html("法人身份证号");
                   $("#mailAddrss").prev("label").html("公司地址");
 			  }
+			  if(data.data.userName){
+                  $("#user").html(data.data.userName);
+              }else if(data.data.realName){
+                  $("#user").html(data.data.realName);
+              }else{
+                  $("#user").html(data.data.phone);
+              }
 		  }
 		  
 	  })
