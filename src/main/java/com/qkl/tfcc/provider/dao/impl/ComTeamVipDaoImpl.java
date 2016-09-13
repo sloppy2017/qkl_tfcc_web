@@ -1,8 +1,9 @@
 package com.qkl.tfcc.provider.dao.impl;
 
 
-import java.util.Map;
+
 import org.springframework.stereotype.Repository;
+
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.qkl.tfcc.api.entity.Page;
@@ -18,19 +19,26 @@ public class ComTeamVipDaoImpl extends DaoSupport<ComTeamVip> implements ComTeam
 	private String namespace = "ComTeamVip";
 	@Override
 	public ComTeamVip findcount(String userCode) {
-		ComTeamVip count = getSqlSession().selectOne(namespace+"."+"findcount", userCode);
+		ComTeamVip count=null;
+		try {
+			count = getSqlSession().selectOne(namespace+"."+"findcount", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("没有数据");
+		}
 		return  count;	
 	}
 	@Override
 	public Object findVipList(Page page) {
-		Object list = getSqlSession().selectList(namespace+"."+"findViplistPage",page);
+		Object list=null;
+		try {
+			list = getSqlSession().selectList(namespace+"."+"findViplistPage",page);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("对象为空");
+		}
 		return list;
 	}
-	@Override
-	public int findfyCount(Map<String, Object> mp) {
-		// TODO Auto-generated method stub
-		return getSqlSession().selectOne(namespace+"."+"findfyCount",mp);
-	}
-
+	
 	
 }

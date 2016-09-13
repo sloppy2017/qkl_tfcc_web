@@ -1,16 +1,22 @@
 package com.qkl.tfcc.controller.User;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.user.ComTeamVip;
@@ -120,7 +126,16 @@ public class ComTeamVipController extends BaseAction{
 			/*pd.put("querycontdiction1", querycontdiction1);
 			pd.put("querycontdiction2", querycontdiction2);
 			page.setPd(pd);*/
+			
 			List<PageData> tviplist = vipservice.findVipList(page);
+			
+			for (int i = 0; i < tviplist.size(); i++) {
+				Date d = (Date) tviplist.get(i).get("reg_time");
+				DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+				String f = format.format(d);
+				map.put("time", f);
+			}
+			
 			map.put("tviplist", tviplist);
 			map.put("page", page);
 			ar.setSuccess(true);
