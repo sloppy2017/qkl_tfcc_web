@@ -1,6 +1,8 @@
 package com.qkl.tfcc.provider.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.ComAccMy;
 import com.qkl.tfcc.provider.dbhelper.DAO;
@@ -14,7 +16,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	  * @param userCode
 	  * @return
 	  */
-	public double findTB(String userCode);
+	public BigDecimal findTB(String userCode);
 	
 
 	/**
@@ -22,7 +24,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public double findJB(String userCode);
+	public BigDecimal findJB(String userCode);
 	
 	
 	/**
@@ -30,7 +32,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public double findReward(String userCode);
+	public BigDecimal findReward(String userCode);
 	
 
 	/**
@@ -38,7 +40,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public double findWReward(String userCode);
+	public BigDecimal findWReward(String userCode);
 	
 
 	/**
@@ -46,7 +48,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param userCode
 	 * @return
 	 */
-	public double findTTReward(String userCode);
+	public BigDecimal findTTReward(String userCode);
 
 	/**
 	 * 查询推荐各级别会员所得奖励列表

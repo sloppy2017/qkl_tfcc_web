@@ -1,5 +1,7 @@
 package com.qkl.tfcc.provider.acc.service.impl;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,14 +27,14 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	private ComAccMyDao comAccMyDao;
 
 	@Override
-	public double findTB(String userCode) {
+	public BigDecimal findTB(String userCode) {
 		// TODO Auto-generated method stub
 		
 		return comAccMyDao.findTB(userCode);
 	}
 
 	@Override
-	public double findJB(String userCode) {
+	public BigDecimal findJB(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findJB(userCode);
 	}
@@ -40,19 +42,19 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	
 
 	@Override
-	public double findReward(String userCode) {
+	public BigDecimal findReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findReward(userCode);
 	}
 
 	@Override
-	public double findWReward(String userCode) {
+	public BigDecimal findWReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findWReward(userCode);
 	}
 
 	@Override
-	public double findTTReward(String userCode) {
+	public BigDecimal findTTReward(String userCode) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.findTTReward(userCode);
 	}
@@ -67,9 +69,9 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	public Map<String, Object> findNum(String userCode) {
 		Map<String, Object> map=new HashMap<String, Object>();
 		
-		double findTTReward = comAccMyDao.findTTReward(userCode);
-		double findTB = comAccMyDao.findTB(userCode);
-		double findReward = comAccMyDao.findReward(userCode);
+		BigDecimal findTTReward = comAccMyDao.findTTReward(userCode);
+		BigDecimal findTB = comAccMyDao.findTB(userCode);
+		BigDecimal findReward = comAccMyDao.findReward(userCode);
 		
 		map.put("findTTReward", findTTReward);
 		map.put("findTB", findTB);

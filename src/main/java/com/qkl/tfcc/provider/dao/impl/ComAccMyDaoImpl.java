@@ -1,5 +1,6 @@
 package com.qkl.tfcc.provider.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -21,14 +22,14 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 	private String namespace="ComAccMy";
 	
 	@Override
-	public double findTB(String userCode) {
-		double cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
+	public BigDecimal findTB(String userCode) {
+		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
 		return cad;
 	}
 
 	@Override
-	public double findJB(String userCode) {
-		double cad = getSqlSession().selectOne(namespace+"."+"findJB", userCode);
+	public BigDecimal findJB(String userCode) {
+		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findJB", userCode);
 		return cad;
 	}
 
@@ -39,20 +40,20 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 	}
 
 	@Override
-	public double findReward(String userCode) {
-		double cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
+	public BigDecimal findReward(String userCode) {
+		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
 		return cad;
 	}
 
 	@Override
-	public double findWReward(String userCode) {
-		double cad = getSqlSession().selectOne(namespace+"."+"findWReward", userCode);
+	public BigDecimal findWReward(String userCode) {
+		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findWReward", userCode);
 		return cad;
 	}
 
 	@Override
-	public double findTTReward(String userCode) {
-		double cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
+	public BigDecimal findTTReward(String userCode) {
+		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
 		return cad;
 	}
 
