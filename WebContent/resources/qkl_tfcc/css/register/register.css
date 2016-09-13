@@ -33,11 +33,11 @@
    margin-left:246px;
 }
 .reg-nav ul{
-<<<<<<< HEAD
+
     /*background: url('../../imgs/reg.png') no-repeat 0px -255px;*/
-=======
+
     background: url('../../imgs/reg.png') no-repeat 0px -156px;
->>>>>>> refs/remotes/origin/dev
+
     width: 790px;
     height: 42px;
 
@@ -64,7 +64,7 @@
     /*background: url('../../imgs/reg.png') no-repeat;*/
 
     background: url('../../imgs/reg.png') no-repeat;
->>>>>>> refs/remotes/origin/dev
+
 }
 .form {
     margin: 32px 0 0 64px;
