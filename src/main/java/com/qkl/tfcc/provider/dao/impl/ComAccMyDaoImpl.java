@@ -23,7 +23,13 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 	
 	@Override
 	public BigDecimal findTB(String userCode) {
-		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
+		BigDecimal cad=null;
+		try {
+			cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return cad;
 	}
 
@@ -35,13 +41,25 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 
 	@Override
 	public List<PageData> findAllPage(Page page) {
-		List<PageData> list = getSqlSession().selectList(namespace+"."+"findAllPage",page);
+		List<PageData> list=null;
+		try {
+			list = getSqlSession().selectList(namespace+"."+"findAllPage",page);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return list;
 	}
 
 	@Override
 	public BigDecimal findReward(String userCode) {
-		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
+		BigDecimal cad=null;
+		try {
+			cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return cad;
 	}
 
@@ -53,7 +71,13 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 
 	@Override
 	public BigDecimal findTTReward(String userCode) {
-		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
+		BigDecimal cad=null;
+		try {
+			cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return cad;
 	}
 

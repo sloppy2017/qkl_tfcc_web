@@ -1,5 +1,8 @@
 package com.qkl.tfcc.controller.User;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +24,6 @@ import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.user.api.ComTeamVipService;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
-import com.qkl.util.help.StringUtil;
 import com.qkl.util.help.pager.PageData;
 
 
@@ -124,7 +126,16 @@ public class ComTeamVipController extends BaseAction{
 			/*pd.put("querycontdiction1", querycontdiction1);
 			pd.put("querycontdiction2", querycontdiction2);
 			page.setPd(pd);*/
+			
 			List<PageData> tviplist = vipservice.findVipList(page);
+			
+			for (int i = 0; i < tviplist.size(); i++) {
+				Date d = (Date) tviplist.get(i).get("reg_time");
+				DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+				String f = format.format(d);
+				map.put("time", f);
+			}
+			
 			map.put("tviplist", tviplist);
 			map.put("page", page);
 			ar.setSuccess(true);

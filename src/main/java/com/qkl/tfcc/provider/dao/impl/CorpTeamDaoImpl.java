@@ -21,13 +21,26 @@ public class CorpTeamDaoImpl extends DaoSupport<CorpTeam> implements CorpTeamDao
 	
 	@Override
 	public long findLPNum(String userCode) {
-		long LPNum = getSqlSession().selectOne(namespace+"."+"findLPNum", userCode);
+		long LPNum=0;
+		try {
+			LPNum = getSqlSession().selectOne(namespace+"."+"findLPNum", userCode);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return LPNum;
 	}
 
 	@Override
 	public List<PageData> findlpInfo(Page page) {
-		List<PageData> lpInfo = getSqlSession().selectList(namespace+"."+"findlpInfolistPage", page);
+		List<PageData> lpInfo=null;
+		try {
+			lpInfo = getSqlSession().selectList(namespace+"."+"findlpInfolistPage", page);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return lpInfo;
 	}
 

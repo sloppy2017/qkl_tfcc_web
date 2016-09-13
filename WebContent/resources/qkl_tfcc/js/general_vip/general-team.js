@@ -54,6 +54,7 @@ function reload_table(currentPage,showCount) {
             showCount: showCount
         },
         success: function (data) {
+        	
             var tviplist = data.data.tviplist;
             var tablecols = "<tr> \n"
                 + " <th>会员级别</th> \n"
