@@ -14,9 +14,6 @@
         <style type="text/css">
             .hide{display: none;}
             #networkName,#companyName{display: none;}
-            .form label {
-                width: 130px;
-            }
         </style>
     </head>
 <body>
@@ -60,7 +57,7 @@
                       <p>个人头像</p>
                       <div style="vertical-align: middle;line-height:114px;text-align: center;">
                           <span onclick="delPic()" style="position: absolute;margin-left: 104px;"><img alt="" src="/resources/qkl_tfcc/imgs/close.gif" width="18px;"></span>
-                          <img id="headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png"  width="122px" height="122px">
+                          <img id="headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg"  width="122px" height="122px">
                       </div>
                   </div>
                   <div class="upload fl">
@@ -94,7 +91,7 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png" alt="">
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
                 </div>
                 <p>投资公司</p>
             </div>
@@ -130,13 +127,16 @@
      
   }
   function delPic(){
+	  if($("#imgAddrss").val().trim()==''){
+		  return;
+	  }
 	  var imgAddrss = $("#imgAddrss").val();
 	  var userCode = $("#userCode").val();
 	  var url = "/service/user/delPic";
 	  $.post(url,{"imgAddrss":imgAddrss,"userCode":userCode},function(data){
 		  if(data.success){
-			  $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/headPic_default.png");//删除后设置为默认图片
-			  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/headPic_default.png");//删除后设置为默认图片
+			  $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
+			  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
 			  $("#imgAddrss").val("");
 		  }
 		  if(!data.success){

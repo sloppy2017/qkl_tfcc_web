@@ -33,7 +33,7 @@
             <ul class="fl">
                 <li ><a class="active" href="../invest_vip/invest_team.html">我的团队</a></li>
                 <li><a href="../invest_vip/invest_account.html">我的账户</a></li>
-                <li ><a class="active" href="../invest_vip/invest_myself.html">个人中心</a></li>
+                <li ><a  href="../invest_vip/invest_myself.html">个人中心</a></li>
                 <li><a href="../invest_vip/invest_safety.html">安全中心</a></li>
                 <li><a href="http://www.r8exchange.com">R8交易所</a></li>
             </ul>
@@ -81,7 +81,7 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png" alt="">
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
                 </div>
                 <p>投资公司</p>
             </div>
@@ -194,24 +194,19 @@
         }
     })
 
-   $(function(){
-    　　toMyself();
-    }); 
-    function toMyself(){
+  $(function(){
+      getUserInfo();
+  });
+
+  function getUserInfo(){
       var url = "/service/user/toMyself";
       $.getJSON(url,function(data){
           if(data.success){
               if(data.data.imgAddrss){
                   $("#left_headPicId").attr("src",data.data.imgAddrss);
               }
-              /* if(data.data.userType==2){//网点会员
-                  $(".myImg").children("p").html("网点会员");
-              }else if(data.data.userType==4){//投资公司
-                  $(".myImg").children("p").html("投资公司");
-              } */
           }
-          
-      })
+      });
   }
    
 </script>

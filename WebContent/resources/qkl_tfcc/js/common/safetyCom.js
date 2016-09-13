@@ -1,6 +1,3 @@
-/**
- * 安全中兴表单验证
- */
 $(function(){
       $('.pwd').click(function(){
           $(this).hide();
@@ -20,10 +17,17 @@ $(function(){
         
         getUserInfo();
     });
+
+/**
+ * 定时器
+ */
 var phone = "";
 var InterValObj=null; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行
 var curCount='';//当前剩余秒数
+/**
+ * 安全中兴表单验证
+ */
 // 手机验证
 function valid_phone(){
     var oldphone = $(".oldphone").text().trim();
