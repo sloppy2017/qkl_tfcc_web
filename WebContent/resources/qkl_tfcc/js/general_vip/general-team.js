@@ -67,14 +67,9 @@ function reload_table(currentPage,showCount) {
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
                 rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
-                rsStr = rsStr + "<th>" + tviplist[i].reg_time + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
-               /* rsStr = rsStr + "<th>" +  
-                
-                new Date(parseInt(1471933364000) * 1000).toLocaleString().substr(6,17)
-                
-                + "</th>";*/
                 rsStr = rsStr + "</tr>";
             }
             $(".result-tab").html( rsStr);

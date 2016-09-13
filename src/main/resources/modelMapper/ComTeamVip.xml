@@ -41,7 +41,7 @@
 	<select id="findViplistPage" parameterType="page"  resultType="pd" >
 	
 	<!--  #   select rela_level memberLevel,reg_time regTime,u.phone referee,d.real_name  memberAcc  -->
-	 select rela_level,reg_time ,u.phone ,d.real_name
+	 select rela_level,date_format(reg_time,'%Y年%m月%d日') rg_time ,u.phone ,d.real_name
         from tb_user u,tb_user_friendship f ,tb_user_detail d 
         where    u.user_code=f.user_code and d.user_code=u.user_code and u.user_code=#{pd.userCode} 
         
