@@ -337,7 +337,7 @@ public class UserController extends BaseAction{
 			createUserFriendship(tUserDetail);
 			
 			//计算注册奖励
-			
+			calRegitAccDetail(tUserDetail);
 			
 			 
 			 

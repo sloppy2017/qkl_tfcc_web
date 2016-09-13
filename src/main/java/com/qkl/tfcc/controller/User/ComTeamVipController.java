@@ -128,14 +128,6 @@ public class ComTeamVipController extends BaseAction{
 			page.setPd(pd);*/
 			
 			List<PageData> tviplist = vipservice.findVipList(page);
-			
-			for (int i = 0; i < tviplist.size(); i++) {
-				Date d = (Date) tviplist.get(i).get("reg_time");
-				DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
-				String f = format.format(d);
-				map.put("time", f);
-			}
-			
 			map.put("tviplist", tviplist);
 			map.put("page", page);
 			ar.setSuccess(true);
