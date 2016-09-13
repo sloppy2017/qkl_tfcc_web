@@ -66,7 +66,7 @@
                     <h4>TFCC最新成交价：<span>¥ 3550.99</span></h4>
                         <ul>
                             <li>我的余额</li>
-                            <li><div>TFCC</div>&nbsp;&nbsp;<span>800,000.00</span></li>
+                            <li><div>TFCC</div>&nbsp;&nbsp;<span id="in_sp"></span></li>
                             <li class="zhuanzhang">转账</li>
                         </ul>
                 </div>
@@ -213,4 +213,17 @@
           return true;
       }
   }
+  
+  $.ajax({
+	    type:'post',
+	    url:'/service/lpacc/getnum',
+	    dataType:'json',
+	    success:function(data){
+	        var message = data.message;
+	       // alert(message);
+	        $("#in_sp").html(data.data.Balance);
+	        
+	    }
+	})
+  
 </script>
