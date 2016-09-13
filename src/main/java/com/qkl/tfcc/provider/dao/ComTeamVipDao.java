@@ -27,12 +27,7 @@ public interface ComTeamVipDao extends DAO<ComTeamVip>{
 		 */
 		public Object findVipList(Page page);
 		
-		/**
-		 * 查询分页条数
-		 * @param mp
-		 * @return
-		 */
-		public int findfyCount(Map<String, Object> mp);
+		
 	
 }
  

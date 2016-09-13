@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <title>我的账户</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/date/dateRange.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/date/monthPicker.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/pagintaion/pagination.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/reset.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/general/general-account.css">
     <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
+    <script src="/resources/qkl_tfcc/js/date/dateRange.js"></script>
     <script src="/resources/qkl_tfcc/js/date/monthPicker.js"></script>
+    <script src="/resources/qkl_tfcc/js/pagination/pagination.js"></script>
 </head>
 <body>
 <!--遮罩层-->
@@ -37,7 +40,7 @@
 
 
 
-<!--LP会员账户中心-->
+<!--普通会员账户中心-->
 <div class="header fix">
     <div class="logo fl">
         <img src="/resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
@@ -47,15 +50,15 @@
             <span class="yearTime">2016年8月24日</span>
             <span class="dateTime">09:18:06 </span>
             <span class="weekTime"> 星期三 </span>
-            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"> </span> ，您好！&nbsp;欢迎使用本系统</span>
+            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
             <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
         <div class="nav fix">
             <ul class="fl">
-                <li ><a href="../lp_vip/lp_team.html">我的团队</a></li>
-                <li><a class="active" href="../lp_vip/lp_account.html">我的账户</a></li>
-                <li ><a  href="../lp_vip/lp_myself.html">个人中心</a></li>
-                <li><a href="../lp_vip/lp_safety.html">安全中心</a></li>
+                <li ><a href="../general_vip/general_team.html">我的团队</a></li>
+                <li ><a class="active" href="../general_vip/general_account.html">我的账户</a></li>
+                <li ><a href="../general_vip/general_myself.html">个人中心</a></li>
+                <li><a href="../general_vip/general_safety.html">安全中心</a></li>
                 <li><a href="http://www.r8exchange.com">R8交易所</a></li>
             </ul>
         </div>
@@ -68,26 +71,26 @@
                 <div class="main-top">
                     <span>你当前的位置：</span><span class="c28">我的账户</span>
                 </div>
-                <div class="my-sum" style="border: none;color:#575757;font: 14px 'microsoft yahei', Arial, Helvetica, sans-serif;font-weight: 500;
-                font-weight: 500;">
-                    <h4>TFCC最新成交价：￥<span class="chengjiaojia" style='color:red;font-size:24px;font-weight:800'>1000</span></h4>
-                    <h4>我的余额:&nbsp;&nbsp;&nbsp;
-                        TFCC:&nbsp;&nbsp;&nbsp;<span id="sp1" style='color:red;font-size:24px;font-weight:800'>1000000</span>
-                        &nbsp;&nbsp;
-                        <!--<span class="chengjiaojia chengjiaojia_TFCC">10000</span>-->
-                        <li class="zhuanzhang" style="display: inline-block;margin-left:100px;border:1px solid #dddddd;border-radius: 3px;width: 160px;line-height: 30px; text-align: center;">转账</li>
-                    </h4>
+                <div class="my-sum">
+                    <h4>我的余额</h4>
+                    <div>
+                        <ul>
+                            <li><div>TFCC</div>&nbsp;&nbsp;<span id="spt">800,000.00</span></li>
+                          <!--   <li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li> -->
+                            <li class="zhuanzhang">转账</li>
+                        </ul>
+                    </div>
                 </div>
-                <!--<div class="my-award">-->
-                <!--<h4>我的奖励</h4>-->
-                <!--<div>-->
-                <!--<ul>-->
-                <!--<li><div class="c57">总累计奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
-                <!--<li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
-                <!--<li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
-                <!--</ul>-->
-                <!--</div>-->
-                <!--</div>-->
+                <div class="my-award">
+                    <h4>我的奖励</h4>
+                    <div>
+                        <ul>
+                            <li><div class="c57">总累计奖励 TFCC</div><div class="ce9" id="sptt">30,000.00</div></li>
+                            <li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9" id="spv">30,000.00</div></li>
+                            <!-- <li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9" id="">30,000.00</div></li> -->
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="trans-account">
                 <div class="main-top"><span>您当前的位置：</span><span>我的账户</span>><span class="c28">账户</span></div>
@@ -138,20 +141,23 @@
     </div>
 </div>
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
-<script src="/resources/qkl_tfcc/js/lpmember/lpccount/lpccount.js"></script>
-<script type="text/javascript">
+<script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
+
+<script>
+
 $.ajax({
     type:'post',
-    url:'/service/lpacc/getnum',
+    url:'/service/comacc/findNums',
     dataType:'json',
     success:function(data){
         var message = data.message;
-       // alert(message);
-        $("#sp1").html(data.data.Balance);
-        
+        $("#spt").html(data.data.findTB);
+        $("#sptt").html(data.data.findTTReward);
+        $("#spv").html(data.data.findReward);
+      
     }
 })
-  $(function(){
+$(function(){
       getUserInfo();
   });
 
@@ -172,7 +178,6 @@ $.ajax({
           }
       });
   }
-
 </script>
 </body>
 </html>

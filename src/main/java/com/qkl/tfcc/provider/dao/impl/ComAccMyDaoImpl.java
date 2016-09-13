@@ -1,5 +1,6 @@
 package com.qkl.tfcc.provider.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -21,38 +22,62 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 	private String namespace="ComAccMy";
 	
 	@Override
-	public ComAccMy findTB(String userCode) {
-		ComAccMy cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
+	public BigDecimal findTB(String userCode) {
+		BigDecimal cad=null;
+		try {
+			cad = getSqlSession().selectOne(namespace+"."+"findTB", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return cad;
 	}
 
 	@Override
-	public ComAccMy findJB(String userCode) {
-		ComAccMy cad = getSqlSession().selectOne(namespace+"."+"fingJB", userCode);
+	public BigDecimal findJB(String userCode) {
+		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findJB", userCode);
 		return cad;
 	}
 
 	@Override
 	public List<PageData> findAllPage(Page page) {
-		List<PageData> list = getSqlSession().selectList(namespace+"."+"findAllPage",page);
+		List<PageData> list=null;
+		try {
+			list = getSqlSession().selectList(namespace+"."+"findAllPage",page);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return list;
 	}
 
 	@Override
-	public ComAccMy findReward(String userCode) {
-		ComAccMy cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
+	public BigDecimal findReward(String userCode) {
+		BigDecimal cad=null;
+		try {
+			cad = getSqlSession().selectOne(namespace+"."+"findReward", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return cad;
 	}
 
 	@Override
-	public ComAccMy findWReward(String userCode) {
-		ComAccMy cad = getSqlSession().selectOne(namespace+"."+"findWReward", userCode);
+	public BigDecimal findWReward(String userCode) {
+		BigDecimal cad = getSqlSession().selectOne(namespace+"."+"findWReward", userCode);
 		return cad;
 	}
 
 	@Override
-	public ComAccMy findTTReward(String userCode) {
-		ComAccMy cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
+	public BigDecimal findTTReward(String userCode) {
+		BigDecimal cad=null;
+		try {
+			cad = getSqlSession().selectOne(namespace+"."+"findTTReward", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return cad;
 	}
 

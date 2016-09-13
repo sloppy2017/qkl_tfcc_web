@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UnfreezeDetail">
+    <resultMap id="UnfreezeDetailResultMap" type="com.qkl.tfcc.api.po.trade.UnfreezeDetail" >
+	    <id column="id" property="id" />
+	    <result column="user_code" property="userCode" />
+	    <result column="beforeuf_num" property="beforeufNum" />
+	    <result column="unfreeze_num" property="unfreezeNum" />
+	    <result column="afteruf_num" property="afterufNum" />
+	    <result column="unfreeze_ratio" property="unfreezeRatio" />
+	    <result column="unfreeze_date" property="unfreezeDate" />
+	    <result column="target_system" property="targetSystem"/>
+	    <result column="status" property="status" /> 
+	    <result column="create_time" property="createTime"/>    
+	    <result column="modify_time" property="modifyTime"/>    
+	    <result column="operator" property="operator"/>    
+    </resultMap>
+
+    	 <!-- 通用查询结果列-->
+	    <sql id="Base_Column_List">
+	    id,
+		user_code,
+		beforeuf_num,
+		unfreeze_num,
+		afteruf_num,
+		unfreeze_ratio,
+		unfreeze_date,
+		target_system,
+		status,
+		create_time,
+		modify_time,
+		operator
+	    </sql>
+      
+       <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		select count(1) cnt
+        from tb_unfreeze_detail  where user_code = #{userCode} 
+	   </select> 
+	   <select id="findById" parameterType="java.lang.Integer" resultMap="UnfreezeDetailResultMap" >
+	        select 
+			user_code userCode,
+			beforeuf_num beforeufNum,
+			unfreeze_num unfreezeNum,
+			afteruf_num afterufNum,
+			unfreeze_ratio unfreezeRatio,
+			unfreeze_date unfreezeDate,
+			target_system targetSystem,
+			STATUS STATUS,
+	        create_time createTime,
+	        modify_time modifyTime,
+	        operator  operator
+	        from tb_unfreeze_detail  where id = #{id}
+      </select>
+
+	<select id="findByUserCode" parameterType="java.lang.String" resultMap="tradeDetailResultMap" >
+        select 
+         <include refid="Base_Column_List" />
+        from tb_unfreeze_detail  where user_code = #{userCode}
+    </select>
+	
+	
+	<insert id="add" parameterType="pd" >
+	 insert into tb_unfreeze_detail ( 
+	 user_code,
+	 beforeuf_num,
+	 unfreeze_num,
+	 afteruf_num,
+	 unfreeze_ratio,
+	 unfreeze_date,
+	 target_system,
+	 status,
+	 create_time,
+	 modify_time,
+	 operator)
+	 values(
+	 #{userCode},
+	 #{beforeufNum},
+	 #{unfreezeNum},
+	 #{afterufNum},
+	 #{unfreezeRatio},
+	 #{unfreezeDate},
+	 #{targetSystem},
+	 #{status},
+	 #{createTime},
+	 #{modifyTime},
+	 #{operator}
+	 )	 
+	 </insert>
+	
+	
+	<update id="updatestatus" parameterType="java.util.Map" >    
+	     update tb_unfreeze_detail 
+	     set status = #{status},
+	         modify_time = #{modify_time}
+	     where id = #{id}     
+     </update>
+     
+     
+	
+
+</mapper>     

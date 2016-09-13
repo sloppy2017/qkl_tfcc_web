@@ -44,7 +44,7 @@
     <div class="main fl">
         <div class="mains">
             <div class="main-top"><span>您当前的位置：</span><span class="c28">我的团队</span></div>
-            <div class="numb">累计LP会员人数 &nbsp; &nbsp;<span class="ce9">107</span></div>
+            <div class="numb">累计LP会员人数 &nbsp; &nbsp;<span class="ce9"></span></div>
             <div class="query fix">
                 <ul>
                     <li>查询条件</li>
@@ -118,7 +118,7 @@
           $.ajax({
               type: 'post',
   //		url: '../../..rvice/user/login/',
-              url: '../../../service/test/queryuser/',
+              url: '../../../service/corp/lpInfo',
               dataType: 'json',
               data: {
             	  lpVal:lpVal,
@@ -171,6 +171,19 @@
           })
 
     }
+</script>
+<script>
+
+$.ajax({
+    type:'post',
+    url:'/service/corp/lpnum',
+    dataType:'json',
+    success:function(data){
+        var message = data.message;
+        $(".ce9").html(data.data);
+    }
+})
+
 </script>
 </body>
 </html>

@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 		User user = userDao.findUserByPhone(phone);
 		if (null != user) {
 			if (user.getPwdhash().equals(MD5Util.getMd5Code(password))) {
-				if (user.getStatus() == Constant.USING) {					
+				if (user.getStatus().equals(Constant.USING)) {					
 						result.put("status", Constant.SUCCESS);
 						result.put(Constant.LOGIN_USER, user);						
 						result.put("msg", "ok");

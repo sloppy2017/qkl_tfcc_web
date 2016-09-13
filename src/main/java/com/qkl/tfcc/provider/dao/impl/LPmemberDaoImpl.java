@@ -20,13 +20,25 @@ public class LPmemberDaoImpl extends DaoSupport<UserDetail> implements LPmemberD
 	
 	@Override
 	public long findLPmemberNum(String userCode) {
-		long num = getSqlSession().selectOne(namespace+"."+"findLPmemberNum", userCode);
+		long num=0;
+		try {
+			num = getSqlSession().selectOne(namespace+"."+"findLPmemberNum", userCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("数据为空");
+		}
 		return num;
 	}
 
 	@Override
 	public List<PageData> findLPmemberInfo(Page page) {
-		List<PageData> list = getSqlSession().selectList(namespace+"."+"findLPmemberInfoPage", page);
+		List<PageData> list=null;
+		try {
+			list = getSqlSession().selectList(namespace+"."+"findLPmemberInfolistPage", page);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("集合为空");
+		}
 		return list;
 	}
 

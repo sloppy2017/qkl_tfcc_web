@@ -43,8 +43,8 @@
             <span class="yearTime">2016年8月24日</span>
             <span class="dateTime">09:18:06 </span>
             <span class="weekTime"> 星期三 </span>
-            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
-            <span class="exit"><a href="">【退出】</a></span>
+            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
+            <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
         <div class="nav fix">
             <ul class="fl">
@@ -66,7 +66,7 @@
                     <h4>TFCC最新成交价：<span>¥ 3550.99</span></h4>
                         <ul>
                             <li>我的余额</li>
-                            <li><div>TFCC</div>&nbsp;&nbsp;<span>800,000.00</span></li>
+                            <li><div>TFCC</div>&nbsp;&nbsp;<span id="in_sp"></span></li>
                             <li class="zhuanzhang">转账</li>
                         </ul>
                 </div>
@@ -115,9 +115,9 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png" height='110px' width="110px" alt="">
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
                 </div>
-                <p>普通会员</p>
+                <p>投资公司</p>
             </div>
 
             <div class="qr-code">
@@ -127,7 +127,7 @@
                 <p>我的二维码</p>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
@@ -135,20 +135,22 @@
 </html>
 <script type="text/javascript">
   $(function(){
-  	  toMyself();
+  	  getUserInfo();
   });
 
-  function toMyself(){
+  function getUserInfo(){
       var url = "/service/user/toMyself";
       $.getJSON(url,function(data){
           if(data.success){
               if(data.data.imgAddrss){
             	  $("#left_headPicId").attr("src",data.data.imgAddrss);
               }
-              if(data.data.userType==2){//网点会员
-                  $(".myImg").children("p").html("网点会员");
-              }else if(data.data.userType==4){//投资公司
-                  $(".myImg").children("p").html("投资公司");
+              if(data.data.userName){
+                  $("#user").html(data.data.userName);
+              }else if(data.data.realName){
+                  $("#user").html(data.data.realName);
+              }else{
+                  $("#user").html(data.data.phone);
               }
           }
       });
@@ -218,4 +220,17 @@
           return true;
       }
   }
+  
+  $.ajax({
+	    type:'post',
+	    url:'/service/lpacc/getnum',
+	    dataType:'json',
+	    success:function(data){
+	        var message = data.message;
+	       // alert(message);
+	        $("#in_sp").html(data.data.Balance);
+	        
+	    }
+	})
+  
 </script>

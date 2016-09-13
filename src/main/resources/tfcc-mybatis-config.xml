@@ -28,9 +28,14 @@
 		<typeAlias alias="AccDetail" type="com.qkl.tfcc.api.po.acc.AccDetail" />
 		<typeAlias alias="ComTeamVip" type="com.qkl.tfcc.api.po.user.ComTeamVip" />
 		<typeAlias alias="ComAccMy" type="com.qkl.tfcc.api.po.acc.ComAccMy" />
+		<typeAlias alias="CorpTeam" type="com.qkl.tfcc.api.po.user.CorpTeam" />
 		<typeAlias alias="Bankacc" type="com.qkl.tfcc.api.po.acc.BankAccInfo" />
 		<typeAlias alias="pd" type="com.qkl.util.help.pager.PageData" />
 		<typeAlias alias="TradeDetail" type="com.qkl.tfcc.api.po.trade.TradeDetail" />
+		<typeAlias alias="UnfreezeDetail" type="com.qkl.tfcc.api.po.trade.UnfreezeDetail" />
+		<typeAlias alias="AccOutdetail" type="com.qkl.tfcc.api.po.acc.AccOutdetail" />
+		
+		
 		
 		<typeAlias type="com.qkl.tfcc.api.entity.Page" alias="Page"/>
 		<!-- typeAlias alias="SourceBean" type="com.qkl.tfcc.api.po.SourceBean" />
@@ -67,8 +72,11 @@
 		<mapper resource="modelMapper/ComAccMy.xml"/>
 		<mapper resource="modelMapper/LPmemberTeam.xml"/>
 		<mapper resource="modelMapper/LPacc.xml"/>
+		<mapper resource="modelMapper/CorpTeam.xml"/>
 		<mapper resource="modelMapper/Bankacc.xml"/>
 		<mapper resource="modelMapper/TradeDetail.xml"/>
+		<mapper resource="modelMapper/UnfreezeDetail.xml"/>
+		<mapper resource="modelMapper/AccOutdetail.xml"/>
 		<!-- mapper resource="modelMapper/SourceBean.xml"/>
 		<mapper resource="modelMapper/DataListBean.xml"/>
 		<mapper resource="modelMapper/EzbCustomerInfoBean.xml"/>

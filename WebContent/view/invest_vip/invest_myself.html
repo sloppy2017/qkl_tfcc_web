@@ -14,9 +14,6 @@
         <style type="text/css">
             .hide{display: none;}
             #networkName,#companyName{display: none;}
-            .form label {
-                width: 130px;
-            }
         </style>
     </head>
 <body>
@@ -36,8 +33,8 @@
             <span class="yearTime">2016年8月24日</span>
             <span class="dateTime">09:18:06 </span>
             <span class="weekTime"> 星期三 </span>
-            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
-            <span class="exit"><a href="">【退出】</a></span>
+            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
+            <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
         <div class="nav fix">
             <ul class="fl">
@@ -59,8 +56,8 @@
                   <div class="pic fl">
                       <p>个人头像</p>
                       <div style="vertical-align: middle;line-height:114px;text-align: center;">
-                          <span onclick="delPic()" style="position: absolute;margin-left: 97px;"><img alt="" src="/resources/qkl_tfcc/imgs/close.gif"></span>
-                          <img id="headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png"  width="122px" height="122px">
+                          <span onclick="delPic()" style="position: absolute;margin-left: 104px;"><img alt="" src="/resources/qkl_tfcc/imgs/close.gif" width="18px;"></span>
+                          <img id="headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg"  width="122px" height="122px">
                       </div>
                   </div>
                   <div class="upload fl">
@@ -94,9 +91,9 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/headPic_default.png" alt="">
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
                 </div>
-                <p>普通会员</p>
+                <p>投资公司</p>
             </div>
 
             <div class="qr-code">
@@ -130,13 +127,16 @@
      
   }
   function delPic(){
+	  if($("#imgAddrss").val().trim()==''){
+		  return;
+	  }
 	  var imgAddrss = $("#imgAddrss").val();
 	  var userCode = $("#userCode").val();
 	  var url = "/service/user/delPic";
 	  $.post(url,{"imgAddrss":imgAddrss,"userCode":userCode},function(data){
 		  if(data.success){
-			  $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/headPic_default.png");//删除后设置为默认图片
-			  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/headPic_default.png");//删除后设置为默认图片
+			  $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
+			  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
 			  $("#imgAddrss").val("");
 		  }
 		  if(!data.success){
@@ -172,15 +172,20 @@
 				  $("#branch_name").val(data.data.branchName);
 				  $("#idno").prev("label").html("法人身份证号");
                   $("#mailAddrss").prev("label").html("公司地址");
-                  $(".myImg").children("p").html("网点会员");
 			  }else if(data.data.userType==4){//投资公司
 				  $("#companyName").css("display","block");
                   $("#crop_name").val(data.data.branchName);
                   $("#realName").prev("label").html("法人姓名");
                   $("#idno").prev("label").html("法人身份证号");
                   $("#mailAddrss").prev("label").html("公司地址");
-                  $(".myImg").children("p").html("投资公司");
 			  }
+			  if(data.data.userName){
+                  $("#user").html(data.data.userName);
+              }else if(data.data.realName){
+                  $("#user").html(data.data.realName);
+              }else{
+                  $("#user").html(data.data.phone);
+              }
 		  }
 		  
 	  })

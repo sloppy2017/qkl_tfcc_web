@@ -19,16 +19,16 @@ $(".type-btn a").click(function(){
     }
     else{
         if(document.getElementById("lva").checked==true){
-            str = str+"'A',";
+            str = str+"A,";
         }
         if(document.getElementById("lvb").checked==true){
-            str = str+"'B',";
+            str = str+"B,";
         }
         if(document.getElementById("lvc").checked==true){
-            str = str+"'C',";
+            str = str+"C,";
         }
     }
-    alert("str is "+str);
+   // alert("str is "+str);
     if(flag){
         reload_table(1,showcnt);
     }
@@ -37,12 +37,16 @@ $(".type-btn a").click(function(){
         $(this).addClass('bg-color').siblings().removeClass('bg-color');
     });
 
+
+});
+	
 function reload_table(currentPage,showCount) {
+	
     var rsStr = "";
-    alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
+   // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
     $.ajax({
         type: 'post',
-        url: '/service/team/findVipPage',
+        url: '/service/team/findVipPage?str='+str+'&currentPage='+currentPage+'&showCount='+showCount,
         dataType: 'json',
         data: {
             str:str,
@@ -50,6 +54,7 @@ function reload_table(currentPage,showCount) {
             showCount: showCount
         },
         success: function (data) {
+        	
             var tviplist = data.data.tviplist;
             var tablecols = "<tr> \n"
                 + " <th>会员级别</th> \n"
@@ -62,12 +67,13 @@ function reload_table(currentPage,showCount) {
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
                 rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
-                rsStr = rsStr + "<th>" + tviplist[i].reg_time + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
                 rsStr = rsStr + "</tr>";
             }
             $(".result-tab").html( rsStr);
+//            console.log(data.data.page.pageStr);
             $(".pages1").html(data.data.page.pageStr);
 
         }, 
@@ -76,9 +82,6 @@ function reload_table(currentPage,showCount) {
         }
     });
 }
-});
-	
-
 
 
 
