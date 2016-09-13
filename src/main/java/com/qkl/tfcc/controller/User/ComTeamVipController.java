@@ -1,5 +1,6 @@
 package com.qkl.tfcc.controller.User;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,7 +124,6 @@ public class ComTeamVipController extends BaseAction{
 			/*pd.put("querycontdiction1", querycontdiction1);
 			pd.put("querycontdiction2", querycontdiction2);
 			page.setPd(pd);*/
-			System.out.println(relalevel+"----------------------------");
 			List<PageData> tviplist = vipservice.findVipList(page);
 			map.put("tviplist", tviplist);
 			map.put("page", page);

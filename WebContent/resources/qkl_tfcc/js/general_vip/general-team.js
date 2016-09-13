@@ -69,6 +69,11 @@ function reload_table(currentPage,showCount) {
                 rsStr = rsStr + "<th>" + tviplist[i].reg_time + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
+               /* rsStr = rsStr + "<th>" +  
+                
+                new Date(parseInt(1471933364000) * 1000).toLocaleString().substr(6,17)
+                
+                + "</th>";*/
                 rsStr = rsStr + "</tr>";
             }
             $(".result-tab").html( rsStr);
