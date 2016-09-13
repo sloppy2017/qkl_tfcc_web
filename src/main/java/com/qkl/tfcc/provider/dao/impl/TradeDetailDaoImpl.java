@@ -25,7 +25,7 @@ public class TradeDetailDaoImpl extends DaoSupport<TradeDetail> implements Trade
 
 	@Override
 	public void modifyTradeDetail(PageData pd) {
-		getSqlSession().insert(namespace+"."+"update", pd);	
+		getSqlSession().update(namespace+"."+"update", pd);	
 		
 	}
 
