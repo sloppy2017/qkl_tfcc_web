@@ -7,7 +7,7 @@
 	</select> 
    
    <select id="findLPmemberInfolistPage" parameterType="page"  resultType="pd" >
-    select a.phone,a.create_time,d.amnt from (select create_time ,phone,user_code  from tb_user_detail where user_code in (select recomuser_code from tb_user_friendship  where user_code='10000000001'))a,
+    select a.phone,a.create_time,d.amnt from (select create_time ,phone,user_code  from tb_user_detail where user_code in (select recomuser_code from tb_user_friendship  where user_code=#{userCode}))a,
 tb_acc_detail d where a.user_code = d.user_code and bouns_source1 = '29' and bouns_source2 = '2900'
       <!-- <if test="userName! = null and userName! ='' ">
       and user_name=#{userName}

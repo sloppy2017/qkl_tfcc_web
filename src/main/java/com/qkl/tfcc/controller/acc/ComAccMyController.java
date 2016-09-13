@@ -1,5 +1,4 @@
 package com.qkl.tfcc.controller.acc;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +37,7 @@ public class ComAccMyController extends BaseAction {
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			
-			String userCode="10000000001";
+			String userCode=user.getUserCode();
 			nums = cams.findNum(userCode);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
