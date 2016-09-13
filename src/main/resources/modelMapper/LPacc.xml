@@ -4,6 +4,6 @@
 
     <!-- 查询LP会员我的TFCC余额 -->
     <select id="findLPBalance" parameterType="java.lang.String" resultType="long" >
-		select avb_amnt from tb_acc where user_code=#{Balance}
+		select avb_amnt from tb_acc where user_code=#{userCode}
 	</select> 
 </mapper>     

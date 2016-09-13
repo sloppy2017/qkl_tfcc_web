@@ -1,7 +1,3 @@
-/**
- * Created by qw on 2016/8/31.
- * 安全中兴表单验证
- */
 $(function(){
       $('.pwd').click(function(){
           $(this).hide();
@@ -21,10 +17,17 @@ $(function(){
         
         getUserInfo();
     });
+
+/**
+ * 定时器
+ */
 var phone = "";
 var InterValObj=null; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行
 var curCount='';//当前剩余秒数
+/**
+ * 安全中兴表单验证
+ */
 // 手机验证
 function valid_phone(){
     var oldphone = $(".oldphone").text().trim();
@@ -124,7 +127,7 @@ function getUserInfo(){
   var url = "/service/user/getUserInfo";
   $.getJSON(url,function(json){
       if(json.success){
-    	  if(json.data.userType==1){
+    	 /* if(json.data.userType==1){
         	  $(".myImg").children("p").html("普通会员");
           }else if(json.data.userType==2){
         	  $(".myImg").children("p").html("网点会员");
@@ -134,8 +137,10 @@ function getUserInfo(){
               $(".myImg").children("p").html("投资公司");
           }else if(json.data.userType==5){
               $(".myImg").children("p").html("众筹会员");
-          }
-    	  $("#left_headPicId").attr("src",json.data.imgAddrss);
+          }*/
+    	  if(json.data.imgAddrss){
+    		  $("#left_headPicId").attr("src",json.data.imgAddrss);
+    	  }
     	  phone = json.data.phone;
     	  if(json.data.realName!=null&&json.data.realName.trim()!=''&&json.data.realName.trim()!=undefined){
     		  $('.renzhen').unbind("click");
@@ -464,7 +469,7 @@ $(".valid,input[type='text']").focus(function(){
     }
 });
 
-
+  
 
 
 

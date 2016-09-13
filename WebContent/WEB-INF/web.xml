@@ -64,7 +64,7 @@
 	</filter-mapping>
 	
 	
-	<!--  filter>
+	 <filter>
     	<filter-name>loginFilter</filter-name>
     	<filter-class>com.qkl.tfcc.filter.LoginFilter</filter-class>
   	</filter>
@@ -72,14 +72,12 @@
    		<filter-name>loginFilter</filter-name>
     	<url-pattern>/service/*</url-pattern>  
   	</filter-mapping>
-  	-->
+  	
 
 	<welcome-file-list>
 		<!-- welcome-file>view/index.jsp</welcome-file> -->
 		<!-- welcome-file>view/login.jsp</welcome-file> -->
-		<welcome-file>view/register.html</welcome-file>
 		<welcome-file>view/login.html</welcome-file>
-		<welcome-file>view/myself/myself.html</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

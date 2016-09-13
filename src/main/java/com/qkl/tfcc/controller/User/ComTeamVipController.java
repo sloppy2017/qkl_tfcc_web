@@ -1,5 +1,9 @@
 package com.qkl.tfcc.controller.User;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,22 +71,62 @@ public class ComTeamVipController extends BaseAction{
 	//		String querycontdiction1 = request.getParameter("querycontdiction1");//获取下拉框对应的输入的值
 	//		String querycontdiction2 = request.getParameter("querycontdiction2");//获取下拉框对应的输入的值
 			String currentPage = request.getParameter("currentPage");
-			String relaleveltmp = request.getParameter("str"); //ALL,|A,B,|A,C,|B,C,
-			String relalevel="";
+			String relaleveltmp1 = request.getParameter("str"); //ALL,|A,B,|A,C,|B,C,
+			String relalevel="";			
+			String relalva ="";
+			String relalvb ="";
+			String relalvc ="";
+			String relaleveltmp =relaleveltmp1.replace("'","");
 			if(relaleveltmp.equals("ALL")||"".equals(relaleveltmp)||relaleveltmp==null){
-				relalevel="'A','B','C'";
+				relalevel="A','B','C";
 			}else{
 				 relalevel = relaleveltmp.substring(0,(relaleveltmp.length()-1));
+				 String relatmp ="";
+				 String[] relalvStrings = relalevel.split(",");
+			 for(int i=0;i<relalvStrings.length;i++){
+				 if(i==relalvStrings.length-1){
+					 relatmp =relatmp +relalvStrings[i]+"'"; 
+				 }else{
+					 relatmp =relatmp+relalvStrings[i]; 
+				  }
+				 relalevel= relatmp;
+			 }
+				 
 			}
+			if(relaleveltmp.equals("ALL,")||"".equals(relaleveltmp)||relaleveltmp==null){
+				relalva="A";
+				relalvb="B";
+				relalvc="C";
+			}else{
+				 relalevel = relaleveltmp.substring(0,(relaleveltmp.length()-1));
+				 String[] relalvStrings = relalevel.split(",");
+				 for (String rela : relalvStrings) {
+					 if("A".equals(rela)){
+						 relalva="A";
+					 }
+					 if("B".equals(rela)){
+						 relalvb="B";
+					 }
+					 if("C".equals(rela)){
+						 relalvc="C";
+					 }
+					
+				}
+			}
+			
+			
 			String userCode="10000000001";
 			pd.put("userCode", userCode);
-			pd.put("relalevel", relalevel);
+			pd.put("relalevel", relalevel);			
+			pd.put("relalva", relalva);
+			pd.put("relalvb", relalvb);
+			pd.put("relalvc", relalvc);
 			page.setPd(pd);
 			/*pd.put("relaLevel", relalevel);*/			
 			/*pd.put("querycontdiction1", querycontdiction1);
 			pd.put("querycontdiction2", querycontdiction2);
 			page.setPd(pd);*/
-			System.out.println(relalevel+"----------------------------");
+			
 			List<PageData> tviplist = vipservice.findVipList(page);
 			map.put("tviplist", tviplist);
 			map.put("page", page);

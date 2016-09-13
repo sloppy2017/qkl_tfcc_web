@@ -21,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, user_code, user_name, phone, pwdhash, start_date, end_date, is_loginlocked, loginlock_time, 
-    is_smslocked, smslock_time, user_type, reg_time, status, create_time, modify_time
+    is_smslocked, smslock_time, user_type, reg_time, `status`, create_time, modify_time
   </sql>
   
     <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
@@ -29,18 +29,9 @@
         from tb_user  where phone = #{phone} 
 	</select> 
 
-    <select id="findUserByPhone" parameterType="java.lang.String" resultType="User" >
-		select id,user_code userCode,
-		phone,pwdhash,
-		start_date startDate,
-		end_date endDate,
-		is_loginlocked isLoginlocked,
-		loginlock_time loginlockTime,
-		is_smslocked isSmslocked,
-        smslock_time smslockTime,
-        user_type userType,reg_time regTime,
-        `status`,
-        create_time createTime,modify_time modifyTime 
+    <select id="findUserByPhone" parameterType="java.lang.String" resultMap="BaseResultMap" >
+		select 
+		<include refid="Base_Column_List" />
         from tb_user  where phone = #{phone}
 	</select> 
 	<select id="findUserByUserCode" parameterType="java.lang.String" resultMap="BaseResultMap" >

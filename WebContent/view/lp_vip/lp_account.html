@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en"class="my" >
+<html lang="en" class="my" >
 <head>
     <meta charset="UTF-8">
     <title>我的账户</title>
-    <link rel="stylesheet" href="../tfcc/WEBcss/commen/commen.css">
-    <!--<link rel="stylesheet" href="css/ssi-uploader.css"/>-->
-    <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="css/style2.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="css/biaoDan.css">-->
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/commen.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/lpmember/lpaccount/lpaccount.css">
+    <!--<script src="/resources/qkl_tfcc/js/pagination/pagination.js"></script>-->
+    <script src="/resources/qkl_tfcc/js/common/jquery-2.1.1.min.js"></script>
 </head>
 <body>
 <div class="overall ">
     <!--头部-->
     <div class="header">
         <div class="header-logo">
-            <img src="/resources/qkl_tfcc/imgs/logo.png" alt="">
+            <img src="/resources/qkl_tfcc/imgs/logo1.png" alt="">
         </div>
         <!--时间栏-->
         <div id="nowTime" class="data">
@@ -26,7 +24,7 @@
                 <span>，您好！欢迎使用本系统</span>
             </div>
             <div class="Sign">
-                【退出】
+                <a href="/service/user/logout">【退出】</a>
             </div>
         </div>
 
@@ -36,8 +34,9 @@
         <div class="content-l">
             <dl>
                 <dt class="dt_img">
-                    <!--<img src="image/LPtouxiang.jpg" alt=""></dt>-->
-                <dd class="lp">LP</dd>
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
+                </dt>
+                <dd class="lp">LP会员</dd>
 
             </dl>
             <dl>
@@ -51,38 +50,111 @@
 <!--选项部分-->
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
-<!--         <li><a  href="../html/lpstock.html">我的股权</a></li> -->
+        <!--<li><a  href="../../html/lpmember/lpstock.html">我的股权</a></li>-->
         <li><a  href="../lp_vip/lp_team.html">我的团队</a></li>
-        <li><a class="active" href="#">我的账户</a></li>
+        <li><a  class="security-z" href="../lp_vip/lp_account.html">我的账户</a></li>
         <li ><a  href="../lp_vip/lp_myself.html">个人中心</a></li>
         <li  ><a href="../lp_vip/lp_safety.html">安全中心</a></li>
         <li><a href="http://www.r8exchange.com">R8交易所</a></li>
     </ul>
 </div>
+<!--遮罩层-->
+<div class="mark2">
+    <div class="mark2-box">
+        <div class="success-icon"></div>
+        <p>TFCC转账成功</p>
+        <div class="achieve"><a href="">完成</a></div>
+    </div>
+</div>
+<div class="mark3">
+    <div class="mark2-box">
+        <div class="success-icon"></div>
+        <p>TFCC转账成功</p>
+        <div class="achieve"><a href="">完成</a></div>
+    </div>
+</div>
+<div class="dividend">
+    <div class="dividend-box">
+        <p>转账额度不再享受粉红是否确认继续转账？</p>
+        <a href="#" onclick="tfcc_sub()" class="yes">是</a><a href="#" onclick="exit()">否</a>
+    </div>
+</div>
 <div class="tuandui">
-    <p>您当前的位置：<b>我的账户</b></p>
-    <div class="yu_e">
-        <div class="zhuan_z">
-            <div class="my_yu_e">我的余额</div>
-            <div class="TF_JF">
-                <span>TFCC </span><b>800,000.00</b>
-                <span>JFCC </span><b>100,000.00</b>
-                <a href="lpaccount/lptransfer.html">转账</a>
+    <div class="main fl">
+        <div class="mains">
+            <div class="">
+                <div class="main-top">
+                    <span>你当前的位置：</span><span class="c28">我的账户</span>
+                </div>
+                <div class="my-sum" style="border: none">
+                    <h4>TFCC最新成交价：￥<span class="chengjiaojia" style='color:red;font-size:24px;font-weight:800'></span></h4>
+                    <h4>我的余额:&nbsp;&nbsp;&nbsp;
+                        TFCC:&nbsp;&nbsp;&nbsp;<span id="sp1" style='color:red;font-size:24px;font-weight:800'></span>
+                        &nbsp;&nbsp;
+                        <span class="chengjiaojia chengjiaojia_TFCC"></span>
+                        <li class="zhuanzhang" style="display: inline-block;margin-left:100px;border:1px solid #dddddd;border-radius: 3px;width: 160px;line-height: 30px; text-align: center;">转账</li>
+                    </h4>
+                    <!--<div>-->
+                        <!--<ul>-->
+                            <!--&lt;!&ndash;<li><div >TFCC</div>&nbsp;&nbsp;<span class="chengjiaojia">100000000</span></li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li>&ndash;&gt;-->
+                            <!--<li class="zhuanzhang">转账</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                </div>
+                <!--<div class="my-award">-->
+                    <!--<h4>我的奖励</h4>-->
+                    <!--<div>-->
+                        <!--<ul>-->
+                            <!--<li><div class="c57">总累计奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
+                            <!--<li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
+                            <!--<li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9">30,000.00</div></li>-->
+                            <!--<input type="button" class="chaxun" value="查询">-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
-
-        </div>
-        <div class="jiang_l">
-            <div class="my_jiang_l">我的奖励</div>
-            <ul class="tui_j">
-                <li class="tui_j_r"><span>推荐LP会员奖励</span><br><b>30,000.00</b></li>
-                <li class="tui_j_r"><span>推荐LP会员购买股权奖励</span><br><b>30,000.00</b></li>
-                <li><span>我购买股权的奖励</span><br><b>30,000.00</b></li>
-            </ul>
-        </div>
-        <div  style="clear: both;border:1px solid #000000;margin-top: 35px">
-            注册时间
+            <div class="trans-account">
+                <div class="main-top"><span>您当前的位置：</span><span>我的账户</span>><span class="c28">账户</span></div>
+                <div class="trans-wrap">
+                    <p style="border: none">转账至R8交易所账户中</p>
+                    <div class="trans-type">
+                        <p style="border: none">选择币种</p>
+                        <select name="" id="pid" onchange="gradeChange()">
+                            <option value="">TFCC</option>
+                            <!--<option value="">JFCC</option>-->
+                        </select>
+                    </div>
+                    <div class="trans-tfcc">
+                        <p style="border: none">转账额度</p>
+                        <input type="text"name="money" placeholder="请输入需转账额度" style="border: 1px solid #dddddd;border-radius: 3px">
+                        <span>您最多可转账额度为 40,000.00</span><span class="t_trans">全部转账</span>
+                        <span class="errorc"></span>
+                        <div ><a style="text-decoration: none"href="#" class="tfcc-btn" onclick="save()">保存</a> <a href="">返回</a></div>
+                    </div>
+                    <div class="trans-jfcc">
+                        <p style="border: none">转账额度</p>
+                        <input type="text" name="money" placeholder="请输入需转账额度">
+                        <span>您最多可转账额度为 10,000.00</span><span class="t_trans">全部转账</span>
+                        <span class="errorc">sss</span>
+                        <div><a href="#" class="jfcc-btn" onclick="return jfcc_sub()">提交</a> <a href="">返回</a></div>
+                    </div>
+                </div>
+                <div class="trans-jfcc"></div>
+            </div>
         </div>
     </div>
+    <!--<table class="result-tab" id="result-tab2">-->
+        <!--&lt;!&ndash;    <tr>-->
+               <!--<th>用户名</th>-->
+               <!--<th>id</th>-->
+           <!--</tr> &ndash;&gt;-->
+    <!--</table>-->
+    <!--<div class="pages1" id="pages2">-->
+        <!--&lt;!&ndash;  <td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>       &ndash;&gt;-->
+
+    <!--</div>-->
+
 </div>
 <!---时间日期-->
 <script type="text/javascript">
@@ -127,6 +199,115 @@
 </script>
 <!---时间日期结束-->
 
+<!--分页表格-->
+<!--<script>-->
+    <!--$(function () {-->
+        <!--var flag = true;-->
+        <!--$(".chaxun").click(function () {-->
+            <!--alert("1111111");-->
+            <!--var showcnt =10; //每页页数初始值-->
+            <!--var  myselect=document.getElementById("showcnt");-->
+            <!--if(myselect==null||myselect=="null"){-->
+            <!--}else{-->
+                <!--showcnt=myselect.options[myselect.selectedIndex].value;-->
+            <!--}-->
+            <!--if(flag){-->
+                <!--reload_table(1,showcnt);-->
+            <!--}-->
+        <!--})-->
 
+        <!--function reload_table(currentPage,showCount) {-->
+            <!--alert("22222");-->
+            <!--var rsStr = "";-->
+            <!--var phoneVal = $('.phone').val();-->
+            <!--console.log("phoneVal is " + phoneVal);-->
+            <!--var passVal = $('.pass').val();-->
+            <!--console.log("passVal is " + passVal);-->
+            <!--$.ajax({-->
+                <!--type: 'POST',-->
+<!--//		url: '/service/user/login/',-->
+                <!--url: '/service/test/queryuser/',-->
+                <!--dataType: 'json',-->
+                <!--data: {-->
+                    <!--huiyuanzhanghao:$('.huiyuanzhanghao').val(),-->
+<!--//                phone: $('.phone').val(),-->
+<!--//                pass: $('.pass').val(),-->
+                    <!--currentPage: currentPage,-->
+                    <!--showCount: showCount-->
+                <!--},-->
+                <!--success: function (data) {-->
+                    <!--alert('请求成功');-->
+                    <!--var message = data.message;-->
+                    <!--console.log("success is " + data.success);-->
+                    <!--console.log("data is " + data.map);-->
+                    <!--console.log("data.userList is " + data.data.userList);-->
+                    <!--var usList = data.data.userList;-->
+                    <!--console.log("usList.length " + usList.length);-->
+                    <!--console.log("data.data.page.pageStr " + data.data.page.pageStr);-->
+                    <!--var tablecols = "<tr> \n"-->
+                            <!--+ " <th>注册时间</th> \n"-->
+                            <!--+ "<th>LP会员账号</th> \n"-->
+                            <!--+ "<th>LP会员姓名</th> \n"-->
+                            <!--+ "<th>购买股份（股）</th> \n"-->
+                            <!--+ "</tr> \n";-->
+                    <!--rsStr = tablecols;-->
+                    <!--for (var i = 0; i < usList.length; i++) {-->
+                        <!--rsStr = rsStr + "<tr>";-->
+                        <!--console.log("usList(" + i + ") name is " + usList[i].name);-->
+                        <!--rsStr = rsStr + "<td>" + usList[i].name + "</td>";-->
+                        <!--rsStr = rsStr + "<td>" + usList[i].test_user_id + "</td>";-->
+                        <!--rsStr = rsStr + "</tr>";-->
+                    <!--}-->
+
+                    <!--console.log("rsStr " + rsStr);-->
+<!--//                    $(".result-tab").append(rsStr);-->
+                    <!--$(".result-tab").html(rsStr);-->
+<!--//			 $(".pages1").append(data.data.page.pageStr);-->
+                    <!--$(".pages1").html(data.data.page.pageStr);-->
+
+<!--//			$('.phone').val(data.data.phone);-->
+                    <!--alert("message is " + message);-->
+
+<!--//			 if(data.success){-->
+<!--//				 window.location.href ="../index.html";-->
+<!--//			 }-->
+                <!--}, error: function (data) {-->
+                    <!--alert('请求错误');-->
+                <!--}-->
+            <!--})-->
+        <!--}-->
+
+    <!--})-->
+<!--</script>-->
+
+<script src="/resources/qkl_tfcc/js/lpmember/lpccount/lpccount.js"></script>
+<script type="text/javascript">
+$.ajax({
+    type:'post',
+    url:'/service/lpacc/getnum',
+    dataType:'json',
+    success:function(data){
+        var message = data.message;
+       // alert(message);
+        $("#sp1").html(data.data.Balance);
+        
+    }
+})
+$(function(){
+      getUserInfo();
+  });
+
+  function getUserInfo(){
+      var url = "/service/user/toMyself";
+      $.getJSON(url,function(data){
+          if(data.success){
+              if(data.data.imgAddrss){
+                  $("#left_headPicId").attr("src",data.data.imgAddrss);
+              }
+          }
+      });
+  }
+
+</script>
 </body>
 </html>

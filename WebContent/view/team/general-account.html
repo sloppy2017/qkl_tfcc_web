@@ -75,8 +75,8 @@
                     <h4>我的余额</h4>
                     <div>
                         <ul>
-                            <li><div>TFCC</div>&nbsp;&nbsp;<span>800,000.00</span></li>
-                            <li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li>
+                            <li><div>TFCC</div>&nbsp;&nbsp;<span id="spt"></span></li>
+                          <!--   <li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li> -->
                             <li class="zhuanzhang">转账</li>
                         </ul>
                     </div>
@@ -85,9 +85,9 @@
                     <h4>我的奖励</h4>
                     <div>
                         <ul>
-                            <li><div class="c57">总累计奖励 TFCC</div><div class="ce9">30,000.00</div></li>
-                            <li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9">30,000.00</div></li>
-                            <li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9">30,000.00</div></li>
+                            <li><div class="c57">总累计奖励 TFCC</div><div class="ce9" id="sptt"></div></li>
+                            <li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9" id="spv"></div></li>
+                            <!-- <li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9" id="">30,000.00</div></li> -->
                         </ul>
                     </div>
                 </div>
@@ -142,5 +142,22 @@
 </div>
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
+
+<script>
+
+$.ajax({
+    type:'post',
+    url:'/service/comacc/findNums',
+    dataType:'json',
+    success:function(data){
+        var message = data.message;
+        $("#spt").html(data.data.findTB);
+        $("#sptt").html(data.data.findTTReward);
+        $("#spv").html(data.data.findReward);
+      
+    }
+})
+
+</script>
 </body>
 </html>

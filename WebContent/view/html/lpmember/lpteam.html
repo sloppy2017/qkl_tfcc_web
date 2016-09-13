@@ -60,7 +60,7 @@
     <p style="width: 1673px">您当前的位置：<b>我的团队</b></p>
     <div class="jilei">
         <div class="jilei_lp">
-            <span>累计LP会员</span><b class="lphuiyuan">107</b>
+            <span>累计LP会员</span><b class="lphuiyuan"></b>
         </div>
         <!--<div class="jilei_zh">-->
             <!--<span >会员账号</span>-->
@@ -83,6 +83,9 @@
 
 <!---时间日期-->
 <script type="text/javascript">
+
+
+
     function showLocale(objD){
         var str,colorhead,colorfoot;
         var yy = objD.getYear();
@@ -208,5 +211,20 @@
     <!--})-->
 <!--</script>-->
 
+<script type="text/javascript">
+$.ajax({
+    type:'post',
+    url:'/service/lp/getnum',
+    dataType:'json',
+    success:function(data){
+        var message = data.message;
+      // alert(message);
+        $(".lphuiyuan").html(data.data);
+        
+    }
+})
+
+
+</script>
 </body>
 </html>

@@ -97,35 +97,35 @@ public class UserController extends BaseAction{
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse login(HttpServletRequest request,HttpServletResponse response ,Page page){
-//		AjaxResponse ar = new AjaxResponse();
-//		Map<String,Object> data = new HashMap<String, Object>();
-//		try {
-//			String userName  =request.getParameter("phone");
-//			String passWord  =request.getParameter("pass");
-//			
-//			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
-//			if ((Integer) map.get("status") == Constant.SUCCESS) {
-//				User user = (User) map.get(Constant.LOGIN_USER);
-//				request.getSession().setAttribute(Constant.LOGIN_USER, user);
-//				logger.info(userName + "登录成功");
-//				ar.setSuccess(true);
-//			} else {
-//				ar.setSuccess(false);
-//				ar.setMessage((String)map.get("msg"));
-//			}
-//			
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			ar.setSuccess(false);
-//			ar.setMessage("系统异常");
-//		}	
-//		ar.setData(data);
-//		return ar;
-		
 		AjaxResponse ar = new AjaxResponse();
-//		long testUserId =  Long.parseLong(request.getParameter("email")) ;
-//		System.out.println( "******queryuser  "+testUserId);
+		Map<String,Object> data = new HashMap<String, Object>();
+		try {
+			String userName  =request.getParameter("phone");
+			String passWord  =URLDecoder.decode(request.getParameter("password"), "utf-8");
+			
+			Map<String, Object> map = userService.login(userName, passWord, Constant.CUR_SYS_CODE,Constant.VERSION_NO);
+			if ((Integer) map.get("status") == Constant.SUCCESS) {
+				User user = (User) map.get(Constant.LOGIN_USER);
+				request.getSession().setAttribute(Constant.LOGIN_USER, user);
+				logger.info(userName + "登录成功");
+				ar.setSuccess(true);
+				data.put("userType", user.getUserType());
+				ar.setData(data);
+			} else {
+				ar.setSuccess(false);
+				ar.setMessage((String)map.get("msg"));
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			ar.setSuccess(false);
+			ar.setMessage("系统异常");
+		}	
+		ar.setData(data);
+		return ar;
+		
+		/*AjaxResponse ar = new AjaxResponse();
 		pd = this.getPageData();
 		page.setPd(pd);
 		List<PageData> userList = testUserService.queryTestUserList(page);
@@ -136,7 +136,7 @@ public class UserController extends BaseAction{
 		ar.setSuccess(true);
 		ar.setMessage("查询成功！");
 		ar.setData(map);
-		return ar;
+		return ar;*/
 	}
 	
 	/**
@@ -214,11 +214,11 @@ public class UserController extends BaseAction{
 			String vcode  =request.getParameter("yzm");
 			String refPhone  =request.getParameter("phone1");
 			String userType =request.getParameter("userType");
-			String branchName =request.getParameter("branchname"); 
-			String realName =request.getParameter("realname");  
+			String branchName =request.getParameter("branchName")==null?"":URLDecoder.decode(request.getParameter("branchName"), "UTF-8"); 
+			String realName = request.getParameter("realName")==null?"":URLDecoder.decode(request.getParameter("realName"), "UTF-8");  
 			String idno =request.getParameter("idno");
-			String cropName  =request.getParameter("cropname");
-			String cropPerson  =request.getParameter("cropperson");
+			String cropName  =request.getParameter("cropName")==null?"":URLDecoder.decode(request.getParameter("cropName"), "UTF-8");
+			String cropPerson  =request.getParameter("cropPerson")==null?"":URLDecoder.decode(request.getParameter("cropPerson"), "UTF-8");
 			
 			userName=userName==null?"":userName.trim();
 			passWord=passWord==null?"":passWord.trim();
@@ -1232,7 +1232,7 @@ public class UserController extends BaseAction{
             String imgtype = filepath.substring(lastindex+1,filepath.length());
             System.out.println("----------imgtype:"+imgtype);
             if(!map.containsKey(imgtype)){
-                out.print("<script>parent.window.alert(\"请上传jpg、png、jpeg、png、gif、bmp格式的图片！\");</script>");
+                out.print("<script>parent.window.alert(\"请上传jpg、png、jpeg、gif、bmp格式的图片！\");</script>");
                 return;
             }
             
@@ -1247,8 +1247,8 @@ public class UserController extends BaseAction{
             System.out.println("-----------http_img_url------------------->>>>>>>>>>>>>>>>>"+http_img_url);
             System.out.println("-----------backup_img_url----------------->>>>>>>>>>>>>>>>>"+backup_img_url);
             
-            FileUtil.copyFile(tp.getInputStream(), server_img_url,new_img_name).replaceAll("-", "");
-            FileUtil.copyFile(tp.getInputStream(), backup_img_url,new_img_name).replaceAll("-", "");
+            FileUtil.copyFile(tp.getInputStream(), server_img_url,new_img_name);
+            FileUtil.copyFile(tp.getInputStream(), backup_img_url,new_img_name);
             userService.modifyUserHeadPic(pdfile.getString("userCode"), http_img_url, Constant.VERSION_NO);//修改数据库图片地址
             Map<String, Long> imgInfo = ImgUtil.getImgInfo(server_img_url+new_img_name);
             Long w = imgInfo.get("w");
@@ -1278,21 +1278,21 @@ public class UserController extends BaseAction{
         try{
             pd = this.getPageData();
             String imgAddrss = pd.getString("imgAddrss");
-            String img_name = imgAddrss.substring(imgAddrss.lastIndexOf("/")+1);                                         //图片路径
             if(!StringUtil.isEmpty(imgAddrss)){
                 //删除硬盘上的文件 start
-                String resources_local = "";
+                String img_name = imgAddrss.substring(imgAddrss.lastIndexOf("/")+1); 
+                String resources_server = "";
                 String resources_backup = "";
                 List<Map<String,Object>> tSysGencodeList =sysGenCodeService.findByGroupCode("RESOURCES_PATH", Constant.VERSION_NO);
                 for(Map<String,Object> mapObj:tSysGencodeList){
                     if("RESOURCES_LOCAL".equals(mapObj.get("codeName"))){
-                        resources_local = mapObj.get("codeValue").toString();
+                        resources_server = mapObj.get("codeValue").toString();
                     }
                     if("RESOURCES_BACKUP".equals(mapObj.get("codeName"))){
                         resources_backup = mapObj.get("codeValue").toString();
                     }
                 }
-                String server_img_url = resources_local+Constant.PIC_HEAD_PATH+img_name;//图片存放在服务器路径
+                String server_img_url = resources_server+Constant.PIC_HEAD_PATH+img_name;//图片存放在服务器路径
                 String backup_img_url = resources_backup+Constant.PIC_HEAD_PATH+img_name;//图片存放在磁盘路径
                 File serverFile = new File(server_img_url.trim()); 
                 File backupFile = new File(backup_img_url.trim()); 

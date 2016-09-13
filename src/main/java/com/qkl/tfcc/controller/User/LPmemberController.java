@@ -1,6 +1,8 @@
 package com.qkl.tfcc.controller.User;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,10 +34,11 @@ public class LPmemberController extends BaseAction {
 	@ResponseBody
 	public AjaxResponse findLPNum(HttpServletRequest request){
 		AjaxResponse ar = new AjaxResponse();
-		long num=0;
+		long lpNum=0;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			num = lpService.findLPmemberNum(user.getUserCode());
+			String userCode="10000000001";
+			lpNum = lpService.findLPmemberNum(userCode);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
 		} catch (Exception e) {
@@ -43,7 +46,7 @@ public class LPmemberController extends BaseAction {
 			ar.setSuccess(false);
 			ar.setMessage("查询失败");
 		}
-		ar.setData(num);
+		ar.setData(lpNum);
 		return ar;
 	}
 	
@@ -52,15 +55,21 @@ public class LPmemberController extends BaseAction {
 	@ResponseBody
 	public AjaxResponse findLPlist(HttpServletRequest request,Page page){
 		AjaxResponse ar = new AjaxResponse();
+		Map<String,Object> map = new HashMap<String, Object>();
 		List<PageData> lpmemberInfo=null;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			String userName = request.getParameter("userName");
 			pd=this.getPageData();
-			pd.put("userCode", user.getUserCode());
-			pd.put("userName", userName);
+			String userCode="10000000001";
+			map.put("userCode", userCode);
+			//pd.put("userCode", user.getUserCode());
+			map.put("userName", userName);
+			
 			page.setPd(pd);
 	        lpmemberInfo = lpService.findLPmemberInfo(page);
+	        map.put("page", page);
+	        map.put("lplist", lpmemberInfo);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
 			
@@ -69,8 +78,6 @@ public class LPmemberController extends BaseAction {
 			ar.setMessage("查询失败");
 			e.printStackTrace();
 		}
-		
-		ar.setData(lpmemberInfo);
 		return ar;
 	}
 

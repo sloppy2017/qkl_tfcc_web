@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/general/general-team.css">
     <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
 </head>
-<body>
+<body >
 <!--mark start-->
 <div class="mark2">
     <div class="mark2-box">
@@ -32,14 +32,14 @@
             <span class="dateTime">09:18:06 </span>
             <span class="weekTime"> 星期三 </span>
             <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span>1234334234</span> ，您好！&nbsp;欢迎使用本系统</span>
-            <span class="exit"><a href="">【退出】</a></span>
+            <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
         <div class="nav fix">
             <ul class="fl">
-                <li ><a class="active"  href="#">我的团队</a></li>
-                <li><a href="../general_vip/general-account.html">我的账户</a></li>
-                <li ><a  class="color-fff" href="../general_vip/general-myhelf.html">个人中心</a></li>
-                <li><a href="../general_vip/general-safety.html">安全中心</a></li>
+               <li ><a class="active" href="../general_vip/general_team.html">我的团队</a></li>
+                <li ><a  href="../general_vip/general_account.html">我的账户</a></li>
+                <li ><a  href="../general_vip/general_myself.html">个人中心</a></li>
+                <li><a  href="../general_vip/general_safety.html">安全中心</a></li>
                 <li><a href="http://www.r8exchange.com">R8交易所</a></li>
             </ul>
         </div>
@@ -52,26 +52,28 @@
         <div class="mains">
             <div class="posit" >
                 <div class="main-top"style="position: relative;overflow: hidden">
+                
+                
                     <div class="top-tab">
-                        <div class="fl ">你当前的位置：</div><span>我的团队</span>><span class="c28">我推荐的会员</span>
+                        <div class="fl ">你当前的位置：</div><span>我的团队</span><span class="c28">我推荐的会员</span>
                     </div>
-                    <div class="top-tab">
-                        <div class="fl ">你当前的位置：</div><span>我的团队</span>><span class="c28">我推荐的网点</span>
-                    </div>
+                    <!-- <div class="top-tab">
+                        <div class="fl ">你当前的位置：</div><span>我的团队</span><span class="c28">我推荐的网点</span>
+                    </div> -->
                 </div>
                 <div class="main-middle fix">
                     <div class="fix">
                         <ul class="fl member">
-                            <li>推荐会员<span class="member1">&nbsp;107</span></li>
-                            <li>A级会员<span class="member2">&nbsp;12</span></li>
-                            <li>B级会员<span class="member3">&nbsp;29</span></li>
-                            <li>C级会员<span class="member4">&nbsp;66</span></li>
-                            <li>推荐网点<span class="member5">&nbsp;5</span></li>
+                            <li>推荐会员&nbsp;<span class="member1">107</span></li>
+                            <li>A级会员&nbsp;<span class="member2">12</span></li>
+                            <li>B级会员&nbsp;<span class="member3">29</span></li>
+                            <li>C级会员&nbsp;<span class="member4">66</span></li>
+<!--                             <li>推荐网点<span class="member5">&nbsp;5</span></li> -->
                         </ul >
                     </div>
                     <ul class="huiyuan">
                         <li class="member-tab act">我推荐的会员</li>
-                        <li class="branch-tab">我推荐的网点</li>
+                       <!--  <li class="branch-tab">我推荐的网点</li> -->
                     </ul>
                 </div>
             </div>
@@ -81,7 +83,7 @@
                                 <ul class="fl ">
                                     <li>推荐类型</li>
                                     <li>
-                                        <input id ="quan" type="checkbox" >全部
+                                        <input id ="quan" type="checkbox" name="checkbox">全部
                                         <input id ="lva" type="checkbox"  > A级会员
                                         <input id ="lvb" type="checkbox" > B级会员
                                         <input id ="lvc" type="checkbox" >C级会员
@@ -89,13 +91,13 @@
                                     <li></li>
                                     <li></li>
                                     <li></li>
-                                    <li class="type-btn"><a href="#" onclick="">查询</a></li>
+                                    <li class="type-btn"><a href="#" >查询</a></li>
                                 </ul>
                             </div>
 
                             <!--table pageing start-->
                             <div class="table-list">
-                                <table class="result-tab" width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <table class="result-tab" width="100%" border="0px;" cellpadding="0px;" cellspacing="0px;">
                                     <thead>
 
                                     </thead>
@@ -119,7 +121,7 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img src="" alt="">
+                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
                 </div>
                 <p>普通会员</p>
             </div>
@@ -133,7 +135,39 @@
         </div>
     </div>
 </div>
+
+
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script src="/resources/qkl_tfcc/js/general_vip/general-team.js"></script>
+
+<script>
+
+$.ajax({
+    type:'post',
+    url:'/service/team/findVipNum',
+    dataType:'json',
+    success:function(data){
+        var message = data.message;
+        $(".member1").html(data.data.rNum);
+        $(".member2").html(data.data.aNum);
+        $(".member3").html(data.data.bNum);
+        $(".member4").html(data.data.cNum)
+    }
+})
+ $(function(){
+      getUserInfo();
+  });
+
+  function getUserInfo(){
+      var url = "/service/user/toMyself";
+      $.getJSON(url,function(data){
+          if(data.success){
+              if(data.data.imgAddrss){
+                  $("#left_headPicId").attr("src",data.data.imgAddrss);
+              }
+          }
+      });
+  }
+</script>
 </body>
 </html>

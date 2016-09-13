@@ -38,10 +38,10 @@
         </div>
         <div class="nav fix">
             <ul class="fl">
-                <li ><a href="../invest_vip/invest_team.html">我的团队</a></li>
-                <li><a href="../invest_vip/invest_account.html">我的账户</a></li>
-                <li ><a class="active" href="../invest_vip/invest_myself.html">个人中心</a></li>
-                <li><a href="../invest_vip/invest_safety.html">安全中心</a></li>
+                <li ><a href="../general_vip/general_team.html">我的团队</a></li>
+                <li ><a  href="../general_vip/general_account.html">我的账户</a></li>
+                <li ><a  class="active" href="../general_vip/general_myself.html">个人中心</a></li>
+                <li><a  href="../general_vip/general_safety.html">安全中心</a></li>
                 <li><a href="http://www.r8exchange.com">R8交易所</a></li>
             </ul>
         </div>
@@ -110,8 +110,8 @@
 </html>
 <script type="text/javascript" >
    $(function(){
-	　　toMyself();
-	}); 
+    　　toMyself();
+    }); 
   function uploadimg(obj){
       var filepath =$("input[type='file'][name='tp']").val();
       if(filepath==""){
@@ -127,81 +127,81 @@
      
   }
   function delPic(){
-	  if($("#imgAddrss").val().trim()==''){
-		  return;
-	  }
-	  var imgAddrss = $("#imgAddrss").val();
-	  var userCode = $("#userCode").val();
-	  var url = "/service/user/delPic";
-	  $.post(url,{"imgAddrss":imgAddrss,"userCode":userCode},function(data){
-		  if(data.success){
-			  $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
-			  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
-			  $("#imgAddrss").val("");
-		  }
-		  if(!data.success){
-			  alert(data.message);
-		  }
-		  
-	  });
+      if($("#imgAddrss").val().trim()==''){
+          return;
+      }
+      var imgAddrss = $("#imgAddrss").val();
+      var userCode = $("#userCode").val();
+      var url = "/service/user/delPic";
+      $.post(url,{"imgAddrss":imgAddrss,"userCode":userCode},function(data){
+          if(data.success){
+              $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
+              $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
+              $("#imgAddrss").val("");
+          }
+          if(!data.success){
+              alert(data.message);
+          }
+          
+      });
   }
   
   function toMyself(){
-	  var url = "/service/user/toMyself";
-	  $.getJSON(url,function(data){
-		  if(data.success){
-			  $("#realName").val(data.data.realName);
-			  if(data.data.userType==1&&data.data.realName!=null&&data.data.realName!=''){//普通会员未认证时提示认证
-				  $("#realName").next().text("您还未实名认证，为保障你的交易顺利进行，请及时前往\"安全中心\"进行认证");
-			  }
-			  $("#idno").val(data.data.idno);
-			  $("#phone").val(data.data.phone);
-			  $("#wxnum").val(data.data.wxnum);
-			  $("#bankaccno").val(data.data.bankaccno);
-			  $("#mailAddrss").val(data.data.mailAddrss);
-			  $("#zipCode").val(data.data.zipCode);
-			  $("#imgAddrss").val(data.data.imgAddrss);
-			  $("#userCode").val(data.data.userCode);
-			  if(data.data.imgAddrss){
-				  $("#imgAddrss").val(data.data.imgAddrss);
-				  $("#headPicId").attr("src",data.data.imgAddrss);
-	              $("#left_headPicId").attr("src",data.data.imgAddrss);
-			  }
-			  if(data.data.userType==2){//网点会员
-				  $("#networkName").css("display","block");
-				  $("#branch_name").val(data.data.branchName);
-				  $("#idno").prev("label").html("法人身份证号");
+      var url = "/service/user/toMyself";
+      $.getJSON(url,function(data){
+          if(data.success){
+              $("#realName").val(data.data.realName);
+              if(data.data.userType==1&&data.data.realName!=null&&data.data.realName!=''){//普通会员未认证时提示认证
+                  $("#realName").next().text("您还未实名认证，为保障你的交易顺利进行，请及时前往\"安全中心\"进行认证");
+              }
+              $("#idno").val(data.data.idno);
+              $("#phone").val(data.data.phone);
+              $("#wxnum").val(data.data.wxnum);
+              $("#bankaccno").val(data.data.bankaccno);
+              $("#mailAddrss").val(data.data.mailAddrss);
+              $("#zipCode").val(data.data.zipCode);
+              $("#imgAddrss").val(data.data.imgAddrss);
+              $("#userCode").val(data.data.userCode);
+              if(data.data.imgAddrss){
+                  $("#imgAddrss").val(data.data.imgAddrss);
+                  $("#headPicId").attr("src",data.data.imgAddrss);
+                  $("#left_headPicId").attr("src",data.data.imgAddrss);
+              }
+              if(data.data.userType==2){//网点会员
+                  $("#networkName").css("display","block");
+                  $("#branch_name").val(data.data.branchName);
+                  $("#idno").prev("label").html("法人身份证号");
                   $("#mailAddrss").prev("label").html("公司地址");
-			  }else if(data.data.userType==4){//投资公司
-				  $("#companyName").css("display","block");
+              }else if(data.data.userType==4){//投资公司
+                  $("#companyName").css("display","block");
                   $("#crop_name").val(data.data.branchName);
                   $("#realName").prev("label").html("法人姓名");
                   $("#idno").prev("label").html("法人身份证号");
                   $("#mailAddrss").prev("label").html("公司地址");
-			  }
-		  }
-		  
-	  })
+              }
+          }
+          
+      })
   }
   
   function save(){
-	  //非空时做格式校验
-	  var validWxnum = true;
-	  var zipCode = true;
-	  if($("#wxnum").val().trim()!=''){
-		  validWxnum = valid_wxnum($("#wxnum"));
+      //非空时做格式校验
+      var validWxnum = true;
+      var zipCode = true;
+      if($("#wxnum").val().trim()!=''){
+          validWxnum = valid_wxnum($("#wxnum"));
       }
-	  if($("#zipCode").val().trim()!=''){
-		  zipCode = valid_zipCode($("#zipCode"));
+      if($("#zipCode").val().trim()!=''){
+          zipCode = valid_zipCode($("#zipCode"));
       }
-	  if(!(validWxnum&&zipCode)){
-		  return;
-	  }
-	  var url = "/service/user/modifyuser";
-	  $.post(url,$("#form").serialize(),function(json){
+      if(!(validWxnum&&zipCode)){
+          return;
+      }
+      var url = "/service/user/modifyuser";
+      $.post(url,$("#form").serialize(),function(json){
           alert(json.message);
       });
-	  /* $.ajax({
+      /* $.ajax({
           type: "POST",
           url: url,
           data:{"phone":"1231654"},
@@ -209,13 +209,13 @@
 //           jsonp: 'jsonpCallback',
 //           callback:"doCall",
           success: function(json){
-        	  alert(1313);
+              alert(1313);
           }
        }); */
   }
  //微信号码
   $('#wxnum').blur(function(){
-	  $(this).val($(this).val().trim());
+      $(this).val($(this).val().trim());
       if($(this).val()==''){
           return;
       }
@@ -236,7 +236,7 @@
   }
   //支付宝
   /* $('#bankaccno').blur(function(){
-	  $(this).val($(this).val().trim());
+      $(this).val($(this).val().trim());
       if($(this).val()==''){
           return;
       }
@@ -257,7 +257,7 @@
   } */
   //通讯地址
   /* $('#mailAddrss').blur(function(){
-	  $(this).val($(this).val().trim());
+      $(this).val($(this).val().trim());
       if($(this).val()==''){
           return;
       }
@@ -282,7 +282,7 @@
   } */
   //邮编
   $('#zipCode').blur(function(){
-	  $(this).val($(this).val().trim());
+      $(this).val($(this).val().trim());
       if($(this).val()==''){
           return;
       }
@@ -306,10 +306,10 @@
       }
   }
   $("input[disabled!='disabled']").focus(function(){
-	  if($(this).hasClass('errorTip')){
-		  $(this).removeClass('errorTip');
-		  $(this).val('');
-	  }
-	  
+      if($(this).hasClass('errorTip')){
+          $(this).removeClass('errorTip');
+          $(this).val('');
+      }
+      
   });
 </script>

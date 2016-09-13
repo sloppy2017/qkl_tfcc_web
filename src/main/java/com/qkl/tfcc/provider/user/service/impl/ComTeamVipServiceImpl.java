@@ -42,11 +42,7 @@ public class ComTeamVipServiceImpl implements ComTeamVipService {
 	}
 
 
-	@Override
-	public int findCount(Map<String, Object> mp) {
-		// TODO Auto-generated method stub
-		return dao.findfyCount(mp);
-	}
+	
 
 
 	
