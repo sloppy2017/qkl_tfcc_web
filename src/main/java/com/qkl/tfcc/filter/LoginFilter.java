@@ -29,13 +29,12 @@ public class LoginFilter implements Filter{
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		HttpSession session = request.getSession();
 		String uri = request.getRequestURI().replaceAll("/$", "");
-		if (uri.equals(request.getContextPath() + "/service")||uri.equals(request.getContextPath() + "/service/user/login")
-				|| uri.equals(request.getContextPath() + "/service/user/logout")) {
+		if (uri.equals(request.getContextPath() + "/service/user/login")|| uri.equals(request.getContextPath() + "/service/user/logout")) {
 			filterChain.doFilter(request, response);
 			return;
 		}
 		if (null == session.getAttribute(Constant.LOGIN_USER)) {
-			response.sendRedirect(request.getContextPath() + "/service/user/logout");
+			response.sendRedirect(request.getContextPath() + "/service/user/login");
 			return;
 		}
 		filterChain.doFilter(request, response);
