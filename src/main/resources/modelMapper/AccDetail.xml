@@ -7,7 +7,7 @@
     
     <insert id="addAccDetail" parameterType="com.qkl.tfcc.api.po.acc.AccDetail" >
      insert into tb_acc_detail (user_code,sub_accno,bouns_source1,bouns_source2,rela_usercode,
-     rela_userlevel,amnt,caldate,cntflag,`status`,create_time,modify_time,operator)
+     rela_userlevel,amnt,caldate,cntflag,`status`,syscode,create_time,modify_time,operator)
      values(
      #{userCode},
      #{subAccno},
@@ -19,6 +19,7 @@
      #{caldate},
      #{cntflag},
      #{status},
+     #{syscode},   
      #{createTime},
      #{modifyTime},
      #{operator}
@@ -43,6 +44,9 @@
            <if test="bounsSource2 != null and bounsSource2 != ''">
                 and    bouns_source2 = #{bounsSource2}
            </if>
+            <if test="syscode != null and syscode != ''">
+                and    syscode = #{syscode}
+           </if>
      </update>
 <!--     分页查询账户明细  -->
      <select id="findAccDetailPage" parameterType="page" resultType="pd">
@@ -64,6 +68,9 @@
         </if>
         <if test="bounsSource2 != null and bounsSource2 != ''">
              and    bouns_source2 = #{bounsSource2}
+        </if>
+         <if test="syscode != null and syscode != ''">
+             and    syscode = #{syscode}
         </if>
      </select>
 </mapper>     
