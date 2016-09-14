@@ -1,15 +1,9 @@
 package com.qkl.tfcc.controller.User;
 
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -45,7 +39,7 @@ public class ComTeamVipController extends BaseAction{
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			pd=this.getPageData();
-			String userCode="10000000001";
+			String userCode= user.getUserCode();
 			pd.put("userCode", userCode);
 			count = vipservice.findcount(userCode);
 			ar.setSuccess(true);
@@ -115,7 +109,7 @@ public class ComTeamVipController extends BaseAction{
 			}
 			
 			
-			String userCode="10000000001";
+			String userCode=user.getUserCode();
 			pd.put("userCode", userCode);
 			pd.put("relalevel", relalevel);			
 			pd.put("relalva", relalva);

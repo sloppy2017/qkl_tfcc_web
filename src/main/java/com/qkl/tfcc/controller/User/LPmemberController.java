@@ -37,7 +37,7 @@ public class LPmemberController extends BaseAction {
 		long lpNum=0;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			String userCode="10000000001";
+			String userCode=user.getUserCode();
 			lpNum = lpService.findLPmemberNum(userCode);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
@@ -61,7 +61,7 @@ public class LPmemberController extends BaseAction {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			String userName = request.getParameter("userName");
 			pd=this.getPageData();
-			String userCode="10000000001";
+			String userCode=user.getUserCode();
 			map.put("userCode", userCode);
 			//pd.put("userCode", user.getUserCode());
 			map.put("userName", userName);
