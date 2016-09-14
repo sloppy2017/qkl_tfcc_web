@@ -18,7 +18,7 @@
 	 last_caldate,
 	 syscode,
 	 create_time,
-	 modify_time,
+	 modify_time,m
 	 operator)
 	 values(
 	 #{userCode},
@@ -65,6 +65,25 @@
                and sub_acc_no = #{subAccno}
                and syscode = #{syscode}
      </update>
+<!--      发放奖励 -->
+     <update id="updatefroze" parameterType="pd">    
+        update tb_acc a,tb_unfreeze_detail b
+         <set> 
+                a.avb_amnt = a.avb_amnt +b.unfreeze_num,
+   			  a.froze_amnt = a.froze_amnt - b.unfreeze_num
+                last_caldate = now(),
+                modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where user_code = #{userCode}     
+               and sub_acc_no = #{subAccno}
+               and syscode = #{syscode}
+               and status ='0'
+     </update>     
+     
+     
      <select id="findAcc" parameterType="com.qkl.tfcc.api.po.acc.Acc" resultType="com.qkl.tfcc.api.po.acc.Acc">
            select * from tb_acc 
            where user_code = #{userCode} 

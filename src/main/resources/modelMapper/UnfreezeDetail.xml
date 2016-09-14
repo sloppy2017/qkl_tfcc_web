@@ -11,6 +11,7 @@
 	    <result column="unfreeze_date" property="unfreezeDate" />
 	    <result column="target_system" property="targetSystem"/>
 	    <result column="status" property="status" /> 
+	    <result column="syscode" property="syscode" /> 
 	    <result column="create_time" property="createTime"/>    
 	    <result column="modify_time" property="modifyTime"/>    
 	    <result column="operator" property="operator"/>    
@@ -27,6 +28,7 @@
 		unfreeze_date,
 		target_system,
 		status,
+		syscode,
 		create_time,
 		modify_time,
 		operator
@@ -46,6 +48,7 @@
 			unfreeze_date unfreezeDate,
 			target_system targetSystem,
 			STATUS STATUS,
+			syscode syscode,
 	        create_time createTime,
 	        modify_time modifyTime,
 	        operator  operator
@@ -69,22 +72,27 @@
 	 unfreeze_date,
 	 target_system,
 	 status,
+	 syscode,
 	 create_time,
 	 modify_time,
 	 operator)
-	 values(
-	 #{userCode},
-	 #{beforeufNum},
-	 #{unfreezeNum},
-	 #{afterufNum},
+	 select  
+	 a.user_code,
+	 sub_acc_no,
+	 froze_amnt,
+	 froze_amnt*#{unfreezeRatio},
+	 froze_amnt*(1-#{unfreezeRatio}),
 	 #{unfreezeRatio},
-	 #{unfreezeDate},
-	 #{targetSystem},
-	 #{status},
-	 #{createTime},
-	 #{modifyTime},
-	 #{operator}
-	 )	 
+	 NOW(),
+	 '',
+	 '0',
+	 #{syscode},
+	 NOW(),
+	 NOW(),
+	 'sys'
+	 from tb_acc a,tb_user b
+	 where a.user_code = b.user_code
+	 and b.user_type=#{userType} 
 	 </insert>
 	
 	
