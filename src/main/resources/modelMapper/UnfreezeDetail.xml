@@ -52,7 +52,7 @@
 	        from tb_unfreeze_detail  where id = #{id}
       </select>
 
-	<select id="findByUserCode" parameterType="java.lang.String" resultMap="tradeDetailResultMap" >
+	<select id="findByUserCode" parameterType="java.lang.String" resultMap="UnfreezeDetailResultMap" >
         select 
          <include refid="Base_Column_List" />
         from tb_unfreeze_detail  where user_code = #{userCode}

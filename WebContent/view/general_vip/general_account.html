@@ -75,7 +75,7 @@
                     <h4>我的余额</h4>
                     <div>
                         <ul>
-                            <li><div>TFCC</div>&nbsp;&nbsp;<span id="spt">800,000.00</span></li>
+                            <li><div>TFCC</div>&nbsp;&nbsp;<span id="spt"></span></li>
                           <!--   <li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li> -->
                             <li class="zhuanzhang">转账</li>
                         </ul>
@@ -85,15 +85,15 @@
                     <h4>我的奖励</h4>
                     <div>
                         <ul>
-                            <li><div class="c57">总累计奖励 TFCC</div><div class="ce9" id="sptt">30,000.00</div></li>
-                            <li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9" id="spv">30,000.00</div></li>
+                            <li><div class="c57">总累计奖励 TFCC</div><div class="ce9" id="sptt"></div></li>
+                            <li><div class="c57">累计推荐会员奖励 TFCC</div><div class="ce9" id="spv"></div></li>
                             <!-- <li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9" id="">30,000.00</div></li> -->
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="trans-account">
-                <div class="main-top"><span>您当前的位置：</span><span>我的账户</span>><span class="c28">账户</span></div>
+                <div class="main-top"><span>您当前的位置：</span><span>我的账户</span><span class="c28">账户</span></div>
                 <div class="trans-wrap">
                     <p>转账至R8交易所账户中</p>
                     <div class="trans-type">
@@ -150,11 +150,20 @@ $.ajax({
     url:'/service/comacc/findNums',
     dataType:'json',
     success:function(data){
-        var message = data.message;
-        $("#spt").html(data.data.findTB);
-        $("#sptt").html(data.data.findTTReward);
-        $("#spv").html(data.data.findReward);
-      
+    	if(data.success){
+    		if(data.data.findTB==null){
+    			$("#spt").html("0.00");
+    		}
+    		if(data.data.findTTReward==null){
+    			$("#sptt").html("0.00");
+    		}
+            if(data.data.findReward==null){
+            	$("#spv").html("0.00");
+            }
+            
+    	}else{
+    		alert(data.message);
+    	}
     }
 })
 $(function(){

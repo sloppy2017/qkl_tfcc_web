@@ -9,7 +9,12 @@
 			$(this).addClass('active').siblings().removeClass('active');
 			var index = $tab_li.index(this);
 			$(' .form >form').eq(index).show().siblings().hide();
-			userType = index + 1;
+			if(index != 0){//userType==2是网点会员，该类型暂时取消
+				userType = index + 2;
+			}else{
+				userType = index + 1;
+			}
+			
 			$(".form").find("input").each(function(){
 				if(!$(this).hasClass("yzm")){
 					$(this).val('');
@@ -274,21 +279,21 @@
 	    }
 	}
 	$('.form1 .submit').click(function(){
-		/*var validPhone = valid_phone($(this).parent().find("input[name='phone']"));
+		var validPhone = valid_phone($(this).parent().find("input[name='phone']"));
 		var validPassword = valid_password($(this).parent().find("input[name='password']"));
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
 			return;
-		}*/
+		}
 		$.ajax({
 			type:'POST',
 			url:'/service/user/register?'+$("form:not(.hide)").serialize()+"&userType="+userType,
 			success:function(data){
 				if(data.success){
-//					$(".mark1").show();
-					location.href="/view/general_vip/general_account.html";
+					$(".mark1").show();
+//					location.href="/view/general_vip/general_account.html";
 				}else{
 					alert(data.message);
 				}
@@ -315,8 +320,8 @@
 			url:url,
 			success:function(data){
 				if(data.success){
-//					$(".mark2").show();
-					location.href="/view/lp_vip/lp_account.html";
+					$(".mark2").show();
+//					location.href="/view/lp_vip/lp_account.html";
 				}else{
 					alert(data.message);
 				}
@@ -343,8 +348,8 @@
 			url:url,
 			success:function(data){
 				if(data.success){
-//					$(".mark3").show();
-					location.href="/view/invest_vip/invest_account.html";
+					$(".mark3").show();
+//					location.href="/view/invest_vip/invest_account.html";
 				}else{
 					alert(data.message);
 				}

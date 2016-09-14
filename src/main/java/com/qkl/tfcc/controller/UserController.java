@@ -10,8 +10,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.common.CodeConstant;
@@ -38,6 +41,7 @@ import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.api.service.sys.api.SysMaxnumService;
 import com.qkl.tfcc.api.service.testUser.api.TestUserService;
 import com.qkl.tfcc.api.service.user.api.UserService;
+import com.qkl.tfcc.sms.SmsSend;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
@@ -159,8 +163,6 @@ public class UserController extends BaseAction{
 			String zipCode =request.getParameter("zipCode");		*/
 //			String imgAddrss =request.getParameter("imgaddrss");
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			user = new User();
-			user.setUserCode("10000000001");
 			UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
 //			UserDetail tUserDetail = new UserDetail();
 			tUserDetail.setUserCode(user.getUserCode());
@@ -217,7 +219,7 @@ public class UserController extends BaseAction{
 			String branchName =request.getParameter("branchName")==null?"":URLDecoder.decode(request.getParameter("branchName"), "UTF-8"); 
 			String realName = request.getParameter("realName")==null?"":URLDecoder.decode(request.getParameter("realName"), "UTF-8");  
 			String idno =request.getParameter("idno");
-			String cropName  =request.getParameter("cropName")==null?"":URLDecoder.decode(request.getParameter("cropName"), "UTF-8");
+//			String cropName  =request.getParameter("cropName")==null?"":URLDecoder.decode(request.getParameter("cropName"), "UTF-8");
 			String cropPerson  =request.getParameter("cropPerson")==null?"":URLDecoder.decode(request.getParameter("cropPerson"), "UTF-8");
 			
 			userName=userName==null?"":userName.trim();
@@ -228,7 +230,7 @@ public class UserController extends BaseAction{
 			branchName=branchName==null?"":branchName.trim();
 			realName=realName==null?"":realName.trim();
 			idno=idno==null?"":idno.trim();
-			cropName=cropName==null?"":cropName.trim();
+//			cropName=cropName==null?"":cropName.trim();
 			cropPerson=cropPerson==null?"":cropPerson.trim();
 			
 			if(!Validator.isMobile(userName)){
@@ -316,7 +318,7 @@ public class UserController extends BaseAction{
 			tUserDetail.setBranchName(branchName);
 			tUserDetail.setRealName(realName);
 			tUserDetail.setIdno(idno);
-			tUserDetail.setCropName(cropName);
+//			tUserDetail.setCropName(cropName);
 			tUserDetail.setCropPerson(cropPerson);
 			tUserDetail.setQrCode("");
 			tUserDetail.setUserType(userType);
@@ -335,10 +337,10 @@ public class UserController extends BaseAction{
 			}
 			
 			//添加用户关系
-			createUserFriendship(tUserDetail);
+//			createUserFriendship(tUserDetail);
 			
 			//计算注册奖励
-			calRegitAccDetail(tUserDetail);
+//			calRegitAccDetail(tUserDetail);
 			
 			 
 			request.getSession().setAttribute(Constant.LOGIN_USER, tUser);
@@ -363,7 +365,7 @@ public class UserController extends BaseAction{
 	   4-投资公司
 	   5-众筹会员
 	 * */
-	private void   calRegitAccDetail(UserDetail mUserDetail){
+	/*private void   calRegitAccDetail(UserDetail mUserDetail){
 		String refPhone =mUserDetail.getRefPhone(); 
 		String UserCode = mUserDetail.getUserCode();
 		String userType = mUserDetail.getUserType();
@@ -447,14 +449,14 @@ public class UserController extends BaseAction{
 			
 		}
 		
-	}
+	}*/
 	
 	
 	/**
 	 * 计算网点用户注册奖励关系
 	 * 
 	 * */
-	private boolean   calWDMemberRegitBouns(UserDetail mUserDetail){				
+	/*private boolean   calWDMemberRegitBouns(UserDetail mUserDetail){				
 		SysGencode tSysGencodeBNDMZC5 = new SysGencode();
 		if(tSysGencodeAll!=null&&tSysGencodeAll.size()>0){
 			for(SysGencode tSysGencode:tSysGencodeAll){
@@ -498,7 +500,7 @@ public class UserController extends BaseAction{
 	    
 	    return accService.addAccDetail(tAccDetail,Constant.VERSION_NO);
 	    
-	}
+	}*/
 	
 	
 	
@@ -506,7 +508,7 @@ public class UserController extends BaseAction{
 	 * 计算普通会员注册奖励关系
 	 * 
 	 * */
-	private void  calPtMemberRecmBouns(UserDetail mUserDetail){	
+	/*private void  calPtMemberRecmBouns(UserDetail mUserDetail){	
 		SysGencode tSysGencodeBNTJDM1 = new   SysGencode();
 		SysGencode tSysGencodeBNTJDM2 = new   SysGencode();
 		SysGencode tSysGencodeBNTJDM3 = new   SysGencode();
@@ -659,7 +661,7 @@ public class UserController extends BaseAction{
 		
 		 }
 	
-	}
+	}*/
 	
 	
 	
@@ -667,7 +669,7 @@ public class UserController extends BaseAction{
 	 * 计算普通会员注册奖励关系
 	 * 
 	 * */
-	private boolean   calPtMemberRegitBouns(UserDetail mUserDetail){				
+	/*private boolean   calPtMemberRegitBouns(UserDetail mUserDetail){				
 		SysGencode tSysGencodeBNDMZC5 = new SysGencode();
 		if(tSysGencodeAll!=null&&tSysGencodeAll.size()>0){
 			for(SysGencode tSysGencode:tSysGencodeAll){
@@ -711,7 +713,7 @@ public class UserController extends BaseAction{
 	    
 	    return accService.addAccDetail(tAccDetail,Constant.VERSION_NO);
 	    
-	}
+	}*/
 	
 	
 	
@@ -719,7 +721,7 @@ public class UserController extends BaseAction{
 	/**
 	 * 创建用户关系
 	 * */
-	private void   createUserFriendship(UserDetail mUserDetail){
+	/*private void   createUserFriendship(UserDetail mUserDetail){
 		String refPhone = mUserDetail.getRefPhone(); 
 		String UserCode = mUserDetail.getUserCode();
 		String userType = mUserDetail.getUserType();
@@ -791,7 +793,7 @@ public class UserController extends BaseAction{
 			 }
 		 }
 		
-	}
+	}*/
 	
 	
 	
@@ -810,10 +812,8 @@ public class UserController extends BaseAction{
 	public AjaxResponse modifypwd(HttpServletRequest request,HttpServletResponse response){
 		AjaxResponse ar = new AjaxResponse();
 		try {
-//			String userName  =request.getParameter("phone");
-//		    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-//		    String userCode = user.getUserCode();
-		    String userCode = "10000000001";
+		    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		    String userCode = user.getUserCode();
 			String oldPassWord  =request.getParameter("oldpassword");
 			String passWord  =request.getParameter("newpassword");
 			String cfPassWord  =request.getParameter("resnewpassword");
@@ -935,10 +935,7 @@ public class UserController extends BaseAction{
 	@ResponseBody
 	public AjaxResponse realname(HttpServletRequest request,HttpServletResponse response){
 	    try {
-//		    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-//            String userName = user.getPhone();
-            String userName = "18618382548";
-//		    String userName  =request.getParameter("phone");
+		    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			String realName  = request.getParameter("realName");
 			if(!StringUtil.isEmpty(realName)){
 			    realName = URLDecoder.decode(realName, "UTF-8");
@@ -965,7 +962,7 @@ public class UserController extends BaseAction{
 			};
 			
 
-			if(!userService.realUser(userName, realName, idno, Constant.VERSION_NO)){			
+			if(!userService.realUser(user.getPhone(), realName, idno, Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("用户实名失败！");
 				return ar;
@@ -1100,8 +1097,8 @@ public class UserController extends BaseAction{
 				ar.setMessage("短信发送太频繁，请稍后重试!");
 				return ar;
 			}
-//			String vCode =SmsSend.sendSms(phone);
-			String vCode =String.valueOf((int)((Math.random()*9+1)*100000));
+			String vCode =SmsSend.sendSms(phone);
+//			String vCode =String.valueOf((int)((Math.random()*9+1)*100000));
 			if(vCode.equals("0")){				
 				ar.setSuccess(false);
 				ar.setMessage("短信发送失败！");
@@ -1263,7 +1260,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.toString(), e);
-            out.print("<script>parent.alert('上传失败！');</script>");
+            out.print("<script>parent.alert('系统异常，上传失败！');</script>");
         }finally{
             out.print("<script>parent.$(\"input[type='file']\").val('');</script>");
             out.close();
@@ -1323,11 +1320,9 @@ public class UserController extends BaseAction{
     }
 	
 	private UserDetail findUserDetail(HttpServletRequest request){
-//	    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-//	    if(user == null)
-//	        return null;
-	    User user = new User();
-	    user.setUserCode("10000000001");
+	    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+	    if(user == null)
+	        return null;
 	    UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
 	    return userDetail;
 	}
