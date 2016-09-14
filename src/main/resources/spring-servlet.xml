@@ -44,6 +44,24 @@
 	<!-- 权限 url 拦截器 -->	
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		 <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.qkl.tfcc.intercept.AuthorizationInterceptor">
+                <property name="allowUrls">
+                    <list>
+                        <!-- 如果请求中包含以下路径，则不进行拦截 -->
+                        <value>/login</value>
+                        <value>/logout</value>
+                        <value>/js</value>
+                        <value>/css</value>
+                        <value>/imgs</value>
+                        <value>/test</value>
+                        <value>/register</value>
+                        <value>/service/user/sendsms</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
 	</mvc:interceptors>
 	
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
@@ -66,6 +84,5 @@
 			</list>
 		</property>
 	</bean>
-	
 	<mvc:default-servlet-handler />
 </beans>        

@@ -142,4 +142,12 @@ $(function() {
 			}
 		});
 	});
+	
+	 //绑定输入框，这里只能 是ID
+   $("#yzm").keydown(function(event){
+	    event=document.all?window.event:event;
+	    if((event.keyCode || event.which)==13){
+	    	$(".submit").click();
+	    }
+    });
 });

@@ -300,6 +300,7 @@ public class UserController extends BaseAction{
 			tUser.setPwdhash(MD5Util.getMd5Code(passWord));
 			tUser.setUserType(userType);
 			tUser.setRegTime(DateUtil.getCurrentDate());
+			tUser.setStatus("1");
 			/*if(userType.equals("2")){//网点会员
 			tUser.setStatus("0");
 			}else {
@@ -340,10 +341,10 @@ public class UserController extends BaseAction{
 			calRegitAccDetail(tUserDetail);
 			
 			 
-			 
-				ar.setSuccess(true);
-				ar.setMessage("注册成功！");
-				return ar;
+			request.getSession().setAttribute(Constant.LOGIN_USER, tUser);
+			ar.setSuccess(true);
+			ar.setMessage("注册成功！");
+			return ar;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
