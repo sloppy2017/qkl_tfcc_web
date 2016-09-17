@@ -11,7 +11,7 @@
 	<insert id="addAcc" parameterType="com.qkl.tfcc.api.po.acc.Acc" >
 	 insert into tb_acc (
 	 user_code,
-	 sub_acc_no,
+	 acc_no,
 	 avb_amnt,
 	 froze_amnt,
 	 total_amnt,
@@ -22,7 +22,7 @@
 	 operator)
 	 values(
 	 #{userCode},
-	 #{subAccno},
+	 #{accNo},
 	 #{avbAmnt},
 	 #{frozeAmnt},
 	 #{totalAmnt},
@@ -46,7 +46,6 @@
            </if>     
          </set>
          where user_code = #{userCode}     
-               and sub_acc_no = #{subAccno}
                and syscode = #{syscode}
      </update>
 <!--      发放奖励 -->
@@ -62,7 +61,6 @@
            </if>     
          </set>
          where user_code = #{userCode}     
-               and sub_acc_no = #{subAccno}
                and syscode = #{syscode}
      </update>
 <!--      发放奖励 -->
@@ -78,7 +76,6 @@
            </if>     
          </set>
          where a.user_code =b.user_code     
-               and a.sub_acc_no = b.sub_acc_no
                and a.syscode = b.syscode
                and a.user_code = c.user_code
                and c.user_type =#{userType}

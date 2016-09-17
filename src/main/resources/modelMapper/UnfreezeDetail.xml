@@ -78,7 +78,6 @@
 	 operator)
 	 select  
 	 a.user_code,
-	 sub_acc_no,
 	 froze_amnt,
 	 froze_amnt*#{unfreezeRatio},
 	 froze_amnt*(1-#{unfreezeRatio}),
