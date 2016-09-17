@@ -26,38 +26,7 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	@Autowired
 	private ComAccMyDao comAccMyDao;
 
-	@Override
-	public BigDecimal findTB(String userCode) {
-		// TODO Auto-generated method stub
-		
-		return comAccMyDao.findTB(userCode);
-	}
-
-	@Override
-	public BigDecimal findJB(String userCode) {
-		// TODO Auto-generated method stub
-		return comAccMyDao.findJB(userCode);
-	}
-
 	
-
-	@Override
-	public BigDecimal findReward(String userCode) {
-		// TODO Auto-generated method stub
-		return comAccMyDao.findReward(userCode);
-	}
-
-	@Override
-	public BigDecimal findWReward(String userCode) {
-		// TODO Auto-generated method stub
-		return comAccMyDao.findWReward(userCode);
-	}
-
-	@Override
-	public BigDecimal findTTReward(String userCode) {
-		// TODO Auto-generated method stub
-		return comAccMyDao.findTTReward(userCode);
-	}
 
 	@Override
 	public List<PageData> findAll(Page page) {
