@@ -405,7 +405,7 @@ public class UserServiceImpl implements UserService {
                             tSysGencodeBNDMWDKD6= tSysGencode;
                         }
                         
-                    }else if(tSysGencode.getGroupCode().equals("LPREWARD_DEF")){
+                    }else if(tSysGencode.getGroupCode().equals("REWARD_DEF")){
                         if(tSysGencode.getCodeValue().equals("SL1")){
                             tSysGencodeLPRDSL1 = tSysGencode;
                         }else if(tSysGencode.getCodeValue().equals("SL2")){
