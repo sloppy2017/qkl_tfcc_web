@@ -12,6 +12,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.service.trade.api.UnfreezeService;
+import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.SysGencodeDao;
 import com.qkl.tfcc.provider.dao.UnfreezeDetailDao;
 import com.qkl.util.help.DateUtil;
@@ -27,7 +28,8 @@ public class UnfreezeServiceImpl implements UnfreezeService {
 	private UnfreezeDetailDao unfreezeDetailDao;
 	@Autowired
 	private SysGencodeDao sysGencodeDao;
-	
+	@Autowired
+	private AccDao accDao;
 	
 	
 	
@@ -54,24 +56,58 @@ public class UnfreezeServiceImpl implements UnfreezeService {
 			
 	        //普通会员解冻
 			if(DateUtil.getNowDay().equals(ptufdate)){
-				
+				//addUnfreezeDetail 添加解冻明细需要参数为：
+				//1、unfreezeRatio 解冻比例
+				//2、syscode 系统编码
+				//3、userType 用户类型，普通会员为1
+				if(unfreezeDetailDao.addUnfreezeDetail(pd)){
+					//updatefroze 更新账户表可用、冻结数量等信息
+					//1、syscode 系统编码
+					//2、userType 用户类型，普通会员为1
+					accDao.updatefroze(pd);
+					//modifyUnfreezeDetailStatus 更新解冻明细表状态
+					//1、syscode 系统编码
+					//2、userType 用户类型，普通会员为1
+					unfreezeDetailDao.modifyUnfreezeDetailStatus(pd);					
+				}
 				
 				
 			}
 			 //LP会员解冻
 			if(DateUtil.getNowDay().equals(lpufdate)){
-				
+				//addUnfreezeDetail 添加解冻明细需要参数为：
+				//1、unfreezeRatio 解冻比例
+				//2、syscode 系统编码
+				//3、userType 用户类型，LP会员为3
+				if(unfreezeDetailDao.addUnfreezeDetail(pd)){
+					//updatefroze 更新账户表可用、冻结数量等信息
+					//1、syscode 系统编码
+					//2、userType 用户类型，LP会员为3
+					accDao.updatefroze(pd);
+					//modifyUnfreezeDetailStatus 更新解冻明细表状态
+					//1、syscode 系统编码
+					//2、userType 用户类型，LP会员为3
+					unfreezeDetailDao.modifyUnfreezeDetailStatus(pd);	
+				}
 			}
 			 //机构会员解冻
 			if(DateUtil.getNowDay().equals(jgufdate)){
-				
+				//addUnfreezeDetail 添加解冻明细需要参数为：
+				//1、unfreezeRatio 解冻比例
+				//2、syscode 系统编码
+				//3、userType 用户类型，机构会员为4
+				if(unfreezeDetailDao.addUnfreezeDetail(pd)){
+					//updatefroze 更新账户表可用、冻结数量等信息
+					//1、syscode 系统编码
+					//2、userType 用户类型，机构会员为4
+					accDao.updatefroze(pd);
+					//modifyUnfreezeDetailStatus 更新解冻明细表状态
+					//1、syscode 系统编码
+					//2、userType 用户类型，机构会员为4
+					unfreezeDetailDao.modifyUnfreezeDetailStatus(pd);
+				}
 			}
 			
-			
-	            
-	            
-			
-			unfreezeDetailDao.addUnfreezeDetail(pd);
 			return true;
 		}catch(Exception e){
 			loger.debug("addUnfreezeDetail fail,reason is "+e.getMessage());

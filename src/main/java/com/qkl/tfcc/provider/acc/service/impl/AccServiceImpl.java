@@ -66,7 +66,7 @@ public class AccServiceImpl implements AccService {
     @Override
     public boolean modifyAcc(Acc acc, String versionNo) {
         try{            
-            accDao.addAcc(acc);
+            accDao.modifyAcc(acc);
             return true;
         }catch(Exception e){
             loger.error("modifyAcc fail,reason is "+e.getMessage());

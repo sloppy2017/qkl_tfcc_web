@@ -86,21 +86,25 @@
 	 NOW(),
 	 '',
 	 '0',
-	 #{syscode},
+	 syscode,
 	 NOW(),
 	 NOW(),
 	 'sys'
 	 from tb_acc a,tb_user b
 	 where a.user_code = b.user_code
+	 and a.syscode = #{syscode}
 	 and b.user_type=#{userType} 
 	 </insert>
 	
 	
 	<update id="updatestatus" parameterType="java.util.Map" >    
-	     update tb_unfreeze_detail 
-	     set status = #{status},
-	         modify_time = #{modify_time}
-	     where id = #{id}     
+	     update tb_unfreeze_detail  a,tb_user b 
+	     set a.status = '1',
+	         a.modify_time =  NOW()
+	     where a.status='0'
+	      and  a.user_code = b.user_code  
+	      and  a.syscode =  #{syscode}
+	      and  b.user_type=#{userType}  
      </update>
      
      

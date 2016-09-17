@@ -52,4 +52,13 @@ public interface AccDao extends DAO<Acc> {
 	 * @return: void
 	 */
 	public void updateOut(Acc acc);
+	/**
+	 * @describe:支出
+	 * @author: zhangchunming
+	 * @date: 2016年9月9日上午10:09:52
+	 * @param acc
+	 * @return: void
+	 */
+	public void updatefroze(PageData pd);
+	
 }

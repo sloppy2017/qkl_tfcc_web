@@ -13,6 +13,14 @@ public interface UnfreezeDetailDao extends DAO<UnfreezeDetail> {
 	 * @create author kezhiyi
 	 * @create date 2016年9月13日
 	 */ 
-	public void addUnfreezeDetail(PageData pd);
+	public boolean addUnfreezeDetail(PageData pd);
+	/** 修改解冻状态
+	 * @return addUnfreezeDetail 修改解冻状态
+	 * @create author kezhiyi
+	 * @create date 2016年9月13日
+	 */ 
+	public boolean modifyUnfreezeDetailStatus(PageData pd);
+	
+	
 	
 }

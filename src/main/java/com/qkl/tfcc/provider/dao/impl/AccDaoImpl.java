@@ -46,5 +46,10 @@ protected static final Log logger = LogFactory.getLog(AccDaoImpl.class);
     public void updateOut(Acc acc) {
         getSqlSession().update(namespace+"."+"updateOut", acc); 
     }
+
+	@Override
+	public void updatefroze(PageData pd) {		
+		 getSqlSession().update(namespace+"."+"updatefroze", pd); 
+	}
 	
 }
