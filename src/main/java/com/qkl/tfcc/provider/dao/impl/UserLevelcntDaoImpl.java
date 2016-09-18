@@ -28,9 +28,15 @@ public class UserLevelcntDaoImpl extends DaoSupport<UserLevelcnt> implements
 	}
 
 	@Override
-	public List<PageData> findUserLevelcnt(PageData pd) {
+	public List<PageData> findUserLevelcntlist(PageData pd) {
 		List<PageData> lvcntinfo = getSqlSession().selectList(namespace+"."+"findlvcntlistPage", pd);
 		return lvcntinfo;
+	}
+
+	@Override
+	public PageData findUserLevelcnt(PageData pd) {
+		return getSqlSession().selectOne(namespace+"."+"find", pd);
+		 
 	}
 
 }
