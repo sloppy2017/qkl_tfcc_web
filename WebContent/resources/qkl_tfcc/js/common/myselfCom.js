@@ -1,6 +1,10 @@
 /**
  * Created by qw on 2016/9/1.
  */
+
+
+
+
 //微信号码
 $('#wxnum').blur(function(){
 	$this.val($(this).val().trim());

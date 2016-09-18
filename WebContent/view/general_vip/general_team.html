@@ -36,6 +36,7 @@
         </div>
         <div class="nav fix">
             <ul class="fl">
+             <li><a  href="../general_vip/general_stocks.html">我的股权</a></li>
                <li ><a class="active" href="../general_vip/general_team.html">我的团队</a></li>
                 <li ><a  href="../general_vip/general_account.html">我的账户</a></li>
                 <li ><a  href="../general_vip/general_myself.html">个人中心</a></li>
@@ -64,10 +65,10 @@
                 <div class="main-middle fix">
                     <div class="fix">
                         <ul class="fl member">
-                            <li>推荐会员&nbsp;<span class="member1">107</span></li>
-                            <li>A级会员&nbsp;<span class="member2">12</span></li>
-                            <li>B级会员&nbsp;<span class="member3">29</span></li>
-                            <li>C级会员&nbsp;<span class="member4">66</span></li>
+                            <li>推荐会员&nbsp;<span class="member1"></span></li>
+                            <li>A级会员&nbsp;<span class="member2"></span></li>
+                            <li>B级会员&nbsp;<span class="member3"></span></li>
+                            <li>C级会员&nbsp;<span class="member4"></span></li>
 <!--                             <li>推荐网点<span class="member5">&nbsp;5</span></li> -->
                         </ul >
                     </div>
@@ -148,10 +149,24 @@ $.ajax({
     dataType:'json',
     success:function(data){
         var message = data.message;
-        $(".member1").html(data.data.rNum);
-        $(".member2").html(data.data.aNum);
-        $(".member3").html(data.data.bNum);
-        $(".member4").html(data.data.cNum)
+        if(data.success){
+        	if(data.data==null){
+        		 $(".member1").html("0");
+        		 $(".member2").html("0");
+        		 $(".member3").html("0");
+        		 $(".member4").html("0");
+        	}else{
+        		$(".member1").html(data.data.rNum);
+        		$(".member2").html(data.data.aNum);
+                $(".member3").html(data.data.bNum);
+                $(".member4").html(data.data.cNum)
+        	}
+        	
+        }else{
+        	alert(message);
+        }
+        
+        
     }
 })
   $(function(){

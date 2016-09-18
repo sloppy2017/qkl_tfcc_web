@@ -32,4 +32,16 @@ public class BankAccServiceImpl implements BankAccService {
 		
 	}
 
+
+	@Override
+	public BankAccInfo findBankInfo(String versionNo) {
+		 
+		try {
+			return  bankAccDao.findBankInfo();
+		} catch (Exception e) {
+			loger.error("findBankInfo fail ,reason is "+e.getMessage());			
+			return null;
+		}
+	}
+
 }

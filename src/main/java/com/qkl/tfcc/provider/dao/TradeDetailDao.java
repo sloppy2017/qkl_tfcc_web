@@ -1,5 +1,8 @@
 package com.qkl.tfcc.provider.dao;
 
+import java.util.List;
+
+import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.trade.TradeDetail;
 import com.qkl.tfcc.provider.dbhelper.DAO;
 import com.qkl.util.help.pager.PageData;
@@ -25,6 +28,15 @@ public interface TradeDetailDao extends DAO<TradeDetail> {
 	 * @create date 2016年9月6日
 	 */
 	public void modifyTradeStatus(PageData pd);
+	
+	
+	/**
+	 * 查询交易信息列表
+	 * @return
+	 */
+	public List<PageData> findTradeInfo(Page page);
+	
+	
 	
 	
 }

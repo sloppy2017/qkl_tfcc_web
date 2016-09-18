@@ -16,7 +16,9 @@ import com.qkl.util.help.pager.PageData;
 public class LPaccDaoImpl extends DaoSupport<AccDetail> implements LPaccDao {
 
 	protected static final Log logger = LogFactory.getLog(LPaccDaoImpl.class);
-	private String namespace = "AccDetail";
+	
+	
+	private String namespace = "LPTeam";
 	
 	
 	@Override

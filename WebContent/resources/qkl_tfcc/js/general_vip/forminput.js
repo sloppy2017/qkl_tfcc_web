@@ -1,30 +1,51 @@
 /**
  * Created by Administrator on 2016/8/29 0029.
  */
+$.ajax({
+        type: "post",
+        url: "/service/bankaccinfo/info",
+        dataType: "json",
+        success: function (data) {	
+        	 if(data.success){
+             	
+             		 $("#revorgname").html(data.data.revorgname);
+             		 $("#revbankaccno").html(data.data.revbankaccno);
+             		 $("#revbankdepname").html(data.data.revbankdepname);
+             		 $("#checkphone").html(data.data.checkphone);
+             		 alert(data.data.checkphone);
+             	
+             }else{
+             	alert(data.message);
+             }
+        }
+    });
 
 
 var status='';
 var flag =true;
-$("a").click(function(){
-    var showcnt =10; //每页页数初始值
-    var  myselect=document.getElementById("showcnt");
-    if(myselect==null||myselect=="null"){
-    }else{
-        showcnt=myselect.options[myselect.selectedIndex].value;
-    }
-   
-     status=document.getElementById("status");
-    
-    if(flag){
-        reload_table(1,showcnt);
-    }
-    
-    $('.page1 ul li').click(function(){
-        $(this).addClass('bg-color').siblings().removeClass('bg-color');
+
+$('.type-btn1').click(function(){
+	alert(222);
+	$.ajax({
+        type: "post",
+        url: "/service/bankaccinfo/tradebuy",
+        dataType: "json",
+        data:{
+            ttext : $("#ttext").val(),
+            revorgname: $("#revorgname").val(),
+            revbankaccno: $("#revbankaccno").val(),
+            revbankdepname: $("#revbankdepname").val()
+        },
+        success: function (date) {
+            alert(date.Message);
+            
+        }
     });
 
 
 });
+
+
 	
 function reload_table(currentPage,showCount) {
 	
@@ -90,16 +111,3 @@ function myfilter(e) {
     }
     return false;
 }
-$(function () {
-    $.ajax({
-        type: "POST",
-        url: "package.json",
-        dataType: "json",
-        data:{
-            ttext : $("#ttext").val()
-        },
-        success: function (responseData) {
-
-        }
-    });
-});

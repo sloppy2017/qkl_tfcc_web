@@ -68,7 +68,7 @@
             需支付金额（元）
             <input type="text" name="lastname" value="￥0.00">
             <br>
-            <a href="">确认购买</a>
+            <a href="" id="queren">确认购买</a>
         </form>
         <!--订单查询-->
         <div style="margin-top: 30px">
@@ -120,6 +120,36 @@
     }
 
     tick();
+    
+    $(function(){
+    	$("#queren").click(function(){
+    		$.ajax({
+    	        type: "post",
+    	        url: "/service/bankaccinfo/info",
+    	        dataType: "json",
+    	        data:{
+    	            ttext : $("#ttext").val()
+    	        },
+    	        success: function (date) {
+    	            alert(date.Message);
+    	            
+    	        }
+    	    });
+    		
+    		
+    	});
+    });
+   
+    
+    $.ajax({
+        type: "post",
+        url: "/service/bankaccinfo/info",
+        dataType: "json",
+        success: function (date) {
+            alert(date.Message);
+            
+        }
+    });
 </script>
 <!---时间日期结束-->
 <script src="../js/stock/forminput.js"></script>

@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>我的股权</title>
-    <link rel="stylesheet" href="../css/commen/commen.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
+      <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
 </head>
 <body>
 <div class="overall ">
     <!--头部-->
     <div class="header">
         <div class="header-logo">
-            <img src="../image/logo.png" alt="">
+            <img src="/resources/qkl_tfcc/image/logo.png" alt="">
         </div>
         <!--时间栏-->
         <div id="nowTime" class="data">
@@ -35,7 +36,7 @@
 
             </dl>
             <dl>
-                <dt><img src="../image/erweima.png" alt=""></dt>
+                <dt><img src="/resources/qkl_tfcc/image/erweima.png" alt=""></dt>
                 <dd class="qr">我的二维码</dd>
 
             </dl>
@@ -45,30 +46,30 @@
 <!--选项部分-->
 <div class="xuanxiang" style="position: absolute">
     <ul class="fl">
-        <li><a  class="security-q" href="#">我的股权</a></li>
-        <li><a href="../html/lpteam.html">我的团队</a></li>
-        <li><a href="../html/lpaccount.html">我的账户</a></li>
-        <li ><a href="../html/lprersonal.html">个人中心</a></li>
-        <li  ><a href="../html/lpsecuritycenter.html">安全中心</a></li>
-        <li><a href="http://www.r8exchange.com">R8交易所</a></li>
+        <li><a  class="security-q" href="../general_vip/general_stock.html">我的股权</a></li>
+        <li ><a  href="../general_vip/general_team.html">我的团队</a></li>
+         <li ><a  href="../general_vip/general_account.html">我的账户</a></li>
+          <li ><a  href="../general_vip/general_myself.html">个人中心</a></li>
+            <li><a  href="../general_vip/general_safety.html">安全中心</a></li>
+             <li><a href="http://www.r8exchange.com">R8交易所</a></li>
     </ul>
     <div class="gu_q">
         <p class="gu_q_gq"><span>您当前的位置：</span><b>我的股权</b></p>
         <div class="shoukuan">
             <p><b>收款账户信息</b></p>
-            <p>有限公司：北京中联共识区块链技术有限公司</p>
-            <p>账号：010-204569888</p>
-            <p>开户行：中国工商银行贵阳市开阳区支行</p>
-            <p>账务对账电话：0851-26790188</p>
+            <p id="revorgname"></p>
+            <p id="revbankaccno"></p>
+            <p id="revbankdepname"></p>
+            <p id="checkphone"></p>
         </div>
         <form >
             购买数量（股）&nbsp;&nbsp;&nbsp;
             <input type="text" maxlength='10' id="ttext" style="ime-mode:disabled" onkeypress="return myfilter(event)" value="请输入需购买数量" />
             <br>
             需支付金额（元）
-            <input type="text" name="lastname" value="￥0.00">
+            <input type="text" name="lastname" id="txamnt" value="￥0.00">
             <br>
-            <a href="">确认购买</a>
+           <li class="type-btn1"><a href="#" >确定</a></li>
         </form>
         <!--订单查询-->
         <div style="margin-top: 30px">
@@ -122,7 +123,7 @@
     tick();
 </script>
 <!---时间日期结束-->
-<script src="../js/stock/forminput.js"></script>
+<script src="/resources/qkl_tfcc/js/general_vip/forminput.js"></script>
 
 </body>
 </html>

@@ -1,9 +1,12 @@
 package com.qkl.tfcc.provider.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
+import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.trade.TradeDetail;
 import com.qkl.tfcc.provider.dao.TradeDetailDao;
 import com.qkl.tfcc.provider.dbhelper.DaoSupport;
@@ -34,6 +37,14 @@ public class TradeDetailDaoImpl extends DaoSupport<TradeDetail> implements Trade
 		getSqlSession().update(namespace+"."+"updatestatus", pd);
 		
 	}
+
+	@Override
+	public List<PageData> findTradeInfo(Page page) {
+		List<PageData> tradeinfo = getSqlSession().selectList(namespace+"."+"findTradelistPage", page);
+		return tradeinfo;
+	}
+
+	
 
 	
 

@@ -28,6 +28,8 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 
 	
 
+	
+
 	@Override
 	public List<PageData> findAll(Page page) {
 		// TODO Auto-generated method stub
@@ -42,10 +44,26 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 		BigDecimal findTB = comAccMyDao.findTB(userCode);
 		BigDecimal findReward = comAccMyDao.findReward(userCode);
 		
-		map.put("findTTReward", findTTReward);
-		map.put("findTB", findTB);
-		map.put("findReward", findReward);
+		String format1="";
+		String format2="";
+		String format3="";
+		
+		if (findTTReward!=null) {
+			format1 = String .format("%.2f",findTTReward);
+		}
+		if (findTB!=null) {
+			 format2 = String .format("%.2f",findTB);
+		}
+		if (findReward!=null) {
+	         format3 = String .format("%.2f",findReward);
+		}
+		
+		
+		map.put("findTTReward", format1);
+		map.put("findTB", format2);
+		map.put("findReward", format3);
 		return map;
 	}
 
+	
 }

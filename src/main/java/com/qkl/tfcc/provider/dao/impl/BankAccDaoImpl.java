@@ -1,5 +1,6 @@
 package com.qkl.tfcc.provider.dao.impl;
 
+
 import org.springframework.stereotype.Repository;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
@@ -22,6 +23,10 @@ public class BankAccDaoImpl extends DaoSupport<BankAccInfo> implements BankAccDa
 		return tBankAccInfo;
 	}
 
-	
+	@Override
+	public BankAccInfo findBankInfo() {
+		BankAccInfo tBankAccInfo =getSqlSession().selectOne(namespace+"."+"findByPhone");
+		return tBankAccInfo;
+	}
 
 }

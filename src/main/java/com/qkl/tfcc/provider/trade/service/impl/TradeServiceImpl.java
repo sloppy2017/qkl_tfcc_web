@@ -1,5 +1,6 @@
 package com.qkl.tfcc.provider.trade.service.impl;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -7,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.qkl.tfcc.api.po.trade.TradeDetail;
+import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.service.trade.api.TradeService;
 import com.qkl.tfcc.provider.dao.TradeDetailDao;
 import com.qkl.util.help.pager.PageData;
@@ -56,4 +57,19 @@ public class TradeServiceImpl implements TradeService {
 		}
 	}
 
+	@Override
+	public List<PageData> findTradeInfo(Page page,String versionNo) {
+		
+		List<PageData> tradeInfo=null;
+		try {
+		 tradeInfo = tradeDetailDao.findTradeInfo(page);
+		} catch (Exception e) {
+			loger.debug("findTradeInfo fail,reason is "+e.getMessage());
+		}
+		return tradeInfo;
+	}
+
+
+
+	
 }

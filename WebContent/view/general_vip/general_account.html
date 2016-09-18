@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>我的账户</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/resources/qkl_tfcc/css/date/dateRange.css">
+    <!-- <link rel="stylesheet" href="/resources/qkl_tfcc/css/date/dateRange.css"> -->
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/date/monthPicker.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/pagintaion/pagination.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/reset.css">
@@ -13,7 +13,7 @@
     <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
     <script src="/resources/qkl_tfcc/js/date/dateRange.js"></script>
     <script src="/resources/qkl_tfcc/js/date/monthPicker.js"></script>
-    <script src="/resources/qkl_tfcc/js/pagination/pagination.js"></script>
+    <script src="/resources/qkl_tfcc/js/pagin/pagination.js"></script>
 </head>
 <body>
 <!--遮罩层-->
@@ -55,7 +55,7 @@
         </div>
         <div class="nav fix">
             <ul class="fl">
-            <li><a  href="../general_vip/general_stock.html">我的股权</a></li>
+                <li><a  href="../general_vip/general_stocks.html">我的股权</a></li>
                 <li ><a href="../general_vip/general_team.html">我的团队</a></li>
                 <li ><a class="active" href="../general_vip/general_account.html">我的账户</a></li>
                 <li ><a href="../general_vip/general_myself.html">个人中心</a></li>
@@ -152,19 +152,25 @@ $.ajax({
     dataType:'json',
     success:function(data){
     	if(data.success){
-    		if(data.data.findTB==null){
-    			$("#spt").html("0.00");
-    		}
-    		if(data.data.findTTReward==null){
-    			$("#sptt").html("0.00");
-    		}
+            if(data.data.findTB==null){
+                $("#spt").html("0.00");
+            }else{
+                $("#spt").html(data.data.findTB);
+            }
+            if(data.data.findTTReward==null){
+                $("#sptt").html("0.00");
+            }else{
+                $("#sptt").html(data.data.findTTReward);
+            }
             if(data.data.findReward==null){
-            	$("#spv").html("0.00");
+                $("#spv").html("0.00");
+            }else{
+                $("#spv").html(data.data.findReward);
             }
             
-    	}else{
-    		alert(data.message);
-    	}
+        }else{
+            alert(data.message);
+        }
     }
 })
 $(function(){
