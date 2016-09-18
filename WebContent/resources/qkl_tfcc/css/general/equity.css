@@ -1,0 +1,58 @@
+.main-top{
+    margin-left:20px;
+    height: 52px;
+    border-bottom: 2px solid #ddd;
+    line-height: 52px;
+}
+.main-top span{
+    font-size: 14px;
+    line-height: 52px;
+}
+.c28{color:#282828;}
+.main-mid{
+    margin-left:20px;
+    margin-top:20px;
+}
+.mid-l{
+    width:400px;
+    border-right:1px solid #ddd;
+    float:left;
+}
+.nid-l h3{
+    font-size: 16px;
+    color:#282828;
+}
+.nid-l p{
+    font-size:14px;
+    color:#646464;
+}
+.mid-r {
+    float:left;
+    margin-left: 20px;
+}
+.mid-r label{
+    display: inline-block;
+    width:120px;
+    margin-right:16px;
+    font-size:14px;
+    color:#575757;
+}
+.mid-r a{
+    display: block;
+    background:url("../../imgs/tijiao.png") no-repeat;
+    height:44px;
+    width:220px;
+    line-height: 44px;
+    color:#fff;
+    font-size: 14px;
+    text-align: center;
+    margin-left:60px;
+    margin-top:30px;
+}
+.mid-r div{
+    margin-bottom:20px;
+}
+.mid-r input{
+    width:178px;
+    height:30px;
+}
