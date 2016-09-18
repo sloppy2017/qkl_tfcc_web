@@ -20,6 +20,7 @@ import com.qkl.tfcc.api.po.sys.SysGencode;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.api.po.user.UserFriendship;
+import com.qkl.tfcc.api.po.user.UserLevelcnt;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.user.api.UserService;
 import com.qkl.tfcc.provider.dao.SysGencodeDao;
@@ -661,4 +662,6 @@ public class UserServiceImpl implements UserService {
          }
     
     }
+
+	
 }

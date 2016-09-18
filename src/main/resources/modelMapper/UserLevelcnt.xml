@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserLevelcnt">
+    <resultMap id="UserLevelcntResultMap" type="com.qkl.tfcc.api.po.user.UserLevelcnt" >
+	    <id column="id" property="id" />
+	    <result column="user_code" property="userCode" />
+	    <result column="rela_level" property="relaLevel" />
+	    <result column="levcnt" property="levcnt" />
+	    <result column="syscode" property="syscode" />   
+	    <result column="create_time" property="createTime"/>    
+	    <result column="modify_time" property="modifyTime"/>    
+	    <result column="operator" property="operator"/>    
+    </resultMap>
+
+     <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id,user_code,rela_level,levcnt,syscode,create_time,modify_time,operator
+    </sql>
+      
+       <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		select count(1) cnt
+        from tb_user_levelcnt  where user_code = #{userCode} 
+	   </select> 
+	
+	<insert id="add" parameterType="com.qkl.tfcc.api.po.user.UserLevelcnt" >
+	 insert into tb_user_levelcnt ( 
+	 user_code,
+	 rela_level,
+	 levcnt,
+	 syscode,
+	 create_time,
+	 modify_time,
+	 operator
+	 )
+	 values(
+	 #{userCode},
+	 #{relaLevel},
+	 #{levcnt},
+	 #{syscode},
+	 #{create_time},
+	 #{modify_time},
+	 #{operator}
+	 )	 
+	 </insert>
+  
+	 <update id="update" parameterType="TradeDetail">    
+         update tb_user_levelcnt 
+         <set>                
+           		levcnt = levcnt+1,
+                modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where user_code =   #{userCode} 
+               and  rela_level =   #{relaLevel}
+               and  syscode =  #{syscode}
+     </update>
+     
+     <!-- 查询交易信息列表 -->
+    <select id="findlvcntlistPage" parameterType="pd"  resultType="pd">   
+    select user_code,rela_level,levcnt,syscode from tb_user_levelcnt where user_code=#{userCode} and syscode = #{syscode}
+    </select>
+
+    
+
+</mapper>     
