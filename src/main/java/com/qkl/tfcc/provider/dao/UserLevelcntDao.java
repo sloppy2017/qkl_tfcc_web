@@ -33,7 +33,7 @@ public interface UserLevelcntDao extends DAO<UserLevelcnt> {
 	 * @create author kezhiyi
 	 * @create date 2016年9月18日
 	 */ 
-	public PageData findUserLevelcnt(PageData pd);
+	public UserLevelcnt findUserLevelcnt(PageData pd);
 	
 	
 }

@@ -62,8 +62,9 @@
     select user_code,rela_level,levcnt,syscode from tb_user_levelcnt where user_code=#{userCode} and syscode = #{syscode}
     </select>
     
- 	<select id="find" parameterType="pd"  resultType="pd">   
-    select user_code,rela_level,levcnt,syscode from tb_user_levelcnt where user_code=#{userCode} and syscode = #{syscode} and rela_level =#{relaLevel}
+ 	<select id="find" parameterType="pd"  resultType="com.qkl.tfcc.api.po.user.UserLevelcnt">   
+    select user_code userCode,rela_level relaLevel,levcnt levcnt,syscode syscode 
+    from tb_user_levelcnt where user_code=#{userCode} and syscode = #{syscode} and rela_level =#{relaLevel}
     </select>
     
 
