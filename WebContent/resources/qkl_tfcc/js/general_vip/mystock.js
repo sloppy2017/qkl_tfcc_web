@@ -69,7 +69,7 @@ $(".sel a").click(function(){
         str=searchSel.options[searchSel.selectedIndex].value;
     }
 
-     alert("str is "+str);
+    /* alert("str is "+str);*/
     if(flag){
         reload_table(1,showcnt);
     }
