@@ -141,12 +141,12 @@ function getUserInfo(){
     	  if(json.data.imgAddrss){
     		  $("#left_headPicId").attr("src",json.data.imgAddrss);
     	  }
-    	  if(data.data.userName){
-              $("#user").html(data.data.userName);
-          }else if(data.data.realName){
-              $("#user").html(data.data.realName);
+    	  if(json.data.userName){
+              $("#user").html(json.data.userName);
+          }else if(json.data.realName){
+              $("#user").html(json.data.realName);
           }else{
-        	  $("#user").html(data.data.phone);
+        	  $("#user").html(json.data.phone);
           }
     	  phone = json.data.phone;
     	  if(json.data.realName!=null&&json.data.realName.trim()!=''&&json.data.realName.trim()!=undefined){

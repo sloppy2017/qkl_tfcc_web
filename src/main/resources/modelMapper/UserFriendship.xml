@@ -32,6 +32,7 @@
 		rela_level relaLevel,
 		user_type userType,
 		calflag calflag,
+		syscode syscode,
 		create_time createTime,
 		modify_time modifyTime		
         from tb_user_friendship  where recomuser_code = #{recomusercode}
@@ -39,13 +40,14 @@
 	
 	
 	<insert id="add" parameterType="com.qkl.tfcc.api.po.user.UserFriendship" >
-	 insert into tb_user_friendship (user_code,recomuser_code,rela_level,user_type,calflag,create_time,modify_time)
+	 insert into tb_user_friendship (user_code,recomuser_code,rela_level,user_type,calflag,syscode,create_time,modify_time)
 	 values(
 	 #{userCode},
 	 #{recomuserCode},
 	 #{relaLevel},
 	 #{userType},
 	 #{calflag},
+	 #{syscode},	 
 	 #{createTime},
 	 #{modifyTime}
 	 )	 
@@ -56,7 +58,8 @@
 	     set calflag = #{calflag},
 	          modify_time = #{modifyTime}
 	     where recomuser_code = #{recomuserCode}     
-	          and user_code = #{userCode}    
+	          and user_code = #{userCode}  
+	          and syscode = #{syscode}   
      </update>
      
     

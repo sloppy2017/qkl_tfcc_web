@@ -5,27 +5,29 @@
   
     <!--查询可用余额 -->
 	<select id="getAvailableBalance" parameterType="com.qkl.tfcc.api.po.acc.Acc" resultType="java.lang.Integer">
-	       select avb_amnt from tb_acc where user_code = #{userCode} and sub_acc_no = #{subAccno}
+	       select avb_amnt from tb_acc where user_code = #{userCode} 
 	</select>
 	
 	<insert id="addAcc" parameterType="com.qkl.tfcc.api.po.acc.Acc" >
 	 insert into tb_acc (
 	 user_code,
-	 sub_acc_no,
+	 acc_no,
 	 avb_amnt,
 	 froze_amnt,
 	 total_amnt,
 	 last_caldate,
+	 syscode,
 	 create_time,
-	 modify_time,
+	 modify_time,m
 	 operator)
 	 values(
 	 #{userCode},
-	 #{subAccno},
+	 #{accNo},
 	 #{avbAmnt},
 	 #{frozeAmnt},
 	 #{totalAmnt},
 	 #{lastCaldate},
+	 #{syscode},
 	 #{createTime},
 	 #{modifyTime},
 	 #{operator}
@@ -44,7 +46,7 @@
            </if>     
          </set>
          where user_code = #{userCode}     
-               and sub_acc_no = #{subAccno}
+               and syscode = #{syscode}
      </update>
 <!--      发放奖励 -->
      <update id="updateOut" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
@@ -59,13 +61,35 @@
            </if>     
          </set>
          where user_code = #{userCode}     
-               and sub_acc_no = #{subAccno}
+               and syscode = #{syscode}
      </update>
+<!--      发放奖励 -->
+     <update id="updatefroze" parameterType="pd">    
+        update tb_acc a,tb_unfreeze_detail b,tb_user c
+         <set> 
+                a.avb_amnt = a.avb_amnt +b.unfreeze_num,
+   			  a.froze_amnt = a.froze_amnt - b.unfreeze_num,
+                a.last_caldate = now(),
+                a.modify_time = now(),
+           <if test="operator != null and operator != ''">
+                operator = #{operator}
+           </if>     
+         </set>
+         where a.user_code =b.user_code     
+               and a.syscode = b.syscode
+               and a.user_code = c.user_code
+               and c.user_type =#{userType}
+               and b.syscode = #{syscode}
+               and b.status ='0'
+     </update>     
+     
+     
      <select id="findAcc" parameterType="com.qkl.tfcc.api.po.acc.Acc" resultType="com.qkl.tfcc.api.po.acc.Acc">
            select * from tb_acc 
            where user_code = #{userCode} 
-           <if test="subAccno != null and subAccno !='' ">
-                and sub_acc_no = #{subAccno}
+          
+           <if test="syscode != null and syscode !='' ">
+                and syscode = #{syscode}
            </if>
      </select>
 	 

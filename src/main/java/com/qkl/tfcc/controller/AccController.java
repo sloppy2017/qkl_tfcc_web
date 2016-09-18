@@ -59,14 +59,14 @@ public class AccController extends BaseAction{
              }
              JSONArray jsonArray = JSONArray.parseArray(pd.get("params").toString());
              User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-             Map<String,String> map = accService.rewardTfcc(jsonArray,"10000000001",Constant.VERSION_NO);
+             Map<String,String> map = accService.rewardTfcc(jsonArray,user.getUserCode(),Constant.VERSION_NO);
              StringBuffer successStr = new StringBuffer("发放成功的手机号：");
              if(map.get("successStr")!=null){
                  JSONArray array = JSONArray.parseArray(map.get("successStr"));
                  for(int i=0;i<array.size();i++){
                      JSONObject obj = (JSONObject)array.get(i);
                      successStr.append(obj.getString("phone")+"，额度："+obj.getString("tfccNum")+"；");
-//                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，恭喜您获得"+obj.getString("tfccNum")+"TFCC奖励。");
+                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，恭喜您获得"+obj.getString("tfccNum")+"TFCC奖励。");
                  }
                  map.remove("successStr");
                  map.put("successStr", successStr.toString());

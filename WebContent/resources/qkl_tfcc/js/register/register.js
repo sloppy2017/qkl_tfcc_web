@@ -9,7 +9,12 @@
 			$(this).addClass('active').siblings().removeClass('active');
 			var index = $tab_li.index(this);
 			$(' .form >form').eq(index).show().siblings().hide();
-			userType = index + 1;
+			if(index != 0){//userType==2是网点会员，该类型暂时取消
+				userType = index + 2;
+			}else{
+				userType = index + 1;
+			}
+			
 			$(".form").find("input").each(function(){
 				if(!$(this).hasClass("yzm")){
 					$(this).val('');
@@ -287,10 +292,10 @@
 			url:'/service/user/register?'+$("form:not(.hide)").serialize()+"&userType="+userType,
 			success:function(data){
 				if(data.success){
-//					$(".mark1").show();
-					location.href="/view/general_vip/general-account.html";
+					$(".mark1").show();
+//					location.href="/view/general_vip/general_account.html";
 				}else{
-					data.message;
+					alert(data.message);
 				}
 			}
 		});
@@ -315,10 +320,10 @@
 			url:url,
 			success:function(data){
 				if(data.success){
-//					$(".mark2").show();
-					location.href="/view/lp_vip/lp_account.html";
+					$(".mark2").show();
+//					location.href="/view/lp_vip/lp_account.html";
 				}else{
-					data.message;
+					alert(data.message);
 				}
 			}
 		});
@@ -343,10 +348,10 @@
 			url:url,
 			success:function(data){
 				if(data.success){
-//					$(".mark3").show();
-					location.href="/view/invest_vip/invest_account.html";
+					$(".mark3").show();
+//					location.href="/view/invest_vip/invest_account.html";
 				}else{
-					data.message;
+					alert(data.message);
 				}
 			}
 		});

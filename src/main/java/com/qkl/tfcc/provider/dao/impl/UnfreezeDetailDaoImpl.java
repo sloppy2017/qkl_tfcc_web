@@ -19,8 +19,25 @@ public class UnfreezeDetailDaoImpl extends DaoSupport<UnfreezeDetail> implements
 	private String namespace = "UnfreezeDetail";
 	
 	@Override
-	public void addUnfreezeDetail(PageData pd) {
-		getSqlSession().insert(namespace+"."+"add", pd);	
+	public boolean addUnfreezeDetail(PageData pd) {
+		try{
+		   getSqlSession().insert(namespace+"."+"add", pd);	
+		   return true;
+		}catch(Exception e){			
+			logger.error("addUnfreezeDetail fail, reason is "+e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public boolean modifyUnfreezeDetailStatus(PageData pd) {
+		try{
+			   getSqlSession().update(namespace+"."+"updatestatus", pd);	
+			   return true;
+			}catch(Exception e){			
+				logger.error("modifyUnfreezeDetailStatus fail, reason is "+e.getMessage());
+				return false;
+			}
 	}
 
 }
