@@ -1,48 +1,31 @@
+/**
+ * Created by qw on 2016/9/18.
+ */
 
 var str='';
 var flag =true;
-$(".type-btn a").click(function(){
+$(".sel a").click(function(){
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
     if(myselect==null||myselect=="null"){
     }else{
         showcnt=myselect.options[myselect.selectedIndex].value;
     }
-    str='';
-    if(document.getElementById("quan").checked==true){
-        document.getElementById("lva").checked =true;
-        document.getElementById("lvb").checked =true;
-        document.getElementById("lvc").checked =true;
+
+    var searchSel = document.getElementById('searchSel')
+    if(searchSel==null||searchSel==''){
+    }else{
+        str=searchSel.options[searchSel.selectedIndex].value;
     }
-    if(document.getElementById("quan").checked==true){
-        str = str+'ALL,';
-    }
-    else{
-        if(document.getElementById("lva").checked==true){
-            str = str+"A,";
-        }
-        if(document.getElementById("lvb").checked==true){
-            str = str+"B,";
-        }
-        if(document.getElementById("lvc").checked==true){
-            str = str+"C,";
-        }
-    }
-   // alert("str is "+str);
+
+    // alert("str is "+str);
     if(flag){
         reload_table(1,showcnt);
     }
-    
-    //$('.page1 ul li').click(function(){
-    //    $(this).addClass('bg-color').siblings().removeClass('bg-color');
-    //});
-
-
 });
-	
 function reload_table(currentPage,showCount) {
     var rsStr = "";
-   // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
+    // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
     $.ajax({
         type: 'post',
         url: '/service/team/findVipPage?str='+str+'&currentPage='+currentPage+'&showCount='+showCount,
@@ -53,14 +36,13 @@ function reload_table(currentPage,showCount) {
             showCount: showCount
         },
         success: function (data) {
-        	
             var tviplist = data.data.tviplist;
             var tablecols = "<tr> \n"
-                + " <th>会员级别</th> \n"
-                + "<th>注册时间</th> \n"
-                + "<th>会员账号</th> \n"
-                +"<th>会员姓名 </th>\n"
-//                +"<th>购买量(股)</th>\n"
+                + " <th>购买时间</th> \n"
+                + "<th>购买份数</th> \n"
+                + "<th>支付方式</th> \n"
+                +"<th>总计金额（元）</th>\n"
+                +"<th>付款状态</th>\n"
                 + "</tr> \n";
             rsStr= tablecols;
             for (var i = 0; i < tviplist.length; i++) {
@@ -75,13 +57,9 @@ function reload_table(currentPage,showCount) {
 //            console.log(data.data.page.pageStr);
             $(".pages1").html(data.data.page.pageStr);
 
-        }, 
+        },
         error: function (data) {
 
         }
     });
 }
-
-
-
-

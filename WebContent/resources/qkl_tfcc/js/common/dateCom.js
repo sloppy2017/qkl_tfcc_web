@@ -34,7 +34,6 @@ $(function(){
         }else{
             var time = times;
         }
-
         $('.yearTime').html(years+'年'+month+'月'+date+'日');
         $('.dateTime').html(times+':'+ min+':'+sec);
         var weekArr = ['一','二','三','四','五','六','日']
