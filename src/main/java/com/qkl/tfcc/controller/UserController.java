@@ -310,6 +310,9 @@ public class UserController extends BaseAction{
 			}	*/	
 			tUser.setCreateTime(DateUtil.getCurrentDate());
 			tUser.setModifyTime(DateUtil.getCurrentDate());
+			
+			User refUser= userService.findbyPhone(refPhone, Constant.VERSION_NO);
+			
 		
 			UserDetail tUserDetail = new UserDetail();
 			tUserDetail.setUserCode(UserCode);
@@ -322,6 +325,12 @@ public class UserController extends BaseAction{
 			tUserDetail.setCropPerson(cropPerson);
 			tUserDetail.setQrCode("");
 			tUserDetail.setUserType(userType);
+			if("2".equals(refUser.getUserType())){
+				tUserDetail.setFreezeFlag("0");
+			}else{
+				tUserDetail.setFreezeFlag("1");
+			}
+			
 			if(realName!=null&&!realName.equals("")&&idno!=null&&!idno.equals("")){
 				tUserDetail.setRealStat("1");	
 			}else{

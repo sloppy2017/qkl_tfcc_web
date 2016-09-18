@@ -390,7 +390,7 @@ public class UserServiceImpl implements UserService {
         try{
             if(tSysGencodeAll!=null&&tSysGencodeAll.size()>0){
                 for(SysGencode tSysGencode:tSysGencodeAll){
-                    if(tSysGencode.getGroupCode().equals("BOUND_DEF")){//获取奖金定义
+                    if(tSysGencode.getGroupCode().equals("BOUND_DEF")){//获取推荐奖金定义
                         if(tSysGencode.getCodeValue().equals("TJDM1")){
                             tSysGencodeBNTJDM1 = tSysGencode;
                         }else if(tSysGencode.getCodeValue().equals("TJDM2")){
@@ -405,7 +405,7 @@ public class UserServiceImpl implements UserService {
                             tSysGencodeBNDMWDKD6= tSysGencode;
                         }
                         
-                    }else if(tSysGencode.getGroupCode().equals("REWARD_DEF")){
+                    }else if(tSysGencode.getGroupCode().equals("REWARD_DEF")){//获取购买奖金定义
                         if(tSysGencode.getCodeValue().equals("SL1")){
                             tSysGencodeLPRDSL1 = tSysGencode;
                         }else if(tSysGencode.getCodeValue().equals("SL2")){
@@ -522,7 +522,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         
-        String refPhone =mUserDetail.getRefPhone(); 
+        String refPhone = mUserDetail.getRefPhone(); 
         String UserCode = mUserDetail.getUserCode();
         String userType = mUserDetail.getUserType();
         
@@ -576,6 +576,7 @@ public class UserServiceImpl implements UserService {
                 loger.error("calPtMemberRecmBouns fail ,translate string to decimal fail!"+e.getMessage());
             }
          tAccDetail.setCaldate(DateUtil.getCurrentDate());
+         tAccDetail.setCntflag("0");//未纳入计算
          tAccDetail.setStatus("1");
          tAccDetail.setCreateTime(DateUtil.getCurrentDate());
          tAccDetail.setModifyTime(DateUtil.getCurrentDate());
@@ -612,6 +613,7 @@ public class UserServiceImpl implements UserService {
                     loger.error("B calPtMemberRecmBouns fail ,translate string to decimal fail!"+e.getMessage());
                 }
              tAccDetail2.setCaldate(DateUtil.getCurrentDate());
+             tAccDetail2.setCntflag("0");
              tAccDetail2.setStatus("1");
              tAccDetail2.setCreateTime(DateUtil.getCurrentDate());
              tAccDetail2.setModifyTime(DateUtil.getCurrentDate());
@@ -647,6 +649,7 @@ public class UserServiceImpl implements UserService {
                     loger.error("C calPtMemberRecmBouns fail ,translate string to decimal fail!"+e.getMessage());
                 }
              tAccDetail3.setCaldate(DateUtil.getCurrentDate());
+             tAccDetail3.setCntflag("0");
              tAccDetail3.setStatus("1");
              tAccDetail3.setCreateTime(DateUtil.getCurrentDate());
              tAccDetail3.setModifyTime(DateUtil.getCurrentDate());
