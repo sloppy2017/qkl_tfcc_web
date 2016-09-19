@@ -1,5 +1,6 @@
 package com.qkl.tfcc.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,7 +113,9 @@ public class BankAccController extends BaseAction {
 				ar.setMessage("购买次数已达上限");
 				return ar;
 			}else{
-				int txamnt = (Integer) pd.get("txamnt");
+				String object = pd.getString("txamnt");
+				BigDecimal txamnt1=new BigDecimal(object);
+				double txamnt = txamnt1.doubleValue();
 				if (txamnt>=1000) {
 					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
 					ar.setSuccess(true);
