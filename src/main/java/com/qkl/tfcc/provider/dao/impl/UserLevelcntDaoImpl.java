@@ -2,13 +2,15 @@ package com.qkl.tfcc.provider.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.qkl.tfcc.api.po.user.UserLevelcnt;
 import com.qkl.tfcc.provider.dao.UserLevelcntDao;
 import com.qkl.tfcc.provider.dbhelper.DaoSupport;
 import com.qkl.util.help.pager.PageData;
-
+@Repository
 public class UserLevelcntDaoImpl extends DaoSupport<UserLevelcnt> implements
 		UserLevelcntDao {
 
