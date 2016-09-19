@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.common.Constant;
+import com.qkl.tfcc.api.po.acc.Acc;
 import com.qkl.tfcc.api.po.acc.AccDetail;
 import com.qkl.tfcc.api.po.sys.SysGencode;
 import com.qkl.tfcc.api.po.user.User;
@@ -23,6 +24,7 @@ import com.qkl.tfcc.api.po.user.UserFriendship;
 import com.qkl.tfcc.api.po.user.UserLevelcnt;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.user.api.UserService;
+import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.SysGencodeDao;
 import com.qkl.tfcc.provider.dao.UserDao;
 import com.qkl.tfcc.provider.dao.UserDetailDao;
@@ -50,6 +52,9 @@ public class UserServiceImpl implements UserService {
 	private UserLoginErrDao userLoginErrDao;
 	@Autowired
     private AccService accService;
+	@Autowired
+    private AccDao accDao;
+
 	@Autowired
 	private SysGencodeDao sysGencodeDao;
 	@Autowired
@@ -97,7 +102,25 @@ public class UserServiceImpl implements UserService {
             
             //计算注册奖励
           calRegitAccDetail(userDetail);
-          
+          Acc tAcc = new Acc();
+          tAcc.setUserCode(userDetail.getUserCode());
+          if("1".equals(userDetail.getUserType())){
+        	  tAcc.setAccNo("01"); 
+          }else if("2".equals(userDetail.getUserType())){
+        	  tAcc.setAccNo("02"); 
+          }else if("3".equals(userDetail.getUserType())){
+        	  tAcc.setAccNo("03"); 
+          }else if("4".equals(userDetail.getUserType())){
+        	  tAcc.setAccNo("04"); 
+          }
+          tAcc.setAvbAmnt(new BigDecimal(0));
+          tAcc.setFrozeAmnt(new BigDecimal(0));
+          tAcc.setTotalAmnt(new BigDecimal(0));
+          tAcc.setSyscode(Constant.CUR_SYS_CODE);
+          tAcc.setCreateTime(DateUtil.getCurrentDate());
+          tAcc.setModifyTime(DateUtil.getCurrentDate());
+          tAcc.setOperator("sys");
+          accDao.addAcc(tAcc);
           
 			return true;
 		}catch(Exception e){
