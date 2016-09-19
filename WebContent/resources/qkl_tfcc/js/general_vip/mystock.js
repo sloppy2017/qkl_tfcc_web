@@ -24,6 +24,23 @@ function getBankAccInfo(){
     });
 }
 
+$("input[name='txnum']").blur(function(){
+	var url = "/service/bankaccinfo/PayMoney?"+$("form").serialize();
+	url = encodeURI(url);
+	$.ajax({
+        type: "post",
+        url:url,
+        dataType: "json",
+        success: function (data) {
+        	if(data.success){
+        		$("input[name='txamnt']").val(data.data);
+        	}else{
+        		alert(data.message);
+        	}  
+        }
+    });
+});
+
 
 $('#buy').click(function(){
 	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();

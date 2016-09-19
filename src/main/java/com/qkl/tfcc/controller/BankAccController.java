@@ -19,6 +19,7 @@ import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.BankAccInfo;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.BankAccService;
+import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.api.service.trade.api.TradeService;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
@@ -35,6 +36,8 @@ public class BankAccController extends BaseAction {
 	private BankAccService bankAccService ;
 	@Autowired
 	private TradeService tradeService;
+	@Autowired
+	private SysGenCodeService sysGenCodeService;
 	
 	@RequestMapping(value="/info",method=RequestMethod.POST)
 	@ResponseBody
@@ -86,7 +89,7 @@ public class BankAccController extends BaseAction {
 	
 	@RequestMapping(value="/tradebuy",method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse buyTfcc(HttpServletRequest request){
+	public AjaxResponse buyTfcc(HttpServletRequest request){//购买tfcc
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		try {
 			pd=this.getPageData();
@@ -143,9 +146,49 @@ public class BankAccController extends BaseAction {
 			e.printStackTrace();
 		}
 		
-		return ar;
-		
+		return ar;	
 	}
+	
+	
+	@RequestMapping(value="/PayMoney",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse requirePayMoney(HttpServletRequest request){//获取购买金额
+		//User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		try {
+			pd=this.getPageData();
+			String txnums = pd.getString("txnum");
+			
+			String tmpprice ="";
+			 List<Map<String,Object>> tSysGencodeList =sysGenCodeService.findByGroupCode("PRICE", Constant.VERSION_NO);
+			 for(Map<String,Object> mapObj:tSysGencodeList){
+			     if("PRICE".equals(mapObj.get("codeName"))){
+			    	 tmpprice = mapObj.get("codeValue").toString();
+			     }
+			  
+			 }
+			BigDecimal tmpprices=new BigDecimal(tmpprice);//每股单价
+			
+			BigDecimal txnum=null;
+			if(txnums!=null&&!"".equals(txnums)&&txnums.length()>0){
+				 txnum=new BigDecimal(txnums);//购买数量
+			}else{
+				return ar;
+			}
+			double doubleValue = tmpprices.multiply(txnum).doubleValue();//计算应付金额
+			String txamnt = String .format("%.2f",doubleValue);
+			
+			
+			ar.setSuccess(true);
+			ar.setMessage("获取购买金额成功");
+			ar.setData(txamnt);
+		} catch (Exception e) {
+			ar.setSuccess(false);
+			ar.setMessage("获取购买金额失败");
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	
 	
 	
 }
