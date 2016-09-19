@@ -33,6 +33,65 @@
 	 #{operator}
 	 )	 
 	 </insert>
+	 
+	 <insert id="addlv" parameterType="pd" >
+	 insert into tb_acc(
+	 user_code,
+	 acc_no,
+	 avb_amnt,
+	 froze_amnt,
+	 total_amnt,
+	 last_caldate,
+	 syscode,
+	 create_time,
+	 modify_time,
+	 operator,
+	 version_id
+	 )
+	 select
+	 c.user_code,
+	 '01',
+	 case when b.freeze_flag ='0' then 0 
+	     when b.freeze_flag ='1' then c.amnt else c.amnt end avb_amnt,
+	 case when b.freeze_flag ='0' then c.amnt 
+	     when b.freeze_flag ='1' then 0 else 0 end froze_amnt,
+	 c.amnt,
+	 now(),
+	 #{syscode},
+	 now(),
+	 now(),
+	 #{operator},
+	 #{versionId}	 
+	 from tb_user_detail b ,tb_acc_detail c
+	 where 1=1
+	 and b.user_code = c.user_code
+	 and c.cntflag ='0'
+	 and c.rela_usercode= #{relaUsercode}
+	 and c.syscode = #{syscode}
+	 and  not EXISTS(
+	 select 1 from tb_acc d  
+	 where d.user_code =c.user_code
+	)
+	; 
+	 </insert>
+	 
+	 
+	  <update id="updatelv" parameterType="pd">    
+         update tb_acc a,tb_acc_detail b,tb_user_detail d
+		set a.avb_amnt =a.avb_amnt + ( case when d.freeze_flag ='0' then 0 else b.amnt end ),
+		    a.froze_amnt= a.froze_amnt + (case when d.freeze_flag ='0' then b.amnt else 0 end ),
+		    a.total_amnt = a.total_amnt+b.amnt,
+		    a.last_caldate = now(),
+			a.modify_time = now(),
+			b.cntflag ='1'
+		where a.user_code = b.user_code
+		and a.user_code = d.user_code
+		
+		and b.cntflag='0'
+		and b.syscode =#{syscode}	
+		and b.rela_usercode =#{relaUsercode}		
+     </update>
+	 
 <!-- 	 获取奖励 -->
 	 <update id="updateIn" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
          update tb_acc 

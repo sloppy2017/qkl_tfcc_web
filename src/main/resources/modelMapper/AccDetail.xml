@@ -25,6 +25,47 @@
      #{operator}
      )   
      </insert>
+     
+      <insert id="addlv" parameterType="pd" >
+     insert into tb_acc_detail (user_code,sub_accno,bouns_source1,bouns_source2,rela_usercode,
+     rela_userlevel,amnt,caldate,cntflag,`status`,syscode,create_time,modify_time,operator)
+	 select  
+	 a.user_code,
+	 #{subAccno},
+	 #{bounsSource1},
+	 case when a.rela_level='A' then '1101'
+	      when a.rela_level='B' then '1102'
+	      when a.rela_level='C' then '1103'
+	 end bouns_source2,
+	 a.recomuser_code,
+	 a.rela_level,
+	 case        
+	         when a.rela_level ='A' and b.levcnt =#{NEDLEVA}   then  1*#{TJZC1}*#{NEDLEVA}
+	         when a.rela_level ='A' and b.levcnt &lt;#{NEDLEVA}    then  0
+	         when a.rela_level ='A' and b.levcnt &gt;#{NEDLEVA}    then  1*#{TJZC1}       
+	         when a.rela_level ='B' and b.levcnt =#{NEDLEVB}  then 1*#{TJZC2}*#{NEDLEVB}
+	         when a.rela_level ='B' and b.levcnt &lt;#{NEDLEVB} then 0
+	         when a.rela_level ='B' and b.levcnt &gt;#{NEDLEVB} then 1*#{TJZC2} 
+	         when a.rela_level ='C' and b.levcnt =#{NEDLEVC} then 1*#{TJZC3}*#{NEDLEVC}
+	         when a.rela_level ='C' and b.levcnt &lt;#{NEDLEVC} then 0
+	         when a.rela_level ='C' and b.levcnt &gt;#{NEDLEVC} then 1*#{TJZC3}
+	         end amnt,
+	 now(),
+	 '0',
+	 '1',
+	 #{syscode},
+	 now(),
+	 now(),
+	 #{operator}
+	 from tb_user_friendship a,tb_user_levelcnt b 
+	 where a.recomuser_code =#{recomuserCode}
+	 and a.syscode =#{syscode}
+	 and a.syscode = b.syscode
+	 and a.user_code = b.user_code
+	 and a.rela_level = b.rela_level      
+     </insert>
+     
+     
      <update id="updateAccDetail" parameterType="com.qkl.tfcc.api.po.acc.AccDetail">
            update tb_acc_detail
            set amnt = amnt + #{amnt},

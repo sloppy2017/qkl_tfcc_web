@@ -2,6 +2,7 @@ package com.qkl.tfcc.provider.dao;
 
 import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.provider.dbhelper.DAO;
+import com.qkl.util.help.pager.PageData;
 
 public interface UserDetailDao extends DAO<UserDetail> {
 
@@ -13,6 +14,12 @@ public interface UserDetailDao extends DAO<UserDetail> {
 	 * @create date 2016年8月17日
 	 */ 
 	public void addUserDetail(UserDetail userDetail);
+	/** 添加用户明细信息
+	 * @return addUserDetail 用户注册信息
+	 * @create author kezhiyi
+	 * @create date 2016年8月17日
+	 */ 
+	public void addUserDetaillv(PageData pd);
 	/** 修改用户明细信息
 	 * @return modifyUserDetail 修改用户明细信息
 	 * @create author kezhiyi

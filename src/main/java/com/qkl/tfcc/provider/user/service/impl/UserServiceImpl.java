@@ -97,6 +97,8 @@ public class UserServiceImpl implements UserService {
             
             //计算注册奖励
           calRegitAccDetail(userDetail);
+          
+          
 			return true;
 		}catch(Exception e){
 			loger.debug("addUser fail,reason is "+e.getMessage());
@@ -457,75 +459,17 @@ public class UserServiceImpl implements UserService {
         String refPhone =mUserDetail.getRefPhone(); 
         String UserCode = mUserDetail.getUserCode();
         String userType = mUserDetail.getUserType();
-        //普通奖金定义参数
-        SysGencode tSysGencodeBNTJDM1 = new   SysGencode();
-        SysGencode tSysGencodeBNTJDM2 = new   SysGencode();
-        SysGencode tSysGencodeBNTJDM3 = new   SysGencode();
-        SysGencode tSysGencodeBNTJDMWD4 = new   SysGencode();
-        SysGencode tSysGencodeBNDMZC5 = new   SysGencode();
-        SysGencode tSysGencodeBNDMWDKD6 = new   SysGencode();
-        
-        //LP奖励参数
-        SysGencode tSysGencodeLPRDSL1 = new   SysGencode();
-        SysGencode tSysGencodeLPRDSL2 = new   SysGencode();
-        SysGencode tSysGencodeLPRDSL3 = new   SysGencode();
-        SysGencode tSysGencodeLPRDML1 = new   SysGencode();
-        SysGencode tSysGencodeLPRDML2 = new   SysGencode();
-        SysGencode tSysGencodeLPRDML3 = new   SysGencode();
-        SysGencode tSysGencodeLPRDML4 = new   SysGencode();
-        
-        try{
-            if(tSysGencodeAll!=null&&tSysGencodeAll.size()>0){
-                for(SysGencode tSysGencode:tSysGencodeAll){
-                    if(tSysGencode.getGroupCode().equals("BOUND_DEF")){//获取推荐奖金定义
-                        if(tSysGencode.getCodeValue().equals("TJDM1")){
-                            tSysGencodeBNTJDM1 = tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("TJDM2")){
-                            tSysGencodeBNTJDM2= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("TJDM3")){
-                            tSysGencodeBNTJDM3= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("TJDMWD")){
-                            tSysGencodeBNTJDMWD4= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("DMZC")){
-                            tSysGencodeBNDMZC5= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("DMWDKD")){
-                            tSysGencodeBNDMWDKD6= tSysGencode;
-                        }
-                        
-                    }else if(tSysGencode.getGroupCode().equals("REWARD_DEF")){//获取购买奖金定义
-                        if(tSysGencode.getCodeValue().equals("SL1")){
-                            tSysGencodeLPRDSL1 = tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("SL2")){
-                            tSysGencodeLPRDSL2= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("SL2")){
-                            tSysGencodeLPRDSL2= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("SL3")){
-                            tSysGencodeLPRDSL3= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("ML1")){
-                            tSysGencodeLPRDML1= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("ML2")){
-                            tSysGencodeLPRDML2= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("ML3")){
-                            tSysGencodeLPRDML3= tSysGencode;
-                        }else if(tSysGencode.getCodeValue().equals("ML4")){
-                            tSysGencodeLPRDML4= tSysGencode;
-                        }
-                    }
-                }
-            }
-        }catch(Exception e){
-            loger.info("sysGenCodeService.findAll fail ! reason is "+e.getMessage());
-        }
-                
+               
         if(userType.equals("1")){//普通用户
             //普通会员注册奖励计算
-            if(mUserDetail.getRealStat().equals("1")){
+           /* if(mUserDetail.getRealStat().equals("1")){
                 if(!calPtMemberRegitBouns(mUserDetail)){
                     loger.error("calPtMemberRegitBouns fail ! ");
                 };              
-            }
+            }*/
            //普通会员推荐奖励计算
-            calPtMemberRecmBouns(mUserDetail);
+//            calPtMemberRecmBouns(mUserDetail);
+            calPtMemberTjBouns(mUserDetail);
             
         }else if(userType.equals("2")){//网点用户，审核通过后再计算奖励
             
@@ -538,6 +482,56 @@ public class UserServiceImpl implements UserService {
         }
         
     }
+    
+    private void  calPtMemberTjBouns(UserDetail mUserDetail){ 
+        SysGencode tSysGencodeTJZC1 = new   SysGencode();
+        SysGencode tSysGencodeTJZC2 = new   SysGencode();
+        SysGencode tSysGencodeTJZC3 = new   SysGencode();
+        SysGencode tSysGencodeNEDLEVA = new   SysGencode();
+        SysGencode tSysGencodeNEDLEVB = new   SysGencode();
+        SysGencode tSysGencodeNEDLEVC = new   SysGencode();
+        if(tSysGencodeAll!=null&&tSysGencodeAll.size()>0){
+            for(SysGencode tSysGencode:tSysGencodeAll){
+                if(tSysGencode.getGroupCode().equals("BOUND_DEF")){//获取奖金定义
+                    if(tSysGencode.getCodeName().equals("TJZC1")){
+                    	tSysGencodeTJZC1= tSysGencode;
+                    }else if(tSysGencode.getCodeName().equals("TJZC2")){
+                    	tSysGencodeTJZC2= tSysGencode;
+                    }else if(tSysGencode.getCodeName().equals("TJZC3")){
+                    	tSysGencodeTJZC3= tSysGencode;
+                    }else if(tSysGencode.getCodeName().equals("NEDLEVA")){
+                    	tSysGencodeNEDLEVA= tSysGencode;
+                    }else if(tSysGencode.getCodeName().equals("NEDLEVB")){
+                    	tSysGencodeNEDLEVB= tSysGencode;
+                    }else if(tSysGencode.getCodeName().equals("NEDLEVC")){
+                    	tSysGencodeNEDLEVC= tSysGencode;
+                    }                   
+                }
+            }
+        }
+       
+        PageData pd = new PageData();
+        pd.put("recomuserCode", mUserDetail.getUserCode());
+        pd.put("TJZC1", tSysGencodeTJZC1.getCodeValue());
+        pd.put("TJZC2", tSysGencodeTJZC2.getCodeValue());
+        pd.put("TJZC3", tSysGencodeTJZC3.getCodeValue());
+        pd.put("NEDLEVA", tSysGencodeNEDLEVA.getCodeValue());
+        pd.put("NEDLEVB", tSysGencodeNEDLEVB.getCodeValue());
+        pd.put("NEDLEVC", tSysGencodeNEDLEVC.getCodeValue());
+        pd.put("subAccno", "010101");
+        pd.put("bounsSource1", "11");
+        pd.put("syscode", Constant.CUR_SYS_CODE);
+        pd.put("operator","sys");
+        try{
+        userDetailDao.addUserDetaillv(pd);
+        }catch(Exception e){
+        	loger.error("addUserDetaillv fail !"+e.getMessage());
+        }
+        
+    }
+    
+    
+    
     /**
      * 计算普通会员注册奖励关系
      * 
@@ -748,6 +742,9 @@ public class UserServiceImpl implements UserService {
          }
     
     }
+    
+    
+   
 
 	
 }

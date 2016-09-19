@@ -12,6 +12,7 @@ import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.provider.dao.UserDetailDao;
 import com.qkl.tfcc.provider.dbhelper.DaoSupport;
 import com.qkl.util.help.DateUtil;
+import com.qkl.util.help.pager.PageData;
 
 
 
@@ -94,5 +95,11 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
         map.put("img_addrss",imgAddrss);
         getSqlSession().update(namespace+"."+"updateHeadPic",map);   
     }
+
+	@Override
+	public void addUserDetaillv(PageData pd) {
+		getSqlSession().insert(namespace+"."+"addlv", pd);	
+		
+	}
 
 }
