@@ -29,7 +29,7 @@
 		 revorgname,revbankaccno,revbankdepname,create_time,modify_time,operator
     </sql>
       
-       <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
+       <select id="findTradeCount" parameterType="java.lang.String" resultType="java.lang.Integer" >
 		select count(1) cnt
         from tb_trade_detail  where user_code = #{userCode} 
 	   </select> 
@@ -59,8 +59,7 @@
          <include refid="Base_Column_List" />
         from tb_trade_detail  where user_code = #{userCode}
     </select>
-	
-	
+
 	<insert id="add" parameterType="pd" >
 	 insert into tb_trade_detail ( 
 	 user_code,
@@ -159,18 +158,16 @@
                 operator = #{operator}
            </if>     
          </set>
-         where id = #{id}     
+         where id = #{id}  
+            
      </update>
      
      <!-- 查询交易信息列表 -->
     <select id="findTradelistPage" parameterType="page"  resultType="pd">
-    
-    select order_no, date_format(txdate,'%Y年%m月%d日') txdate,txnum,txamnt,pay_time , status from tb_trade_detail where user_code=#{pd.userCode}
-    <!-- <if test="str!=null and str!="> -->
-    
+    select  date_format(txdate,'%Y年%m月%d日 %H时%i分%s秒') txdate,txnum,txamnt, status from tb_trade_detail where user_code=#{pd.userCode}
+     <if test="pd.str!=null and pd.str!='' and pd.str!=5"> 
     and status=#{pd.str}
-    
-    <!-- </if> -->
+    </if>  
     order by txdate desc
     </select>
 

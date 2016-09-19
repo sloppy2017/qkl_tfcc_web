@@ -44,6 +44,12 @@ public class TradeDetailDaoImpl extends DaoSupport<TradeDetail> implements Trade
 		return tradeinfo;
 	}
 
+	@Override
+	public int findTradeCount(PageData pd) {
+		int tradecount = getSqlSession().selectOne(namespace+"."+"findTradeCount", pd);
+		return tradecount;
+	}
+
 	
 
 	

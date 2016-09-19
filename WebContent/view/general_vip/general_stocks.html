@@ -56,10 +56,10 @@
                 <div class="mid-r">
                     <form action="">
                         <div>
-                            <label>购买数量（股）</label><input type="text" placeholder="请输入需要购买的数量">
+                            <label>购买数量（股）</label><input name="txnum" type="text" placeholder="请输入需要购买的数量">
                         </div>
                         <div>
-                            <label >需支付金额（元）</label><input type="text" placeholder="￥0.00">
+                            <label >需支付金额（元）</label><input  name="txamnt" type="text" placeholder="￥0.00">
                         </div>
                         <div>
                           <a id="buy">确认购买</a>
@@ -73,6 +73,7 @@
                     <div class="sel">
                         <span>付款状态</span>
                         <select name="searchSel" id="searchSel">
+                            <option value="5" selected="selected">请选择</option>
                             <option value="1">已完成</option>
                             <option value="9">已取消</option>
                             <option value="0">待付款</option>

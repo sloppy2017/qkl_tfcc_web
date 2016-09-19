@@ -1,6 +1,11 @@
 package com.qkl.tfcc.provider.trade.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -9,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.entity.Page;
+import com.qkl.tfcc.api.po.trade.TradeDetail;
 import com.qkl.tfcc.api.service.trade.api.TradeService;
 import com.qkl.tfcc.provider.dao.TradeDetailDao;
 import com.qkl.util.help.pager.PageData;
@@ -59,7 +65,6 @@ public class TradeServiceImpl implements TradeService {
 
 	@Override
 	public List<PageData> findTradeInfo(Page page,String versionNo) {
-		
 		List<PageData> tradeInfo=null;
 		try {
 		 tradeInfo = tradeDetailDao.findTradeInfo(page);
@@ -67,6 +72,17 @@ public class TradeServiceImpl implements TradeService {
 			loger.debug("findTradeInfo fail,reason is "+e.getMessage());
 		}
 		return tradeInfo;
+	}
+
+	@Override
+	public int findTradeCount(PageData pd, String versionNo) {
+		int tradeCount=0;
+		try {
+			tradeCount = tradeDetailDao.findTradeCount(pd);
+		} catch (Exception e) {
+			loger.debug("findTradeCount fail,reason is "+e.getMessage());
+		}
+		return tradeCount;
 	}
 
 
