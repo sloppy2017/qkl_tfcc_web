@@ -35,6 +35,12 @@ public interface TradeDetailDao extends DAO<TradeDetail> {
 	 * @return
 	 */
 	public List<PageData> findTradeInfo(Page page);
+	/***
+	 * 查询交易次数
+	 * @param pd
+	 * @return
+	 */
+	public int findTradeCount(PageData pd);
 	
 	
 	

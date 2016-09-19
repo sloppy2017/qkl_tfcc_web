@@ -124,6 +124,7 @@
     height: 32px;
     line-height: 32px;
     width: 57px;
+    float: left;
     border: 1px solid #ddd;
     text-align: center;
 }

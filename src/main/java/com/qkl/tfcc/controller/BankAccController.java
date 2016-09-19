@@ -1,6 +1,5 @@
 package com.qkl.tfcc.controller;
 
-import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +67,8 @@ public class BankAccController extends BaseAction {
 			 page.setPd(pd);
 			 tradeInfo = tradeService.findTradeInfo(page,Constant.VERSION_NO);
 			 map.put("tradeInfo", tradeInfo);
+			 map.put("page", page);
+			 ar.setData(map);
 			 ar.setSuccess(true);
 		     ar.setMessage("查询成功");
 			 
@@ -76,7 +77,7 @@ public class BankAccController extends BaseAction {
 			ar.setMessage("查询失败");
 			e.printStackTrace();
 		}
-		ar.setData(map);
+		
 		return ar;
 	}
 	
@@ -103,13 +104,39 @@ public class BankAccController extends BaseAction {
 			pd.put("create_time", DateUtil.getCurrentDate());
 			pd.put("modify_time", DateUtil.getCurrentDate());
 			pd.put("operator", user.getPhone());
+			pd.put("userCode", user.getUserCode());
 			
-			tradeService.addTradeDetail(pd, Constant.VERSION_NO);
-			ar.setSuccess(true);
-			ar.setMessage("添加成功"); 
+			int tradeCount = tradeService.findTradeCount(pd, Constant.VERSION_NO);
+			if (tradeCount>=5) {
+				ar.setSuccess(false);
+				ar.setMessage("购买次数已达上限");
+				return ar;
+			}else{
+				int txamnt = (Integer) pd.get("txamnt");
+				if (txamnt>=1000) {
+					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
+					ar.setSuccess(true);
+					ar.setMessage("购买成功"); 
+				}else{
+					ar.setSuccess(false);
+					ar.setMessage("购买金额低于下限");
+					return ar;
+				}
+				if (txamnt>10000) {
+					ar.setSuccess(false);
+					ar.setMessage("购买金额高于上限");
+					return ar;
+				}else {
+					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
+					ar.setSuccess(true);
+					ar.setMessage("购买成功"); 
+				}
+				
+			}	
+			
 		} catch (Exception e) {
 			ar.setSuccess(false);
-			ar.setMessage("添加失败");
+			ar.setMessage("购买失败");
 			e.printStackTrace();
 		}
 		

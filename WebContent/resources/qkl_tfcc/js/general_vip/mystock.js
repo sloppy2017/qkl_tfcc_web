@@ -23,17 +23,18 @@ function getBankAccInfo(){
         }
     });
 }
+
+
 $('#buy').click(function(){
 	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
 	url = encodeURI(url);
-	alert(url);
 	$.ajax({
         type: "post",
         url:url,
         dataType: "json",
         /*data:{
-            'ttext':$("#ttext").val(),
-            'money':$("#money").val(),
+            ttext:$("#ttext").val(),
+            money:$("#money").val()
             'revorgname':$("#revorgname").text().trim(),
             'revbankaccno': $("#revbankaccno").text().trim(),
             'revbankdepname':$("#revbankdepname").text().trim()
@@ -105,7 +106,7 @@ function reload_table(currentPage,showCount) {
                 rsStr = rsStr + "</tr>";
             }
             $(".result-tab").html( rsStr);
-//            console.log(data.data.page.pageStr);
+           // console.log(data.data.page.pageStr);
             $(".pages1").html(data.data.page.pageStr);
 
         },
