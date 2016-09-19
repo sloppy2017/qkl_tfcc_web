@@ -96,10 +96,6 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
         getSqlSession().update(namespace+"."+"updateHeadPic",map);   
     }
 
-	@Override
-	public void addUserDetaillv(PageData pd) {
-		getSqlSession().insert(namespace+"."+"addlv", pd);	
-		
-	}
+	
 
 }

@@ -25,6 +25,7 @@ import com.qkl.tfcc.api.po.user.UserLevelcnt;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.user.api.UserService;
 import com.qkl.tfcc.provider.dao.AccDao;
+import com.qkl.tfcc.provider.dao.AccDetailDao;
 import com.qkl.tfcc.provider.dao.SysGencodeDao;
 import com.qkl.tfcc.provider.dao.UserDao;
 import com.qkl.tfcc.provider.dao.UserDetailDao;
@@ -54,7 +55,8 @@ public class UserServiceImpl implements UserService {
     private AccService accService;
 	@Autowired
     private AccDao accDao;
-
+	@Autowired
+    private AccDetailDao accDetailDao;
 	@Autowired
 	private SysGencodeDao sysGencodeDao;
 	@Autowired
@@ -319,9 +321,10 @@ public class UserServiceImpl implements UserService {
     private void   createUserFriendship(UserDetail mUserDetail){
         String refPhone = mUserDetail.getRefPhone(); 
         String UserCode = mUserDetail.getUserCode();
-        String userType = mUserDetail.getUserType();
+       
         
         User tRefUser =  findbyPhone(refPhone, Constant.VERSION_NO);
+        String userType = tRefUser.getUserType();
                 
          boolean tUpflag = findIsExistUpFriendship(tRefUser.getUserCode(), Constant.VERSION_NO);
          UserFriendship fUserFriendship= new UserFriendship();//推荐人上级关系
@@ -518,7 +521,7 @@ public class UserServiceImpl implements UserService {
         SysGencode tSysGencodeNEDLEVC = new   SysGencode();
         if(tSysGencodeAll!=null&&tSysGencodeAll.size()>0){
             for(SysGencode tSysGencode:tSysGencodeAll){
-                if(tSysGencode.getGroupCode().equals("BOUND_DEF")){//获取奖金定义
+                if(tSysGencode.getGroupCode().equals("REWARD_DEF")){//获取奖金定义
                     if(tSysGencode.getCodeName().equals("TJZC1")){
                     	tSysGencodeTJZC1= tSysGencode;
                     }else if(tSysGencode.getCodeName().equals("TJZC2")){
@@ -549,7 +552,7 @@ public class UserServiceImpl implements UserService {
         pd.put("syscode", Constant.CUR_SYS_CODE);
         pd.put("operator","sys");
         try{
-        userDetailDao.addUserDetaillv(pd);
+        	accDetailDao.addAccDetaillv(pd);
         }catch(Exception e){
         	loger.error("addUserDetaillv fail !"+e.getMessage());
         }

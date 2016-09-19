@@ -17,6 +17,12 @@ public interface AccDetailDao extends DAO<AccDetail> {
 	 * @create date 2016年8月29日
 	 */ 
 	public void addAccDetail(AccDetail accDetail);
+	/** 添加用户明细信息
+	 * @return addUserDetail 用户注册信息
+	 * @create author kezhiyi
+	 * @create date 2016年8月17日
+	 */ 
+	public void addAccDetaillv(PageData pd);
 	/**
 	 * @describe:修改用户账户明细信息
 	 * @author: zhangchunming

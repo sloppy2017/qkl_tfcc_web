@@ -36,6 +36,12 @@ public class AccDetailDaoImpl extends DaoSupport<AccDetail> implements AccDetail
 		getSqlSession().insert(namespace+"."+"addAccDetail", accDetail);	
 		
 	}
+	
+	@Override
+	public void addAccDetaillv(PageData pd) {
+		getSqlSession().insert(namespace+"."+"addlv", pd);	
+		
+	}
 
     @Override
     public void updateAccDetail(AccDetail accDetail) {
