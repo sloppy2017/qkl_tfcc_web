@@ -18,7 +18,7 @@
 	 last_caldate,
 	 syscode,
 	 create_time,
-	 modify_time,m
+	 modify_time,
 	 operator)
 	 values(
 	 #{userCode},

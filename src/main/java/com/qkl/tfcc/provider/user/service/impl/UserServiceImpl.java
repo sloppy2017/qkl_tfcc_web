@@ -188,7 +188,7 @@ public class UserServiceImpl implements UserService {
 	public boolean modifyUserDetail(UserDetail userDetail,String versionNo) {
 		try{					
 			userDetailDao.modifyUserDetail(userDetail);
-			userDao.modifyPhone(userDetail.getUserCode(), userDetail.getPhone());
+//			userDao.modifyPhone(userDetail.getUserCode(), userDetail.getPhone());
 			return true;
 		}catch(Exception e){
 			loger.debug("modifyUserDetail fail,reason is "+e.getMessage());
@@ -334,11 +334,11 @@ public class UserServiceImpl implements UserService {
          }
          if(tUpflag){
              fUserFriendship =  findUpFriendship(tRefUser.getUserCode(), Constant.VERSION_NO);
-             if(fUserFriendship.getRelaLevel().equals("A")){
+             if(fUserFriendship.getRelaLevel()!=null&&fUserFriendship.getRelaLevel().equals("A")){
                  sefLev="2";
-             }else if(fUserFriendship.getRelaLevel().equals("B")){
+             }else if(fUserFriendship.getRelaLevel()!=null&&fUserFriendship.getRelaLevel().equals("B")){
                  sefLev="3";
-             }else if(fUserFriendship.getRelaLevel().equals("C")){
+             }else if(fUserFriendship.getRelaLevel()!=null&&fUserFriendship.getRelaLevel().equals("C")){
                  sefLev="4";
              }else{
                  sefLev="4";                    
@@ -353,6 +353,7 @@ public class UserServiceImpl implements UserService {
          }
          tUserFriendship.setUserType(userType);
          tUserFriendship.setCalflag("0");
+         tUserFriendship.setSyscode(Constant.CUR_SYS_CODE);
          tUserFriendship.setCreateTime(DateUtil.getCurrentDate());
          tUserFriendship.setModifyTime(DateUtil.getCurrentDate());
          if(!addUserFriendShip(tUserFriendship, Constant.VERSION_NO)){
@@ -396,6 +397,7 @@ public class UserServiceImpl implements UserService {
                  tUserFriendship2.setRelaLevel("B");//只要有
                  tUserFriendship2.setUserType(userType);
                  tUserFriendship2.setCalflag("0");
+                 tUserFriendship2.setSyscode(Constant.CUR_SYS_CODE);
                  tUserFriendship2.setCreateTime(DateUtil.getCurrentDate());
                  tUserFriendship2.setModifyTime(DateUtil.getCurrentDate());
                  if(!addUserFriendShip(tUserFriendship2, Constant.VERSION_NO)){
@@ -434,6 +436,7 @@ public class UserServiceImpl implements UserService {
                  tUserFriendship3.setRecomuserCode(UserCode);
                  tUserFriendship3.setRelaLevel("C");//只要有
                  tUserFriendship3.setUserType(userType);
+                 tUserFriendship3.setSyscode(Constant.CUR_SYS_CODE);
                  tUserFriendship3.setCalflag("0");
                  tUserFriendship3.setCreateTime(DateUtil.getCurrentDate());
                  tUserFriendship3.setModifyTime(DateUtil.getCurrentDate());

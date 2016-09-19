@@ -37,8 +37,8 @@
 	 #{relaLevel},
 	 #{levcnt},
 	 #{syscode},
-	 #{create_time},
-	 #{modify_time},
+	 #{createTime},
+	 #{modifyTime},
 	 #{operator}
 	 )	 
 	 </insert>
