@@ -54,12 +54,12 @@
                                  账务对账电话：   <p id="checkphone"></p>
                 </div>
                 <div class="mid-r">
-                    <form action="">
+                    <form action="" autocomplete="off" >
                         <div>
-                            <label>购买数量（股）</label><input name="txnum" type="text" placeholder="请输入需要购买的数量">
+                            <label>购买数量（股）</label><input name="txnum" type="text" onkeyup='this.value=this.value.replace(/\D/gi,"")' placeholder="请输入需要购买的数量">
                         </div>
                         <div>
-                            <label >需支付金额（元）</label><input  name="txamnt" type="text" readonly="readonly" placeholder="￥0.00">
+                            <label >需支付金额（元）</label><input  name="txamnt" type="text" autocomplete="off" readonly="readonly" placeholder="￥0.00">
                         </div>
                         <div>
                           <a id="buy">确认购买</a>

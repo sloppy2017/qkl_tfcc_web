@@ -68,6 +68,7 @@ public class TradeServiceImpl implements TradeService {
 		List<PageData> tradeInfo=null;
 		try {
 		 tradeInfo = tradeDetailDao.findTradeInfo(page);
+		 
 		} catch (Exception e) {
 			loger.debug("findTradeInfo fail,reason is "+e.getMessage());
 		}
@@ -75,7 +76,7 @@ public class TradeServiceImpl implements TradeService {
 	}
 
 	@Override
-	public int findTradeCount(PageData pd, String versionNo) {
+	public int findTradeCount(PageData pd, String versionNo) {//获取一个人的交易次数
 		int tradeCount=0;
 		try {
 			tradeCount = tradeDetailDao.findTradeCount(pd);

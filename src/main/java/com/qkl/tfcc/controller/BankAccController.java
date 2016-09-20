@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.BankAccInfo;
+import com.qkl.tfcc.api.po.trade.TradeDetail;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.BankAccService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
@@ -70,6 +71,26 @@ public class BankAccController extends BaseAction {
 			 pd.put("userCode", user.getUserCode());
 			 page.setPd(pd);
 			 tradeInfo = tradeService.findTradeInfo(page,Constant.VERSION_NO);
+			 for (PageData pageData : tradeInfo) {
+				 int status = Integer.parseInt( pageData.getString("status"));
+				 String string2 = pageData.get("txamnt").toString();
+				 BigDecimal decimal = new BigDecimal(string2);
+				 String format = String .format("%.2f",decimal);
+				//double txamnt = decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+				//System.out.println(txamnt+"=============");
+				pageData.put("txamnt", format);
+				 if (status==0) {
+					 pageData.put("status", "待付款");	
+				}
+				 if (status==1) {
+					 pageData.put("status", "已完成");
+				}
+				 if (status==9) {
+					 pageData.put("status", "已取消");
+				}
+			}
+			 
+			 
 			 map.put("tradeInfo", tradeInfo);
 			 map.put("page", page);
 			 ar.setData(map);
@@ -113,7 +134,7 @@ public class BankAccController extends BaseAction {
 			int tradeCount = tradeService.findTradeCount(pd, Constant.VERSION_NO);
 			if (tradeCount>=5) {
 				ar.setSuccess(false);
-				ar.setMessage("购买次数已达上限");
+				ar.setMessage("购买次数已达5次");
 				return ar;
 			}else{
 				String object = pd.getString("txamnt");
@@ -125,12 +146,12 @@ public class BankAccController extends BaseAction {
 					ar.setMessage("购买成功"); 
 				}else{
 					ar.setSuccess(false);
-					ar.setMessage("购买金额低于下限");
+					ar.setMessage("购买金额不得低于1000.00元");
 					return ar;
 				}
 				if (txamnt>10000) {
 					ar.setSuccess(false);
-					ar.setMessage("购买金额高于上限");
+					ar.setMessage("购买金额不得高于10000.00元");
 					return ar;
 				}else {
 					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
@@ -190,6 +211,13 @@ public class BankAccController extends BaseAction {
 		return ar;
 	}
 	
-	
+	public static void main(String[] args) {
+		String str = "152.00";
+		PageData pdData = new PageData();
+		pdData.put("str", str);
+		System.out.println(pdData.get("str"));
+		BigDecimal bigDecimal = new BigDecimal(pdData.get("str").toString());
+		System.out.println(bigDecimal);
+	}
 	
 }
