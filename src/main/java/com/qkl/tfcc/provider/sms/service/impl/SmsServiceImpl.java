@@ -1,5 +1,7 @@
 package com.qkl.tfcc.provider.sms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -10,8 +12,11 @@ import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.po.user.Sendsms;
 import com.qkl.tfcc.api.po.user.SendsmsDetail;
 import com.qkl.tfcc.api.service.sms.api.SmsService;
+import com.qkl.tfcc.provider.dao.LogSmsDao;
 import com.qkl.tfcc.provider.dao.SmsSendDao;
 import com.qkl.tfcc.provider.dao.SmsSendDetailDao;
+import com.qkl.tfcc.sms.SmsSend;
+import com.qkl.util.help.pager.PageData;
 
 
 
@@ -21,7 +26,9 @@ public class SmsServiceImpl implements SmsService {
 	private Logger loger = LoggerFactory.getLogger(SmsServiceImpl.class);
 
 	@Autowired
-	private SmsSendDao smsSendDao;
+	private SmsSendDao smsSendDao;//发送验证码
+	@Autowired
+	private LogSmsDao logSmsDao;//发送短信
 	@Autowired
 	private SmsSendDetailDao smsSendDetailDao;
 	
@@ -87,5 +94,40 @@ public class SmsServiceImpl implements SmsService {
 		}
 		return smsSendDao.findByPhone(phone,second);
 	}
+
+    @Override
+    public List<PageData> getSmsNoSend(PageData pd) {
+        return logSmsDao.getSmsNoSend(pd);
+    }
+
+    @Override
+    public boolean updateSms(PageData pd) {
+        try{            
+            logSmsDao.updateSms(pd);
+            return true;
+        }catch(Exception e){
+            loger.debug("updateSms fail,reason is "+e.getMessage());
+            return false;
+        }
+    }
+    /**
+     * @describe:发送库里未发送的短息
+     * @author: zhangchunming
+     * @date: 2016年9月19日下午7:49:23
+     * @return: void
+     *//*
+    @Transactional(propagation =Propagation.REQUIRED)
+    public void sendNoSendSms(PageData pd){
+        List<PageData> smsList = logSmsDao.getSmsNoSend(pd);
+        for(PageData tpd:smsList){
+            boolean result = SmsSend.sendSms(tpd.getString("ls_phone"), tpd.getString("ls_content"));
+            if(result){
+                pd.put("log_sms_id", tpd.getString("log_sms_id"));
+                pd.put("ls_is_success", 1);
+                pd.put("ls_is_send", 1);
+                logSmsDao.updateSms(pd);
+            }
+        }
+    }*/
 
 }

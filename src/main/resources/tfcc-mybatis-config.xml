@@ -78,6 +78,7 @@
 		<mapper resource="modelMapper/UnfreezeDetail.xml"/>
 		<mapper resource="modelMapper/AccOutdetail.xml"/>
 		<mapper resource="modelMapper/UserLevelcnt.xml"/>
+		<mapper resource="modelMapper/LogSms.xml"/>
 		<!-- mapper resource="modelMapper/SourceBean.xml"/>
 		<mapper resource="modelMapper/DataListBean.xml"/>
 		<mapper resource="modelMapper/EzbCustomerInfoBean.xml"/>

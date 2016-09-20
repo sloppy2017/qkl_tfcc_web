@@ -23,9 +23,9 @@
     </div>
     <div class="nav-right fl">
         <div class="top">
-            <span class="yearTime">2016年8月24日</span>
-            <span class="dateTime">09:18:06 </span>
-            <span class="weekTime"> 星期三 </span>
+            <span class="yearTime"></span>
+            <span class="dateTime"></span>
+            <span class="weekTime"></span>
             <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
             <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
@@ -81,7 +81,7 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
+                    <img id="left_headPicId" src="" alt="">
                 </div>
                 <p>投资公司</p>
             </div>
@@ -97,91 +97,6 @@
 </div>
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script>
-
-
-
-/* 
-    $(".type-btn1 a").click(function () {
-        var showcnt =10; //每页页数初始值
-     
-        var  myselect=document.getElementById("showcnt");
-        if(myselect==null||myselect=="null"){
-        }else{
-            showcnt=myselect.options[myselect.selectedIndex].value;
-        }
-        var lpVal =$(".lp-lv").val();
-        
-        console.log("lpVal is  " + lpVal);
-        reload_table(1,showcnt);
-       
-    })
-
-    function reload_table(currentPage,showCount) {
-        
-       var lpVal =$('.lp-lv').val();
-      
-       alert(lpVal);
-          var rsStr = "";
-          $.ajax({  
-              type: 'post',
-  //		url: 'rvice/user/login/',
-              url: '/service/corp/lpInfo',
-              dataType: 'json',
-              data: {
-            	  lpVal:lpVal,
-                  currentPage: currentPage,
-                  showCount: showCount
-              },
-              success: function (data) {
-            	
-                  /*  alert('请求成功');  */
-                 /*  var message = data.message;
-                  alert(message);
-                  /*    console.log("success is " + data.success);
-                   console.log("data is " + data.map);
-                   console.log("data.userList is " + data.data.userList); 
-                  var usList = data.data.list;
-                  console.log("usList.length " + usList.length);
-                 console.log("data.data.page.pageStr " + data.data.page.pageStr); */
-                 /*  var tablecols = "<tr> \n"
-                        /*   + " <th>会员级别</th> \n" */
-                         // + "<th>注册时间</th> \n"
-                        //  + "<th>LP会员账号</th> \n"
-                        //  +"<th>LP会员姓名人</th>\n"
-                        /*   +"<th>用户名 </th>\n" */
-                        //  +"<th>购买量(股)</th>\n"
-                        //  + "</tr> \n";
-               //   rsStr= tablecols;
-               //   for (var i = 0; i < usList.length; i++) {
-                  //    rsStr = rsStr + "<tr class='ss'>";
-                  //    console.log("usList(" + i + ") name is " + usList[i].name);
-                   //   rsStr = rsStr + "<th>" + usList[i].create_time + "</th>";
-                   //   rsStr = rsStr + "<th>" + usList[i].phone + "</th>";
-                    //  rsStr = rsStr + "<th>" + usList[i].real_name + "</th>";
-                   //  rsStr = rsStr + "<th>" + usList[i].amnt + "</th>";
-                     /*  rsStr = rsStr + "<th>" + usList[i].name + "</th>";
-                      rsStr = rsStr + "<th>" + usList[i].test_user_id + "</th>"; */
-                   //   rsStr = rsStr + "</tr>";
-                 // }
-               //   console.log("rsStr " + rsStr); */
-  //			 $(".result-tab").append(rsStr);
-               //   var x =$(".result-tab").html( rsStr)
-                //  console.log(x)
-  //			 $(".pages1").append(data.data.page.pageStr);
-                 // $(".pages1").html(data.data.page.pageStr);
-  //			$('.phone').val(data.data.phone);
-                  /*  alert("message is " + message); */
-  //			 if(data.success){
-  //				 window.location.href ="../index.html";
-  //			 }
-              //}, error: function (data) {
-            //	    alert("data is "+data);
-            //  }
-         // })
-
-   // } */
-     
-    
 
     $.ajax({
         type:'post',
@@ -204,6 +119,8 @@
           if(data.success){
               if(data.data.imgAddrss){
                   $("#left_headPicId").attr("src",data.data.imgAddrss);
+              }else{
+                  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
               }
               if(data.data.userName){
                   $("#user").html(data.data.userName);

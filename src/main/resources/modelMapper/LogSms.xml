@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="LogSms" >
+  <!-- <resultMap id="BaseresultType" type="pd" >
+    <id column="log_sms_id" property="logSmsId" jdbcType="INTEGER" />
+    <result column="ls_phone" property="lsPhone" jdbcType="VARCHAR" />
+    <result column="ls_response_code" property="lsResponseCode" jdbcType="VARCHAR" />
+    <result column="ls_response_msg" property="lsResponseMsg" jdbcType="VARCHAR" />
+    <result column="ls_create_datetime" property="lsCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ls_is_resend" property="lsIsResend" jdbcType="INTEGER" />
+    <result column="ls_sms_commercial" property="lsSmsCommercial" jdbcType="VARCHAR" />
+    <result column="ls_sms_source" property="lsSmsSource" jdbcType="VARCHAR" />
+    <result column="ls_is_send" property="lsIsSend" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="resultTypeWithBLOBs" type="pd" extends="BaseresultType" >
+    <result column="ls_content" property="lsContent" jdbcType="LONGVARCHAR" />
+  </resultMap> -->
+  <sql id="Base_Column_List" >
+    log_sms_id, ls_phone, ls_response_code, ls_response_msg, ls_create_datetime, ls_is_resend, 
+    ls_sms_commercial, ls_sms_source, ls_is_send
+  </sql>
+  <sql id="Blob_Column_List" >
+    ls_content
+  </sql>
+  <select id="selectByIsSend" resultType="pd" parameterType="pd" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from log_sms
+    where ls_is_send = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log_sms
+    where log_sms_id = #{logSmsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pd" >
+    insert into log_sms (log_sms_id, ls_phone, ls_response_code, 
+      ls_response_msg, ls_create_datetime, ls_is_resend, 
+      ls_sms_commercial, ls_sms_source, ls_is_send, 
+      ls_content)
+    values (#{logSmsId,jdbcType=INTEGER}, #{lsPhone,jdbcType=VARCHAR}, #{lsResponseCode,jdbcType=VARCHAR}, 
+      #{lsResponseMsg,jdbcType=VARCHAR}, #{lsCreateDatetime,jdbcType=TIMESTAMP}, #{lsIsResend,jdbcType=INTEGER}, 
+      #{lsSmsCommercial,jdbcType=VARCHAR}, #{lsSmsSource,jdbcType=VARCHAR}, #{lsIsSend,jdbcType=BIT}, 
+      #{lsContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pd" >
+    insert into log_sms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logSmsId != null" >
+        log_sms_id,
+      </if>
+      <if test="lsPhone != null" >
+        ls_phone,
+      </if>
+      <if test="lsResponseCode != null" >
+        ls_response_code,
+      </if>
+      <if test="lsResponseMsg != null" >
+        ls_response_msg,
+      </if>
+      <if test="lsCreateDatetime != null" >
+        ls_create_datetime,
+      </if>
+      <if test="lsIsResend != null" >
+        ls_is_resend,
+      </if>
+      <if test="lsSmsCommercial != null" >
+        ls_sms_commercial,
+      </if>
+      <if test="lsSmsSource != null" >
+        ls_sms_source,
+      </if>
+      <if test="lsIsSend != null" >
+        ls_is_send,
+      </if>
+      <if test="lsContent != null" >
+        ls_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logSmsId != null" >
+        #{logSmsId,jdbcType=INTEGER},
+      </if>
+      <if test="lsPhone != null" >
+        #{lsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="lsResponseCode != null" >
+        #{lsResponseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lsResponseMsg != null" >
+        #{lsResponseMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="lsCreateDatetime != null" >
+        #{lsCreateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lsIsResend != null" >
+        #{lsIsResend,jdbcType=INTEGER},
+      </if>
+      <if test="lsSmsCommercial != null" >
+        #{lsSmsCommercial,jdbcType=VARCHAR},
+      </if>
+      <if test="lsSmsSource != null" >
+        #{lsSmsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="lsIsSend != null" >
+        #{lsIsSend,jdbcType=BIT},
+      </if>
+      <if test="lsContent != null" >
+        #{lsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="pd" >
+    update log_sms
+    <set >
+      <if test="lsPhone != null" >
+        ls_phone = #{lsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="lsResponseCode != null" >
+        ls_response_code = #{lsResponseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lsResponseMsg != null" >
+        ls_response_msg = #{lsResponseMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="lsCreateDatetime != null" >
+        ls_create_datetime = #{lsCreateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lsIsResend != null" >
+        ls_is_resend = #{lsIsResend,jdbcType=INTEGER},
+      </if>
+      <if test="lsSmsCommercial != null" >
+        ls_sms_commercial = #{lsSmsCommercial,jdbcType=VARCHAR},
+      </if>
+      <if test="lsSmsSource != null" >
+        ls_sms_source = #{lsSmsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="lsIsSend != null" >
+        ls_is_send = #{lsIsSend},
+      </if>
+      <if test="lsIsSuccess != null" >
+        ls_is_success = #{lsIsSuccess},
+      </if>
+      <if test="lsContent != null" >
+        ls_content = #{lsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where log_sms_id = #{logSmsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="pd" >
+    update log_sms
+    set ls_phone = #{lsPhone,jdbcType=VARCHAR},
+      ls_response_code = #{lsResponseCode,jdbcType=VARCHAR},
+      ls_response_msg = #{lsResponseMsg,jdbcType=VARCHAR},
+      ls_create_datetime = #{lsCreateDatetime,jdbcType=TIMESTAMP},
+      ls_is_resend = #{lsIsResend,jdbcType=INTEGER},
+      ls_sms_commercial = #{lsSmsCommercial,jdbcType=VARCHAR},
+      ls_sms_source = #{lsSmsSource,jdbcType=VARCHAR},
+      ls_is_send = #{lsIsSend,jdbcType=BIT},
+      ls_content = #{lsContent,jdbcType=LONGVARCHAR}
+    where log_sms_id = #{logSmsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pd" >
+    update log_sms
+    set ls_phone = #{lsPhone,jdbcType=VARCHAR},
+      ls_response_code = #{lsResponseCode,jdbcType=VARCHAR},
+      ls_response_msg = #{lsResponseMsg,jdbcType=VARCHAR},
+      ls_create_datetime = #{lsCreateDatetime,jdbcType=TIMESTAMP},
+      ls_is_resend = #{lsIsResend,jdbcType=INTEGER},
+      ls_sms_commercial = #{lsSmsCommercial,jdbcType=VARCHAR},
+      ls_sms_source = #{lsSmsSource,jdbcType=VARCHAR},
+      ls_is_send = #{lsIsSend,jdbcType=BIT}
+    where log_sms_id = #{logSmsId,jdbcType=INTEGER}
+  </update>
+</mapper>

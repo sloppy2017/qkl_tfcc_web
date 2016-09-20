@@ -140,7 +140,9 @@ function getUserInfo(){
           }*/
     	  if(json.data.imgAddrss){
     		  $("#left_headPicId").attr("src",json.data.imgAddrss);
-    	  }
+    	  }else{
+              $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
+          }
     	  if(json.data.userName){
               $("#user").html(json.data.userName);
           }else if(json.data.realName){

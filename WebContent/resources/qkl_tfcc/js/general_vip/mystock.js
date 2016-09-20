@@ -2,6 +2,8 @@
  * Created by qw on 2016/9/18.
  */
 $(function(){
+	//获取个人信息
+	getUserInfo();
 	//获取收款账户信息
 	getBankAccInfo();
 });
@@ -42,26 +44,6 @@ $("input[name='txnum']").change(function(){
     });
 });
 
-/*$(function(){
-
-	 $("input[name='txnum']").change(function(){
-
-	 var text = $(this).val();
-
-	 $("input[name='txamnt']").attr("value",text);
-
-	 });
-
-	});
-*/
-
-/*$("input[name='txnum']").blur(function(){
-	var $txnum=this.val();
-	if($txnum==null&&$txnum.length<=0){
-		$("input[name='txamnt']").text();
-	}
-});*/
-
 $('#buy').click(function(){
 	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
 	url = encodeURI(url);
@@ -81,13 +63,28 @@ $('#buy').click(function(){
             
         }
     });
-	/*var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
-	$.post(url,function(data){
-		alert(data.message);
-	});*/
 
 
 });
+function getUserInfo(){
+    var url = "/service/user/toMyself";
+    $.getJSON(url,function(data){
+        if(data.success){
+            if(data.data.imgAddrss){
+          	    $("#left_headPicId").attr("src",data.data.imgAddrss);
+            }else{
+                $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
+            }
+            if(data.data.userName){
+                $("#user").html(data.data.userName);
+            }else if(data.data.realName){
+                $("#user").html(data.data.realName);
+            }else{
+                $("#user").html(data.data.phone);
+            }
+        }
+    });
+}
 
 
 

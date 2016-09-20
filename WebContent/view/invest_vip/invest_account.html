@@ -40,9 +40,9 @@
     </div>
     <div class="nav-right fl">
         <div class="top">
-            <span class="yearTime">2016年8月24日</span>
-            <span class="dateTime">09:18:06 </span>
-            <span class="weekTime"> 星期三 </span>
+            <span class="yearTime"></span>
+            <span class="dateTime"></span>
+            <span class="weekTime"></span>
             <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
             <span class="exit"><a href="/service/user/logout">【退出】</a></span>
         </div>
@@ -115,7 +115,7 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img id="left_headPicId" src="/resources/qkl_tfcc/imgs/LPtouxiang.jpg" alt="">
+                    <img id="left_headPicId" src="" alt="">
                 </div>
                 <p>投资公司</p>
             </div>
@@ -131,11 +131,9 @@
 </div>
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
-</body>
-</html>
 <script type="text/javascript">
   $(function(){
-  	  getUserInfo();
+      getUserInfo();
   });
 
   function getUserInfo(){
@@ -143,7 +141,9 @@
       $.getJSON(url,function(data){
           if(data.success){
               if(data.data.imgAddrss){
-            	  $("#left_headPicId").attr("src",data.data.imgAddrss);
+                  $("#left_headPicId").attr("src",data.data.imgAddrss);
+              }else{
+                  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
               }
               if(data.data.userName){
                   $("#user").html(data.data.userName);
@@ -156,58 +156,58 @@
       });
   }
   function sub_money(){
-	  var jsonStr = '[';  
-	  $("form li:not(.subBtn)").each(function(){
-	        var phone = $(this).children('input[name="phone"]').val().trim();
-	        var tfccNum = $(this).children('input[name="money"]').val().trim();
-	        if(phone!=''&&tfccNum!=''){
-	        	var validPhone = valid_phone($(this).children('input[name="phone"]'));
-	        	var validMoney = valid_money($(this).children('input[name="money"]'));
-	        	if(validPhone&&validMoney){
-	        		jsonStr += "{'phone':'"+phone+"','tfccNum':'"+tfccNum+"'},";
-	        	}else{
-	        		return;
-	        	}
-	        }
-	    });
-	  jsonStr = jsonStr.substring(0, jsonStr.length-1)+"]";
-	  if(jsonStr == ']'){
-		  $("#showTip").html("<p style='margin-left:100px;' class='error18'>请填写对应的手机号和发放额度！</p>");
-		  return;
-	  }
-	    $.ajax({
-	        type:'post',
-	        url:'/service/acc/rewardTfcc?params='+jsonStr,
-// 	        data:,
-	        dataType:'json',
-	        success:function(data){
-	        	 if(data.success){
-	        		 $("#showTip").html("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p><p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
-	        	 }
-	        },
-	        errror:function(data){
-	        	alert("系统异常！")
-	        }
-	    });
-	}
+      var jsonStr = '[';  
+      $("form li:not(.subBtn)").each(function(){
+            var phone = $(this).children('input[name="phone"]').val().trim();
+            var tfccNum = $(this).children('input[name="money"]').val().trim();
+            if(phone!=''&&tfccNum!=''){
+                var validPhone = valid_phone($(this).children('input[name="phone"]'));
+                var validMoney = valid_money($(this).children('input[name="money"]'));
+                if(validPhone&&validMoney){
+                    jsonStr += "{'phone':'"+phone+"','tfccNum':'"+tfccNum+"'},";
+                }else{
+                    return;
+                }
+            }
+        });
+      jsonStr = jsonStr.substring(0, jsonStr.length-1)+"]";
+      if(jsonStr == ']'){
+          $("#showTip").html("<p style='margin-left:100px;' class='error18'>请填写对应的手机号和发放额度！</p>");
+          return;
+      }
+        $.ajax({
+            type:'post',
+            url:'/service/acc/rewardTfcc?params='+jsonStr,
+//          data:,
+            dataType:'json',
+            success:function(data){
+                 if(data.success){
+                     $("#showTip").html("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p><p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
+                 }
+            },
+            errror:function(data){
+                alert("系统异常！")
+            }
+        });
+    }
 //手机验证
   
   function valid_phone($this){
-	  var phone = $this.val().trim();
+      var phone = $this.val().trim();
       var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
       if(phone.length!=11||!myreg.test(phone)){
           $this.val("请输入正确的手机号");
           $this.addClass("errorTip");
           return false;
       }else{
-    	  if($this.hasClass('errorTip')){
-    		  $this.removeClass("errorTip");
-    	  }
+          if($this.hasClass('errorTip')){
+              $this.removeClass("errorTip");
+          }
           return true;
       }
   }
   function valid_money($this){
-	  var money = $this.val().trim();
+      var money = $this.val().trim();
       var myreg = /^[1-9][0-9]{0,5}$/;
       if(!myreg.test(money)){
           $this.val("请输入1~6位正整数");
@@ -222,15 +222,18 @@
   }
   
   $.ajax({
-	    type:'post',
-	    url:'/service/lpacc/getnum',
-	    dataType:'json',
-	    success:function(data){
-	        var message = data.message;
-	       // alert(message);
-	        $("#in_sp").html(data.data.Balance);
-	        
-	    }
-	})
+        type:'post',
+        url:'/service/lpacc/getnum',
+        dataType:'json',
+        success:function(data){
+            var message = data.message;
+           // alert(message);
+            $("#in_sp").html(data.data.Balance);
+            
+        }
+    })
   
 </script>
+</body>
+</html>
+
