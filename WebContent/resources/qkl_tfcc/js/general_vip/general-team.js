@@ -1,6 +1,89 @@
 
+
+$(function(){
+	$.ajax({
+	    type:'post',
+	    url:'/service/team/findVipNum',
+	    dataType:'json',
+	    success:function(data){
+	        var message = data.message;
+	        if(data.success){
+	            if(data.data==null){
+	                 $(".member1").html("0");
+	                 $(".member2").html("0");
+	                 $(".member3").html("0");
+	                 $(".member4").html("0");
+	            }else{
+	                $(".member1").html(data.data.rNum);
+	                $(".member2").html(data.data.aNum);
+	                $(".member3").html(data.data.bNum);
+	                $(".member4").html(data.data.cNum);
+	            }
+	            
+	        }else{
+	            alert(message);
+	        }
+	        
+	        
+	    }
+	});
+});
+
+  $(function(){
+      getUserInfo();
+  });
+
+  function getUserInfo(){
+      var url = "/service/user/toMyself";
+      $.getJSON(url,function(data){
+          if(data.success){
+              if(data.data.imgAddrss){
+                  $("#left_headPicId").attr("src",data.data.imgAddrss);
+              }else{
+                  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
+              }
+              if(data.data.userName){
+                  $("#user").html(data.data.userName);
+              }else if(data.data.realName){
+                  $("#user").html(data.data.realName);
+              }else{
+                  $("#user").html(data.data.phone);
+              }
+          }
+      });
+  }
+
+  $(function(){
+	  $("#quan").click(function(){
+		  var c=$(this).attr("checked");
+		  if(c=="checked"){ //选中
+			 $("[name=checkbox]").attr("checked",true);
+		  }else{
+			 $("[name=checkbox]").attr("checked",false);
+		  }
+	  });
+	});
+	
+	
+	$(function(){
+		var totalCount=$("[name=checkbox]").length;//总数
+		
+		$("[name=checkbox]").click(function(){
+			var count=$("[name=checkbox]:checked").length; //被选中的个数
+			if(totalCount==count){
+				$("#quan").attr("checked",true);
+		    }else{
+			   $("#quan").attr("checked",false);
+			}
+	    });
+    });
+ 
+  
+  
+
 var str='';
 var flag =true;
+
 $(".type-btn a").click(function(){
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
@@ -8,12 +91,14 @@ $(".type-btn a").click(function(){
     }else{
         showcnt=myselect.options[myselect.selectedIndex].value;
     }
+    
     str='';
-    if(document.getElementById("quan").checked==true){
+   /* if(document.getElementById("quan").checked==true){
         document.getElementById("lva").checked =true;
         document.getElementById("lvb").checked =true;
         document.getElementById("lvc").checked =true;
-    }
+    }*/
+    
     if(document.getElementById("quan").checked==true){
         str = str+'ALL,';
     }
@@ -28,7 +113,9 @@ $(".type-btn a").click(function(){
             str = str+"C,";
         }
     }
-   // alert("str is "+str);
+   alert("str is "+str);
+    
+   
     if(flag){
         reload_table(1,showcnt);
     }
