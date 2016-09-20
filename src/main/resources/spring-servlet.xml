@@ -58,6 +58,9 @@
                         <value>/test</value>
                         <value>/register</value>
                         <value>/service/user/sendsms</value>
+                        <value>/forget-password.html</value>
+                        <value>/isExistPhone</value>
+                        <value>/forgetpwd</value>
                     </list>
                 </property>
             </bean>

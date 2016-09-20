@@ -204,21 +204,31 @@
 	    if(!validPhone){
 	        return;
 	    }
-	    settime(obj);//请用定时器
-	    //向后台发送处理数据
-	    
 	    $.ajax({
 	        type:'POST',
-	        url:'/service/user/sendsms?phone='+phoneNote.val().trim(),
+	        url:'/service/user/isExistPhone?phone='+phoneNote.val().trim(),
 	        dataType:'JSON',
 	        success: function (json) {
-	             if(json.success){
+	             if(!json.success){
+	            	 settime(obj);//调用定时器
+	         	    //向后台发送处理数据
+	         	    $.ajax({
+	         	        type:'POST',
+	         	        url:'/service/user/sendsms?phone='+phoneNote.val().trim(),
+	         	        dataType:'JSON',
+	         	        success: function (json) {
+	         	             if(json.success){
+	         	             }else{
+	         	                 alert(json.message);
+	         	             }
+	         	        },
+	         	        error: function (a,b,c) {
+	         	            console.log("获取短信验证码失败");
+	         	        }
+	         	    });
 	             }else{
 	                 alert(json.message);
 	             }
-	        },
-	        error: function (a,b,c) {
-	            console.log("获取短信验证码失败");
 	        }
 	    });
 	}
@@ -290,6 +300,7 @@
 		$.ajax({
 			type:'POST',
 			url:'/service/user/register?'+$("form:not(.hide)").serialize()+"&userType="+userType,
+			dataType:'JSON',
 			success:function(data){
 				if(data.success){
 					$(".mark1").show();
@@ -300,7 +311,7 @@
 			}
 		});
 	});
-	$('.form2 .submit').click(function(){	
+	/*$('.form2 .submit').click(function(){	
 		var validPhone = valid_phone($(this).parent().find("input[name='phone']"));
 		var validPassword = valid_password($(this).parent().find("input[name='password']"));
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
@@ -318,6 +329,7 @@
 		$.ajax({
 			type:'POST',
 			url:url,
+			dataType:'JSON',
 			success:function(data){
 				if(data.success){
 					$(".mark2").show();
@@ -327,7 +339,7 @@
 				}
 			}
 		});
-	});
+	});*/
 	$('.form3 .submit').click(function(){	
 		var validPhone = valid_phone($(this).parent().find("input[name='phone']"));
 		var validPassword = valid_password($(this).parent().find("input[name='password']"));
@@ -347,6 +359,7 @@
 		$.ajax({
 			type:'POST',
 			url:url,
+			dataType:'JSON',
 			success:function(data){
 				if(data.success){
 					$(".mark3").show();

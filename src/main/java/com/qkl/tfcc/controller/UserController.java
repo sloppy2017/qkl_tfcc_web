@@ -1,6 +1,7 @@
 package com.qkl.tfcc.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -325,7 +326,7 @@ public class UserController extends BaseAction{
 			tUserDetail.setCropPerson(cropPerson);
 			tUserDetail.setQrCode("");
 			tUserDetail.setUserType(userType);
-			if("2".equals(refUser.getUserType())){
+			if("4".equals(refUser.getUserType())){//推介人是投资机构的话，用户的冻结标志要冻结
 				tUserDetail.setFreezeFlag("0");
 			}else{
 				tUserDetail.setFreezeFlag("1");
@@ -886,7 +887,7 @@ public class UserController extends BaseAction{
 		try {
 			String userName  =request.getParameter("phone");
 			String passWord  =request.getParameter("password");
-			String cfPassWord  =request.getParameter("respassword");
+			String cfPassWord  =request.getParameter("resPassword");
 			String vcode  =request.getParameter("yzm");
 			
 			if(!Validator.isMobile(userName)){
@@ -915,7 +916,7 @@ public class UserController extends BaseAction{
 				return ar;
 			}
 
-			if(userService.modifyPwd(userName, MD5Util.getMd5Code(passWord),Constant.VERSION_NO )){			
+			if(!userService.modifyPwd(userName, MD5Util.getMd5Code(passWord),Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("修改密码失败！");
 				return ar;
@@ -1247,25 +1248,30 @@ public class UserController extends BaseAction{
 //            long currentTimeMillis = System.currentTimeMillis();
             String new_img_name= get32UUID()+"_"+Constant.PIC_HEAD_WIDTH+"_"+Constant.PIC_HEAD_HEIGHT+"."+imgtype;
             String http_img_url = resources_base+Constant.PIC_HEAD_PATH+new_img_name;
+            String temp_img_url = resources_local+Constant.PIC_TEMP_PATH;//临时图片路径
             String server_img_url = resources_local+Constant.PIC_HEAD_PATH;//图片保存服务器路径
             String backup_img_url = resources_backup+Constant.PIC_HEAD_PATH;//图片磁盘备份路径
             
             
+            System.out.println("-----------temp_img_url----------------->>>>>>>>>>>>>>>>>"+temp_img_url);
             System.out.println("-----------server_img_url----------------->>>>>>>>>>>>>>>>>"+server_img_url);
             System.out.println("-----------http_img_url------------------->>>>>>>>>>>>>>>>>"+http_img_url);
             System.out.println("-----------backup_img_url----------------->>>>>>>>>>>>>>>>>"+backup_img_url);
             
-            FileUtil.copyFile(tp.getInputStream(), server_img_url,new_img_name);
-            FileUtil.copyFile(tp.getInputStream(), backup_img_url,new_img_name);
-            userService.modifyUserHeadPic(pdfile.getString("userCode"), http_img_url, Constant.VERSION_NO);//修改数据库图片地址
-            Map<String, Long> imgInfo = ImgUtil.getImgInfo(server_img_url+new_img_name);
+            FileUtil.copyFile(tp.getInputStream(), temp_img_url,new_img_name);
+            Map<String, Long> imgInfo = ImgUtil.getImgInfo(temp_img_url+new_img_name);
             Long w = imgInfo.get("w");
             Long h = imgInfo.get("h");
 //            Long s = imgInfo.get("s");
             if(w != Constant.PIC_HEAD_WIDTH && h != Constant.PIC_HEAD_HEIGHT){
+                FileUtil.deleteFile(temp_img_url+new_img_name);
                 out.print("<script>top.alert(\"请上传"+Constant.PIC_HEAD_WIDTH+"*"+Constant.PIC_HEAD_WIDTH+"规格的图片！\");</script>");
                 return;
             }
+            FileUtil.copyFile(new FileInputStream(temp_img_url+new_img_name), server_img_url,new_img_name);
+            FileUtil.copyFile(new FileInputStream(temp_img_url+new_img_name), backup_img_url,new_img_name);
+            FileUtil.deleteFile(temp_img_url+new_img_name);
+            userService.modifyUserHeadPic(pdfile.getString("userCode"), http_img_url, Constant.VERSION_NO);//修改数据库图片地址
             out.print("<script>parent.document.getElementById('headPicId').src=\""+http_img_url+"\";parent.document.getElementById('left_headPicId').src=\""+http_img_url+"\";parent.$('#imgAddrss').val('"+http_img_url+"')</script>"); 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1388,4 +1394,31 @@ public class UserController extends BaseAction{
         logAfter(logger);
         return ar;
     }
+	/**
+	 * @describe:判断用户手机号是否存在
+	 * @author: zhangchunming
+	 * @date: 2016年9月20日下午6:36:46
+	 * @return: AjaxResponse
+	 */
+	@RequestMapping(value="/isExistPhone", method=RequestMethod.POST)
+    @ResponseBody
+    public AjaxResponse isExistPhone(){
+	    pd = this.getPageData();
+	    String phone = pd.getString("phone").trim();
+	    if(StringUtil.isEmpty(phone)){
+	        ar.setSuccess(false);
+	        ar.setMessage("请求参数有误！");
+	        return ar;
+	    }
+	    User user = userService.findbyPhone(phone, Constant.VERSION_NO);
+	    if(user==null){
+	        ar.setSuccess(false);
+            ar.setMessage("该手机号未注册！");
+            return ar;
+	    }else{
+	        ar.setMessage("该手机号已注册！");
+	        ar.setSuccess(true);
+	    }
+	    return ar;
+	}
 }
