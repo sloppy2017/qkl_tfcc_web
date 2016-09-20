@@ -29,10 +29,10 @@
 }
 
 .reg-nav{
-   margin-left:326px;
+   margin-left:246px;
 }
 .reg-nav ul{
-    background: url('../../imgs/reg22.png') no-repeat 0px -124px;
+    background: url('../../imgs/reg.png') no-repeat 0px -156px;
     width: 790px;
     height: 42px;
 
@@ -55,7 +55,7 @@
 
 .reg-nav .active{
     color:#fff;
-    background: url('../../imgs/reg22.png') no-repeat;
+    background: url('../../imgs/reg.png') no-repeat;
 }
 .form {
     margin: 32px 0 0 64px;
@@ -74,7 +74,7 @@
 }
 .error1{
     position: absolute;
-    left:276px;
+    left:244px;
     font-size:12px ;
     margin-top: 45px;
     color:red;
@@ -82,7 +82,7 @@
 .form .hide{display: none;}
 
 .form div{
-    margin:30px 0 0 148px;
+    margin:30px 0 0 118px;
 }
 .form div label{
     font-size:14px;
