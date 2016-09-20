@@ -24,7 +24,8 @@ function getBankAccInfo(){
     });
 }
 
-$("input[name='txnum']").blur(function(){
+
+$("input[name='txnum']").change(function(){
 	var url = "/service/bankaccinfo/PayMoney?"+$("form").serialize();
 	url = encodeURI(url);
 	$.ajax({
@@ -41,6 +42,25 @@ $("input[name='txnum']").blur(function(){
     });
 });
 
+/*$(function(){
+
+	 $("input[name='txnum']").change(function(){
+
+	 var text = $(this).val();
+
+	 $("input[name='txamnt']").attr("value",text);
+
+	 });
+
+	});
+*/
+
+/*$("input[name='txnum']").blur(function(){
+	var $txnum=this.val();
+	if($txnum==null&&$txnum.length<=0){
+		$("input[name='txamnt']").text();
+	}
+});*/
 
 $('#buy').click(function(){
 	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();

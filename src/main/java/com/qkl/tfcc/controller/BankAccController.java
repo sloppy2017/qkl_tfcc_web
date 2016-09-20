@@ -172,6 +172,7 @@ public class BankAccController extends BaseAction {
 			if(txnums!=null&&!"".equals(txnums)&&txnums.length()>0){
 				 txnum=new BigDecimal(txnums);//购买数量
 			}else{
+				ar.setMessage("请选择购买数量");
 				return ar;
 			}
 			double doubleValue = tmpprices.multiply(txnum).doubleValue();//计算应付金额
