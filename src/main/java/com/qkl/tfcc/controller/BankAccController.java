@@ -137,23 +137,34 @@ public class BankAccController extends BaseAction {
 				ar.setMessage("购买次数已达5次");
 				return ar;
 			}else{
-				String object = pd.getString("txamnt");
-				BigDecimal txamnt1=new BigDecimal(object);
-				double txamnt = txamnt1.doubleValue();
-				if (txamnt>=1000) {
-					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
-					ar.setSuccess(true);
-					ar.setMessage("购买成功"); 
+				String txamnt1 = pd.getString("txamnt");
+				
+				if(txamnt1!=null&&!"".equals(txamnt1)&&txamnt1.length()>0){
+					BigDecimal txamnt2=new BigDecimal(txamnt1);
+					double txamnt = txamnt2.doubleValue();
+					if (txamnt>=1000) {
+						tradeService.addTradeDetail(pd, Constant.VERSION_NO);
+						ar.setSuccess(true);
+						ar.setMessage("购买成功"); 
+					}else{
+						ar.setSuccess(false);
+						ar.setMessage("购买金额不得低于1000.00元");
+						return ar;
+					}
+					if (txamnt>10000) {
+						ar.setSuccess(false);
+						ar.setMessage("购买金额不得高于10000.00元");
+						return ar;
+					}
+					
 				}else{
-					ar.setSuccess(false);
-					ar.setMessage("购买金额不得低于1000.00元");
+					ar.setMessage("请选择购买数量");
 					return ar;
 				}
-				if (txamnt>10000) {
-					ar.setSuccess(false);
-					ar.setMessage("购买金额不得高于10000.00元");
-					return ar;
-				}
+				
+				
+				
+				
 				
 			}	
 			
