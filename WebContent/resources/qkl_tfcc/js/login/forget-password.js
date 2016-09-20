@@ -1,149 +1,209 @@
-//普通会员注册
-var InterValObj=null; //timer变量，控制时间
-var count = 60; //间隔函数，1秒执行
-var curCount='';//当前剩余秒数
-// 手机验证
-function sub_phone()
-{
-    var phone = $('.phone');
-    var phoneVal= $('.phone').val();
-    var myreg = /^(((13[0-9]{1})|159|153)+\d{8})$/;
-    if(phoneVal.length==''||phoneVal.length!=11)
-    {
-        phone.next().html('请输入正确手机号');
-        //phone.focus();
-        return false;
-    }else if(!myreg.test(phoneVal))
-    {
-        phone.next().html('请输入正确的手机号');
-        phone.focus();
-        return false;
-    }else{
-        phone.next().empty();
-        //判断所有的都正确时执行这个发送的函数
-        sendMessage(phoneVal);
-        //return true;
-    }
-}
-function sendMessage(phoneVal,InterValObj,phone) {
-    curCount = count;
-    //删除input的属性值是在60内不能重新点击
-    $(".yzm").attr("disabled",'true');
-    $(".yzm").val("请在" + curCount + "秒内输入验证码");
-    clearInterval(InterValObj);
-    InterValObj=setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-    //向后台发送处理数据
-    console.log(phoneVal);
-    $.ajax({
-        type: "POST", //用POST方式传输     　　
-        url: 'res.php', //目标地址.f
-        dataType:'text',//数据格式:JSON
-        //data: "dealType=" + dealType +"&uid=" + uid + "&code=" + code,
-        data:{phone:phoneVal },
-        success: function(data){
-            //alert('请求成功');
-            if(data=="1"){//成功的处理
-                alert('用户存在');
-                $('.phone').next().html('对不起，用户名已存在！');
-            }else{               //失败的处理
-                $('.phone').val('恭喜你可以注册').css('color','green');
-            }
-        },error:function(){
-            alert('请求失败');
-        }
-    });
-}
-
-//timer处理函数
-function SetRemainTime() {
-    if (curCount == 0) {
-        clearInterval(InterValObj);       //停止计时器
-        $(".yzm").removeAttr("disabled"); //启用按钮
-        $(".yzm").val("重新发送验证码");
-    } else {
-        curCount--;
-        $(".yzm").next().html("请在" + curCount + "秒内输入验证码");
-    }
-}
-
-//-------------------------------------------------------------//
-var flag =true; //默认情况下是成功的；
-//判断验证码发送手机收到的验证码
-$('.input input[name="yzm"] ').blur(function(){
-    //密码正则6-16字母数字或特殊字符
-    reg = /^[a-zA-Z0-9]{6,}$/;
-    if($(this).val()==''){
-        //$(this).focus();
-        $(this).next().next().html('请输入验证码');
-        flag=false;
-    }else if(!reg.test($(this).val())){
-        $(this).focus();
-        $(this).next().next().html('验证码不正确');
-        flag=false;
-    }else{
-        $(this).next().next().empty();
-        flag=true;
-        //ajax();
-    }
-});
-//密码失去焦点
-$('.input input[name="password"]').blur(function () {
-    //密码正则6-16字母数字或特殊字符
-    reg = /^[a-zA-Z][a-zA-Z0-9|*|&|%|.|@|!]{5,15}$/;
-    if ($(this).val() == '') {
-        $(this).next().html('请输入密码');
-        flag=false;
-    }else if (!reg.test($(this).val())) {
-        $(this).focus();
-        $(this).next().html('密码是以字母开头的6-16数字字母或特殊字符');
-        flag=false;
-    }else {
-        $(this).next().empty();
-        flag=true;
-        //ajax();
-    }
-});
-//确认密码
-$('.input input[name="resPassword"]').blur(function(){
-    var pVal = 	$('.input input[name="password"]').val();
-    if ($(this).val() == '') {
-        $(this).next().html('请输入确认密码');
-        flag=false;
-    }else if($(this).val()!=pVal){
-        $(this).focus();
-        $(this).next().html('确认密码错误');
-        flag=false;
-    }else{
-        $(this).next().empty();
-        flag=true;
-    }
-});
-
-//创建ajax函数
-function ajax(){
-    var yzmVal=	$('.input input[ name="yzm"]').val();
-    var psswordVal=	$('.input input[name="password"] ').val();
-    console.log();
-    if(flag){
-        $.ajax({
-            type:'post',
-            url:'res.php',
-            data:{
-                yzm:yzmVal,
-                password:psswordVal,
-            },
-            success:function(reqData){
-                alert('恭喜你注册成工')
-            },
-            error:function(reqData){
-                alert('请求失败');
-            }
-        })
-    }else{
-        alert('请输入相关信息在提交注册');
-    }
-
-}
+	/**
+	 * 倒数60秒
+	 */
+	var countdown=60; 
+	var timeoutId=0;
+	function settime(obj) { 
+		if(countdown == 0){
+			clearTimeout(timeoutId);		
+			countdown = 60;
+			$(obj).removeAttr("disabled"); //启用按钮
+			$(obj).val("重新发送验证码");
+		}else{
+			$(obj).attr("disabled","disabled"); //禁用按钮
+			$(obj).val("请在" + countdown + "秒内输入验证码");
+			countdown--;
+			timeoutId = setTimeout(function(){settime(obj);},1000);	
+			
+		}
+	};
+	/**
+	 * 手机号验证
+	 */
+	$('.form input[name="phone"]').blur(function () {
+		$(this).val($(this).val().trim());
+		valid_phone($(this));
+	});
+	function valid_phone($this){
+		//手机号正则
+		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
+		if ($this.val() == ''||$this.val() == undefined) {
+			$this.next().html('请输入你的手机号');
+			return false;
+		} else if ($this.val().length !=11) {
+			$this.next().html('你输入的手机号的长度有误！');
+			return false;
+		} else if (!myreg.test($this.val())) {
+			$this.next().html('请输入正确的手机号');
+			return false;
+		} else {
+			$this.next().empty();
+			return true;
+		}
+	}
+	/**
+	 * 密码验证
+	 */
+	$('.form input[name="password"]').blur(function () {
+		$(this).val($(this).val().trim());
+		valid_password($(this));
+	});
+	function valid_password($this){
+		//密码正则6-16字母数字或特殊字符
+		var result = password_valid($this.val().trim());
+		if ($this.val() == '') {
+			$this.next().html('请输入密码');
+			return false;
+		} else if (!result) {
+			$this.next().html('请输入6~20位字母、数字或字符组合');
+			return false;
+		} else {
+			$this.next().empty();
+			return true;
+		}
+	}
+	/**
+	 * 确认密码验证
+	 */
+	$('.form input[name="resPassword"]').blur(function(){
+		valid_resPassword($(this));
+	});
+	function valid_resPassword($this){
+		var result = password_valid($this.val().trim());
+		var pVal = 	$this.parent().prev().children("input[name='password']").val().trim();
+		if ($this.val() == '') {
+			$this.next().html('请输入确认密码');
+			return false;
+		}else if(!result){
+			$this.next().html('请输入6~20位字母、数字或字符组合');
+			return false;
+		}else if($this.val()!=pVal){
+			$this.next().html('两次密码不一致');
+			return false;
+		}else{
+			$this.next().empty();
+			return true;
+		}
+	}	
+	/**
+	 * 验证码验证
+	 */
+	$('.form input[name="yzm"] ').blur(function(){
+		valid_yzm($(this));
+	});
+	function valid_yzm($this){
+		//验证码6位数字开头不能为零
+		reg = /^[1-9]\d{5}$/;
+		if($this.val()==''){
+			$this.next().next().html('请输入验证码');
+			return false;
+		}else if(!reg.test($this.val())){
+			$this.next().next().html('验证码格式有误');
+			return false;
+		}else if(countdown == 60){
+			$this.next().next().html('验证码已过期，请重新获取');
+			return false;
+		}else{
+			$this.next().next().empty();
+			return true;
+		}
+	}
+	//密码格式验证
+	function password_valid(str){
+	    var is=true;
+	    //去除前后空格
+	    str=str.replace(/(^\s*)|(\s*$)/g,'');
+	    //位数不对，设置为false
+	    if(str.length<6 || str.length>20){
+	        is=false;   
+	    };
+	    //全是数字
+	    var sz=/^[0-9]{1,}$/;
+	    //全是字母
+	    var zm=/^[a-zA-Z]{1,}$/;
+	    //全是特殊字符;
+	    var ts=/^[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]{1,}$/; 
+	    if(sz.test(str)){
+	        is=false;       
+	    };
+	    if(zm.test(str)){
+	        is=false;
+	        
+	    };
+	    if(ts.test(str)){
+	        is=false;
+	    };
+	    return is;  
+	};
+	$(".yzm").click(function(){
+		getVCode(this);
+	});
+	//获取验证码
+	function getVCode(obj) {
+		var phoneNote = $(obj).parent().prev().children("input[name='phone']");
+		var validPhone = valid_phone(phoneNote);//验证手机号是否正确
+	    if(!validPhone){
+	        return;
+	    }
+	    $.ajax({
+	        type:'POST',
+	        url:'/service/user/isExistPhone?phone='+phoneNote.val().trim(),
+	        dataType:'JSON',
+	        success: function (json) {
+	             if(json.success){
+	            	 settime(obj);//调用定时器
+	         	    //向后台发送处理数据
+	         	    $.ajax({
+	         	        type:'POST',
+	         	        url:'/service/user/sendsms?phone='+phoneNote.val().trim(),
+	         	        dataType:'JSON',
+	         	        success: function (json) {
+	         	             if(json.success){
+	         	             }else{
+	         	                 alert(json.message);
+	         	             }
+	         	        },
+	         	        error: function (a,b,c) {
+	         	            console.log("获取短信验证码失败");
+	         	        }
+	         	    });
+	             }else{
+	                 alert(json.message);
+	             }
+	        }
+	    });
+	}
+	function submit(){
+		var validPhone = valid_phone($("input[name='phone']"));
+		var validYzm = valid_yzm($("input[name='yzm']"));
+		var validPassword = valid_password($("input[name='password']"));
+		var validResPassword = valid_resPassword($("input[name='resPassword']"));
+//		alert(validPhone+"--"+validYzm+"--"+validResPassword+"--"+validPassword);
+		if(!(validPhone&&validPassword&&validResPassword&&validYzm)){
+			return;
+		}
+		var url = '../service/user/forgetpwd?'+$("form").serialize();
+		$.ajax({
+			type:'POST',
+			url:url,
+			dataType:'JSON',
+			success:function(data){
+				if(data.success){
+					$(".mark1").show();
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+		/*var url = '../service/user/forgetpwd?'+$("form").serialize();
+		$.post(url,function(data){
+			if(data.success){
+				$(".mark1").show();
+			}else{
+				alert(data.message);
+			}
+		});*/
+	};
 
 
 

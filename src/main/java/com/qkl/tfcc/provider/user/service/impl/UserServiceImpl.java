@@ -1,5 +1,6 @@
 package com.qkl.tfcc.provider.user.service.impl;
 
+import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +34,7 @@ import com.qkl.tfcc.provider.dao.UserFriendshipDao;
 import com.qkl.tfcc.provider.dao.UserLevelcntDao;
 import com.qkl.tfcc.provider.dao.UserLoginErrDao;
 import com.qkl.util.help.DateUtil;
+import com.qkl.util.help.FileUtil;
 import com.qkl.util.help.MD5Util;
 import com.qkl.util.help.pager.PageData;
 
@@ -771,9 +773,5 @@ public class UserServiceImpl implements UserService {
          }
     
     }
-    
-    
-   
-
 	
 }
