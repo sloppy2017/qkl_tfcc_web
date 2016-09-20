@@ -153,10 +153,6 @@ public class BankAccController extends BaseAction {
 					ar.setSuccess(false);
 					ar.setMessage("购买金额不得高于10000.00元");
 					return ar;
-				}else {
-					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
-					ar.setSuccess(true);
-					ar.setMessage("购买成功"); 
 				}
 				
 			}	
@@ -211,13 +207,13 @@ public class BankAccController extends BaseAction {
 		return ar;
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String str = "152.00";
 		PageData pdData = new PageData();
 		pdData.put("str", str);
-		System.out.println(pdData.get("str"));
-		BigDecimal bigDecimal = new BigDecimal(pdData.get("str").toString());
+		System.out.println(pdData.getString("str"));
+		BigDecimal bigDecimal = new BigDecimal(pdData.getString("str"));
 		System.out.println(bigDecimal);
-	}
+	}*/
 	
 }

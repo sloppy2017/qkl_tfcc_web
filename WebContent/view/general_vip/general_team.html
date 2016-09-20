@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/general/general-team.css">
     <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
+    <script src="/resources/qkl_tfcc/js/date/dateRange.js"></script>
+    <script src="/resources/qkl_tfcc/js/date/monthPicker.js"></script>
+    
 </head>
 <body >
 <!--mark start-->
@@ -56,11 +59,11 @@
                 
                 
                     <div class="top-tab">
-                        <div class="fl ">你当前的位置：</div><span>我的团队</span><span class="c28">我推荐的会员</span>
+                        <div class="fl ">你当前的位置：</div><span>我的团队&gt;</span><span class="c28">我推荐的会员</span>
                     </div>
-                    <!-- <div class="top-tab">
+                   <!-- <div class="top-tab">
                         <div class="fl ">你当前的位置：</div><span>我的团队</span><span class="c28">我推荐的网点</span>
-                    </div> -->
+                    </div>  -->
                 </div>
                 <div class="main-middle fix">
                     <div class="fix">
@@ -74,7 +77,7 @@
                     </div>
                     <ul class="huiyuan">
                         <li class="member-tab act">我推荐的会员</li>
-                       <!--  <li class="branch-tab">我推荐的网点</li> -->
+                     <!--   <li class="branch-tab">我推荐的网点</li> -->
                     </ul>
                 </div>
             </div>
@@ -84,10 +87,10 @@
                                 <ul class="fl ">
                                     <li>推荐类型</li>
                                     <li>
-                                        <input id ="quan" type="checkbox" name="checkbox">全部
-                                        <input id ="lva" type="checkbox"  > A级会员
-                                        <input id ="lvb" type="checkbox" > B级会员
-                                        <input id ="lvc" type="checkbox" >C级会员
+                                        <input id ="quan" type="checkbox" name="ckall">全部
+                                        <input id ="lva" type="checkbox"  name="checkbox"> A级会员
+                                        <input id ="lvb" type="checkbox" name="checkbox"> B级会员
+                                        <input id ="lvc" type="checkbox" name="checkbox">C级会员
                                     </li>
                                     <li></li>
                                     <li></li>
@@ -136,62 +139,7 @@
         </div>
     </div>
 </div>
-
-
-<script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
+<script src="/resources/qkl_tfcc/js/date/dateCom.js"></script>
 <script src="/resources/qkl_tfcc/js/general_vip/general-team.js"></script>
-
-<script>
-
-$.ajax({
-    type:'post',
-    url:'/service/team/findVipNum',
-    dataType:'json',
-    success:function(data){
-        var message = data.message;
-        if(data.success){
-        	if(data.data==null){
-        		 $(".member1").html("0");
-        		 $(".member2").html("0");
-        		 $(".member3").html("0");
-        		 $(".member4").html("0");
-        	}else{
-        		$(".member1").html(data.data.rNum);
-        		$(".member2").html(data.data.aNum);
-                $(".member3").html(data.data.bNum);
-                $(".member4").html(data.data.cNum)
-        	}
-        	
-        }else{
-        	alert(message);
-        }
-        
-        
-    }
-})
-  $(function(){
-      getUserInfo();
-  });
-
-  function getUserInfo(){
-      var url = "/service/user/toMyself";
-      $.getJSON(url,function(data){
-          if(data.success){
-              if(data.data.imgAddrss){
-                  $("#left_headPicId").attr("src",data.data.imgAddrss);
-              }else{
-                  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
-              }
-              if(data.data.userName){
-                  $("#user").html(data.data.userName);
-              }else if(data.data.realName){
-                  $("#user").html(data.data.realName);
-              }else{
-                  $("#user").html(data.data.phone);
-              }
-          }
-      });
-  }
-</script>
 </body>
 </html>
