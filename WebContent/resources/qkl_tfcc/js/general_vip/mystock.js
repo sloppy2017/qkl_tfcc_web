@@ -26,7 +26,38 @@ function getBankAccInfo(){
     });
 }
 
+/*$('#buy').mousedown(function(){
+	$(".mid-r a").css({"display":" block",
+		    "background":"url('../../imgs/tijiao.png') no-repeat",
+		    "height":"44px",
+		    "width":"220px",
+		    "line-height":"44px",
+		    "color":"#fff",
+		    "font-size": "14px",
+		    "text-align": "center",
+		    "margin-left":"60px",
+		    "margin-top":"30px"
+			
+	});
+	
+});
+*/
+/*
+$('#buy').mouseup(function(){
+	$(".mid-r a").css({
+	"display":" block",
+    "background":"url('../../imgs/tijiao.png') no-repeat",
+    "height":"44px",
+    "width":"220px",
+    "line-height":"44px",
+    "color":"#fff",
+    "font-size": "14px",
+    "text-align": "center",
+    "margin-left":"60px",
+    "margin-top":"30px"
+		  });
 
+});*/
 $("input[name='txnum']").change(function(){
 	var url = "/service/bankaccinfo/PayMoney?"+$("form").serialize();
 	url = encodeURI(url);
@@ -44,10 +75,14 @@ $("input[name='txnum']").change(function(){
     });
 });
 
+
+var buy_flag=true;
 $('#buy').click(function(){
+	buy_flag=false;
 	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
 	url = encodeURI(url);
 	$.ajax({
+		async:false, 
         type: "post",
         url:url,
         dataType: "json",
@@ -57,15 +92,36 @@ $('#buy').click(function(){
             'revorgname':$("#revorgname").text().trim(),
             'revbankaccno': $("#revbankaccno").text().trim(),
             'revbankdepname':$("#revbankdepname").text().trim()
-        },*/
+        },*/ 
+        async:true, 
         success: function (data) {
+        	buy_flag=true;
             alert(data.message);
             
         }
+	
     });
 
 
 });
+
+
+
+/*onload = function (){ 
+    var a = document.querySelector ("a"); 
+    a.onclick = function (){ 
+        if (this.disabled){ 
+            return false; 
+        } 
+        this.style.color = 'grey'; 
+        this.disabed = true; 
+    }; 
+} 
+*/
+
+
+
+
 function getUserInfo(){
     var url = "/service/user/toMyself";
     $.getJSON(url,function(data){

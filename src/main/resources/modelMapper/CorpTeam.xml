@@ -3,7 +3,8 @@
 <mapper namespace="CorpTeam">
 
     <select id="findLPNum" parameterType="java.lang.String" resultType="java.lang.Long" >
-		select count(*) lpNum from tb_user_friendship where user_type='3' and user_code=#{userCode}
+		<!-- select count(1) lpNum from tb_user_friendship where user_type='3' and  user_code=#{userCode} -->
+		select count(1) lpNum from tb_user_friendship where user_code=#{userCode}
 	</select> 
    
    <select id="findlpInfolistPage" parameterType="page"  resultType="pd" >

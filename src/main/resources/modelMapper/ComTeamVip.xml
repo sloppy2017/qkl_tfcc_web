@@ -45,7 +45,7 @@
         from tb_user u,tb_user_friendship f ,tb_user_detail d 
         where    u.user_code=f.user_code and d.user_code=u.user_code and u.user_code=#{pd.userCode}  -->
         
-        select rela_level,date_format(d.create_time,'%Y年%m月%d日') rg_time,real_name,user_name 
+        select rela_level,date_format(d.create_time,'%Y年%m月%d日') rg_time,phone,real_name 
         from tb_user_detail d,tb_user_friendship f where d.user_code=f.recomuser_code and f.user_code=#{pd.userCode}
         
              <if test ="pd.relalva != null and pd.relalva !='' and pd.relalvb != null and pd.relalvb !='' and pd.relalvc != null and pd.relalvc !='' ">           
