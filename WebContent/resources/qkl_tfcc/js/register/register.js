@@ -238,11 +238,11 @@
 	 */
 	//姓名
 	$('.form input[name="realName"]').blur(function(){
-	    // 4、2~5个汉字
 	   valid_realName($(this));
 	});
 	function valid_realName($this){
-		 var reg=/^[\u4E00-\u9FA5]{2,5}$/;
+//		 var reg=/^[\u4E00-\u9FA5]{2,5}$/;//2-4个汉字
+		 var reg = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？0123456789]");
 	        if ($this.val() == '') {
 	        	$this.next().html('姓名不能为空');
 				return false;

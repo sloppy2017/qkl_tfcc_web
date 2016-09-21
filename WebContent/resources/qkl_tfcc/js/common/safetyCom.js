@@ -433,7 +433,8 @@ $('#realName').blur(function(){
    valid_realName($(this));
 });
 function valid_realName($this){
-	 var reg=/^[\u4E00-\u9FA5]{2,5}$/;
+//	 var reg=/^[\u4E00-\u9FA5]{2,5}$/;
+	 var reg = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？0123456789]");
         if ($this.val() == '') {
         	$this.val('姓名不能为空');
         	$this.addClass("errorTip");
