@@ -339,9 +339,11 @@ public class UserServiceImpl implements UserService {
             tUserFriendship.setSyscode(Constant.CUR_SYS_CODE);
             tUserFriendship.setCreateTime(DateUtil.getCurrentDate());
             tUserFriendship.setModifyTime(DateUtil.getCurrentDate());
-            if(!addUserFriendShip(tUserFriendship, Constant.VERSION_NO)){
+            userFriendshipDao.addUserFriendship(tUserFriendship);
+            
+           /* if(!addUserFriendShip(tUserFriendship, Constant.VERSION_NO)){
                 loger.info("addUserFriendShip fail,tUserFriendship is "+tUserFriendship.toString());
-            };
+            };*/
         }
         
          if("1".equals(userType)){
@@ -365,9 +367,10 @@ public class UserServiceImpl implements UserService {
              tUserFriendship.setSyscode(Constant.CUR_SYS_CODE);
              tUserFriendship.setCreateTime(DateUtil.getCurrentDate());
              tUserFriendship.setModifyTime(DateUtil.getCurrentDate());
-             if(!addUserFriendShip(tUserFriendship, Constant.VERSION_NO)){
+             userFriendshipDao.addUserFriendship(tUserFriendship);
+             /*if(!addUserFriendShip(tUserFriendship, Constant.VERSION_NO)){
                  loger.info("addUserFriendShip fail,tUserFriendship is "+tUserFriendship.toString());
-             };
+             };*/
              //用户关系计算器            
              PageData pd1=new PageData();
              pd1.put("userCode", tRefUser.getUserCode());
@@ -405,9 +408,11 @@ public class UserServiceImpl implements UserService {
                  tUserFriendship2.setSyscode(Constant.CUR_SYS_CODE);
                  tUserFriendship2.setCreateTime(DateUtil.getCurrentDate());
                  tUserFriendship2.setModifyTime(DateUtil.getCurrentDate());
-                 if(!addUserFriendShip(tUserFriendship2, Constant.VERSION_NO)){
+                 userFriendshipDao.addUserFriendship(tUserFriendship2);
+                 
+                /* if(!addUserFriendShip(tUserFriendship2, Constant.VERSION_NO)){
                      loger.info("addUserFriendShip fail,tUserFriendship2 is "+tUserFriendship2.toString());
-                 }; 
+                 }; */
                //用户关系计算器            
                  PageData pd2=new PageData();
                  pd2.put("userCode", fUserFriendship2.getUserCode());
@@ -445,9 +450,10 @@ public class UserServiceImpl implements UserService {
                  tUserFriendship2.setSyscode(Constant.CUR_SYS_CODE);
                  tUserFriendship2.setCreateTime(DateUtil.getCurrentDate());
                  tUserFriendship2.setModifyTime(DateUtil.getCurrentDate());
-                 if(!addUserFriendShip(tUserFriendship2, Constant.VERSION_NO)){
+                 userFriendshipDao.addUserFriendship(tUserFriendship2);
+                 /*if(!addUserFriendShip(tUserFriendship2, Constant.VERSION_NO)){
                      loger.info("addUserFriendShip fail,tUserFriendship2 is "+tUserFriendship2.toString());
-                 }; 
+                 };*/ 
                //用户关系计算器            
                  PageData pd2=new PageData();
                  pd2.put("userCode", fUserFriendship2.getUserCode());
@@ -485,9 +491,10 @@ public class UserServiceImpl implements UserService {
                  tUserFriendship3.setCalflag("0");
                  tUserFriendship3.setCreateTime(DateUtil.getCurrentDate());
                  tUserFriendship3.setModifyTime(DateUtil.getCurrentDate());
-                 if(!addUserFriendShip(tUserFriendship3, Constant.VERSION_NO)){
+                 userFriendshipDao.addUserFriendship(tUserFriendship3);                 
+                /* if(!addUserFriendShip(tUserFriendship3, Constant.VERSION_NO)){
                      loger.info("addUserFriendShip fail,tUserFriendship3 is "+tUserFriendship3.toString());
-                 };
+                 };*/
                //用户关系计算器            
                  PageData pd3=new PageData();
                  pd3.put("userCode", fMaxFriendship.getUserCode());

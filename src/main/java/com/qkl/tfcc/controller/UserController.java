@@ -326,7 +326,7 @@ public class UserController extends BaseAction{
 			tUserDetail.setCropPerson(cropPerson);
 			tUserDetail.setQrCode("");
 			tUserDetail.setUserType(userType);
-			if("4".equals(refUser.getUserType())){//推介人是投资机构的话，用户的冻结标志要冻结
+			if(refUser.getUserType()==null||"4".equals(refUser.getUserType())||"0".equals(refUser.getUserType())||"".equals(refUser.getUserType())){//推介人是投资机构的话，用户的冻结标志要冻结
 				tUserDetail.setFreezeFlag("0");
 			}else{
 				tUserDetail.setFreezeFlag("1");
