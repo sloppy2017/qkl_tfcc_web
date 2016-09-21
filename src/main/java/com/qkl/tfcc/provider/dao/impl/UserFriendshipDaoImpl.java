@@ -49,6 +49,12 @@ public class UserFriendshipDaoImpl extends DaoSupport<UserFriendship> implements
 		getSqlSession().update(namespace+"."+"updatecalflag", userFriendship);		
 	}
 
+	@Override
+	public UserFriendship findMaxFriendship(String recomusercode) {
+		UserFriendship tUserFriendship =getSqlSession().selectOne(namespace+"."+"findMaxFriendshipByPhone", recomusercode);
+		return tUserFriendship;
+	}
+
 	
 	
 	

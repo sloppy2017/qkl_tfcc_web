@@ -35,7 +35,25 @@
 		syscode syscode,
 		create_time createTime,
 		modify_time modifyTime		
-        from tb_user_friendship  where recomuser_code = #{recomusercode}
+        from tb_user_friendship   
+        where   rela_level='A'  
+		and recomuser_code = #{recomusercode} 
+	</select> 
+	
+	  <select id="findMaxFriendshipByPhone" parameterType="java.lang.String" resultType="UserFriendship" >
+		select id,
+		user_code userCode,
+		recomuser_code recomuserCode,
+		rela_level relaLevel,
+		user_type userType,
+		calflag calflag,
+		syscode syscode,
+		create_time createTime,
+		modify_time modifyTime		
+        from tb_user_friendship   
+        where id in (
+		select max(id) from tb_user_friendship where 
+		recomuser_code = #{recomusercode})
 	</select> 
 	
 	

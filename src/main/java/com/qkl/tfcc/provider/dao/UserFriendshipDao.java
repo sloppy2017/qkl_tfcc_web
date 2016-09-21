@@ -18,6 +18,12 @@ public interface UserFriendshipDao extends DAO<UserFriendship> {
 	 * @create date 2016年8月25日
 	 */
 	public UserFriendship  findUpFriendship(String recomusercode);
+	/** 查询推荐人最大级数
+	 * @return findMaxFriendship  查询推荐人最大级数
+	 * @create author kezhiyi
+	 * @create date 2016年9月20日
+	 */
+	public UserFriendship  findMaxFriendship(String recomusercode);
 	
 	
 	/** 添加用户关系信息
