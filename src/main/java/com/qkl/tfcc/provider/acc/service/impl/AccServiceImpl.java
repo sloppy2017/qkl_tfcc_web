@@ -15,6 +15,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.Acc;
 import com.qkl.tfcc.api.po.acc.AccDetail;
@@ -22,6 +23,7 @@ import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccDetailDao;
+import com.qkl.tfcc.provider.dao.AccLimitDao;
 import com.qkl.tfcc.provider.dao.UserDao;
 import com.qkl.util.help.Validator;
 import com.qkl.util.help.pager.PageData;
@@ -40,6 +42,8 @@ public class AccServiceImpl implements AccService {
     private AccDao accDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private AccLimitDao accLimitDao;
     
     @Override
     public boolean addAccDetail(AccDetail accDetail, String versionNo) {
@@ -138,40 +142,57 @@ public class AccServiceImpl implements AccService {
             String phone = obj.getString("phone").trim();
             String tfccNum = obj.getString("tfccNum").trim();
             if(Validator.isMobile(phone)&&Validator.isNumberMax7(tfccNum)){
-                User user  = userDao.findUserByPhone(phone);
-                if(user != null&&"1".equals(user.getStatus())){
-                    //账户支出
+                
+                User tUser = userDao.findUserByPhone(phone);
+                BigDecimal limit = null;//账户限额
+                BigDecimal totalAmnt = null;
+                BigDecimal tfccNumTemp = new BigDecimal(tfccNum);
+                if(tUser!=null&&"1".equals(tUser.getStatus())&&"1".equals(tUser.getUserType())){
+                    PageData pd = new PageData();
+                    pd.put("cuy_type", "1");
+                    pd.put("acc_no", "01");
+                    PageData accLimit = accLimitDao.getAccLimit(pd);
+                    limit = new BigDecimal(accLimit.get("credit_limit").toString());
+                    Acc acc = new Acc();
+                    acc.setUserCode(tUser.getUserCode());
+                    acc.setSyscode(Constant.CUR_SYS_CODE);
+                    acc =  accDao.findAcc(acc);
+                    totalAmnt =acc.getTotalAmnt();
+                }
+                //判断是否超过限额
+                if((limit!=null&&totalAmnt!=null&&totalAmnt.add(tfccNumTemp).compareTo(limit)<=0)||(limit != null&&totalAmnt == null&&tfccNumTemp.compareTo(limit)<=0)){
+                    //投资机构账户支出
                     Acc accOut = new Acc();
                     accOut.setUserCode(userCode);
-                    accOut.setAvbAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
-                    accOut.setTotalAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
+                    accOut.setAvbAmnt(tfccNumTemp);
+                    accOut.setTotalAmnt(tfccNumTemp);
                     accDao.updateOut(accOut);
                     
-                    //账户汇总收入
+                    //普通用户账户汇总收入
                     Acc accIn = new Acc();
-                    accIn.setUserCode(user.getUserCode());
+                    accIn.setUserCode(tUser.getUserCode());
                     Acc tacc = accDao.findAcc(accIn);
                     if(tacc == null){
-                        accIn.setAvbAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
-                        accIn.setTotalAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
+                        accIn.setAvbAmnt(tfccNumTemp);
+                        accIn.setTotalAmnt(tfccNumTemp);
                         accDao.addAcc(accIn);
                     }else{
-                        accIn.setAvbAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
+                        accIn.setAvbAmnt(tfccNumTemp);
                         accDao.updateIn(tacc);
                     }
-                    //账户明细收入
+                    //普通用户账户明细收入
                     AccDetail accDetail = new AccDetail();
                     accDetail.setUserCode(userCode);//投资机构用户编码
-                    accDetail.setRelaUsercode(user.getUserCode());//关联用户编码 
+                    accDetail.setRelaUsercode(tUser.getUserCode());//关联用户编码 
                     accDetail.setBounsSource1("29");//LP会员累计
                     accDetail.setBounsSource2("2900");
                     AccDetail taccDetail = accDetailDao.findAccDetail(accDetail);
                     if(taccDetail == null){
-                        accDetail.setAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
+                        accDetail.setAmnt(tfccNumTemp);
                         accDetail.setStatus("1");
                         accDetailDao.addAccDetail(accDetail);
                     }else{
-                        accDetail.setAmnt(BigDecimal.valueOf(Long.valueOf(tfccNum)));
+                        accDetail.setAmnt(tfccNumTemp);
                         accDetailDao.updateAccDetail(accDetail);
                     }
                     successStr.append("{phone:'"+phone+"',tfccNum:'"+tfccNum+"'},");
@@ -200,5 +221,14 @@ public class AccServiceImpl implements AccService {
     @Override
     public AccDetail findAccDetail(AccDetail accDetail, String versionNo) {
         return null;
+    }
+    
+    public static void main(String[] args) {
+        BigDecimal limit = new BigDecimal("1200.00");//账户限额
+        BigDecimal totalAmnt = new BigDecimal("1100.00");
+        BigDecimal tfccNumTemp = new BigDecimal("99.01");
+        if(totalAmnt.add(tfccNumTemp).compareTo(limit)==-1){
+            System.out.println("测试相等");
+        }
     }
 }
