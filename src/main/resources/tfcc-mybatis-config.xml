@@ -35,6 +35,7 @@
 		<typeAlias alias="UnfreezeDetail" type="com.qkl.tfcc.api.po.trade.UnfreezeDetail" />
 		<typeAlias alias="AccOutdetail" type="com.qkl.tfcc.api.po.acc.AccOutdetail" />
 		<typeAlias alias="UserLevelcnt" type="com.qkl.tfcc.api.po.user.UserLevelcnt" />
+		<typeAlias alias="AccLimitdef" type="com.qkl.tfcc.api.po.acc.AccLimitdef" />
 		
 		
 		<typeAlias type="com.qkl.tfcc.api.entity.Page" alias="Page"/>
@@ -79,6 +80,7 @@
 		<mapper resource="modelMapper/AccOutdetail.xml"/>
 		<mapper resource="modelMapper/UserLevelcnt.xml"/>
 		<mapper resource="modelMapper/LogSms.xml"/>
+		<mapper resource="modelMapper/AccLimitdef.xml"/>
 		<!-- mapper resource="modelMapper/SourceBean.xml"/>
 		<mapper resource="modelMapper/DataListBean.xml"/>
 		<mapper resource="modelMapper/EzbCustomerInfoBean.xml"/>

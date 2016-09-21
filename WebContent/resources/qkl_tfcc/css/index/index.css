@@ -102,6 +102,14 @@
 .form-input1{
     position: relative;
 }
+.form-input1 .submit{
+	display: block;
+	height:40px;
+	width:100%;
+	line-height: 40px;
+	text-align: center;
+	margin:20px 0;
+}
 .form-input1 li{
     position: relative;
 }
@@ -137,6 +145,7 @@
     width:20px;
     height:20px;
     margin-right: 20px;
+    margin-bottom:0px;
 }
 .input-reg p{
     margin:0;

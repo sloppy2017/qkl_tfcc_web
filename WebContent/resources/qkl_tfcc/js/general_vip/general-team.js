@@ -113,7 +113,7 @@ $(".type-btn a").click(function(){
             str = str+"C,";
         }
     }
-   alert("str is "+str);
+  // alert("str is "+str);
     
    
     if(flag){

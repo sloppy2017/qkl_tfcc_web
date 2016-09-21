@@ -15,7 +15,13 @@
  		from  tb_acc_limitdef 
 	</select> 
    
-	
+	<select id="findAccLimit" parameterType="pd" resultType="pd" >
+        select  *
+        from  tb_acc_limitdef 
+        where 1=1
+        and cuy_type = #{cuy_type}
+        and acc_no = #{acc_no}
+    </select> 
 	 
 
 </mapper>     
