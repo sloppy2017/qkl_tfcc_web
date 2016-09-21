@@ -137,7 +137,7 @@ public class AccServiceImpl implements AccService {
             JSONObject obj = (JSONObject)jsonArray.get(i);
             String phone = obj.getString("phone").trim();
             String tfccNum = obj.getString("tfccNum").trim();
-            if(Validator.isMobile(phone)&&Validator.isNumber(tfccNum)){
+            if(Validator.isMobile(phone)&&Validator.isNumberMax7(tfccNum)){
                 User user  = userDao.findUserByPhone(phone);
                 if(user != null&&"1".equals(user.getStatus())){
                     //账户支出

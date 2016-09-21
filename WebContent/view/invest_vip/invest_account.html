@@ -133,6 +133,14 @@
 <script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
 <script type="text/javascript">
   $(function(){
+	  $("form input").each(function(){
+		  $(this).focus(function(){
+			  if($(this).hasClass("errorTip")){
+				  $(this).removeClass("errorTip");
+				  $(this).val("");
+			  }
+		  });
+	  });
       getUserInfo();
   });
 
@@ -156,7 +164,8 @@
       });
   }
   function sub_money(){
-      var jsonStr = '[';  
+	  $("#showTip").html('');
+	  var jsonStr = '[';  
       $("form li:not(.subBtn)").each(function(){
             var phone = $(this).children('input[name="phone"]').val().trim();
             var tfccNum = $(this).children('input[name="money"]').val().trim();
@@ -182,7 +191,13 @@
             dataType:'json',
             success:function(data){
                  if(data.success){
-                     $("#showTip").html("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p><p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
+                	 if(data.data.successStr){
+                		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p>");
+                	 }
+                	 if(data.data.failStr){
+                		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
+                	 }
+                     
                  }
             },
             errror:function(data){

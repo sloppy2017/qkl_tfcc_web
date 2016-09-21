@@ -9,8 +9,8 @@
 			$(this).addClass('active').siblings().removeClass('active');
 			var index = $tab_li.index(this);
 			$(' .form >form').eq(index).show().siblings().hide();
-			if(index != 0){//userType==2是网点会员，该类型暂时取消
-				userType = index + 2;
+			if(index != 0){
+				userType = index + 3;
 			}else{
 				userType = index + 1;
 			}
