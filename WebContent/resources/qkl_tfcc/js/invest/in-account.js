@@ -4,8 +4,9 @@
 $(function(){
     //到转账界面
     $('.zhuanzhang').click(function(){
-        $('.mains>div').hide();
-        $('.trans-account').show();
+    	alert("转账功能尚未开通");
+       // $('.mains>div').hide();
+       // $('.trans-account').show();
     })
 })
 //select选中那个就显示那个转账的表单
