@@ -59,7 +59,7 @@
     right:5%;
     top:70px;
     border-radius: 5px;
-     z-index: 111;
+    z-index: 11111;
 }
 @media screen and(min-width:1200px){
     .content .register{
@@ -105,9 +105,9 @@
 .form-input1 .submit{
 	display: block;
 	height:40px;
-	width:100%;
 	line-height: 40px;
-	text-align: center;
+	width:100%;
+	text-align:center;
 	margin:20px 0;
 }
 .form-input1 li{
