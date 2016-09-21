@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title></title>
+        <title>个人中心</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/reset.css">
         <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
@@ -43,7 +43,7 @@
                 <li ><a  href="../general_vip/general_account.html">我的账户</a></li>
                 <li ><a  class="active" href="../general_vip/general_myself.html">个人中心</a></li>
                 <li><a  href="../general_vip/general_safety.html">安全中心</a></li>
-                <li><a href="http://www.r8exchange.com">R8交易所</a></li>
+                <li><a href="http://www.r8exchange.com" target="new_window">R8交易所</a></li>
             </ul>
         </div>
     </div>
@@ -152,7 +152,7 @@
       $.getJSON(url,function(data){
           if(data.success){
               $("#realName").val(data.data.realName);
-              if(data.data.userType==1&&data.data.realName!=null&&data.data.realName!=''){//普通会员未认证时提示认证
+              if(data.data.userType==1&&(data.data.realName==null||data.data.realName=='')){//普通会员未认证时提示认证
                   $("#realName").next().text("您还未实名认证，为保障你的交易顺利进行，请及时前往\"安全中心\"进行认证");
               }
               $("#idno").val(data.data.idno);
