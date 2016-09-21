@@ -1,16 +1,13 @@
 package com.qkl.tfcc.provider.acc.service.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.fastjson.JSONArray;
@@ -23,7 +20,7 @@ import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccDetailDao;
-import com.qkl.tfcc.provider.dao.AccLimitDao;
+import com.qkl.tfcc.provider.dao.AccLimitdefDao;
 import com.qkl.tfcc.provider.dao.UserDao;
 import com.qkl.util.help.Validator;
 import com.qkl.util.help.pager.PageData;
@@ -43,7 +40,7 @@ public class AccServiceImpl implements AccService {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private AccLimitDao accLimitDao;
+    private AccLimitdefDao accLimitdefDao;
     
     @Override
     public boolean addAccDetail(AccDetail accDetail, String versionNo) {
@@ -151,7 +148,7 @@ public class AccServiceImpl implements AccService {
                     PageData pd = new PageData();
                     pd.put("cuy_type", "1");
                     pd.put("acc_no", "01");
-                    PageData accLimit = accLimitDao.getAccLimit(pd);
+                    PageData accLimit = accLimitdefDao.getAccLimit(pd);
                     limit = new BigDecimal(accLimit.get("credit_limit").toString());
                     Acc acc = new Acc();
                     acc.setUserCode(tUser.getUserCode());
