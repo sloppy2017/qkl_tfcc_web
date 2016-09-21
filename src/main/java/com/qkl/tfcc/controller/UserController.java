@@ -217,10 +217,10 @@ public class UserController extends BaseAction{
 			String vcode  =request.getParameter("yzm");
 			String refPhone  =request.getParameter("phone1");
 			String userType =request.getParameter("userType");
-			String branchName =request.getParameter("branchName")==null?"":URLDecoder.decode(request.getParameter("branchName"), "UTF-8"); 
+//			String branchName =request.getParameter("branchName")==null?"":URLDecoder.decode(request.getParameter("branchName"), "UTF-8"); 
 			String realName = request.getParameter("realName")==null?"":URLDecoder.decode(request.getParameter("realName"), "UTF-8");  
 			String idno =request.getParameter("idno");
-//			String cropName  =request.getParameter("cropName")==null?"":URLDecoder.decode(request.getParameter("cropName"), "UTF-8");
+			String cropName  =request.getParameter("cropName")==null?"":URLDecoder.decode(request.getParameter("cropName"), "UTF-8");
 			String cropPerson  =request.getParameter("cropPerson")==null?"":URLDecoder.decode(request.getParameter("cropPerson"), "UTF-8");
 			
 			userName=userName==null?"":userName.trim();
@@ -228,10 +228,10 @@ public class UserController extends BaseAction{
 			cfPassWord=cfPassWord==null?"":cfPassWord.trim();
 			refPhone=refPhone==null?"":refPhone.trim();
 			vcode=vcode==null?"":vcode.trim();
-			branchName=branchName==null?"":branchName.trim();
+//			branchName=branchName==null?"":branchName.trim();
 			realName=realName==null?"":realName.trim();
 			idno=idno==null?"":idno.trim();
-//			cropName=cropName==null?"":cropName.trim();
+			cropName=cropName==null?"":cropName.trim();
 			cropPerson=cropPerson==null?"":cropPerson.trim();
 			
 			if(!Validator.isMobile(userName)){
@@ -319,10 +319,10 @@ public class UserController extends BaseAction{
 			tUserDetail.setUserCode(UserCode);
 			tUserDetail.setPhone(userName);
 			tUserDetail.setRefPhone(refPhone);
-			tUserDetail.setBranchName(branchName);
+//			tUserDetail.setBranchName(branchName);
 			tUserDetail.setRealName(realName);
 			tUserDetail.setIdno(idno);
-//			tUserDetail.setCropName(cropName);
+			tUserDetail.setCropName(cropName);
 			tUserDetail.setCropPerson(cropPerson);
 			tUserDetail.setQrCode("");
 			tUserDetail.setUserType(userType);
