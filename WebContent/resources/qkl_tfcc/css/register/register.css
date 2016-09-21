@@ -61,9 +61,9 @@
 .reg-nav .active{
     color:#fff;
 
-    /*background: url('../../imgs/reg.png') no-repeat;*/
+    background: url('../../imgs/reg.png') no-repeat;
 
-    background: url('../../imgs/reg22.png') no-repeat;
+/*     background: url('../../imgs/reg22.png') no-repeat; */
 
 }
 .form {

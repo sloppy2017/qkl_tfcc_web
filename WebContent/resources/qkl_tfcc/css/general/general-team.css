@@ -65,8 +65,14 @@
     text-align: center;
 }
 .main-middle .huiyuan .act{
-    color:red;
-    border-bottom:3px solid red;
+    color:blue;
+   /*  border-bottom:3px solid red; */
+   height:30px;
+     border-radius:8px 8px 0px 0px;
+     margin-top: 60px;
+     line-height:30px;
+     border:1px solid blue;
+     border-bottom:none;
 }
  .btm{
     position: relative;
