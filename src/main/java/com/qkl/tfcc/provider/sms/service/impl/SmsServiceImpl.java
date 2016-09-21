@@ -96,11 +96,13 @@ public class SmsServiceImpl implements SmsService {
 	}
 
     @Override
+    @Transactional(propagation =Propagation.SUPPORTS)    
     public List<PageData> getSmsNoSend(PageData pd) {
         return logSmsDao.getSmsNoSend(pd);
     }
 
     @Override
+    @Transactional(propagation =Propagation.REQUIRED)  
     public boolean updateSms(PageData pd) {
         try{            
             logSmsDao.updateSms(pd);
