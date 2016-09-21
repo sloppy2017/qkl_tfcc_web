@@ -26,38 +26,42 @@ function getBankAccInfo(){
     });
 }
 
-/*$('#buy').mousedown(function(){
-	$(".mid-r a").css({"display":" block",
-		    "background":"url('../../imgs/tijiao.png') no-repeat",
-		    "height":"44px",
-		    "width":"220px",
-		    "line-height":"44px",
-		    "color":"#fff",
-		    "font-size": "14px",
-		    "text-align": "center",
-		    "margin-left":"60px",
-		    "margin-top":"30px"
-			
-	});
-	
-});
-*/
-/*
-$('#buy').mouseup(function(){
-	$(".mid-r a").css({
-	"display":" block",
-    "background":"url('../../imgs/tijiao.png') no-repeat",
-    "height":"44px",
-    "width":"220px",
-    "line-height":"44px",
-    "color":"#fff",
-    "font-size": "14px",
-    "text-align": "center",
-    "margin-left":"60px",
-    "margin-top":"30px"
-		  });
+//$('#buy').mousedown(function(){
+//	$(".mid-r a").css({"display":" block",
+//		    "background":"red",
+//		    "height":"44px",
+//		    "width":"220px",
+//		    "line-height":"44px",
+//		    "color":"#fff",
+//		    "font-size": "14px",
+//		    "text-align": "center",
+//		    "margin-left":"60px",
+//		    "margin-top":"30px"
+//			
+//	});
+//	
+//});
 
-});*/
+//$('#buy').mouseup(function(){
+//	$(".mid-r a").css({
+//	"display":" block",
+//    "background":"url('../../../imgs/tijiao.png') no-repeat",
+//    "height":"44px",
+//    "width":"220px",
+//    "line-height":"44px",
+//    "color":"#fff",
+//    "font-size": "14px",
+//    "text-align": "center",
+//    "margin-left":"60px",
+//    "margin-top":"30px"
+//		  });
+//
+//});
+
+//$('#buy').mouseup(function(){
+//	$('.mid-r a').css('background','none')
+//})
+
 $("input[name='txnum']").change(function(){
 	var url = "/service/bankaccinfo/PayMoney?"+$("form").serialize();
 	url = encodeURI(url);
