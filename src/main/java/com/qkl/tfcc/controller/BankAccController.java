@@ -131,35 +131,84 @@ public class BankAccController extends BaseAction {
 			pd.put("operator", user.getPhone());
 			pd.put("userCode", user.getUserCode());
 			
-			int tradeCount = tradeService.findTradeCount(pd, Constant.VERSION_NO);
+			String txamnt1 = pd.getString("txamnt");
+			if (txamnt1!=null&&!"".equals(txamnt1)) {
+					BigDecimal txamnt2=new BigDecimal(txamnt1);
+					double txamnt = txamnt2.doubleValue();
+					if (txamnt>=1000.00&&txamnt<=10000.00) {
+						int tradeCount = tradeService.findTradeCount(pd, Constant.VERSION_NO);
+							if (tradeCount<5) {
+								boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
+								if (addTradeDetail) {
+									ar.setSuccess(true);
+									ar.setMessage("恭喜您，购买成功！");
+								}else {
+									ar.setSuccess(false);
+									ar.setMessage("系统异常，购买失败！");
+								}
+								
+							}else{
+								ar.setSuccess(false);
+								ar.setMessage("购买次数已达5次");
+								return ar;		
+							}
+						
+						}else {
+							if(txamnt<1000.00){
+								ar.setMessage("单次购买金额不得低于1000.00元");	
+							}
+							if (txamnt>10000.00) {
+								ar.setMessage("单次购买金额不得高于10000.00元");
+							}
+							ar.setSuccess(false);
+							return ar;
+						}
+				
+			}else{
+				ar.setSuccess(false);
+				ar.setMessage("请选择购买数量");
+				return ar;
+			}
+			
+			
+			
+			
+			/*int tradeCount = tradeService.findTradeCount(pd, Constant.VERSION_NO);
 			if (tradeCount>=5) {
 				ar.setSuccess(false);
 				ar.setMessage("购买次数已达5次");
 				return ar;
 			}else{
-				String object = pd.getString("txamnt");
-				BigDecimal txamnt1=new BigDecimal(object);
-				double txamnt = txamnt1.doubleValue();
-				if (txamnt>=1000) {
-					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
-					ar.setSuccess(true);
-					ar.setMessage("购买成功"); 
+				String txamnt1 = pd.getString("txamnt");
+				
+				if(txamnt1!=null&&!"".equals(txamnt1)&&txamnt1.length()>0){
+					BigDecimal txamnt2=new BigDecimal(txamnt1);
+					double txamnt = txamnt2.doubleValue();
+					if (txamnt>=1000) {
+						tradeService.addTradeDetail(pd, Constant.VERSION_NO);
+						ar.setSuccess(true);
+						ar.setMessage("恭喜您，购买成功！"); 
+					}else{
+						ar.setSuccess(false);
+						ar.setMessage("单次购买金额不得低于1000.00元");
+						return ar;
+					}
+					if (txamnt>10000) {
+						ar.setSuccess(false);
+						ar.setMessage("单次购买金额不得高于10000.00元");
+						return ar;
+					}
+					
 				}else{
-					ar.setSuccess(false);
-					ar.setMessage("购买金额不得低于1000.00元");
+					ar.setMessage("请选择购买数量");
 					return ar;
-				}
-				if (txamnt>10000) {
-					ar.setSuccess(false);
-					ar.setMessage("购买金额不得高于10000.00元");
-					return ar;
-				}else {
-					tradeService.addTradeDetail(pd, Constant.VERSION_NO);
-					ar.setSuccess(true);
-					ar.setMessage("购买成功"); 
 				}
 				
-			}	
+				
+				
+				
+				
+			}	*/
 			
 		} catch (Exception e) {
 			ar.setSuccess(false);
@@ -211,13 +260,13 @@ public class BankAccController extends BaseAction {
 		return ar;
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String str = "152.00";
 		PageData pdData = new PageData();
 		pdData.put("str", str);
-		System.out.println(pdData.get("str"));
-		BigDecimal bigDecimal = new BigDecimal(pdData.get("str").toString());
+		System.out.println(pdData.getString("str"));
+		BigDecimal bigDecimal = new BigDecimal(pdData.getString("str"));
 		System.out.println(bigDecimal);
-	}
+	}*/
 	
 }

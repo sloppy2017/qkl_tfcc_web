@@ -78,7 +78,7 @@
                         <ul>
                             <li><div>TFCC</div>&nbsp;&nbsp;<span id="spt"></span></li>
                           <!--   <li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li> -->
-                            <li class="zhuanzhang">转账</li>
+                            <li class="zhuanzhang" >转账</li>
                         </ul>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
         <div class="fl">
             <div class="myImg">
                 <div>
-                    <img id="left_headPicId" src="" alt="">
+                    <img id="left_headPicId" src="" width="122"  alt="">
                 </div>
                 <p>普通会员</p>
             </div>
@@ -141,61 +141,9 @@
         </div>
     </div>
 </div>
-<script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
+<!-- <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script> -->
+<script src="/resources/qkl_tfcc/js/date/dateCom.js"></script>
 <script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
-
-<script>
-
-$.ajax({
-    type:'post',
-    url:'/service/comacc/findNums',
-    dataType:'json',
-    success:function(data){
-    	if(data.success){
-            if(data.data.findTB==null){
-                $("#spt").html("0.00");
-            }else{
-                $("#spt").html(data.data.findTB);
-            }
-            if(data.data.findTTReward==null){
-                $("#sptt").html("0.00");
-            }else{
-                $("#sptt").html(data.data.findTTReward);
-            }
-            if(data.data.findReward==null){
-                $("#spv").html("0.00");
-            }else{
-                $("#spv").html(data.data.findReward);
-            }
-            
-        }else{
-            alert(data.message);
-        }
-    }
-})
-$(function(){
-      getUserInfo();
-  });
-
-  function getUserInfo(){
-      var url = "/service/user/toMyself";
-      $.getJSON(url,function(data){
-          if(data.success){
-              if(data.data.imgAddrss){
-                  $("#left_headPicId").attr("src",data.data.imgAddrss);
-              }else{
-                  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
-              }
-              if(data.data.userName){
-                  $("#user").html(data.data.userName);
-              }else if(data.data.realName){
-                  $("#user").html(data.data.realName);
-              }else{
-                  $("#user").html(data.data.phone);
-              }
-          }
-      });
-  }
-</script>
+<script src="/resources/qkl_tfcc/js/general_vip/general_account.js"></script>
 </body>
 </html>

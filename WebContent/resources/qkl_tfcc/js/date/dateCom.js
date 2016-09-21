@@ -6,26 +6,24 @@ $(document).ready(function(){
         var index = $tab1_li.index(this);
         $(' .mains .btm').eq(index).show().siblings().hide();
         $(' .main-top .top-tab').eq(index).show().siblings().hide();
-    })
-})
-
-$(function(){
-    function time(){
-        var now = new Date();
-        var years =now.getFullYear();
-        var month = now.getMonth()+1;
-        var date = now.getDate();
-        var times = now.getHours()
-        var minutes = now.getMinutes();
-        var seconds=now.getSeconds();
-        var week = now.getDay()-1;
-        $('.yearTime').html(years+'年'+month+'月'+date+'日');
-        $('.dateTime').html(times+':'+ minutes+':'+seconds);
-        var weekArr = ['一','二','三','四','五','六','日']
-        $('.weekTime').html('星期'+weekArr[week]);
-    }
-    setInterval(time,1000);
-})
+    });
+});
+function time(){
+    var now = new Date();
+    var years =now.getFullYear();
+    var month = now.getMonth()+1;
+    var date = now.getDate();
+    var times = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds=now.getSeconds();
+    var week = now.getDay()-1;
+    $('.yearTime').html(years+'年'+month+'月'+date+'日');
+    $('.dateTime').html(times+':'+ minutes+':'+seconds);
+    var weekArr = ['一','二','三','四','五','六','日'];
+    $('.weekTime').html('星期'+weekArr[week]);
+}
+time();
+setInterval(time,1000);
 /**
  * Created by qw on 2016/8/26.
  */
