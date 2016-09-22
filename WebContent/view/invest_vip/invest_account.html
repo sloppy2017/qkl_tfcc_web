@@ -36,7 +36,7 @@
 <!--个人账户头部开始-->
 <div class="header fix">
     <div class="logo fl">
-        <img src="../../resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
+        <img src="../../resources/qkl_tfcc/imgs/reglogo_02.png" alt="">
     </div>
     <div class="nav-right fl">
         <div class="top">
@@ -197,7 +197,8 @@
                 	 if(data.data.failStr){
                 		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                 	 }
-                     
+                 }else{
+                	 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                  }
             },
             errror:function(data){
@@ -238,13 +239,18 @@
   
   $.ajax({
         type:'post',
-        url:'/service/lpacc/getnum',
+        url:'/service/service/comacc/findNums',
         dataType:'json',
         success:function(data){
             var message = data.message;
            // alert(message);
-            $("#in_sp").html(data.data.Balance);
-            
+           if(data.success){
+            if(data.data.findTB==null||data.data.findTB==""){
+                $("#in_sp").html("0.0000");
+            }else{
+                $("#in_sp").html(data.data.findTB);
+            }
+           } 
         }
     })
   

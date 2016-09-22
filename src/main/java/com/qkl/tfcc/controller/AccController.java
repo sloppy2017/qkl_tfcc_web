@@ -18,6 +18,7 @@ import com.qkl.tfcc.api.common.CodeConstant;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.po.acc.Acc;
 import com.qkl.tfcc.api.po.user.User;
+import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.sms.api.SmsService;
 import com.qkl.tfcc.api.service.user.api.UserService;
@@ -54,7 +55,7 @@ public class AccController extends BaseAction{
     @RequestMapping(value="/rewardTfcc", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse modifyuser(HttpServletRequest request){
-        logBefore(logger, "投资机构发放tfcc给LP会员");
+        logBefore(logger, "投资机构发放tfcc给普通会员会员");
         Map<String,String> resMap = new HashMap<String, String>();
         try {
              pd = this.getPageData();
@@ -66,21 +67,26 @@ public class AccController extends BaseAction{
              }
              JSONArray jsonArray = JSONArray.parseArray(pd.get("params").toString());
              User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+             UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
              Acc acc = new Acc();
              acc.setUserCode(user.getUserCode());
              acc.setSyscode(Constant.CUR_SYS_CODE);
              Acc tAcc = accService.findAcc(acc, Constant.VERSION_NO);
              if(tAcc.getAvbAmnt()==null||tAcc.getAvbAmnt().compareTo(new BigDecimal("0"))==0){
                  resMap.put("failStr", "您的账户余额不足发放失败！");
+                 ar.setSuccess(false);
+                 ar.setData(resMap);
+                 ar.setMessage("您的账户余额不足发放失败！");
+                 return ar;
              }
-             resMap = accService.rewardTfcc(jsonArray,user.getUserCode(),tAcc.getAvbAmnt(),Constant.VERSION_NO);
+             resMap = accService.rewardTfcc(jsonArray,userDetail,tAcc.getAvbAmnt(),Constant.VERSION_NO);
              StringBuffer successStr = new StringBuffer("发放成功的手机号：");
              if(resMap.get("successStr")!=null){
                  JSONArray array = JSONArray.parseArray(resMap.get("successStr"));
                  for(int i=0;i<array.size();i++){
                      JSONObject obj = (JSONObject)array.get(i);
                      successStr.append(obj.getString("phone")+"，额度："+obj.getString("tfccNum")+"；");
-                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，恭喜您获得"+obj.getString("tfccNum")+"TFCC奖励。");
+                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】用户给您发放了"+obj.getString("tfccNum")+"SAN奖励。");
                  }
                  resMap.remove("successStr");
                  resMap.put("successStr", successStr.toString());

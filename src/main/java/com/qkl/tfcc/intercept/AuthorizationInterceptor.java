@@ -48,18 +48,18 @@ public class AuthorizationInterceptor implements HandlerInterceptor{
             }
         }  
         if (null == session.getAttribute(Constant.LOGIN_USER)) {
-            response.sendRedirect(request.getContextPath() + "/service/user/logout");
+            response.sendRedirect(request.getContextPath() + "/view/login.html");
             return false;
         }
         User user = (User)session.getAttribute(Constant.LOGIN_USER);
         if("1".equals(user.getUserType())&&(requestUrl.contains("/lp_vip")||requestUrl.contains("/invest_vip"))){//普通会员
-            response.sendRedirect(request.getContextPath() + "/service/user/logout");
+            response.sendRedirect(request.getContextPath() + "/view/login.html");
             return false;
         }else if("3".equals(user.getUserType())&&(requestUrl.contains("/general_vip")||requestUrl.contains("/invest_vip"))){//LP会员
-            response.sendRedirect(request.getContextPath() + "/service/user/logout");
+            response.sendRedirect(request.getContextPath() + "/view/login.html");
             return false; 
         }else if("4".equals(user.getUserType())&&(requestUrl.contains("/general_vip")||requestUrl.contains("/lp_vip"))){//投资公司
-            response.sendRedirect(request.getContextPath() + "/service/user/logout");
+            response.sendRedirect(request.getContextPath() + "/view/login.html");
             return false;
         }   
 		return true;
