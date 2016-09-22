@@ -233,12 +233,13 @@
       valid_wxnum($(this));
   });
   function valid_wxnum($this){
-      var reg=/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
-      if(!reg.test($this.val())){
-          $this.val('请输入正确的微信号');
-          $this.addClass('errorTip');
-          return false;
-      }else {
+	    var reg=/^[a-zA-Z\d_]{5,}$/;
+	    var reg_mail = /^([a-z0-9A-Z]+[-|\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\.)+[a-zA-Z]{2,}$/;
+	    if(!reg.test($this.val())&&!reg_mail.test($this.val())){
+	        $this.val('请输入正确的微信号');
+	        $this.addClass('errorTip');
+	        return false;
+	    }else {
           if($this.hasClass('errorTip')){
               $this.removeClass('errorTip');
           }

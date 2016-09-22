@@ -134,6 +134,7 @@
 <script src="../../../resources/qkl_tfcc/js/invest/in-account.js"></script>
 <script type="text/javascript">
   $(function(){
+	  //移除错误提示
 	  $("form input").each(function(){
 		  $(this).focus(function(){
 			  if($(this).hasClass("errorTip")){
@@ -240,9 +241,9 @@
       }
   }
   
-  $.ajax({
+  /* $.ajax({
         type:'post',
-        url:'/service/comacc/findNums',
+        url:'../../service/comacc/findNums',
         dataType:'json',
         success:function(data){
             var message = data.message;
@@ -255,7 +256,7 @@
             }
            } 
         }
-    })
+    }) */
   
 </script>
 </body>

@@ -83,6 +83,7 @@
     left: 213px;
     margin-top: 45px;
     color:red;
+    font-size: 14px;
 }
 .form .hide{display: none;}
 
@@ -99,6 +100,7 @@
 .form div input{
     width:310px;
     height:40px;
+    line-height: 40px;
 }
 .form div label span{
     color:#ef807a;

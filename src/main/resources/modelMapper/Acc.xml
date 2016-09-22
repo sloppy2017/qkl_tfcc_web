@@ -108,7 +108,7 @@
 	 <update id="updateIn" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
          update tb_acc 
          <set> 
-                avb_amnt = avb_amnt + #{avbAmnt},
+                froze_amnt = froze_amnt + #{avbAmnt},
                 total_amnt = total_amnt + #{avbAmnt},
                 last_caldate = now(),
                 modify_time = now(),

@@ -208,7 +208,7 @@ public class AccServiceImpl implements AccService {
 //                        accIn.setAvbAmnt(tfccNumTemp);
                         accDao.addAcc(accIn);
                     }else{
-                        accDao.updateIn(tacc);
+                        accDao.updateIn(accIn);
                     }
                     
                     /*AccDetail taccDetail = accDetailDao.findAccDetail(accDetail);
