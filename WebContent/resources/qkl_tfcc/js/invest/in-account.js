@@ -4,16 +4,16 @@
 $(function(){
     //到转账界面
     $('.zhuanzhang').click(function(){
-    	alert("转账功能尚未开通");
-       // $('.mains>div').hide();
-       // $('.trans-account').show();
+    	//alert("转账功能尚未开通");
+        $('.mains>div').hide();
+        $('.trans-account').show();
     })
 })
 //select选中那个就显示那个转账的表单
 function gradeChange(){
     var objS = document.getElementById("pid");
     var grade = objS.options[objS.selectedIndex].value;
-    alert(grade);
+    //alert(grade);
     if(objS.options[0].selected==false){
         $('.trans-jfcc').show();
         $('.trans-tfcc').hide()

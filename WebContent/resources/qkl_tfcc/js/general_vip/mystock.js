@@ -14,10 +14,10 @@ function getBankAccInfo(){
         dataType: "json",
         success: function (data) {	
         	 if(data.success){
-             		 $("#revorgname").text(data.data.orgName);
+             		 $("#revorgname").text(data.data.payeeName);
              		 $("#revbankaccno").text(data.data.bankaccno);
-             		 $("#revbankdepname").text(data.data.depositBankname);
-             		 $("#checkphone").text(data.data.checkphone);
+             		/* $("#revbankdepname").text(data.data.depositBankname);
+             		 $("#checkphone").text(data.data.checkphone);*/
              			
              }else{
              	alert(data.message);

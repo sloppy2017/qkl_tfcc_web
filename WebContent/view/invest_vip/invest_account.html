@@ -52,7 +52,7 @@
                 <li><a class="active" href="../invest_vip/invest_account.html">我的账户</a></li>
                 <li ><a  href="../invest_vip/invest_myself.html">个人中心</a></li>
                 <li><a  href="../invest_vip/invest_safety.html">安全中心</a></li>
-                <li><a href="http://www.r8exchange.com" target="new_window">R8交易所</a></li>
+                <li><a href="http://SANJIELAIN.COM" target="new_window">三界链</a></li>
             </ul>
         </div>
     </div>
@@ -239,13 +239,18 @@
   
   $.ajax({
         type:'post',
-        url:'/service/lpacc/getnum',
+        url:'/service/service/comacc/findNums',
         dataType:'json',
         success:function(data){
             var message = data.message;
            // alert(message);
-            $("#in_sp").html(data.data.Balance);
-            
+           if(data.success){
+            if(data.data.findTB==null||data.data.findTB==""){
+                $("#in_sp").html("0.0000");
+            }else{
+                $("#in_sp").html(data.data.findTB);
+            }
+           } 
         }
     })
   

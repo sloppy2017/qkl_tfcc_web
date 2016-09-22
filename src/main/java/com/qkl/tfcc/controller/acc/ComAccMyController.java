@@ -1,5 +1,8 @@
 package com.qkl.tfcc.controller.acc;
+import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -50,6 +53,28 @@ public class ComAccMyController extends BaseAction {
 		return ar;	
 	}
 
+	
+	@RequestMapping(value="/acccompare",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse findAccOut(HttpServletRequest request){
+		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		Map<String, Object> findNum = cams.findNum(user.getUserCode());
+		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<String, Object> entry = iterator.next();
+			String key = entry.getKey();
+			if (key=="findTTReward"||"findTTReward".equals(key)) {
+				BigDecimal value = (BigDecimal) entry.getValue();
+				if (value!=null) {
+				String 	format1 = String .format("%.4f",value);
+				System.out.println(format1+"==============");
+				}
+			}
+		}
+		return ar;
+	}
+	
+	
 	
 	/*@RequestMapping(value="/fall",method=RequestMethod.POST)
 	@ResponseBody

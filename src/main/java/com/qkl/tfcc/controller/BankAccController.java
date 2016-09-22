@@ -4,20 +4,25 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.BankAccInfo;
 import com.qkl.tfcc.api.po.user.User;
+import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.api.service.acc.api.BankAccService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.api.service.trade.api.TradeService;
+import com.qkl.tfcc.provider.user.service.impl.UserDetailServiceImpl;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
@@ -36,6 +41,9 @@ public class BankAccController extends BaseAction {
 	@Autowired
 	private SysGenCodeService sysGenCodeService;
 	
+	/*@Autowired
+	private  UserDetailServiceImpl userDetailServiceImpl;*/
+	
 	@RequestMapping(value="/info",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse findBankInfo(HttpServletRequest request,HttpServletResponse response){
@@ -53,6 +61,25 @@ public class BankAccController extends BaseAction {
 		}
 	   return ar;
 	}
+	
+
+	@RequestMapping(value="/bankaccno",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse findBankaccNo(HttpServletRequest request,HttpServletResponse response){//查询购买人的支付宝账号
+		try {
+			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+			//UserDetail findUserDetailByUserCode = userDetailServiceImpl.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
+			ar.setSuccess(true);
+			ar.setMessage("查询成功");
+			//ar.setData(findUserDetailByUserCode);
+		} catch (Exception e) {
+			ar.setSuccess(false);
+			ar.setMessage("查询失败");
+			e.printStackTrace();
+		}
+	   return ar;
+	}
+	
 	
 	@RequestMapping(value="/searchSel",method=RequestMethod.POST)
 	@ResponseBody
