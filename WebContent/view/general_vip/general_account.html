@@ -41,7 +41,7 @@
 <!--普通会员账户中心-->
 <div class="header fix">
     <div class="logo fl">
-        <img src="/resources/qkl_tfcc/imgs/reglogo_02.png" alt="">
+        <img src="../../resources/qkl_tfcc/imgs/reglogo_02.png" alt="">
     </div>
     <div class="nav-right fl">
         <div class="top">
@@ -105,17 +105,20 @@
                     <div class="trans-tfcc">
                         <p>转账额度</p>
                         <input type="text" name="money" placeholder="请输入需转账额度">
-                        <span>您最多可转账额度为 40,000.00</span><span class="t_trans">全部转账</span>
+                        <!-- <span>您最多可转账额度为 40,000.00</span><span class="t_trans">全部转账</span> -->
                         <span class="errorc"></span>
-                        <div><a href="#" class="tfcc-btn" onclick="save()">保存</a> <a href="">返回</a></div>
+                        <div><a href="#" class="tfcc-btn" onclick="save()">提交</a> <a href="">返回</a></div>
                     </div>
                     <div class="trans-jfcc">
                         <p>转账额度</p>
                         <input type="text" name="money" placeholder="请输入需转账额度">
-                        <span>您最多可转账额度为 10,000.00</span><span class="t_trans">全部转账</span>
+                       <!--  <span>您最多可转账额度为 10,000.00</span><span class="t_trans">全部转账</span> -->
                         <span class="errorc"></span>
+                         <p>支付宝账号</p>
+                        <input type="text" name="money" placeholder="请输入支付宝账号">
                         <div><a href="#" class="jfcc-btn" onclick="return jfcc_sub()">提交</a> <a href="">返回</a></div>
                     </div>
+                    
                 </div>
                 <div class="trans-jfcc"></div>
             </div>

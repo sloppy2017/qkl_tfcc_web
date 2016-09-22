@@ -63,6 +63,15 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<filter>
+        <filter-name>CrossOrigin</filter-name>
+        <filter-class>com.qkl.tfcc.filter.CrossOriginFilter</filter-class>    
+    </filter>
+    <filter-mapping>
+        <filter-name>CrossOrigin</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
 	
 	 <!-- <filter>
     	<filter-name>loginFilter</filter-name>
