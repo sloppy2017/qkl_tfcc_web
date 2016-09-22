@@ -5,7 +5,7 @@
 }
 
 .reg-logo img{
-    margin-top:14px;
+    /*margin-top:14px;*/
 }
 .container{
     width:100%;
@@ -273,6 +273,10 @@ form .myagree span{
     font-size: 14px;
 } */
 /*�ύ�ɹ�����*/
+body{
+	overflow: hidden;
+}
+
 .mark1,.mark2{
     position:absolute;
     top:0;
@@ -281,8 +285,9 @@ form .myagree span{
     height:100%;
     background: rgba(5, 5, 5, 0.47);
     z-index: 9999;
+    /*filter:alpha(opacity=50)progid:DXImageTransform.Microsoft.gradient(startColorstr=#ccc,endColorstr=#ccc);*/
     display: none;
-
+   overflow-y: auto;
 }
  .mark1-box{
      position: absolute;

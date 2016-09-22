@@ -99,26 +99,19 @@
                         <p>选择币种</p>
                         <select name="" id="pid" onchange="gradeChange()">
                             <option value="">SAN</option>
-                            <option value="">SAN</option>
                         </select>
                     </div>
                     <div class="trans-tfcc">
+                        <p>对方账户</p>
+                        <input type="text" name="zfb" placeholder="请输入对方账号"><span style="color:red">&nbsp;*</span>
+                        <span class="errorc"></span>
+                    </div>
+                    <div class="trans-tfcc">
                         <p>转账额度</p>
-                        <input type="text" name="money" placeholder="请输入需转账额度">
-                        <!-- <span>您最多可转账额度为 40,000.00</span><span class="t_trans">全部转账</span> -->
+                        <input type="text" name="money" placeholder="请输入需转账额度"><span style="color:red">&nbsp;*</span>
                         <span class="errorc"></span>
                         <div><a href="#" class="tfcc-btn" onclick="save()">提交</a> <a href="">返回</a></div>
                     </div>
-                    <div class="trans-jfcc">
-                        <p>转账额度</p>
-                        <input type="text" name="money" placeholder="请输入需转账额度">
-                       <!--  <span>您最多可转账额度为 10,000.00</span><span class="t_trans">全部转账</span> -->
-                        <span class="errorc"></span>
-                         <p>支付宝账号</p>
-                        <input type="text" name="money" placeholder="请输入支付宝账号">
-                        <div><a href="#" class="jfcc-btn" onclick="return jfcc_sub()">提交</a> <a href="">返回</a></div>
-                    </div>
-                    
                 </div>
                 <div class="trans-jfcc"></div>
             </div>

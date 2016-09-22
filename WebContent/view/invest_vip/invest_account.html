@@ -63,10 +63,10 @@
             <div>
                 <div class="main-top"><span>您当前的位置：</span><span class="c28">我的账户</span></div>
                 <div class="my-sum">
-                    <h4>SAN最新成交价：<span>¥ 3550.99</span></h4>
+<!--                     <h4>SAN最新成交价：<span>¥ 3550.99</span></h4> -->
                         <ul>
                             <li>我的余额</li>
-                            <li><div>SAN</div>&nbsp;&nbsp;<span id="in_sp"></span></li>
+                            <li>SAN&nbsp;&nbsp;<span id="in_sp"></span></li>
                             <li class="zhuanzhang">转账</li>
                         </ul>
                 </div>
@@ -88,6 +88,7 @@
                         </ul>
                     </form>
                     <div id="showTip"></div>
+                    <input type="text" id="focus" style="border:0px;" readonly="readonly"/>
                 </div>
 
             </div>
@@ -197,8 +198,10 @@
                 	 if(data.data.failStr){
                 		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                 	 }
+                	 $("#focus").focus();
                  }else{
-                	 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
+                	 alert(data.message);
+//                 	 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                  }
             },
             errror:function(data){
