@@ -38,37 +38,22 @@ public class SmsServiceImpl implements SmsService {
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean addSendsmsDetail(SendsmsDetail smsDetail) {
-		try{			
-			smsSendDetailDao.addSmsSendDetail(smsDetail);
-			return true;
-		}catch(Exception e){
-			loger.debug("addSendsmsDetail fail,reason is "+e.getMessage());
-			return false;
-		}
+		smsSendDetailDao.addSmsSendDetail(smsDetail);
+		return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean addSendsmsInfo(Sendsms SendsmsInfo) {
-		try{			
-			smsSendDao.addSmsSend(SendsmsInfo);			
-			return true;
-		}catch(Exception e){
-			loger.debug("addSendsmsInfo fail,reason is "+e.getMessage());
-			return false;
-		}
+		smsSendDao.addSmsSend(SendsmsInfo);			
+		return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean modifySendsmsInfo(Sendsms SendsmsInfo) {
-		try{			
-			smsSendDao.modifySmsSend(SendsmsInfo);			
-			return true;
-		}catch(Exception e){
-			loger.debug("modifySendsmsInfo fail,reason is "+e.getMessage());
-			return false;
-		}
+		smsSendDao.modifySmsSend(SendsmsInfo);			
+		return true;
 	}
 
 	@Override
@@ -104,13 +89,8 @@ public class SmsServiceImpl implements SmsService {
     @Override
     @Transactional(propagation =Propagation.REQUIRED)  
     public boolean updateSms(PageData pd) {
-        try{            
-            logSmsDao.updateSms(pd);
-            return true;
-        }catch(Exception e){
-            loger.debug("updateSms fail,reason is "+e.getMessage());
-            return false;
-        }
+        logSmsDao.updateSms(pd);
+        return true;
     }
     /**
      * @describe:发送库里未发送的短息

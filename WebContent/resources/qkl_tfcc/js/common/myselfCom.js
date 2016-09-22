@@ -15,7 +15,8 @@ $('#wxnum').blur(function(){
 });
 function valid_wxnum($this){
 	var reg=/^[a-zA-Z\d_]{5,}$/;
-    if(!reg.test($this.val())){
+	var reg_mail = /^([a-z0-9A-Z]+[-|\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\.)+[a-zA-Z]{2,}$/;
+    if(!reg.test($this.val())&&!reg_mail.test($this.val())){
         $this.val('请输入正确的微信号');
         $this.addClass('errorTip');
         return false;

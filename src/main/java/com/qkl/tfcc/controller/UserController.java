@@ -281,7 +281,7 @@ public class UserController extends BaseAction{
 			
 			//1小时之内的短信验证码有效
 			String tVcode =smsService.findSendsmsDetail(userName,Constant.CUR_SYS_CODE); 
-			if(!vcode.equals(tVcode.trim())){
+			if(tVcode==null||!vcode.equals(tVcode.trim())){
 				ar.setSuccess(false);
 				ar.setMessage("验证码输入不正确！");
 				return ar;
@@ -313,7 +313,18 @@ public class UserController extends BaseAction{
 			tUser.setModifyTime(DateUtil.getCurrentDate());
 			
 			User refUser= userService.findbyPhone(refPhone, Constant.VERSION_NO);
+			if(refUser == null){
+			    ar.setSuccess(false);
+			    ar.setMessage("推介人不存在！");
+			    return ar;
+			}
+			UserFriendship fMaxFriendship =  userService.findMaxFriendship(refUser.getUserCode(), Constant.VERSION_NO);//推荐人上级关系最大级数    
 			
+			if("1".equals(refUser.getUserType())&&fMaxFriendship == null){//如果用户为普通用户且没有上级用户
+			    ar.setSuccess(false);
+                ar.setMessage("推介人数据异常，请联系客服！");
+                return ar;
+			}
 		
 			UserDetail tUserDetail = new UserDetail();
 			tUserDetail.setUserCode(UserCode);
@@ -340,6 +351,8 @@ public class UserController extends BaseAction{
 			tUserDetail.setCreateTime(DateUtil.getCurrentDate());
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
 			tUserDetail.setOperator(userName);
+			
+			
 			if(!userService.addUser(tUser,tUserDetail,Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("注册失败！");
