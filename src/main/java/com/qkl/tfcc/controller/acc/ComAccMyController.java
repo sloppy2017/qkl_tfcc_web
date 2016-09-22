@@ -56,18 +56,29 @@ public class ComAccMyController extends BaseAction {
 	
 	@RequestMapping(value="/acccompare",method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse findAccOut(HttpServletRequest request){
+	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		pd=this.getPageData();
 		Map<String, Object> findNum = cams.findNum(user.getUserCode());
 		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<String, Object> entry = iterator.next();
 			String key = entry.getKey();
 			if (key=="findTTReward"||"findTTReward".equals(key)) {
-				BigDecimal value = (BigDecimal) entry.getValue();
-				if (value!=null) {
-				String 	format1 = String .format("%.4f",value);
-				System.out.println(format1+"==============");
+			 //BigDecimal value = (BigDecimal) entry.getValue();
+				String string = entry.getValue().toString();
+				BigDecimal bigDecimal2 = new BigDecimal(string);
+				String money = pd.get("money").toString();
+				if (money!=null&&"".equals(money)) {
+					
+				}
+				System.out.println(money+"++++++++++++++++++++");
+				BigDecimal bigDecimal = new BigDecimal(money);
+				System.out.println(bigDecimal+"________________");
+				int compareTo = bigDecimal.compareTo(bigDecimal2);
+				if (compareTo==1) {
+					ar.setMessage("您的可用余额不足");
+					ar.setSuccess(true);
 				}
 			}
 		}

@@ -140,8 +140,10 @@ function reload_table(currentPage,showCount) {
             showCount: showCount
         },
         success: function (data) {
-        	
             var tviplist = data.data.tviplist;
+            if(tviplist.length==0){
+        		alert("没有符合条件的会员信息");
+        	}
             var tablecols = "<tr> \n"
                 + " <th>会员级别</th> \n"
                 + "<th>注册时间</th> \n"

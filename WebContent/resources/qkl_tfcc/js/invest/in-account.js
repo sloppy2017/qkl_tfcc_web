@@ -27,7 +27,7 @@ function gradeChange(){
 
 
 //tfcc提交函数
-function  save(){
+/*function  save(){
     var money =  $('.trans-tfcc input[name="money"]').val();
     //var reg =/^([1-9][0-9]*)?[0-9]\.[0-9]{2}$/;
     var reg =/^([1-9][0-9]*)?[0-9]$/;
@@ -43,8 +43,8 @@ function  save(){
         $(".dividend").fadeIn(500);
         return true;
     }
-}
-function tfcc_sub(){
+}*/
+/*function tfcc_sub(){
     var money =  $('.trans-tfcc input[name="money"]').val();
     console.log(money);
     $.ajax({
@@ -63,7 +63,7 @@ function tfcc_sub(){
 }
 function exit(){
     $(".dividend").fadeOut(500);
-}
+}*/
 
 
 

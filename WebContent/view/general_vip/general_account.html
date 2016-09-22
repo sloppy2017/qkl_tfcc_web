@@ -103,14 +103,14 @@
                     </div>
                     <div class="trans-tfcc">
                         <p>对方账户</p>
-                        <input type="text" name="zfb" placeholder="请输入对方账号"><span style="color:red">&nbsp;*</span>
+                        <input type="text" name="zfb" id="zhanghao" placeholder="请输入对方账号"><span style="color:red">&nbsp;*</span>
                         <span class="errorc"></span>
                     </div>
                     <div class="trans-tfcc">
                         <p>转账额度</p>
-                        <input type="text" name="money" placeholder="请输入需转账额度"><span style="color:red">&nbsp;*</span>
+                        <input type="text" name="money" id="zhuanzhang" onkeyup='this.value=this.value.replace(/\D/gi,"")' placeholder="请输入需转账额度">您的可用额度为&nbsp;&nbsp;<span id= "zid" style="color:red">&nbsp;*</span>
                         <span class="errorc"></span>
-                        <div><a href="#" class="tfcc-btn" onclick="save()">提交</a> <a href="">返回</a></div>
+                        <div><a href="#" class="tfcc-btn" id="tijiao" onclick="save()">提交</a> <a href="">返回</a></div>
                     </div>
                 </div>
                 <div class="trans-jfcc"></div>
