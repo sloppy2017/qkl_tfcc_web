@@ -4,12 +4,13 @@
 
      <!-- 查询TFCC余额 -->
     <select id="findTB" parameterType="java.lang.String" resultType="java.math.BigDecimal" >
-		        select sum(amnt) tfcc
+		        <!-- select sum(amnt) tfcc
 		        from tb_acc_def d , tb_acc_detail a 
 		        where d.sub_accno=a.sub_accno 
 		        and cuy_type='1' 
 		        and user_type='1'
-		        and user_code=#{userCode} 
+		        and user_code=#{userCode}  -->
+		        select avb_amnt tfcc from tb_acc where user_code=#{userCode}
 	</select> 
 	
      <!-- 查询JFCC余额 -->
@@ -24,13 +25,14 @@
 	 
 	 <!-- 查询我累计推荐会员奖励的TFCC -->
 	 <select id="findReward"  parameterType="java.lang.String" resultType="java.math.BigDecimal" > 
-		 select sum(amnt) mtfcc
+		<!--  select sum(amnt) mtfcc
 		 from tb_acc_def f,tb_acc_detail d  
 		 where  f.sub_accno=d.sub_accno 
 		 and acc_type='1' 
 		 and cuy_type='1' 
 		 and d.bouns_source1='11' 
-		 and d.user_code=#{userCode}
+		 and d.user_code=#{userCode} -->
+		 select sum(amnt) mtfcc from tb_acc_detail where bouns_source1='11' and user_code=#{userCode}
 	 </select>
 	
 	 <!-- 查询我累计推荐网点奖励的TFCC -->
@@ -46,12 +48,14 @@
     
      <!-- 查询我总计奖励的TFCC -->
      <select id="findTTReward"  parameterType="java.lang.String" resultType="java.math.BigDecimal" > 
-        select sum(amnt) ttfcc
+       <!--  select sum(amnt) ttfcc
          from tb_acc_def f,tb_acc_detail d  
          where  f.sub_accno=d.sub_accno 
          and acc_type='1' 
          and cuy_type='1' 
-         and d.user_code=#{userCode}
+         and d.user_code=#{userCode} -->
+         
+         select sum(amnt) ttfcc from tb_acc_detail where user_code=#{userCode}
      </select>
      
       <!-- 查询列表 -->
