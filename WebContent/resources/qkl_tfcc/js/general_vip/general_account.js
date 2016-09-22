@@ -8,18 +8,18 @@ $(function(){
 	    dataType:'json',
 	    success:function(data){
 	        if(data.success){
-	            if(data.data.findTB==null){
-	                $("#spt").html("0.00");
+	            if(data.data.findTB==null||data.data.findTB==""){
+	                $("#spt").html("0.0000");
 	            }else{
 	                $("#spt").html(data.data.findTB);
 	            }
-	            if(data.data.findTTReward==null){
-	                $("#sptt").html("0.00");
+	            if(data.data.findTTReward==null||data.data.findTTReward==""){
+	                $("#sptt").html("0.0000");
 	            }else{
 	                $("#sptt").html(data.data.findTTReward);
 	            }
-	            if(data.data.findReward==null){
-	                $("#spv").html("0.00");
+	            if(data.data.findReward==null||data.data.findReward==""){
+	                $("#spv").html("0.0000");
 	            }else{
 	                $("#spv").html(data.data.findReward);
 	            }
