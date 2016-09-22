@@ -14,7 +14,7 @@ function getBankAccInfo(){
         dataType: "json",
         success: function (data) {	
         	 if(data.success){
-             		 $("#revorgname").text(data.data.payeeName);
+             		 $("#revorgname").text(data.data.orgName);
              		 $("#revbankaccno").text(data.data.bankaccno);
              		/* $("#revbankdepname").text(data.data.depositBankname);
              		 $("#checkphone").text(data.data.checkphone);*/
@@ -77,11 +77,10 @@ $('#buy').click(function(){//提交购买申请
             
             
             if(data.message=='订单已生成，请及时付款'){
-            	 $(function(){
-//                 window.location.href="https://auth.alipay.com/login/index.htm";
-                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
-                 	
-                 });
+            
+                 window.location.href="https://auth.alipay.com/login/index.htm";
+//                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
+                
             }
            
             	
