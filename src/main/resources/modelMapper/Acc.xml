@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Acc">
-
+    <resultMap id="BaseResultMap" type="com.qkl.tfcc.api.po.acc.Acc" >
+	    <id column="id" property="id" jdbcType="BIGINT" />
+	    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+	    <result column="acc_no" property="accNo" jdbcType="VARCHAR" />
+	    <result column="avb_amnt" property="avbAmnt" jdbcType="DECIMAL" />
+	    <result column="froze_amnt" property="frozeAmnt" jdbcType="DECIMAL" />
+	    <result column="total_amnt" property="totalAmnt" jdbcType="DECIMAL" />
+	    <result column="last_caldate" property="lastCaldate" jdbcType="TIMESTAMP" />
+	    <result column="syscode" property="syscode" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	    <result column="operator" property="operator" jdbcType="VARCHAR" />
+	 </resultMap>
   
     <!--查询可用余额 -->
 	<select id="getAvailableBalance" parameterType="com.qkl.tfcc.api.po.acc.Acc" resultType="java.lang.Integer">
@@ -143,12 +155,13 @@
      </update>     
      
      
-     <select id="findAcc" parameterType="com.qkl.tfcc.api.po.acc.Acc" resultType="com.qkl.tfcc.api.po.acc.Acc">
+     <select id="findAcc" parameterType="pd" resultMap="BaseResultMap">
            select * from tb_acc 
-           where user_code = #{userCode} 
+           where 1=1
+           and  user_code = #{userCode} 
           
            <if test="syscode != null and syscode !='' ">
-                and syscode = #{syscode}
+                and syscode = #{syscode} 
            </if>
      </select>
 	 

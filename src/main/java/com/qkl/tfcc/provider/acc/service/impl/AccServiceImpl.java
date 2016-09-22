@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.fastjson.JSONArray;
@@ -17,11 +19,13 @@ import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.Acc;
 import com.qkl.tfcc.api.po.acc.AccDetail;
 import com.qkl.tfcc.api.po.user.User;
+import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccDetailDao;
 import com.qkl.tfcc.provider.dao.AccLimitdefDao;
 import com.qkl.tfcc.provider.dao.UserDao;
+import com.qkl.util.help.DateUtil;
 import com.qkl.util.help.Validator;
 import com.qkl.util.help.pager.PageData;
 
@@ -130,7 +134,7 @@ public class AccServiceImpl implements AccService {
 
     @Override
     @Transactional(propagation =Propagation.REQUIRED)
-    public Map<String,String> rewardTfcc(JSONArray jsonArray,String userCode,BigDecimal avbAmnt,String versionNo) {
+    public Map<String,String> rewardTfcc(JSONArray jsonArray,UserDetail userDetail,BigDecimal avbAmnt,String versionNo) {
         Map<String,String> map = new HashMap<String,String>();
         StringBuffer successStr = new StringBuffer("[");
         StringBuffer failStr = new StringBuffer("发放失败的手机号：");
@@ -146,7 +150,7 @@ public class AccServiceImpl implements AccService {
                 BigDecimal tfccNumTemp = new BigDecimal(tfccNum);
                 //如果可用余额小于发放额度
                 if(avbAmnt.compareTo(tfccNumTemp)<0){
-                    failStr.append(phone+",");
+                    failStr.append(phone+"-账户余额不足；");
                     map.put("failStr", failStr.toString());
                     return map;
                 }
@@ -162,34 +166,52 @@ public class AccServiceImpl implements AccService {
                     acc =  accDao.findAcc(acc);
                     totalAmnt =acc.getTotalAmnt();
                 }
+                if(limit == null){
+                    failStr = new StringBuffer("发放失败，系统未设置限额，请联系客服！");
+                    map.put("failStr", failStr.toString());
+                    return map;
+                }
                 //判断是否超过限额
                 if((limit!=null&&totalAmnt!=null&&totalAmnt.add(tfccNumTemp).compareTo(limit)<=0)||(limit != null&&totalAmnt == null&&tfccNumTemp.compareTo(limit)<=0)){
                     //投资机构账户支出
                     Acc accOut = new Acc();
-                    accOut.setUserCode(userCode);
+                    accOut.setUserCode(userDetail.getUserCode());
                     accOut.setAvbAmnt(tfccNumTemp);
                     accOut.setTotalAmnt(tfccNumTemp);
                     accDao.updateOut(accOut);
+                    
+                    //普通用户账户明细收入
+                    AccDetail accDetail = new AccDetail();
+                    accDetail.setUserCode(userDetail.getUserCode());//投资机构用户编码
+                    accDetail.setRelaUsercode(tUser.getUserCode());//关联用户编码 
+                    accDetail.setBounsSource1("40");//投资机构发放SAN
+                    accDetail.setBounsSource2("4001");//投资机构发放SAN给普通会员
+                    accDetail.setCaldate(DateUtil.getCurrentDate());
+                    accDetail.setCntflag("1");
+                    accDetail.setSyscode(Constant.CUR_SYS_CODE);
+                    accDetail.setCreateTime(DateUtil.getCurrentDate());
+                    accDetail.setModifyTime(DateUtil.getCurrentDate());
+                    accDetail.setOperator(userDetail.getPhone());
+                    accDetail.setRelaUserlevel("A");
+                    accDetail.setSubAccno("010301");
+                    accDetail.setAmnt(tfccNumTemp);
+                    accDetail.setStatus("1");
+                    accDetailDao.addAccDetail(accDetail);
                     
                     //普通用户账户汇总收入
                     Acc accIn = new Acc();
                     accIn.setUserCode(tUser.getUserCode());
                     Acc tacc = accDao.findAcc(accIn);
+                    accIn.setFrozeAmnt(tfccNumTemp);//投资机构发放的SAN币全部冻结
+                    accIn.setTotalAmnt(tfccNumTemp);
                     if(tacc == null){
-                        accIn.setAvbAmnt(tfccNumTemp);
-                        accIn.setTotalAmnt(tfccNumTemp);
+//                        accIn.setAvbAmnt(tfccNumTemp);
                         accDao.addAcc(accIn);
                     }else{
-                        accIn.setAvbAmnt(tfccNumTemp);
                         accDao.updateIn(tacc);
                     }
-                    //普通用户账户明细收入
-                    AccDetail accDetail = new AccDetail();
-                    accDetail.setUserCode(userCode);//投资机构用户编码
-                    accDetail.setRelaUsercode(tUser.getUserCode());//关联用户编码 
-                    accDetail.setBounsSource1("29");//LP会员累计
-                    accDetail.setBounsSource2("2900");
-                    AccDetail taccDetail = accDetailDao.findAccDetail(accDetail);
+                    
+                    /*AccDetail taccDetail = accDetailDao.findAccDetail(accDetail);
                     if(taccDetail == null){
                         accDetail.setAmnt(tfccNumTemp);
                         accDetail.setStatus("1");
@@ -197,13 +219,21 @@ public class AccServiceImpl implements AccService {
                     }else{
                         accDetail.setAmnt(tfccNumTemp);
                         accDetailDao.updateAccDetail(accDetail);
-                    }
+                    }*/
                     successStr.append("{phone:'"+phone+"',tfccNum:'"+tfccNum+"'},");
                 }else{
-                    failStr.append(phone+",");
+                    if((limit!=null&&totalAmnt!=null&&totalAmnt.add(tfccNumTemp).compareTo(limit)>0)||limit != null&&totalAmnt == null&&tfccNumTemp.compareTo(limit)>0){
+                        failStr.append(phone+"-超出限额；");
+                    }
                 }
             }else{
-                failStr.append(phone+",");
+                if(Validator.isMobile(phone)){
+                    failStr.append(phone+"-手机号格式有误；");
+                }
+                if(Validator.isNumberMax7(tfccNum)){
+                    failStr.append(phone+"-发放额度格式有误；");
+                }
+                
             }
         }
         if(successStr.toString().equals("[")){
@@ -214,8 +244,6 @@ public class AccServiceImpl implements AccService {
         }
         if(failStr.toString().equals("发放失败的手机号：")){
             failStr.append("无");  
-        }else{
-            failStr = new StringBuffer(failStr.substring(0, failStr.length()-1));
         }
         map.put("failStr", failStr.toString());
         return map;
