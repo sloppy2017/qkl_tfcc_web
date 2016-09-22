@@ -97,7 +97,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean addUser(User user, UserDetail userDetail,String versionNo) {
-		try{			
 			userDao.addUser(user);
 			userDetailDao.addUserDetail(userDetail);
 			tSysGencodeAll =sysGencodeDao.findAll();
@@ -125,107 +124,59 @@ public class UserServiceImpl implements UserService {
           tAcc.setModifyTime(DateUtil.getCurrentDate());
           tAcc.setOperator("sys");
           accDao.addAcc(tAcc);
-          
-			return true;
-		}catch(Exception e){
-			loger.debug("addUser fail,reason is "+e.getMessage());
-			return false;
-		}
-		
+		  return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean addUserFriendShip(UserFriendship userFriendship,String versionNo) {
-		try{			
-			userFriendshipDao.addUserFriendship(userFriendship);			
-			return true;
-		}catch(Exception e){ 
-			loger.debug("addUserFriendShip fail,reason is "+e.getMessage());
-			return false;
-		}
-
+		userFriendshipDao.addUserFriendship(userFriendship);			
+		return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean realUser(String phone, String realName, String idNo,String versionNo) {
-		try{			
-			userDetailDao.modifyRealStatus(phone, realName, idNo);			
-			return true;
-		}catch(Exception e){
-			loger.debug("realUser fail,reason is "+e.getMessage());
-			return false;
-		}
-
+		userDetailDao.modifyRealStatus(phone, realName, idNo);			
+		return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean modifyPwd(String phone, String password,String versionNo) {
-		try{			
-			userDao.modifyPwd(phone, password);		
-			return true;
-		}catch(Exception e){
-			loger.debug("modifyPwd fail,reason is "+e.getMessage());
-			return false;
-		}
-
+		userDao.modifyPwd(phone, password);		
+		return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean modifyPhone(String userCode, String phone,String versionNo) {
-		try{			
-			userDao.modifyPhone(userCode, phone);	
-			userDetailDao.modifyPhone(userCode, phone);
-			return true;
-		}catch(Exception e){
-			loger.debug("modifyPwd fail,reason is "+e.getMessage());
-			return false;
-		}
-
+		userDao.modifyPhone(userCode, phone);	
+		userDetailDao.modifyPhone(userCode, phone);
+		return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean modifyUserDetail(UserDetail userDetail,String versionNo) {
-		try{					
 			userDetailDao.modifyUserDetail(userDetail);
 //			userDao.modifyPhone(userDetail.getUserCode(), userDetail.getPhone());
 			return true;
-		}catch(Exception e){
-			loger.debug("modifyUserDetail fail,reason is "+e.getMessage());
-			return false;
-		}
-
 	}
 
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean modifyLockLoginStatus(String phone, String status,Date locktime,String versionNo) {
-		try{					
-			userDao.modifyLoginLockStaus(phone, status);
-			return true;
-		}catch(Exception e){
-			loger.debug("modifyLockLoginStatus fail,reason is "+e.getMessage());
-			return false;
-		}
-		
+		userDao.modifyLoginLockStaus(phone, status);
+		return true;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean modifyLockSmsStatus(String phone, String status,Date locktime,String versionNo) {
-		try{					
-			userDao.modifySmsLockStaus(phone, status);
-			return true;
-		}catch(Exception e){
-			loger.debug("modifyLockSmsStatus fail,reason is "+e.getMessage());
-			return false;
-		}
-		
+		userDao.modifySmsLockStaus(phone, status);
+		return true;
 	}
 
 	@Override
@@ -286,14 +237,8 @@ public class UserServiceImpl implements UserService {
 	
     @Override
     public boolean modifyUserHeadPic(String userCode, String imgAddrss, String versionNo) {
-        try{                    
-            userDetailDao.modifyUserHeadPic(userCode, imgAddrss);
-            return true;
-        }catch(Exception e){
-            loger.debug("modifyUserHeadPic fail,reason is "+e.getMessage());
-            return false;
-        }
-
+        userDetailDao.modifyUserHeadPic(userCode, imgAddrss);
+        return true;
     }
 
     @Override
@@ -308,13 +253,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean modifypwdByUserCode(String userCode, String password, String versionNo) {
-        try{                    
-            userDao.modifypwdByUserCode(userCode, password);
-            return true;
-        }catch(Exception e){
-            loger.debug("modifypwdByUserCode fail,reason is "+e.getMessage());
-            return false;
-        }
+        userDao.modifypwdByUserCode(userCode, password);
+        return true;
     }
     
     /**
@@ -602,12 +542,7 @@ public class UserServiceImpl implements UserService {
         pd.put("bounsSource1", "11");
         pd.put("syscode", Constant.CUR_SYS_CODE);
         pd.put("operator","sys");
-        try{
-        	accDetailDao.addAccDetaillv(pd);
-        }catch(Exception e){
-        	loger.error("addUserDetaillv fail !"+e.getMessage());
-        }
-        
+    	accDetailDao.addAccDetaillv(pd);
     }
     
     
@@ -636,23 +571,19 @@ public class UserServiceImpl implements UserService {
         tAccDetail.setBounsSource2("1001");
         tAccDetail.setRelaUsercode(mUserDetail.getRefPhone());
         tAccDetail.setRelaUserlevel("");
-        try{
-            String rsAmnt="0";
-            if(tSysGencodeBNDMZC5.getCodeValue()==null||
-                    tSysGencodeBNDMZC5.getCodeValue().equals("")||
-                    tSysGencodeBNDMZC5.getCodeValue().equals("null"))
-            {
-                loger.info("calPtMemberRegitBouns fail ,tSysGencodeBNDMZC5 is null !");
-            }else{
-                rsAmnt = tSysGencodeBNDMZC5.getCodeValue();
-                
-            }
-            BigDecimal bdAmnt=new BigDecimal(rsAmnt);  
-            bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
-            tAccDetail.setAmnt(bdAmnt); 
-        }catch(Exception e){
-            loger.error("calPtMemberRegitBouns fail ,translate string to decimal fail!"+e.getMessage());
+        String rsAmnt="0";
+        if(tSysGencodeBNDMZC5.getCodeValue()==null||
+                tSysGencodeBNDMZC5.getCodeValue().equals("")||
+                tSysGencodeBNDMZC5.getCodeValue().equals("null"))
+        {
+            loger.info("calPtMemberRegitBouns fail ,tSysGencodeBNDMZC5 is null !");
+        }else{
+            rsAmnt = tSysGencodeBNDMZC5.getCodeValue();
+            
         }
+        BigDecimal bdAmnt=new BigDecimal(rsAmnt);  
+        bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
+        tAccDetail.setAmnt(bdAmnt); 
         tAccDetail.setCaldate(DateUtil.getCurrentDate());
         tAccDetail.setStatus("1");
         tAccDetail.setCreateTime(DateUtil.getCurrentDate());
@@ -718,23 +649,19 @@ public class UserServiceImpl implements UserService {
          tAccDetail.setBounsSource2("1101");//普通用户推荐A级会员
          tAccDetail.setRelaUsercode(UserCode);
          tAccDetail.setRelaUserlevel("A");
-          try{
-                String rsAmnt="0";
-                if(tSysGencodeBNTJDM1.getCodeValue()==null||
-                        tSysGencodeBNTJDM1.getCodeValue().equals("")||
-                        tSysGencodeBNTJDM1.getCodeValue().equals("null"))
-                {
-                    loger.info("calPtMemberRecmBouns fail ,tSysGencodeBNTJDM1 is null !");
-                }else{
-                    rsAmnt = tSysGencodeBNTJDM1.getCodeValue();
-                    
-                }
-                BigDecimal bdAmnt=new BigDecimal(rsAmnt);  
-                bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
-                tAccDetail.setAmnt(bdAmnt); 
-            }catch(Exception e){
-                loger.error("calPtMemberRecmBouns fail ,translate string to decimal fail!"+e.getMessage());
-            }
+        String rsAmnt="0";
+        if(tSysGencodeBNTJDM1.getCodeValue()==null||
+                tSysGencodeBNTJDM1.getCodeValue().equals("")||
+                tSysGencodeBNTJDM1.getCodeValue().equals("null"))
+        {
+            loger.info("calPtMemberRecmBouns fail ,tSysGencodeBNTJDM1 is null !");
+        }else{
+            rsAmnt = tSysGencodeBNTJDM1.getCodeValue();
+            
+        }
+        BigDecimal bdAmnt=new BigDecimal(rsAmnt);  
+        bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
+        tAccDetail.setAmnt(bdAmnt); 
          tAccDetail.setCaldate(DateUtil.getCurrentDate());
          tAccDetail.setCntflag("0");//未纳入计算
          tAccDetail.setStatus("1");
@@ -755,23 +682,19 @@ public class UserServiceImpl implements UserService {
              tAccDetail2.setBounsSource2("1102");//普通用户推荐B级会员
              tAccDetail2.setRelaUsercode(UserCode);
              tAccDetail2.setRelaUserlevel("B");
-              try{
-                    String rsAmnt="0";
-                    if(tSysGencodeBNTJDM2.getCodeValue()==null||
-                            tSysGencodeBNTJDM2.getCodeValue().equals("")||
-                            tSysGencodeBNTJDM2.getCodeValue().equals("null"))
-                    {
-                        loger.info("calPtMemberRecmBouns fail ,tSysGencodeBNTJDM2 is null !");
-                    }else{
-                        rsAmnt = tSysGencodeBNTJDM2.getCodeValue();
-                        
-                    }
-                    BigDecimal bdAmnt=new BigDecimal(rsAmnt);  
-                    bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
-                    tAccDetail2.setAmnt(bdAmnt);    
-                }catch(Exception e){
-                    loger.error("B calPtMemberRecmBouns fail ,translate string to decimal fail!"+e.getMessage());
-                }
+            rsAmnt="0";
+            if(tSysGencodeBNTJDM2.getCodeValue()==null||
+                    tSysGencodeBNTJDM2.getCodeValue().equals("")||
+                    tSysGencodeBNTJDM2.getCodeValue().equals("null"))
+            {
+                loger.info("calPtMemberRecmBouns fail ,tSysGencodeBNTJDM2 is null !");
+            }else{
+                rsAmnt = tSysGencodeBNTJDM2.getCodeValue();
+                
+            }
+            bdAmnt=new BigDecimal(rsAmnt);  
+            bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
+            tAccDetail2.setAmnt(bdAmnt);    
              tAccDetail2.setCaldate(DateUtil.getCurrentDate());
              tAccDetail2.setCntflag("0");
              tAccDetail2.setStatus("1");
@@ -791,23 +714,19 @@ public class UserServiceImpl implements UserService {
              tAccDetail3.setBounsSource2("1103");//普通用户推荐B级会员
              tAccDetail3.setRelaUsercode(UserCode);
              tAccDetail3.setRelaUserlevel("C");
-              try{
-                    String rsAmnt="0";
-                    if(tSysGencodeBNTJDM3.getCodeValue()==null||
-                            tSysGencodeBNTJDM3.getCodeValue().equals("")||
-                            tSysGencodeBNTJDM3.getCodeValue().equals("null"))
-                    {
-                        loger.info("calPtMemberRecmBouns fail ,tSysGencodeBNTJDM3 is null !");
-                    }else{
-                        rsAmnt = tSysGencodeBNTJDM3.getCodeValue();
-                        
-                    }
-                    BigDecimal bdAmnt=new BigDecimal(rsAmnt);  
-                    bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
-                    tAccDetail3.setAmnt(bdAmnt);    
-                }catch(Exception e){
-                    loger.error("C calPtMemberRecmBouns fail ,translate string to decimal fail!"+e.getMessage());
-                }
+            rsAmnt="0";
+            if(tSysGencodeBNTJDM3.getCodeValue()==null||
+                    tSysGencodeBNTJDM3.getCodeValue().equals("")||
+                    tSysGencodeBNTJDM3.getCodeValue().equals("null"))
+            {
+                loger.info("calPtMemberRecmBouns fail ,tSysGencodeBNTJDM3 is null !");
+            }else{
+                rsAmnt = tSysGencodeBNTJDM3.getCodeValue();
+                
+            }
+            bdAmnt=new BigDecimal(rsAmnt);  
+            bdAmnt.setScale(2, BigDecimal.ROUND_HALF_UP);//四舍五入
+            tAccDetail3.setAmnt(bdAmnt);    
              tAccDetail3.setCaldate(DateUtil.getCurrentDate());
              tAccDetail3.setCntflag("0");
              tAccDetail3.setStatus("1");

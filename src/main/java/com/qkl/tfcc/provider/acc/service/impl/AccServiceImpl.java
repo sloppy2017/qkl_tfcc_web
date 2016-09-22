@@ -130,7 +130,7 @@ public class AccServiceImpl implements AccService {
 
     @Override
     @Transactional(propagation =Propagation.REQUIRED)
-    public Map<String,String> rewardTfcc(JSONArray jsonArray,String userCode,String versionNo) {
+    public Map<String,String> rewardTfcc(JSONArray jsonArray,String userCode,BigDecimal avbAmnt,String versionNo) {
         Map<String,String> map = new HashMap<String,String>();
         StringBuffer successStr = new StringBuffer("[");
         StringBuffer failStr = new StringBuffer("发放失败的手机号：");
@@ -144,6 +144,12 @@ public class AccServiceImpl implements AccService {
                 BigDecimal limit = null;//账户限额
                 BigDecimal totalAmnt = null;
                 BigDecimal tfccNumTemp = new BigDecimal(tfccNum);
+                //如果可用余额小于发放额度
+                if(avbAmnt.compareTo(tfccNumTemp)<0){
+                    failStr.append(phone+",");
+                    map.put("failStr", failStr.toString());
+                    return map;
+                }
                 if(tUser!=null&&"1".equals(tUser.getStatus())&&"1".equals(tUser.getUserType())){
                     PageData pd = new PageData();
                     pd.put("cuy_type", "1");

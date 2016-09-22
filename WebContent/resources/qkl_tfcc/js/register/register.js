@@ -242,12 +242,12 @@
 	});
 	function valid_realName($this){
 //		 var reg=/^[\u4E00-\u9FA5]{2,5}$/;//2-4个汉字
-		 var reg = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？0123456789]");
+		var reg = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？0123456789]");
 	        if ($this.val() == '') {
 	        	$this.next().html('姓名不能为空');
 				return false;
-	        }if(!reg.test($this.val())){
-	        	$this.next().html('请输入2-5个汉字');
+	        }if(reg.test($this.val())){
+	        	$this.next().html('姓名格式有误');
 	            return false;
 	        }else {
 	        	$this.next().empty();
