@@ -71,7 +71,7 @@ public class BankAccController extends BaseAction {
 				 int status = Integer.parseInt( pageData.getString("status"));
 				 String string2 = pageData.get("txamnt").toString();
 				 BigDecimal decimal = new BigDecimal(string2);
-				 String format = String .format("%.2f",decimal);
+				 String format = String .format("%.4f",decimal);
 				//double txamnt = decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 				//System.out.println(txamnt+"=============");
 				pageData.put("txamnt", format);
@@ -140,7 +140,7 @@ public class BankAccController extends BaseAction {
 									ar.setMessage("已提交购买申请！");
 								}else {
 									ar.setSuccess(false);
-									ar.setMessage("系统异常，购买失败！");
+									ar.setMessage("网络异常，购买失败！");
 								}
 								
 							}else{

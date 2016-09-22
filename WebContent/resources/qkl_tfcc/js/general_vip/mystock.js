@@ -26,43 +26,13 @@ function getBankAccInfo(){
     });
 }
 
-//$('#buy').mousedown(function(){
-//	$(".mid-r a").css({"display":" block",
-//		    "background":"red",
-//		    "height":"44px",
-//		    "width":"220px",
-//		    "line-height":"44px",
-//		    "color":"#fff",
-//		    "font-size": "14px",
-//		    "text-align": "center",
-//		    "margin-left":"60px",
-//		    "margin-top":"30px"
-//			
-//	});
-//	
-//});
+/*$('#buy').mousedown(function(){
+	$(this).css("background","gray");
+	
+});*/
 
-//$('#buy').mouseup(function(){
-//	$(".mid-r a").css({
-//	"display":" block",
-//    "background":"url('../../../imgs/tijiao.png') no-repeat",
-//    "height":"44px",
-//    "width":"220px",
-//    "line-height":"44px",
-//    "color":"#fff",
-//    "font-size": "14px",
-//    "text-align": "center",
-//    "margin-left":"60px",
-//    "margin-top":"30px"
-//		  });
-//
-//});
 
-//$('#buy').mouseup(function(){
-//	$('.mid-r a').css('background','none')
-//})
-
-$("input[name='txnum']").change(function(){
+$("input[name='txnum']").blur(function(){//计算支付金额
 	var url = "/service/bankaccinfo/PayMoney?"+$("form").serialize();
 	url = encodeURI(url);
 	$.ajax({
@@ -71,7 +41,7 @@ $("input[name='txnum']").change(function(){
         dataType: "json",
         success: function (data) {
         	if(data.success){
-        		$("input[name='txamnt']").val(data.data);
+        		$("input[name='txamnt']").attr("value",data.data);
         	}else{
         		alert(data.message);
         	}  
@@ -80,8 +50,9 @@ $("input[name='txnum']").change(function(){
 });
 
 
+
 var buy_flag=true;
-$('#buy').click(function(){
+$('#buy').click(function(){//提交购买申请
 	buy_flag=false;
 	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
 	url = encodeURI(url);
@@ -101,7 +72,10 @@ $('#buy').click(function(){
         success: function (data) {
         	buy_flag=true;
             alert(data.message);
-            
+            $("input[name='txamnt']").val("");
+            $("input[name='txnum']").val("");
+           // $('.mid-r a').css('background-color','none');
+           // $(".mid-r a").style.visibility="hidden";    
         }
 	
     });
@@ -111,6 +85,14 @@ $('#buy').click(function(){
 
 
 
+/*$(function(){ 
+
+	  var url = $('tijiao').attr("src"); 
+
+	  alert(url); 
+
+	});
+*/
 /*onload = function (){ 
     var a = document.querySelector ("a"); 
     a.onclick = function (){ 
@@ -150,7 +132,7 @@ function getUserInfo(){
 
 var str='';
 var flag =true;
-$(".sel a").click(function(){
+$(".sel a").click(function(){//查询列表
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
     if(myselect==null||myselect=="null"){

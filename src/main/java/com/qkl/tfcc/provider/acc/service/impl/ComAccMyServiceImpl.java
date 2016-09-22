@@ -49,13 +49,13 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 		String format3="";
 		
 		if (findTTReward!=null) {
-			format1 = String .format("%.2f",findTTReward);
+			format1 = String .format("%.4f",findTTReward);
 		}
 		if (findTB!=null) {
-			 format2 = String .format("%.2f",findTB);
+			 format2 = String .format("%.4f",findTB);
 		}
 		if (findReward!=null) {
-	         format3 = String .format("%.2f",findReward);
+	         format3 = String .format("%.4f",findReward);
 		}
 		
 		
