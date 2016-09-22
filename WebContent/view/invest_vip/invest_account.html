@@ -36,7 +36,7 @@
 <!--个人账户头部开始-->
 <div class="header fix">
     <div class="logo fl">
-        <img src="../../resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
+        <img src="../../resources/qkl_tfcc/imgs/reglogo_02.png" alt="">
     </div>
     <div class="nav-right fl">
         <div class="top">
@@ -197,7 +197,8 @@
                 	 if(data.data.failStr){
                 		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                 	 }
-                     
+                 }else{
+                	 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                  }
             },
             errror:function(data){
