@@ -48,8 +48,7 @@
 }
 .login .data-width{
     position: relative;
-    max-width:1000px;
-    min-width:760px;
+    width:1000px;
 }
 .content .register{
     width:298px;
