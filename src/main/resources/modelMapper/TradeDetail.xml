@@ -78,7 +78,8 @@
 	 create_time,
 	 modify_time,
 	 operator,
-	 order_no
+	 order_no,
+	 payno
 	 )
 	 values(
 	 #{user_code},
@@ -97,7 +98,8 @@
 	 #{create_time},
 	 #{modify_time},
 	 #{operator},
-	 #{order_no}
+	 #{order_no},
+	 #{payno}
 	 )	 
 	 </insert>
 	
