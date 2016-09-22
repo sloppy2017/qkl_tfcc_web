@@ -43,7 +43,7 @@ public interface AccDao extends DAO<Acc> {
 	 * @param acc
 	 * @return: void
 	 */
-	public void updateIn(Acc acc);
+	public boolean updateIn(Acc acc);
 	/**
 	 * @describe:支出
 	 * @author: zhangchunming
@@ -51,7 +51,7 @@ public interface AccDao extends DAO<Acc> {
 	 * @param acc
 	 * @return: void
 	 */
-	public void updateOut(Acc acc);
+	public boolean updateOut(Acc acc);
 	/**
 	 * @describe:支出
 	 * @author: zhangchunming

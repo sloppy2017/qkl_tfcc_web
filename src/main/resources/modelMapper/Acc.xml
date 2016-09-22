@@ -108,8 +108,8 @@
 	 <update id="updateIn" parameterType="com.qkl.tfcc.api.po.acc.Acc">    
          update tb_acc 
          <set> 
-                froze_amnt = froze_amnt + #{avbAmnt},
-                total_amnt = total_amnt + #{avbAmnt},
+                froze_amnt = froze_amnt + #{frozeAmnt},
+                total_amnt = total_amnt + #{totalAmnt},
                 last_caldate = now(),
                 modify_time = now(),
            <if test="operator != null and operator != ''">
@@ -124,14 +124,14 @@
          update tb_acc 
          <set> 
                 avb_amnt = avb_amnt - #{avbAmnt},
-                total_amnt = total_amnt - #{avbAmnt},
+                total_amnt = total_amnt - #{totalAmnt},
                 last_caldate = now(),
                 modify_time = now(),
            <if test="operator != null and operator != ''">
                 operator = #{operator}
            </if>     
          </set>
-         where user_code = #{userCode}     
+          where user_code = #{userCode}     
                and syscode = #{syscode}
      </update>
 <!--      发放奖励 -->

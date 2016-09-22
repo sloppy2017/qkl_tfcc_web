@@ -38,13 +38,13 @@ protected static final Log logger = LogFactory.getLog(AccDaoImpl.class);
     }
 
     @Override
-    public void updateIn(Acc acc) {
-         getSqlSession().update(namespace+"."+"updateIn", acc); 
+    public boolean updateIn(Acc acc) {
+         return getSqlSession().update(namespace+"."+"updateIn", acc)>0; 
     }
 
     @Override
-    public void updateOut(Acc acc) {
-        getSqlSession().update(namespace+"."+"updateOut", acc); 
+    public boolean updateOut(Acc acc) {
+        return getSqlSession().update(namespace+"."+"updateOut", acc)>0; 
     }
 
 	@Override

@@ -178,49 +178,46 @@ public class AccServiceImpl implements AccService {
                     accOut.setUserCode(userDetail.getUserCode());
                     accOut.setAvbAmnt(tfccNumTemp);
                     accOut.setTotalAmnt(tfccNumTemp);
-                    accDao.updateOut(accOut);
-                    
-                    //普通用户账户明细收入
-                    AccDetail accDetail = new AccDetail();
-                    accDetail.setUserCode(userDetail.getUserCode());//投资机构用户编码
-                    accDetail.setRelaUsercode(tUser.getUserCode());//关联用户编码 
-                    accDetail.setBounsSource1("40");//投资机构发放SAN
-                    accDetail.setBounsSource2("4001");//投资机构发放SAN给普通会员
-                    accDetail.setCaldate(DateUtil.getCurrentDate());
-                    accDetail.setCntflag("1");
-                    accDetail.setSyscode(Constant.CUR_SYS_CODE);
-                    accDetail.setCreateTime(DateUtil.getCurrentDate());
-                    accDetail.setModifyTime(DateUtil.getCurrentDate());
-                    accDetail.setOperator(userDetail.getPhone());
-                    accDetail.setRelaUserlevel("A");
-                    accDetail.setSubAccno("010301");
-                    accDetail.setAmnt(tfccNumTemp);
-                    accDetail.setStatus("1");
-                    accDetailDao.addAccDetail(accDetail);
-                    
-                    //普通用户账户汇总收入
-                    Acc accIn = new Acc();
-                    accIn.setUserCode(tUser.getUserCode());
-                    Acc tacc = accDao.findAcc(accIn);
-                    accIn.setFrozeAmnt(tfccNumTemp);//投资机构发放的SAN币全部冻结
-                    accIn.setTotalAmnt(tfccNumTemp);
-                    if(tacc == null){
-//                        accIn.setAvbAmnt(tfccNumTemp);
-                        accDao.addAcc(accIn);
-                    }else{
-                        accDao.updateIn(accIn);
-                    }
-                    
-                    /*AccDetail taccDetail = accDetailDao.findAccDetail(accDetail);
-                    if(taccDetail == null){
+                    accOut.setSyscode(Constant.CUR_SYS_CODE);
+                    boolean result = accDao.updateOut(accOut);
+                    if(result){
+                      //普通用户账户明细收入
+                        AccDetail accDetail = new AccDetail();
+                        accDetail.setUserCode(userDetail.getUserCode());//投资机构用户编码
+                        accDetail.setRelaUsercode(tUser.getUserCode());//关联用户编码 
+                        accDetail.setBounsSource1("40");//投资机构发放SAN
+                        accDetail.setBounsSource2("4001");//投资机构发放SAN给普通会员
+                        accDetail.setCaldate(DateUtil.getCurrentDate());
+                        accDetail.setCntflag("1");
+                        accDetail.setSyscode(Constant.CUR_SYS_CODE);
+                        accDetail.setCreateTime(DateUtil.getCurrentDate());
+                        accDetail.setModifyTime(DateUtil.getCurrentDate());
+                        accDetail.setOperator(userDetail.getPhone());
+                        accDetail.setRelaUserlevel("A");
+                        accDetail.setSubAccno("010301");
                         accDetail.setAmnt(tfccNumTemp);
                         accDetail.setStatus("1");
                         accDetailDao.addAccDetail(accDetail);
-                    }else{
-                        accDetail.setAmnt(tfccNumTemp);
-                        accDetailDao.updateAccDetail(accDetail);
-                    }*/
-                    successStr.append("{phone:'"+phone+"',tfccNum:'"+tfccNum+"'},");
+                        
+                        //普通用户账户汇总收入
+                        Acc accIn = new Acc();
+                        accIn.setUserCode(tUser.getUserCode());
+                        accIn.setFrozeAmnt(tfccNumTemp);//投资机构发放的SAN币全部冻结
+                        accIn.setTotalAmnt(tfccNumTemp);
+                        accIn.setSyscode(Constant.CUR_SYS_CODE);
+                        accDao.updateIn(accIn);
+                        
+                        /*AccDetail taccDetail = accDetailDao.findAccDetail(accDetail);
+                        if(taccDetail == null){
+                            accDetail.setAmnt(tfccNumTemp);
+                            accDetail.setStatus("1");
+                            accDetailDao.addAccDetail(accDetail);
+                        }else{
+                            accDetail.setAmnt(tfccNumTemp);
+                            accDetailDao.updateAccDetail(accDetail);
+                        }*/
+                        successStr.append("{phone:'"+phone+"',tfccNum:'"+tfccNum+"'},");
+                    }
                 }else{
                     if((limit!=null&&totalAmnt!=null&&totalAmnt.add(tfccNumTemp).compareTo(limit)>0)||limit != null&&totalAmnt == null&&tfccNumTemp.compareTo(limit)>0){
                         failStr.append(phone+"-超出限额；");
