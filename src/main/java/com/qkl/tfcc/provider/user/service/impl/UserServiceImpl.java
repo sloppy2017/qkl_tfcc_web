@@ -295,8 +295,6 @@ public class UserServiceImpl implements UserService {
                  sefLev="3";
              }else if(fMaxFriendship.getRelaLevel()!=null&&!fMaxFriendship.getRelaLevel().equals("")&&fMaxFriendship.getRelaLevel().equals("C")){
                  sefLev="4";
-             }else{
-                 sefLev="4";                    
              }
              UserFriendship tUserFriendship = new UserFriendship();
              tUserFriendship.setUserCode(tRefUser.getUserCode());
@@ -462,7 +460,89 @@ public class UserServiceImpl implements UserService {
                  }
                  
              }
-         
+             if(sefLev.equals("4")){//推荐人自己最大是C级，注册人需要向上查找2级别，注册人总共有3层
+            	 UserFriendship  fUserFriendship2 =  findUpFriendship(tRefUser.getUserCode(), Constant.VERSION_NO);                  
+                 UserFriendship tUserFriendship2 = new UserFriendship();
+                 tUserFriendship2.setUserCode(fUserFriendship2.getUserCode());
+                 tUserFriendship2.setRecomuserCode(UserCode);
+                 tUserFriendship2.setRelaLevel("B");//只要有
+                 tUserFriendship2.setUserType(userType);
+                 tUserFriendship2.setCalflag("0");
+                 tUserFriendship2.setSyscode(Constant.CUR_SYS_CODE);
+                 tUserFriendship2.setCreateTime(DateUtil.getCurrentDate());
+                 tUserFriendship2.setModifyTime(DateUtil.getCurrentDate());
+                 userFriendshipDao.addUserFriendship(tUserFriendship2);
+                 /*if(!addUserFriendShip(tUserFriendship2, Constant.VERSION_NO)){
+                     loger.info("addUserFriendShip fail,tUserFriendship2 is "+tUserFriendship2.toString());
+                 };*/ 
+               //用户关系计算器            
+                 PageData pd2=new PageData();
+                 pd2.put("userCode", fUserFriendship2.getUserCode());
+                 pd2.put("syscode", Constant.CUR_SYS_CODE);
+                 pd2.put("relaLevel","B" );
+                 UserLevelcnt tUserLevelcnt2= userLevelcntDao.findUserLevelcnt(pd2);            
+                 if(tUserLevelcnt2==null){
+                	 UserLevelcnt tUserLevelcntB = new UserLevelcnt();
+                	 tUserLevelcntB.setUserCode(fUserFriendship2.getUserCode());
+                	 tUserLevelcntB.setRelaLevel("B");
+                	 tUserLevelcntB.setLevcnt(1);
+                	 tUserLevelcntB.setSyscode(Constant.CUR_SYS_CODE);
+                	 tUserLevelcntB.setCreateTime(DateUtil.getCurrentDate());
+                	 tUserLevelcntB.setModifyTime(DateUtil.getCurrentDate());
+                	 tUserLevelcntB.setOperator("sys");
+                	 userLevelcntDao.addUserLevelcnt(tUserLevelcntB);
+                 }else{
+                	 UserLevelcnt tUserLevelcntB = new UserLevelcnt();
+                	 tUserLevelcntB.setUserCode(fUserFriendship2.getUserCode());
+                	 tUserLevelcntB.setRelaLevel("B");            	 
+                	 tUserLevelcntB.setSyscode(Constant.CUR_SYS_CODE);
+                	 tUserLevelcntB.setModifyTime(DateUtil.getCurrentDate());
+                	 tUserLevelcntB.setOperator("sys");
+                	 userLevelcntDao.modifyUserLevelcnt(tUserLevelcntB);
+                 } 
+            	 
+            	 
+                 UserFriendship  fUserFriendship3 =  findUpFriendship(fUserFriendship2.getUserCode(), Constant.VERSION_NO);  
+                 UserFriendship tUserFriendship3 = new UserFriendship();
+                 tUserFriendship3.setUserCode(fUserFriendship3.getUserCode());
+                 tUserFriendship3.setRecomuserCode(UserCode);
+                 tUserFriendship3.setRelaLevel("C");//只要有
+                 tUserFriendship3.setUserType(userType);
+                 tUserFriendship3.setSyscode(Constant.CUR_SYS_CODE);
+                 tUserFriendship3.setCalflag("0");
+                 tUserFriendship3.setCreateTime(DateUtil.getCurrentDate());
+                 tUserFriendship3.setModifyTime(DateUtil.getCurrentDate());
+                 userFriendshipDao.addUserFriendship(tUserFriendship3);                 
+                /* if(!addUserFriendShip(tUserFriendship3, Constant.VERSION_NO)){
+                     loger.info("addUserFriendShip fail,tUserFriendship3 is "+tUserFriendship3.toString());
+                 };*/
+               //用户关系计算器            
+                 PageData pd3=new PageData();
+                 pd3.put("userCode", fUserFriendship3.getUserCode());
+                 pd3.put("syscode", Constant.CUR_SYS_CODE);
+                 pd3.put("relaLevel","C" );
+                 UserLevelcnt tUserLevelcnt3= userLevelcntDao.findUserLevelcnt(pd3);            
+                 if(tUserLevelcnt3==null){
+                	 UserLevelcnt tUserLevelcntC = new UserLevelcnt();
+                	 tUserLevelcntC.setUserCode(fUserFriendship3.getUserCode());
+                	 tUserLevelcntC.setRelaLevel("C");
+                	 tUserLevelcntC.setLevcnt(1);
+                	 tUserLevelcntC.setSyscode(Constant.CUR_SYS_CODE);
+                	 tUserLevelcntC.setCreateTime(DateUtil.getCurrentDate());
+                	 tUserLevelcntC.setModifyTime(DateUtil.getCurrentDate());
+                	 tUserLevelcntC.setOperator("sys");
+                	 userLevelcntDao.addUserLevelcnt(tUserLevelcntC);
+                 }else{
+                	 UserLevelcnt tUserLevelcntC = new UserLevelcnt();
+                	 tUserLevelcntC.setUserCode(fUserFriendship3.getUserCode());
+                	 tUserLevelcntC.setRelaLevel("C");            	 
+                	 tUserLevelcntC.setSyscode(Constant.CUR_SYS_CODE);
+                	 tUserLevelcntC.setModifyTime(DateUtil.getCurrentDate());
+                	 tUserLevelcntC.setOperator("sys");
+                	 userLevelcntDao.modifyUserLevelcnt(tUserLevelcntC);
+                 }
+                 
+             }
          }
 
         
