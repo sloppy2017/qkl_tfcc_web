@@ -15,12 +15,14 @@
 }
 .mid-l{
     width:400px;
-    border-right:1px solid #ddd;
+    height:200px;
+     border-right:1px solid #ddd;
     float:left;
 }
 .mid-l h3{
     font-size: 16px;
     color:#282828;
+    margin-bottom:20px;
 }
 .mid-l p{
     font-size:14px;

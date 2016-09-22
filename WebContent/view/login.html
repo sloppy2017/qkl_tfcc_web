@@ -19,8 +19,8 @@
 		}
 		.swiper-pagination-switch {
 		  display: inline-block;
-		  width: 8px;
-		  height: 8px;
+		  width: 12px;
+		  height: 12px;
 		 -ms-border-radius:8px;
 		  border-radius: 8px;
 		  background: #222;
@@ -47,15 +47,16 @@
 
 			</div>
 			<ul class="nav">
-				<li><a href="">原油币SAN会员管理系统</a><span></span></li>
+				<!--<li><a href="">原油币SAN会员管理系统</a><span></span></li>
 				<li><a href="">R8数字资产交易所</a><span></span></li>
-				<li><a href=""> 帮助 </a></li>
+				<li><a href=""> 帮助 </a></li>-->
 			</ul>
 		</div>		
 	</div>
 	<div class="content ">
 		<div class="login ">
 			<div class="data-width">
+				<div class="register-fun">				
 				<div class="register">
 					<form action="" class="form1" method="post">
 						<div class="form-h">
@@ -63,16 +64,18 @@
 <!-- 							<h4><a href="register.html">没有账号?</a></h4> -->
 						</div>
 						<ul class="form-input1">
-							<li>
+							<li class="w250">
 								<span style="background:url('../resources/qkl_tfcc/imgs/icon1.png');top:8px;left:10px;"></span>
 								<input type="text" name="phone" class="phone"  placeholder="请输入手机号"   maxlength="11"><em class="error1"></em>
 							</li>
-							<li>
+							<li class="w250">
 								<span style="background:url('../resources/qkl_tfcc/imgs/icon2.png');top:6px;left:10px;"></span>
-								<input type="password" name="password" class="pass" placeholder="请输入登录密码" maxlength="20"  ><em class="error1"></em></li>
-							<li class="fix">
+								<input type="password" name="password" class="pass" placeholder="请输入登录密码" maxlength="20" >
+								<em class="error1"></em>
+							</li>
+							<li class="fix wm">								
 								<input type="text" class="xiaoyan" id="yzm" name="yzm" placeholder="请输入验证码" maxlength="6" >
-								<p class="fr" id="check-code">TFCC</p>
+								<p class="fr" id="check-code"></p>
 								<em class="error1"></em>
 							</li>
 							<li><input type="checkbox" class="sure fl" checked="checked"><h5>请记住手机号</h5></li>
@@ -88,13 +91,21 @@
 					</form>
 				</div>
 			</div>
-
+		</div>
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide"><a  style="background:url('../resources/qkl_tfcc/imgs/banner1.jpg') no-repeat center"></a></div>
-					<div class="swiper-slide"><a  style="background:url('../resources/qkl_tfcc/imgs/3.jpg') no-repeat center"></a></div>
-					<div class="swiper-slide"><a  style="background:url('../resources/qkl_tfcc/imgs/6.jpg') no-repeat center"></a></div>
-					<div class="swiper-slide"><a  style="background:url('../resources/qkl_tfcc/imgs/7.jpg') no-repeat center"></a></div>
+					<div class="swiper-slide">
+						<a  style="background:url('../resources/qkl_tfcc/imgs/banner3.jpg') no-repeat center"></a>
+					</div>
+					<div class="swiper-slide">
+						<a  style="background:url('../resources/qkl_tfcc/imgs/banner2.jpg') no-repeat center"></a>
+					</div>
+					<div class="swiper-slide">
+						<a  style="background:url('../resources/qkl_tfcc/imgs/banner1.jpg') no-repeat center"></a>
+					</div>
+					<!--<div class="swiper-slide">
+						<a  style="background:url('../resources/qkl_tfcc/imgs/banner4.jpg') no-repeat center"></a>
+					</div>-->
 				</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
@@ -107,7 +118,7 @@
 	</div>
 
 	<div class="footer data-width">
-		<p class="address">©Copyright 2014-2016  r8exchange.COM  All Rights Reserved. Powered by TFCC（北京）科技有限公司京ICP备13025163号-1</p>
+		<p class="address">©Copyright 2014-2016  SANJIELIAN.COM  All Rights Reserved. Powered by 天津思则通网络科技有限公司</p>
 	</div>
 </div>
 
@@ -117,6 +128,10 @@
 	<script src="../resources/qkl_tfcc/js/common/idangerous.swiper2.7.6.min.js"></script>
 
 	   <!-- Initialize Swiper -->  
+	   
+	   
+	   
+	   
     <script>
 		var swiper = new Swiper('.swiper-container', {
 			loop: true,
@@ -124,7 +139,7 @@
 			paginationClickable: '.swiper-pagination',
 			nextButton: '.swiper-button-next',
 			prevButton: '.swiper-button-prev',
-			autoplay: 3000,
+			autoplay: 2000,
 			autoplayDisableOnInteraction: false,
 		});
     </script>
