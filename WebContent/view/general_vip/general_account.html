@@ -41,7 +41,7 @@
 <!--普通会员账户中心-->
 <div class="header fix">
     <div class="logo fl">
-        <img src="/resources/qkl_tfcc/imgs/reglogo_02.jpg" alt="">
+        <img src="../../resources/qkl_tfcc/imgs/reglogo_02.png" alt="">
     </div>
     <div class="nav-right fl">
         <div class="top">
@@ -49,16 +49,16 @@
             <span class="dateTime"></span>
             <span class="weekTime"></span>
             <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
-            <span class="exit"><a href="/service/user/logout">【退出】</a></span>
+            <span class="exit"><a href="service/user/logout">【退出】</a></span>
         </div>
         <div class="nav fix">
             <ul class="fl">
-                <li><a  href="../general_vip/general_stocks.html">我的股权</a></li>
+                <li><a  href="../general_vip/general_stocks.html">我要购买</a></li>
                 <li ><a href="../general_vip/general_team.html">我的团队</a></li>
                 <li ><a class="active" href="../general_vip/general_account.html">我的账户</a></li>
                 <li ><a href="../general_vip/general_myself.html">个人中心</a></li>
                 <li><a href="../general_vip/general_safety.html">安全中心</a></li>
-                <li><a href="http://www.r8exchange.com" target="new_window">三界链</a></li>
+                <li><a href="http://www.r8exchange.com" target="new_window">数字钱包</a></li>
             </ul>
         </div>
     </div>
@@ -86,15 +86,15 @@
                         <ul>
                             <li><div class="c57">总累计奖励 SAN</div><div class="ce9" id="sptt"></div></li>
                             <li><div class="c57">累计推荐会员奖励 SAN</div><div class="ce9" id="spv"></div></li>
-                            <!-- <li><div class="c57">累计推荐网点奖励 TFCC</div><div class="ce9" id="">30,000.00</div></li> -->
+                            <!-- <li><div class="c57">累计推荐网点奖励 SAN</div><div class="ce9" id="">30,000.00</div></li> -->
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="trans-account">
-                <div class="main-top"><span>您当前的位置：</span><span>我的账户</span><span class="c28">账户</span></div>
+                <div class="main-top"><span>您当前的位置：</span><span>我的账户&gt;</span><span class="c28">转账</span></div>
                 <div class="trans-wrap">
-                    <p>转账至R8交易所账户中</p>
+                    <p></p>
                     <div class="trans-type">
                         <p>选择币种</p>
                         <select name="" id="pid" onchange="gradeChange()">
@@ -104,18 +104,21 @@
                     </div>
                     <div class="trans-tfcc">
                         <p>转账额度</p>
-                        <input type="text"name="money" placeholder="请输入需转账额度">
-                        <span>您最多可转账额度为 40,000.00</span><span class="t_trans">全部转账</span>
+                        <input type="text" name="money" placeholder="请输入需转账额度">
+                        <!-- <span>您最多可转账额度为 40,000.00</span><span class="t_trans">全部转账</span> -->
                         <span class="errorc"></span>
-                        <div><a href="#" class="tfcc-btn" onclick="save()">保存</a> <a href="">返回</a></div>
+                        <div><a href="#" class="tfcc-btn" onclick="save()">提交</a> <a href="">返回</a></div>
                     </div>
                     <div class="trans-jfcc">
                         <p>转账额度</p>
                         <input type="text" name="money" placeholder="请输入需转账额度">
-                        <span>您最多可转账额度为 10,000.00</span><span class="t_trans">全部转账</span>
+                       <!--  <span>您最多可转账额度为 10,000.00</span><span class="t_trans">全部转账</span> -->
                         <span class="errorc"></span>
+                         <p>支付宝账号</p>
+                        <input type="text" name="money" placeholder="请输入支付宝账号">
                         <div><a href="#" class="jfcc-btn" onclick="return jfcc_sub()">提交</a> <a href="">返回</a></div>
                     </div>
+                    
                 </div>
                 <div class="trans-jfcc"></div>
             </div>

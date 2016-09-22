@@ -1183,26 +1183,36 @@ public class UserController extends BaseAction{
 		return ar;
 	}
 	
-	
-	
-	 
-	
-	
 	/**
 	 * 退出
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request) {
+	/*@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@ResponseBody
+	public AjaxResponse logout(HttpServletRequest request) {
 		request.getSession().setAttribute(Constant.LOGIN_USER, null);
-		return new ModelAndView("/login");
+		ar.setSuccess(true);
+		ar.setMessage("成功退出！");
+		return ar;
+	}*/
+	/**
+	 * 退出
+	 * @param request
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@ResponseBody
+	public void logout(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	    request.getSession().setAttribute(Constant.LOGIN_USER, null);
+	    response.sendRedirect(request.getContextPath() + "/view/login.html");
 	}
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request) {
 		return new ModelAndView("/index");
-	}
+	}*/
 	
 	
 	

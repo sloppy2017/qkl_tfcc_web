@@ -829,6 +829,7 @@ public class UserServiceImpl implements UserService {
     	UserFriendship fUserFriendship = userFriendshipDao.findMaxFriendship(recomusercode);
 		return fUserFriendship;
 	}
-
+    
+    
 	
 }

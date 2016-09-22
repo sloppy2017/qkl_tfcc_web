@@ -127,11 +127,9 @@ $(function() {
 			success:function(data){
 				if(data.success){
 					if(data.data.userType==1){
-						location.href='/view/general_vip/general_account.html';
-					}else if(data.data.userType==3){
-						location.href='/view/lp_vip/lp_account.html';
+						location.href='../view/general_vip/general_account.html';
 					}else if(data.data.userType==4){
-						location.href = '/view/invest_vip/invest_account.html';
+						location.href = '../view/invest_vip/invest_account.html';
 					}
 				}else{
 					alert(data.message);
