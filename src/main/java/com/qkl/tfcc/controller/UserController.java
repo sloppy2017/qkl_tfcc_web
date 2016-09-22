@@ -313,7 +313,7 @@ public class UserController extends BaseAction{
 			tUser.setModifyTime(DateUtil.getCurrentDate());
 			
 			User refUser= userService.findbyPhone(refPhone, Constant.VERSION_NO);
-			/*if(refUser == null){
+			if(refUser == null){
 			    ar.setSuccess(false);
 			    ar.setMessage("推介人不存在！");
 			    return ar;
@@ -324,7 +324,7 @@ public class UserController extends BaseAction{
 			    ar.setSuccess(false);
                 ar.setMessage("推介人数据异常，请联系客服！");
                 return ar;
-			}*/
+			}
 		
 			UserDetail tUserDetail = new UserDetail();
 			tUserDetail.setUserCode(UserCode);

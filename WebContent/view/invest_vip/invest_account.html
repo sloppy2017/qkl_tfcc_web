@@ -238,13 +238,18 @@
   
   $.ajax({
         type:'post',
-        url:'/service/lpacc/getnum',
+        url:'/service/service/comacc/findNums',
         dataType:'json',
         success:function(data){
             var message = data.message;
            // alert(message);
-            $("#in_sp").html(data.data.Balance);
-            
+           if(data.success){
+            if(data.data.findTB==null||data.data.findTB==""){
+                $("#in_sp").html("0.0000");
+            }else{
+                $("#in_sp").html(data.data.findTB);
+            }
+           } 
         }
     })
   
