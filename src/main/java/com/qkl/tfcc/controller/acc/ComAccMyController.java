@@ -70,16 +70,16 @@ public class ComAccMyController extends BaseAction {
 				BigDecimal bigDecimal2 = new BigDecimal(string);
 				String money = pd.get("money").toString();
 				if (money!=null&&"".equals(money)) {
-					
+					BigDecimal bigDecimal = new BigDecimal(money);
+					int compareTo = bigDecimal.compareTo(bigDecimal2);
+					if (compareTo==1) {
+						ar.setMessage("您的可用余额不足");
+						ar.setSuccess(true);
+					}
 				}
-				System.out.println(money+"++++++++++++++++++++");
-				BigDecimal bigDecimal = new BigDecimal(money);
-				System.out.println(bigDecimal+"________________");
-				int compareTo = bigDecimal.compareTo(bigDecimal2);
-				if (compareTo==1) {
-					ar.setMessage("您的可用余额不足");
-					ar.setSuccess(true);
-				}
+				
+				
+				
 			}
 		}
 		return ar;

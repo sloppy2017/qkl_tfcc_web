@@ -63,7 +63,7 @@ public class BankAccController extends BaseAction {
 	}
 	
 
-	@RequestMapping(value="/bankaccno",method=RequestMethod.POST)
+	/*@RequestMapping(value="/bankaccno",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse findBankaccNo(HttpServletRequest request,HttpServletResponse response){//查询购买人的支付宝账号
 		try {
@@ -78,7 +78,7 @@ public class BankAccController extends BaseAction {
 			e.printStackTrace();
 		}
 	   return ar;
-	}
+	}*/
 	
 	
 	@RequestMapping(value="/searchSel",method=RequestMethod.POST)
