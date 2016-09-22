@@ -381,3 +381,9 @@ $('.hid-x').click(function(){
 	$('.body-o').css('overflow','visible');
 	$('.myagree-hid').hide();
 })
+$('.mark1 a').click(function(){
+	$('.body-o').css('overflow','visible');
+})
+$('.mark2 a').click(function(){
+	$('.body-o').css('overflow','visible');
+})

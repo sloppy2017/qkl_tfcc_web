@@ -163,7 +163,7 @@
 	padding:8px;
 }
 .myagree-hid h2{
-	text-align: center;
+	text-align:center;
 	color:#282828;	
 	margin-top:20px;
 }
@@ -173,8 +173,6 @@
 .myagree-hid .hid-mian h3{
 	color:#666;
 }
-
-
 
 .form .myagree label{
 	width:40px;
