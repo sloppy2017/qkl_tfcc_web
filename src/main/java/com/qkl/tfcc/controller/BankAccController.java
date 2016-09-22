@@ -164,7 +164,7 @@ public class BankAccController extends BaseAction {
 								boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
 								if (addTradeDetail) {
 									ar.setSuccess(true);
-									ar.setMessage("已提交购买申请！");
+									ar.setMessage("订单已生成，请及时付款");
 								}else {
 									ar.setSuccess(false);
 									ar.setMessage("网络异常，购买失败！");

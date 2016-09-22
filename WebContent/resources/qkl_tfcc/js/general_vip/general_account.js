@@ -12,6 +12,7 @@ $(function(){
 	                $("#spt").html("0.0000");
 	            }else{
 	                $("#spt").html(data.data.findTB);
+	                $("#zid").html(data.data.findTB);
 	            }
 	            if(data.data.findTTReward==null||data.data.findTTReward==""){
 	                $("#sptt").html("0.0000");
@@ -55,3 +56,47 @@ $(function(){
           }
       });
   }
+
+  $(function(){
+	  $('#zhuanzhang').blur(function(){//输入转账的金额和我的账户余额比较
+		 var money= $(this).val();
+		 if(money==null||money==''||money==0){
+			 alert('转账金额不能为空');
+		 }
+		 $.ajax({
+			    type:'post',
+			    url:'/service/comacc/acccompare?money='+money,
+		 		//data:{'money':money},
+			    dataType:'json',
+			    success:function(data){
+			        if(data.success){    
+			        	alert(data.message);
+			        }
+			    }
+			});
+		  
+	  });
+	  
+	  
+  });
+  
+  $(function(){
+	  $('#tijiao').click(function(){//点击提交按钮的提示信息
+		  alert('转账功能还未正式上线');  
+		  return false;
+	  });
+	  var zhanghao= $('#zhanghao').val();
+	  $.ajax({
+		    type:'post',
+		    url:'/service/../..?zhanghao='+zhanghao,
+	 		//data:{'money':money},
+		    dataType:'json',
+		    success:function(data){
+		        if(data.success){    
+		        	alert(data.message);
+		        }
+		    }
+		});
+	  
+  });
+  

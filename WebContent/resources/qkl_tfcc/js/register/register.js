@@ -289,6 +289,7 @@
 	    }
 	}
 	$('.form1 .submit').click(function(){
+		$('.body-o').css('overflow','hidden');
 		var validPhone = valid_phone($(this).parent().find("input[name='phone']"));
 		var validPassword = valid_password($(this).parent().find("input[name='password']"));
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
@@ -370,3 +371,19 @@
 			}
 		});
 	});
+	
+$('.myagree span').click(function(){
+	$('.body-o').css('overflow','hidden');
+	$('.myagree-hid').show();
+})
+
+$('.hid-x').click(function(){
+	$('.body-o').css('overflow','visible');
+	$('.myagree-hid').hide();
+})
+$('.mark1 a').click(function(){
+	$('.body-o').css('overflow','visible');
+})
+$('.mark2 a').click(function(){
+	$('.body-o').css('overflow','visible');
+})
