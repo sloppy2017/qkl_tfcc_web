@@ -72,6 +72,13 @@ public class AccController extends BaseAction{
              acc.setUserCode(user.getUserCode());
              acc.setSyscode(Constant.CUR_SYS_CODE);
              Acc tAcc = accService.findAcc(acc, Constant.VERSION_NO);
+             if(tAcc == null){
+                 resMap.put("failStr", "您的账户不存在，请联系客服！");
+                 ar.setSuccess(false);
+                 ar.setData(resMap);
+                 ar.setMessage("您的账户不存在，请联系客服！");
+                 return ar;
+             }
              if(tAcc.getAvbAmnt()==null||tAcc.getAvbAmnt().compareTo(new BigDecimal("0"))==0){
                  resMap.put("failStr", "您的账户余额不足发放失败！");
                  ar.setSuccess(false);

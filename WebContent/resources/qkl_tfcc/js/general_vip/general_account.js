@@ -43,7 +43,7 @@ $(function(){
               if(data.data.imgAddrss){
                   $("#left_headPicId").attr("src",data.data.imgAddrss);
               }else{
-                  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
+                  $("#left_headPicId").attr("src","../../resources/qkl_tfcc/imgs/LPtouxiang.jpg");
               }
               if(data.data.userName){
                   $("#user").html(data.data.userName);
