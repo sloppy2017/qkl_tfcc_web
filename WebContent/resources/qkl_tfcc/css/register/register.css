@@ -336,7 +336,7 @@ form .myagree span{
     background: rgba(5, 5, 5, 0.47);
     z-index: 9999;
     /*filter:alpha(opacity=50)progid:DXImageTransform.Microsoft.gradient(startColorstr=#ccc,endColorstr=#ccc);*/
-    /*display: none;*/
+    display: none;
    overflow-y: auto;
 }
  .mark1-box{
