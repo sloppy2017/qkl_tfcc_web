@@ -29,7 +29,6 @@ $(function(){
 	        	//累计总购买奖励
 	        	if(data.data.totalGMJL!=null&&data.data.totalGMJL!=""&&data.data.totalGMJL!='undefined'){
 	        		$("#totalGMJL").text(data.data.totalGMJL);
-	        		map.put("totalGMJL", totalGMJL);
 	        	}else{
 	        		$("#totalGMJL").text("0.0000");
 	        	}
