@@ -23,7 +23,7 @@ import com.qkl.tfcc.api.service.acc.api.BankAccService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.api.service.trade.api.TradeService;
 import com.qkl.tfcc.api.service.user.api.UserService;
-import com.qkl.tfcc.provider.user.service.impl.UserDetailServiceImpl;
+import com.qkl.tfcc.sms.SmsSend;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
@@ -181,6 +181,8 @@ public class BankAccController extends BaseAction {
 					if (value<=50000.00) {
 						boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
 						if (addTradeDetail) {
+							String content = "尊敬的【"+userDetail.getPhone()+"】会员，您提交购买【"+txamnt2+"】SAN数字货币订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
+							SmsSend.sendSms(userDetail.getPhone(), content);
 							ar.setSuccess(true);
 							ar.setMessage("订单已生成，请及时付款");
 						}else {
