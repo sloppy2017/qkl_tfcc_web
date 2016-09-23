@@ -74,13 +74,11 @@ $('#buy').click(function(){//提交购买申请
             alert(data.message);
             $("input[name='txamnt']").val("");
             $("input[name='txnum']").val("");
-            
-            
             if(data.message=='订单已生成，请及时付款'){
-            
+            	// $('#pay').click();    
                  window.location.href="https://auth.alipay.com/login/index.htm";
 //                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
-                
+            	
             }
            
             	
@@ -95,7 +93,10 @@ $('#buy').click(function(){//提交购买申请
 });
 
 
-
+/*$(function(){ 
+	 $('#pay').css("display","none") ;
+	});
+*/
 /*$(function(){ 
 
 	  var url = $('tijiao').attr("src"); 
