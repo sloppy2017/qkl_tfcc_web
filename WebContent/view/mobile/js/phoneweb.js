@@ -90,11 +90,11 @@ function purse(){
 	console.log(usercode)
 	$.ajax({
 		type:"post",
-		url:"/service/comacc/findNums",
+		url:"/service/comacc/findMyAcc",
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)
-			$("#findTB").text(msg.data.findTB);
+			$("#findTB").text(msg.data.total_amnt);
 		}
 	});
    }		   
