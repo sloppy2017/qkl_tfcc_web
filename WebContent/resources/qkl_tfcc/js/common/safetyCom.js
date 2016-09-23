@@ -311,7 +311,6 @@ $('#newpassword').blur(function(){
    return valid_newpassword($(this));
 });
 function valid_newpassword($this){
-   $this.val($this.val().trim());
    //密码正则6-16字母数字或特殊字符
    /* var reg = /^[a-zA-Z][a-zA-Z0-9|*|&|%|.|@|!]{5,20}$/;
    if ($this.val() == '') {
@@ -336,6 +335,10 @@ function valid_newpassword($this){
        return false;
    }else if(!result){
        $this.next().text('请输入6~20位字母、数字或字符组合');
+       $this.addClass("errorTip");
+       return false;
+   }else if($this.val()==$("#oldpassword").val()){
+	   $this.next().text('输入的新密码与旧密码一致');
        $this.addClass("errorTip");
        return false;
    }else{
