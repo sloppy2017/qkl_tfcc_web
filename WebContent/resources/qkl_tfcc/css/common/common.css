@@ -157,4 +157,10 @@
     color:red;
     font-size: 18px;
 }
-
+.qr-code img{
+    width:147px;
+    height:146px;
+    border:0;
+    
+    
+}
