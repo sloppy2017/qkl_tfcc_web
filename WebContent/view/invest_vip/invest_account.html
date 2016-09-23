@@ -66,7 +66,9 @@
 <!--                     <h4>SAN最新成交价：<span>¥ 3550.99</span></h4> -->
                         <ul>
                             <li>我的余额</li>
-                            <li>SAN&nbsp;&nbsp;<span id="in_sp"></span></li>
+                            <li>可用SAN&nbsp;&nbsp;<span id="avb_amnt"></span></li>
+                            <li>冻结SAN&nbsp;&nbsp;<span id="froze_amnt"></span></li>
+                            <li>总SAN&nbsp;&nbsp;<span id="total_amnt"></span></li>
                             <li class="zhuanzhang">转账</li>
                         </ul>
                 </div>
@@ -134,18 +136,18 @@
 <script src="../../../resources/qkl_tfcc/js/invest/in-account.js"></script>
 <script type="text/javascript">
   $(function(){
-	  //移除错误提示
-	  $("form input").each(function(){
-		  $(this).focus(function(){
-			  if($(this).hasClass("errorTip")){
-				  $(this).removeClass("errorTip");
-				  $(this).val("");
-			  }
-		  });
-	  });
-	  //获取用户信息
+      //移除错误提示
+      $("form input").each(function(){
+          $(this).focus(function(){
+              if($(this).hasClass("errorTip")){
+                  $(this).removeClass("errorTip");
+                  $(this).val("");
+              }
+          });
+      });
+      //获取用户信息
       getUserInfo();
-	  //获取账户余额
+      //获取账户余额
       getAmnt();
   });
 
@@ -169,8 +171,8 @@
       });
   }
   function sub_money(){
-	  $("#showTip").html('');
-	  var jsonStr = '[';  
+      $("#showTip").html('');
+      var jsonStr = '[';  
       $("form li:not(.subBtn)").each(function(){
             var phone = $(this).children('input[name="phone"]').val().trim();
             var tfccNum = $(this).children('input[name="money"]').val().trim();
@@ -196,16 +198,33 @@
             dataType:'json',
             success:function(data){
                  if(data.success){
-                	 $("#in_sp").text(data.data.avb_amnt);//可用数量
-                	 if(data.data.successStr){
-                		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p>");
-                	 }
-                	 if(data.data.failStr){
-                		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
-                	 }
-                	 $("#focus").focus();
+                	 //可用SAN
+                     if(data.data.avb_amnt!=null&&data.data.avb_amnt!=""&&data.data.avb_amnt!='undefined'){
+                         $("#avb_amnt").text(data.data.avb_amnt);
+                     }else{
+                         $("#avb_amnt").text("0.0000");
+                     }
+                     //冻结SAN
+                     if(data.data.froze_amnt!=null&&data.data.froze_amnt!=""&&data.data.froze_amnt!='undefined'){
+                         $("#froze_amnt").text(data.data.froze_amnt);
+                     }else{
+                         $("#froze_amnt").text("0.0000");
+                     }
+                     //总SAN
+                     if(data.data.total_amnt!=null&&data.data.total_amnt!=""&&data.data.total_amnt!='undefined'){
+                         $("#total_amnt").text(data.data.total_amnt);
+                     }else{
+                         $("#total_amnt").text("0.0000");
+                     }
+                     if(data.data.successStr){
+                         $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p>");
+                     }
+                     if(data.data.failStr){
+                         $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
+                     }
+                     $("#focus").focus();
                  }else{
-                	 alert(data.message);
+                     alert(data.message);
                  }
             },
             errror:function(data){
@@ -244,22 +263,35 @@
       }
   }
   function getAmnt(){
-	  $.ajax({
-	        type:'post',
-	        url:'../../service/comacc/getAmnt',
-	        dataType:'json',
-	        success:function(data){
-	           if(data.success){
-	              if(data.data.avb_amnt==null||data.data.avb_amnt==""){
-	                  $("#in_sp").text("0.0000");
-	              }else{
-	                  $("#in_sp").text(data.data.avb_amnt);
-	              }
-	           }else{
-	               alert(data.message);
-	           } 
-	        }
-	    }) 
+      $.ajax({
+            type:'post',
+            url:'../../service/comacc/getAmnt',
+            dataType:'json',
+            success:function(data){
+               if(data.success){
+            	   //可用SAN
+                    if(data.data.avb_amnt!=null&&data.data.avb_amnt!=""&&data.data.avb_amnt!='undefined'){
+                        $("#avb_amnt").text(data.data.avb_amnt);
+                    }else{
+                        $("#avb_amnt").text("0.0000");
+                    }
+                    //冻结SAN
+                    if(data.data.froze_amnt!=null&&data.data.froze_amnt!=""&&data.data.froze_amnt!='undefined'){
+                        $("#froze_amnt").text(data.data.froze_amnt);
+                    }else{
+                        $("#froze_amnt").text("0.0000");
+                    }
+                    //总SAN
+                    if(data.data.total_amnt!=null&&data.data.total_amnt!=""&&data.data.total_amnt!='undefined'){
+                        $("#total_amnt").text(data.data.total_amnt);
+                    }else{
+                        $("#total_amnt").text("0.0000");
+                    }
+               }else{
+                   alert(data.message);
+               } 
+            }
+        }) 
   }
 </script>
 </body>

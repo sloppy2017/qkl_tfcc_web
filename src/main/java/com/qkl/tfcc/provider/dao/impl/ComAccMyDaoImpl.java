@@ -86,4 +86,9 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
         return getSqlSession().selectOne(namespace+"."+"getAmnt", pd);
     }
 
+    @Override
+    public BigDecimal findFFReward(String userCode) {
+        return getSqlSession().selectOne(namespace+"."+"findFFReward", userCode);
+    }
+
 }

@@ -31,7 +31,7 @@ public class ComAccMyController extends BaseAction {
 	@Autowired
 	private ComAccMyService cams;
 	
-	@RequestMapping(value="/findNums",method=RequestMethod.POST)
+	@RequestMapping(value="/findMyAcc",method=RequestMethod.POST)
 	@ResponseBody
 	public  AjaxResponse findTB(HttpServletRequest request){
 		
@@ -45,7 +45,7 @@ public class ComAccMyController extends BaseAction {
 			}else{
 				userCode =user.getUserCode();
 			}			
-			nums = cams.findNum(userCode);
+			nums = cams.findMyAcc(userCode);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
 		} catch (Exception e) {

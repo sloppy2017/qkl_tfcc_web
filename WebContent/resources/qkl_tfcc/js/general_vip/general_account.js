@@ -4,28 +4,41 @@
 $(function(){
 	$.ajax({
 	    type:'post',
-	    url:'/service/comacc/findNums',
+	    url:'/service/comacc/findMyAcc',
 	    dataType:'json',
 	    success:function(data){
 	        if(data.success){
-	            if(data.data.findTB==null||data.data.findTB==""){
-	                $("#spt").html("0.0000");
-	            }else{
-	                $("#spt").html(data.data.findTB);
-	                $("#zid").html(data.data.findTB);
-	                $("#in_sp").html(data.data.findTB);
-	            }
-	            if(data.data.findTTReward==null||data.data.findTTReward==""){
-	                $("#sptt").html("0.0000");
-	            }else{
-	                $("#sptt").html(data.data.findTTReward);
-	            }
-	            if(data.data.findReward==null||data.data.findReward==""){
-	                $("#spv").html("0.0000");
-	            }else{
-	                $("#spv").html(data.data.findReward);
-	            }
-	            
+	        	//可用SAN
+	        	if(data.data.avb_amnt!=null&&data.data.avb_amnt!=""&&data.data.avb_amnt!='undefined'){
+	        		$("#avb_amnt").text(data.data.avb_amnt);
+	        	}else{
+	        		$("#avb_amnt").text("0.0000");
+	        	}
+	        	//冻结SAN
+	        	if(data.data.froze_amnt!=null&&data.data.froze_amnt!=""&&data.data.froze_amnt!='undefined'){
+	        		$("#froze_amnt").text(data.data.froze_amnt);
+	        	}else{
+	        		$("#froze_amnt").text("0.0000");
+	        	}
+	        	//总SAN
+	        	if(data.data.total_amnt!=null&&data.data.total_amnt!=""&&data.data.total_amnt!='undefined'){
+	        		$("#total_amnt").text(data.data.total_amnt);
+	        	}else{
+	        		$("#total_amnt").text("0.0000");
+	        	}
+	        	//累计总购买奖励
+	        	if(data.data.totalGMJL!=null&&data.data.totalGMJL!=""&&data.data.totalGMJL!='undefined'){
+	        		$("#totalGMJL").text(data.data.totalGMJL);
+	        		map.put("totalGMJL", totalGMJL);
+	        	}else{
+	        		$("#totalGMJL").text("0.0000");
+	        	}
+	        	//累计总奖励
+	        	if(data.data.totalReward!=null&&data.data.totalReward!=""&&data.data.totalReward!='undefined'){
+	        		$("#totalReward").text(data.data.totalReward);
+	        	}else{
+	        		$("#totalReward").text("0.0000");
+	        	}
 	        }else{
 	            alert(data.message);
 	        }
