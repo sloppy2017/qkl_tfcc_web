@@ -115,6 +115,7 @@ public class UserController extends BaseAction{
 				logger.info(userName + "登录成功");
 				ar.setSuccess(true);
 				data.put("userType", user.getUserType());
+				data.put("userCode", user.getUserCode());
 				ar.setData(data);
 			} else {
 				ar.setSuccess(false);

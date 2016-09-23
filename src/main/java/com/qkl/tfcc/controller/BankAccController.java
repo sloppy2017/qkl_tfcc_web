@@ -89,9 +89,15 @@ public class BankAccController extends BaseAction {
 		List<PageData> tradeInfo=null;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+			String userCode ="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}
 			 pd=this.getPageData();
 			 //String parameter = request.getParameter("searchSel");
-			 pd.put("userCode", user.getUserCode());
+			 pd.put("userCode", userCode);
 			 page.setPd(pd);
 			 tradeInfo = tradeService.findTradeInfo(page,Constant.VERSION_NO);
 			 for (PageData pageData : tradeInfo) {
