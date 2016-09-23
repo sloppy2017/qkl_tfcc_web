@@ -83,7 +83,7 @@ $('#buy').click(function(){//提交购买申请
 	if($payno.length==0||$payno==null){
 		alert('支付宝账号不能为空');
 		return false;
-	};
+	}
 	
 	
 	buy_flag=false;
