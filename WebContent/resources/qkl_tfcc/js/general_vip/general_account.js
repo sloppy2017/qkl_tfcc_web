@@ -83,8 +83,10 @@ $(function(){
   
   $(function(){
 	  $('#tijiao').click(function(){//点击提交按钮的提示信息
+	 //var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	  var zhanghao= $('#zhanghao').val();//对方账号
 	  var money= $('#zhuanzhang').val();//转帐额度
+	  
 	  if(zhanghao.length==0||zhanghao==null){
 		  alert('账号不能为空');
 		  return false;
@@ -93,6 +95,12 @@ $(function(){
 		  alert('转账金额不能为空');
 		  return false;
 	  }
+	  /*if (filter.test(zhanghao)){ 
+		     return true; 
+		  }else{
+			  alert('您的钱包账号格式不正确'); 
+			  return false;
+			  }*/
 	 // alert('转账功能还未正式上线');
 	  $.ajax({
 		    type:'post',
