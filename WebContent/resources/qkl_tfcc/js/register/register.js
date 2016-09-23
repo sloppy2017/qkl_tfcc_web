@@ -299,7 +299,7 @@
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
 			return;
 		}
-			if(!checked.checked==false){
+			if(!checked.checked){
 			return;
 		}
 		$.ajax({
@@ -359,7 +359,8 @@
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
-		if(!checked.checked==false){
+		if(!checked.checked){
+			
 			return;
 		}	
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
