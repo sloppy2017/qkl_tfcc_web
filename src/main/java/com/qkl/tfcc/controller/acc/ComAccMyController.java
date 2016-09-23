@@ -87,8 +87,56 @@ public class ComAccMyController extends BaseAction {
 	    return ar;	
 	}
 
-	
 	@RequestMapping(value="/acccompare",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
+		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		pd=this.getPageData();
+		Map<String, Object> findNum = cams.findNum(user.getUserCode());
+		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
+		String money = pd.getString("money");
+		while (iterator.hasNext()) {
+			Entry<String, Object> entry = iterator.next();
+			String key = entry.getKey();
+			if (key!=null&&"findTB".equals(key)) {
+			 //BigDecimal value = (BigDecimal) entry.getValue();
+				String string = entry.getValue().toString();
+					BigDecimal bigDecimal2=null;
+					try {
+						bigDecimal2 = new BigDecimal(string);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (money!=null&&!"".equals(money)) {
+						BigDecimal bigDecimal = new BigDecimal(money);
+						int compareTo = bigDecimal.compareTo(bigDecimal2);
+						if (compareTo==1) {
+							ar.setSuccess(true);
+							ar.setMessage("您的可用余额不足");
+							
+						
+					}if (compareTo==0) {
+						ar.setSuccess(true);
+						ar.setMessage("转账功能还未正式上线");
+						
+					
+				}if (compareTo==-1) {
+					ar.setSuccess(true);
+					ar.setMessage("转账功能还未正式上线");
+					
+				
+			}
+				}
+				
+				
+				
+				
+			}
+		}
+		return ar;
+	}
+	/*@RequestMapping(value="/acccompare",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
@@ -118,7 +166,7 @@ public class ComAccMyController extends BaseAction {
 		}
 		return ar;
 	}
-	
+	*/
 	
 	
 	/*@RequestMapping(value="/fall",method=RequestMethod.POST)

@@ -12,13 +12,17 @@
 		<script src="../resources/qkl_tfcc/js/common/jquery.event.drag-1.5.min.js"></script>
 		<script src="../resources/qkl_tfcc/js/common/jquery.touchSlider.js"></script>
 		<style>
-			.login-form {
 		
+			.login-form {
 				position: absolute;
 				top: 0;
 				left: 0;
 			width: 100%;
 		}
+		
+		input:-webkit-autofill {  
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;  
+} 
 		</style>
 		<script> 		
 			//平台、设备和操作系统
@@ -36,7 +40,7 @@
 			if(system.win||system.mac||system.xll){//转向后台登陆页面
 			 
 			}else{
-			window.location.href="./mobile/login.html";
+			window.location.href="view/mobile/login.html";
 			}
 </script>
 	</head>
