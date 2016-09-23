@@ -147,9 +147,15 @@ public class AccServiceImpl implements AccService {
             String tfccNum = obj.getString("tfccNum").trim();
             if(Validator.isMobile(phone)&&Validator.isNumberMax7(tfccNum)){
                 User tUser = userDao.findUserByPhone(phone);
+                if(tUser==null){
+                    failStr.append(phone+"-会员不存在；");
+                    map.put("failStr", failStr.toString());
+                    continue;
+                }
                 PageData pdFriend = new PageData();
                 pdFriend.put("user_code", userDetail.getUserCode());
                 pdFriend.put("recomuser_code", tUser.getUserCode());
+                pdFriend.put("syscode", Constant.CUR_SYS_CODE);
                 boolean isFriend = userFriendshipDao.isFriend(pdFriend);
                 if(!isFriend){
                     failStr.append(phone+"-会员未绑定该机构；");
@@ -204,7 +210,7 @@ public class AccServiceImpl implements AccService {
                         accDetail.setCreateTime(DateUtil.getCurrentDate());
                         accDetail.setModifyTime(DateUtil.getCurrentDate());
                         accDetail.setOperator(userDetail.getPhone());
-                        accDetail.setRelaUserlevel("A");
+                        accDetail.setRelaUserlevel("");
                         accDetail.setSubAccno("010301");
                         accDetail.setAmnt(tfccNumTemp);
                         accDetail.setStatus("1");
