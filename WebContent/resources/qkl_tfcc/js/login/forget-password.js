@@ -1,4 +1,9 @@
-	/**
+$(document).ready(function(){
+
+
+
+
+/**
 	 * 倒数60秒
 	 */
 	var countdown=60; 
@@ -204,6 +209,43 @@
 			}
 		});*/
 	};
+	
+	
+	
+//	$(".empty-clear").val("");
+//	function empty(){
+//		$('.empty-clear').html('')
+//		alert(111)
+//	}	
+//	empty();
+	
+	
+//	
+//	clearCookie(JSESSIONID);
+//	function clearCookie(name) {  
+//	    setCookie(name, "", -1);  
+//	}  
+//	function checkCookie() {
+//	    var user = getCookie("username");
+//	    if (user != "") {
+//	        alert("Welcome again " + user);
+//	    } else {
+//	        user = prompt("Please enter your name:", "");
+//	        if (user != "" && user != null) {
+//	            setCookie("username", user, 365);
+//	        }
+//	    }
+//	}
+	
+	function sss(){
+		
+	}
+	
+	sss();
+	
+})
+	
+	
 
 
 

@@ -108,3 +108,18 @@ var $login = {
 };
 
 $login._init();
+function clearCookie(name) {  
+    setCookie(phone, "", -1); 
+    setCookie(JSESSIONID, "", -1);
+}  
+function checkCookie() {
+    var user = getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+            setCookie("username", user, 365);
+        }
+    }
+}
