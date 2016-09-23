@@ -96,6 +96,12 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
         getSqlSession().update(namespace+"."+"updateHeadPic",map);   
     }
 
+	@Override
+	public UserDetail findDetail(String userCode) {
+		UserDetail selectOne = getSqlSession().selectOne(namespace+"."+"findDetail", userCode);
+		return selectOne;
+	}
+
 	
 
 }
