@@ -61,6 +61,7 @@ $(function(){
   $(function(){
 	  $('#tijiao').click(function(){//输入转账的金额和我的账户余额比较
 		 var money= $('#zhuanzhang').val();
+		 //alert(money);
 		 $.ajax({
 			    type:'post',
 			    url:'/service/comacc/acccompare?money='+money,
@@ -69,7 +70,9 @@ $(function(){
 			    success:function(data){
 			        if(data.success){    
 			        	alert(data.message);
+			        	return false;
 			        }
+			       
 			    }
 			});
 		  
@@ -110,7 +113,7 @@ $(function(){
   /**
  * Created by qw on 2016/9/18.
  */
-$(function(){
+/*$(function(){
 	$.ajax({
 	    type:'post',
 	    url:'/service/comacc/findNums',
@@ -208,4 +211,4 @@ $(function(){
 		});
 	  
   });
-  
+  */
