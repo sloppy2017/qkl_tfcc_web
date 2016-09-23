@@ -1121,8 +1121,8 @@ public class UserController extends BaseAction{
 				ar.setMessage("短信发送太频繁，请稍后重试!");
 				return ar;
 			}
-//			String vCode =SmsSend.sendSms(phone);
-			String vCode = "888888";
+			String vCode =SmsSend.sendSms(phone);
+//			String vCode = "888888";
 //			String vCode =String.valueOf((int)((Math.random()*9+1)*100000));
 			if(vCode.equals("0")){				
 				ar.setSuccess(false);

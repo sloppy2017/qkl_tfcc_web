@@ -4,28 +4,41 @@
 $(function(){
 	$.ajax({
 	    type:'post',
-	    url:'/service/comacc/findNums',
+	    url:'/service/comacc/findMyAcc',
 	    dataType:'json',
 	    success:function(data){
 	        if(data.success){
-	            if(data.data.findTB==null||data.data.findTB==""){
-	                $("#spt").html("0.0000");
-	            }else{
-	                $("#spt").html(data.data.findTB);
-	                $("#zid").html(data.data.findTB);
-	                $("#in_sp").html(data.data.findTB);
-	            }
-	            if(data.data.findTTReward==null||data.data.findTTReward==""){
-	                $("#sptt").html("0.0000");
-	            }else{
-	                $("#sptt").html(data.data.findTTReward);
-	            }
-	            if(data.data.findReward==null||data.data.findReward==""){
-	                $("#spv").html("0.0000");
-	            }else{
-	                $("#spv").html(data.data.findReward);
-	            }
-	            
+	        	//可用SAN
+	        	if(data.data.avb_amnt!=null&&data.data.avb_amnt!=""&&data.data.avb_amnt!='undefined'){
+	        		$("#avb_amnt").text(data.data.avb_amnt);
+	        	}else{
+	        		$("#avb_amnt").text("0.0000");
+	        	}
+	        	//冻结SAN
+	        	if(data.data.froze_amnt!=null&&data.data.froze_amnt!=""&&data.data.froze_amnt!='undefined'){
+	        		$("#froze_amnt").text(data.data.froze_amnt);
+	        	}else{
+	        		$("#froze_amnt").text("0.0000");
+	        	}
+	        	//总SAN
+	        	if(data.data.total_amnt!=null&&data.data.total_amnt!=""&&data.data.total_amnt!='undefined'){
+	        		$("#total_amnt").text(data.data.total_amnt);
+	        	}else{
+	        		$("#total_amnt").text("0.0000");
+	        	}
+	        	//累计总购买奖励
+	        	if(data.data.totalGMJL!=null&&data.data.totalGMJL!=""&&data.data.totalGMJL!='undefined'){
+	        		$("#totalGMJL").text(data.data.totalGMJL);
+	        		map.put("totalGMJL", totalGMJL);
+	        	}else{
+	        		$("#totalGMJL").text("0.0000");
+	        	}
+	        	//累计总奖励
+	        	if(data.data.totalReward!=null&&data.data.totalReward!=""&&data.data.totalReward!='undefined'){
+	        		$("#totalReward").text(data.data.totalReward);
+	        	}else{
+	        		$("#totalReward").text("0.0000");
+	        	}
 	        }else{
 	            alert(data.message);
 	        }
@@ -61,6 +74,7 @@ $(function(){
   $(function(){
 	  $('#tijiao').click(function(){//输入转账的金额和我的账户余额比较
 		 var money= $('#zhuanzhang').val();
+		 //alert(money);
 		 $.ajax({
 			    type:'post',
 			    url:'/service/comacc/acccompare?money='+money,
@@ -69,7 +83,9 @@ $(function(){
 			    success:function(data){
 			        if(data.success){    
 			        	alert(data.message);
+			        	return false;
 			        }
+			       
 			    }
 			});
 		  
@@ -80,8 +96,10 @@ $(function(){
   
   $(function(){
 	  $('#tijiao').click(function(){//点击提交按钮的提示信息
+	 //var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	  var zhanghao= $('#zhanghao').val();//对方账号
 	  var money= $('#zhuanzhang').val();//转帐额度
+	  
 	  if(zhanghao.length==0||zhanghao==null){
 		  alert('账号不能为空');
 		  return false;
@@ -90,7 +108,13 @@ $(function(){
 		  alert('转账金额不能为空');
 		  return false;
 	  }
-	  alert('转账功能还未正式上线');
+	  /*if (filter.test(zhanghao)){ 
+		     return true; 
+		  }else{
+			  alert('您的钱包账号格式不正确'); 
+			  return false;
+			  }*/
+	 // alert('转账功能还未正式上线');
 	  $.ajax({
 		    type:'post',
 		    url:'/service/../..?zhanghao='+zhanghao,
@@ -110,7 +134,7 @@ $(function(){
   /**
  * Created by qw on 2016/9/18.
  */
-$(function(){
+/*$(function(){
 	$.ajax({
 	    type:'post',
 	    url:'/service/comacc/findNums',
@@ -208,4 +232,4 @@ $(function(){
 		});
 	  
   });
-  
+  */

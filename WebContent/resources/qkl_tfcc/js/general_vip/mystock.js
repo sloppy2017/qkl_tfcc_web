@@ -63,7 +63,10 @@ $(function(){
 
 
 var buy_flag=true;
-$('#buy').click(function(){//提交购买申请
+function userRequest(){
+	
+	
+//提交购买申请
 	
 	var $txnum= $("input[name='txnum']").val();
 	var $txamnt= $("input[name='txamnt']").val();
@@ -83,7 +86,7 @@ $('#buy').click(function(){//提交购买申请
 	if($payno.length==0||$payno==null){
 		alert('支付宝账号不能为空');
 		return false;
-	};
+	}
 	
 	
 	buy_flag=false;
@@ -110,8 +113,12 @@ $('#buy').click(function(){//提交购买申请
             $("input[name='payno']").val("");
             if(data.message=='订单已生成，请及时付款'){
             //	$('.pay').click();    
-                window.location.href="https://auth.alipay.com/login/index.htm";
+//                window.location.href="https://auth.alipay.com/login/index.htm";
 //                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
+                 var tempwindow=window.open();
+                 tempwindow.location='https://auth.alipay.com/login/index.htm';
+//                 window.open('你所要跳转的页面');  
+//                 window.history.back(-1);返回上一页  
             	
             }
             
@@ -121,9 +128,9 @@ $('#buy').click(function(){//提交购买申请
         }
 	
     });
+}
 
 
-});
 
 
 

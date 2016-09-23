@@ -28,15 +28,23 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	
 	
 	/**
-	 * 查询推荐会员奖励的TFCC
+	 * 查询我累计推荐会员奖励的TFCC
 	 * @param userCode
 	 * @return
 	 */
 	public BigDecimal findReward(String userCode);
+	/**
+	 * @describe:查询投资机构给我发放的奖励
+	 * @author: zhangchunming
+	 * @date: 2016年9月24日上午1:36:45
+	 * @param userCode
+	 * @return: BigDecimal
+	 */
+	public BigDecimal findFFReward(String userCode);
 	
 
 	/**
-	 * 查询推荐网点奖励的TFCC
+	 * 查询推荐网点奖励的SAN
 	 * @param userCode
 	 * @return
 	 */
@@ -44,7 +52,7 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	
 
 	/**
-	 * 查询累奖励的TFCC
+	 * 查询推介会员购买SAN时送给我的奖励
 	 * @param userCode
 	 * @return
 	 */

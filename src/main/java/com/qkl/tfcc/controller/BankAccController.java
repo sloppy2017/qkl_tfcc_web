@@ -174,6 +174,9 @@ public class BankAccController extends BaseAction {
 				BigDecimal findAnmt = tradeService.findAnmt(userCode, Constant.VERSION_NO);
 				String txamnt1 = pd.getString("txamnt");
 				BigDecimal txamnt2=new BigDecimal(txamnt1);
+				if(findAnmt==null){
+					findAnmt = new BigDecimal(0);
+				}
 				double value = findAnmt.add(txamnt2).doubleValue();
 					if (value<=50000.00) {
 						boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
