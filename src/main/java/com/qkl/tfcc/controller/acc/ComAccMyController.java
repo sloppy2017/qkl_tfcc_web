@@ -116,7 +116,17 @@ public class ComAccMyController extends BaseAction {
 							ar.setMessage("您的可用余额不足");
 							
 						
-					}
+					}if (compareTo==0) {
+						ar.setSuccess(true);
+						ar.setMessage("转账功能还未正式上线");
+						
+					
+				}if (compareTo==-1) {
+					ar.setSuccess(true);
+					ar.setMessage("转账功能还未正式上线");
+					
+				
+			}
 				}
 				
 				

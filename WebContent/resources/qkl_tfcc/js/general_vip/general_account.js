@@ -93,7 +93,7 @@ $(function(){
 		  alert('转账金额不能为空');
 		  return false;
 	  }
-	  alert('转账功能还未正式上线');
+	 // alert('转账功能还未正式上线');
 	  $.ajax({
 		    type:'post',
 		    url:'/service/../..?zhanghao='+zhanghao,
