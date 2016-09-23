@@ -38,7 +38,7 @@ public class SmsSend {
 
 		//System.out.println(mobile);
 		
-	    String content = new String("您的验证码是：" + mobile_code + "。请不要把验证码泄露给其他人。"); 
+	    String content = new String("您的验证码是：" + mobile_code + ",30分钟内有效，如非本人操作，请忽略本短信。");
 
 		NameValuePair[] data = {//提交短信
 			    new NameValuePair("account", account), 

@@ -81,4 +81,9 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 		return cad;
 	}
 
+    @Override
+    public PageData getAmnt(PageData pd) {
+        return getSqlSession().selectOne(namespace+"."+"getAmnt", pd);
+    }
+
 }

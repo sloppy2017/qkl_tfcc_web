@@ -35,7 +35,7 @@
                 <li><a href="../invest_vip/invest_account.html">我的账户</a></li>
                 <li ><a  href="../invest_vip/invest_myself.html">个人中心</a></li>
                 <li><a href="../invest_vip/invest_safety.html">安全中心</a></li>
-                <li><a href="http://www.r8exchange.com" target="new_window">数字钱包</a></li>
+                <li><a href="http://www.sanjielian.com" target="new_window">数字钱包</a></li>
             </ul>
         </div>
     </div>
@@ -97,8 +97,8 @@
 </div>
 <script src="/resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script>
-$(function(){
-	$.ajax({
+
+    $.ajax({
         type:'post',
         url:'/service/corp/lpnum',
         dataType:'json',
@@ -108,8 +108,6 @@ $(function(){
             $(".ce9").html(data.data);
         }
     })
-});
-    
 
   $(function(){
       getUserInfo();

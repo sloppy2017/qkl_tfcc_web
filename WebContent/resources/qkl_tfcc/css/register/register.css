@@ -120,6 +120,9 @@
 .form .myagree{
     margin-left:212px;
 }
+.form form input{
+	outline: none;
+}
 .form .myagree input{
     width:14px;
     height:14px;
@@ -184,6 +187,7 @@
     display: inline-block;
 }
 form .myagree span{
+	cursor:pointer;
     font-size:12px;
     color:#3c8ad1;
 }

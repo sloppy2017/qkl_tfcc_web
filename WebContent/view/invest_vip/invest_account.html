@@ -143,7 +143,10 @@
 			  }
 		  });
 	  });
+	  //获取用户信息
       getUserInfo();
+	  //获取账户余额
+      getAmnt();
   });
 
   function getUserInfo(){
@@ -193,6 +196,7 @@
             dataType:'json',
             success:function(data){
                  if(data.success){
+                	 $("#in_sp").text(data.data.avb_amnt);//可用数量
                 	 if(data.data.successStr){
                 		 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p>");
                 	 }
@@ -202,7 +206,6 @@
                 	 $("#focus").focus();
                  }else{
                 	 alert(data.message);
-//                 	 $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                  }
             },
             errror:function(data){
@@ -240,24 +243,24 @@
           return true;
       }
   }
-  
-  $.ajax({
-        type:'post',
-        url:'../../service/comacc/findNums',
-        dataType:'json',
-        success:function(data){
-            var message = data.message;
-           // alert(message);
-           if(data.success){
-            if(data.data.findTB==null||data.data.findTB==""){
-                $("#in_sp").html("0.0000");
-            }else{
-                $("#in_sp").html(data.data.findTB);
-            }
-           } 
-        }
-    }) 
-  
+  function getAmnt(){
+	  $.ajax({
+	        type:'post',
+	        url:'../../service/comacc/getAmnt',
+	        dataType:'json',
+	        success:function(data){
+	           if(data.success){
+	              if(data.data.avb_amnt==null||data.data.avb_amnt==""){
+	                  $("#in_sp").text("0.0000");
+	              }else{
+	                  $("#in_sp").text(data.data.avb_amnt);
+	              }
+	           }else{
+	               alert(data.message);
+	           } 
+	        }
+	    }) 
+  }
 </script>
 </body>
 </html>

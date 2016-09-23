@@ -65,5 +65,10 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 		return map;
 	}
 
+    @Override
+    public PageData getAmnt(PageData pd) {
+        return comAccMyDao.getAmnt(pd);
+    }
+
 	
 }
