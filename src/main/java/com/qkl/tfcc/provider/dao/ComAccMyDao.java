@@ -55,4 +55,12 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @return
 	 */
 	public List<PageData> findAllPage(Page page);
+	/**
+	 * @describe:查询可用余额，冻结额度，总额度
+	 * @author: zhangchunming
+	 * @date: 2016年9月23日上午10:46:45
+	 * @param pd
+	 * @return: PageData
+	 */
+	public PageData getAmnt(PageData pd);
 }

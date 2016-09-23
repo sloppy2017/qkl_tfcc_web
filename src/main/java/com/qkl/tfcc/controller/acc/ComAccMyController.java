@@ -52,6 +52,29 @@ public class ComAccMyController extends BaseAction {
 		ar.setData(nums);
 		return ar;	
 	}
+	@RequestMapping(value="/getAmnt",method=RequestMethod.POST)
+	@ResponseBody
+	public  AjaxResponse getAmnt(HttpServletRequest request){
+	    try {
+	        User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+	        PageData accPd = new PageData();
+	        accPd.put("user_code", user.getUserCode());
+	        accPd = cams.getAmnt(accPd);
+	        if(accPd!=null){
+	            ar.setSuccess(true);
+	            ar.setData(accPd);
+	            ar.setMessage("查询成功");
+	        }else{
+	            ar.setSuccess(false);
+                ar.setMessage("账户不存在，请联系客服！");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        ar.setSuccess(false);
+	        ar.setMessage("系统异常，请联系客服！");
+	    }
+	    return ar;	
+	}
 
 	
 	@RequestMapping(value="/acccompare",method=RequestMethod.POST)

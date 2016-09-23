@@ -20,11 +20,13 @@ import com.qkl.tfcc.api.po.acc.Acc;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.api.service.acc.api.AccService;
+import com.qkl.tfcc.api.service.acc.api.ComAccMyService;
 import com.qkl.tfcc.api.service.sms.api.SmsService;
 import com.qkl.tfcc.api.service.user.api.UserService;
 import com.qkl.tfcc.sms.SmsSend;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
+import com.qkl.util.help.pager.PageData;
 /**
  * 账户的控制类
  * <p>Description： 账户的控制类 </p>
@@ -44,6 +46,8 @@ public class AccController extends BaseAction{
     private AccService accService;
     @Autowired
     private SmsService smsService;
+    @Autowired
+    private ComAccMyService cams;
     
     /**
      * @describe:投资公司发放奖励
@@ -88,21 +92,39 @@ public class AccController extends BaseAction{
              }
              resMap = accService.rewardTfcc(jsonArray,userDetail,tAcc.getAvbAmnt(),Constant.VERSION_NO);
              StringBuffer successStr = new StringBuffer("发放成功的手机号：");
+             StringBuffer phoneStr = new StringBuffer("");
+             BigDecimal totalSan = new BigDecimal("0");//总计转出SAN数量
              if(resMap.get("successStr")!=null){
                  JSONArray array = JSONArray.parseArray(resMap.get("successStr"));
                  for(int i=0;i<array.size();i++){
                      JSONObject obj = (JSONObject)array.get(i);
                      successStr.append(obj.getString("phone")+"，额度："+obj.getString("tfccNum")+"；");
-                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】用户给您发放了"+obj.getString("tfccNum")+"SAN奖励。");
+                     phoneStr.append(obj.getString("phone")+"，");
+                     totalSan = totalSan.add(new BigDecimal(obj.getString("tfccNum")));
+                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】会员给您发转入"+obj.getString("tfccNum")+"SAN数字货币，请登录网站查收！");
+                   
                  }
                  resMap.remove("successStr");
                  resMap.put("successStr", successStr.toString());
              }
-             /*for(int i=0;i<successList.size();i++){
-                 String phone = ((Map)successList.get(i)).get("phone").toString();
-                 String tfccNum = ((Map)successList.get(i)).get("tfccNum").toString();
-                 SmsSend.sendSms(phone, "尊敬的【"+phone+"】会员您好，恭喜您获得"+tfccNum+"TFCC奖励。");
-             }*/
+             PageData  accPd  = new PageData();
+             accPd.put("user_code", userDetail.getUserCode());
+             accPd = cams.getAmnt(accPd);
+             if(accPd!=null){
+                 resMap.put("avb_amnt", accPd.get("avb_amnt")==null?null:accPd.get("avb_amnt").toString());
+                 resMap.put("froze_amnt", accPd.get("froze_amnt")==null?null:accPd.get("froze_amnt").toString());
+                 resMap.put("total_amnt", accPd.get("total_amnt")==null?null:accPd.get("total_amnt").toString());
+             }
+             //给当前登陆用户发送短信
+             if(totalSan.compareTo(new BigDecimal("0"))>0){//判断发放总额是否大于0
+                 phoneStr = new StringBuffer(phoneStr.substring(0, phoneStr.length()-1));
+                 if(phoneStr.toString().contains(",")){
+                     SmsSend.sendSms(userDetail.getPhone(), "尊敬的【"+userDetail.getPhone()+"】会员您好，您向【"+phoneStr+"】会员转出"+totalSan+"SAN数字货币成功，账户余额【"+resMap.get("avb_amnt").toString()+"】，祝您生活愉快！如有疑问请及时联系网站客服。");
+                 }else{
+                     SmsSend.sendSms(userDetail.getPhone(), "尊敬的【"+userDetail.getPhone()+"】会员您好，您向【"+phoneStr+"】会员共计转出"+totalSan+"SAN数字货币成功，账户余额【"+resMap.get("avb_amnt").toString()+"】，祝您生活愉快！如有疑问请及时联系网站客服。");
+                 }
+                 
+             }
              ar.setSuccess(true);
              ar.setData(resMap);
              ar.setMessage("发放成功");

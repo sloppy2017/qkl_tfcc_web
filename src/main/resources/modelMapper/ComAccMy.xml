@@ -10,7 +10,7 @@
 		        and cuy_type='1' 
 		        and user_type='1'
 		        and user_code=#{userCode}  -->
-		        select avb_amnt tfcc, from tb_acc where user_code=#{userCode}
+		        select avb_amnt tfcc from tb_acc where user_code=#{userCode}
 	</select> 
 	
      <!-- 查询JFCC余额 -->
@@ -69,5 +69,9 @@
 	where a.user_code=#{userCode}
 	group by caldate;
  
+    </select>
+    
+    <select id="getAmnt" parameterType="pd" resultType="pd">
+        select * from tb_acc where user_code = #{user_code}
     </select>
 </mapper>     
