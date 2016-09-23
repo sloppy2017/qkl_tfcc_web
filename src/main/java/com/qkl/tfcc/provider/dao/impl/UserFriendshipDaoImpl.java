@@ -7,6 +7,7 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.qkl.tfcc.api.po.user.UserFriendship;
 import com.qkl.tfcc.provider.dao.UserFriendshipDao;
 import com.qkl.tfcc.provider.dbhelper.DaoSupport;
+import com.qkl.util.help.pager.PageData;
 
 
 
@@ -55,8 +56,8 @@ public class UserFriendshipDaoImpl extends DaoSupport<UserFriendship> implements
 		return tUserFriendship;
 	}
 
-	
-	
-	
-	
+    @Override
+    public boolean isFriend(PageData pd) {
+        return getSqlSession().selectOne(namespace+"."+"isFriend", pd)==null?false:true;
+    }
 }
