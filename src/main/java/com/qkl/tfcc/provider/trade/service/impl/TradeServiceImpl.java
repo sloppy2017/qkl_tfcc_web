@@ -1,10 +1,13 @@
 package com.qkl.tfcc.provider.trade.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.entity.Page;
@@ -49,5 +52,11 @@ public class TradeServiceImpl implements TradeService {
 	@Override
 	public int findTradeCount(PageData pd, String versionNo) {//获取一个人的交易次数
 		return tradeDetailDao.findTradeCount(pd);
+	}
+
+	@Override
+	public BigDecimal findAnmt(String userCode, String versionNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
