@@ -1,4 +1,17 @@
 $(function() {
+	var phone = $.cookie('phone');
+	if(phone != 'undefined'){
+		$("#phone").val(phone);
+		$("#saveid").attr("checked",true);
+	}
+	$("#saveid").click(function(){
+		if(!$("#saveid").attr("checked")){
+			$.cookie('phone', '', { expires: -1 });
+			$("#phone").val('');
+			$("#password").val('');
+		}
+	});
+	
 	//手机失去焦点
 	$("input[name='phone']").blur(function () {
 		valid_phone($(this));
@@ -118,6 +131,10 @@ $(function() {
 		var validYzm = valid_yzm($("input[name='yzm']"));
 		if(!(validPhone&&validPassword&&validYzm)){
 			return;
+		}
+		//记住
+		if($("#saveid").attr("checked")){
+			$.cookie('phone', $("#phone").val(), { expires: 7 });
 		}
 		var url = "/service/user/login?"+$("form").serialize();
 		url = encodeURI(url);
