@@ -56,15 +56,4 @@ public class TradeDetailDaoImpl extends DaoSupport<TradeDetail> implements Trade
 		BigDecimal findTradeAmnt = getSqlSession().selectOne(namespace+"."+"findTradeAmnt", userCode);
 		return findTradeAmnt;
 	}
-
-	@Override
-	public BigDecimal findTradeAmnt(String userCode) {
-		 BigDecimal findTradeAmnt = getSqlSession().selectOne(namespace+"."+"findTradeAmnt", userCode);
-		return findTradeAmnt;
-	}
-
-	
-
-	
-
 }
