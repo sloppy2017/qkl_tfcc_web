@@ -114,6 +114,7 @@ $('#buy').click(function(){//提交购买申请
 //                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
             	
             }
+            
            
            // $('.mid-r a').css('background-color','none');
            // $(".mid-r a").style.visibility="hidden";    
@@ -123,6 +124,8 @@ $('#buy').click(function(){//提交购买申请
 
 
 });
+
+
 
 /*$(function(){ 
 	 $('#pay').trigger('click') ;

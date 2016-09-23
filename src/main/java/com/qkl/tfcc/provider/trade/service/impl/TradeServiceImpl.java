@@ -57,6 +57,6 @@ public class TradeServiceImpl implements TradeService {
 	@Override
 	public BigDecimal findAnmt(String userCode, String versionNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return tradeDetailDao.findTradeAmnt(userCode);
 	}
 }

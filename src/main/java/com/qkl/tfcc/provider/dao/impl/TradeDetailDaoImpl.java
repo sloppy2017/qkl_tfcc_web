@@ -1,5 +1,6 @@
 package com.qkl.tfcc.provider.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -46,8 +47,14 @@ public class TradeDetailDaoImpl extends DaoSupport<TradeDetail> implements Trade
 
 	@Override
 	public int findTradeCount(PageData pd) {
-		int tradecount = getSqlSession().selectOne(namespace+"."+"findTradeCount", pd);
-		return tradecount;
+		/*int tradecount = getSqlSession().selectOne(namespace+"."+"findTradeCount", pd);*/
+		return 0;
+	}
+
+	@Override
+	public BigDecimal findTradeAmnt(String userCode) {
+		BigDecimal findTradeAmnt = getSqlSession().selectOne(namespace+"."+"findTradeAmnt", userCode);
+		return findTradeAmnt;
 	}
 
 	

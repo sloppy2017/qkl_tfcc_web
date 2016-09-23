@@ -22,6 +22,7 @@ import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.api.service.acc.api.BankAccService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.api.service.trade.api.TradeService;
+import com.qkl.tfcc.api.service.user.api.UserService;
 import com.qkl.tfcc.provider.user.service.impl.UserDetailServiceImpl;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
@@ -40,6 +41,9 @@ public class BankAccController extends BaseAction {
 	private TradeService tradeService;
 	@Autowired
 	private SysGenCodeService sysGenCodeService;
+	@Autowired
+	private UserService userService;
+	
 	
 	/*@Autowired
 	private  UserDetailServiceImpl userDetailServiceImpl;*/
@@ -160,7 +164,37 @@ public class BankAccController extends BaseAction {
 			pd.put("operator", user.getPhone());
 			pd.put("userCode", user.getUserCode());
 			
-			String txamnt1 = pd.getString("txamnt");
+			
+			
+			String userCode = user.getUserCode();
+			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
+			int freezeFlag = Integer.parseInt(userDetail.getFreezeFlag());
+			if (freezeFlag!=0) {
+				pd.put("userCode", userCode);
+				BigDecimal findAnmt = tradeService.findAnmt(userCode, Constant.VERSION_NO);
+				String txamnt1 = pd.getString("txamnt");
+				BigDecimal txamnt2=new BigDecimal(txamnt1);
+				double value = findAnmt.add(txamnt2).doubleValue();
+					if (value<=50000.00) {
+						boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
+						if (addTradeDetail) {
+							ar.setSuccess(true);
+							ar.setMessage("订单已生成，请及时付款");
+						}else {
+							ar.setSuccess(false);
+							ar.setMessage("网络异常，购买失败！");
+						}
+					}else {
+						ar.setSuccess(true);
+						ar.setMessage("购买金额已经超过规定额度");
+					}
+										
+			}else {
+				ar.setSuccess(false);
+				ar.setMessage("您没有购买资格");	
+			}
+			
+			/*String txamnt1 = pd.getString("txamnt");
 			if (txamnt1!=null&&!"".equals(txamnt1)) {
 					BigDecimal txamnt2=new BigDecimal(txamnt1);
 					double txamnt = txamnt2.doubleValue();
@@ -198,7 +232,7 @@ public class BankAccController extends BaseAction {
 				ar.setMessage("请选择购买数量");
 				return ar;
 			}
-			
+			*/
 			
 			
 			
