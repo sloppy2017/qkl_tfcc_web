@@ -289,7 +289,7 @@
 	    }
 	}
 	$('.form1 .submit').click(function(){
-		$('.body-o').css('overflow','hidden');
+//		$('.body-o').css('overflow','hidden');
 		var validPhone = valid_phone($(this).parent().find("input[name='phone']"));
 		var validPassword = valid_password($(this).parent().find("input[name='password']"));
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
@@ -299,7 +299,7 @@
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
 			return;
 		}
-			if(!checked.checked==false){
+			if(!checked.checked){
 			return;
 		}
 		$.ajax({
@@ -359,7 +359,8 @@
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
-		if(!checked.checked==false){
+		if(!checked.checked){
+			
 			return;
 		}	
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
@@ -380,17 +381,20 @@
 	});
 	
 $('.myagree span').click(function(){
-	$('.body-o').css('overflow','hidden');
-	$('.myagree-hid').show();
+//	$('.body-o').css('overflow','hidden');
+//	$('.myagree-hid').show();
 })
 
 $('.hid-x').click(function(){
-	$('.body-o').css('overflow','visible');
-	$('.myagree-hid').hide();
+//	$('.body-o').css('overflow','visible');
+//	$('.myagree-hid').hide();
 })
 $('.mark1 a').click(function(){
-	$('.body-o').css('overflow','visible');
+//	$('.body-o').css('overflow','visible');
 })
 $('.mark2 a').click(function(){
-	$('.body-o').css('overflow','visible');
+//	$('.body-o').css('overflow','visible');
 })
+
+
+
