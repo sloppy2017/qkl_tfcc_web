@@ -1,236 +1,168 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>TFCC发行系统</title>
-	<meta name="description" content="原油币（TFCC）发行及推广系统">
-	<meta name="keywords" content="原油，币，TFCC，会员，管理，系统，区块链">
-	<link rel="stylesheet" href="../resources/qkl_tfcc/css/common/reset.css">
-	<link rel="stylesheet" href="../resources/qkl_tfcc/css/login/login.css">
-	
+ <!doctype html>
+ <html lang="en">
+	<head>
+ 		<meta charset="UTF-8">
+ 		<title>TFCC发行系统</title>
+ 		<meta name="description" content="原油币（TFCC）发行及推广系统">
+ 		<meta name="keywords" content="原油，币，TFCC，会员，管理，系统，区块链">
+		<link rel="stylesheet" href="../resources/qkl_tfcc/css/common/reset.css">
+	<link rel="stylesheet" href="../resources/qkl_tfcc/css/index/index.css">
 	<link rel="stylesheet" href="../resources/qkl_tfcc/css/common/style.css">
-	<script src="../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
-	<script src="../resources/qkl_tfcc/js/common/jquery.event.drag-1.5.min.js"></script>
-	<script src="../resources/qkl_tfcc/js/common/jquery.touchSlider.js"></script>
-	<style>	
-		/*.swiper-pagination {
-		  position: absolute;
-		  z-index: 20;
-		  left: 50%;
-		  bottom: 10px;
+		<script src="../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
+		<script src="../resources/qkl_tfcc/js/common/jquery.event.drag-1.5.min.js"></script>
+		<script src="../resources/qkl_tfcc/js/common/jquery.touchSlider.js"></script>
+		<style>
+			.login-form {
+		
+				position: absolute;
+				top: 0;
+				left: 0;
+			width: 100%;
 		}
-		.swiper-pagination-switch {
-		  display: inline-block;
-		  width: 8px;
-		  height: 8px;
-		-ms-border-radius:8px;
-		  border-radius: 8px;
-		  background: #222;
-		  margin-right: 5px;
-		  opacity: 0.8;
-		  border: 1px solid #fff;
-		  cursor: pointer;
-		}
-		.swiper-visible-switch {
-		  background: #aaa;
-		}
-		.swiper-active-switch {
-		  background: #fff;
-		}*/
+		</style>
+	</head>
 
-.login-form{
-	position: absolute;
-	top:0;
-	left:0;
-	width:100%;
-}
-
-	</style>
-</head>
-<body>
-
-<div class="container">
-	<!-- 头部开始 -->
-	<div class="header fix">
-		<div class="head-top">
-			<div class="logo">
-				<img src="../resources/qkl_tfcc/imgs/logos.png" alt="">
+	<body>
+		<div class="container">
+			<!-- 头部开始 -->
+			<div class="header fix">
+				<div class="head-top">
+					<div class="logo">
+						<img src="../resources/qkl_tfcc/imgs/logos.png" alt="">
+					</div>
+					<ul class="nav">
+						<!--<li><a href="">原油币TFCC会员管理系统</a><span></span></li>
+			<li><a href="">R8数字资产交易所</a><span></span></li>
+			<li><a href=""> 帮助 </a></li>-->
+					</ul>
 			</div>
-			<ul class="nav">
-				<!--<li><a href="">原油币TFCC会员管理系统</a><span></span></li>
-				<li><a href="">R8数字资产交易所</a><span></span></li>
-				<li><a href=""> 帮助 </a></li>-->
-			</ul>
-		</div>		
-	</div>
+			</div>
 
-
-	<!-- 内容开始 -->
-	<div class="content ">
-		<div class="login ">
-		<!--	<div class="swiper-container">-->	
-				<div class="main_visual" >
-					<div class="flicking_con">
-						<a href="#">1</a>
-						<a href="#">2</a>
-						<a href="#">3</a>
-					
+			<!-- 内容开始 -->
+			<div class="content ">
+				<div class="login ">
+					<div class="main_visual">
+						<div class="flicking_con">
+							<a href="#">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
 					</div>
-					<div class="main_image">
-						<ul>
-							<li><span class="img_3" style="background:url('../resources/qkl_tfcc/imgs/banner1.jpg') no-repeat center"></span></li>
-							<li><span class="img_4" style="background:url('../resources/qkl_tfcc/imgs/banner2.jpg') no-repeat center"></span></li>
-							<li><span class="img_1" style="background:url('../resources/qkl_tfcc/imgs/banner3.jpg') no-repeat center"></span></li>
-							<!--<li><span class="img_2"></span></li>
-							<li><span class="img_5"></span></li>-->
-						</ul>
-						<a href="javascript:;" id="btn_prev"></a>
-						<a href="javascript:;" id="btn_next"></a>
-					</div>
-				</div>
-				
-			<div class="login-form">
-				<div class="data-width">
-					<div class="register">
-						<form action="" class="form1" method="post">
-							<div class="form-h">
-								<h3>会员账号登陆</h3>
-								<h4><a href="../register/resources/qkl_tfcc/register.html">没有账号?</a></h4>
-							</div>
-							<ul class="form-input1">
-								<li>
-									<span style="background:url('../resources/qkl_tfcc/imgs/icon1.png');top:8px;left:10px;"></span>
-									<input type="text" maxlength="11" name="phone" class="phone"  placeholder="请输入手机号"  ><em class="error1"></em>
-								</li>
-								<li>
-									<span style="background:url('../resources/qkl_tfcc/imgs/icon2.png');top:6px;left:10px;"></span>
-									<input type="text" name="password" class="pass" placeholder="请输入登陆密码" maxlength="16"  ><em class="error1"></em></li>
-								<li class="fix">
-									<input type="text" class="xiaoyan" name="yzm" placeholder="请输入验证码" >
-									<p class="fr" id="check-code">TFCC</p>
-									<em class="error1"></em>
-								</li>
-								<li><input type="checkbox" class="sure fl" checked="checked"><h5>请记住手机号</h5></li>
-								<li>
-									<a href="" class="submit sub-a" style="color:#fff;background:#3884c9;border:none">登录</a>
-								</li>
-								<li class="input-reg">
-									<p class="fl"><a href="../register/register.html" >免费注册</a></p>
-									<p class="fr"><a style="color:#fa5a49" href="../forget/forget-password.html">忘记密码？</a></p>
-								</li>
+						<div class="main_image">
+							<ul>
+								<li><span class="img_3" style="background:url('../resources/qkl_tfcc/imgs/banner1.jpg') no-repeat center"></span></li>
+								<li><span class="img_4" style="background:url('../resources/qkl_tfcc/imgs/banner2.jpg') no-repeat center"></span></li>
+								<li><span class="img_1" style="background:url('../resources/qkl_tfcc/imgs/banner3.jpg') no-repeat center"></span></li>
 							</ul>
-						</form>
+						<a href="javascript:;" id="btn_prev"></a>
+							<a href="javascript:;" id="btn_next"></a>
+						</div>
+				</div>
+
+					<!--登录表单-->
+					<div class="login-form">
+						<div class="data-width">
+							<div class="register">
+								<form action="" class="form1" method="post">
+									<div class="form-h">
+										<h3>会员账号登陆</h3>
+										<h4><a href="../register/resources/qkl_tfcc/register.html">没有账号?</a></h4>
+									</div>
+												<ul class="form-input1">
+										<li class="w250">
+											<span style="background:url('../resources/qkl_tfcc/imgs/icon1.png');top:8px;left:10px;"></span>
+											<input type="text" name="phone" class="phone"  placeholder="请输入手机号"   maxlength="11"><em class="error1"></em>
+										</li>
+										<li class="w250">
+											<span style="background:url('../resources/qkl_tfcc/imgs/icon2.png');top:6px;left:10px;"></span>
+											<input type="password" name="password" class="pass" placeholder="请输入登录密码" maxlength="20" >
+											<em class="error1"></em>
+										</li>
+										<li class="fix wm">	
+											
+											<input type="text" class="xiaoyan" id="yzm" name="yzm" placeholder="请输入验证码" maxlength="6" >
+											<p class="fr" id="check-code"></p>
+											<em class="error1"></em>
+										</li>
+										<li><input type="checkbox" class="sure fl" checked="checked"><h5>请记住手机号</h5></li>
+										<li>
+											
+			                                <a  class="submit"  style="color:#fff;background:#3884c9;border:none">登&nbsp;录</a>
+										</li>
+										<li class="input-reg">
+											<p class="fl"><a href="/view/register.html" >免费注册</a></p>
+											<p class="fr"><a style="color:#fa5a49" href="wiew/forget-password.html">忘记密码？</a></p>
+										</li>
+									</ul>
+							</form>
+						</div>
 					</div>
 				</div>
-				
-				</div>		
-				
-				<!--<div class="swiper-wrapper">
-					<div class="swiper-slide"><a href="" style="background:url('../../../resources/qkl_tfcc/imgs/banner1.jpg') no-repeat center"></a></div>
-					<div class="swiper-slide"><a href="" style="background:url('../../../resources/qkl_tfcc/imgs/banner2.jpg') no-repeat center"></a></div>
-					<div class="swiper-slide"><a href="" style="background:url('../../../resources/qkl_tfcc/imgs/banner3.jpg') no-repeat center"></a></div>
-				</div>-->
-				<!-- Add Pagination -->
-				<!--<div class="swiper-pagination"></div>-->
-				<!-- Add Arrows -->
-				<!--<div class="swiper-button-next"></div>
-				<div class="swiper-button-prev"></div>-->
-				
-				
-			<!--</div>-->
+			</div>
+		</div>
+		<div class="footer data-width">
+			<p class="address">©Copyright 2014-2016 r8exchange.COM All Rights Reserved. Powered by TFCC（北京）科技有限公司京ICP备13025163号-1</p>
 		</div>
 	</div>
-	
-	  <!--<table class="result-tab" width="100%">-->
-                            <!--<tr>-->
-                                <!--<th>用户名</th>-->
-                                <!--<th>id</th>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-             <!--<div class="pages1">-->
-                        <!--</div>-->
-	<!-- footer START -->
-	<div class="footer data-width">
-		<p class="address">©Copyright 2014-2016  r8exchange.COM  All Rights Reserved. Powered by TFCC（北京）科技有限公司京ICP备13025163号-1</p>
-	</div>
-</div>
-	<script src="../resources/qkl_tfcc/js/login/sub-login.js"></script>
-	<!--<script src="../../../resources/qkl_tfcc/js/common/swiper-3.3.1.min.js"></script>-->
-		<!--<script src="../../../resources/qkl_tfcc/js/common/idangerous.swiper2.7.6.min.js"></script>-->
-   <!-- Initialize Swiper -->
-    <script>
-//		var swiper = new Swiper('.swiper-container', {
-//			loop: true,
-//			pagination: '.swiper-pagination',
-//			paginationClickable: '.swiper-pagination',
-//			nextButton: '.swiper-button-next',
-//			prevButton: '.swiper-button-prev',
-//			autoplay: 3000,
-//			autoplayDisableOnInteraction: false,
-//		});
-    </script>
-  
-  
-  
-  <script>
-  	
-  	 $(document).ready(function(){
-
-	$(".main_visual").hover(function(){
-		$("#btn_prev,#btn_next").fadeIn()
-	},function(){
-		$("#btn_prev,#btn_next").fadeOut()
-	});
-	
-	$dragBln = false;
-	
-	$(".main_image").touchSlider({
-		flexible : true,
-		speed : 200,
-		btn_prev : $("#btn_prev"),
-		btn_next : $("#btn_next"),
-		paging : $(".flicking_con a"),
-		counter : function (e){
-			$(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
-		}
-	});
-	
-	$(".main_image").bind("mousedown", function() {
-		$dragBln = false;
-	});
-	
-	$(".main_image").bind("dragstart", function() {
-		$dragBln = true;
-	});
-	
-	$(".main_image a").click(function(){
-		if($dragBln) {
-			return false;
-		}
-	});
-	
-	timer = setInterval(function(){
-		$("#btn_next").click();
-	}, 5000);
-	
-	$(".main_visual").hover(function(){
-		clearInterval(timer);
-	},function(){
-		timer = setInterval(function(){
-			$("#btn_next").click();
-		},5000);
-	});
-	
-	$(".main_image").bind("touchstart",function(){
-		clearInterval(timer);
-	}).bind("touchend", function(){
-		timer = setInterval(function(){
-			$("#btn_next").click();
-		}, 5000);
-	});
-	
-});
-  </script>
    
-</body>
-</html>
+  		<script src="../resources/qkl_tfcc/js/login/sub-login.js"></script>
+	<script>
+   			$(document).ready(function() {
+  
+   				$(".main_visual").hover(function() {
+				$("#btn_prev,#btn_next").fadeIn()
+			}, function() {
+				$("#btn_prev,#btn_next").fadeOut()
+   				});
+   
+   				$dragBln = false;
+   
+   				$(".main_image").touchSlider({
+				flexible: true,
+				speed: 200,
+				btn_prev: $("#btn_prev"),
+				btn_next: $("#btn_next"),
+				paging: $(".flicking_con a"),
+				counter: function(e) {
+					$(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+   					}
+   				});
+  
+   				$(".main_image").bind("mousedown", function() {
+   					$dragBln = false;
+   				});
+   
+   				$(".main_image").bind("dragstart", function() {
+   					$dragBln = true;
+   				});
+   
+   				$(".main_image a").click(function() {
+				if($dragBln) {
+					return false;
+				}
+			});
+			timer = setInterval(function() {
+				$("#btn_next").click();
+   				}, 3000);
+   
+   				$(".main_visual").hover(function() {
+				clearInterval(timer);
+			}, function() {
+				timer = setInterval(function() {
+					$("#btn_next").click();
+   					}, 3000);
+   				});
+   
+   				$(".main_image").bind("touchstart", function() {
+				clearInterval(timer);
+			}).bind("touchend", function() {
+				timer = setInterval(function() {
+					$("#btn_next").click();
+   					}, 3000);
+   				});
+   
+   			});
+   		</script>
+  
+   	</body>
+   
+   </html>

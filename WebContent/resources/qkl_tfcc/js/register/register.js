@@ -295,7 +295,11 @@
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
+				var checked = $('.myagree input[type=checkbox]');
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
+			return;
+		}
+			if(!checked.checked==false){
 			return;
 		}
 		$.ajax({
@@ -350,11 +354,14 @@
 		var validIdno = valid_idno($(this).parent().find("input[name='idno']"));
 		var validCropPerson = valid_realName($(this).parent().find("input[name='realName']"));
 		var validCropName = valid_cropName($(this).parent().find("input[name='cropName']"));
+		var checked = $('.myagree input[type=checkbox]');
 		
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
-		
+		if(!checked.checked==false){
+			return;
+		}	
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
 		url = encodeURI(url);
 		$.ajax({
