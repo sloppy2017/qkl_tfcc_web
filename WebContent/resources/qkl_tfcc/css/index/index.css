@@ -172,6 +172,7 @@
 .form-input1 .checkedC{
     border: 1px solid #1ece6d;
 }
+
 .form-input1 li span{
     display:inline-block;
     width:20px;
@@ -184,17 +185,33 @@
     text-indent: 12px;
    	outline: none;
 	border: 1px solid #8c8c8c;
+	*margin-left:-10px;
 }
+
 .form-input1 .sure{
-    width:20px;
-    height:20px;
+    width:16px;
+    height:16px;
     margin-right: 20px;
     margin-bottom:0px;
+
 }
+ .form-input1 .mind-my{
+ 	height:6px;
+ 	*margin-top:-10px;
+ }
+.form-input1 .mind{
+	/*display: inline-block;*/
+	position: absolute;
+	left:20px;
+	top:0px;
+}
+
 .input-reg p{
     margin:0;
 }
+
 #check-code{
+	margin-left:10px;
 	cursor: pointer;
     margin-right: 32px;
     width: 62px;

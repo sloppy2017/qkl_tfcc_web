@@ -19,8 +19,12 @@ body{width:100%;margin:0 auto;overflow:hidden}*/
 
 
 div.flicking_con{position:absolute;top:412px;left:50%;z-index:999;width:300px;height:21px;margin:0 0 0 -50px;}
-div.flicking_con a{float:left;width:21px;height:21px;margin:0;padding:0;background:url('../../imgs/btn_main_img.png') 0 0 no-repeat;display:block;text-indent:-1000px}
+div.flicking_con a{float:left;width:21px;height:21px;margin:0;padding:0;background:url('../../imgs/btn_main_img.png') 0 0 no-repeat;display:block;text-indent:-1000px;
+/*以下为IE6设置PNG透明代码*/
+  
+    _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../imgs/btn_main_img.png");
+}
 div.flicking_con a.on{background-position:0 -21px}
 #btn_prev,#btn_next{z-index:11111;position:absolute;display:block;width:73px!important;height:74px!important;top:50%;margin-top:-37px;display:none;}
-#btn_prev{background:url(../../imgs/hover_left.png) no-repeat left top;left:100px;}
-#btn_next{background:url(../../imgs/hover_right.png) no-repeat right top;right:100px;}
+#btn_prev{background:url(../../imgs/hover_left.png) no-repeat left top;left:100px;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../imgs/hover_left.png");}
+#btn_next{background:url(../../imgs/hover_right.png) no-repeat right top;right:100px;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../imgs/hover_right.png");}

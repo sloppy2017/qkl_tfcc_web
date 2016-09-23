@@ -6,8 +6,8 @@
  		<meta name="description" content="原油币（TFCC）发行及推广系统">
  		<meta name="keywords" content="原油，币，TFCC，会员，管理，系统，区块链">
 		<link rel="stylesheet" href="../resources/qkl_tfcc/css/common/reset.css">
-	<link rel="stylesheet" href="../resources/qkl_tfcc/css/index/index.css">
-	<link rel="stylesheet" href="../resources/qkl_tfcc/css/common/style.css">
+		<link rel="stylesheet" href="../resources/qkl_tfcc/css/index/index.css">
+		<link rel="stylesheet" href="../resources/qkl_tfcc/css/common/style.css">
 		<script src="../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
 		<script src="../resources/qkl_tfcc/js/common/jquery.event.drag-1.5.min.js"></script>
 		<script src="../resources/qkl_tfcc/js/common/jquery.touchSlider.js"></script>
@@ -20,6 +20,25 @@
 			width: 100%;
 		}
 		</style>
+		<script> 		
+			//平台、设备和操作系统
+			var system ={
+			win : false,
+			mac : false,
+			xll : false
+			};
+			//检测平台
+			var p = navigator.platform;			 
+			system.win = p.indexOf("Win") == 0;
+			system.mac = p.indexOf("Mac") == 0;
+			system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+			//跳转语句
+			if(system.win||system.mac||system.xll){//转向后台登陆页面
+			 
+			}else{
+			window.location.href="./mobile/login.html";
+			}
+</script>
 	</head>
 
 	<body>
@@ -67,7 +86,7 @@
 										<h3>会员账号登陆</h3>
 										<h4><a href="../register/resources/qkl_tfcc/register.html">没有账号?</a></h4>
 									</div>
-												<ul class="form-input1">
+									<ul class="form-input1">
 										<li class="w250">
 											<span style="background:url('../resources/qkl_tfcc/imgs/icon1.png');top:8px;left:10px;"></span>
 											<input type="text" name="phone" class="phone"  placeholder="请输入手机号"   maxlength="11"><em class="error1"></em>
@@ -77,13 +96,13 @@
 											<input type="password" name="password" class="pass" placeholder="请输入登录密码" maxlength="20" >
 											<em class="error1"></em>
 										</li>
-										<li class="fix wm">	
-											
+										<li class="fix wm">											
 											<input type="text" class="xiaoyan" id="yzm" name="yzm" placeholder="请输入验证码" maxlength="6" >
-											<p class="fr" id="check-code"></p>
+											<!--<p class="fr" id="check-code"></p>-->
+												<span id="check-code"></span>
 											<em class="error1"></em>
 										</li>
-										<li><input type="checkbox" class="sure fl" checked="checked"><h5>请记住手机号</h5></li>
+										<li class="mind-my"><input type="checkbox" class="sure fl" checked="checked"><h5 class="mind">请记住手机号</h5></li>
 										<li>
 											
 			                                <a  class="submit"  style="color:#fff;background:#3884c9;border:none">登&nbsp;录</a>
