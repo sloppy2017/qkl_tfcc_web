@@ -3,7 +3,9 @@ package com.qkl.tfcc.controller.User;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -38,8 +40,13 @@ public class ComTeamVipController extends BaseAction{
 		ComTeamVip count=null;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			pd=this.getPageData();
-			String userCode= user.getUserCode();
+			String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}
+			pd=this.getPageData();			
 			pd.put("userCode", userCode);
 			count = vipservice.findcount(userCode);
 			ar.setSuccess(true);
@@ -62,6 +69,13 @@ public class ComTeamVipController extends BaseAction{
 		try {
 			pd = this.getPageData();
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+			String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}
+			
 	//		String querycontdiction1 = request.getParameter("querycontdiction1");//获取下拉框对应的输入的值
 	//		String querycontdiction2 = request.getParameter("querycontdiction2");//获取下拉框对应的输入的值
 			String currentPage = request.getParameter("currentPage");
@@ -109,7 +123,7 @@ public class ComTeamVipController extends BaseAction{
 			}
 			
 			
-			String userCode=user.getUserCode();
+			
 			pd.put("userCode", userCode);
 			pd.put("relalevel", relalevel);			
 			pd.put("relalva", relalva);

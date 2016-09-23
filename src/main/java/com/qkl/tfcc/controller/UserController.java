@@ -1360,10 +1360,17 @@ public class UserController extends BaseAction{
     }
 	
 	private UserDetail findUserDetail(HttpServletRequest request){
+		
 	    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-	    if(user == null)
+	    String userCode ="";
+	    if(user==null){
+	    	userCode =request.getParameter("userCode");
+	    }else{
+	    	userCode = user.getUserCode();
+	    }
+	    if(userCode == null||userCode.equals(""))
 	        return null;
-	    UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
+	    UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
 	    return userDetail;
 	}
 	

@@ -39,8 +39,12 @@ public class ComAccMyController extends BaseAction {
 		Map<String, Object> nums=null;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			
-			String userCode=user.getUserCode();
+			String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}			
 			nums = cams.findNum(userCode);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
@@ -57,8 +61,15 @@ public class ComAccMyController extends BaseAction {
 	public  AjaxResponse getAmnt(HttpServletRequest request){
 	    try {
 	        User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+	        String userCode="";	       
+	        if(user==null){
+	        	userCode=request.getParameter("userCode");
+	        }else{
+	        	userCode=user.getUserCode();
+	        }
+	        
 	        PageData accPd = new PageData();
-	        accPd.put("user_code", user.getUserCode());
+	        accPd.put("user_code", userCode);
 	        accPd = cams.getAmnt(accPd);
 	        if(accPd!=null){
 	            ar.setSuccess(true);
