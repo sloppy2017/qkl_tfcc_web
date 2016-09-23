@@ -11,8 +11,10 @@ $(function(){
 	        	//可用SAN
 	        	if(data.data.avb_amnt!=null&&data.data.avb_amnt!=""&&data.data.avb_amnt!='undefined'){
 	        		$("#avb_amnt").text(data.data.avb_amnt);
+	        		$("#zid").text(data.data.avb_amnt);
 	        	}else{
 	        		$("#avb_amnt").text("0.0000");
+	        		$("#zid").text("0.0000");
 	        	}
 	        	//冻结SAN
 	        	if(data.data.froze_amnt!=null&&data.data.froze_amnt!=""&&data.data.froze_amnt!='undefined'){
