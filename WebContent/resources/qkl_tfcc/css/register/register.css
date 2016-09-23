@@ -100,7 +100,7 @@
 .form div input{
     width:310px;
     height:40px;
-    line-height: 40px;
+    line-height: 40px;  
 }
 .form div label span{
     color:#ef807a;
@@ -129,7 +129,8 @@
     vertical-align: middle;
 }
 .myagree-hid {
-	position:absolute;
+	 position:fixed; 
+	_position:absolute; ;
 	top:0;
 	left:0;
 	width:100%;
