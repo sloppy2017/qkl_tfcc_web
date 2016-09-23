@@ -96,28 +96,16 @@
 
             <!--转账位置-->
             <div class="trans-account">
-                <div class="main-top"><span>您当前的位置：</span><span>我的账户</span>><span class="c28">转账</span></div>
+                <div class="main-top"><span>您当前的位置：</span><span>我的账户</span>><span class="c28">账户</span></div>
                 <div class="trans-wrap">
-                    <p></p>
-                    
-                     <div class="trans-tfcc">
-                        <p>对方账户</p>
-                        <input type="text" name="zfb" id="zhanghao" placeholder="请输入对方账号"><span style="color:red">&nbsp;*</span>
-                        <span class="errorc"></span>
-                    </div>
+                    <p>转账至R8交易所账户中</p>
                     <div class="trans-tfcc">
-                        <p>转账额度</p>
-                        <input type="text" name="money" id="zhuanzhang" onkeyup='this.value=this.value.replace(/\D/gi,"")' placeholder="请输入需转账额度">您的可用额度为&nbsp;&nbsp;<span id= "zid" style="color:red">&nbsp;*</span>
-                        <span class="errorc"></span>
-                        <div><a href="#" class="tfcc-btn" id="tijiao" onclick="save()">提交</a> <a href="">返回</a></div>
-                    </div>
-                   <!--  <div class="trans-tfcc">
                         <p>转账额度</p>
                         <input type="text"name="money" placeholder="请输入需转账额度">
                         <span>您最多可转账额度为 40,000.00</span><span class="t_trans">全部转账</span>
                         <span class="errorc"></span>
                         <div><a href="#" class="tfcc-btn" onclick="save()">保存</a> <a href="">返回</a></div>
-                    </div> -->
+                    </div>
                 </div>
 
                 <div class="trans-jfcc"></div>
@@ -142,9 +130,8 @@
         </div>
     </div>
 </div>
-<script src="/resources/qkl_tfcc/js/date/dateCom.js"></script>
+<script src="../../../resources/qkl_tfcc/js/common/dateCom.js"></script>
 <script src="../../../resources/qkl_tfcc/js/invest/in-account.js"></script>
-<script src="/resources/qkl_tfcc/js/general_vip/general_account.js"></script>
 <script type="text/javascript">
   $(function(){
 	  //移除错误提示

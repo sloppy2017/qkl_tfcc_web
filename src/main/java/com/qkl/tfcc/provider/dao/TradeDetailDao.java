@@ -1,6 +1,5 @@
 package com.qkl.tfcc.provider.dao;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.qkl.tfcc.api.entity.Page;
@@ -43,12 +42,7 @@ public interface TradeDetailDao extends DAO<TradeDetail> {
 	 */
 	public int findTradeCount(PageData pd);
 	
-	/**
-	 * 查询单个用户的交易额总量
-	 * @param userCode
-	 * @return
-	 */
 	
-	public BigDecimal findTradeAmnt(String userCode);
+	
 	
 }

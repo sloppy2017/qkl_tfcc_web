@@ -2,7 +2,6 @@ package com.qkl.tfcc.provider.dao;
 
 import com.qkl.tfcc.api.po.user.UserFriendship;
 import com.qkl.tfcc.provider.dbhelper.DAO;
-import com.qkl.util.help.pager.PageData;
 
 public interface UserFriendshipDao extends DAO<UserFriendship> {
 
@@ -40,12 +39,5 @@ public interface UserFriendshipDao extends DAO<UserFriendship> {
 	 * @create date 2016年8月25日
 	 */ 
 	public void modifyCalflag(UserFriendship userFriendship);
-	/**
-	 * @describe:查询用户关系
-	 * @author: zhangchunming
-	 * @date: 2016年9月23日下午6:55:54
-	 * @param pd
-	 * @return: boolean
-	 */
-	public boolean  isFriend(PageData pd);
+	
 }

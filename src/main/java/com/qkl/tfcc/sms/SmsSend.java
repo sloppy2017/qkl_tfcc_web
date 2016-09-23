@@ -11,15 +11,12 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.HttpTool;
 import com.qkl.util.help.MD5Util;
 
 public class SmsSend {
 
-    private static Logger logger = LoggerFactory.getLogger(SmsSend.class);
+	
 	private static String Url = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";
 	
 	private static String account="cf_dingyao";
@@ -41,8 +38,8 @@ public class SmsSend {
 
 		//System.out.println(mobile);
 		
-	    String content = new String("您的验证码是：【"+mobile_code+"】,30分钟内有效，如非本人操作，请忽略本短信。");
-	    logger.info(content);
+	    String content = new String("您的验证码是：" + mobile_code + ",30分钟内有效，如非本人操作，请忽略本短信。");
+
 		NameValuePair[] data = {//提交短信
 			    new NameValuePair("account", account), 
 //			    new NameValuePair("password", "密码"), //密码可以使用明文密码或使用32位MD5加密
