@@ -7,7 +7,7 @@ var num1=1;
 
 $.jqPaginator('#paginationUser', {
 		        totalPages: 100,
-		        visiblePages:10,
+		        visiblePages:5,
 		        currentPage: 1, 
 		         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
 		         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
