@@ -49,13 +49,13 @@ public class ComAccMyServiceImpl implements ComAccMyService {
         String format3="";
         
         if (findTTReward!=null) {
-            format1 = String .format("%.4f",findTTReward);
+            format1 = String.format("%.4f",findTTReward);
         }
         if (findTB!=null) {
-             format2 = String .format("%.4f",findTB);
+             format2 = String.format("%.4f",findTB);
         }
         if (findReward!=null) {
-             format3 = String .format("%.4f",findReward);
+             format3 = String.format("%.4f",findReward);
         }
         
         
@@ -77,17 +77,19 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 		pd.put("user_code", userCode);
 		pd = comAccMyDao.getAmnt(pd);
 		if(pd!=null){
-		    map.put("avb_amnt", pd.get("avb_amnt")==null?"0.0000":pd.get("avb_amnt").toString());
-		    map.put("froze_amnt", pd.get("froze_amnt")==null?"0.0000":pd.get("froze_amnt").toString());
-		    map.put("total_amnt", pd.get("total_amnt")==null?"0.0000":pd.get("total_amnt").toString());
+		    map.put("avb_amnt", pd.get("avb_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(pd.get("avb_amnt").toString())));
+		    map.put("froze_amnt", pd.get("froze_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(pd.get("froze_amnt").toString())));
+		    map.put("total_amnt", pd.get("total_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(pd.get("total_amnt").toString())));
 		}
 		//查询投资机构发放给我的SAN奖励
 		BigDecimal findFFReward = comAccMyDao.findFFReward(userCode);
 		if(findFFReward == null){
 		    findFFReward = new BigDecimal("0");
 		}
-		map.put("totalGMJL", totalGMJL);
-		map.put("totalReward", totalGMJL.add(findFFReward));
+		String totalGMJL1 = String.format("%.4f",totalGMJL);
+		String totalReward1 = String.format("%.4f",totalGMJL.add(findFFReward));
+		map.put("totalGMJL", totalGMJL1);
+		map.put("totalReward", totalReward1);
 		return map;
 	}
 
@@ -95,6 +97,8 @@ public class ComAccMyServiceImpl implements ComAccMyService {
     public PageData getAmnt(PageData pd) {
         return comAccMyDao.getAmnt(pd);
     }
-
+    public static void main(String[] args) {
+		System.out.println(String.format("%.4f",new BigDecimal("0.12")));
+	}
 	
 }
