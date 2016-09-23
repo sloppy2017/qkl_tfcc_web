@@ -1,5 +1,6 @@
 $(function() {
 	var phone = $.cookie('phone');
+	$("#password").val('');
 	if(phone != 'undefined'){
 		$("#phone").val(phone);
 		$("#saveid").attr("checked",true);
