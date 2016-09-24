@@ -41,9 +41,17 @@ public class ComAccMyServiceImpl implements ComAccMyService {
         Map<String, Object> map=new HashMap<String, Object>();
         
         BigDecimal findTTReward = comAccMyDao.findTTReward(userCode);
+        if (findTTReward==null) {
+        	findTTReward = new BigDecimal("0");
+		}
         BigDecimal findTB = comAccMyDao.findTB(userCode);
+        if (findTB==null) {
+        	findTB = new BigDecimal("0");
+		}
         BigDecimal findReward = comAccMyDao.findReward(userCode);
-        
+        if (findReward==null) {
+        	findReward = new BigDecimal("0");
+		}
         String format1="";
         String format2="";
         String format3="";

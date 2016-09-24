@@ -358,18 +358,13 @@
 		var validIdno = valid_idno($(this).parent().find("input[name='idno']"));
 		var validCropPerson = valid_realName($(this).parent().find("input[name='realName']"));
 		var validCropName = valid_cropName($(this).parent().find("input[name='cropName']"));
-	/*	var checkedss = $('.myagree input[type=checkbox]');*/
-		
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
-//		if(checkedss.checked==false){			
-//			return;
-//		}	
+		
 		$('.form3 .submit').unbind("click");
 		$('.form3 .submit a').css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
 		$('.form3 .submit a').css("background-size","50px 60px");
-		
 		$('.form3 .submit').unbind('click');
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
 		url = encodeURI(url);
@@ -388,28 +383,18 @@
 		});
 	});
 	
+	
 $('.myagree span').click(function(){
 
  $('.myagree-hid').show();
 })
-
 $('.hid-x').click(function(){
 	$('.myagree-hid').hide();
 })
 
-
-$('.mark1 a').click(function(){
-//	$('.body-o').css('overflow','visible');
-})
-$('.mark2 a').click(function(){
-//	$('.body-o').css('overflow','visible');
-})
 $('.myagree input').click(function(){
 	this.checked = !this.checked; 
 })
-
-
-
 
 
 

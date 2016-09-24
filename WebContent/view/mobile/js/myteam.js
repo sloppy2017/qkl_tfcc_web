@@ -33,6 +33,9 @@ function recommend(){
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)
+			if(msg.data==null){
+				$("#rNum").text("0");
+			}
 			$("#rNum").text(msg.data.rNum);
 		}
 	});
@@ -42,11 +45,11 @@ function findTTnub(){
 	console.log(usercode)
 	$.ajax({
 		type:"post",
-		url:"/service/comacc/findNums",
+		url:"/service/comacc/findMyAcc",
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)
-			var findTb=parseInt(msg.data.findTTReward);
+			var findTb=parseInt(msg.data.totalReward);
 			$("#findTTReward").text(findTb);
 		}
 	});
