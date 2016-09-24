@@ -141,7 +141,7 @@ function reload_table(currentPage,showCount) {
         },
         success: function (data) {
             var tviplist = data.data.tviplist;
-            if(tviplist.length==0){
+            if(tviplist.length==0||tviplist==null){
         		alert("没有符合条件的会员信息");
         	}
             var tablecols = "<tr> \n"

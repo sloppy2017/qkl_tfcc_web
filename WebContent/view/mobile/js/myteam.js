@@ -33,6 +33,9 @@ function recommend(){
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)
+			if(msg.data==null){
+				$("#rNum").text("0");
+			}
 			$("#rNum").text(msg.data.rNum);
 		}
 	});

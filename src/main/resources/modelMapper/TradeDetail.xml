@@ -88,7 +88,7 @@
 	 payno
 	 )
 	 values(
-	 #{user_code},
+	 #{userCode},
 	 #{txtype},
 	 #{cuy_type},
 	 #{txnum},

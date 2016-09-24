@@ -152,7 +152,7 @@ public class BankAccController extends BaseAction {
 			pd.put("revorgname",bankAccInfo.getOrgName());
 			pd.put("revbankdepname", bankAccInfo.getDepositBankname());
 			pd.put("revbankaccno", bankAccInfo.getBankaccno());
-			pd.put("user_code", user.getUserCode());
+			//pd.put("user_code", user.getUserCode());
 			pd.put("txtype", "1");
 			pd.put("cuy_type", "1");
 			pd.put("txdate", DateUtil.getCurrentDate());
@@ -162,22 +162,22 @@ public class BankAccController extends BaseAction {
 			pd.put("create_time", DateUtil.getCurrentDate());
 			pd.put("modify_time", DateUtil.getCurrentDate());
 			pd.put("operator", user.getPhone());
-			pd.put("userCode", user.getUserCode());
+			//pd.put("userCode", user.getUserCode());
 			
 			
 			
 			String userCode = user.getUserCode();
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
-			int freezeFlag = Integer.parseInt(userDetail.getFreezeFlag());
-			if (freezeFlag!=0) {
+			int freezeFlag = Integer.parseInt(userDetail.getFreezeFlag());//获取冻结标识
+			if (freezeFlag!=0) {//判断是否为冻结的用户
 				pd.put("userCode", userCode);
-				BigDecimal findAnmt = tradeService.findAnmt(userCode, Constant.VERSION_NO);
-				String txamnt1 = pd.getString("txamnt");
+				BigDecimal findAnmt = tradeService.findAnmt(userCode, Constant.VERSION_NO);//获取数据库中此用户的交易金额数量
+				String txamnt1 = pd.getString("txamnt");//获取再次购买的金额
 				BigDecimal txamnt2=new BigDecimal(txamnt1);
 				if(findAnmt==null){
 					findAnmt = new BigDecimal(0);
 				}
-				double value = findAnmt.add(txamnt2).doubleValue();
+				double value = findAnmt.add(txamnt2).doubleValue();//计算再次购买和数据库中的交易金额之和
 					if (value<=50000.00) {
 						boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
 						if (addTradeDetail) {
@@ -199,84 +199,7 @@ public class BankAccController extends BaseAction {
 				ar.setMessage("您没有购买资格");	
 			}
 			
-			/*String txamnt1 = pd.getString("txamnt");
-			if (txamnt1!=null&&!"".equals(txamnt1)) {
-					BigDecimal txamnt2=new BigDecimal(txamnt1);
-					double txamnt = txamnt2.doubleValue();
-					if (txamnt>=1000.00&&txamnt<=10000.00) {
-						int tradeCount = tradeService.findTradeCount(pd, Constant.VERSION_NO);
-							if (tradeCount<5) {
-								boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
-								if (addTradeDetail) {
-									ar.setSuccess(true);
-									ar.setMessage("订单已生成，请及时付款");
-								}else {
-									ar.setSuccess(false);
-									ar.setMessage("网络异常，购买失败！");
-								}
-								
-							}else{
-								ar.setSuccess(false);
-								ar.setMessage("购买次数已达5次");
-								return ar;		
-							}
-						
-						}else {
-							if(txamnt<1000.00){
-								ar.setMessage("单次购买金额不得低于1000.00元");	
-							}
-							if (txamnt>10000.00) {
-								ar.setMessage("单次购买金额不得高于10000.00元");
-							}
-							ar.setSuccess(false);
-							return ar;
-						}
-				
-			}else{
-				ar.setSuccess(false);
-				ar.setMessage("请选择购买数量");
-				return ar;
-			}
-			*/
 			
-			
-			
-			/*int tradeCount = tradeService.findTradeCount(pd, Constant.VERSION_NO);
-			if (tradeCount>=5) {
-				ar.setSuccess(false);
-				ar.setMessage("购买次数已达5次");
-				return ar;
-			}else{
-				String txamnt1 = pd.getString("txamnt");
-				
-				if(txamnt1!=null&&!"".equals(txamnt1)&&txamnt1.length()>0){
-					BigDecimal txamnt2=new BigDecimal(txamnt1);
-					double txamnt = txamnt2.doubleValue();
-					if (txamnt>=1000) {
-						tradeService.addTradeDetail(pd, Constant.VERSION_NO);
-						ar.setSuccess(true);
-						ar.setMessage("恭喜您，购买成功！"); 
-					}else{
-						ar.setSuccess(false);
-						ar.setMessage("单次购买金额不得低于1000.00元");
-						return ar;
-					}
-					if (txamnt>10000) {
-						ar.setSuccess(false);
-						ar.setMessage("单次购买金额不得高于10000.00元");
-						return ar;
-					}
-					
-				}else{
-					ar.setMessage("请选择购买数量");
-					return ar;
-				}
-				
-				
-				
-				
-				
-			}	*/
 			
 		} catch (Exception e) {
 			ar.setSuccess(false);
@@ -328,13 +251,5 @@ public class BankAccController extends BaseAction {
 		return ar;
 	}
 	
-	/*public static void main(String[] args) {
-		String str = "152.00";
-		PageData pdData = new PageData();
-		pdData.put("str", str);
-		System.out.println(pdData.getString("str"));
-		BigDecimal bigDecimal = new BigDecimal(pdData.getString("str"));
-		System.out.println(bigDecimal);
-	}*/
 	
 }
