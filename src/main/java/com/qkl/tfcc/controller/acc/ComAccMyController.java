@@ -47,7 +47,7 @@ public class ComAccMyController extends BaseAction {
 			}			
 			nums = cams.findMyAcc(userCode);
 			ar.setSuccess(true);
-			ar.setMessage("查询成功");
+			//ar.setMessage("查询成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);

@@ -83,7 +83,7 @@ $(function(){
 			    dataType:'json',
 			    success:function(data){
 			        if(data.success){    
-			        	alert(data.message);
+			        	//alert(data.message);
 			        	return false;
 			        }
 			       
