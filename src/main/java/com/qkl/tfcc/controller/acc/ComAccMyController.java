@@ -92,46 +92,35 @@ public class ComAccMyController extends BaseAction {
 	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		pd=this.getPageData();
-		Map<String, Object> findNum = cams.findNum(user.getUserCode());
+		Map<String, Object> findNum = cams.findMyAcc(user.getUserCode());
 		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
-		String money = pd.getString("money");
+		String money = pd.getString("money");//获取输入的SAN数量
 		while (iterator.hasNext()) {
 			Entry<String, Object> entry = iterator.next();
 			String key = entry.getKey();
-			if (key!=null&&"findTB".equals(key)) {
+			if (key!=null&&"avb_amnt".equals(key)) {
 			 //BigDecimal value = (BigDecimal) entry.getValue();
-				String string = entry.getValue().toString();
-					BigDecimal bigDecimal2=null;
+				String string = entry.getValue().toString();//获取可用余额
 					try {
-						bigDecimal2 = new BigDecimal(string);
+						BigDecimal	bigDecimal2 = new BigDecimal(string);//转换成BigDecimal类型
+							if (money!=null&&!"".equals(money)) {
+								BigDecimal bigDecimal = new BigDecimal(money);
+								int compareTo = bigDecimal.compareTo(bigDecimal2);//要转账数量和可用数量比较大小
+								if (compareTo==1) {//大于
+									ar.setSuccess(true);
+									ar.setMessage("您的可用余额不足");
+								}
+								if (compareTo==0||compareTo==-1) {//等于或者小于
+									ar.setSuccess(true);
+									ar.setMessage("转账功能还未正式上线");
+								}
+							}
+						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					if (money!=null&&!"".equals(money)) {
-						BigDecimal bigDecimal = new BigDecimal(money);
-						int compareTo = bigDecimal.compareTo(bigDecimal2);
-						if (compareTo==1) {
-							ar.setSuccess(true);
-							ar.setMessage("您的可用余额不足");
-							
 						
-					}if (compareTo==0) {
-						ar.setSuccess(true);
-						ar.setMessage("转账功能还未正式上线");
-						
-					
-				}if (compareTo==-1) {
-					ar.setSuccess(true);
-					ar.setMessage("转账功能还未正式上线");
-					
-				
-			}
-				}
-				
-				
-				
-				
 			}
 		}
 		return ar;
