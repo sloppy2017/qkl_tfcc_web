@@ -52,10 +52,15 @@ $("input[name='txnum']").blur(function(){//计算支付金额
 $(function(){ 
 	$("input[name='payno']").blur(function(){
 		var $payno= $("input[name='payno']").val();
+		/*var reg = /^[\w\u0391-\uFFE5\u40]+$/;*/
 		if($payno.length==0||$payno==null){
 			alert('支付宝账号不能为空');
 			return false;
 		};
+		/*if(!reg.test($payno)){
+			
+			alert('请输入正确的支付宝账号');
+		};*/
 	});
 	});
 
