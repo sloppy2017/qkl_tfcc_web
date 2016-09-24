@@ -76,11 +76,11 @@ function userRequest(){
 		return false;
 	}
 	if($txamnt<1000.00){
-		alert('单次购买金额不得少于1000.00');
+		alert('单次购买金额不得少于1000.00元');
 		return false;
 	};
 	if($txamnt>50000.00){
-		alert('单次购买金额不得大于50000.00');
+		alert('单次购买金额不得大于50000.00元');
 		return false;
 	};
 	if($payno.length==0||$payno==null){
