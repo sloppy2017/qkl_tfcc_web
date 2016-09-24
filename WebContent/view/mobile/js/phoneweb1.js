@@ -154,6 +154,7 @@ blur1($('#phone4'),$('#userPassWord3'),validate.phone,'手机格式不正确');
 			success:function( content ){
 		       	 
 		        console.log(content );
+		        
 		        if(content.errorCode==0){
 		        	tesSetIn()
 		        }
@@ -208,8 +209,11 @@ $('#reg1').on('click',function(){
  		},
        success:function(msg){
        	 console.log(msg);
-       	if( msg.message = "注册成功！" ){
-       		window.location.href="index.html";
+       	if( msg.success == true ){
+       		alert(msg.message);
+       		window.location.href="login.html";
+       	}else{
+       		alert(msg.message);
        	}
        
         
