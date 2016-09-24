@@ -359,8 +359,7 @@
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
-		if(!checked.checked){
-			
+		if(!checked.checked){		
 			return;
 		}	
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
@@ -380,21 +379,23 @@
 		});
 	});
 	
-$('.myagree span').click(function(){
+	
+	
+//$('.myagree span').click(function(){
 //	$('.body-o').css('overflow','hidden');
 //	$('.myagree-hid').show();
-})
+//})
 
-$('.hid-x').click(function(){
+//$('.hid-x').click(function(){
 //	$('.body-o').css('overflow','visible');
 //	$('.myagree-hid').hide();
-})
-$('.mark1 a').click(function(){
+//})
+//$('.mark1 a').click(function(){
 //	$('.body-o').css('overflow','visible');
-})
-$('.mark2 a').click(function(){
+//})
+//$('.mark2 a').click(function(){
 //	$('.body-o').css('overflow','visible');
-})
+//})
 
 
 

@@ -345,7 +345,7 @@ form .myagree span{
     -pie-background:rgba(0,0,0,.5);/*IE6-8*/ 
     box-shadow: 1px 1px rgba(0,0,0,.5);
     /*filter:alpha(opacity=55)progid:DXImageTransform.Microsoft.gradient(startColorstr=#000,endColorstr=#000);*/
-    /*display: none;*/
+    display: none;
    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000,endColorstr=#BF000000);  /*解决ie的透明度问题*/*/
    
   
