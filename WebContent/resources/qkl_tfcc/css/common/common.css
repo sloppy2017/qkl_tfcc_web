@@ -22,7 +22,8 @@
 }
 
 .mark3,.mark2{
-    position:absolute;
+     position:fixed; 
+	_position:absolute; 
     top:0;
     left:0;
     width: 100%;
@@ -157,4 +158,10 @@
     color:red;
     font-size: 18px;
 }
-
+.qr-code img{
+    width:147px;
+    height:146px;
+    border:0;
+    
+    
+}

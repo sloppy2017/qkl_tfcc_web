@@ -49,10 +49,46 @@ $("input[name='txnum']").blur(function(){//计算支付金额
     });
 });
 
+$(function(){ 
+	$("input[name='payno']").blur(function(){
+		var $payno= $("input[name='payno']").val();
+		if($payno.length==0||$payno==null){
+			alert('支付宝账号不能为空');
+			return false;
+		};
+	});
+	});
+
+
 
 
 var buy_flag=true;
-$('#buy').click(function(){//提交购买申请
+function userRequest(){
+	
+	
+//提交购买申请
+	
+	var $txnum= $("input[name='txnum']").val();
+	var $txamnt= $("input[name='txamnt']").val();
+	var $payno= $("input[name='payno']").val();
+	if($txnum.length==0||$txnum==null){
+		alert('请选择购买数量');
+		return false;
+	}
+	if($txamnt<1000.00){
+		alert('单次购买金额不得少于1000.00');
+		return false;
+	};
+	if($txamnt>10000.00){
+		alert('单次购买金额不得大于10000.00');
+		return false;
+	};
+	if($payno.length==0||$payno==null){
+		alert('支付宝账号不能为空');
+		return false;
+	}
+	
+	
 	buy_flag=false;
 	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
 	url = encodeURI(url);
@@ -74,29 +110,38 @@ $('#buy').click(function(){//提交购买申请
             alert(data.message);
             $("input[name='txamnt']").val("");
             $("input[name='txnum']").val("");
+            $("input[name='payno']").val("");
             if(data.message=='订单已生成，请及时付款'){
-            	// $('#pay').click();    
-                 window.location.href="https://auth.alipay.com/login/index.htm";
+            //	$('.pay').click();    
+//                window.location.href="https://auth.alipay.com/login/index.htm";
 //                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
+                 var tempwindow=window.open();
+                 tempwindow.location='https://auth.alipay.com/login/index.htm';
+//                 window.open('你所要跳转的页面');  
+//                 window.history.back(-1);返回上一页  
             	
             }
-           
-            	
+            
            
            // $('.mid-r a').css('background-color','none');
            // $(".mid-r a").style.visibility="hidden";    
         }
 	
     });
+}
 
 
-});
+
 
 
 /*$(function(){ 
+	 $('#pay').trigger('click') ;
+	});*/
+
+/*$(function(){ //隐藏链接支付宝的菜单
 	 $('#pay').css("display","none") ;
-	});
-*/
+	});*/
+
 /*$(function(){ 
 
 	  var url = $('tijiao').attr("src"); 

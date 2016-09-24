@@ -25,6 +25,7 @@ import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccDetailDao;
 import com.qkl.tfcc.provider.dao.AccLimitdefDao;
 import com.qkl.tfcc.provider.dao.UserDao;
+import com.qkl.tfcc.provider.dao.UserFriendshipDao;
 import com.qkl.util.help.DateUtil;
 import com.qkl.util.help.Validator;
 import com.qkl.util.help.pager.PageData;
@@ -45,6 +46,8 @@ public class AccServiceImpl implements AccService {
     private UserDao userDao;
     @Autowired
     private AccLimitdefDao accLimitdefDao;
+    @Autowired
+    private UserFriendshipDao userFriendshipDao;
     
     @Override
     public boolean addAccDetail(AccDetail accDetail, String versionNo) {
@@ -143,8 +146,22 @@ public class AccServiceImpl implements AccService {
             String phone = obj.getString("phone").trim();
             String tfccNum = obj.getString("tfccNum").trim();
             if(Validator.isMobile(phone)&&Validator.isNumberMax7(tfccNum)){
-                
                 User tUser = userDao.findUserByPhone(phone);
+                if(tUser==null){
+                    failStr.append(phone+"-会员不存在；");
+                    map.put("failStr", failStr.toString());
+                    continue;
+                }
+                PageData pdFriend = new PageData();
+                pdFriend.put("user_code", userDetail.getUserCode());
+                pdFriend.put("recomuser_code", tUser.getUserCode());
+                pdFriend.put("syscode", Constant.CUR_SYS_CODE);
+                boolean isFriend = userFriendshipDao.isFriend(pdFriend);
+                if(!isFriend){
+                    failStr.append(phone+"-会员未绑定该机构；");
+                    map.put("failStr", failStr.toString());
+                    continue;
+                }
                 BigDecimal limit = null;//账户限额
                 BigDecimal totalAmnt = null;
                 BigDecimal tfccNumTemp = new BigDecimal(tfccNum);
@@ -193,7 +210,7 @@ public class AccServiceImpl implements AccService {
                         accDetail.setCreateTime(DateUtil.getCurrentDate());
                         accDetail.setModifyTime(DateUtil.getCurrentDate());
                         accDetail.setOperator(userDetail.getPhone());
-                        accDetail.setRelaUserlevel("A");
+                        accDetail.setRelaUserlevel("");
                         accDetail.setSubAccno("010301");
                         accDetail.setAmnt(tfccNumTemp);
                         accDetail.setStatus("1");

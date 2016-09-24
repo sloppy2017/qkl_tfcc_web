@@ -295,13 +295,13 @@
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
-				var checked = $('.myagree input[type=checkbox]');
+				/*var checkedss = $('.myagree input[type=checkbox]');*/
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
 			return;
 		}
-			if(!checked.checked){
+	/*		if(checkedss.checked==false){
 			return;
-		}
+		}*/
 		$.ajax({
 			type:'POST',
 			url:'/service/user/register?'+$("form:not(.hide)").serialize()+"&userType="+userType,
@@ -354,14 +354,10 @@
 		var validIdno = valid_idno($(this).parent().find("input[name='idno']"));
 		var validCropPerson = valid_realName($(this).parent().find("input[name='realName']"));
 		var validCropName = valid_cropName($(this).parent().find("input[name='cropName']"));
-		var checked = $('.myagree input[type=checkbox]');
 		
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
-		if(!checked.checked){		
-			return;
-		}	
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
 		url = encodeURI(url);
 		$.ajax({
@@ -380,22 +376,17 @@
 	});
 	
 	
-	
-//$('.myagree span').click(function(){
-//	$('.body-o').css('overflow','hidden');
-//	$('.myagree-hid').show();
-//})
+$('.myagree span').click(function(){
 
-//$('.hid-x').click(function(){
-//	$('.body-o').css('overflow','visible');
-//	$('.myagree-hid').hide();
-//})
-//$('.mark1 a').click(function(){
-//	$('.body-o').css('overflow','visible');
-//})
-//$('.mark2 a').click(function(){
-//	$('.body-o').css('overflow','visible');
-//})
+ $('.myagree-hid').show();
+})
+$('.hid-x').click(function(){
+	$('.myagree-hid').hide();
+})
+
+$('.myagree input').click(function(){
+	this.checked = !this.checked; 
+})
 
 
 

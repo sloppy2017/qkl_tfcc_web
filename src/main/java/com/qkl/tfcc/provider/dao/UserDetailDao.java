@@ -67,5 +67,8 @@ public interface UserDetailDao extends DAO<UserDetail> {
 	public void modifyUserHeadPic(String userCode,String imgAddrss);
 	
 	
+	public UserDetail findDetail(String userCode);
 	
+	
+
 }

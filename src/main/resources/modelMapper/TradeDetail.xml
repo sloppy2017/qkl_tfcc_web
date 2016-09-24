@@ -28,11 +28,17 @@
          id,user_code,txtype,cuy_type,txnum,txamnt,txdate,cntflag,caldate,source_system,`status`,
 		 revorgname,revbankaccno,revbankdepname,create_time,modify_time,operator
     </sql>
-      
-       <select id="findTradeCount" parameterType="java.lang.String" resultType="java.lang.Integer" >
-		select count(1) cnt
-        from tb_trade_detail  where user_code = #{userCode} 
+      <!-- 查询单个用户的购买总金额 -->
+       <select id="findTradeAmnt" parameterType="java.lang.String" resultType="java.math.BigDecimal" >
+		<!-- select count(1) cnt
+        from tb_trade_detail  where user_code = #{userCode}  -->
+        
+        select sum(txamnt) txamnt from tb_trade_detail where  user_code=#{userCode}
+        
 	   </select> 
+	   
+	  
+	   
 	   <select id="findById" parameterType="java.lang.Integer" resultMap="tradeDetailResultMap" >
 	        select 
 	        user_code userCode,

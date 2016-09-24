@@ -105,6 +105,9 @@
 .form-input1{
     position: relative;
 }
+.form-input1 input{
+	background:none;
+}
 .form-input1 .submit{
 	
 	display: block;
@@ -180,12 +183,15 @@
     position: absolute;
 }
 
+
+
 .form-input1 .xiaoyan{
     width:134px;
     text-indent: 12px;
    	outline: none;
 	border: 1px solid #8c8c8c;
 	*margin-left:-10px;
+	-webkit-box-shadow: 0 0 0px 1000px white inset !important;  
 }
 
 .form-input1 .sure{

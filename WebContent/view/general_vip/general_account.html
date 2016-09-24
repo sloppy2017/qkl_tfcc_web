@@ -41,7 +41,7 @@
 <!--普通会员账户中心-->
 <div class="header fix">
     <div class="logo fl">
-        <img src="../../resources/qkl_tfcc/imgs/reglogo_02.png" alt="">
+        <img src="../../resources/qkl_tfcc/imgs/reglogos_02.png" alt="">
     </div>
     <div class="nav-right fl">
         <div class="top">
@@ -72,20 +72,24 @@
                 </div>
                 <div class="my-sum">
                     <h4>我的余额</h4>
-                    <div>
+                    <div class="zhuan-zhang">
                         <ul>
-                            <li><div>SAN</div>&nbsp;&nbsp;<span id="spt"></span></li>
-                          <!--   <li><div>JFCC</div>&nbsp;&nbsp;<span>100,000.00</span></li> -->
+                            <li><div>可用&nbsp;SAN</div>&nbsp;&nbsp;<span id="avb_amnt"></span></li>
+                            <li><div>冻结&nbsp;SAN</div>&nbsp;&nbsp;<span id="froze_amnt"></span></li>
+                            <li><div>总&nbsp;SAN</div>&nbsp;&nbsp;<span id="total_amnt"></span></li>
+                         <!--   <li><div>冻结数量SAN</div>&nbsp;&nbsp;<span id="spd"></span></li>  -->
+
                             <li class="zhuanzhang" >转账</li>
                         </ul>
+                        
                     </div>
                 </div>
                 <div class="my-award">
                     <h4>我的奖励</h4>
                     <div>
                         <ul>
-                            <li><div class="c57">总累计奖励 SAN</div><div class="ce9" id="sptt"></div></li>
-                            <li><div class="c57">累计推荐会员奖励 SAN</div><div class="ce9" id="spv"></div></li>
+                            <li><div class="c57">总累计奖励 SAN</div><div class="ce9" id="totalReward"></div></li>
+                            <li><div class="c57">累计推荐会员购买奖励 SAN</div><div class="ce9" id="totalGMJL"></div></li>
                             <!-- <li><div class="c57">累计推荐网点奖励 SAN</div><div class="ce9" id="">30,000.00</div></li> -->
                         </ul>
                     </div>
@@ -96,19 +100,20 @@
                 <div class="trans-wrap">
                     <p></p>
                     <div class="trans-type">
-                        <p>选择币种</p>
-                        <select name="" id="pid" onchange="gradeChange()">
+                        <p>币&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span style="color:red">SAN</span>
+                        <!-- <select name="" id="pid" onchange="gradeChange()">
                             <option value="">SAN</option>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="trans-tfcc">
-                        <p>对方账户</p>
+                        <p>钱包账户</p>
                         <input type="text" name="zfb" id="zhanghao" placeholder="请输入对方账号"><span style="color:red">&nbsp;*</span>
                         <span class="errorc"></span>
                     </div>
                     <div class="trans-tfcc">
                         <p>转账额度</p>
-                        <input type="text" name="money" id="zhuanzhang" onkeyup='this.value=this.value.replace(/\D/gi,"")' placeholder="请输入需转账额度">您的可用额度为&nbsp;&nbsp;<span id= "zid" style="color:red">&nbsp;*</span>
+                        <input type="text" name="money" id="zhuanzhang" onkeyup='this.value=this.value.replace(/\D/gi,"")' placeholder="请输入需转账额度"><span style="color:red">&nbsp;*</span>&nbsp;您的可用额度为&nbsp;&nbsp;<span id= "zid" style="color:red">&nbsp;</span>&nbsp;元
                         <span class="errorc"></span>
                         <div><a href="#" class="tfcc-btn" id="tijiao" onclick="save()">提交</a> <a href="">返回</a></div>
                     </div>

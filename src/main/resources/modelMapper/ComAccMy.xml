@@ -34,7 +34,10 @@
 		 and d.user_code=#{userCode} -->
 		 select sum(amnt) mtfcc from tb_acc_detail where bouns_source1='11' and user_code=#{userCode}
 	 </select>
-	
+	 <!-- 查询投资机构给我发放的SAN -->
+	 <select id="findFFReward"  parameterType="java.lang.String" resultType="java.math.BigDecimal" > 
+            select sum(amnt) reward from tb_acc_detail  where rela_usercode=#{userCode} and bouns_source1 ='40' and (rela_userlevel = '' or rela_userlevel is NULL) 
+     </select>
 	 <!-- 查询我累计推荐网点奖励的TFCC -->
 	 <select id="findWReward"  parameterType="java.lang.String" resultType="java.math.BigDecimal" > 
 	     select sum(amnt) wtfcc
@@ -46,7 +49,7 @@
 	     and d.user_code=#{userCode}
      </select>
     
-     <!-- 查询我总计奖励的TFCC -->
+     <!-- 查询推介会员购买奖励给我的SAN -->
      <select id="findTTReward"  parameterType="java.lang.String" resultType="java.math.BigDecimal" > 
        <!--  select sum(amnt) ttfcc
          from tb_acc_def f,tb_acc_detail d  
@@ -55,7 +58,7 @@
          and cuy_type='1' 
          and d.user_code=#{userCode} -->
          
-         select sum(amnt) ttfcc from tb_acc_detail where user_code=#{userCode}
+         select sum(amnt) gmjl from tb_acc_detail where user_code=#{userCode} and bouns_source1 ='15'
      </select>
      
       <!-- 查询列表 -->

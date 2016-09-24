@@ -79,7 +79,13 @@
 	          and user_code = #{userCode}  
 	          and syscode = #{syscode}   
      </update>
-     
+     <select id="isFriend" parameterType="pd" resultType="pd">
+        select * from tb_user_friendship 
+        where 1=1 
+        and user_code = #{user_code}
+        and recomuser_code = #{recomuser_code}
+        and syscode = #{syscode}   
+     </select>
     
 
 </mapper>     

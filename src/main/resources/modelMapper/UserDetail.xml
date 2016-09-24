@@ -17,6 +17,7 @@
 	    <result column="ref_phone" property="refPhone" />
 	    <result column="img_addrss" property="imgAddrss" />
 	    <result column="qr_code" property="qrCode"/>      
+	    <result column="freeze_flag" property="freezeFlag"/> 
 	    <result column="user_type" property="userType"/>    
 	    <result column="create_time" property="createTime"/>    
 	    <result column="modify_time" property="modifyTime"/>    
