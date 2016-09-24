@@ -6,7 +6,7 @@
     <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
 		select count(1) cnt
         from tb_sendsms_detail  where phone = #{phone} 
-        and send_time > DATE_ADD(NOW(),INTERVAL -1  HOUR)
+        and send_time > DATE_ADD(NOW(),INTERVAL -30  MINUTE)
 	</select> 
 
      <select id="findByPhone" parameterType="java.lang.String" resultType="java.lang.String" >

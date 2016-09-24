@@ -56,7 +56,7 @@
 	 * 手机号验证
 	 */
 	$('.form input[name="phone"]').blur(function () {
-		$(this).val($(this).val().trim());
+		$(this).val($.trim($(this).val()));
 		valid_phone($(this));
 	});
 	function valid_phone($this){
@@ -80,12 +80,12 @@
 	 * 密码验证
 	 */
 	$('.form input[name="password"]').blur(function () {
-		$(this).val($(this).val().trim());
+		$(this).val($.trim($(this).val()));
 		valid_password($(this));
 	});
 	function valid_password($this){
 		//密码正则6-16字母数字或特殊字符
-		var result = password_valid($this.val().trim());
+		var result = password_valid($.trim($this.val()));
 		if ($this.val() == '') {
 			$this.next().html('请输入密码');
 			return false;
@@ -104,8 +104,8 @@
 		valid_resPassword($(this));
 	});
 	function valid_resPassword($this){
-		var result = password_valid($this.val().trim());
-		var pVal = 	$this.parent().prev().children("input[name='password']").val().trim();
+		var result = password_valid($.trim($this.val()));
+		var pVal = 	$.trim($this.parent().prev().children("input[name='password']").val());
 		if ($this.val() == '') {
 			$this.next().html('请输入确认密码');
 			return false;
@@ -135,19 +135,20 @@
 		}else if(!reg.test($this.val())){
 			$this.next().next().html('验证码格式有误');
 			return false;
-		}else if(countdown == 60){
-			$this.next().next().html('验证码已过期，请重新获取');
-			return false;
 		}else{
 			$this.next().next().empty();
 			return true;
 		}
+		/*else if(countdown == 60){
+			$this.next().next().html('验证码已过期，请重新获取');
+			return false;
+		}*/
 	}
 	/**
 	 * 推介人手机号验证
 	 */
 	$('.form input[name="phone1"]').blur(function () {
-		$(this).val($(this).val().trim());
+		$(this).val($.trim($(this).val()));
 		valid_phone1($(this));
 	});
 	function valid_phone1($this){
@@ -206,7 +207,7 @@
 	    }
 	    $.ajax({
 	        type:'POST',
-	        url:'/service/user/isExistPhone?phone='+phoneNote.val().trim(),
+	        url:'/service/user/isExistPhone?phone='+$.trim(phoneNote.val()),
 	        dataType:'JSON',
 	        success: function (json) {
 	             if(!json.success){
@@ -214,7 +215,7 @@
 	         	    //向后台发送处理数据
 	         	    $.ajax({
 	         	        type:'POST',
-	         	        url:'/service/user/sendsms?phone='+phoneNote.val().trim(),
+	         	        url:'/service/user/sendsms?phone='+$.trim(phoneNote.val()),
 	         	        dataType:'JSON',
 	         	        success: function (json) {
 	         	             if(json.success){
@@ -276,7 +277,7 @@
 		valid_realName($(this));
 	});
 	$('.form input[name="cropName"]').blur(function(){
-		$(this).val($(this).val().trim());
+		$(this).val($.trim($(this).val()));
 		valid_cropName($(this));
 	});
 	function valid_cropName($this){
@@ -302,6 +303,9 @@
 	/*		if(checkedss.checked==false){
 			return;
 		}*/
+		$('.form1 .submit').unbind("click");
+		$('.form1 .submit a').css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
+		$('.form1 .submit a').css("background-size","50px 60px");
 		$.ajax({
 			type:'POST',
 			url:'/service/user/register?'+$("form:not(.hide)").serialize()+"&userType="+userType,
@@ -354,10 +358,14 @@
 		var validIdno = valid_idno($(this).parent().find("input[name='idno']"));
 		var validCropPerson = valid_realName($(this).parent().find("input[name='realName']"));
 		var validCropName = valid_cropName($(this).parent().find("input[name='cropName']"));
-		
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1&&validIdno&&validCropPerson&&validCropName)){
 			return;
 		}
+		
+		$('.form3 .submit').unbind("click");
+		$('.form3 .submit a').css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
+		$('.form3 .submit a').css("background-size","50px 60px");
+		$('.form3 .submit').unbind('click');
 		var url = '/service/user/register?'+$(".form3").serialize()+"&userType="+userType;
 		url = encodeURI(url);
 		$.ajax({

@@ -19,7 +19,7 @@ $(function() {
 	});
 	// 手机验证
 	function valid_phone($this){
-		$this.val($this.val().trim());
+		$this.val($.trim($this.val()));
 		//手机号正则
 		var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
 		if ($this.val() == '') {
@@ -41,7 +41,7 @@ $(function() {
 	   return valid_password($(this));
 	});
 	function valid_password($this){
-		$this.val($this.val().trim());
+		$this.val($.trim($this.val()));
 	 //密码正则6-20字母数字或特殊字符
 	   var result = password_valid($this.val());
 	   if ($this.val() == '') {
@@ -89,8 +89,8 @@ $(function() {
 	});
 	//验证验证码
 	function valid_yzm($this){
-		$this.val($this.val().trim());
-		var code = $this.val().trim();
+		$this.val($.trim($this.val()));
+		var code = $.trim($this.val());
 //		var reg = /^[0-9a-zA-Z]{6}$/;
 	    if(code==''){
 	    	$this.next().next().html('请输入验证码');

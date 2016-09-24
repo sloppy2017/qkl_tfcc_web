@@ -65,9 +65,9 @@ public class SmsServiceImpl implements SmsService {
 	@Override
 	@Transactional(propagation =Propagation.SUPPORTS)
 	public String findSendsmsDetail(String phone, String sysCode) {
-		/*if(smsSendDetailDao.findPhoneIsExist(phone)==0){//校验用户手机号是否存在应从用户表里查询
-			return "";
-		}*/
+		if(smsSendDetailDao.findPhoneIsExist(phone)==0){//校验用户手机号是否存在应从用户表里查询(30分钟内该手机号没有发送验证码)
+			return null;
+		}
 		return smsSendDetailDao.findByPhone(phone,sysCode); 
 	}
 

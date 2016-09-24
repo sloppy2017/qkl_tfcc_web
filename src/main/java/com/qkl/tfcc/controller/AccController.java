@@ -111,9 +111,9 @@ public class AccController extends BaseAction{
              accPd.put("user_code", userDetail.getUserCode());
              accPd = cams.getAmnt(accPd);
              if(accPd!=null){
-                 resMap.put("avb_amnt", accPd.get("avb_amnt")==null?null:accPd.get("avb_amnt").toString());
-                 resMap.put("froze_amnt", accPd.get("froze_amnt")==null?null:accPd.get("froze_amnt").toString());
-                 resMap.put("total_amnt", accPd.get("total_amnt")==null?null:accPd.get("total_amnt").toString());
+                 resMap.put("avb_amnt", accPd.get("avb_amnt")==null?null:String.format("%.4f",new BigDecimal(accPd.get("avb_amnt").toString())));
+                 resMap.put("froze_amnt", accPd.get("froze_amnt")==null?null:String.format("%.4f",new BigDecimal(accPd.get("froze_amnt").toString())));
+                 resMap.put("total_amnt", accPd.get("total_amnt")==null?null:String.format("%.4f",new BigDecimal(accPd.get("total_amnt").toString())));
              }
              //给当前登陆用户发送短信
              if(totalSan.compareTo(new BigDecimal("0"))>0){//判断发放总额是否大于0
