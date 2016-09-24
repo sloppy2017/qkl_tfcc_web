@@ -20,25 +20,7 @@
 			width: 100%;
 		}
 		</style>
-		<script> 		
-			//平台、设备和操作系统
-			var system ={
-			win : false,
-			mac : false,
-			xll : false
-			};
-			//检测平台
-			var p = navigator.platform;			 
-			system.win = p.indexOf("Win") == 0;
-			system.mac = p.indexOf("Mac") == 0;
-			system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-			//跳转语句
-			if(system.win||system.mac||system.xll){//转向后台登陆页面
-			 
-			}else{
-			window.location.href="mobile/login.html";
-			}
-</script>
+		
 	</head>
 
 	<body>
@@ -67,7 +49,7 @@
 							<a href="#">3</a>
 					</div>
 						<div class="main_image">
-							<ul>
+							<ul> 
 								<li><span class="img_3" style="background:url('../resources/qkl_tfcc/imgs/banner1.jpg') no-repeat center"></span></li>
 								<li><span class="img_4" style="background:url('../resources/qkl_tfcc/imgs/banner2.jpg') no-repeat center"></span></li>
 								<li><span class="img_1" style="background:url('../resources/qkl_tfcc/imgs/banner3.jpg') no-repeat center"></span></li>
@@ -108,7 +90,7 @@
 			                                <a  class="submit"  style="color:#fff;background:#3884c9;border:none">登&nbsp;录</a>
 										</li>
 										<li class="input-reg">
-											<p class="fl"><a href="/view/register.html" >免费注册</a></p>
+											<p class="fl"><a href="register.html" >免费注册</a></p>
 											<p class="fr"><a style="color:#fa5a49" href="wiew/forget-password.html">忘记密码？</a></p>
 										</li>
 									</ul>
