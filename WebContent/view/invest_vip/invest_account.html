@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="../../resources/qkl_tfcc/css/common/common.css">
     <link rel="stylesheet" href="../../resources/qkl_tfcc/css/invest/in-account.css">
     <script src="../../../resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
+    <style type="text/css">
+        .award-num .subBtn a {
+          width: 114px;
+          height: 30px;
+       }
+       .my-sum ul .zhuanzhang {
+            margin-left: inherit;
+        }
+    </style>
 </head>
 <body>
 <!--遮罩层-->
@@ -86,10 +95,11 @@
                             <li><span>8</span><label >手机号</label><input type="text" name="phone" maxlength="11"  placeholder="请输入发送手机号"><label >发放额度</label><input type="text" name="money" placeholder="请输入发送额度"></li>
                             <li><span>9</span><label >手机号</label><input type="text" name="phone" maxlength="11"  placeholder="请输入发送手机号"><label >发放额度</label><input type="text" name="money" placeholder="请输入发送额度"></li>
                             <li><span>10</span><label >手机号</label><input type="text" name="phone" maxlength="11"  placeholder="请输入发送手机号"><label >发放额度</label><input type="text" name="money" placeholder="请输入发送额度"></li>
-                            <li class="subBtn"><a href="javascript:sub_money()">确认发放</a></li>
+                            <li class="subBtn"><a href="javascript:sub_money()" id="reward" style="background-image: url('../../resources/qkl_tfcc/imgs/JFCC_03.png');">确认发放</a></li>
                         </ul>
                     </form>
-                    <div id="showTip"></div>
+                    <div id="successStr"></div>
+                    <div id="failStr"></div>
                     <input type="text" id="focus" style="border:0px;" readonly="readonly"/>
                 </div>
 
@@ -158,7 +168,7 @@
               if(data.data.imgAddrss){
                   $("#left_headPicId").attr("src",data.data.imgAddrss);
               }else{
-                  $("#left_headPicId").attr("src","../../../resources/qkl_tfcc/imgs/LPtouxiang.jpg");
+                  $("#left_headPicId").attr("src","../../resources/qkl_tfcc/imgs/LPtouxiang.jpg");
               }
               if(data.data.userName){
                   $("#user").html(data.data.userName);
@@ -171,7 +181,7 @@
       });
   }
   function sub_money(){
-      $("#showTip").html('');
+	  $("#showTip").html('');
       var jsonStr = '[';  
       $("form li:not(.subBtn)").each(function(){
             var phone = $(this).children('input[name="phone"]').val().trim();
@@ -188,8 +198,11 @@
         });
       jsonStr = jsonStr.substring(0, jsonStr.length-1)+"]";
       if(jsonStr == ']'){
-          $("#showTip").html("<p style='margin-left:100px;' class='error18'>请填写对应的手机号和发放额度！</p>");
+          $("#successStr").html("<p style='margin-left:100px;' class='error18'>请填写对应的手机号和发放额度！</p>");
           return;
+      }else{
+    	  $("#reward").removeAttr("href");
+          $("#reward").css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
       }
         $.ajax({
             type:'post',
@@ -197,7 +210,8 @@
 //          data:,
             dataType:'json',
             success:function(data){
-                 if(data.success){
+//                 $("#reward").css("background-image","url(../../resources/qkl_tfcc/imgs/JFCC_03.png)");
+            	if(data.success){
                 	 //可用SAN
                      if(data.data.avb_amnt!=null&&data.data.avb_amnt!=""&&data.data.avb_amnt!='undefined'){
                          $("#avb_amnt").text(data.data.avb_amnt);
@@ -217,10 +231,10 @@
                          $("#total_amnt").text("0.0000");
                      }
                      if(data.data.successStr){
-                         $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p>");
+                         $("#successStr").html("<p style='margin-left:100px;' class='error18'>"+data.data.successStr+"</p>");
                      }
                      if(data.data.failStr){
-                         $("#showTip").append("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
+                         $("#failStr").html("<p style='margin-left:100px;' class='error18'>"+data.data.failStr+"</p>");
                      }
                      $("#focus").focus();
                  }else{

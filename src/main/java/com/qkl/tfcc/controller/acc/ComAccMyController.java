@@ -72,8 +72,12 @@ public class ComAccMyController extends BaseAction {
 	        accPd.put("user_code", userCode);
 	        accPd = cams.getAmnt(accPd);
 	        if(accPd!=null){
+	            PageData tpd = new PageData();
+	            tpd.put("avb_amnt", accPd.get("avb_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(accPd.get("avb_amnt").toString())));
+	            tpd.put("froze_amnt", accPd.get("froze_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(accPd.get("froze_amnt").toString())));
+	            tpd.put("total_amnt", accPd.get("total_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(accPd.get("total_amnt").toString())));
 	            ar.setSuccess(true);
-	            ar.setData(accPd);
+	            ar.setData(tpd);
 	            ar.setMessage("查询成功");
 	        }else{
 	            ar.setSuccess(false);

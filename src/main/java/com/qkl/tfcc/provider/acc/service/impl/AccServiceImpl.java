@@ -156,12 +156,12 @@ public class AccServiceImpl implements AccService {
                 pdFriend.put("user_code", userDetail.getUserCode());
                 pdFriend.put("recomuser_code", tUser.getUserCode());
                 pdFriend.put("syscode", Constant.CUR_SYS_CODE);
-                boolean isFriend = userFriendshipDao.isFriend(pdFriend);
+                /*boolean isFriend = userFriendshipDao.isFriend(pdFriend);
                 if(!isFriend){
                     failStr.append(phone+"-会员未绑定该机构；");
                     map.put("failStr", failStr.toString());
                     continue;
-                }
+                }*/
                 BigDecimal limit = null;//账户限额
                 BigDecimal totalAmnt = null;
                 BigDecimal tfccNumTemp = new BigDecimal(tfccNum);
