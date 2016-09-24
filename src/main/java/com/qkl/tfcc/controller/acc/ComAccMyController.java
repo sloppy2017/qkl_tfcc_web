@@ -92,13 +92,13 @@ public class ComAccMyController extends BaseAction {
 	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		pd=this.getPageData();
-		Map<String, Object> findNum = cams.findNum(user.getUserCode());
+		Map<String, Object> findNum = cams.findMyAcc(user.getUserCode());
 		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
 		String money = pd.getString("money");
 		while (iterator.hasNext()) {
 			Entry<String, Object> entry = iterator.next();
 			String key = entry.getKey();
-			if (key!=null&&"findTB".equals(key)) {
+			if (key!=null&&"avb_amnt".equals(key)) {
 			 //BigDecimal value = (BigDecimal) entry.getValue();
 				String string = entry.getValue().toString();
 					BigDecimal bigDecimal2=null;

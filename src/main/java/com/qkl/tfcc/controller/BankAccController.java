@@ -152,7 +152,7 @@ public class BankAccController extends BaseAction {
 			pd.put("revorgname",bankAccInfo.getOrgName());
 			pd.put("revbankdepname", bankAccInfo.getDepositBankname());
 			pd.put("revbankaccno", bankAccInfo.getBankaccno());
-			pd.put("user_code", user.getUserCode());
+			//pd.put("user_code", user.getUserCode());
 			pd.put("txtype", "1");
 			pd.put("cuy_type", "1");
 			pd.put("txdate", DateUtil.getCurrentDate());
@@ -162,7 +162,7 @@ public class BankAccController extends BaseAction {
 			pd.put("create_time", DateUtil.getCurrentDate());
 			pd.put("modify_time", DateUtil.getCurrentDate());
 			pd.put("operator", user.getPhone());
-			pd.put("userCode", user.getUserCode());
+			//pd.put("userCode", user.getUserCode());
 			
 			
 			

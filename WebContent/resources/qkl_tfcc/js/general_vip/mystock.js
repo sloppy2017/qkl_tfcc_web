@@ -79,8 +79,8 @@ function userRequest(){
 		alert('单次购买金额不得少于1000.00');
 		return false;
 	};
-	if($txamnt>10000.00){
-		alert('单次购买金额不得大于10000.00');
+	if($txamnt>50000.00){
+		alert('单次购买金额不得大于50000.00');
 		return false;
 	};
 	if($payno.length==0||$payno==null){
