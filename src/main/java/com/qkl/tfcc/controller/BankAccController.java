@@ -190,7 +190,7 @@ public class BankAccController extends BaseAction {
 							ar.setMessage("网络异常，购买失败！");
 						}
 					}else {
-						ar.setSuccess(true);
+						ar.setSuccess(false);
 						ar.setMessage("购买金额已经超过规定额度");
 					}
 										
@@ -236,8 +236,8 @@ public class BankAccController extends BaseAction {
 				ar.setMessage("请选择购买数量");
 				return ar;
 			}
-			double doubleValue = tmpprices.multiply(txnum).doubleValue();//计算应付金额
-			String txamnt = String .format("%.2f",doubleValue);
+			BigDecimal multiply = tmpprices.multiply(txnum);//计算应付金额
+			String txamnt = String .format("%.2f",multiply);
 			
 			
 			ar.setSuccess(true);

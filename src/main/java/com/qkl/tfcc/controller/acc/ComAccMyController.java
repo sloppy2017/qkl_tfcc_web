@@ -101,30 +101,26 @@ public class ComAccMyController extends BaseAction {
 			if (key!=null&&"avb_amnt".equals(key)) {
 			 //BigDecimal value = (BigDecimal) entry.getValue();
 				String string = entry.getValue().toString();//获取可用余额
-					BigDecimal bigDecimal2=null;
 					try {
-						bigDecimal2 = new BigDecimal(string);//转换成BigDecimal类型
+						BigDecimal	bigDecimal2 = new BigDecimal(string);//转换成BigDecimal类型
+							if (money!=null&&!"".equals(money)) {
+								BigDecimal bigDecimal = new BigDecimal(money);
+								int compareTo = bigDecimal.compareTo(bigDecimal2);//要转账数量和可用数量比较大小
+								if (compareTo==1) {//大于
+									ar.setSuccess(true);
+									ar.setMessage("您的可用余额不足");
+								}
+								if (compareTo==0||compareTo==-1) {//等于或者小于
+									ar.setSuccess(true);
+									ar.setMessage("转账功能还未正式上线");
+								}
+							}
+						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					if (money!=null&&!"".equals(money)) {
-						BigDecimal bigDecimal = new BigDecimal(money);
-						int compareTo = bigDecimal.compareTo(bigDecimal2);//要转账数量和可用数量比较大小
-						if (compareTo==1) {//大于
-							ar.setSuccess(true);
-							ar.setMessage("您的可用余额不足");
-							
 						
-					}if (compareTo==0||compareTo==-1) {//等于或者小于
-						ar.setSuccess(true);
-						ar.setMessage("转账功能还未正式上线");
-				}
-			}
-				
-				
-				
-				
 			}
 		}
 		return ar;
