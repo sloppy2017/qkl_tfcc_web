@@ -164,16 +164,13 @@ public class BankAccController extends BaseAction {
 			pd.put("operator", user.getPhone());
 			//pd.put("userCode", user.getUserCode());
 			
-			String string = pd.get("payno").toString();
-		//	System.out.println(string+"==============================");
+		
 			String userCode = user.getUserCode();
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
 			String buyFlag = userDetail.getBuyFlag();
 			String freezeFlag =userDetail.getFreezeFlag();//获取冻结标识
 			if ("1".equals(freezeFlag)) {//判断是否为冻结的用户
-				if ("1".equals(buyFlag)) {
-					
-				
+				if ("1".equals(buyFlag)) {//判断此用户能否购买
 				pd.put("userCode", userCode);
 				BigDecimal findAnmt = tradeService.findAnmt(userCode, Constant.VERSION_NO);//获取数据库中此用户的交易金额数量
 				String txamnt1 = pd.getString("txamnt");//获取再次购买的金额

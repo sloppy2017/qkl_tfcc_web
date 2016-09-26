@@ -80,11 +80,24 @@ function userRequest(){
 	var $txamnt= $("input[name='txamnt']").val();
 	var $payno= $("input[name='payno']").val();
 	
-	//alert($payno);
 	
 	if($txnum.length==0||$txnum==null){
 		alert('请选择购买数量');
 		return false;
+	}
+	
+	
+
+	if($payno.length==0||$payno==null){
+		alert('支付宝账号不能为空');
+		return false;
+	}else{
+		if(reg.test($payno)){
+			
+			}else{
+				alert('请输入正确的支付宝账号:手机号/邮箱');
+				return false;
+			};
 	}
 	
 	if($txamnt<1000.00){
@@ -97,24 +110,8 @@ function userRequest(){
 	};
 	
 	
-	if($payno.length==0||$payno==null){
-		alert('支付宝账号不能为空');
-		return false;
-	}else{
-		if(reg.test($payno)){
-			return true;
-			}else{
-				alert('请输入正确的支付宝账号:手机号/邮箱');
-				return false;
-			};
-	}
-	
-	
-	
-	
-	
 	buy_flag=false;
-	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
+	var url = "/service/bankaccinfo/tradebuy?txamnt="+$txamnt+"&payno="+$payno+"&txnum="+$txnum;
 	url = encodeURI(url);
 	$.ajax({
 		async:false, 
@@ -130,6 +127,8 @@ function userRequest(){
         },*/ 
         async:true, 
         success: function (data) {
+        	
+        	
         	buy_flag=true;
             alert(data.message);
             $("input[name='txamnt']").val("");
