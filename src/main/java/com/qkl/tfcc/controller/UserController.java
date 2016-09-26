@@ -159,6 +159,9 @@ public class UserController extends BaseAction{
 		logBefore(logger, "修改用户信息");		
 	    try {
 	    	UserDetail tUserDetail = new UserDetail();
+			
+			String realName = request.getParameter("realName");
+			String idno = request.getParameter("idno");
 			String wxnum = request.getParameter("wxnum");
 			String bankaccno = request.getParameter("bankaccno");
 			String mailAddrss =request.getParameter("mailAddrss"); 
@@ -172,6 +175,12 @@ public class UserController extends BaseAction{
 				userCode =user.getUserCode();
 			}
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
+			if(realName!=null&&!realName.equals("")){
+				tUserDetail.setRealName(realName);
+			}
+			if(idno!=null&&!idno.equals("")){
+				tUserDetail.setIdno(idno);
+			}			
 			tUserDetail.setUserCode(userCode);
 			tUserDetail.setWxnum(wxnum);
 			tUserDetail.setBankaccno(bankaccno);
