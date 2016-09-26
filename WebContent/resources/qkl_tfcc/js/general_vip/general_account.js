@@ -74,7 +74,18 @@ $(function(){
 
   $(function(){
 	  $('#tijiao').click(function(){//输入转账的金额和我的账户余额比较
-		 var money= $('#zhuanzhang').val();
+		 var zhanghao= $('#zhanghao').val();//对方账号
+		  var money= $('#zhuanzhang').val();//转帐额度
+		  
+		  if(zhanghao.length==0||zhanghao==null){
+			  alert('账号不能为空');
+			  return false;
+		  }
+		  if(money.length==0||money==null){
+			  alert('转账金额不能为空');
+			  return false;
+		  }
+		 
 		 //alert(money);
 		 $.ajax({
 			    type:'post',
@@ -84,7 +95,8 @@ $(function(){
 			    success:function(data){
 			        if(data.success){    
 			        	alert(data.message);
-			        	return false;
+			        	$('#zhanghao').val("");
+			        	$('#zhuanzhang').val("");
 			        }
 			       
 			    }
@@ -95,26 +107,16 @@ $(function(){
 	  
   });
   
-  $(function(){
+  /*$(function(){
 	  $('#tijiao').click(function(){//点击提交按钮的提示信息
 	 //var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	  var zhanghao= $('#zhanghao').val();//对方账号
-	  var money= $('#zhuanzhang').val();//转帐额度
 	  
-	  if(zhanghao.length==0||zhanghao==null){
-		  alert('账号不能为空');
-		  return false;
-	  }
-	  if(money.length==0||money==null){
-		  alert('转账金额不能为空');
-		  return false;
-	  }
-	  /*if (filter.test(zhanghao)){ 
+	  if (filter.test(zhanghao)){ 
 		     return true; 
 		  }else{
 			  alert('您的钱包账号格式不正确'); 
 			  return false;
-			  }*/
+			  }
 	 // alert('转账功能还未正式上线');
 	  $.ajax({
 		    type:'post',
@@ -131,7 +133,7 @@ $(function(){
 		});
 	  
   });
-  });
+  });*/
   /**
  * Created by qw on 2016/9/18.
  */
