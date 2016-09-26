@@ -47,11 +47,17 @@ public class AuthorizationInterceptor implements HandlerInterceptor{
                 } 
             }
         }  
-        String userCode =request.getParameter("userCode");
+        logger.debug(request.getContextPath());
+        String userCode =request.getParameter("userCode")==null?"":request.getParameter("userCode");
       
-        if (null == session.getAttribute(Constant.LOGIN_USER)&&null==userCode&&"".equals(userCode)) {
+        if (null == session.getAttribute(Constant.LOGIN_USER)) {
+        	if("".equals(userCode)&&requestUrl.contains("/mobile")){
+        		response.sendRedirect(request.getContextPath() + "/");
+                return false;
+        	}else{
             response.sendRedirect(request.getContextPath() + "/view/login.html");
             return false;
+        	}
         }
         User user = (User)session.getAttribute(Constant.LOGIN_USER);
         if(user!=null&&"1".equals(user.getUserType())&&(requestUrl.contains("/lp_vip")||requestUrl.contains("/invest_vip"))){//普通会员

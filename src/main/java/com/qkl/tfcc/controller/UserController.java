@@ -155,26 +155,30 @@ public class UserController extends BaseAction{
 	 */
 	@RequestMapping(value="/modifyuser", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse modifyuser(UserDetail tUserDetail,HttpServletRequest request){
-		logBefore(logger, "修改用户信息");
+	public AjaxResponse modifyuser(UserDetail mUserDetail,HttpServletRequest request){
+		logBefore(logger, "修改用户信息");		
 	    try {
-		    /*String phone  =request.getParameter("phone");
+	    	UserDetail tUserDetail = new UserDetail();
 			String wxnum = request.getParameter("wxnum");
 			String bankaccno = request.getParameter("bankaccno");
 			String mailAddrss =request.getParameter("mailAddrss"); 
-			String zipCode =request.getParameter("zipCode");		*/
-//			String imgAddrss =request.getParameter("imgaddrss");
+			String zipCode =request.getParameter("zipCode");		
+			String imgAddrss =request.getParameter("imgAddrss");
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			UserDetail userDetail = userService.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
-//			UserDetail tUserDetail = new UserDetail();
-			tUserDetail.setUserCode(user.getUserCode());
-			/*tUserDetail.setPhone(phone);
+			String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}
+			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
+			tUserDetail.setUserCode(userCode);
 			tUserDetail.setWxnum(wxnum);
 			tUserDetail.setBankaccno(bankaccno);
 			tUserDetail.setMailAddrss(mailAddrss);
-			tUserDetail.setZipCode(zipCode);*/
-//			tUserDetail.setImgAddrss(imgAddrss);
-//			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
+			tUserDetail.setZipCode(zipCode);
+			tUserDetail.setImgAddrss(imgAddrss);
+			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
 			if(!StringUtil.isEmpty(userDetail.getRealName().trim())){
 			    tUserDetail.setOperator(userDetail.getRealName());
 			}else{
@@ -837,7 +841,12 @@ public class UserController extends BaseAction{
 		AjaxResponse ar = new AjaxResponse();
 		try {
 		    User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-		    String userCode = user.getUserCode();
+		    String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}		    
 			String oldPassWord  =request.getParameter("oldpassword");
 			String passWord  =request.getParameter("newpassword");
 			String cfPassWord  =request.getParameter("resnewpassword");
@@ -1121,8 +1130,22 @@ public class UserController extends BaseAction{
 				ar.setMessage("短信发送太频繁，请稍后重试!");
 				return ar;
 			}
-			String vCode =SmsSend.sendSms(phone);
-//			String vCode = "888888";
+			
+			 List<Map<String,Object>> tSysGencodeList =sysGenCodeService.findByGroupCode("SENDSMS_FLAG", Constant.VERSION_NO);
+			 String smsflag ="";
+	            for(Map<String,Object> mapObj:tSysGencodeList){
+	                if("SENDSMS_FLAG".equals(mapObj.get("codeName"))){
+	                	smsflag = mapObj.get("codeValue").toString();
+	                }
+	              
+	            }
+	        String vCode = "";
+			if("0".equals(smsflag)){
+			    vCode = "888888";
+			}else{
+				vCode =SmsSend.sendSms(phone);
+			}
+//			String vCode =SmsSend.sendSms(phone);			
 //			String vCode =String.valueOf((int)((Math.random()*9+1)*100000));
 			if(vCode.equals("0")){				
 				ar.setSuccess(false);
