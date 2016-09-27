@@ -150,9 +150,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
-	public boolean modifyPhone(String userCode, String phone,String versionNo) {
-		userDao.modifyPhone(userCode, phone);	
+	public boolean modifyPhone(String userCode, String phone,String oldPhone,String versionNo) {
+	    userDao.modifyPhone(userCode, phone);	
 		userDetailDao.modifyPhone(userCode, phone);
+		PageData pd = new PageData();
+		pd.put("ref_phone", oldPhone);
+		pd.put("new_ref_phone", phone);
+		userDetailDao.updateRefPhone(pd);
 		return true;
 	}
 

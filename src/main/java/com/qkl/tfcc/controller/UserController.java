@@ -1062,7 +1062,7 @@ public class UserController extends BaseAction{
 			
 			//1小时之内的短信验证码有效
 			String tVcode =smsService.findSendsmsDetail(phone,Constant.CUR_SYS_CODE); 
-			if(!vcode.equals(tVcode.trim())){
+			if(tVcode==null||!vcode.equals(tVcode.trim())){
 				ar.setSuccess(false);
 				ar.setErrorCode(CodeConstant.SMS_ERROR);
 				ar.setMessage("验证码输入不匹配！");
@@ -1072,7 +1072,7 @@ public class UserController extends BaseAction{
 			User fUser = userService.findbyPhone(oldPhone, Constant.VERSION_NO);
 			if(fUser==null){
 				ar.setSuccess(false);
-				logger.info("修改手机号功能,根据原手机号"+oldPhone+"未查询用户信息！");
+				logger.info("修改手机号功能,根据原手机号"+oldPhone+"未查询到用户信息！");
 				ar.setMessage("系统异常！");
 				return ar;
 			}
@@ -1090,7 +1090,7 @@ public class UserController extends BaseAction{
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
 			
 			
-			if(!userService.modifyPhone(tUserCode, phone, Constant.VERSION_NO)){			
+			if(!userService.modifyPhone(tUserCode, phone,oldPhone,Constant.VERSION_NO)){			
 				ar.setSuccess(false);
 				ar.setMessage("修改手机号失败！");
 				return ar;
