@@ -1,13 +1,3 @@
-$(document).ready(function(){
-
-	function sss(){
-		
-	}
-	
-	sss();
-	
-})	
-
 
 /**
 	 * 倒数60秒
