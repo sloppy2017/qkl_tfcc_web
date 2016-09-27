@@ -163,9 +163,13 @@ public class BankAccController extends BaseAction {
 			pd.put("modify_time", DateUtil.getCurrentDate());
 			pd.put("operator", user.getPhone());
 			//pd.put("userCode", user.getUserCode());
-			
+			String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}	
 		
-			String userCode = user.getUserCode();
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
 			String buyFlag = userDetail.getBuyFlag();
 			String freezeFlag =userDetail.getFreezeFlag();//获取冻结标识

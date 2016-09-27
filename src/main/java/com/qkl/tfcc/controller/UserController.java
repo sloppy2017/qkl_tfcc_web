@@ -356,6 +356,11 @@ public class UserController extends BaseAction{
 			}else{
 				tUserDetail.setFreezeFlag("1");
 			}
+			if(refUser.getUserType()==null||"4".equals(refUser.getUserType())||"0".equals(refUser.getUserType())||"".equals(refUser.getUserType())){//推介人是投资机构的话，用户的冻结标志要冻结
+				tUserDetail.setBuyFlag("0");
+			}else{
+				tUserDetail.setBuyFlag("1");
+			}
 			
 			if(realName!=null&&!realName.equals("")&&idno!=null&&!idno.equals("")){
 				tUserDetail.setRealStat("1");	

@@ -128,7 +128,9 @@
      </update>
 	 <update id="updateUserDetail" parameterType="UserDetail">    
          update tb_user_detail 
-         <set> 
+         <set>
+                real_name   = #{realName},
+                idno   = #{idno},
                 wxnum = #{wxnum},
                 bankaccno = #{bankaccno},
                 mail_addrss = #{mailAddrss},
