@@ -68,6 +68,14 @@ public interface UserDetailDao extends DAO<UserDetail> {
 	
 	
 	public UserDetail findDetail(String userCode);
+	/**
+	 * @describe:修改关联人手机号
+	 * @author: zhangchunming
+	 * @date: 2016年9月27日下午12:07:39
+	 * @param refPhone
+	 * @return: void
+	 */
+	public void updateRefPhone(PageData pd);
 	
 	
 

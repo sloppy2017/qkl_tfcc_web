@@ -102,6 +102,11 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
 		return selectOne;
 	}
 
+    @Override
+    public void updateRefPhone(PageData pd) {
+        getSqlSession().update(namespace+"."+"updateRefPhone", pd);
+    }
+
 	
 
 }

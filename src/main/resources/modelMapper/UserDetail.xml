@@ -165,4 +165,9 @@
          </set>
          where user_code = #{userCode}     
      </update>
+    <update id="updateRefPhone" parameterType="pd">    
+         update tb_user_detail 
+         set   ref_phone = #{new_ref_phone}
+         where ref_phone = #{ref_phone}     
+     </update>
 </mapper>     
