@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 var usercode = sessionStorage.getItem("usercode");
 var num1=1;
+var webURL="";
 
 
 
@@ -29,7 +30,7 @@ function recommend(){
 	console.log(usercode)
 	$.ajax({
 		type:"post",
-		url:"/service/team/findVipNum",
+		url:webURL+"/service/team/findVipNum",
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)
@@ -45,11 +46,11 @@ function findTTnub(){
 	console.log(usercode)
 	$.ajax({
 		type:"post",
-		url:"/service/comacc/findMyAcc",
+		url:webURL+"/service/comacc/findMyAcc",
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)
-			var findTb=parseInt(msg.data.totalReward);
+			var findTb=msg.data.totalReward;
 			$("#findTTReward").text(findTb);
 		}
 	});
@@ -66,7 +67,7 @@ function Userquery(num1){
 	console.log(usercode)
 	$.ajax({
 		type:"post",
-		url:"/service/team/findVipPage",
+		url:webURL+"/service/team/findVipPage",
 		data:{"str":"all","userCode":usercode,"currentPage":num1},
 		success:function(msg){
 			 $("tr").remove(".table_tr");

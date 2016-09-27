@@ -4,8 +4,8 @@
 <title>tfcc_原油发行及奖励系统</title>
 <jsp:include page="./_g/head.jsp" />
 <%
-	String basePath = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-	
+/* 	String basePath = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+	 */
 %>
 <link rel="stylesheet" href="${basePath}/resources/yc_udrs/css/style.css">
 <link rel="stylesheet" href="${basePath}/resources/yc_udrs/css/index.css">

@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	var usercode = sessionStorage.getItem("usercode");
+	var webURL="";
 	 var num=1;
 	 var num1=1;
 	 console.log(usercode)
@@ -28,15 +29,16 @@ $("#orderQuery").click(function(){
 	orderInquiry(orderStatus,1);
 })
 var sprSchoolName=1;
-console.log(orderStatus);
+console.log(usercode);
 //会员页码插件调用
 //==================
 //收款账号
 function gathering(){
 	$.ajax({
 	type:"post",
-	url:"/service/bankaccinfo/info",
+	url:webURL+"/service/bankaccinfo/info",
 	async:true,
+	data:{"userCode":usercode},
 	success:function(msg){
 		console.log(msg);
 		var orgName=msg.data.orgName;
@@ -48,10 +50,10 @@ function gathering(){
 }
 //订单查询
 function orderInquiry(orderStatus,num){
-	console.log(usercode)
+	console.log(usercode);
 	$.ajax({
 		type:"post",
-		url:"/service/bankaccinfo/searchSel",
+		url:webURL+"/service/bankaccinfo/searchSel",
 		async:true,
 		data:{"str":orderStatus,"currentPage":num,"showCount":10,"userCode":usercode},
 		success:function(msg){
