@@ -26,7 +26,7 @@ $(document).ready(function(){
 	 * 手机号验证
 	 */
 	$('.form input[name="phone"]').blur(function () {
-		$(this).val($(this).val().trim());
+		$(this).val($.trim($(this).val()));
 		valid_phone($(this));
 	});
 	function valid_phone($this){
@@ -50,12 +50,12 @@ $(document).ready(function(){
 	 * 密码验证
 	 */
 	$('.form input[name="password"]').blur(function () {
-		$(this).val($(this).val().trim());
+		$(this).val($.trim($(this).val()));
 		valid_password($(this));
 	});
 	function valid_password($this){
 		//密码正则6-16字母数字或特殊字符
-		var result = password_valid($this.val().trim());
+		var result = password_valid($.trim($this.val()));
 		if ($this.val() == '') {
 			$this.next().html('请输入密码');
 			return false;
@@ -74,8 +74,8 @@ $(document).ready(function(){
 		valid_resPassword($(this));
 	});
 	function valid_resPassword($this){
-		var result = password_valid($this.val().trim());
-		var pVal = 	$this.parent().prev().children("input[name='password']").val().trim();
+		var result = password_valid($.trim($this.val()));
+		var pVal = 	$this.parent().prev().children("input[name='password']").val();
 		if ($this.val() == '') {
 			$this.next().html('请输入确认密码');
 			return false;
@@ -152,7 +152,7 @@ $(document).ready(function(){
 	    }
 	    $.ajax({
 	        type:'POST',
-	        url:'/service/user/isExistPhone?phone='+phoneNote.val().trim(),
+	        url:'/service/user/isExistPhone?phone='+$.trim(phoneNote.val()),
 	        dataType:'JSON',
 	        success: function (json) {
 	             if(json.success){
@@ -160,7 +160,7 @@ $(document).ready(function(){
 	         	    //向后台发送处理数据
 	         	    $.ajax({
 	         	        type:'POST',
-	         	        url:'/service/user/sendsms?phone='+phoneNote.val().trim(),
+	         	        url:'/service/user/sendsms?phone='+$.trim(phoneNote.val()),
 	         	        dataType:'JSON',
 	         	        success: function (json) {
 	         	             if(json.success){
@@ -178,7 +178,7 @@ $(document).ready(function(){
 	        }
 	    });
 	}
-	function submit(){
+	function subBtn(){
 		var validPhone = valid_phone($("input[name='phone']"));
 		var validYzm = valid_yzm($("input[name='yzm']"));
 		var validPassword = valid_password($("input[name='password']"));
