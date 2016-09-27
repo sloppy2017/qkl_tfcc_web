@@ -160,8 +160,8 @@ public class UserController extends BaseAction{
 	    try {
 	    	UserDetail tUserDetail = new UserDetail();
 			
-			String realName = request.getParameter("realName");
-			String idno = request.getParameter("idno");
+			/*String realName = request.getParameter("realName");
+			String idno = request.getParameter("idno");*/
 			String wxnum = request.getParameter("wxnum");
 			String bankaccno = request.getParameter("bankaccno");
 			String mailAddrss =request.getParameter("mailAddrss"); 
@@ -175,12 +175,12 @@ public class UserController extends BaseAction{
 				userCode =user.getUserCode();
 			}
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
-			if(realName!=null&&!realName.equals("")){
+			/*if(realName!=null&&!realName.equals("")){
 				tUserDetail.setRealName(realName);
 			}
 			if(idno!=null&&!idno.equals("")){
 				tUserDetail.setIdno(idno);
-			}			
+			}	*/		
 			tUserDetail.setUserCode(userCode);
 			tUserDetail.setWxnum(wxnum);
 			tUserDetail.setBankaccno(bankaccno);
@@ -188,11 +188,7 @@ public class UserController extends BaseAction{
 			tUserDetail.setZipCode(zipCode);
 			tUserDetail.setImgAddrss(imgAddrss);
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
-			if(!StringUtil.isEmpty(userDetail.getRealName().trim())){
-			    tUserDetail.setOperator(userDetail.getRealName());
-			}else{
-			    tUserDetail.setOperator(userDetail.getPhone());
-			}
+		    tUserDetail.setOperator(userDetail.getPhone());
 			
 			if(userService.modifyUserDetail(tUserDetail, Constant.VERSION_NO)){			
 			    ar.setSuccess(true);
