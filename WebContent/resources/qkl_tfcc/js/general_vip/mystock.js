@@ -49,20 +49,20 @@ $("input[name='txnum']").blur(function(){//计算支付金额
     });
 });
 
-$(function(){ 
+/*$(function(){ 
 	$("input[name='payno']").blur(function(){
 		var $payno= $("input[name='payno']").val();
-		/*var reg = /^[\w\u0391-\uFFE5\u40]+$/;*/
+		var reg = /^[\w\u0391-\uFFE5\u40]+$/;
 		if($payno.length==0||$payno==null){
 			alert('支付宝账号不能为空');
 			return false;
 		};
-		/*if(!reg.test($payno)){
+		if(!reg.test($payno)){
 			
 			alert('请输入正确的支付宝账号');
-		};*/
+		};
 	});
-	});
+	});*/
 
 
 
@@ -73,13 +73,33 @@ function userRequest(){
 	
 //提交购买申请
 	
+	
+	
 	var $txnum= $("input[name='txnum']").val();
+	var reg = /[a-zA-Z\d+]{6,16}/;
 	var $txamnt= $("input[name='txamnt']").val();
 	var $payno= $("input[name='payno']").val();
+	
+	
 	if($txnum.length==0||$txnum==null){
 		alert('请选择购买数量');
 		return false;
 	}
+	
+	
+
+	if($payno.length==0||$payno==null){
+		alert('支付宝账号不能为空');
+		return false;
+	}else{
+		if(reg.test($payno)){
+			
+			}else{
+				alert('请输入正确的支付宝账号:手机号/邮箱');
+				return false;
+			};
+	}
+	
 	if($txamnt<1000.00){
 		alert('单次购买金额不得少于1000.00元');
 		return false;
@@ -88,14 +108,10 @@ function userRequest(){
 		alert('单次购买金额不得大于50000.00元');
 		return false;
 	};
-	if($payno.length==0||$payno==null){
-		alert('支付宝账号不能为空');
-		return false;
-	}
 	
 	
 	buy_flag=false;
-	var url = "/service/bankaccinfo/tradebuy?"+$("form").serialize();
+	var url = "/service/bankaccinfo/tradebuy?txamnt="+$txamnt+"&payno="+$payno+"&txnum="+$txnum;
 	url = encodeURI(url);
 	$.ajax({
 		async:false, 
@@ -111,6 +127,8 @@ function userRequest(){
         },*/ 
         async:true, 
         success: function (data) {
+        	
+        	
         	buy_flag=true;
             alert(data.message);
             $("input[name='txamnt']").val("");

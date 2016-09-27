@@ -18,6 +18,7 @@
 	    <result column="img_addrss" property="imgAddrss" />
 	    <result column="qr_code" property="qrCode"/>      
 	    <result column="freeze_flag" property="freezeFlag"/> 
+	    <result column="buy_flag" property="buyFlag"/>
 	    <result column="user_type" property="userType"/>    
 	    <result column="create_time" property="createTime"/>    
 	    <result column="modify_time" property="modifyTime"/>    
@@ -27,7 +28,7 @@
      <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
          id,user_code,user_name,phone,real_name,idno,crop_name,crop_person,branch_name,wxnum,bankaccno,mail_addrss,zip_code,ref_phone,
-         img_addrss,qr_code,user_type,real_stat,freeze_flag,create_time,modify_time,operator
+         img_addrss,qr_code,user_type,real_stat,freeze_flag,buy_flag,create_time,modify_time,operator
     </sql>
       
        <select id="findIsExist" parameterType="java.lang.String" resultType="java.lang.Integer" >
@@ -48,6 +49,7 @@
 	         user_type userType,
 	         real_stat realStat,
 	         freeze_flag freezeFlag,
+	         buy_flag buyFlag,
 	         create_time createTime,
 	         modify_time modifyTime,
 	         operator  operator
@@ -79,6 +81,7 @@
 	 user_type,
 	 real_stat,
 	 freeze_flag,
+	 buy_flag,
 	 create_time,
 	 modify_time,
 	 operator)
@@ -94,7 +97,8 @@
 	 #{qrCode},
 	 #{userType},
 	 #{realStat},
-	 #{freezeFlag},	 
+	 #{freezeFlag},
+	 #{buyFlag},	 
 	 #{createTime},
 	 #{modifyTime},
 	 #{operator}

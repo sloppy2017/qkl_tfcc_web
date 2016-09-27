@@ -564,4 +564,61 @@ body{
 	padding-bottom:2rem;
 }
 
-
+/*购买*/
+.purchase{
+	width: 100%;
+	min-height:4rem;
+	height: auto;
+	height: 4rem;
+	float: left;
+	margin-top:0.6rem ;
+}
+.purchase_li_wrap{
+	width: 100%;
+	height: 0.8rem;
+	background: #F2F2F2;
+	float: left;
+	position: relative;
+	margin-top:0.3rem ;
+}
+.purchase_li_wrap .reg_li_left{
+	width: 2.5rem;
+	height: 100%;
+	font-size:12px;
+	text-align: right;
+	line-height: 0.8rem;
+	float: left;
+	color: black;
+	position: relative;
+}
+.pho_input1 {
+    width: 4rem;
+    height: 0.7rem;
+    float: left;
+    background: none;
+    padding-left: 0.1rem;
+    border: 1px solid #bebebe;
+    margin-left: 0.3rem;
+    margin-top: 0.06rem;
+    margin-bottom: 0.06rem;
+    font-size: 0.24rem;
+    background: #FFFFFF;
+}
+.purchase_p{
+	font-size: 0.28rem;
+    padding-left: 2.8rem;
+    float: left;
+    color: #ff0000;
+    z-index: 1;
+}
+.purchase_a{
+	height: 0.6rem;
+    width: 1.5rem;
+    float: left;
+    border: 0;
+    background: #2b71b1;
+    margin-left: 0.3rem;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 0.6rem;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>购买</title>
+		<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/all.css"/>
+	</head>
+	<body>
+		<div class="ind_header">
+			<img src="img/sanjiebao_logo_fanbai.png"/>
+		</div>
+		<div class="purchase">
+			<div class="purchase_li_wrap">
+				<li class="reg_li_left">购买数量</li>
+				<input type="text" class="pho_input1" id="buyNumber" value="" placeholder="请输入购买数量" />
+				<p class="purchase_p" id="point_phonnumber"></p>
+			</div>
+			<div class=" purchase_li_wrap">
+				<li class="reg_li_left">需支付金额（元）</li>
+				<input type="text" readonly="readonly" class="pho_input1" id="paymentAmount" value="" placeholder="" />
+				<p class="purchase_p" id="userPassWord1"></p>
+			</div>
+			<div class=" purchase_li_wrap">
+				<li class="reg_li_left">我的支付宝</li>
+				<input type="text" class="pho_input1"  id="myAlipay" value="" placeholder="请输入支付宝账户" />
+				<p class="purchase_p" id="myAlipayP"></p>
+			</div>
+		</div>
+		<div class="login_wrap">
+			<input type="button" class="login_login" name="" id="ConfirmBuy" value="确认购买" />
+			<input type="button" class="login_login" name="" id="cancel" value="取消" />
+		</div>
+		
+		
+		<div class="footer_wrap">
+			<a href="index1.html">
+				<img src="img/woyaogoumai_lan.png"/>
+				<div class="color_a">我要购买</div>
+			</a>
+			<a  href="myteam.html">
+				<img src="img/wodetuandui_hui.png"/>
+				<div>我的团队</div>
+			</a>
+			<a href="purse.html">
+				<img src="img/gerenzhongxin_hui.png"/>
+				<div>个人中心</div>
+			</a>
+		</div>
+		<script src="js/jquery-2.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/phoneweb1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var usercode = sessionStorage.getItem("usercode");
+				$("#myAlipay").blur(function(){
+					var buyNub,paymentAmount,myAlipaynub;
+					if(!validate.alipay($('#myAlipay').val())){
+					$("#myAlipayP").html("请输入正确的支付宝账号");
+					}else{
+						$("#myAlipayP").html("");
+					}
+				})
+				$("#buyNumber").blur(function(){
+					buyNub= $("#buyNumber").val();
+					if(buyNub==""){
+						buyNub=0;
+					}
+					console.log(buyNub);
+					purchase();
+					
+				})
+				
+				$("#ConfirmBuy").click(function(){
+					 paymentAmount=$("#paymentAmount").val();
+					 myAlipaynub=$('#myAlipay').val();
+					 buyNub= $("#buyNumber").val();
+					if(paymentAmount==""){
+						alert("请填写单价，获取支付金额");
+					}else if(!validate.alipay($('#myAlipay').val())){
+						alert("填写正确的支付宝账户");
+					}else{
+						var a=confirm("您确定购买吗？")
+		            		if(a==true){
+		            			purchaseOrder();
+		            		}
+					}
+				})
+				$("#cancel").click(function(){
+					var a=confirm("您确定取消购买吗？")
+		            		if(a==true){
+		            			window.location.href="index.html"
+		            		}
+				})
+//				var wConfirm = window.confirm;  
+//				window.confirm = function (message) {  
+//				    try {  
+//				        var iframe = document.createElement("IFRAME");  
+//				        iframe.style.display = "none";  
+//				        iframe.setAttribute("src", 'data:text/plain,');  
+//				        document.documentElement.appendChild(iframe);  
+//				        var alertFrame = window.frames[0];  
+//				        var iwindow = alertFrame.window;  
+//				        if (iwindow == undefined) {  
+//				            iwindow = alertFrame.contentWindow;  
+//				        }  
+//				        iwindow.confirm(message);  
+//				        iframe.parentNode.removeChild(iframe);  
+//				    }  
+//				    catch (exc) {  
+//				        return wConfirm(message);  
+//				    }  
+//				}  
+//				 window.alert = function(name){  
+//		            var iframe = document.createElement("IFRAME");  
+//		            iframe.style.display="none";  
+//		            iframe.setAttribute("src", 'data:text/plain,');  
+//		            document.documentElement.appendChild(iframe);  
+//		            window.frames[0].window.alert(name);  
+//		            iframe.parentNode.removeChild(iframe);  
+//		        }  
+
+				function purchase(){
+					$.ajax({
+						type:"post",
+						url:"/service/bankaccinfo/PayMoney",
+						data:{"txnum":buyNub},
+						success:function(msg){
+							console.log(msg)
+							if(msg.data<1000){
+								alert("单次交易金额不得小于1000.00")
+							}else if(msg.data>50000){
+								alert("单次交易金额不得小于50000.00")
+							}else{
+								$("#paymentAmount").val(msg.data);
+							}
+							
+						}
+					});
+				   }
+				function purchaseOrder(){
+					$.ajax({
+						type:"post",
+						url:"/service/bankaccinfo/tradebuy",
+						data:{"txamnt":paymentAmount,"payno":myAlipaynub,"userCode":usercode,"txnum":buyNub},
+						success:function(msg){
+							
+							alert(msg.message);
+							console.log(msg)
+							if(msg.success==true){
+								window.location.href="index.html";
+							}
+						
+						}
+					});
+				   }	
+			})
+		</script>
+	</body>
+</html>

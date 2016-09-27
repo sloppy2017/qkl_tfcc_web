@@ -1,6 +1,12 @@
 $(document).ready(function(){
 
-
+	function sss(){
+		
+	}
+	
+	sss();
+	
+})	
 
 
 /**
@@ -22,6 +28,8 @@ $(document).ready(function(){
 			
 		}
 	};
+	
+
 	/**
 	 * 手机号验证
 	 */
@@ -209,9 +217,6 @@ $(document).ready(function(){
 			}
 		});*/
 	};
-	
-	
-	
 //	$(".empty-clear").val("");
 //	function empty(){
 //		$('.empty-clear').html('')
@@ -237,15 +242,42 @@ $(document).ready(function(){
 //	    }
 //	}
 	
-	function sss(){
-		
-	}
+
 	
-	sss();
-	
-})
-	
-	
+
+function submit(){
+		console.log("forgetpwd start1!");
+		var validPhone = valid_phone($("input[name='phone']"));
+		var validYzm = valid_yzm($("input[name='yzm']"));
+		var validPassword = valid_password($("input[name='password']"));
+		var validResPassword = valid_resPassword($("input[name='resPassword']"));
+//		alert(validPhone+"--"+validYzm+"--"+validResPassword+"--"+validPassword);
+		if(!(validPhone&&validPassword&&validResPassword&&validYzm)){
+			return;
+		}
+		 console.log("forgetpwd start2!");
+		var url = '../service/user/forgetpwd?'+$("form").serialize();
+		$.ajax({
+			type:'POST',
+			url:url,
+			dataType:'JSON',
+			success:function(data){
+				if(data.success){
+					$(".mark1").show();
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+		/*var url = '../service/user/forgetpwd?'+$("form").serialize();
+		$.post(url,function(data){
+			if(data.success){
+				$(".mark1").show();
+			}else{
+				alert(data.message);
+			}
+		});*/
+	};
 
 
 
