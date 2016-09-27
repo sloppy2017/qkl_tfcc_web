@@ -16,16 +16,22 @@
 		<script src="../resources/qkl_tfcc/js/common/jquery.touchSlider.js"></script>
 		<style>
 		
-			.login-form {
+	   .login-form {
 				position: absolute;
 				top: 0;
 				left: 0;
 			width: 100%;
-		}
-		
+		}		
 		input:-webkit-autofill {  
-    -webkit-box-shadow: 0 0 0px 1000px white inset !important;  
-} 
+    		-webkit-box-shadow: 0 0 0px 1000px white inset !important;  
+		} 
+		
+		<!--[if IE]> 
+		<style type="text/css"> 
+		input{margin:0;padding:0;filter:chroma(color=#000000);border:none; } 
+		.wrap{background-color:#0f0;} 
+		</style> 
+		<![endif]--> 
 		</style>
 		<script> 		
 			//平台、设备和操作系统
