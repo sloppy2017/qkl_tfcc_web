@@ -1,6 +1,7 @@
 package com.qkl.tfcc.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -186,7 +187,7 @@ public class BankAccController extends BaseAction {
 					if (value<=50000.00) {
 						boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
 						if (addTradeDetail) {
-							String content = "尊敬的【"+userDetail.getPhone()+"】会员，您提交购买【"+txamnt2+"】SAN数字货币订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
+							String content = "尊敬的【"+userDetail.getPhone()+"】会员您好，您提交购买【"+txamnt2+"】三界宝数字资产订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
 							SmsSend.sendSms(userDetail.getPhone(), content);
 							ar.setSuccess(true);
 							ar.setMessage("订单已生成，请及时付款");
@@ -224,6 +225,7 @@ public class BankAccController extends BaseAction {
 	@RequestMapping(value="/PayMoney",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse requirePayMoney(HttpServletRequest request){//获取购买金额
+	    
 		//User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		try {
 			pd=this.getPageData();
@@ -261,5 +263,28 @@ public class BankAccController extends BaseAction {
 		return ar;
 	}
 	
-	
+	@RequestMapping(value="/getPayList",method=RequestMethod.POST)
+    @ResponseBody
+    public AjaxResponse getPayList(HttpServletRequest request,HttpServletResponse response){
+        AjaxResponse ar = new AjaxResponse();
+        List<Map<String,String>> resList = new ArrayList<Map<String,String>>();
+        try {
+            List<Map<String,Object>> payList = sysGenCodeService.findByGroupCode("PAY_TYPE", Constant.VERSION_NO);
+            for(Map<String,Object> payMap:payList){
+                Map<String,String> map = new  HashMap<String,String>();
+                map.put("name", payMap.get("description").toString());
+                map.put("value", payMap.get("codeValue").toString());
+                resList.add(map);
+            }
+            ar.setSuccess(true);
+            ar.setMessage("查询成功");
+            ar.setData(resList);
+        } catch (Exception e) {
+            ar.setSuccess(false);
+            ar.setMessage("查询失败");
+            e.printStackTrace();
+        }
+       return ar;
+    }
+    
 }

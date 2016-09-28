@@ -5,7 +5,7 @@
   
       <select id="findByPhone" parameterType="java.lang.String" resultType="com.qkl.tfcc.api.po.acc.BankAccInfo" >
 		select  
-		org_name orgName,bankaccno bankaccno,deposit_bankname depositBankname,deposit_time depositTime,checkphone checkphone,payee_name payeeName,
+		org_name orgName,bankaccno bankaccno,deposit_bankname depositBankname,deposit_time depositTime,checkphone checkphone,
 		status status,create_time createTime,modify_time modifyTime,operator operator
 		from tb_bankacc where status ='1'		
 	  </select> 

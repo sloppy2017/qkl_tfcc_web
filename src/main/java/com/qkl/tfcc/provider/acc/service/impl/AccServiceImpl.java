@@ -25,6 +25,7 @@ import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccDetailDao;
 import com.qkl.tfcc.provider.dao.AccLimitdefDao;
 import com.qkl.tfcc.provider.dao.UserDao;
+import com.qkl.tfcc.provider.dao.UserDetailDao;
 import com.qkl.tfcc.provider.dao.UserFriendshipDao;
 import com.qkl.util.help.DateUtil;
 import com.qkl.util.help.Validator;
@@ -40,6 +41,8 @@ public class AccServiceImpl implements AccService {
 
     @Autowired
     private AccDetailDao accDetailDao;
+    @Autowired
+    private UserDetailDao userDetailDao;
     @Autowired
     private AccDao accDao;
     @Autowired
@@ -141,6 +144,12 @@ public class AccServiceImpl implements AccService {
         Map<String,String> map = new HashMap<String,String>();
         StringBuffer successStr = new StringBuffer("[");
         StringBuffer failStr = new StringBuffer("发放失败的手机号：");
+        
+        //用户发放完以后，购买标识改为0，禁止购买
+        PageData pdUserDetail = new PageData();
+        pdUserDetail.put("user_code", userDetail.getUserCode());
+        pdUserDetail.put("buy_flag", "0");
+        userDetailDao.updateBuyFlag(pdUserDetail);
         for(int i = 0;i<jsonArray.size();i++){
             JSONObject obj = (JSONObject)jsonArray.get(i);
             String phone = obj.getString("phone").trim();
@@ -198,7 +207,7 @@ public class AccServiceImpl implements AccService {
                     accOut.setSyscode(Constant.CUR_SYS_CODE);
                     boolean result = accDao.updateOut(accOut);
                     if(result){
-                      //普通用户账户明细收入
+                        //普通用户账户明细收入
                         AccDetail accDetail = new AccDetail();
                         accDetail.setUserCode(userDetail.getUserCode());//投资机构用户编码
                         accDetail.setRelaUsercode(tUser.getUserCode());//关联用户编码 
