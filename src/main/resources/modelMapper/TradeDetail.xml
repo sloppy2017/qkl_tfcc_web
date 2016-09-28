@@ -172,11 +172,33 @@
      
      <!-- 查询交易信息列表 -->
     <select id="findTradelistPage" parameterType="page"  resultType="pd">
-    select  date_format(txdate,'%Y年%m月%d日 %H时%i分%s秒') txdate,txnum,txamnt, status from tb_trade_detail where user_code=#{pd.userCode}
+   <!--  select  date_format(txdate,'%Y年%m月%d日 %H时%i分%s秒') txdate,txnum,txamnt, status from tb_trade_detail where user_code=#{pd.userCode}
      <if test="pd.str!=null and pd.str!='' and pd.str!=5"> 
     and status=#{pd.str}
     </if>  
     order by txdate desc
+    
+     case when  a.`status`='0' then '待审核' 
+          when  a.`status`='1' then '通过' 
+          when a.`status`='9' then '取消'
+          else '待审核'  end 状态
+      from tb_trade_detail a
+    
+     -->
+    
+    
+    
+select  
+  a.order_no orderno, a.txnum txnum,a.txamnt txamnt,date_format(a.txdate,'%Y:%m:%d %H:%i:%s') txdate,
+  date_format(a.pay_time,'%Y:%m:%d %H:%i:%s') paytime , status 
+   from tb_trade_detail a
+  where 1 = 1
+
+     <if test="pd.str!=null and pd.str!='' and pd.str!=5"> 
+    and status=#{pd.str}
+    </if>  
+    order by txdate desc
+    
     </select>
 
     

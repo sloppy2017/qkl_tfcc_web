@@ -107,11 +107,19 @@ public class BankAccController extends BaseAction {
 			 for (PageData pageData : tradeInfo) {
 				 int status = Integer.parseInt( pageData.getString("status"));
 				 String string2 = pageData.get("txamnt").toString();
+				 String txnum1 = pageData.get("txnum").toString();
 				 BigDecimal decimal = new BigDecimal(string2);
+				 BigDecimal decimal1 = new BigDecimal(txnum1);
 				 String format = String .format("%.4f",decimal);
+				 String txnum = String .format("%.4f",decimal1);
 				//double txamnt = decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 				//System.out.println(txamnt+"=============");
+				 String paytime = pageData.getString("paytime");
+				 if ("".equals(paytime)||paytime==null) {
+					 pageData.put("paytime", "");
+				}
 				pageData.put("txamnt", format);
+				pageData.put("txnum", txnum);
 				 if (status==0) {
 					 pageData.put("status", "待付款");	
 				}
@@ -178,7 +186,15 @@ public class BankAccController extends BaseAction {
 				pd.put("userCode", userCode);
 				BigDecimal findAnmt = tradeService.findAnmt(userCode, Constant.VERSION_NO);//获取数据库中此用户的交易金额数量
 				String txamnt1 = pd.getString("txamnt");//获取再次购买的金额
-				BigDecimal txamnt2=new BigDecimal(txamnt1);
+				
+				
+				BigDecimal txamnt2=null;
+				if (!"".equals(txamnt1)||txamnt1!=null) {
+					 txamnt2=new BigDecimal(txamnt1);
+				}else {
+					 txamnt2=new BigDecimal(0);
+				}
+				
 				if(findAnmt==null){
 					findAnmt = new BigDecimal(0);
 				}
@@ -248,6 +264,7 @@ public class BankAccController extends BaseAction {
 			}
 			BigDecimal multiply = tmpprices.multiply(txnum);//计算应付金额
 			String txamnt = String .format("%.2f",multiply);
+			
 			
 			
 			ar.setSuccess(true);

@@ -246,18 +246,21 @@ function reload_table(currentPage,showCount) {
         success: function (data) {
             var tviplist = data.data.tradeInfo;
             var tablecols = "<tr> \n"
-                + " <th>购买时间</th> \n"
-                + "<th>购买份数</th> \n"
-               /* + "<th>支付方式</th> \n"*/
-                +"<th>总计金额（元）</th>\n"
-                +"<th>付款状态</th>\n"
+                + " <th>订单号</th> \n"
+                + "<th>交易数量</th> \n"
+                + "<th>交易金额</th> \n"
+                +"<th>购买时间</th>\n"
+                +"<th>交易时间</th>\n"
+                +"<th>状态</th>\n"
                 + "</tr> \n";
             rsStr= tablecols;
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
-                rsStr = rsStr + "<th>" + tviplist[i].txdate + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].orderno + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].txnum + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].txamnt + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].txdate + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].paytime + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].status + "</th>";
                 rsStr = rsStr + "</tr>";
             }
