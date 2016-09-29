@@ -101,7 +101,7 @@ public class AccController extends BaseAction{
                      successStr.append(obj.getString("phone")+"，额度："+obj.getString("tfccNum")+"；");
                      phoneStr.append(obj.getString("phone")+"，");
                      totalSan = totalSan.add(new BigDecimal(obj.getString("tfccNum")));
-                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】会员给您发转入【"+obj.getString("tfccNum")+"】三界宝数字资产，请登录网站查收！");
+                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】会员给您发转入【"+obj.getString("tfccNum")+"】SAN数字货币，请登录网站查收！");
                    
                  }
                  resMap.remove("successStr");
@@ -116,15 +116,15 @@ public class AccController extends BaseAction{
                  resMap.put("total_amnt", accPd.get("total_amnt")==null?null:String.format("%.4f",new BigDecimal(accPd.get("total_amnt").toString())));
              }
              //给当前登陆用户发送短信
-            /* if(totalSan.compareTo(new BigDecimal("0"))>0){//判断发放总额是否大于0
+             if(totalSan.compareTo(new BigDecimal("0"))>0){//判断发放总额是否大于0
                  phoneStr = new StringBuffer(phoneStr.substring(0, phoneStr.length()-1));
                  if(phoneStr.toString().contains(",")){
-                     SmsSend.sendSms(userDetail.getPhone(), "尊敬的【"+userDetail.getPhone()+"】会员您好，您向【"+phoneStr+"】会员转出【"+totalSan+"】三界宝数字货币成功，账户余额【"+resMap.get("avb_amnt").toString()+"】，祝您生活愉快！如有疑问请及时联系网站客服。");
+                     SmsSend.sendSms(userDetail.getPhone(), "尊敬的【"+userDetail.getPhone()+"】会员您好，您向【"+phoneStr+"】会员转出【"+totalSan+"】SAN数字货币成功，账户余额【"+resMap.get("avb_amnt").toString()+"】，祝您生活愉快！如有疑问请及时联系网站客服。");
                  }else{
-                     SmsSend.sendSms(userDetail.getPhone(), "尊敬的【"+userDetail.getPhone()+"】会员您好，您向【"+phoneStr+"】会员共计转出【"+totalSan+"】三界宝数字货币成功，账户余额【"+resMap.get("avb_amnt").toString()+"】，祝您生活愉快！如有疑问请及时联系网站客服。");
+                     SmsSend.sendSms(userDetail.getPhone(), "尊敬的【"+userDetail.getPhone()+"】会员您好，您向【"+phoneStr+"】会员共计转出【"+totalSan+"】SAN数字货币成功，账户余额【"+resMap.get("avb_amnt").toString()+"】，祝您生活愉快！如有疑问请及时联系网站客服。");
                  }
                  
-             }*/
+             }
              ar.setSuccess(true);
              ar.setData(resMap);
              ar.setMessage("发放成功");

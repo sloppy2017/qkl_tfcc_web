@@ -160,8 +160,8 @@ public class UserController extends BaseAction{
 	    try {
 	    	UserDetail tUserDetail = new UserDetail();
 			
-			/*String realName = request.getParameter("realName");
-			String idno = request.getParameter("idno");*/
+			String realName = request.getParameter("realName");
+			String idno = request.getParameter("idno");
 			String wxnum = request.getParameter("wxnum");
 			String bankaccno = request.getParameter("bankaccno");
 			String mailAddrss =request.getParameter("mailAddrss"); 
@@ -175,12 +175,12 @@ public class UserController extends BaseAction{
 				userCode =user.getUserCode();
 			}
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
-			/*if(realName!=null&&!realName.equals("")){
+			if(realName!=null&&!realName.equals("")){
 				tUserDetail.setRealName(realName);
 			}
 			if(idno!=null&&!idno.equals("")){
 				tUserDetail.setIdno(idno);
-			}	*/		
+			}			
 			tUserDetail.setUserCode(userCode);
 			tUserDetail.setWxnum(wxnum);
 			tUserDetail.setBankaccno(bankaccno);
@@ -188,7 +188,11 @@ public class UserController extends BaseAction{
 			tUserDetail.setZipCode(zipCode);
 			tUserDetail.setImgAddrss(imgAddrss);
 			tUserDetail.setModifyTime(DateUtil.getCurrentDate());
-		    tUserDetail.setOperator(userDetail.getPhone());
+			if(!StringUtil.isEmpty(userDetail.getRealName().trim())){
+			    tUserDetail.setOperator(userDetail.getRealName());
+			}else{
+			    tUserDetail.setOperator(userDetail.getPhone());
+			}
 			
 			if(userService.modifyUserDetail(tUserDetail, Constant.VERSION_NO)){			
 			    ar.setSuccess(true);
@@ -352,12 +356,6 @@ public class UserController extends BaseAction{
 			}else{
 				tUserDetail.setFreezeFlag("1");
 			}
-			tUserDetail.setBuyFlag("1");
-			/*if(refUser.getUserType()==null||"4".equals(refUser.getUserType())||"0".equals(refUser.getUserType())||"".equals(refUser.getUserType())){//推介人是投资机构的话，用户的冻结标志要冻结
-				tUserDetail.setBuyFlag("0");
-			}else{
-				tUserDetail.setBuyFlag("1");
-			}*/
 			
 			if(realName!=null&&!realName.equals("")&&idno!=null&&!idno.equals("")){
 				tUserDetail.setRealStat("1");	

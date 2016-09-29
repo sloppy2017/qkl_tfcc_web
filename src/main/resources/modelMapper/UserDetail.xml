@@ -128,7 +128,7 @@
      </update>
 	 <update id="updateUserDetail" parameterType="UserDetail">    
          update tb_user_detail 
-         <set>
+         <set> 
                 wxnum = #{wxnum},
                 bankaccno = #{bankaccno},
                 mail_addrss = #{mailAddrss},
@@ -169,10 +169,5 @@
          update tb_user_detail 
          set   ref_phone = #{new_ref_phone}
          where ref_phone = #{ref_phone}     
-     </update>
-    <update id="updateBuyFlag" parameterType="pd">    
-         update tb_user_detail 
-         set   buy_flag = #{buy_flag}   
-         where user_code = #{user_code}     
      </update>
 </mapper>     

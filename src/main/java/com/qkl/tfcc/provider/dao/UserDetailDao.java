@@ -76,14 +76,6 @@ public interface UserDetailDao extends DAO<UserDetail> {
 	 * @return: void
 	 */
 	public void updateRefPhone(PageData pd);
-	/**
-	 * @describe:更新购买标识
-	 * @author: zhangchunming
-	 * @date: 2016年9月28日下午3:44:28
-	 * @param pd
-	 * @return: void
-	 */
-	public boolean updateBuyFlag(PageData pd);
 	
 	
 
