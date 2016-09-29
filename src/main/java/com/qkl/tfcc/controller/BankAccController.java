@@ -106,12 +106,28 @@ public class BankAccController extends BaseAction {
 			 tradeInfo = tradeService.findTradeInfo(page,Constant.VERSION_NO);
 			 for (PageData pageData : tradeInfo) {
 				 int status = Integer.parseInt( pageData.getString("status"));
-				 String string2 = pageData.get("txamnt").toString();
-				 BigDecimal decimal = new BigDecimal(string2);
-				 String format = String .format("%.4f",decimal);
-				//double txamnt = decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-				//System.out.println(txamnt+"=============");
-				pageData.put("txamnt", format);
+				 String txamnt1 = pageData.get("txamnt").toString();
+				 String txnum1 = pageData.get("txnum").toString();
+				 String paytime = pageData.getString("paytime");
+				 BigDecimal decimal=null;
+				 BigDecimal decima2=null;
+				 if (!"".equals(txamnt1)||txamnt1!=null) {
+					 decimal = new BigDecimal(txamnt1);
+				}else {
+					  decimal = new BigDecimal(0);
+				}
+				 if (!"".equals(txnum1)||txnum1!=null) {
+					 decima2 = new BigDecimal(txnum1);
+				}else {
+					  decima2 = new BigDecimal(0);
+				}
+				if (paytime==null) {
+					pageData.put("paytime", "");
+				}
+				 String txnum = String .format("%.4f",decima2);
+				 String txamnt = String .format("%.4f",decimal);
+				pageData.put("txamnt", txamnt);
+				pageData.put("txnum", txnum);
 				 if (status==0) {
 					 pageData.put("status", "待付款");	
 				}
