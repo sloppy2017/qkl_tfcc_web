@@ -560,8 +560,8 @@ public class UserServiceImpl implements UserService {
        5-众筹会员
      * */
     private void   calRegitAccDetail(UserDetail mUserDetail){
-        String refPhone =mUserDetail.getRefPhone(); 
-        String UserCode = mUserDetail.getUserCode();
+        /*String refPhone =mUserDetail.getRefPhone(); 
+        String UserCode = mUserDetail.getUserCode();*/
         String userType = mUserDetail.getUserType();
                
         if(userType.equals("1")){//普通用户
@@ -588,7 +588,7 @@ public class UserServiceImpl implements UserService {
     }
     
     private void  calPtMemberTjBouns(UserDetail mUserDetail){ 
-        SysGencode tSysGencodeTJZC1 = new   SysGencode();
+        /*SysGencode tSysGencodeTJZC1 = new   SysGencode();
         SysGencode tSysGencodeTJZC2 = new   SysGencode();
         SysGencode tSysGencodeTJZC3 = new   SysGencode();
         SysGencode tSysGencodeNEDLEVA = new   SysGencode();
@@ -612,18 +612,19 @@ public class UserServiceImpl implements UserService {
                     }                   
                 }
             }
-        }
+        }*/
        
         PageData pd = new PageData();
         pd.put("recomuserCode", mUserDetail.getUserCode());
-        pd.put("TJZC1", tSysGencodeTJZC1.getCodeValue());
+        /*pd.put("TJZC1", tSysGencodeTJZC1.getCodeValue());
         pd.put("TJZC2", tSysGencodeTJZC2.getCodeValue());
         pd.put("TJZC3", tSysGencodeTJZC3.getCodeValue());
         pd.put("NEDLEVA", tSysGencodeNEDLEVA.getCodeValue());
         pd.put("NEDLEVB", tSysGencodeNEDLEVB.getCodeValue());
-        pd.put("NEDLEVC", tSysGencodeNEDLEVC.getCodeValue());
+        pd.put("NEDLEVC", tSysGencodeNEDLEVC.getCodeValue());*/
         pd.put("subAccno", "010101");
-        pd.put("bounsSource1", "11");
+        pd.put("bounsSource1", "15");
+        pd.put("bounsSource2", "1501");
         pd.put("syscode", Constant.CUR_SYS_CODE);
         pd.put("operator","sys");
     	accDetailDao.addAccDetaillv(pd);

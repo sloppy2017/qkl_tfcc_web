@@ -160,8 +160,8 @@ public class UserController extends BaseAction{
 	    try {
 	    	UserDetail tUserDetail = new UserDetail();
 			
-			/*String realName = request.getParameter("realName");
-			String idno = request.getParameter("idno");*/
+			String realName = request.getParameter("realName");
+			String idno = request.getParameter("idno");
 			String wxnum = request.getParameter("wxnum");
 			String bankaccno = request.getParameter("bankaccno");
 			String mailAddrss =request.getParameter("mailAddrss"); 

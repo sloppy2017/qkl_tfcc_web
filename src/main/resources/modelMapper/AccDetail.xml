@@ -26,7 +26,7 @@
      )   
      </insert>
      
-      <insert id="addlv" parameterType="pd" >
+      <!-- <insert id="addlv" parameterType="pd" >
      insert into tb_acc_detail (user_code,sub_accno,bouns_source1,bouns_source2,rela_usercode,
      rela_userlevel,amnt,caldate,cntflag,`status`,syscode,create_time,modify_time,operator)
 	 select  
@@ -63,8 +63,29 @@
 	 and a.syscode = b.syscode
 	 and a.user_code = b.user_code
 	 and a.rela_level = b.rela_level      
+     </insert> -->
+     <insert id="addlv" parameterType="pd" >
+     insert into tb_acc_detail (user_code,sub_accno,bouns_source1,bouns_source2,rela_usercode,
+     rela_userlevel,amnt,caldate,cntflag,`status`,syscode,create_time,modify_time,operator)
+     select  
+     a.user_code,
+     #{subAccno},
+     #{bounsSource1},
+     #{bounsSource2},
+     #{recomuserCode},
+     a.rela_level,
+     '0.0000',
+     now(),
+     '0',
+     '1',
+     #{syscode},
+     now(),
+     now(),
+     #{operator}
+     from tb_user_friendship a
+     where a.recomuser_code =#{recomuserCode}
+     and a.syscode =#{syscode}
      </insert>
-     
      
      <update id="updateAccDetail" parameterType="com.qkl.tfcc.api.po.acc.AccDetail">
            update tb_acc_detail

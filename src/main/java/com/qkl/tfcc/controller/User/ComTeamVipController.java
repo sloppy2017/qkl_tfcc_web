@@ -78,7 +78,7 @@ public class ComTeamVipController extends BaseAction{
 			
 	//		String querycontdiction1 = request.getParameter("querycontdiction1");//获取下拉框对应的输入的值
 	//		String querycontdiction2 = request.getParameter("querycontdiction2");//获取下拉框对应的输入的值
-			String currentPage = request.getParameter("currentPage");
+//			String currentPage = request.getParameter("currentPage");
 			String relaleveltmp1 = request.getParameter("str"); //ALL,|A,B,|A,C,|B,C,
 			String relalevel="";			
 			String relalva ="";

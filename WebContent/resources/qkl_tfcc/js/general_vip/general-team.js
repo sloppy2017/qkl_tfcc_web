@@ -142,25 +142,30 @@ function reload_table(currentPage,showCount) {
         success: function (data) {
             var tviplist = data.data.tviplist;
             if(tviplist.length==0||tviplist==null){
-        		alert("没有符合条件的会员信息");
+//        		alert("没有符合条件的会员信息");
+        		$("#tfoot").show();
+        		$("#showData").hide();
+        		return;
         	}
-            var tablecols = "<tr> \n"
+            /*var tablecols = "<tr> \n"
                 + " <th>会员级别</th> \n"
-                + "<th>注册时间</th> \n"
                 + "<th>会员账号</th> \n"
                 +"<th>会员姓名 </th>\n"
+                + "<th>购买数量</th> \n"
+                + "<th>注册时间</th> \n"
 //                +"<th>购买量(股)</th>\n"
                 + "</tr> \n";
-            rsStr= tablecols;
+            rsStr= tablecols;*/
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
                 rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
-                rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].buyNum + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
                 rsStr = rsStr + "</tr>";
             }
-            $(".result-tab").html( rsStr);
+            $("#showData").html( rsStr);
 //            console.log(data.data.page.pageStr);
             $(".pages1").html(data.data.page.pageStr);
 
