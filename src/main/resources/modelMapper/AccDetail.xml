@@ -72,7 +72,7 @@
      #{subAccno},
      #{bounsSource1},
      #{bounsSource2},
-     #{recomuserCode},
+     null,
      a.rela_level,
      '0.0000',
      now(),
@@ -84,7 +84,6 @@
      #{operator}
      from tb_user_friendship a
      where a.recomuser_code =#{recomuserCode}
-     and a.syscode =#{syscode}
      and not EXISTS(
      select 1 from tb_acc_detail d where d.user_code = a.user_code 
      and a.rela_level=d.rela_userlevel and d.bouns_source1 ='15'
