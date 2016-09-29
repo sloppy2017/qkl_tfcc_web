@@ -1,7 +1,6 @@
 package com.qkl.tfcc.controller;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,19 +106,27 @@ public class BankAccController extends BaseAction {
 			 tradeInfo = tradeService.findTradeInfo(page,Constant.VERSION_NO);
 			 for (PageData pageData : tradeInfo) {
 				 int status = Integer.parseInt( pageData.getString("status"));
-				 String string2 = pageData.get("txamnt").toString();
+				 String txamnt1 = pageData.get("txamnt").toString();
 				 String txnum1 = pageData.get("txnum").toString();
-				 BigDecimal decimal = new BigDecimal(string2);
-				 BigDecimal decimal1 = new BigDecimal(txnum1);
-				 String format = String .format("%.4f",decimal);
-				 String txnum = String .format("%.4f",decimal1);
-				//double txamnt = decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-				//System.out.println(txamnt+"=============");
 				 String paytime = pageData.getString("paytime");
-				 if ("".equals(paytime)||paytime==null) {
-					 pageData.put("paytime", "");
+				 BigDecimal decimal=null;
+				 BigDecimal decima2=null;
+				 if (!"".equals(txamnt1)||txamnt1!=null) {
+					 decimal = new BigDecimal(txamnt1);
+				}else {
+					  decimal = new BigDecimal(0);
 				}
-				pageData.put("txamnt", format);
+				 if (!"".equals(txnum1)||txnum1!=null) {
+					 decima2 = new BigDecimal(txnum1);
+				}else {
+					  decima2 = new BigDecimal(0);
+				}
+				if (paytime==null) {
+					pageData.put("paytime", "");
+				}
+				 String txnum = String .format("%.4f",decima2);
+				 String txamnt = String .format("%.4f",decimal);
+				pageData.put("txamnt", txamnt);
 				pageData.put("txnum", txnum);
 				 if (status==0) {
 					 pageData.put("status", "待付款");	
@@ -172,13 +179,9 @@ public class BankAccController extends BaseAction {
 			pd.put("modify_time", DateUtil.getCurrentDate());
 			pd.put("operator", user.getPhone());
 			//pd.put("userCode", user.getUserCode());
-			String userCode="";
-			if(user==null){
-				userCode =request.getParameter("userCode");
-			}else{
-				userCode =user.getUserCode();
-			}	
+			
 		
+			String userCode = user.getUserCode();
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
 			String buyFlag = userDetail.getBuyFlag();
 			String freezeFlag =userDetail.getFreezeFlag();//获取冻结标识
@@ -187,15 +190,7 @@ public class BankAccController extends BaseAction {
 				pd.put("userCode", userCode);
 				BigDecimal findAnmt = tradeService.findAnmt(userCode, Constant.VERSION_NO);//获取数据库中此用户的交易金额数量
 				String txamnt1 = pd.getString("txamnt");//获取再次购买的金额
-				
-				
-				BigDecimal txamnt2=null;
-				if (!"".equals(txamnt1)||txamnt1!=null) {
-					 txamnt2=new BigDecimal(txamnt1);
-				}else {
-					 txamnt2=new BigDecimal(0);
-				}
-				
+				BigDecimal txamnt2=new BigDecimal(txamnt1);
 				if(findAnmt==null){
 					findAnmt = new BigDecimal(0);
 				}
@@ -203,7 +198,7 @@ public class BankAccController extends BaseAction {
 					if (value<=50000.00) {
 						boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
 						if (addTradeDetail) {
-							String content = "尊敬的【"+userDetail.getPhone()+"】会员您好，您提交购买【"+txamnt2+"】三界宝数字资产订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
+							String content = "尊敬的【"+userDetail.getPhone()+"】会员，您提交购买【"+txamnt2+"】SAN数字货币订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
 							SmsSend.sendSms(userDetail.getPhone(), content);
 							ar.setSuccess(true);
 							ar.setMessage("订单已生成，请及时付款");
@@ -241,7 +236,6 @@ public class BankAccController extends BaseAction {
 	@RequestMapping(value="/PayMoney",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse requirePayMoney(HttpServletRequest request){//获取购买金额
-	    
 		//User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		try {
 			pd=this.getPageData();
@@ -268,7 +262,6 @@ public class BankAccController extends BaseAction {
 			String txamnt = String .format("%.2f",multiply);
 			
 			
-			
 			ar.setSuccess(true);
 			ar.setMessage("获取购买金额成功");
 			ar.setData(txamnt);
@@ -280,28 +273,5 @@ public class BankAccController extends BaseAction {
 		return ar;
 	}
 	
-	@RequestMapping(value="/getPayList",method=RequestMethod.POST)
-    @ResponseBody
-    public AjaxResponse getPayList(HttpServletRequest request,HttpServletResponse response){
-        AjaxResponse ar = new AjaxResponse();
-        List<Map<String,String>> resList = new ArrayList<Map<String,String>>();
-        try {
-            List<Map<String,Object>> payList = sysGenCodeService.findByGroupCode("PAY_TYPE", Constant.VERSION_NO);
-            for(Map<String,Object> payMap:payList){
-                Map<String,String> map = new  HashMap<String,String>();
-                map.put("name", payMap.get("description").toString());
-                map.put("value", payMap.get("codeValue").toString());
-                resList.add(map);
-            }
-            ar.setSuccess(true);
-            ar.setMessage("查询成功");
-            ar.setData(resList);
-        } catch (Exception e) {
-            ar.setSuccess(false);
-            ar.setMessage("查询失败");
-            e.printStackTrace();
-        }
-       return ar;
-    }
-    
+	
 }

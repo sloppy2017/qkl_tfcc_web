@@ -56,6 +56,10 @@
 	        and f.rela_level is not null
 	        and f.rela_level &lt;&gt; '' 
 	        and f.user_code=#{pd.userCode}
+
+        <!-- select rela_level,date_format(u.reg_time,'%Y:%m:%d %H:%i:%s') rg_time,d.phone,real_name 
+        from tb_user_detail d,tb_user_friendship f ,tb_user u where u.user_code=d.user_code and  d.user_code=f.recomuser_code and f.user_code=#{pd.userCode} -->
+
         
              <if test ="pd.relalva != null and pd.relalva !='' and pd.relalvb != null and pd.relalvb !='' and pd.relalvc != null and pd.relalvc !='' ">           
                 and rela_level in (#{pd.relalva},#{pd.relalvb},#{pd.relalvc})
