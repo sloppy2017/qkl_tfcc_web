@@ -136,6 +136,8 @@ public class ComTeamVipController extends BaseAction{
 			page.setPd(pd);*/
 			
 			List<PageData> tviplist = vipservice.findVipList(page);
+			
+			
 			map.put("tviplist", tviplist);
 			map.put("page", page);
 			ar.setSuccess(true);
