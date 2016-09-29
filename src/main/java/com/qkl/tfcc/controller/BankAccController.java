@@ -1,6 +1,7 @@
 package com.qkl.tfcc.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -179,9 +180,14 @@ public class BankAccController extends BaseAction {
 			pd.put("modify_time", DateUtil.getCurrentDate());
 			pd.put("operator", user.getPhone());
 			//pd.put("userCode", user.getUserCode());
-			
+			String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}	
 		
-			String userCode = user.getUserCode();
+		
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
 			String buyFlag = userDetail.getBuyFlag();
 			String freezeFlag =userDetail.getFreezeFlag();//获取冻结标识
@@ -273,5 +279,28 @@ public class BankAccController extends BaseAction {
 		return ar;
 	}
 	
-	
+	@RequestMapping(value="/getPayList",method=RequestMethod.POST)
+    @ResponseBody
+    public AjaxResponse getPayList(HttpServletRequest request,HttpServletResponse response){
+        AjaxResponse ar = new AjaxResponse();
+        List<Map<String,String>> resList = new ArrayList<Map<String,String>>();
+        try {
+            List<Map<String,Object>> payList = sysGenCodeService.findByGroupCode("PAY_TYPE", Constant.VERSION_NO);
+            for(Map<String,Object> payMap:payList){
+                Map<String,String> map = new  HashMap<String,String>();
+                map.put("name", payMap.get("description").toString());
+                map.put("value", payMap.get("codeValue").toString());
+                resList.add(map);
+            }
+            ar.setSuccess(true);
+            ar.setMessage("查询成功");
+            ar.setData(resList);
+        } catch (Exception e) {
+            ar.setSuccess(false);
+            ar.setMessage("查询失败");
+            e.printStackTrace();
+        }
+       return ar;
+    }
+    
 }

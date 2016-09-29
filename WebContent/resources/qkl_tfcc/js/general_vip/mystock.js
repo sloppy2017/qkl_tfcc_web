@@ -67,7 +67,7 @@ $("input[name='txnum']").blur(function(){//计算支付金额
 
 
 
-var buy_flag=true;
+var lock=0;
 function userRequest(){	
 //提交购买申请
 	var $txnum= $("input[name='txnum']").val();
@@ -100,11 +100,16 @@ function userRequest(){
 		alert('单次购买金额不得大于50000.00元');
 		return false;
 	};
-	buy_flag=false;
+	$("#buy").unbind("click");
+	$("#buy").css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
+	$("#buy").css("background-size","220px 42px");
+	++lock;
+	if(lock>1){
+		return;
+	}
 	var url = "/service/bankaccinfo/tradebuy?txamnt="+$txamnt+"&payno="+$payno+"&txnum="+$txnum;
 	url = encodeURI(url);
 	$.ajax({
-		async:false, 
         type: "post",
         url:url,
         dataType: "json",
@@ -115,25 +120,16 @@ function userRequest(){
             'revbankaccno': $("#revbankaccno").text().trim(),
             'revbankdepname':$("#revbankdepname").text().trim()
         },*/ 
-        async:true, 
         success: function (data) {
-        	buy_flag=true;
-            alert(data.message);
-            $("input[name='txamnt']").val("");
-            $("input[name='txnum']").val("");
-            $("input[name='payno']").val("");
-            if(data.message=='订单已生成，请及时付款'){
-            //	$('.pay').click();    
- //                window.location.href="https://auth.alipay.com/login/index.htm";
-//                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
-                 var tempwindow=window.open();
-                 tempwindow.location='https://auth.alipay.com/login/index.htm';
- //                 window.open('你所要跳转的页面');  
-//                 window.history.back(-1);返回上一页  
-            	
+        	alert(data.message);
+        	if(data.success){
+                var tempwindow=window.open();
+                tempwindow.location='https://auth.alipay.com/login/index.htm';
             }
-           // $('.mid-r a').css('background-color','none');
-           // $(".mid-r a").style.visibility="hidden";    
+        	window.location.reload();
+            /*$("input[name='txamnt']").val("");
+            $("input[name='txnum']").val("");
+            $("input[name='payno']").val("");*/
         }
 	
     });

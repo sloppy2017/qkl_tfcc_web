@@ -1,5 +1,6 @@
 package com.qkl.tfcc.controller.User;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,10 +138,8 @@ public class ComTeamVipController extends BaseAction{
 			
 			List<PageData> tviplist = vipservice.findVipList(page);
 			for (PageData pageData : tviplist) {
-				String realname = pageData.getString("real_name");
-				if (realname==null) {
-					pageData.put("realname", "");
-				}
+				pageData.put("realname", pageData.get("real_name")==null?"":pageData.get("real_name").toString());
+				pageData.put("buyNum", pageData.get("buyNum")==null?"0.0000":String.format("%.4f",new BigDecimal(pageData.get("buyNum").toString())));
 			}
 			
 			map.put("tviplist", tviplist);

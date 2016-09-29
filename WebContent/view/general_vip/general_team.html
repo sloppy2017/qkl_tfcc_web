@@ -13,7 +13,9 @@
     <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
     <!--<script src="/resources/qkl_tfcc/js/date/dateRange.js"></script>-->
     <!--<script src="/resources/qkl_tfcc/js/date/monthPicker.js"></script>-->
-    
+    <style type="text/css">
+       table td{border:solid 1px #ccc;} 
+    </style>
 </head>
 <body >
 <!--mark start-->
@@ -105,14 +107,14 @@
                             <!--table pageing start-->
                                
                             <div class="table-list">
-                                <table class="result-tab" style="width:100%;border:0px;cellpadding:0px;cellspacing:0px;">
+                                <table class="result-tab" style="width:100%;border:5px;cellspacing:0px;">
                                     <thead>
-                                         <tr><th>会员级别</th><th>会员账号</th><th>会员姓名 </th><th>购买数量</th><th>注册时间</th><th>购买量(股)</th></tr>    
+                                         <tr><th>会员级别</th><th>会员账号</th><th>会员姓名 </th><th>购买数量</th><th>注册时间</th></tr>    
                                     </thead>
                                     <tbody id="showData">
                                         
                                     </tbody>
-                                    <tfoot id="tfoot" style="display: none">没有符合条件的数据</tfoot>
+                                    <tfoot id="tfoot" style="width:100%;display: none"><tr><td colspan="5" style="text-align: center;background-color: #eee;">没有符合条件的数据</td></tr></tfoot>
                                 </table>
                                 <div class="pages1">
                                     
