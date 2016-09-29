@@ -68,13 +68,8 @@ $("input[name='txnum']").blur(function(){//计算支付金额
 
 
 var buy_flag=true;
-function userRequest(){
-	
-	
+function userRequest(){	
 //提交购买申请
-	
-	
-	
 	var $txnum= $("input[name='txnum']").val();
 	var reg = /[a-zA-Z\d+]{6,16}/;
 	var $txamnt= $("input[name='txamnt']").val();
@@ -85,9 +80,6 @@ function userRequest(){
 		alert('请选择购买数量');
 		return false;
 	}
-	
-	
-
 	if($payno.length==0||$payno==null){
 		alert('支付宝账号不能为空');
 		return false;
@@ -108,8 +100,6 @@ function userRequest(){
 		alert('单次购买金额不得大于50000.00元');
 		return false;
 	};
-	
-	
 	buy_flag=false;
 	var url = "/service/bankaccinfo/tradebuy?txamnt="+$txamnt+"&payno="+$payno+"&txnum="+$txnum;
 	url = encodeURI(url);
@@ -127,8 +117,6 @@ function userRequest(){
         },*/ 
         async:true, 
         success: function (data) {
-        	
-        	
         	buy_flag=true;
             alert(data.message);
             $("input[name='txamnt']").val("");
@@ -136,16 +124,14 @@ function userRequest(){
             $("input[name='payno']").val("");
             if(data.message=='订单已生成，请及时付款'){
             //	$('.pay').click();    
-//                window.location.href="https://auth.alipay.com/login/index.htm";
+ //                window.location.href="https://auth.alipay.com/login/index.htm";
 //                 window.open("https://auth.alipay.com/login/index.htm",'width:300','height:300');
                  var tempwindow=window.open();
                  tempwindow.location='https://auth.alipay.com/login/index.htm';
-//                 window.open('你所要跳转的页面');  
+ //                 window.open('你所要跳转的页面');  
 //                 window.history.back(-1);返回上一页  
             	
             }
-            
-           
            // $('.mid-r a').css('background-color','none');
            // $(".mid-r a").style.visibility="hidden";    
         }
@@ -224,6 +210,7 @@ $(".sel a").click(function(){//查询列表
     if(searchSel==null||searchSel==''){
     }else{
         str=searchSel.options[searchSel.selectedIndex].value;
+       // alert(str);
     }
 
     /* alert("str is "+str);*/
@@ -246,24 +233,27 @@ function reload_table(currentPage,showCount) {
         success: function (data) {
             var tviplist = data.data.tradeInfo;
             var tablecols = "<tr> \n"
-                + " <th>购买时间</th> \n"
-                + "<th>购买份数</th> \n"
-               /* + "<th>支付方式</th> \n"*/
-                +"<th>总计金额（元）</th>\n"
-                +"<th>付款状态</th>\n"
+                + " <th>订单号</th> \n"
+                + "<th>交易数量</th> \n"
+                + "<th>交易金额</th> \n"
+                +"<th>购买时间</th>\n"
+                +"<th>交易时间</th>\n"
+                +"<th>状态</th>\n"
                 + "</tr> \n";
             rsStr= tablecols;
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
-                rsStr = rsStr + "<th>" + tviplist[i].txdate + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].orderno + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].txnum + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].txamnt + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].txdate + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].paytime + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].status + "</th>";
                 rsStr = rsStr + "</tr>";
             }
             $(".result-tab").html( rsStr);
            // console.log(data.data.page.pageStr);
-            $(".pages1").html(data.data.page.pageStr);
+           $(".pages1").html(data.data.page.pageStr);
 
         },
         error: function (data) {

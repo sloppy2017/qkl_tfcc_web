@@ -2,6 +2,7 @@
 	 * 导航部分
 	 */
 	var userType = "1";
+	$(".yzm").removeAttr("disabled"); //默认启用按钮
 	$(document).ready(function(){
 		var $tab_li = $('.reg-nav ul li');
 		// console.log($tab_li)

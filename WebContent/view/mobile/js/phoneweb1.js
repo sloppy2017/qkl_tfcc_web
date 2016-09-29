@@ -1,4 +1,4 @@
-
+var webURL="";
 		   
 		   
 //正则
@@ -149,7 +149,7 @@ blur1($('#phone4'),$('#userPassWord3'),validate.phone,'手机格式不正确');
 			
 		$.ajax({
 			type:"post",
-			url:"/service/user/sendsms",
+			url:webURL+"/service/user/sendsms",
 			data:{"phone":$('#pho_number1').val()},
 			success:function( content ){
 		       	 
@@ -166,8 +166,8 @@ blur1($('#phone4'),$('#userPassWord3'),validate.phone,'手机格式不正确');
 
 //判断两次密码是否一致
 $('#pho_password4').blur( function(){
-	if( !($('#pho_password3').val() === $('#pho_password4').val()) ){
-		$('#userPassWord2').html('两次密码是否一致');
+	if( !($('#pho_password3').val() == $('#pho_password4').val()) ){
+		$('#userPassWord2').html('两次密码不一致');
 	}else{
 		$('#userPassWord2').html('');
 	}
@@ -195,10 +195,12 @@ function tesSetIn(){
 
 //普通会员交互
 $('#reg1').on('click',function(){
+	$('#reg1').attr("disabled","disalbed"); 
+	$('#reg1').css("background","#b1a2a2");
 	if( $('#pho_password3').val() ){
 		$.ajax({
  		type:"post",
- 		url:"/service/user/register",
+ 		url:webURL+"/service/user/register",
  		data:{
              "phone":$('#pho_number1').val(),
              "password":$('#pho_password3').val(),
@@ -211,13 +213,21 @@ $('#reg1').on('click',function(){
        	 console.log(msg);
        	if( msg.success == true ){
        		alert(msg.message);
+       		$('#reg1').attr("disabled","");
+       		$('#reg1').css("background","#2b71b1");
        		window.location.href="login.html";
        	}else{
        		alert(msg.message);
+       		$('#reg1').css("background","#2b71b1")
+       		$('#reg1').attr("disabled",""); 
        	}
-       
-        
-       }	
+       },
+       error:function(msg){
+    	   if( msg.success == false ){
+    		   $('#reg1').css("background","white")
+    		   $('#reg1').attr("disabled",""); 
+    	   }
+       }
   	 });
  }		
 });
@@ -244,7 +254,7 @@ $("#loginCilck").click(function(){
 function Post(phoneNub,PhonePassWord){
 	$.ajax({
 		type:"post",
-		url:"/service/user/login",
+		url:webURL+"/service/user/login",
 		data:{"phone":phoneNub,"password":PhonePassWord},
 		success:function(msg){
 			var msg = msg;

@@ -54,6 +54,7 @@
 		<script src="js/phoneweb1.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				var webURL="";
 				var usercode = sessionStorage.getItem("usercode");
 				$("#myAlipay").blur(function(){
 					var buyNub,paymentAmount,myAlipaynub;
@@ -123,16 +124,19 @@
 //		        }  
 
 				function purchase(){
+					console.log(webURL)
 					$.ajax({
 						type:"post",
-						url:"/service/bankaccinfo/PayMoney",
+						url:webURL+"/service/bankaccinfo/PayMoney",
 						data:{"txnum":buyNub},
 						success:function(msg){
 							console.log(msg)
 							if(msg.data<1000){
-								alert("单次交易金额不得小于1000.00")
+								alert("单次交易金额不得小于1000.00");
+								$("#paymentAmount").val("");
 							}else if(msg.data>50000){
-								alert("单次交易金额不得小于50000.00")
+								alert("单次交易金额不得小于50000.00");
+								$("#paymentAmount").val("");
 							}else{
 								$("#paymentAmount").val(msg.data);
 							}

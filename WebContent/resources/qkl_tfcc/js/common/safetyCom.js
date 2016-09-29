@@ -2,7 +2,7 @@ $(function(){
       $('.pwd').click(function(){
           $(this).hide();
           $('.main-top ,.amend').hide();
-          $('.pwd').show();
+          $('.pwdsss').show();
       });
         $('.phone').click(function(){
             $(this).hide();
@@ -254,7 +254,7 @@ function realname(){
    });
 }
 function toPart1(obj){
-   location.reload();
+   window.location.reload();
    /* var markDiv = $(obj).parent().parent();
    markDiv.css("display","none");
    $(".rerenzhen,.rephone,.pwd").hide();
