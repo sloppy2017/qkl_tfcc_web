@@ -16,6 +16,7 @@ function getBankAccInfo(){
         	 if(data.success){
              		 $("#revorgname").text(data.data.orgName);
              		 $("#revbankaccno").text(data.data.bankaccno);
+             		$("#deposit_bankname").text(data.data.depositBankname);
              		/* $("#revbankdepname").text(data.data.depositBankname);
              		 $("#checkphone").text(data.data.checkphone);*/
              			
