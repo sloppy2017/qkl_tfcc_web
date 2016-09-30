@@ -54,6 +54,8 @@ public class AuthorizationInterceptor implements HandlerInterceptor{
         	if("".equals(userCode)&&requestUrl.contains("/mobile")){
         		response.sendRedirect(request.getContextPath() + "/");
                 return false;
+        	}else if(!"".equals(userCode)){
+        		
         	}else{
             response.sendRedirect(request.getContextPath() + "/view/login.html");
             return false;

@@ -116,6 +116,7 @@ public class UserController extends BaseAction{
                 ar.setSuccess(true);
                 data.put("userType", user.getUserType());
                 data.put("userCode", user.getUserCode());
+                data.put("phone", user.getPhone());            
                 ar.setData(data);
             } else {
                 ar.setSuccess(false);
@@ -980,16 +981,17 @@ public class UserController extends BaseAction{
     public AjaxResponse realname(HttpServletRequest request,HttpServletResponse response){
         try {
             User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-            
+            String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}
             String realName  = request.getParameter("realName");
             if(!StringUtil.isEmpty(realName)){
                 realName = URLDecoder.decode(realName, "UTF-8");
             }
             String idno  =request.getParameter("idno");
-            String userCode = request.getParameter("userCode");
-            if(StringUtil.isEmpty(userCode)){
-                userCode = user.getUserCode();
-            }
             UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
             
             /*if(!isMobile(userName)){
@@ -1009,8 +1011,6 @@ public class UserController extends BaseAction{
                 ar.setMessage("身份证格式不正确！");
                 return ar;
             };
-            
-
             if(!userService.realUser(userDetail.getPhone(), realName, idno, Constant.VERSION_NO)){            
                 ar.setSuccess(false);
                 ar.setMessage("用户实名失败！");
