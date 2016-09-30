@@ -116,6 +116,7 @@ public class UserController extends BaseAction{
                 ar.setSuccess(true);
                 data.put("userType", user.getUserType());
                 data.put("userCode", user.getUserCode());
+                data.put("phone", user.getPhone());            
                 ar.setData(data);
             } else {
                 ar.setSuccess(false);
@@ -980,6 +981,19 @@ public class UserController extends BaseAction{
     public AjaxResponse realname(HttpServletRequest request,HttpServletResponse response){
         try {
             User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+            String userCode="";
+			if(user==null){
+				userCode =request.getParameter("userCode");
+			}else{
+				userCode =user.getUserCode();
+			}
+			String phone="";
+			if(phone==null){
+				phone =request.getParameter("phone");
+			}else{
+				phone =user.getPhone();
+			}
+            
             String realName  = request.getParameter("realName");
             if(!StringUtil.isEmpty(realName)){
                 realName = URLDecoder.decode(realName, "UTF-8");
@@ -1006,7 +1020,7 @@ public class UserController extends BaseAction{
             };
             
 
-            if(!userService.realUser(user.getPhone(), realName, idno, Constant.VERSION_NO)){            
+            if(!userService.realUser(phone, realName, idno, Constant.VERSION_NO)){            
                 ar.setSuccess(false);
                 ar.setMessage("用户实名失败！");
                 return ar;
