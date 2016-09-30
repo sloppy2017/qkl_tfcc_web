@@ -162,6 +162,7 @@ public class BankAccController extends BaseAction {
 	@ResponseBody
 	public AjaxResponse buyTfcc(HttpServletRequest request){//购买tfcc
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		
 		try {
 			pd=this.getPageData();
 			BankAccInfo bankAccInfo = bankAccService.findBankInfo(Constant.VERSION_NO);
@@ -178,7 +179,7 @@ public class BankAccController extends BaseAction {
 			pd.put("status", "0");
 			pd.put("create_time", DateUtil.getCurrentDate());
 			pd.put("modify_time", DateUtil.getCurrentDate());
-			pd.put("operator", user.getPhone());
+			
 			//pd.put("userCode", user.getUserCode());
 			String userCode="";
 			if(user==null){
@@ -186,9 +187,8 @@ public class BankAccController extends BaseAction {
 			}else{
 				userCode =user.getUserCode();
 			}	
-		
-		
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
+			pd.put("operator", userDetail.getPhone());
 			String buyFlag = userDetail.getBuyFlag();
 			//String freezeFlag =userDetail.getFreezeFlag();//获取冻结标识
 			/*if ("1".equals(freezeFlag)) {//判断是否为冻结的用户
