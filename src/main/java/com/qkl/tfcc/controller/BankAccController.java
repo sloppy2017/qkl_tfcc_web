@@ -190,7 +190,7 @@ public class BankAccController extends BaseAction {
 		
 			UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
 			String buyFlag = userDetail.getBuyFlag();
-			String freezeFlag =userDetail.getFreezeFlag();//获取冻结标识
+			//String freezeFlag =userDetail.getFreezeFlag();//获取冻结标识
 			/*if ("1".equals(freezeFlag)) {//判断是否为冻结的用户
 */				if ("1".equals(buyFlag)) {//判断此用户能否购买
 				pd.put("userCode", userCode);
@@ -200,8 +200,8 @@ public class BankAccController extends BaseAction {
 				if(findAnmt==null){
 					findAnmt = new BigDecimal(0);
 				}
-				double value = findAnmt.add(txamnt2).doubleValue();//计算再次购买和数据库中的交易金额之和
-					if (value<=50000.00) {
+				//double value = findAnmt.add(txamnt2).doubleValue();//计算再次购买和数据库中的交易金额之和
+					//if (value<=50000.00) {
 						boolean addTradeDetail = tradeService.addTradeDetail(pd, Constant.VERSION_NO);
 						if (addTradeDetail) {
 							String content = "尊敬的【"+userDetail.getPhone()+"】会员，您提交购买【"+txamnt2+"】SAN数字货币订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
@@ -212,10 +212,10 @@ public class BankAccController extends BaseAction {
 							ar.setSuccess(false);
 							ar.setMessage("网络异常，购买失败！");
 						}
-					}else {
-						ar.setSuccess(false);
-						ar.setMessage("购买金额已经超过规定额度");
-					}
+					//}else {
+						//ar.setSuccess(false);
+						//ar.setMessage("购买金额已经超过规定额度");
+					//}
 					
 				}else {
 					ar.setSuccess(false);
