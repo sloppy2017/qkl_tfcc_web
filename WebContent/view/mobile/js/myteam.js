@@ -1,94 +1,102 @@
 $(document).ready(function(){
-
-var usercode = sessionStorage.getItem("usercode");
-var num1=1;
-var webURL="";
-
-
-
-$.jqPaginator('#paginationUser', {
+	$(".uesr_phone").html(userPhone);
+	var orderStatus="ALL";
+	vip();
+	function vip(){
+	$.ajax({
+	type:"post",
+	url:"/service/team/findVipNum",
+	data:{"userCode":usercode},
+	success:function(msg){
+		console.log(msg);
+		if(msg.data==null){
+			$("#rNum").html(0);
+			$("#aNum").html(0);
+			$("#bNum").html(0);
+			$("#cNum").html(0);
+		}else{
+			var rNum=msg.data.rNum;
+			var aNum=msg.data.aNum;
+			var bNum=msg.data.bNum;
+			var cNum=msg.data.cNum;
+			$("#rNum").html(rNum);
+			$("#aNum").html(aNum);
+			$("#bNum").html(bNum);
+			$("#cNum").html(cNum);
+		}
+	
+	}
+});
+}
+	//订单页码插件调用
+	$.jqPaginator('#pagination1', {
 		        totalPages: 100,
 		        visiblePages:5,
 		        currentPage: 1, 
 		         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
 		         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
 		         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
-		         onPageChange: function (num1, type){
-					 console.log(num1)
-		         Userquery(num1)
+		         onPageChange: function (num, type){
+		         serverTitle=$("#server_title").val();
+		         orderInquiry(orderStatus,num)
 		    }
 		   });
-
-
-
-
-
-
-//推荐
-recommend()
-function recommend(){
-	console.log(usercode)
+		   
+		  $("#rNum").click(function(){
+		  orderStatus=$(this).text();
+		   orderInquiry(orderStatus,num)
+		  });
+		$("#aNum").click(function(){
+		  orderStatus=$(this).text();
+		   orderInquiry(orderStatus,num)
+		  });
+		$("#bNum").click(function(){
+		  orderStatus=$(this).text();
+		   orderInquiry(orderStatus,num)
+		  });
+		$("#cNum").click(function(){
+		  orderStatus=$(this).text();
+		   orderInquiry(orderStatus,num)
+		  });
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+	function orderInquiry(orderStatus,num){
+	console.log(num);
 	$.ajax({
 		type:"post",
-		url:webURL+"/service/team/findVipNum",
-		data:{"userCode":usercode},
+		url:"/service/team/findVipPage",
+		async:true,
+		data:{"str":"all","currentPage":num,"showCount":10,"userCode":usercode},
 		success:function(msg){
-			console.log(msg)
-			if(msg.data==null){
-				$("#rNum").text("0");
-			}
-			$("#rNum").text(msg.data.rNum);
-		}
-	});
-   }	
-findTTnub()
-function findTTnub(){
-	console.log(usercode)
-	$.ajax({
-		type:"post",
-		url:webURL+"/service/comacc/findMyAcc",
-		data:{"userCode":usercode},
-		success:function(msg){
-			console.log(msg)
-			var findTb=msg.data.totalReward;
-			$("#findTTReward").text(findTb);
-		}
-	});
-   }
-
-
-
-
-
-
-
-//会员查询
-function Userquery(num1){
-	console.log(usercode)
-	$.ajax({
-		type:"post",
-		url:webURL+"/service/team/findVipPage",
-		data:{"str":"all","userCode":usercode,"currentPage":num1},
-		success:function(msg){
+			console.log(msg);
 			 $("tr").remove(".table_tr");
-			var msgtvi=msg.data.tviplist;
-			console.log(msg)
-		$.each(msgtvi,function(i,n) {
-			var msgPhone=msgtvi[i].phone;
-			var msgRela_level=msgtvi[i].rela_level;
-		    var msgReal_name=msgtvi[i].real_name;
-		    if(msgReal_name==""){
-		    	msgReal_name="无";
-		    }
-		    var msgrg_time=msgtvi[i].rg_time;
-		    var msgtime = msgrg_time.replace(/年/, "-").replace(/月/, "-").replace(/日/,"")
+			var msgdata=msg.data.tviplist;
+			$.each(msgdata,function(i,n) {
+			var relaLevel=msgdata[i].rela_level;
+			var msgphone=msgdata[i].phone;
+		    var msgbuyNum=msgdata[i].buyNum;
+		    var msgrealName=msgdata[i].real_name;
+		    var mstxdate=msgdata[i].rg_time.substr(0,10);
+		    var msgtime = mstxdate.replace(/年/, "-").replace(/月/, "-").replace(/日/,"")
 //		    console.log(msgtime);
 //			console.log(msgStatus)
-			var ajaxwrap="<tr class='table_tr'><td>"+msgtime+"</td><td>"+msgPhone+"</td><td>"+msgReal_name+"</td><td>"+msgRela_level+"</td></tr>"
-		$(".table_order").find("tbody").append(ajaxwrap);
+			var ajaxwrap="<tr class='table_tr'><td class='team_level'>"+relaLevel+"</td><td>"+msgtime+"</td><td class='zhifub'>"+msgphone+"</td><td class='zonge'>"+msgrealName+"</td><td class='goumai'>"+msgbuyNum+"</td></tr>"
+		$(".table_order1").find("tbody").append(ajaxwrap);
 		});
 		}
 	});
-	
    }
+	
 })

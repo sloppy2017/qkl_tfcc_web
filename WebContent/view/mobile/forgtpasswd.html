@@ -12,7 +12,7 @@
 				width: 100%;
 				min-height: 2rem;
 				float: left;
-				margin-top: 1rem;
+				margin-top: 0.4rem;
 				
 			}
 			#pho_code_pass{
@@ -26,8 +26,8 @@
 		</style>
 	</head>
 	<body>
-		<div class="ind_header">
-			<img src="img/sanjiebao_logo_fanbai.png"/>
+		<div class="ind_header" style="text-align: center;">
+			<img style="margin-top: 1rem;"  src="img/sanjiebao_logo_lanse.png"/>
 		</div>
 		<div class="for_password">
 			<div class="reg_li_wrap">
@@ -67,9 +67,7 @@
 			$(document).ready(function(){
 				var usercode = sessionStorage.getItem("usercode");
 				var buyNub,paymentAmount,myAlipaynub;
-				var webURL="";
-				
-				
+				var webURL="http://192.168.0.73:8080";
 				$("#phone_pass").blur(function(){
 					
 					if(!validate.phone($('#phone_pass').val())){
@@ -87,16 +85,7 @@
 					}
 					console.log(buyNub);
 				})
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			     
+			
 			     //获取验证码
 				   var code;
 					$('#testBtn1').on('click',function(){
@@ -105,7 +94,7 @@
 							
 						$.ajax({
 							type:"post",
-							url:webURL+"/service/user/sendsms",
+							url:"/service/user/sendsms",
 							data:{"phone":$('#phone_pass').val()},
 							success:function( content ){
 						       	 
@@ -152,7 +141,7 @@
 				$('#ConfirmBuy').click( function(){
 					$.ajax({
 						type:"post",
-						url:webURL+"/service/user/forgetpwd",
+						url:"/service/user/forgetpwd",
 						data:{
 							'phone':$('#phone_pass').val(),
 						    'password':$('#pho_password_forget1').val(),

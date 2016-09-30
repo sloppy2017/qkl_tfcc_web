@@ -1,4 +1,4 @@
-var webURL="";
+var webURL="http://192.168.0.73:8080";
 		   
 		   
 //正则
@@ -112,34 +112,6 @@ blur1($('#pho_password3'),$('#userPassWord1'),validate.userPassword,'密码格�
 blur1($('.code'),$('#testCodeText'),validate.code,'验证码格式不正确');
 //blur1($('#pho_password4'),$('#userPassWord2'),validate.userPassword,'两次密码不一致');
 blur1($('#phone4'),$('#userPassWord3'),validate.phone,'手机格式不正确');
- 	
- 
- 
- 
- 
-//投递公司交互
-//$('#reg').on('click',function(){
-//	
-//		$.ajax({
-// 		type:"post",
-// 		url:"http://192.168.0.116:8080/service/user/register",
-// 		data:{
-//           "phone":$('#pho_number').val(),
-//           "password":$('#pho_password1').val(),
-//           "resPassword":$('#pho_password2').val(),
-//           "yzm":$('#pho_code').val(),
-//          "phone1":$('#phone3').val(),
-//           "userType":4,
-//          "realName":$('#name1').val(),
-//           "idno":$('#idnum').val(),
-//           "cropName":$('#company').val()
-// 		},
-//     success:function(msg){
-//     	alert(1);
-//      console.log(msg);
-//     }	
-//	});
-//});
 
 //获取验证码
    var code;
@@ -149,7 +121,7 @@ blur1($('#phone4'),$('#userPassWord3'),validate.phone,'手机格式不正确');
 			
 		$.ajax({
 			type:"post",
-			url:webURL+"/service/user/sendsms",
+			url:"/service/user/sendsms",
 			data:{"phone":$('#pho_number1').val()},
 			success:function( content ){
 		       	 
@@ -166,8 +138,8 @@ blur1($('#phone4'),$('#userPassWord3'),validate.phone,'手机格式不正确');
 
 //判断两次密码是否一致
 $('#pho_password4').blur( function(){
-	if( !($('#pho_password3').val() == $('#pho_password4').val()) ){
-		$('#userPassWord2').html('两次密码不一致');
+	if( !($('#pho_password3').val() === $('#pho_password4').val()) ){
+		$('#userPassWord2').html('两次密码是否一致');
 	}else{
 		$('#userPassWord2').html('');
 	}
@@ -194,44 +166,40 @@ function tesSetIn(){
 
 
 //普通会员交互
-$('#reg1').on('click',function(){
-	$('#reg1').attr("disabled","disalbed"); 
-	$('#reg1').css("background","#b1a2a2");
-	if( $('#pho_password3').val() ){
-		$.ajax({
- 		type:"post",
- 		url:webURL+"/service/user/register",
- 		data:{
-             "phone":$('#pho_number1').val(),
-             "password":$('#pho_password3').val(),
-             "resPassword":$('#pho_password4').val(),
-             "yzm":$('#pho_code').val(),
-            "phone1":$('#phone4').val(),
-             "userType":1
- 		},
-       success:function(msg){
-       	 console.log(msg);
-       	if( msg.success == true ){
-       		alert(msg.message);
-       		$('#reg1').attr("disabled","");
-       		$('#reg1').css("background","#2b71b1");
-       		window.location.href="login.html";
-       	}else{
-       		alert(msg.message);
-       		$('#reg1').css("background","#2b71b1")
-       		$('#reg1').attr("disabled",""); 
-       	}
-       },
-       error:function(msg){
-    	   if( msg.success == false ){
-    		   $('#reg1').css("background","white")
-    		   $('#reg1').attr("disabled",""); 
-    	   }
-       }
-  	 });
- }		
-});
+$('#reg1').click(function(){
+	$(this).addClass('bg-ccc');
 
+
+	if( $('#pho_password3').val() ){
+			$(this).unbind('click');
+		$.ajax({
+	 		type:"post",
+	 		url:"/service/user/register",
+	 		data:{
+	             "phone":$('#pho_number1').val(),
+	             "password":$('#pho_password3').val(),
+	             "resPassword":$('#pho_password4').val(),
+	             "yzm":$('#pho_code').val(),
+	            "phone1":$('#phone4').val(),
+	             "userType":1
+	 		},
+	        success:function(msg){
+	         // $(this).attr("disabled","disabled");
+	       	 console.log(msg);
+	       	 $(this).unbind('click');
+	       	if( msg.success == true ){
+	       		alert(msg.message);
+	       		window.location.href="login.html";
+	       	}else{
+	       		alert(msg.message);
+	       	}
+	       
+	        
+	       }	
+  		 });
+ 	}	
+ 	
+});
 
 var phoneNub,PhonePassWord;
 var PhoneWebNub;
@@ -254,7 +222,7 @@ $("#loginCilck").click(function(){
 function Post(phoneNub,PhonePassWord){
 	$.ajax({
 		type:"post",
-		url:webURL+"/service/user/login",
+		url:"/service/user/login",
 		data:{"phone":phoneNub,"password":PhonePassWord},
 		success:function(msg){
 			var msg = msg;
