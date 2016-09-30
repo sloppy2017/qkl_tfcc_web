@@ -55,10 +55,13 @@
                         <value>/js</value>
                         <value>/css</value>
                         <value>/imgs</value>
+                        <value>/img</value>
                         <value>/test</value>
                         <value>/register</value>
+                        <value>/registmen</value>
                         <value>/service/user/sendsms</value>
-                        <value>/forget-password.html</value>
+                        <value>/forget-password</value>
+                        <value>/forgtpasswd</value>                       
                         <value>/isExistPhone</value>
                         <value>/forgetpwd</value>
                     </list>
