@@ -944,7 +944,7 @@ public class UserController extends BaseAction{
                     
             //1小时之内的短信验证码有效
             String tVcode =smsService.findSendsmsDetail(userName,Constant.CUR_SYS_CODE); 
-            if(!vcode.equals(tVcode.trim())){
+            if(tVcode ==null||!vcode.equals(tVcode.trim())){
                 ar.setSuccess(false);
                 ar.setMessage("验证码输入不正确！");
                 return ar;
@@ -980,12 +980,17 @@ public class UserController extends BaseAction{
     public AjaxResponse realname(HttpServletRequest request,HttpServletResponse response){
         try {
             User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+            
             String realName  = request.getParameter("realName");
             if(!StringUtil.isEmpty(realName)){
                 realName = URLDecoder.decode(realName, "UTF-8");
             }
             String idno  =request.getParameter("idno");
-    
+            String userCode = request.getParameter("userCode");
+            if(StringUtil.isEmpty(userCode)){
+                userCode = user.getUserCode();
+            }
+            UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
             
             /*if(!isMobile(userName)){
                 ar.setSuccess(false);
@@ -1006,7 +1011,7 @@ public class UserController extends BaseAction{
             };
             
 
-            if(!userService.realUser(user.getPhone(), realName, idno, Constant.VERSION_NO)){            
+            if(!userService.realUser(userDetail.getPhone(), realName, idno, Constant.VERSION_NO)){            
                 ar.setSuccess(false);
                 ar.setMessage("用户实名失败！");
                 return ar;
@@ -1265,6 +1270,14 @@ public class UserController extends BaseAction{
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+        User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+        String userCode="";
+        if(user==null){
+            userCode =request.getParameter("userCode");
+        }else{
+            userCode =user.getUserCode();
+        }
+        UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
         PageData pdfile = this.getPageData();
         Map<String,String> map = new HashMap<String, String>();
         map.put("jpg","jpg");
@@ -1329,6 +1342,16 @@ public class UserController extends BaseAction{
             FileUtil.copyFile(new FileInputStream(temp_img_url+new_img_name), server_img_url,new_img_name);
             FileUtil.copyFile(new FileInputStream(temp_img_url+new_img_name), backup_img_url,new_img_name);
             FileUtil.deleteFile(temp_img_url+new_img_name);
+            //上传新图片时删除原图片
+            if(!StringUtil.isEmpty(userDetail.getImgAddrss())){
+                int index = userDetail.getImgAddrss().indexOf("/uploadfile");
+                if(index>0){
+                    String tomcat_path = resources_local+userDetail.getImgAddrss().substring(index+1, userDetail.getImgAddrss().length());
+                    String backup_path = resources_backup+userDetail.getImgAddrss().substring(index+1, userDetail.getImgAddrss().length());
+                    FileUtil.deleteFile(tomcat_path);
+                    FileUtil.deleteFile(backup_path);
+                }
+            }
             userService.modifyUserHeadPic(pdfile.getString("userCode"), http_img_url, Constant.VERSION_NO);//修改数据库图片地址
             out.print("<script>parent.document.getElementById('headPicId').src=\""+http_img_url+"\";parent.document.getElementById('left_headPicId').src=\""+http_img_url+"\";parent.$('#imgAddrss').val('"+http_img_url+"')</script>"); 
         } catch (Exception e) {
@@ -1342,7 +1365,12 @@ public class UserController extends BaseAction{
         }
         return;
     }
-    
+    public static void main(String[] args) {
+        String str = "http://192.168.0.116:8080/uploadfile/img/head/40cf2ab223f14422affd2dcc006cc4a9_122_122.bmp";
+        int index = str.indexOf("/uploadfile");
+        String path = str.substring(index+1, str.length());
+        System.out.println("-------------------imgpath="+path);
+    }
     @RequestMapping(value="delPic",method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse delPic(){

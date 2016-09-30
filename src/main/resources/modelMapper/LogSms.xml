@@ -28,7 +28,7 @@
     ,
     <include refid="Blob_Column_List" />
     from log_sms
-    where ls_is_send in ('',null,0)
+    where ls_is_send in ('',0) or ls_is_send is null
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from log_sms
@@ -123,9 +123,7 @@
       <if test="lsResponseMsg != null" >
         ls_response_msg = #{lsResponseMsg,jdbcType=VARCHAR},
       </if>
-      <if test="lsCreateDatetime != null" >
-        ls_create_datetime = #{lsCreateDatetime,jdbcType=TIMESTAMP},
-      </if>
+        ls_create_datetime = now(),
       <if test="lsIsResend != null" >
         ls_is_resend = #{lsIsResend,jdbcType=INTEGER},
       </if>

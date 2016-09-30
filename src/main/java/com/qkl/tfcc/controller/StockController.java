@@ -104,6 +104,12 @@ public class StockController extends BaseAction {
 				bankAccInfo = bankAccService.findBankAccInfo("", Constant.VERSION_NO);
 			}
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+			String userCode="";
+            if(user==null){
+                userCode =request.getParameter("userCode");
+            }else{
+                userCode =user.getUserCode();
+            }
 			Map<String,Object> map = new HashMap<String, Object>();
 			String txamntstr = pd.getString("txamnt");
 			String txnumstr = pd.getString("txnum");
@@ -134,7 +140,7 @@ public class StockController extends BaseAction {
 			pd.put("cntflag", "");
 			pd.put("caldate", null);
 			pd.put("status", "1");//需要审核
-			pd.put("userCode", user.getUserCode());
+			pd.put("userCode", userCode);
 			pd.put("createTime", DateUtil.getCurrentDate());
 			pd.put("modifyTime", DateUtil.getCurrentDate());
 			pd.put("operator","sys");

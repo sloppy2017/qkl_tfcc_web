@@ -396,6 +396,18 @@ $('.hid-x').click(function(){
 $('.myagree input').click(function(){
 	this.checked = !this.checked; 
 })
-
+  //绑定输入框，这里只能 是ID
+   $("#ref_phone").keydown(function(event){
+	    event=document.all?window.event:event;
+	    if((event.keyCode || event.which)==13){
+	    	$(".form1 .submit").click();
+	    }
+    });
+	$("#ref_phone1").keydown(function(event){
+		event=document.all?window.event:event;
+		if((event.keyCode || event.which)==13){
+			$(".form3 .submit").click();
+		}
+	});
 
 

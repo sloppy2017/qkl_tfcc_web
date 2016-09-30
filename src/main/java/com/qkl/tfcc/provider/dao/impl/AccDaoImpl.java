@@ -51,5 +51,10 @@ protected static final Log logger = LogFactory.getLog(AccDaoImpl.class);
 	public void updatefroze(PageData pd) {		
 		 getSqlSession().update(namespace+"."+"updatefroze", pd); 
 	}
+
+    @Override
+    public boolean thaw(String ratio) {
+       return getSqlSession().update(namespace+"."+"thaw", ratio)>0; 
+    }
 	
 }

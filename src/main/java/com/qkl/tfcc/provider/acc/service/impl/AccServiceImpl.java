@@ -25,6 +25,7 @@ import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccDetailDao;
 import com.qkl.tfcc.provider.dao.AccLimitdefDao;
 import com.qkl.tfcc.provider.dao.UserDao;
+import com.qkl.tfcc.provider.dao.UserDetailDao;
 import com.qkl.tfcc.provider.dao.UserFriendshipDao;
 import com.qkl.util.help.DateUtil;
 import com.qkl.util.help.Validator;
@@ -44,6 +45,8 @@ public class AccServiceImpl implements AccService {
     private AccDao accDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserDetailDao userDetailDao;
     @Autowired
     private AccLimitdefDao accLimitdefDao;
     @Autowired
@@ -198,7 +201,7 @@ public class AccServiceImpl implements AccService {
                     accOut.setSyscode(Constant.CUR_SYS_CODE);
                     boolean result = accDao.updateOut(accOut);
                     if(result){
-                      //普通用户账户明细收入
+                        //普通用户账户明细收入
                         AccDetail accDetail = new AccDetail();
                         accDetail.setUserCode(userDetail.getUserCode());//投资机构用户编码
                         accDetail.setRelaUsercode(tUser.getUserCode());//关联用户编码 
@@ -224,6 +227,11 @@ public class AccServiceImpl implements AccService {
                         accIn.setSyscode(Constant.CUR_SYS_CODE);
                         accDao.updateIn(accIn);
                         
+                        //冻结普通用户
+                        PageData userDetailPD = new PageData();
+                        userDetailPD.put("phone", phone);
+                        userDetailPD.put("freeze_flag", "0");//冻结
+                        userDetailDao.updateFreezeFlag(userDetailPD);
                         /*AccDetail taccDetail = accDetailDao.findAccDetail(accDetail);
                         if(taccDetail == null){
                             accDetail.setAmnt(tfccNumTemp);

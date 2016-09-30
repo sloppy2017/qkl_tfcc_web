@@ -834,6 +834,11 @@ public class UserServiceImpl implements UserService {
     	UserFriendship fUserFriendship = userFriendshipDao.findMaxFriendship(recomusercode);
 		return fUserFriendship;
 	}
+
+    @Override
+    public boolean thaw(String ratio, String versionNo) {
+        return accDao.thaw(ratio);
+    }
     
     
 	

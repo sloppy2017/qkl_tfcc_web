@@ -138,7 +138,7 @@ public class ComTeamVipController extends BaseAction{
 			
 			List<PageData> tviplist = vipservice.findVipList(page);
 			for (PageData pageData : tviplist) {
-				pageData.put("realname", pageData.get("real_name")==null?"":pageData.get("real_name").toString());
+				pageData.put("real_name", pageData.get("real_name")==null?"":pageData.get("real_name").toString());
 				pageData.put("buyNum", pageData.get("buyNum")==null?"0.0000":String.format("%.4f",new BigDecimal(pageData.get("buyNum").toString())));
 			}
 			

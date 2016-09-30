@@ -95,8 +95,14 @@ public class ComAccMyController extends BaseAction {
 	@ResponseBody
 	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		String userCode="";
+        if(user==null){
+            userCode =request.getParameter("userCode");
+        }else{
+            userCode =user.getUserCode();
+        }
 		pd=this.getPageData();
-		Map<String, Object> findNum = cams.findMyAcc(user.getUserCode());
+		Map<String, Object> findNum = cams.findMyAcc(userCode);
 		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
 		String money = pd.getString("money");//获取输入的SAN数量
 		while (iterator.hasNext()) {

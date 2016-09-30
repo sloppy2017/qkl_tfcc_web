@@ -76,7 +76,14 @@ public interface UserDetailDao extends DAO<UserDetail> {
 	 * @return: void
 	 */
 	public void updateRefPhone(PageData pd);
-	
+	/**
+	 * @describe:修改冻结标志
+	 * @author: zhangchunming
+	 * @date: 2016年9月30日下午3:09:46
+	 * @param pd
+	 * @return: void
+	 */
+	public void updateFreezeFlag(PageData pd);
 	
 
 }

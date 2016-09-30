@@ -59,7 +59,7 @@ public class AccController extends BaseAction{
     @RequestMapping(value="/rewardTfcc", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse modifyuser(HttpServletRequest request){
-        logBefore(logger, "投资机构发放tfcc给普通会员会员");
+        logBefore(logger, "投资机构发放tfcc给普通会员");
         Map<String,String> resMap = new HashMap<String, String>();
         try {
              pd = this.getPageData();

@@ -28,8 +28,13 @@ public class LPaccController extends BaseAction {
 		AjaxResponse ar = new AjaxResponse();
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+			String userCode="";
+	        if(user==null){
+	            userCode =request.getParameter("userCode");
+	        }else{
+	            userCode =user.getUserCode();
+	        }
 			pd = this.getPageData();
-			String userCode=user.getUserCode();
 			long Balance = lpService.findLPBalance(userCode);
 			pd.put("Balance", Balance);
 			ar.setData(pd);

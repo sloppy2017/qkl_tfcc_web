@@ -198,78 +198,15 @@
 				}
 			}
 		});
-		/*var url = '../service/user/forgetpwd?'+$("form").serialize();
-		$.post(url,function(data){
-			if(data.success){
-				$(".mark1").show();
-			}else{
-				alert(data.message);
-			}
-		});*/
+		
 	};
-//	$(".empty-clear").val("");
-//	function empty(){
-//		$('.empty-clear').html('')
-//		alert(111)
-//	}	
-//	empty();
-	
-	
-//	
-//	clearCookie(JSESSIONID);
-//	function clearCookie(name) {  
-//	    setCookie(name, "", -1);  
-//	}  
-//	function checkCookie() {
-//	    var user = getCookie("username");
-//	    if (user != "") {
-//	        alert("Welcome again " + user);
-//	    } else {
-//	        user = prompt("Please enter your name:", "");
-//	        if (user != "" && user != null) {
-//	            setCookie("username", user, 365);
-//	        }
-//	    }
-//	}
-	
-
-	
-
-function submit(){
-		console.log("forgetpwd start1!");
-		var validPhone = valid_phone($("input[name='phone']"));
-		var validYzm = valid_yzm($("input[name='yzm']"));
-		var validPassword = valid_password($("input[name='password']"));
-		var validResPassword = valid_resPassword($("input[name='resPassword']"));
-//		alert(validPhone+"--"+validYzm+"--"+validResPassword+"--"+validPassword);
-		if(!(validPhone&&validPassword&&validResPassword&&validYzm)){
-			return;
+	//绑定输入框，这里只能 是ID
+	$("#resPassword").keydown(function(event){
+		event=document.all?window.event:event;
+		if((event.keyCode || event.which)==13){
+			subBtn();
 		}
-		 console.log("forgetpwd start2!");
-		var url = '../service/user/forgetpwd?'+$("form").serialize();
-		$.ajax({
-			type:'POST',
-			url:url,
-			dataType:'JSON',
-			success:function(data){
-				if(data.success){
-					$(".mark1").show();
-				}else{
-					alert(data.message);
-				}
-			}
-		});
-		/*var url = '../service/user/forgetpwd?'+$("form").serialize();
-		$.post(url,function(data){
-			if(data.success){
-				$(".mark1").show();
-			}else{
-				alert(data.message);
-			}
-		});*/
-	};
-
-
+	});
 
 
 

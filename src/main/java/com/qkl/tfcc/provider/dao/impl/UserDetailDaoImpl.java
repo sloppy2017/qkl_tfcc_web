@@ -107,6 +107,10 @@ protected static final Log logger = LogFactory.getLog(UserDaoImpl.class);
         getSqlSession().update(namespace+"."+"updateRefPhone", pd);
     }
 
+    @Override
+    public void updateFreezeFlag(PageData pd) {
+        getSqlSession().update(namespace+"."+"updateFreezeFlag", pd);
+    }
 	
 
 }

@@ -14,9 +14,11 @@
 		http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
 	<task:annotation-driven />
-     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
-	<context:component-scan base-package="com.qkl.tfcc.quartz.job" />
-
+    <!--  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	<context:component-scan base-package="com.qkl.tfcc.quartz.job" /> -->
+    <context:annotation-config/>  
+        <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
+    <context:component-scan base-package="com.qkl.tfcc.quartz.job"/>
 </beans>
 
 

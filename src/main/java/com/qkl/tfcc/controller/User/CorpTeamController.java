@@ -34,7 +34,12 @@ public class CorpTeamController extends BaseAction {
 		long lpNum=0;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-			String userCode=user.getUserCode();
+			String userCode="";
+            if(user==null){
+                userCode =request.getParameter("userCode");
+            }else{
+                userCode =user.getUserCode();
+            }
 			lpNum = corpTeamService.findNum(userCode);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
@@ -53,9 +58,15 @@ public class CorpTeamController extends BaseAction {
 	public AjaxResponse findLplist(HttpServletRequest request,Page page){
 		AjaxResponse ar = new AjaxResponse();
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		String userCode="";
+        if(user==null){
+            userCode =request.getParameter("userCode");
+        }else{
+            userCode =user.getUserCode();
+        }
 		//String userCode="10000000001";
 		pd = this.getPageData();
-		pd.put("userCode", user.getUserCode());
+		pd.put("userCode", userCode);
 		//pd.put("userCode", userCode);
 		page.setPd(pd);
 		List<PageData> list = corpTeamService.findlplist(page);

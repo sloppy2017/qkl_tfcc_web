@@ -172,4 +172,10 @@
          set   ref_phone = #{new_ref_phone}
          where ref_phone = #{ref_phone}     
      </update>
+     <!-- 修改冻结标志 -->
+     <update id="updateFreezeFlag" parameterType="pd">    
+         update tb_user_detail 
+         set   freeze_flag = #{freeze_flag}
+         where phone = #{phone}     
+     </update>
 </mapper>     

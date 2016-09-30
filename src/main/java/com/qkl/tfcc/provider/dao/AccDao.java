@@ -60,5 +60,13 @@ public interface AccDao extends DAO<Acc> {
 	 * @return: void
 	 */
 	public void updatefroze(PageData pd);
+	/**
+	 * @describe:解冻-比率5%
+	 * @author: zhangchunming
+	 * @date: 2016年9月30日上午9:41:25
+	 * @param ratio
+	 * @return: void
+	 */
+	public boolean thaw(String ratio);
 	
 }
