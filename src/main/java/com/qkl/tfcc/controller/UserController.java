@@ -178,9 +178,17 @@ public class UserController extends BaseAction{
             UserDetail userDetail = userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
             if(realName!=null&&!realName.equals("")){
                 tUserDetail.setRealName(realName);
+            }else{
+            	if(userDetail!=null){
+            	 tUserDetail.setRealName(userDetail.getRealName());
+            	}
             }
             if(idno!=null&&!idno.equals("")){
                 tUserDetail.setIdno(idno);
+            }else{
+            	if(userDetail!=null){
+            	tUserDetail.setIdno(userDetail.getIdno());
+            	}
             }           
             tUserDetail.setUserCode(userCode);
             tUserDetail.setWxnum(wxnum);
