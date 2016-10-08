@@ -148,7 +148,7 @@ public class AccServiceImpl implements AccService {
             JSONObject obj = (JSONObject)jsonArray.get(i);
             String phone = obj.getString("phone").trim();
             String tfccNum = obj.getString("tfccNum").trim();
-            if(Validator.isMobile(phone)&&Validator.isNumberMax7(tfccNum)){
+            if(Validator.isMobile(phone)&&Validator.isMoney4(tfccNum)){
                 User tUser = userDao.findUserByPhone(phone);
                 if(tUser==null){
                     failStr.append(phone+"-会员不存在；");
@@ -249,10 +249,10 @@ public class AccServiceImpl implements AccService {
                     }
                 }
             }else{
-                if(Validator.isMobile(phone)){
+                if(!Validator.isMobile(phone)){
                     failStr.append(phone+"-手机号格式有误；");
                 }
-                if(Validator.isNumberMax7(tfccNum)){
+                if(!Validator.isMoney4(tfccNum)){
                     failStr.append(phone+"-发放额度格式有误；");
                 }
                 
