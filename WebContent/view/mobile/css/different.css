@@ -118,7 +118,7 @@ em{
 	height: 0.88rem;
 	line-height: 0.88rem;
 	font-size: 0.32rem;
-	border-bottom: 1px solid #333333;
+	border-bottom: 1px solid #ccc;
 	color: #565656;
 }
 
@@ -133,7 +133,7 @@ em{
 .mybalance font{
 	float: left;
 	font-size: 0.32rem;
-	color: #000000;
+	color: #282828;
 	font-weight: 600;
 }
 .mybalance a{
@@ -174,7 +174,8 @@ em{
 	height: 0.8rem;
 	line-height: 0.8rem;
 	font-size: 0.32rem;
-	color: #000000;
+	/*color: #000000;*/
+	color:#282828;
 	font-weight: 600;
 }
 .reward{

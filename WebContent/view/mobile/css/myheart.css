@@ -221,6 +221,7 @@ body{
 .a-m-name input,.a-m-p input{
 	float:left;
 	height:.6rem;
+	line-height: .6rem;
 	border:none;
 	width:67%;
 	margin-left:3%; 
