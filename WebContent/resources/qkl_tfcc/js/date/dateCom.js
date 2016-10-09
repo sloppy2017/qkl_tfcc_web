@@ -14,12 +14,21 @@ function time(){
     var month = now.getMonth()+1;
     var date = now.getDate();
     var times = now.getHours();
+    if(times.toLocaleString().length==1){
+    	times = "0"+times;
+    }
     var minutes = now.getMinutes();
+    if(minutes.toLocaleString().length==1){
+    	minutes = "0"+minutes;
+    }
     var seconds=now.getSeconds();
-    var week = now.getDay()-1;
+    if(seconds.toLocaleString().length==1){
+    	seconds = "0"+seconds;
+    }
+    var week = now.getDay();
     $('.yearTime').html(years+'年'+month+'月'+date+'日');
     $('.dateTime').html(times+':'+ minutes+':'+seconds);
-    var weekArr = ['一','二','三','四','五','六','日'];
+    var weekArr = ['日','一','二','三','四','五','六'];
     $('.weekTime').html('星期'+weekArr[week]);
 }
 time();

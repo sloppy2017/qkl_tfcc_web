@@ -206,7 +206,7 @@ public class BankAccController extends BaseAction {
 							
 							int num = smsService.getBlackPhone(userDetail.getPhone());
 							if (num==0) {
-								String content = "尊敬的【"+userDetail.getPhone()+"】会员，您提交购买【"+txamnt2+"】SAN数字货币订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
+								String content = "尊敬的【"+userDetail.getPhone()+"】会员，您提交购买【"+txamnt2+"】三界宝数字资产订单提交成功，请在24小时内付款，否则您的订单将会自动取消。如有疑问请联系在线客服，祝您生活愉快！";
 								SmsSend.sendSms(userDetail.getPhone(), content);
 							}else {
 								logger.debug("此人已进入短信黑名单");
