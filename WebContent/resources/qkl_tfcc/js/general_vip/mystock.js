@@ -236,8 +236,8 @@ function reload_table(currentPage,showCount) {
                 + "<th>交易金额</th> \n"
                 +"<th>购买时间</th>\n"
                 +"<th>交易时间</th>\n"
-                +"<th>交易账号</th>\n"
-                +"<th>交易银行</th>\n"
+                +"<th>收款账号</th>\n"
+                +"<th>收款银行</th>\n"
                 +"<th>状态</th>\n"
                 + "</tr> \n";
             rsStr= tablecols;
