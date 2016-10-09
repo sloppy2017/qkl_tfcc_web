@@ -44,7 +44,7 @@
 			.basic_info_div{
 				padding-top:0.2rem ;
 				width: 100%;
-				min-height: 2.6rem;
+				min-height: 1.6rem;
 				float: left;
 			}
 			.info_li{
@@ -81,8 +81,8 @@
 				line-height: 0.84rem;
 			}
 			.info_pad .info_li_right{
-				min-height: 0.86rem;
-				line-height: 0.84rem;
+				height: 0.26rem;
+				padding: 0.4rem 0.2rem;
 			}
 			.page_bottom{
 				width: 100%;
@@ -110,7 +110,7 @@
 				color: #2B71B1;
 			}
 			.buy_info_div{
-				height: 1.6rem;
+				min-height: 1.6rem;
 			}
 			.nowuser_wrap{
 				position: relative;

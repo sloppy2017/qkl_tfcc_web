@@ -42,7 +42,7 @@ $("#loginCilck").click(function(){
 function Post(phoneNub,PhonePassWord){
 	$.ajax({
 		type:"post",
-		url:"http://192.168.0.116:8080/service/user/login",
+		url:webURL+"/service/user/login",
 		data:{"phone":phoneNub,"password":PhonePassWord},
 		success:function(msg){
 			var msg = msg;
@@ -70,7 +70,7 @@ function personal(){
 	console.log(usercode)
 	$.ajax({
 		type:"get",
-		url:"http://192.168.0.116:8080/service/user/toMyself",
+		url:webURL+"/service/user/toMyself",
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)
@@ -90,7 +90,7 @@ function purse(){
 	console.log(usercode)
 	$.ajax({
 		type:"post",
-		url:"http://192.168.0.116:8080/service/comacc/findNums",
+		url:webURL+"service/comacc/findNums",
 		data:{"userCode":usercode},
 		success:function(msg){
 			console.log(msg)

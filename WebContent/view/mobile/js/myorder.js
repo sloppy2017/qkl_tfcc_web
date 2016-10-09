@@ -47,7 +47,7 @@ console.log(usercode);
 function gathering(){
 	$.ajax({
 	type:"post",
-	url:"/service/bankaccinfo/info",
+	url:webURL+"/service/bankaccinfo/info",
 	async:true,
 	data:{"userCode":usercode},
 	success:function(msg){
@@ -65,7 +65,7 @@ function orderInquiry(orderStatus,num){
 	console.log(usercode);
 	$.ajax({
 		type:"post",
-		url:"/service/bankaccinfo/searchSel",
+		url:webURL+"/service/bankaccinfo/searchSel",
 		async:true,
 		data:{"str":orderStatus,"currentPage":num,"showCount":10,"userCode":usercode},
 		success:function(msg){

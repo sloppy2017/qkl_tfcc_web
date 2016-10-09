@@ -5,7 +5,7 @@ $(document).ready(function(){
 	function vip(){
 	$.ajax({
 	type:"post",
-	url:"/service/team/findVipNum",
+	url:webURL+"/service/team/findVipNum",
 	data:{"userCode":usercode},
 	success:function(msg){
 		console.log(msg);
@@ -76,7 +76,7 @@ $(document).ready(function(){
 	console.log(num);
 	$.ajax({
 		type:"post",
-		url:"/service/team/findVipPage",
+		url:webURL+"/service/team/findVipPage",
 		async:true,
 		data:{"str":"all","currentPage":num,"showCount":10,"userCode":usercode},
 		success:function(msg){
