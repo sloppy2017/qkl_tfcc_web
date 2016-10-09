@@ -16,10 +16,10 @@ function time(){
     var times = now.getHours();
     var minutes = now.getMinutes();
     var seconds=now.getSeconds();
-    var week = now.getDay()-1;
+    var week = now.getDay();
     $('.yearTime').html(years+'年'+month+'月'+date+'日');
     $('.dateTime').html(times+':'+ minutes+':'+seconds);
-    var weekArr = ['一','二','三','四','五','六','日'];
+    var weekArr = ['日','一','二','三','四','五','六'];
     $('.weekTime').html('星期'+weekArr[week]);
 }
 time();
