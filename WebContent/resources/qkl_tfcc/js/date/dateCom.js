@@ -14,8 +14,17 @@ function time(){
     var month = now.getMonth()+1;
     var date = now.getDate();
     var times = now.getHours();
+    if(times.toLocaleString().length==1){
+    	times = "0"+times;
+    }
     var minutes = now.getMinutes();
+    if(minutes.toLocaleString().length==1){
+    	minutes = "0"+minutes;
+    }
     var seconds=now.getSeconds();
+    if(seconds.toLocaleString().length==1){
+    	seconds = "0"+seconds;
+    }
     var week = now.getDay();
     $('.yearTime').html(years+'年'+month+'月'+date+'日');
     $('.dateTime').html(times+':'+ minutes+':'+seconds);
