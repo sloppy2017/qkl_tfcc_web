@@ -21,7 +21,7 @@
 			<id>nexus</id>
 			<name>Sonatype Repository</name>
 			<!--url>http://172.16.16.14:8081/nexus/content/groups/public/</url-->
-			<url>http://192.168.0.73:8081/nexus/content/groups/public/</url>
+			<url>http://192.168.100.90:8081/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 
@@ -33,7 +33,7 @@
 		<pluginRepository>
 			<id>localhost plugins</id>
 			<!--url>http://172.16.16.14:8081/nexus/content/groups/public/</url-->
-			<url>http://192.168.0.73:8081/nexus/content/groups/public/</url>
+			<url>http://192.168.100.90:8081/nexus/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
 
