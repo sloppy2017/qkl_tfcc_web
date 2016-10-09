@@ -35,6 +35,9 @@
       locked_time = #{lockedTime}
       where phone = #{phone}
      </update>
-	 
+	  <!-- 查询手机号是否进入黑名单 -->
+     <select id="findBlackPhoneIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+     select count(1) from tb_sms_blacklist where phone=#{phone}
+     </select>
 
 </mapper>     

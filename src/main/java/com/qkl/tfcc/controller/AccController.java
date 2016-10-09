@@ -101,7 +101,13 @@ public class AccController extends BaseAction{
                      successStr.append(obj.getString("phone")+"，额度："+obj.getString("tfccNum")+"；");
                      phoneStr.append(obj.getString("phone")+"，");
                      totalSan = totalSan.add(new BigDecimal(obj.getString("tfccNum")));
-                   SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】会员给您发转入【"+obj.getString("tfccNum")+"】SAN数字货币，请登录网站查收！");
+                     int num = smsService.getBlackPhone(obj.getString("phone"));
+                     if (num==0) {
+                         SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】会员给您发转入【"+obj.getString("tfccNum")+"】SAN数字货币，请登录网站查收！");
+					}else {
+						logger.debug("此人已进入短信黑名单");
+						//System.out.println("此人已进入短信黑名单");
+					}
                    
                  }
                  resMap.remove("successStr");

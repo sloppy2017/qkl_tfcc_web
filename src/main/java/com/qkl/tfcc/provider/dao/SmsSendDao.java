@@ -1,8 +1,11 @@
 package com.qkl.tfcc.provider.dao;
 
+import java.util.List;
+
 import com.qkl.tfcc.api.po.user.Sendsms;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.provider.dbhelper.DAO;
+import com.qkl.util.help.pager.PageData;
 
 public interface SmsSendDao extends DAO<Sendsms> {
 
@@ -38,6 +41,13 @@ public interface SmsSendDao extends DAO<Sendsms> {
 	 * @create date 2016年8月17日
 	 */ 
 	public void modifySmsSend(Sendsms sendsms);
+	
+	/***
+	 * 查询黑手机号是否存在
+	 * @param phone
+	 * @return
+	 */
+	public int findBlackPhoneIsExist(String phone);
 	
 	
 	

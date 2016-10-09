@@ -112,4 +112,12 @@ public class SmsServiceImpl implements SmsService {
         }
     }*/
 
+	@Override
+	public int getBlackPhone(String phone) {
+		int exist = smsSendDao.findBlackPhoneIsExist(phone);
+		return exist;
+	}
+
+	
+
 }

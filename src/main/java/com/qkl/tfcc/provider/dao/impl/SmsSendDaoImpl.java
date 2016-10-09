@@ -1,5 +1,7 @@
 package com.qkl.tfcc.provider.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.alibaba.druid.support.logging.Log;
@@ -7,6 +9,7 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.qkl.tfcc.api.po.user.Sendsms;
 import com.qkl.tfcc.provider.dao.SmsSendDao;
 import com.qkl.tfcc.provider.dbhelper.DaoSupport;
+import com.qkl.util.help.pager.PageData;
 
 /**SmsSendDaoImpl的实现
  * <p>Description：SmsSendDaoImpl的实现  </p>
@@ -53,6 +56,14 @@ public class SmsSendDaoImpl extends DaoSupport<Sendsms> implements SmsSendDao {
 		return eCnt;
 	}
 
+	@Override
+	public int findBlackPhoneIsExist(String phone) {
+		 
+		
+		return getSqlSession().selectOne(namespace+"."+"findBlackPhoneIsExist", phone);
+	}
+
+	
 	 
 	
 
