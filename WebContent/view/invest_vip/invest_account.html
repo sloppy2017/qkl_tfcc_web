@@ -270,7 +270,7 @@
 //       var myreg = /^(([0-9]|([1-9][0-9]{0,9}))((\.[0-9]{1,2})?))$/;
       var myreg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){0,4})?$/;
       if(!myreg.test(money)){
-          $this.val("格式输入有误");
+          $this.val("小数点后最多保留四位");
           $this.addClass("errorTip");
           return false;
       }else{
