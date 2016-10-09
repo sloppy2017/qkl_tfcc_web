@@ -228,6 +228,7 @@ function reload_table(currentPage,showCount) {
             showCount: showCount
         },
         success: function (data) {
+        	 console.log(data.data);
             var tviplist = data.data.tradeInfo;
             var tablecols = "<tr> \n"
                 + " <th>订单号</th> \n"
@@ -235,6 +236,8 @@ function reload_table(currentPage,showCount) {
                 + "<th>交易金额</th> \n"
                 +"<th>购买时间</th>\n"
                 +"<th>交易时间</th>\n"
+                +"<th>交易账号</th>\n"
+                +"<th>交易银行</th>\n"
                 +"<th>状态</th>\n"
                 + "</tr> \n";
             rsStr= tablecols;
@@ -245,6 +248,8 @@ function reload_table(currentPage,showCount) {
                 rsStr = rsStr + "<th>" + tviplist[i].txamnt + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].txdate + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].paytime + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].revbankaccno + "</th>";
+                rsStr = rsStr + "<th>" + tviplist[i].revbankdepname + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].status + "</th>";
                 rsStr = rsStr + "</tr>";
             }

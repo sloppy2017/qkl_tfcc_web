@@ -45,7 +45,7 @@ public class ComAccMyController extends BaseAction {
 			}else{
 				userCode =user.getUserCode();
 			}			
-			nums = cams.findMyAcc(userCode);
+			nums = cams.findMyAcc(userCode);//查询余额，冻结，总量，推荐总奖励，推荐奖励
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
 		} catch (Exception e) {
