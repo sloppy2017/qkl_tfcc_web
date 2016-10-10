@@ -177,24 +177,27 @@
     <!-- 	申请转账  -->
     <update id="transfering" parameterType="pd">
         UPDATE tb_acc t
-        SET t.total_amnt = t.total_amnt - #{amount},
+        SET 
         t.avb_amnt = t.avb_amnt - #{amount},
-        t.froze_amnt_out = #{amount}
+        t.froze_amnt_out = t.froze_amnt_out+#{amount}
         where t.user_code = #{userCode}
-        and t.avb_amnt >#{amount}
+        and t.avb_amnt &gt;#{amount}
     </update>
     <!--     转账成功 -->
     <update id="transferSuccess" parameterType="pd">
         UPDATE tb_acc t
-        SET t.froze_amnt_out = 0
+        SET t.froze_amnt_out = t.froze_amnt_out - #{amount},
+        t.total_amnt = t.total_amnt - #{amount},
         where t.user_code = #{userCode}
+        and froze_amnt_out &gt;#{amount}
     </update>
     <!--     转账失败 -->
     <update id="transferfail" parameterType="pd">
          UPDATE tb_acc t
-         SET t.total_amnt = t.total_amnt + #{amount},
+         SET 
          t.avb_amnt = t.avb_amnt + #{amount},
-         t.froze_amnt_out = 0
+         t.froze_amnt_out = t.froze_amnt_out - #{amount}
          where t.user_code = #{userCode}
+         and froze_amnt_out &gt;#{amount}
     </update>
 </mapper>     

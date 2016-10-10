@@ -64,6 +64,7 @@
                         <value>/forgtpasswd</value>                       
                         <value>/isExistPhone</value>
                         <value>/forgetpwd</value>
+                        <value>/transfer</value>
                     </list>
                 </property>
             </bean>
