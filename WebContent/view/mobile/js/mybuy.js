@@ -1,5 +1,5 @@
-//$(document).ready(function(){
-	console.log(userPhone)
+$(document).ready(function(){
+//	console.log(userPhone)
 	$(".uesr_phone").html(userPhone);
 	 gathering();	 
 				 $("#myAlipay").blur(function(){
@@ -11,12 +11,17 @@
 					}
 				})
 				$("#buyNumber").blur(function(){
+					
 					buyNub= $("#buyNumber").val();
 					if(buyNub==""){
-						buyNub=0;
+						alert("请输入购买数量");
+					}else if(!validate.nuber($("#buyNumber").val())){
+						alert("请输入正确的数量")
+					}else{
+						console.log(buyNub);
+						purchase();
 					}
-					console.log(buyNub);
-					purchase();
+					
 				})
 				
 				$("#ConfirmBuy").click(function(){
@@ -49,7 +54,7 @@
 function gathering(){
 	$.ajax({
 	type:"post",
-	url:"/service/bankaccinfo/info",
+	url:webURL+"/service/bankaccinfo/info",
 	async:true,
 	data:{"userCode":usercode},
 	success:function(msg){
@@ -95,7 +100,7 @@ function gathering(){
 		    
 					$.ajax({
 						type:"post",
-						url:"/service/bankaccinfo/PayMoney",
+						url:webURL+"/service/bankaccinfo/PayMoney",
 						data:{"txnum":buyNub,"userCode":usercode},
 						success:function(msg){
 							console.log(msg)
@@ -115,7 +120,7 @@ function gathering(){
 				function purchaseOrder(){
 					$.ajax({
 						type:"post",
-						url:"/service/bankaccinfo/tradebuy",
+						url:webURL+"/service/bankaccinfo/tradebuy",
 						data:{"txamnt":paymentAmount,"payno":myAlipaynub,"userCode":usercode,"txnum":buyNub},
 						success:function(msg){
 							alert(msg.message);
@@ -131,4 +136,4 @@ function gathering(){
 
 
 
-//})
+})

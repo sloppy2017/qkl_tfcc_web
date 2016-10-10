@@ -1,4 +1,7 @@
 /*个人中心的主页面*/ 
+a{
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);    
+}
 body{
 	height:100%;
 	width:100%;

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 //正则
 var validate={
 //手机号正则
@@ -82,7 +81,7 @@ var validate={
    //我的帐户交互
 	$.ajax({
    	  	type:"post",
-   	  	url:"/service/comacc/findMyAcc",
+   	  	url:webURL+"/service/comacc/findMyAcc",
    	  	data:{
    	  		 "userCode": usercode
    	  	},
@@ -109,7 +108,7 @@ var validate={
   $('#confirmChange').on('click',function(){
   	$.ajax({
   		type:"post",
-  		url:"/service/user/modifypwd",
+  		url:webURL+"/service/user/modifypwd",
   		data:{
           "userCode": usercode,
           "oldpassword":$('#oldPassword').val(),

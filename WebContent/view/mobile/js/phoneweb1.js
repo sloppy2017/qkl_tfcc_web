@@ -1,4 +1,3 @@
-var webURL="http://192.168.0.73:8080";
 		   
 		   
 //正则
@@ -121,7 +120,7 @@ blur1($('#phone4'),$('#userPassWord3'),validate.phone,'手机格式不正确');
 			
 		$.ajax({
 			type:"post",
-			url:"/service/user/sendsms",
+			url:webURL+"/service/user/sendsms",
 			data:{"phone":$('#pho_number1').val()},
 			success:function( content ){
 		       	 
@@ -169,12 +168,11 @@ function tesSetIn(){
 $('#reg1').click(function(){
 	$(this).addClass('bg-ccc');
 
-
 	if( $('#pho_password3').val() ){
-			$(this).unbind('click');
+			$(this).disabled=false;
 		$.ajax({
 	 		type:"post",
-	 		url:"/service/user/register",
+	 		url:webURL+"/service/user/register",
 	 		data:{
 	             "phone":$('#pho_number1').val(),
 	             "password":$('#pho_password3').val(),
@@ -186,15 +184,18 @@ $('#reg1').click(function(){
 	        success:function(msg){
 	         // $(this).attr("disabled","disabled");
 	       	 console.log(msg);
-	       	 $(this).unbind('click');
+//	       	 $(this).unbind('click');
 	       	if( msg.success == true ){
 	       		alert(msg.message);
 	       		window.location.href="login.html";
+	       		$('#reg1').disabled=false;
+	       		$('#reg1').removeClass('bg-ccc');
 	       	}else{
 	       		alert(msg.message);
+	       		$('#reg1').disabled=false;
+	       		$('#reg1').removeClass('bg-ccc');
+	       		
 	       	}
-	       
-	        
 	       }	
   		 });
  	}	
@@ -222,7 +223,7 @@ $("#loginCilck").click(function(){
 function Post(phoneNub,PhonePassWord){
 	$.ajax({
 		type:"post",
-		url:"/service/user/login",
+		url:webURL+"/service/user/login",
 		data:{"phone":phoneNub,"password":PhonePassWord},
 		success:function(msg){
 			var msg = msg;

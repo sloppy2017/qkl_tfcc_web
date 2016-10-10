@@ -19,7 +19,7 @@ $("#loginCilck").click(function(){
 function Post(phoneNub,PhonePassWord){
 	$.ajax({
 		type:"post",
-		url:"/service/user/login",
+		url:webURL+"/service/user/login",
 		data:{"phone":phoneNub,"password":PhonePassWord,"userCode":usercode},
 		success:function(msg){
 			var msg = msg;

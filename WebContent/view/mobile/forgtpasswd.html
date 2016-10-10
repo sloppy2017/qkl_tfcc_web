@@ -63,11 +63,11 @@
 		
 		<script src="js/jquery-2.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/phoneweb1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				var usercode = sessionStorage.getItem("usercode");
 				var buyNub,paymentAmount,myAlipaynub;
-				var webURL="http://192.168.0.73:8080";
 				$("#phone_pass").blur(function(){
 					
 					if(!validate.phone($('#phone_pass').val())){
@@ -94,7 +94,7 @@
 							
 						$.ajax({
 							type:"post",
-							url:"/service/user/sendsms",
+							url:webURL+"/service/user/sendsms",
 							data:{"phone":$('#phone_pass').val()},
 							success:function( content ){
 						       	 
@@ -141,7 +141,7 @@
 				$('#ConfirmBuy').click( function(){
 					$.ajax({
 						type:"post",
-						url:"/service/user/forgetpwd",
+						url:webURL+"/service/user/forgetpwd",
 						data:{
 							'phone':$('#phone_pass').val(),
 						    'password':$('#pho_password_forget1').val(),
@@ -161,6 +161,13 @@
 					});
 					
 				} );
+				//取消
+				$("#cancel_pass").click(function(){
+					var a=confirm("您确定取消找回密码吗？")
+		            if(a==true){
+		            	window.location.href="login.html"
+		            }
+				})
 				   
 			})
 		</script>

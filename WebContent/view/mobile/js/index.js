@@ -35,7 +35,7 @@ console.log(orderStatus);
 function gathering(){
 	$.ajax({
 	type:"post",
-	url:"http://192.168.0.116:8080/service/bankaccinfo/info",
+	url:webURL+"service/bankaccinfo/info",
 	async:true,
 	success:function(msg){
 		console.log(msg);
@@ -51,7 +51,7 @@ function orderInquiry(orderStatus,num){
 	console.log(usercode)
 	$.ajax({
 		type:"post",
-		url:"http://192.168.0.116:8080/service/bankaccinfo/searchSel",
+		url:webURL+"service/bankaccinfo/searchSel",
 		async:true,
 		data:{"str":orderStatus,"currentPage":num,"showCount":10,"userCode":usercode},
 		success:function(msg){

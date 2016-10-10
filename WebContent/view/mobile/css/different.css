@@ -24,9 +24,9 @@ em{
 			}
 .transferImg{
 	width: 0.4rem;
-	text-align: right;
+	text-align: center;
 	height: 0.88rem; 
-	
+	line-height: 0.88rem;
 } 
 .transferImg img{
 	display: block;

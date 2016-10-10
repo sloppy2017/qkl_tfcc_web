@@ -1,6 +1,7 @@
 
 var usercode = sessionStorage.getItem("usercode");
 var userPhone = sessionStorage.getItem("userPhone");
+var webURL=""
 //正则
 var validate={
 //手机号正则
@@ -72,7 +73,14 @@ var validate={
            return false;
        }
        return true;
- }		
+ },
+//数字正则（）
+       nuber:function (nuber){
+       if(!/^\d+(\.\d+)?$/.test(nuber)){
+           return false;
+       }
+       return true;
+ }			
 };
 
 //下拉框

@@ -103,10 +103,12 @@
 		$(function(){
 			$('.exit-box').click(function(){
 				$('.exit-box ul').toggle();
-				$('.exit-btn').click(function(){
+			})
+			$('.exit-btn').click(function(){
+					sessionStorage.setItem("usercode",""); 
+					sessionStorage.setItem("userPhone",""); 
 					window.location.href='login.html';
 				})
-			})
 		})
 	</script>
 

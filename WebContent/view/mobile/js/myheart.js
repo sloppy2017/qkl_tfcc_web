@@ -1,11 +1,11 @@
 $(document).ready(function(){
 // 个人中心的主页面
 
-var phoneVal;
+var phoneVal=sessionStorage.getItem("userPhone");;
 //返回的手机号值
 $.ajax({
     type:"get",
-    url:"/service/user/toMyself",
+    url:webURL+"/service/user/toMyself",
     data:{"userCode":usercode},
     success:function(massge){
       // console.log(massge)
@@ -19,7 +19,7 @@ $.ajax({
   });
   $.ajax({
     type:"post",
-    url:"/service/comacc/findMyAcc",
+    url:webURL+"/service/comacc/findMyAcc",
     data:{"userCode":usercode},
     success:function(massge){
       $('.a-one div').text(massge.data.total_amnt);
@@ -38,7 +38,7 @@ $.ajax({
        tesSetIn()
     $.ajax({
       type:"post",
-      url:"/service/user/sendsms",
+      url:webURL+"/service/user/sendsms",
       data:{"phone":$('.put-phone').val()},
       success:function( content ){            
             if(content.errorCode==0){           
@@ -54,7 +54,6 @@ function tesSetIn(){
     if(total == 0) {
       total="重新发送";
       $(".get-pwd").removeAttr("disabled");
-      
       clearInterval(timer);//如果程序在上一行出现错误，这一行代码就无法执行
     }else if(total> 0){
       $(".get-pwd").attr("disabled","disabled");
@@ -69,10 +68,9 @@ function tesSetIn(){
 $('.real-name1 button').click(function(){
    if( validate.code($('.write-pwd').val() ) ){ 
       console.log($('.write-pwd').val() )
-       tesSetIn()
     $.ajax({
       type:"post",
-      url:"/service/user/modifyphone",
+      url:webURL+"/service/user/modifyphone",
       data:{
         "userCode":usercode,
         "yzm":$('.write-pwd').val(),
@@ -80,12 +78,17 @@ $('.real-name1 button').click(function(){
         "phone":$(".put-phone").val(),
         "mobileflag":1,
       },
-      success:function(massges){                    
-            console.log( massges );
-            phoneVal = $(".put-phone").val();
-            $('.a-m-name .oldphone').html( phoneVal);
-            window.location.href="myheart.html";
-
+      success:function(massges){    
+            if(massges.success==true){
+              console.log( massges );
+              phoneVal = $(".put-phone").val();
+               $('.a-m-name .oldphone').html(phoneVal);
+               sessionStorage.setItem("userPhone",phoneVal); 
+               alert(massges.message)
+               window.location.href="myheart.html";
+            }else{
+               alert(massges.message);
+            }     
         }  
     });
   }
@@ -97,7 +100,7 @@ $('.real-name1 button').click(function(){
 //自动刷新获取值；
 $.ajax({
     type:"get",
-    url:"/service/user/toMyself",
+    url:webURL+"/service/user/toMyself",
     data:{"userCode":usercode},
     success:function(massge){
       console.log(massge);
@@ -105,8 +108,9 @@ $.ajax({
       console.log(realVal);
       var phoneVal=massge.data.phone;
        $('.oldphone').val(phoneVal)
-      if( realVal == ''){
+      if( realVal == null||realVal ==""){
            $('.a-m-name .oldphone').val(phoneVal);
+           $('.undiend').html('未认证');
       }else{
          $('#name-info').html(realVal);
          $('.undiend').html('已认证');
@@ -120,21 +124,13 @@ $('.exit-btn').click(function(){
 })
 
 
-
-
-
-
 // 实名认证
 var vnameVal;
   $('.real-name2 button').click(function(){
-    // var xx =validate.name($('.r-name').val() );
-    // var yy =validate.Idcard($('.r-idcard').val());
       vnameVal=$('.r-name').val();
-    // alert(vnameVal);         
-        // alert(xx+'.....'+yy);
         $.ajax({
           type:"post",
-          url:"/service/user/realname",
+          url:webURL+"/service/user/realname",
           data:{
             "realName":$('.r-name').val(),
             "userCode":usercode,
