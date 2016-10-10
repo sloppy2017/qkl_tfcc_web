@@ -68,8 +68,17 @@ public class TransferAccController extends BaseAction{
                 }
             }
             boolean signResult = APIHttpClient.validSign(pd.getString("orderId"), pd.getString("status"), pd.getString("value"), pd.getString("ts"), pd.getString("sign"), pri);
-            if(signResult){
-                accOutdetailService.transferCallBack(pd, Constant.VERSION_NO);
+            if(signResult){//签名认证成功
+                boolean transferResult = accOutdetailService.transferCallBack(pd, Constant.VERSION_NO);
+                if(transferResult){
+                    ar.setMessage("转账成功");
+                    ar.setSuccess(true);
+                    return ar;
+                }else{
+                    ar.setMessage("转账失败");
+                    ar.setSuccess(false);
+                    return ar;
+                }
             }else{
                 ar.setErrorCode(CodeConstant.SIGN_ERROR);
                 ar.setMessage("签名认证失败");

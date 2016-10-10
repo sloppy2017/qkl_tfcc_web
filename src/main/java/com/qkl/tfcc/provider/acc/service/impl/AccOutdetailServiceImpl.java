@@ -51,13 +51,17 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
     @Override
     public boolean transferCallBack(PageData pd, String versionNo) {
         boolean transferRestult = false;
+        PageData accOutDetail = accOutdetailDao.getAccOutDetailByOrderId(pd.getString("orderId"));
+        pd.put("userCode", accOutDetail.getString("user_code"));
         if("1".equals(pd.getString("status"))){//status-1成功 0-失敗
             transferRestult = accDao.transferSuccess(pd);
+            boolean outResult = accOutdetailDao.updateStatusByOrderId(pd);
+            return (transferRestult&&outResult);
         }else{
             transferRestult = accDao.transferfail(pd);
+            boolean outResult = accOutdetailDao.updateStatusByOrderId(pd);
+            return false;
         }
-        boolean outResult = accOutdetailDao.updateStatusByOrderId(pd);
-        return (transferRestult&&outResult);
     }
 
 }

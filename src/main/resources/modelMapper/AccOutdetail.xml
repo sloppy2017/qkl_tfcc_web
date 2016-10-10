@@ -85,6 +85,9 @@
              modify_time = now()
          where order_ids = #{orderId}     
      </update>
-	 
+<!--      根据订单id查询转出记录 -->
+	 <select id="getAccOutDetailByOrderId" parameterType="java.lang.String" resultType="pd">
+	    select * from tb_acc_outdetail where order_ids = #{orderId}     
+	 </select>
 
 </mapper>     

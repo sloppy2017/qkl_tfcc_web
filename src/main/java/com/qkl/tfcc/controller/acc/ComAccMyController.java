@@ -130,7 +130,7 @@ public class ComAccMyController extends BaseAction {
 									ar.setMessage("您的可用余额不足");
 								}
 								if (compareTo==0||compareTo==-1) {//等于或者小于
-									String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", money, null,null,null);//调用转账接口
+									String turnOut = APIHttpClient.turnOut(null, null,  "test02", "test01", money, null,null,null);//调用转账接口
 									JSONObject objJson = (JSONObject)JSON.parse(turnOut);
 									String status = objJson.getString("status");
 									if ("failed".equals(status)) {
@@ -221,16 +221,12 @@ public class ComAccMyController extends BaseAction {
 	/*public static void main(String[] args) {
 		String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", "10", null,null,null);
 		try {
+			System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
 			JSONObject objJson = (JSONObject)JSON.parse(turnOut);
 			System.out.println(objJson.getString("status")+"++++++++++++++++++++++++");
-			String string = objJson.getString("data");
-		//	JSONArray
-			byte[] bs = string.getBytes();
-			for (int i = 0; i < bs.length; i++) {
-				System.out.println(bs[i]);
-			}
+			Object object = objJson.getString("data");
 			
-			
+		System.out.println(objJson.toString()+"+++++++++++==============================");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

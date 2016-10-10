@@ -27,6 +27,14 @@ public interface AccOutdetailDao extends DAO<AccOutdetail> {
 	 * @return: void
 	 */
 	public boolean updateStatusByOrderId(PageData pd);
+	/**
+	 * @describe:根据订单id查询转账记录
+	 * @author: zhangchunming
+	 * @date: 2016年10月10日下午3:35:38
+	 * @param orderId
+	 * @return: PageData
+	 */
+	public PageData getAccOutDetailByOrderId(String orderId);
 	
 	
 }
