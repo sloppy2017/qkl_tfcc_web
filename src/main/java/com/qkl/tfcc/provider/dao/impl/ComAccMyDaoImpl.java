@@ -91,4 +91,10 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
         return getSqlSession().selectOne(namespace+"."+"findFFReward", userCode);
     }
 
+	@Override
+	public int insertOutAcc(PageData pd) {
+		int insert = getSqlSession().insert(namespace+"."+"insertOutAcc",pd);
+		return insert;
+	}
+
 }

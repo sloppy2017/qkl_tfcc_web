@@ -108,5 +108,11 @@ public class ComAccMyServiceImpl implements ComAccMyService {
     public static void main(String[] args) {
 		System.out.println(String.format("%.4f",new BigDecimal("0.12")));
 	}
+
+	@Override
+	public int saveOutAcc(PageData pd) {
+		// TODO Auto-generated method stub
+		return comAccMyDao.insertOutAcc(pd);
+	}
 	
 }

@@ -12,13 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.dubbo.common.json.JSON;
+import com.alibaba.dubbo.common.json.JSONArray;
+import com.alibaba.dubbo.common.json.JSONObject;
+import com.alibaba.dubbo.common.json.ParseException;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.ComAccMy;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.ComAccMyService;
 import com.qkl.tfcc.web.BaseAction;
+import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
+import com.qkl.util.help.DateUtil;
 import com.qkl.util.help.pager.PageData;
 
 
@@ -121,8 +127,29 @@ public class ComAccMyController extends BaseAction {
 									ar.setMessage("您的可用余额不足");
 								}
 								if (compareTo==0||compareTo==-1) {//等于或者小于
-									ar.setSuccess(true);
-									ar.setMessage("转账功能还未正式上线");
+									String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", money, null,null,null);
+									JSONObject objJson = (JSONObject)JSON.parse(turnOut);
+									String status = objJson.getString("status");
+									if ("failed".equals(status)) {
+										ar.setSuccess(true);
+										ar.setMessage("转账失败");
+									}if ("success".equals(status)) {
+										pd.put("userCode", userCode);
+										pd.put("sub_acc_no", "");
+										pd.put("outamnt", bigDecimal);
+										pd.put("outdate",DateUtil.getCurrentDate());
+										pd.put("cntflag", "SAN");
+										pd.put("target_system","R8");
+										pd.put("status", 3);//1成功2失败3转出中
+										pd.put("create_time", DateUtil.getCurrentDate());
+										pd.put("modify_time", DateUtil.getCurrentDate());
+										pd.put("operator", user.getUserName());
+										int num = cams.saveOutAcc(pd);
+										ar.setSuccess(true);
+										ar.setMessage("转账申请提交成功");
+									}
+//									ar.setSuccess(true);
+//									ar.setMessage("转账功能还未正式上线");
 								}
 							}
 						
@@ -187,4 +214,22 @@ public class ComAccMyController extends BaseAction {
 		ar.setData(findAll);
 		return ar;
 	}*/
+	public static void main(String[] args) {
+		String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", "10", null,null,null);
+		try {
+			JSONObject objJson = (JSONObject)JSON.parse(turnOut);
+			System.out.println(objJson.getString("status")+"++++++++++++++++++++++++");
+			String string = objJson.getString("data");
+		//	JSONArray
+			/*byte[] bs = string.getBytes();
+			for (int i = 0; i < bs.length; i++) {
+				System.out.println(bs[i]);
+			}*/
+			
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

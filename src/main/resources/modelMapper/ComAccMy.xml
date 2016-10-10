@@ -77,4 +77,31 @@
     <select id="getAmnt" parameterType="pd" resultType="pd">
         select * from tb_acc where user_code = #{user_code}
     </select>
+    
+    <insert id="insertOutAcc" parameterType="pd">
+    insert into tb_acc_outdetail 
+    (user_code,
+    sub_acc_no,
+    outamnt,
+    outdate,
+    cntflag,
+    target_system,
+    status,
+    create_time,
+    modify_time,
+    operator) 
+    values(
+    #{user_code},
+     #{sub_acc_no},
+      #{outamnt},
+       #{outdate},
+        #{cntflag},
+         #{target_system},
+          #{status},
+           #{create_time},
+            #{modify_time},
+             #{operator}
+    )
+    
+    </insert>
 </mapper>     
