@@ -20,6 +20,7 @@ import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.acc.ComAccMy;
 import com.qkl.tfcc.api.po.user.User;
+import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
 import com.qkl.tfcc.api.service.acc.api.ComAccMyService;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
@@ -36,6 +37,8 @@ public class ComAccMyController extends BaseAction {
 
 	@Autowired
 	private ComAccMyService cams;
+	@Autowired
+	private AccOutdetailService accOutdetailService;
 	
 	@RequestMapping(value="/findMyAcc",method=RequestMethod.POST)
 	@ResponseBody
@@ -127,7 +130,7 @@ public class ComAccMyController extends BaseAction {
 									ar.setMessage("您的可用余额不足");
 								}
 								if (compareTo==0||compareTo==-1) {//等于或者小于
-									String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", money, null,null,null);
+									String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", money, null,null,null);//调用转账接口
 									JSONObject objJson = (JSONObject)JSON.parse(turnOut);
 									String status = objJson.getString("status");
 									if ("failed".equals(status)) {
@@ -135,16 +138,17 @@ public class ComAccMyController extends BaseAction {
 										ar.setMessage("转账失败");
 									}if ("success".equals(status)) {
 										pd.put("userCode", userCode);
-										pd.put("sub_acc_no", "");
+										pd.put("subAccno", "");
 										pd.put("outamnt", bigDecimal);
 										pd.put("outdate",DateUtil.getCurrentDate());
 										pd.put("cntflag", "SAN");
-										pd.put("target_system","R8");
+										pd.put("targetSystem","R8");
 										pd.put("status", 3);//1成功2失败3转出中
-										pd.put("create_time", DateUtil.getCurrentDate());
-										pd.put("modify_time", DateUtil.getCurrentDate());
+										pd.put("createTime", DateUtil.getCurrentDate());
+										pd.put("modifyTime", DateUtil.getCurrentDate());
 										pd.put("operator", user.getUserName());
-										int num = cams.saveOutAcc(pd);
+									//	int num = cams.saveOutAcc(pd);
+										boolean outdetail = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
 										ar.setSuccess(true);
 										ar.setMessage("转账申请提交成功");
 									}

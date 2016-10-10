@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
@@ -110,6 +112,7 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	}
 
 	@Override
+	@Transactional(propagation =Propagation.REQUIRED)
 	public int saveOutAcc(PageData pd) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.insertOutAcc(pd);
