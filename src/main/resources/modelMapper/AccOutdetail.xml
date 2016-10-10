@@ -53,7 +53,8 @@
 	 outamnt,
 	 outdate,
 	 cntflag,
-	 STATUS,
+	 status,
+	 target_system,
 	 create_time,
 	 modify_time,
 	 operator)
@@ -63,8 +64,8 @@
 	 #{outamnt},
 	 #{outdate},
 	 #{cntflag},
-	 #{targetSystem},
 	 #{status},
+	 #{targetSystem},
 	 #{createTime},
 	 #{modifyTime},
 	 #{operator}
