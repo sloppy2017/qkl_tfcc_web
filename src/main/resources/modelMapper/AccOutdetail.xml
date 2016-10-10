@@ -78,8 +78,13 @@
 	         modify_time = #{modify_time}
 	     where id = #{id}     
      </update>
-     
-     
-	
+<!--      转账回调时更新状态 -->
+     <update id="updateStatusByOrderId" parameterType="pd" >    
+         update tb_acc_outdetail 
+         set status = #{status},
+             modify_time = now()
+         where order_ids = #{orderId}     
+     </update>
+	 
 
 </mapper>     

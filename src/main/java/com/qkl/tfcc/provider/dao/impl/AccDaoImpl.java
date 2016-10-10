@@ -56,5 +56,20 @@ protected static final Log logger = LogFactory.getLog(AccDaoImpl.class);
     public boolean thaw(String ratio) {
        return getSqlSession().update(namespace+"."+"thaw", ratio)>0; 
     }
+
+    @Override
+    public boolean transfering(PageData pd) {
+        return getSqlSession().update(namespace+"."+"transfering", pd)>0; 
+    }
+
+    @Override
+    public boolean transferSuccess(PageData pd) {
+        return getSqlSession().update(namespace+"."+"transferSuccess", pd)>0; 
+    }
+
+    @Override
+    public boolean transferfail(PageData pd) {
+        return getSqlSession().update(namespace+"."+"transferfail", pd)>0; 
+    }
 	
 }

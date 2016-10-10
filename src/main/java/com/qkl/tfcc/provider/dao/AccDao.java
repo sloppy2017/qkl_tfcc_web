@@ -68,5 +68,29 @@ public interface AccDao extends DAO<Acc> {
 	 * @return: void
 	 */
 	public boolean thaw(String ratio);
+	/**
+	 * @describe:转账申请
+	 * @author: zhangchunming
+	 * @date: 2016年10月10日上午11:12:11
+	 * @param pd
+	 * @return: boolean
+	 */
+	public boolean transfering(PageData pd);
+	/**
+	 * @describe:转账成功
+	 * @author: zhangchunming
+	 * @date: 2016年10月10日上午11:12:59
+	 * @param pd
+	 * @return: boolean
+	 */
+	public boolean transferSuccess(PageData pd);
+	/**
+	 * @describe:转账失败
+	 * @author: zhangchunming
+	 * @date: 2016年10月10日上午11:13:33
+	 * @param pd
+	 * @return: boolean
+	 */
+	public boolean transferfail(PageData pd);
 	
 }
