@@ -17,7 +17,7 @@ public class AccOutdetailDaoImpl extends DaoSupport<AccOutdetail> implements
 
 	protected static final Log logger = LogFactory.getLog(AccOutdetailDaoImpl.class);
 	
-	private String namespace = " AccOutdetail";
+	private String namespace = "AccOutdetail";
 	
 	
 	@Override
