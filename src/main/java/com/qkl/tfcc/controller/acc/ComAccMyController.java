@@ -218,22 +218,22 @@ public class ComAccMyController extends BaseAction {
 		ar.setData(findAll);
 		return ar;
 	}*/
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", "10", null,null,null);
 		try {
 			JSONObject objJson = (JSONObject)JSON.parse(turnOut);
 			System.out.println(objJson.getString("status")+"++++++++++++++++++++++++");
 			String string = objJson.getString("data");
 		//	JSONArray
-			/*byte[] bs = string.getBytes();
+			byte[] bs = string.getBytes();
 			for (int i = 0; i < bs.length; i++) {
 				System.out.println(bs[i]);
-			}*/
+			}
 			
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
