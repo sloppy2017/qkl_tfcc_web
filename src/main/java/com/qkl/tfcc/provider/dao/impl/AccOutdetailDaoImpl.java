@@ -31,4 +31,9 @@ public class AccOutdetailDaoImpl extends DaoSupport<AccOutdetail> implements
 
 	}
 
+    @Override
+    public boolean updateStatusByOrderId(PageData pd) {
+        return getSqlSession().update(namespace+"."+"updateStatusByOrderId", pd)>0;
+    }
+
 }

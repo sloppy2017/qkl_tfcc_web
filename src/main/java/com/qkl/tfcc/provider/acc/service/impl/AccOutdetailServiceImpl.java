@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
+import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccOutdetailDao;
 import com.qkl.util.help.pager.PageData;
 
@@ -19,6 +20,8 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
 	
 	@Autowired
 	private AccOutdetailDao accOutdetailDao;
+	@Autowired
+	private AccDao accDao;
 	
 	
 	@Override
@@ -44,5 +47,17 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
 			return false;
 		}
 	}
+
+    @Override
+    public boolean transferCallBack(PageData pd, String versionNo) {
+        boolean transferRestult = false;
+        if("1".equals(pd.getString("status"))){//status-1成功 0-失敗
+            transferRestult = accDao.transferSuccess(pd);
+        }else{
+            transferRestult = accDao.transferfail(pd);
+        }
+        boolean outResult = accOutdetailDao.updateStatusByOrderId(pd);
+        return (transferRestult&&outResult);
+    }
 
 }

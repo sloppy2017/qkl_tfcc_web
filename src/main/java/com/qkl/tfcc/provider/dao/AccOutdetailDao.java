@@ -19,6 +19,14 @@ public interface AccOutdetailDao extends DAO<AccOutdetail> {
 	 * @create date 2016年9月13日
 	 */ 
 	public void modifyAccOutdetailStatus(PageData pd);
+	/**
+	 * @describe:转账回调时更新状态
+	 * @author: zhangchunming
+	 * @date: 2016年10月10日上午10:52:13
+	 * @param pd
+	 * @return: void
+	 */
+	public boolean updateStatusByOrderId(PageData pd);
 	
 	
 }

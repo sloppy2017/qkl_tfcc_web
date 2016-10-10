@@ -103,8 +103,11 @@ public class AccController extends BaseAction{
                      totalSan = totalSan.add(new BigDecimal(obj.getString("tfccNum")));
                      int num = smsService.getBlackPhone(obj.getString("phone"));
                      if (num==0) {
-                         SmsSend.sendSms(obj.getString("phone"), "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】会员给您发转入【"+obj.getString("tfccNum")+"】三界宝数字资产，请登录网站查收！");
-					}else {
+                         logger.info("发放三界宝数字资产短信--------start---------");
+                         String content = "尊敬的【"+obj.getString("phone")+"】会员您好，【"+userDetail.getPhone()+"】会员给您转入【"+obj.getString("tfccNum")+"】三界宝数字资产，请登录网站查收！";
+                         SmsSend.sendSms(obj.getString("phone"), content);
+                         logger.info("发放三界宝数字资产短信--------end:content="+content);
+                     }else {
 						logger.debug("此人已进入短信黑名单");
 						//System.out.println("此人已进入短信黑名单");
 					}
