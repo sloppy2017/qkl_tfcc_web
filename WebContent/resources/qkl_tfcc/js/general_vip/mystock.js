@@ -78,7 +78,7 @@ function userRequest(){
 	
 	
 	if($txnum.length==0||$txnum==null){
-		alert('请选择购买数量');
+		alert('请输入购买数量');
 		return false;
 	}
 	if($payno.length==0||$payno==null){
