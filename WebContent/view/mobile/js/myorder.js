@@ -76,11 +76,12 @@ function orderInquiry(orderStatus,num){
 			var msgStatus=msgdata[i].status;
 			var msgTxamnt=parseInt(msgdata[i].txamnt);
 		    var msgtxnum=msgdata[i].txnum;
+		    var revbankaccno=msgdata[i].revbankaccno;
 		    var mstxdate=msgdata[i].txdate;
 		    var msgtime = mstxdate.replace(/年/, "-").replace(/月/, "-").replace(/日/,"")
 //		    console.log(msgtime);
 //			console.log(msgStatus)
-			var ajaxwrap="<tr class='table_tr'><td class='order_time'>"+msgtime+"</td><td>"+msgtxnum+"</td><td class='zhifub'>"+msgtxnum+"</td><td class='timecolor zonge'>"+msgTxamnt+"</td><td>"+msgStatus+"</td></tr>"
+			var ajaxwrap="<tr class='table_tr'><td class='order_time'>"+msgtime+"</td><td>"+msgtxnum+"</td><td class='zhifub'>"+revbankaccno+"</td><td class='timecolor zonge'>"+msgTxamnt+"</td><td>"+msgStatus+"</td></tr>"
 		$(".table_order").find("tbody").append(ajaxwrap);
 		});
 		}

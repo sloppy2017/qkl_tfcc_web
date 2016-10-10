@@ -16,7 +16,8 @@ $(document).ready(function(){
 					if(buyNub==""){
 						alert("请输入购买数量");
 					}else if(!validate.nuber($("#buyNumber").val())){
-						alert("请输入正确的数量")
+						alert("请输入正确的数量");
+						$("#paymentAmount").val("");
 					}else{
 						console.log(buyNub);
 						purchase();
@@ -29,7 +30,7 @@ $(document).ready(function(){
 					 myAlipaynub=$('#myAlipay').val();
 					 buyNub= $("#buyNumber").val();
 					if(paymentAmount==""){
-						alert("请填写单价，获取支付金额");
+						alert("请填写数量，获取支付金额");
 					}else if(!validate.alipay($('#myAlipay').val())){
 						alert("填写正确的支付宝账户");
 					}else{
@@ -46,9 +47,6 @@ $(document).ready(function(){
 		            			window.location.href="index.html"
 		            		}
 				})
-	 
-
-
 
 //收款账号
 function gathering(){

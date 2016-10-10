@@ -103,9 +103,31 @@ var validate={
   		}
    	  	
    	  });
+   	  
+   	//判断新旧密码可一致
+   	$('#newPassword').on('blur',function(){ 
+   	   if( $('#oldPassword').val() ==  $('#newPassword').val() ){
+   	   	  $('#rePsd').html( '新密码和原密码不能一致' );
+   	   	 //判断两次密码可一致
+   	   	   
+	   	$('#resNewpassword').on('blur',function(){
+	   	   if( $('#resNewpassword').val() !=  $('#newPassword').val() ){
+	   	   	  $('#rePsd').html( '两次密码不一致' );
+	   	   }else{
+	   	   	   $('#rePsd').html( '' );
+	   	   }
+	   	});
+   	   }else{
+   	   	   $('#rePsd').html( '' );
+   	   }
+   	});
+   	
+  
+  
 	
    //修改密码交互
   $('#confirmChange').on('click',function(){
+   if(  $('#rePsd').html() == '' ){
   	$.ajax({
   		type:"post",
   		url:webURL+"/service/user/modifypwd",
@@ -126,7 +148,9 @@ var validate={
   		
   		
   	});
+   };
   });
+ 
   
    
    // 提交转账

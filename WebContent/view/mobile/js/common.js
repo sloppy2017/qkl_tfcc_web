@@ -1,7 +1,7 @@
 
 var usercode = sessionStorage.getItem("usercode");
 var userPhone = sessionStorage.getItem("userPhone");
-var webURL=""
+var webURL="";
 //正则
 var validate={
 //手机号正则

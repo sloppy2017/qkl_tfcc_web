@@ -7,6 +7,7 @@
 		<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
 		<link rel="stylesheet" type="text/css" href="css/all.css"/>
+		<link rel="stylesheet" type="text/css" href="css/hint.css"/>
 		<!-- <link rel="stylesheet" type="text/css" href="css/iconfont.css"/>		 -->
 	</head>
 	<body>
@@ -39,8 +40,29 @@
 			<a class="login_register" href="registmen.html">还没账号？立即注册</a>
 			<a class="login_register" href="forgtpasswd.html">忘记密码？</a>
 		</div>
+		<div class="hint">
+			<img id="hintimg" src="img/Screenshot_2016-10-10-18-18-46_06.png"/>
+			<div class="hint_top">
+					<img src="img/phonehint_03.png"/>
+			</div>
+			<div class="hint_title">
+				郑重提示
+			</div>
+			<div class="hint_bottom">
+				<div class="hint_bottom_div">
+					<p>近期有不法分子冒充三界宝数字资产系统进行虚假宣传(如:www.fg999.top)，损害用户合法权益，对其财产造成一定的损失。</p>
+					<p>现我司郑重提示：所有用户请远离虚假信息，选择正规网站注册、查询(www.sanledger.com),如
+因虚假信息导致的任何损失，我司概不负责！ 我司将对不法分子保留法律追溯权利。</p>
+				</div>
+			</div>
+		</div>
 		<script src="js/jquery-2.2.1.min.js" type="text/javascript" charset="utf-8"></script> 
 		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#hintimg").click(function(){
+				$(".hint").css("display","none");
+			})
+		</script>
 	</body>
 </html>

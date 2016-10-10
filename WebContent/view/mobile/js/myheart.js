@@ -63,9 +63,17 @@ function tesSetIn(){
   },1000);
 }
 
-
+$(".put-phone").focus(function(){
+     $('.errora').html('');
+})
+$('.write-pwd').focus(function(){
+  $('.errora').html('');
+})
 //确认修改
 $('.real-name1 button').click(function(){
+	if($('.write-pwd').val()==''&& $(".put-phone").val()==''){
+       $('.errora').html('手机号或验证不能为空');
+    }
    if( validate.code($('.write-pwd').val() ) ){ 
       console.log($('.write-pwd').val() )
     $.ajax({
@@ -80,6 +88,7 @@ $('.real-name1 button').click(function(){
       },
       success:function(massges){    
             if(massges.success==true){
+            	
               console.log( massges );
               phoneVal = $(".put-phone").val();
                $('.a-m-name .oldphone').html(phoneVal);
@@ -114,6 +123,7 @@ $.ajax({
       }else{
          $('#name-info').html(realVal);
          $('.undiend').html('已认证');
+         $('.setting .set-dd').attr('href','#');
       }
        // console.log(phoneVal);
     }
