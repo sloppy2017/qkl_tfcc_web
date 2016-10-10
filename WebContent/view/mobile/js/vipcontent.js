@@ -38,6 +38,14 @@ $(document).ready(function(){
 		
 	})
 	
+	
+	
+	
+	
+	
+	
+	
+	
 //	姓名
 function vipName(){
 	$.ajax({

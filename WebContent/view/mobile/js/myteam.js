@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	$(".uesr_phone").html(userPhone);
 	var orderStatus="ALL";
+	var num=1;
 	vip();
 	function vip(){
 	$.ajax({
@@ -38,47 +39,36 @@ $(document).ready(function(){
 		         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
 		         onPageChange: function (num, type){
 		         serverTitle=$("#server_title").val();
-		         orderInquiry(orderStatus,num)
+		         orderInquiry(orderStatus,num);
 		    }
 		   });
 		   
-		  $("#rNum").click(function(){
-		  orderStatus=$(this).text();
+		  $("#r1Num").click(function(){
+		  orderStatus="All";
 		   orderInquiry(orderStatus,num)
 		  });
-		$("#aNum").click(function(){
-		  orderStatus=$(this).text();
+		$("#a1Num").click(function(){
+		  orderStatus="A,";
 		   orderInquiry(orderStatus,num)
 		  });
-		$("#bNum").click(function(){
-		  orderStatus=$(this).text();
+		$("#b1Num").click(function(){
+		  orderStatus="B,";
 		   orderInquiry(orderStatus,num)
 		  });
-		$("#cNum").click(function(){
-		  orderStatus=$(this).text();
+		$("#c1Num").click(function(){
+		  orderStatus="C,";
 		   orderInquiry(orderStatus,num)
 		  });
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
 		   
 		   
 		   
 	function orderInquiry(orderStatus,num){
-	console.log(num);
+	console.log(orderStatus);
 	$.ajax({
 		type:"post",
 		url:webURL+"/service/team/findVipPage",
 		async:true,
-		data:{"str":"all","currentPage":num,"showCount":10,"userCode":usercode},
+		data:{"str":orderStatus,"currentPage":num,"showCount":10,"userCode":usercode},
 		success:function(msg){
 			console.log(msg);
 			 $("tr").remove(".table_tr");

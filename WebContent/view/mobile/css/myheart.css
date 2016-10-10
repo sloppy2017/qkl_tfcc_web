@@ -1,4 +1,14 @@
 /*个人中心的主页面*/ 
+.errora{
+	position: absolute;
+	left:0;	
+	font-size: .28rem;
+	color:red;
+	width:100%;
+	text-align: center;
+	display: inline-block;
+	/*height:.6rem;*/
+}
 a{
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);    
 }
