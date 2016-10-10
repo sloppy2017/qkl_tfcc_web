@@ -166,6 +166,8 @@ function reload_table(currentPage,showCount) {
                 rsStr = rsStr + "</tr>";
             }
             $("#showData").html( rsStr);
+            $("#showData").show();
+            $("#tfoot").hide();
 //            console.log(data.data.page.pageStr);
             $(".pages1").html(data.data.page.pageStr);
 

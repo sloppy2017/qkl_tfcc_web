@@ -143,10 +143,10 @@ public class ComAccMyController extends BaseAction {
 										pd.put("outdate",DateUtil.getCurrentDate());
 										pd.put("cntflag", "SAN");
 										pd.put("targetSystem","R8");
-										pd.put("status", 3);//1成功2失败3转出中
+										pd.put("status", 2);//1成功0失败2转出中
 										pd.put("createTime", DateUtil.getCurrentDate());
 										pd.put("modifyTime", DateUtil.getCurrentDate());
-										pd.put("operator", user.getUserName());
+										pd.put("operator", user.getPhone());
 									//	int num = cams.saveOutAcc(pd);
 										boolean outdetail = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
 										ar.setSuccess(true);
