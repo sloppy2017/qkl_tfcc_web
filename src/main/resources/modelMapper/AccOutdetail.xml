@@ -57,7 +57,8 @@
 	 target_system,
 	 create_time,
 	 modify_time,
-	 operator)
+	 operator,
+	 order_ids)
 	 values(
 	 #{userCode},
 	 #{subAccno},
@@ -68,7 +69,8 @@
 	 #{targetSystem},
 	 #{createTime},
 	 #{modifyTime},
-	 #{operator}
+	 #{operator},
+	 #{order_ids}
 	 )	 
 	 </insert>
 	

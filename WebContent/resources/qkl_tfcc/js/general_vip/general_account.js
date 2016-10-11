@@ -97,6 +97,8 @@ $(function(){
 			        	alert(data.message);
 			        	$('#zhanghao').val("");
 			        	$('#zhuanzhang').val("");
+			        }else{
+			        	alert(data.message);
 			        }
 			       
 			    }
