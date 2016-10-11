@@ -137,6 +137,7 @@ public class ComAccMyController extends BaseAction {
 								if (compareTo==1) {//大于
 									ar.setSuccess(true);
 									ar.setMessage("您的可用余额不足");
+									return ar;
 								}
 								if (compareTo==0||compareTo==-1) {//等于或者小于
 									List<Map<String, Object>> list = sysGenCodeService.findByGroupCode("DIGITAL_SIGN", Constant.VERSION_NO);
@@ -170,6 +171,7 @@ public class ComAccMyController extends BaseAction {
 											||StringUtil.isEmpty(pri)||StringUtil.isEmpty(salt)||StringUtil.isEmpty(admin_user)) {
 										ar.setSuccess(false);
 										ar.setMessage("转账失败");
+										return ar;
 									}
 									
 									//调用转账接口
@@ -179,6 +181,7 @@ public class ComAccMyController extends BaseAction {
 									if ("failed".equals(status)) {
 										ar.setSuccess(false);
 										ar.setMessage("转账失败");
+										return ar;
 									}if ("success".equals(status)) {
 										String order_ids = objJson.getString("orderIds");
 										//AccDetail accDetail = new AccDetail();
@@ -188,7 +191,7 @@ public class ComAccMyController extends BaseAction {
 										pd.put("subAccno", "");
 										pd.put("outamnt", bigDecimal);
 										pd.put("outdate",DateUtil.getCurrentDate());
-										pd.put("cntflag", "SAN");
+										pd.put("cntflag", 0);
 										pd.put("targetSystem","R8");
 										pd.put("status", 2);//1成功0失败2转出中
 										pd.put("createTime", DateUtil.getCurrentDate());
@@ -199,6 +202,7 @@ public class ComAccMyController extends BaseAction {
 										boolean outdetail = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
 										ar.setSuccess(true);
 										ar.setMessage("转账申请提交成功");
+										return ar;
 									}
 //									ar.setSuccess(true);
 //									ar.setMessage("转账功能还未正式上线");
