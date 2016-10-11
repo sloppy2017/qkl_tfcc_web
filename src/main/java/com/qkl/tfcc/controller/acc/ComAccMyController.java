@@ -30,6 +30,7 @@ import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
+import com.qkl.util.help.StringUtil;
 import com.qkl.util.help.pager.PageData;
 
 
@@ -140,8 +141,7 @@ public class ComAccMyController extends BaseAction {
 								if (compareTo==0||compareTo==-1) {//等于或者小于
 									List<Map<String, Object>> list = sysGenCodeService.findByGroupCode("DIGITAL_SIGN", Constant.VERSION_NO);
 									String url="";
-									String api="";//暂未获取
-									String sender="test02";//暂未获取
+									String sender="";//暂未获取
 									String recipient="";
 									String pri="";
 									String salt="";
@@ -162,10 +162,18 @@ public class ComAccMyController extends BaseAction {
 										if ("RECIPIENT".equals(map.get("codeName"))) {
 											recipient = map.get("codeValue").toString();
 										}
+										if ("SENDER".equals(map.get("codeName"))) {
+											sender = map.get("codeValue").toString();
+										}
+									}
+									if (StringUtil.isEmpty(url)||StringUtil.isEmpty(sender)||StringUtil.isEmpty(recipient)
+											||StringUtil.isEmpty(pri)||StringUtil.isEmpty(salt)||StringUtil.isEmpty(admin_user)) {
+										ar.setSuccess(false);
+										ar.setMessage("转账失败");
 									}
 									
 									//调用转账接口
-									String turnOut =APIHttpClient.turnOut(url, api, sender, recipient, money, pri, salt, admin_user);
+									String turnOut =APIHttpClient.turnOut(url, null, sender, recipient, money, pri, salt, admin_user);
 									JSONObject objJson = (JSONObject)JSON.parse(turnOut);
 									String status = objJson.getString("status");
 									if ("failed".equals(status)) {
