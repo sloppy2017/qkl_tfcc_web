@@ -26,6 +26,7 @@ import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.acc.api.ComAccMyService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
+import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
@@ -48,6 +49,8 @@ public class ComAccMyController extends BaseAction {
 	private SysGenCodeService sysGenCodeService;
 	@Autowired
 	private AccService accService;
+	@Autowired
+	private AccDao accDao;
 	
 	
 	@RequestMapping(value="/findMyAcc",method=RequestMethod.POST)
@@ -144,7 +147,7 @@ public class ComAccMyController extends BaseAction {
 									String salt="";
 									String admin_user="";
 									for (Map<String, Object> map : list) {
-										if ("PRY".equals(map.get("codeName"))) {
+										if ("PRI".equals(map.get("codeName"))) {
 											  pri = map.get("codeValue").toString();
 										}
 										if ("SALT".equals(map.get("codeName"))) {
@@ -179,12 +182,17 @@ public class ComAccMyController extends BaseAction {
 										ar.setMessage("转账失败");
 										return ar;
 									}if ("success".equals(status)) {
+									    logger.info("调用转账接口成功---------success----------");
+									    pd.put("userCode", userCode);
+									    //更新账户表，转出冻结
+									    boolean transferResult = accDao.transfering(pd);
+									    logger.info("调用转账接口---------更新账户表，转出冻结-----------结果--transferResult="+transferResult);
 										String order_ids = objJson.getString("orderIds");
 										//AccDetail accDetail = new AccDetail();
 										//accDetail.setUserCode(userCode);
 										//AccDetail detail = accService.findAccDetail(accDetail, Constant.VERSION_NO);
-										pd.put("userCode", userCode);
-										pd.put("subAccno", "");
+										
+										pd.put("subAccno", "010401");//普通会员转出至R8账户
 										pd.put("outamnt", bigDecimal);
 										pd.put("outdate",DateUtil.getCurrentDate());
 										pd.put("cntflag", 0);
@@ -196,6 +204,7 @@ public class ComAccMyController extends BaseAction {
 										pd.put("order_ids", order_ids);
 									//	int num = cams.saveOutAcc(pd);
 										boolean outdetail = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
+										logger.info("调用转账接口---------添加转出记录结果-----------outdetail="+outdetail);
 										ar.setSuccess(true);
 										ar.setMessage("转账申请提交成功");
 										return ar;

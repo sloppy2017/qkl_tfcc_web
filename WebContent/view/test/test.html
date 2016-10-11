@@ -10,7 +10,7 @@
 <script type="text/javascript">
  //转账回调
  function transferCallBack(){
-	 var url = "/transfer/callback?orderId=123456&status=1&value=10&ts=1476090950801&sign=31955dc3a7308d0d1c3f5fa723f6e9faad24c32612ddcf8c0585ef56acd52918";
+	 var url = "/transfer/callback?orderId=23337&status=1&value=10&ts=1476187837550&sign=1deae97b763757fc06c20e41f810d42b09de42c4c5386bf5b1abe87f818aa0dd";
 	 $.post(url,function(data){
 		 if(data.success){
 			 alert("转账成功")
