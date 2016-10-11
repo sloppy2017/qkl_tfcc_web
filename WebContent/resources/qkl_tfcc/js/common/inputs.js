@@ -76,6 +76,5 @@ if (!isPlaceholder()) {//不支持placeholder 用jquery来完成
             });  
               
         }  
-    });  
-      
+    });       
 } 
