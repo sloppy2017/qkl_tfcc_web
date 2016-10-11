@@ -129,7 +129,7 @@
       form.submit();  
   }
   function delPic(){
-      if($("#imgAddrss").val().trim()==''){
+      if($.trim($("#imgAddrss").val())==''){
           return;
       }
       var imgAddrss = $("#imgAddrss").val();
