@@ -77,7 +77,7 @@ $(function(){
   var lock=0;
   $(function(){
 	  $('#tijiao').click(function(){//输入转账的金额和我的账户余额比较
-		 var zhanghao= $('#zhanghao').val();//对方账号
+		 var zhanghao= $('#zhanghao').val();//钱包账号
 		  var money= $('#zhuanzhang').val();//转帐额度
 		  
 		  if(zhanghao.length==0||zhanghao==null){
@@ -98,19 +98,16 @@ $(function(){
 		 //alert(money);
 		 $.ajax({
 			    type:'post',
-			    url:'/service/comacc/acccompare?money='+money,
+			    url:'/service/comacc/acccompare?money='+money+'&zhanghao='+zhanghao,
 		 		//data:{'money':money},
 			    dataType:'json',
-			    success:function(data){
-			        if(data.success){    
+			    success:function(data){   
 			        	alert(data.message);
 			        	$('#zhanghao').val("");
 			        	$('#zhuanzhang').val("");
 			        	$("#tijiao").css("background-image","url(../../resources/qkl_tfcc/imgs/safty1.jpg)");
 				        $("#tijiao").bind("click");
-			        }else{
-			        	alert(data.message);
-			        }
+			       
 			       // window.location.reload();
 			        
 			    }

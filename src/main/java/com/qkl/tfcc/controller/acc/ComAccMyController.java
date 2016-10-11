@@ -122,13 +122,9 @@ public class ComAccMyController extends BaseAction {
         }
 		pd=this.getPageData();
 		Map<String, Object> findNum = cams.findMyAcc(userCode);
-		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
+		String string = findNum.get("avb_amnt").toString();//获取可用余额
 		String money = pd.getString("money");//获取输入的SAN数量
-		while (iterator.hasNext()) {
-			Entry<String, Object> entry = iterator.next();
-			String key = entry.getKey();
-			if (key!=null&&"avb_amnt".equals(key)) {
-				String string = entry.getValue().toString();//获取可用余额
+		String recipient = pd.getString("zhanghao");//获取钱包地址
 					try {
 						BigDecimal	bigDecimal2 = new BigDecimal(string);//转换成BigDecimal类型
 							if (money!=null&&!"".equals(money)) {
@@ -143,7 +139,7 @@ public class ComAccMyController extends BaseAction {
 									List<Map<String, Object>> list = sysGenCodeService.findByGroupCode("DIGITAL_SIGN", Constant.VERSION_NO);
 									String url="";
 									String sender="";//暂未获取
-									String recipient="";
+									//String recipient=WalletAddress;
 									String pri="";
 									String salt="";
 									String admin_user="";
@@ -160,9 +156,9 @@ public class ComAccMyController extends BaseAction {
 										if ("URL".equals(map.get("codeName"))) {
 											url = map.get("codeValue").toString();
 										}
-										if ("RECIPIENT".equals(map.get("codeName"))) {
+										/*if ("RECIPIENT".equals(map.get("codeName"))) {
 											recipient = map.get("codeValue").toString();
-										}
+										}*/
 										if ("SENDER".equals(map.get("codeName"))) {
 											sender = map.get("codeValue").toString();
 										}
@@ -212,9 +208,6 @@ public class ComAccMyController extends BaseAction {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-						
-			}
-		}
 		return ar;
 	}
 	/*@RequestMapping(value="/acccompare",method=RequestMethod.POST)
