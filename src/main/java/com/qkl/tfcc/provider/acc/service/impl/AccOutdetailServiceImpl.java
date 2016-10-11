@@ -52,6 +52,9 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
     public boolean transferCallBack(PageData pd, String versionNo) {
         boolean transferRestult = false;
         PageData accOutDetail = accOutdetailDao.getAccOutDetailByOrderId(pd.getString("orderId"));
+        if(accOutDetail==null){//没有创建转出记录，或者orderId有误
+            return false;
+        }
         pd.put("userCode", accOutDetail.getString("user_code"));
         if("1".equals(pd.getString("status"))){//status-1成功 0-失敗
             transferRestult = accDao.transferSuccess(pd);
