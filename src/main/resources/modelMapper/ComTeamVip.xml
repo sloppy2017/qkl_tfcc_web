@@ -30,12 +30,16 @@
         sum(lvc) cNum
         from 
         (select 
-        1 as tt,
-        case when rela_level='A' then 1 else 0 end as lva,
-        case when rela_level='B' then 1 else 0 end as lvb,
-        case when rela_level='C' then 1 else 0 end as lvc
-         from tb_user_friendship f,tb_user_detail d
-        where f.recomuser_code=d.user_code and f.user_code=#{userCode}) a 
+	        1 as tt,
+	        case when rela_level='A' then 1 else 0 end as lva,
+	        case when rela_level='B' then 1 else 0 end as lvb,
+	        case when rela_level='C' then 1 else 0 end as lvc
+        from tb_user_friendship f
+        where 
+              f.user_code=#{userCode}
+              and f.rela_level is not null
+              and f.rela_level &lt;&gt; '' 
+        ) a 
 	</select>
 	<!-- 查询各类会员的信息列表按照会员账号和推荐人进行查询条件拼接有问题 -->
 	<select id="findViplistPage" parameterType="page"  resultType="pd" >
