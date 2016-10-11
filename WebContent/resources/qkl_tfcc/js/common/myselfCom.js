@@ -7,7 +7,7 @@
 
 //微信号码
 $('#wxnum').blur(function(){
-	$this.val($(this).val().trim());
+	$this.val($.trim($(this).val()));
 	if($(this).val()==''){
 		return;
 	}
@@ -29,7 +29,7 @@ function valid_wxnum($this){
 }
 //支付宝
 $('#bankaccno').blur(function(){
-	$this.val($(this).val().trim());
+	$this.val( $.trim($(this).val()));
 	if($(this).val()==''){
 		return;
 	}
@@ -50,7 +50,7 @@ function valid_bankaccno($this){
 }
 //通讯地址
 $('#mailAddrss').blur(function(){
-	$this.val($(this).val().trim());
+	$this.val($.trim($(this).val()));
 	if($(this).val()==''){
 		return;
 	}
@@ -75,7 +75,7 @@ function valid_mailAddrss($this){
 }
 //邮编
 $('#zipCode').blur(function(){
-	$this.val($(this).val().trim());
+	$this.val($.trim($(this).val()));
 	if($(this).val()==''){
 		return;
 	}

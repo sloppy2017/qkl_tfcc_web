@@ -30,10 +30,10 @@ var curCount='';//当前剩余秒数
  */
 // 手机验证
 function valid_phone(){
-    var oldphone = $(".oldphone").text().trim();
+    var oldphone = $.trim($(".oldphone").text());
 	var $this = $('.phone-safety');
-	$this.val($this.val().trim());
-    var phoneVal= $this.val().trim();
+	$this.val( $.trim($this.val()));
+    var phoneVal= $.trim($this.val());
     var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
     if(phoneVal==''){
     	$this.val("请输入手机号");
@@ -106,8 +106,8 @@ $('input[name="yzm"]').blur(function(){
 //验证验证码
 function valid_yzm(id){
 	var $this = $("#"+id);
-	$this.val($this.val().trim());
-	var code = $this.val().trim();
+	$this.val($.trim($this.val()));
+	var code = $.trim($this.val());
 	var reg = /^\d[0-9]{5}$/;
     if(code==''){
     	$this.val('请输入验证码');
@@ -176,7 +176,7 @@ function modifyPhone(){
    }
    $.ajax({
        type:'POST',
-       url:'/service/user/modifyphone?'+$("#form2").serialize()+"&oldphone="+$("#oldphone").text().trim(),
+       url:'/service/user/modifyphone?'+$("#form2").serialize()+"&oldphone="+$.trim($("#oldphone").text()),
        dataType:'JSON',
        success: function (json) {
             if(json.success){
@@ -270,7 +270,7 @@ $('#oldpassword').blur(function () {
 });
 function valid_oldpassword($this){
  //密码正则6-20字母数字或特殊字符
-   $this.val($this.val().trim());
+   $this.val($.trim($this.val()));
    /* var reg = /^([^a-zA-Z]|[^\d]|[^a-zA-Z0-9]){6,20}$/;
    if ($this.val() == '') {
 	   $this.next().text('请输入原密码');
@@ -356,8 +356,8 @@ $('#resnewpassword').blur(function(){
     return valid_resnewpassword($(this));
 });
 function valid_resnewpassword($this){
-    $this.val($this.val().trim());
-    var newpassword = $("#newpassword").val().trim();
+    $this.val($.trim($this.val()));
+    var newpassword = $.trim($("#newpassword").val());
     //密码正则6-16字母数字或特殊字符
     /* var reg = /^[a-zA-Z][a-zA-Z0-9|*|&|%|.|@|!]{5,15}$/;
     if ($this.val() == '') {
