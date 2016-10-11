@@ -11,6 +11,7 @@ input{
 	position: fixed;
 	bottom: 0;
 	border-top: 1px solid #CCCCCC;
+	z-index:1000;
 }
 .base a{
 	float: left;
