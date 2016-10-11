@@ -82,7 +82,7 @@
 	
 	</head>
 
-	<body>
+	<body oncontextmenu="return false" onselectstart="return false" >
 		<div class="fengxian">
 			<div class="fengxian-m">
 				<img src="../resources/qkl_tfcc/imgs/xxxx.png"" alt="" />
@@ -146,8 +146,8 @@
 										</li>
 										<li class="fix wm">											
 											<input type="text" class="xiaoyan" id="yzm" name="yzm" placeholder="请输入验证码" maxlength="6" >
-											<!--<p class="fr" id="check-code"></p>-->
-												<span id="check-code"></span>
+											<!--<p class="fr" id="check-code" ></p>-->
+												<span id="check-code" ondragstart="return false" onbeforecopy="return false" oncopy=document.selection.empty() onselect=document.selection.empty()></span>
 											<em class="error1"></em>
 										</li>
 										<li class="mind-my"><input type="checkbox" id="saveid" class="sure fl" checked="checked"><h5 class="mind">请记住手机号</h5></li>
@@ -236,7 +236,6 @@
   			$('.fengxian-m img').click(function(){
   			  $('.fengxian').hide();
   			})
-  			
   		</script>
    	</body>
    
