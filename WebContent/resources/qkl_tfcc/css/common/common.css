@@ -148,7 +148,7 @@
 .qr-code>div{
     width:148px;
     height:148px;
-    border:1px solid red;
+    border:1px solid #ccc;
     margin: 60px auto 10px;
     
 }
