@@ -79,6 +79,8 @@ $(function(){
 	  $('#tijiao').click(function(){//输入转账的金额和我的账户余额比较
 		 var zhanghao= $('#zhanghao').val();//钱包账号
 		  var money= $('#zhuanzhang').val();//转帐额度
+		  var myreg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){0,4})?$/;
+
 		  
 		  if(zhanghao.length==0||zhanghao==null){
 			  alert('账号不能为空');
@@ -88,6 +90,15 @@ $(function(){
 			  alert('转账金额不能为空');
 			  return false;
 		  }
+		  
+		  if(!myreg.test(money)){
+			  alert('转账金额只能为整数/小数，且小数点后最多保留四位');
+			 // $('#zhuanzhang').val("小数点后最多保留四位");
+			//  $('#zhuanzhang').addClass("errorTip");
+	          return false;
+	      }
+
+		  
 		  	$("#tijiao").unbind("click");
 			$("#tijiao").css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
 			$("#tijiao").css("background-size","220px 42px");
