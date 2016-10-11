@@ -273,7 +273,9 @@ public class AccServiceImpl implements AccService {
 
     @Override
     public AccDetail findAccDetail(AccDetail accDetail, String versionNo) {
-        return null;
+    	/*AccDetail findAccDetail = accDetailDao.findAccDetail(accDetail);
+        return findAccDetail;*/
+    	return null;
     }
     
     public static void main(String[] args) {

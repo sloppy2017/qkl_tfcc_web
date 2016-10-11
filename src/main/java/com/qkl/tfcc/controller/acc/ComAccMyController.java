@@ -1,6 +1,7 @@
 package com.qkl.tfcc.controller.acc;
 import java.math.BigDecimal;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,14 +19,18 @@ import com.alibaba.dubbo.common.json.JSONObject;
 import com.alibaba.dubbo.common.json.ParseException;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
+import com.qkl.tfcc.api.po.acc.AccDetail;
 import com.qkl.tfcc.api.po.acc.ComAccMy;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
+import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.acc.api.ComAccMyService;
+import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
+import com.qkl.util.help.StringUtil;
 import com.qkl.util.help.pager.PageData;
 
 
@@ -39,6 +44,11 @@ public class ComAccMyController extends BaseAction {
 	private ComAccMyService cams;
 	@Autowired
 	private AccOutdetailService accOutdetailService;
+	@Autowired
+	private SysGenCodeService sysGenCodeService;
+	@Autowired
+	private AccService accService;
+	
 	
 	@RequestMapping(value="/findMyAcc",method=RequestMethod.POST)
 	@ResponseBody
@@ -118,7 +128,6 @@ public class ComAccMyController extends BaseAction {
 			Entry<String, Object> entry = iterator.next();
 			String key = entry.getKey();
 			if (key!=null&&"avb_amnt".equals(key)) {
-			 //BigDecimal value = (BigDecimal) entry.getValue();
 				String string = entry.getValue().toString();//获取可用余额
 					try {
 						BigDecimal	bigDecimal2 = new BigDecimal(string);//转换成BigDecimal类型
@@ -128,29 +137,72 @@ public class ComAccMyController extends BaseAction {
 								if (compareTo==1) {//大于
 									ar.setSuccess(true);
 									ar.setMessage("您的可用余额不足");
+									return ar;
 								}
 								if (compareTo==0||compareTo==-1) {//等于或者小于
-									String turnOut = APIHttpClient.turnOut(null, null,  "test02", "test01", money, null,null,null);//调用转账接口
+									List<Map<String, Object>> list = sysGenCodeService.findByGroupCode("DIGITAL_SIGN", Constant.VERSION_NO);
+									String url="";
+									String sender="";//暂未获取
+									String recipient="";
+									String pri="";
+									String salt="";
+									String admin_user="";
+									for (Map<String, Object> map : list) {
+										if ("PRY".equals(map.get("codeName"))) {
+											  pri = map.get("codeValue").toString();
+										}
+										if ("SALT".equals(map.get("codeName"))) {
+											salt = map.get("codeValue").toString();
+										}
+										if ("ADMIN_USER".equals(map.get("codeName"))) {
+											admin_user = map.get("codeValue").toString();
+										}
+										if ("URL".equals(map.get("codeName"))) {
+											url = map.get("codeValue").toString();
+										}
+										if ("RECIPIENT".equals(map.get("codeName"))) {
+											recipient = map.get("codeValue").toString();
+										}
+										if ("SENDER".equals(map.get("codeName"))) {
+											sender = map.get("codeValue").toString();
+										}
+									}
+									if (StringUtil.isEmpty(url)||StringUtil.isEmpty(sender)||StringUtil.isEmpty(recipient)
+											||StringUtil.isEmpty(pri)||StringUtil.isEmpty(salt)||StringUtil.isEmpty(admin_user)) {
+										ar.setSuccess(false);
+										ar.setMessage("转账失败");
+										return ar;
+									}
+									
+									//调用转账接口
+									String turnOut =APIHttpClient.turnOut(url, null, sender, recipient, money, pri, salt, admin_user);
 									JSONObject objJson = (JSONObject)JSON.parse(turnOut);
 									String status = objJson.getString("status");
 									if ("failed".equals(status)) {
-										ar.setSuccess(true);
+										ar.setSuccess(false);
 										ar.setMessage("转账失败");
+										return ar;
 									}if ("success".equals(status)) {
+										String order_ids = objJson.getString("orderIds");
+										//AccDetail accDetail = new AccDetail();
+										//accDetail.setUserCode(userCode);
+										//AccDetail detail = accService.findAccDetail(accDetail, Constant.VERSION_NO);
 										pd.put("userCode", userCode);
 										pd.put("subAccno", "");
 										pd.put("outamnt", bigDecimal);
 										pd.put("outdate",DateUtil.getCurrentDate());
-										pd.put("cntflag", "SAN");
+										pd.put("cntflag", 0);
 										pd.put("targetSystem","R8");
 										pd.put("status", 2);//1成功0失败2转出中
 										pd.put("createTime", DateUtil.getCurrentDate());
 										pd.put("modifyTime", DateUtil.getCurrentDate());
 										pd.put("operator", user.getPhone());
+										pd.put("order_ids", order_ids);
 									//	int num = cams.saveOutAcc(pd);
 										boolean outdetail = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
 										ar.setSuccess(true);
 										ar.setMessage("转账申请提交成功");
+										return ar;
 									}
 //									ar.setSuccess(true);
 //									ar.setMessage("转账功能还未正式上线");
@@ -158,7 +210,6 @@ public class ComAccMyController extends BaseAction {
 							}
 						
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 						

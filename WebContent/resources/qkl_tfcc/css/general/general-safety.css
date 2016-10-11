@@ -24,6 +24,9 @@
 	color:#282828;
 	font-size: 14px;
 	margin:0px;
+	*zoom:1;
+
+    *display: inline;
 }
 .amend ul li div{
 	width:1000px;

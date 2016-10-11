@@ -151,7 +151,7 @@ function getUserInfo(){
         	  $("#user").html(json.data.phone);
           }
     	  phone = json.data.phone;
-    	  if(json.data.realName!=null&&json.data.realName.trim()!=''&&json.data.realName.trim()!=undefined){
+    	  if(json.data.realName!=null&&$.trim(json.data.realName)!=''&&$.trim(json.data.realName)!=undefined){
     		  $('.renzhen').unbind("click");
     		  $("#renzheng").text("已验证");
     		  $("#renzheng").next("a").text("已认证");

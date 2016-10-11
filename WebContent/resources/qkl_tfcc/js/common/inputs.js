@@ -33,7 +33,6 @@
 // });
 
 
-
 //兼容placeholder
 function isPlaceholder(){  
     var input = document.createElement('input');  
