@@ -51,13 +51,15 @@ public class TransferAccController extends BaseAction{
      */
     @RequestMapping(value="/callback", method=RequestMethod.POST)
     @ResponseBody
-    public AjaxResponse login(HttpServletRequest request,HttpServletResponse response){
+    public AjaxResponse callback(HttpServletRequest request,HttpServletResponse response){
+        logBefore(logger,"TransferAccController.callback()");
         try {
             pd = this.getPageData();
             if(pd.get("orderId")==null||pd.get("status")==null||pd.get("value")==null||pd.get("ts")==null||pd.get("sign")==null){
                 ar.setErrorCode(CodeConstant.PARAM_ERROR);
                 ar.setMessage("传递参数有误");
                 ar.setSuccess(false);
+                logger.info("---------转账回调----------传递参数有误：orderId="+pd.get("orderId")+"---status="+pd.get("status")+"--ts="+pd.get("ts")+"--sign="+pd.get("sign"));
                 return ar;
             }
             String pri = null;
@@ -74,22 +76,29 @@ public class TransferAccController extends BaseAction{
                 if(transferResult){
                     ar.setMessage("转账成功");
                     ar.setSuccess(true);
+                    logger.info("转账回调------转账成功success---------");
                     return ar;
                 }else{
                     ar.setMessage("转账失败");
                     ar.setSuccess(false);
+                    logger.info("转账回调------转账失败fail---------");
                     return ar;
                 }
             }else{
+                ar.setSuccess(false);
                 ar.setErrorCode(CodeConstant.SIGN_ERROR);
                 ar.setMessage("签名认证失败");
-                ar.setSuccess(false);
+                logger.info("转账回调------签名认证失败fail---------");
                 return ar; 
             }
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
+            ar.setErrorCode(CodeConstant.SYS_ERROR);
             ar.setMessage("系统异常");
+            logger.info("转账回调------系统异常---------");
+        }finally{
+            logAfter(logger);
         }   
         return ar;
     }

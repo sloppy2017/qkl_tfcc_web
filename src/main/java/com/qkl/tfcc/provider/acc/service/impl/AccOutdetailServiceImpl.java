@@ -49,6 +49,7 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
 	}
 
     @Override
+    @Transactional(propagation =Propagation.REQUIRED)
     public boolean transferCallBack(PageData pd, String versionNo) {
         boolean transferRestult = false;
         PageData accOutDetail = accOutdetailDao.getAccOutDetailByOrderId(pd.getString("orderId"));
