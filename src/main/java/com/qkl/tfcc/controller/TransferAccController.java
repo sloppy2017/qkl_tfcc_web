@@ -67,6 +67,7 @@ public class TransferAccController extends BaseAction{
                     pri = codeMap.get("codeValue").toString();
                 }
             }
+            //签名认证
             boolean signResult = APIHttpClient.validSign(pd.getString("orderId"), pd.getString("status"), pd.getString("value"), pd.getString("ts"), pd.getString("sign"), pri);
             if(signResult){//签名认证成功
                 boolean transferResult = accOutdetailService.transferCallBack(pd, Constant.VERSION_NO);
