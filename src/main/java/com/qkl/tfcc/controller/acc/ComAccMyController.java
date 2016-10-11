@@ -141,7 +141,7 @@ public class ComAccMyController extends BaseAction {
 								if (compareTo==0||compareTo==-1) {//等于或者小于
 									List<Map<String, Object>> list = sysGenCodeService.findByGroupCode("DIGITAL_SIGN", Constant.VERSION_NO);
 									String url="";
-									String sender="";//暂未获取
+									String sender="";
 									//String recipient=WalletAddress;
 									String pri="";
 									String salt="";
