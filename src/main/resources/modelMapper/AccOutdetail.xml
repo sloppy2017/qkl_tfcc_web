@@ -85,7 +85,8 @@
      <update id="updateStatusByOrderId" parameterType="pd" >    
          update tb_acc_outdetail 
          set status = #{status},
-             modify_time = now()
+             modify_time = now(),
+             cntflag = 1
          where order_ids = #{orderId}     
      </update>
 <!--      根据订单id查询转出记录 -->
