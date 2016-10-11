@@ -72,6 +72,9 @@ $(function(){
       });
   }
 
+  
+  
+  var lock=0;
   $(function(){
 	  $('#tijiao').click(function(){//输入转账的金额和我的账户余额比较
 		 var zhanghao= $('#zhanghao').val();//对方账号
@@ -85,7 +88,13 @@ $(function(){
 			  alert('转账金额不能为空');
 			  return false;
 		  }
-		 
+		  	$("#tijiao").unbind("click");
+			$("#tijiao").css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
+			$("#tijiao").css("background-size","220px 42px");
+			++lock;
+			if(lock>1){
+				return;
+			}
 		 //alert(money);
 		 $.ajax({
 			    type:'post',
@@ -97,10 +106,13 @@ $(function(){
 			        	alert(data.message);
 			        	$('#zhanghao').val("");
 			        	$('#zhuanzhang').val("");
+			        	$("#tijiao").css("background-image","url(../../resources/qkl_tfcc/imgs/safty1.jpg)");
+				        $("#tijiao").bind("click");
 			        }else{
 			        	alert(data.message);
 			        }
-			       
+			       // window.location.reload();
+			        
 			    }
 			});
 		  
