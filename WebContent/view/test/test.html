@@ -5,10 +5,56 @@
 	<script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<a href="javascript:transferCallBack()">转账</a>
+<a href="javascript:transferCallBack()">转账</a><hr>
+
+<div class="foot-btm" style="position: relative">
+  <div class="btm">
+    <form action="/service/comacc/findout" method="post">
+        <div class="fix btm-type">
+          <ul class="fl ">
+              <li>转账状态</li>
+              <li>
+                  <input id ="all" type="radio" name="status" value="">全部
+                  <input id ="success" type="radio" name="status" value="1"> 成功
+                  <input id ="failed" type="radio" name="status" value="0"> 失败
+                  <input id ="transfering" type="radio" name="status" value="2"> 转账中
+              </li>
+          </ul>
+          <ul class="fl ">
+              <li>对方账户名</li>
+              <li>
+                  <input id ="recipient" type="text" name="recipient" maxlength="15" placeholder="请输入对方账户名称">
+              </li>
+          </ul>
+          <ul class="fl ">
+              <li>转账额度</li>
+              <li>
+                  <input id ="recipient" type="text" name="recipient" maxlength="15">
+              </li>
+              <li class="type-btn" style="margin-left: 100px;"><a href="javascript:getOut()" >查询</a></li>
+          </ul>
+        </div>
+    </form>
+    
+  <div class="table-list">
+      <table class="result-tab" style="width:100%;border:5px;cellspacing:0px;">
+          <thead>
+               <tr><th>会员级别</th><th>会员账号</th><th>会员姓名 </th><th>购买数量</th><th>注册时间</th></tr>    
+          </thead>
+          <tbody id="showData">
+              
+          </tbody>
+          <tfoot id="tfoot" style="width:100%;display: none"><tr><td colspan="5" style="text-align: center;background-color: #eee;">没有符合条件的数据</td></tr></tfoot>
+      </table>
+      <div class="pages1">
+          
+      </div>
+  </div>
+ </div>
+</div>
 </body>
 <script type="text/javascript">
- //转账回调
+ //  转账回调
  function transferCallBack(){
 	 var url = "/transfer/callback?orderId=23337&status=1&value=10&ts=1476187837550&sign=1deae97b763757fc06c20e41f810d42b09de42c4c5386bf5b1abe87f818aa0dd";
 	 $.post(url,function(data){
@@ -17,6 +63,29 @@
 		 }else{
 			 alert("转账失败");
 		 }
+	 });
+ }
+ function getOut(){
+	 var url = "/service/comacc/findout?"+$("#form").serialize();
+	 $.post(url,function(data){
+		 if(list.length==0||list==null){
+             $("#tfoot").show();
+             $("#showData").hide();
+             return;
+         }
+         for (var i = 0; i < list.length; i++) {
+             rsStr = rsStr + "<tr class='ss'>";
+             rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
+             rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
+             rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
+             rsStr = rsStr + "<th>" + tviplist[i].buyNum + "</th>";
+             rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
+             rsStr = rsStr + "</tr>";
+         }
+         $("#showData").html( rsStr);
+         $("#showData").show();
+         $("#tfoot").hide();
+         $(".pages1").html(data.data.page.pageStr);
 	 });
  }
 </script>

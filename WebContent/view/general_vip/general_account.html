@@ -88,28 +88,33 @@
                         </ul>
                     </div>
                 </div>
-                <div class="my-serach">
-                     <h3>转账查询</h3>
-                     <div class="ser-tit">
-                          <div class="trans-status">
-                               <span>转账状态</span>
-                               <input type="radio" name="all">全部
-                               <input type="radio" name="a">成功
-                               <input type="radio" name="b">失败
-                               <input type="radio" name="c">转账中
-                          </div>
-                          <div class="d-accts">
-                              <label>对方账户</label>
-                              <input type="text" class="d-acct" placeholder="请输入对方账户名称">
-                          </div>
-                          <div class="trans-money">
-                                <label>转账额度</label>
-                                <input type="text" class="min-num" placeholder="请输入数字"> - <input type="text" class="max-num" placeholder="请输入数字">
-                          </div>
-                          <div class="trans-serach-btn">查询</div>
-                     </div>
-                </div>
-                               
+                <form id="form" method="post">
+                  <div class="my-serach">
+                       <h3>转账查询</h3>
+                       <div class="ser-tit">
+                            <div class="trans-status">
+                                 <span>转账状态</span>
+                                  <input id ="all" type="radio" name="status" value="">全部
+                                  <input id ="success" type="radio" name="status" value="1"> 成功
+                                  <input id ="failed" type="radio" name="status" value="0"> 失败
+                                  <input id ="transfering" type="radio" name="status" value="2"> 转账中
+                            </div>
+                            <div class="d-accts">
+                                <label>对方账户</label>
+                                <input id ="recipient" name="recipient" type="text" class="d-acct" placeholder="请输入对方账户名称" maxlength="20">
+                            </div>
+                            <div class="trans-money">
+                                  <label>转账额度</label>
+                                  <input id="startOutamnt" name="startOutamnt" type="text" class="min-num" placeholder="请输入数字"> - <input id="endOutamnt" name="endOutamnt" type="text" class="max-num" placeholder="请输入数字">
+                            </div>
+                            <div class="trans-money">
+                                  <label>日期</label>
+                                  <input id="startOutamnt" name="startOutamnt" type="text" class="min-num" placeholder="请输入数字"> - <input id="endOutamnt" name="endOutamnt" type="text" class="max-num" placeholder="请输入数字">
+                            </div>
+                            <div class="trans-serach-btn" onclick="getOut()">查询</div>
+                       </div>
+                  </div>
+               </form>                
               <!--   查询列表 -->              
                       <!--table pageing start-->
                                
@@ -181,5 +186,30 @@
 <script src="/resources/qkl_tfcc/js/date/dateCom.js"></script>
 <script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
 <script src="/resources/qkl_tfcc/js/general_vip/general_account.js"></script>
+<script type="text/javascript">
+  function getOut(){
+      var url = "/service/comacc/findout?"+$("#form").serialize();
+      $.post(url,function(data){
+          if(list.length==0||list==null){
+              $("#tfoot").show();
+              $("#showData").hide();
+              return;
+          }
+          for (var i = 0; i < list.length; i++) {
+              rsStr = rsStr + "<tr class='ss'>";
+              rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
+              rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
+              rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
+              rsStr = rsStr + "<th>" + tviplist[i].buyNum + "</th>";
+              rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
+              rsStr = rsStr + "</tr>";
+          }
+          $("#showData").html( rsStr);
+          $("#showData").show();
+          $("#tfoot").hide();
+          $(".pages1").html(data.data.page.pageStr);
+      });
+  }
+</script>
 </body>
 </html>

@@ -98,9 +98,8 @@ public class ComAccMyDaoImpl extends DaoSupport<ComAccMy> implements ComAccMyDao
 	}
 
 	@Override
-	public List<PageData> findAccOutListPage(Page page) {
-		List<PageData> selectList = getSqlSession().selectList(namespace+"."+"findAccOutListPage",page);
-		return selectList;
+	public List<PageData> listPageAccOut(Page page) {
+		return getSqlSession().selectList(namespace+"."+"listPageAccOut",page);
 	}
 
 }
