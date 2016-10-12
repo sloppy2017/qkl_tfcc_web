@@ -71,7 +71,11 @@
 	from tb_acc_detail ) a
 	where a.user_code=#{userCode}
 	group by caldate;
- 
+    </select>
+    
+    <!-- 查询转账记录列表 -->
+    <select id="findAccOutListPage" parameterType="page"  resultType="pd">
+    select outamnt,outdate,`status`,sender,recipient from tb_acc_outdetail where user_code = #{pd.userCode}
     </select>
     
     <select id="getAmnt" parameterType="pd" resultType="pd">

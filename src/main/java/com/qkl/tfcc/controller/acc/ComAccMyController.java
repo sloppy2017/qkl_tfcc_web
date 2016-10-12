@@ -3,14 +3,18 @@ package com.qkl.tfcc.controller.acc;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.alibaba.fastjson.JSONObject;
 import com.qkl.tfcc.api.common.Constant;
+import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
 import com.qkl.tfcc.api.service.acc.api.AccService;
@@ -225,6 +229,34 @@ public class ComAccMyController extends BaseAction {
 						ar.setSuccess(false);
                         ar.setMessage("系统异常！");
 					}
+		return ar;
+	}
+	
+	@RequestMapping(value="/findout",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse findOutList(HttpServletRequest request,Page page){
+	
+		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		String userCode="";
+        if(user==null){
+            userCode =request.getParameter("userCode");
+        }else{
+            userCode =user.getUserCode();
+        }
+		List<PageData> outList=null;
+		try {
+			pd=this.getPageData();
+			pd.put("userCode", userCode);
+			page.setPd(pd);
+			outList = cams.findAccOutList(page);
+			ar.setSuccess(true);
+			ar.setMessage("查询成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			ar.setSuccess(false);
+			ar.setMessage("查询失败");
+		}
+		ar.setData(outList);
 		return ar;
 	}
 	/*public static void main(String[] args) {

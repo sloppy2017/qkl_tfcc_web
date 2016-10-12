@@ -77,4 +77,12 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @return
 	 */
 	public int insertOutAcc(PageData pd);
+	
+	
+	/**
+	 * 查询转账信息列表
+	 * @param page
+	 * @return
+	 */
+	public List<PageData> findAccOutListPage(Page page);
 }
