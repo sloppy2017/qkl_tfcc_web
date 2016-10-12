@@ -156,6 +156,7 @@ function getUserInfo(){
     		  $("#renzheng").text("已验证");
     		  $("#renzheng").next("a").text("已认证");
     		  $("#renzheng").next("a").css("background","url('/resources/qkl_tfcc/imgs/grey.png')no-repeat 0px");
+    		  $("#renzheng").next("a").attr("background","url('/resources/qkl_tfcc/imgs/grey.png')no-repeat 0px");    		  
     	  }
       }else{
     	  alert(json.message);
