@@ -65,7 +65,7 @@ public class TransferAccController extends BaseAction{
             String pri = null;
             List<Map<String, Object>> codeList =  sysGenCodeService.findByGroupCode("DIGITAL_SIGN", Constant.VERSION_NO);
             for(Map<String, Object> codeMap:codeList){
-                if("PRY".equals(codeMap.get("codeName"))){
+                if("PRI".equals(codeMap.get("codeName"))){
                     pri = codeMap.get("codeValue").toString();
                 }
             }

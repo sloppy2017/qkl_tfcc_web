@@ -73,54 +73,54 @@ $(function(){
   }
 
   
-  
+  $('#tijiao').bind("click",tijiao);
   var lock=0;
-  $(function(){
-	  $('#tijiao').click(function(){//输入转账的金额和我的账户余额比较
-		 var zhanghao= $('#zhanghao').val();//对方账号
+  function tijiao(){//输入转账的金额和我的账户余额比较
+		 var zhanghao= $('#zhanghao').val();//钱包账号
 		  var money= $('#zhuanzhang').val();//转帐额度
+		  var myreg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){0,4})?$/;
+
 		  
-		  if(zhanghao.length==0||zhanghao==null){
-			  alert('账号不能为空');
+		  if(zhanghao.length==0||zhanghao==''){
+			  alert('钱包账户不能为空');
 			  return false;
 		  }
-		  if(money.length==0||money==null){
-			  alert('转账金额不能为空');
+		  if(money.length==0||money==''){
+			  alert('转账额度不能为空');
 			  return false;
 		  }
-		  	$("#tijiao").unbind("click");
-			$("#tijiao").css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
-			$("#tijiao").css("background-size","220px 42px");
-			++lock;
-			if(lock>1){
-				return;
-			}
+		  
+		  if(!myreg.test(money)){
+			  alert('转账额度格式有误，小数点后最多保留四位');
+			 // $('#zhuanzhang').val("小数点后最多保留四位");
+			//  $('#zhuanzhang').addClass("errorTip");
+	          return false;
+	      }
+		  ++lock;
+		  if(lock>1){
+			return;
+		  }
+		  
+	  	$("#tijiao").unbind("click");
+		$("#tijiao").css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
+		$("#tijiao").css("background-size","220px 42px");
 		 //alert(money);
 		 $.ajax({
 			    type:'post',
-			    url:'/service/comacc/acccompare?money='+money,
+			    url:'/service/comacc/acccompare?money='+money+'&zhanghao='+zhanghao,
 		 		//data:{'money':money},
 			    dataType:'json',
-			    success:function(data){
-			        if(data.success){    
+			    success:function(data){   
 			        	alert(data.message);
-			        	$('#zhanghao').val("");
+			        	/*$('#zhanghao').val("");
 			        	$('#zhuanzhang').val("");
 			        	$("#tijiao").css("background-image","url(../../resources/qkl_tfcc/imgs/safty1.jpg)");
-				        $("#tijiao").bind("click");
-			        }else{
-			        	alert(data.message);
-			        }
-			       // window.location.reload();
+				        $("#tijiao").bind("click",tijiao);*/
+			        window.location.reload();
 			        
 			    }
 			});
-		  
-	  });
-	  
-	  
-  });
-  
+	  }
   /*$(function(){
 	  $('#tijiao').click(function(){//点击提交按钮的提示信息
 	 //var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;

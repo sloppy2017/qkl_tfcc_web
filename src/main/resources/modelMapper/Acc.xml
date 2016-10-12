@@ -178,10 +178,10 @@
     <update id="transfering" parameterType="pd">
         UPDATE tb_acc t
         SET 
-        t.avb_amnt = t.avb_amnt - #{amount},
-        t.froze_amnt_out = t.froze_amnt_out+#{amount}
+        t.avb_amnt = t.avb_amnt - #{money},
+        t.froze_amnt_out = t.froze_amnt_out+#{money}
         where t.user_code = #{userCode}
-        and t.avb_amnt &gt;=#{amount}
+        and t.avb_amnt &gt;=#{money}
     </update>
     <!--     转账成功 -->
     <update id="transferSuccess" parameterType="pd">
