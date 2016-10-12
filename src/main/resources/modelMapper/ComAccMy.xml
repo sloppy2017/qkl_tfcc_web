@@ -79,24 +79,24 @@
 	    (case when `status`='1' then '转账成功' when `status`='0' then '转账失败' when `status`='2' then '转账中' end) out_status,
 	    recipient,order_ids from tb_acc_outdetail 
 	    where 1=1
-	    and userCode = #{userCode}
-	    <if test="status != null and status !=''" >
-	       and  `status` = #{status}
+	    and userCode = #{pd.userCode}
+	    <if test="pd.status != null and pd.status !=''" >
+	       and  `status` = #{pd.status}
 	    </if>
-	    <if test="recipient != null and recipient !=''" >
-	       and  recipient = #{recipient}
+	    <if test="pd.recipient != null and pd.recipient !=''" >
+	       and  recipient = #{pd.recipient}
 	    </if>
-	    <if test="startOutamnt != null and startOutamnt !=''" >
-	       and  outamnt &gt;= #{startOutamnt}
+	    <if test="pd.startOutamnt != null and pd.startOutamnt !=''" >
+	       and  outamnt &gt;= #{pd.startOutamnt}
 	    </if>
-	    <if test="endOutamnt != null and endOutamnt !=''" >
-	       and  outamnt &lt;= #{endOutamnt}
+	    <if test="pd.endOutamnt != null and pd.endOutamnt !=''" >
+	       and  outamnt &lt;= #{pd.endOutamnt}
 	    </if>
-	    <if test="startTime != null and startTime !=''" >
-	       and  outdate &gt;= #{startTime}
+	    <if test="pd.startTime != null and pd.startTime !=''" >
+	       and  outdate &gt;= #{pd.startTime}
 	    </if>
-	    <if test="endTime != null and endTime !=''" >
-	       and  substring(outdate,1,10) &gt;= #{endTime}
+	    <if test="pd.endTime != null and pd.endTime !=''" >
+	       and  substring(outdate,1,10) &gt;= #{pd.endTime}
 	    </if>
     </select>
     
