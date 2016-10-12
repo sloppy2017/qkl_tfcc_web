@@ -202,6 +202,8 @@ public class ComAccMyController extends BaseAction {
 										pd.put("modifyTime", DateUtil.getCurrentDate());
 										pd.put("operator", user.getPhone());
 										pd.put("order_ids", order_ids);
+										pd.put("sender", sender);
+										pd.put("recipient", recipient);
 									//	int num = cams.saveOutAcc(pd);
 										boolean outdetail = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
 										logger.info("调用转账接口---------添加转出记录结果-----------outdetail="+outdetail);
@@ -252,15 +254,23 @@ public class ComAccMyController extends BaseAction {
 	*/
 	
 	
-	/*@RequestMapping(value="/fall",method=RequestMethod.POST)
+	@RequestMapping(value="/findout",method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse findAll(HttpServletRequest request,Page page){
-		AjaxResponse ar = new AjaxResponse();
-		List<PageData> findAll=null;
+	public AjaxResponse findOutList(HttpServletRequest request,Page page){
+	
+		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+		String userCode="";
+        if(user==null){
+            userCode =request.getParameter("userCode");
+        }else{
+            userCode =user.getUserCode();
+        }
+		List<PageData> outList=null;
 		try {
-			
-			
-			findAll = cams.findAll(page);
+			pd=this.getPageData();
+			pd.put("userCode", userCode);
+			page.setPd(pd);
+			outList = cams.findAccOutList(page);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
 		} catch (Exception e) {
@@ -268,9 +278,9 @@ public class ComAccMyController extends BaseAction {
 			ar.setSuccess(false);
 			ar.setMessage("查询失败");
 		}
-		ar.setData(findAll);
+		ar.setData(outList);
 		return ar;
-	}*/
+	}
 	/*public static void main(String[] args) {
 		String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", "10", null,null,null);
 		try {

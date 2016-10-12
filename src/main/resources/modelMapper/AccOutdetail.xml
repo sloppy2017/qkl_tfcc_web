@@ -58,7 +58,9 @@
 	 create_time,
 	 modify_time,
 	 operator,
-	 order_ids)
+	 order_ids,
+	 sender,
+	 recipient)
 	 values(
 	 #{userCode},
 	 #{subAccno},
@@ -70,7 +72,9 @@
 	 #{createTime},
 	 #{modifyTime},
 	 #{operator},
-	 #{order_ids}
+	 #{order_ids},
+	 #{sender},
+	 #{recipient}
 	 )	 
 	 </insert>
 	
