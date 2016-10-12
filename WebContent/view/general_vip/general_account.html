@@ -105,12 +105,12 @@
                             </div>
                             <div class="trans-money">
                                   <label>转账额度</label>
-                                  <input id="startOutamnt" name="startOutamnt" type="text" class="min-num" placeholder="请输入数字" maxlength="20"> - <input id="endOutamnt" name="endOutamnt" type="text" class="max-num" placeholder="请输入数字">
+                                  <input id="startOutamnt" name="startOutamnt" type="text" class="min-num" placeholder="请输入数字" maxlength="20"> - <input id="endOutamnt" name="endOutamnt" type="text" class="max-num" maxlength="20" placeholder="请输入数字">
                             </div>
-                            <div class="trans-money">
+                            <!-- <div class="trans-money">
                                   <label>日期</label>
                                   <input id="startTime" name="startTime" type="text" class="min-num" placeholder="请输入开始日期" maxlength="10"> - <input id="endTime" name="endTime" type="text" class="max-num" placeholder="请输入结束日期" maxlength="10">
-                            </div>
+                            </div> -->
                             <div class="trans-serach-btn" onclick="getOut()">查询</div>
                        </div>
                   </div>
@@ -190,24 +190,27 @@
   function getOut(){
       var url = "/service/comacc/findout?"+$("#form").serialize();
       $.post(url,function(data){
-          if(list.length==0||list==null){
+    	  var outList = data.data;
+          if(outList.length==0||outList==null){
               $("#tfoot").show();
               $("#showData").hide();
               return;
           }
-          for (var i = 0; i < list.length; i++) {
+          var rsStr = "";
+          for (var i = 0; i < outList.length; i++) {
               rsStr = rsStr + "<tr class='ss'>";
-              rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
-              rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
-              rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
-              rsStr = rsStr + "<th>" + tviplist[i].buyNum + "</th>";
-              rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
+              rsStr = rsStr + "<th>" + (i+1) + "</th>";
+              rsStr = rsStr + "<th>" + outList[i].outdate + "</th>";
+              rsStr = rsStr + "<th>" + outList[i].outamnt + "</th>";
+              rsStr = rsStr + "<th>" + outList[i].recipient + "</th>";
+              rsStr = rsStr + "<th>" + outList[i].out_status + "</th>";
+              rsStr = rsStr + "<th>" + outList[i].order_ids + "</th>";
               rsStr = rsStr + "</tr>";
           }
           $("#showData").html( rsStr);
           $("#showData").show();
           $("#tfoot").hide();
-          $(".pages1").html(data.data.page.pageStr);
+          $(".pages1").html(data.page.pageStr);
       });
   }
 </script>
