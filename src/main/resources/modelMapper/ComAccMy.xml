@@ -74,8 +74,30 @@
     </select>
     
     <!-- 查询转账记录列表 -->
-    <select id="findAccOutListPage" parameterType="page"  resultType="pd">
-    select outamnt,outdate,`status`,sender,recipient from tb_acc_outdetail where user_code = #{pd.userCode}
+    <select id="listPageAccOut" parameterType="page"  resultType="pd">
+	    select outamnt,date_format(outdate,'%Y-%m-%d %T'),
+	    (case when `status`='1' then '转账成功' when `status`='0' then '转账失败' when `status`='2' then '转账中' end) out_status,
+	    recipient,order_ids from tb_acc_outdetail 
+	    where 1=1
+	    and userCode = #{userCode}
+	    <if test="status != null and status !=''" >
+	       and  `status` = #{status}
+	    </if>
+	    <if test="recipient != null and recipient !=''" >
+	       and  recipient = #{recipient}
+	    </if>
+	    <if test="startOutamnt != null and startOutamnt !=''" >
+	       and  outamnt &gt;= #{startOutamnt}
+	    </if>
+	    <if test="endOutamnt != null and endOutamnt !=''" >
+	       and  outamnt &lt;= #{endOutamnt}
+	    </if>
+	    <if test="startTime != null and startTime !=''" >
+	       and  outdate &gt;= #{startTime}
+	    </if>
+	    <if test="endTime != null and endTime !=''" >
+	       and  substring(outdate,1,10) &gt;= #{endTime}
+	    </if>
     </select>
     
     <select id="getAmnt" parameterType="pd" resultType="pd">

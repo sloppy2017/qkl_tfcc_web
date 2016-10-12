@@ -120,9 +120,8 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	}
 
 	@Override
-	public List<PageData> findAccOutList(Page page) {
-		// TODO Auto-generated method stub
-		return comAccMyDao.findAccOutListPage(page);
+	public List<PageData> listPageAccOut(Page page,String versionNo) {
+		return comAccMyDao.listPageAccOut(page);
 	}
 	
 }

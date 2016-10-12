@@ -84,5 +84,5 @@ public interface ComAccMyDao extends DAO<ComAccMy> {
 	 * @param page
 	 * @return
 	 */
-	public List<PageData> findAccOutListPage(Page page);
+	public List<PageData> listPageAccOut(Page page);
 }

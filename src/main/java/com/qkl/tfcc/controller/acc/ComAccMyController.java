@@ -3,15 +3,12 @@ package com.qkl.tfcc.controller.acc;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
@@ -178,19 +175,30 @@ public class ComAccMyController extends BaseAction {
                                         ar.setMessage("转账失败");
                                         logger.info("调用转账接口失败！--------fail-----返回串："+objJson.toString());
                                         //添加日志
-									    PageData pd = new PageData();
-									    pd.put("log_titile", "调用转账接口失败");
-									    pd.put("log_content", objJson.toJSONString());
-									    pd.put("syscode", Constant.CUR_SYS_CODE);
-									    pd.put("create_time", DateUtil.getCurrDateTime());
-									    pd.put("modify_time", DateUtil.getCurrDateTime());
-									    pd.put("log_type", "1");//接口日志类型：1-转账申请2-转账回调
-									    pd.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
-									    interfaceLogDao.insertSelective(pd);
+									    PageData log = new PageData();
+									    log.put("log_titile", "调用转账接口失败");
+									    log.put("log_content", objJson.toJSONString());
+									    log.put("syscode", Constant.CUR_SYS_CODE);
+									    log.put("create_time", DateUtil.getCurrDateTime());
+									    log.put("modify_time", DateUtil.getCurrDateTime());
+									    log.put("log_type", "1");//接口日志类型：1-转账申请2-转账回调
+									    log.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
+									    interfaceLogDao.insertSelective(log);
 									    
 										return ar;
 									}if ("success".equals(status)) {
 									    logger.info("调用转账接口成功---------success-----返回串："+objJson.toString());
+									  //添加日志
+                                        PageData log = new PageData();
+                                        log.put("log_titile", "调用转账接口成功");
+                                        log.put("log_content", objJson.toString());
+                                        log.put("syscode", Constant.CUR_SYS_CODE);
+                                        log.put("create_time", DateUtil.getCurrDateTime());
+                                        log.put("modify_time", DateUtil.getCurrDateTime());
+                                        log.put("log_type", "1");//接口日志类型：1-转账申请2-转账回调
+                                        log.put("log_status", "2");//转账日志状态：1-成功 0-失败 2-转账中
+                                        interfaceLogDao.insertSelective(log);
+                                        
 										pd.put("userCode", userCode);
 										pd.put("subAccno", "010401");//普通会员转出至R8账户
 										pd.put("outamnt", bigDecimal);
@@ -205,16 +213,6 @@ public class ComAccMyController extends BaseAction {
 										pd.put("sender", sender);
 										pd.put("recipient", recipient);
 										accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
-										//添加日志
-										PageData log = new PageData();
-								        log.put("log_titile", "调用转账接口成功");
-								        log.put("log_content", objJson.toString());
-								        log.put("syscode", Constant.CUR_SYS_CODE);
-								        log.put("create_time", DateUtil.getCurrDateTime());
-								        log.put("modify_time", DateUtil.getCurrDateTime());
-								        log.put("log_type", "1");//接口日志类型：1-转账申请2-转账回调
-								        log.put("log_status", "2");//转账日志状态：1-成功 0-失败 2-转账中
-								        interfaceLogDao.insertSelective(pd);
 										ar.setSuccess(true);
 										ar.setMessage("转账申请提交成功");
 										return ar;
@@ -248,7 +246,7 @@ public class ComAccMyController extends BaseAction {
 			pd=this.getPageData();
 			pd.put("userCode", userCode);
 			page.setPd(pd);
-			outList = cams.findAccOutList(page);
+			outList = cams.listPageAccOut(page,Constant.VERSION_NO);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
 		} catch (Exception e) {

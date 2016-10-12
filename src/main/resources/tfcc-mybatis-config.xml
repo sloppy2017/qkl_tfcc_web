@@ -82,7 +82,7 @@
 		<mapper resource="modelMapper/UserLevelcnt.xml"/>
 		<mapper resource="modelMapper/LogSms.xml"/>
 		<mapper resource="modelMapper/AccLimitdef.xml"/>
-		<mapper resource="modelMapper/InterfaceLogMapper.xml"/>
+		<mapper resource="modelMapper/InterfaceLog.xml"/>
 		<!-- mapper resource="modelMapper/SourceBean.xml"/>
 		<mapper resource="modelMapper/DataListBean.xml"/>
 		<mapper resource="modelMapper/EzbCustomerInfoBean.xml"/>
