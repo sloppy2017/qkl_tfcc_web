@@ -82,7 +82,7 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 		if(totalGMJL ==null){
 		    totalGMJL = new BigDecimal("0");
 		}
-		//查询账户余额，总额，冻结SAN
+		//查询账户余额，总额，冻结SAN，转出冻结
 		PageData pd = new PageData();
 		pd.put("user_code", userCode);
 		pd = comAccMyDao.getAmnt(pd);
@@ -90,6 +90,7 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 		    map.put("avb_amnt", pd.get("avb_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(pd.get("avb_amnt").toString())));
 		    map.put("froze_amnt", pd.get("froze_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(pd.get("froze_amnt").toString())));
 		    map.put("total_amnt", pd.get("total_amnt")==null?"0.0000":String.format("%.4f",new BigDecimal(pd.get("total_amnt").toString())));
+		    map.put("froze_amnt_out", pd.get("froze_amnt_out")==null?"0.0000":String.format("%.4f",new BigDecimal(pd.get("froze_amnt_out").toString())));
 		}
 		//查询投资机构发放给我的SAN奖励
 		BigDecimal findFFReward = comAccMyDao.findFFReward(userCode);
@@ -116,6 +117,12 @@ public class ComAccMyServiceImpl implements ComAccMyService {
 	public int saveOutAcc(PageData pd) {
 		// TODO Auto-generated method stub
 		return comAccMyDao.insertOutAcc(pd);
+	}
+
+	@Override
+	public List<PageData> findAccOutList(Page page) {
+		// TODO Auto-generated method stub
+		return comAccMyDao.findAccOutListPage(page);
 	}
 	
 }
