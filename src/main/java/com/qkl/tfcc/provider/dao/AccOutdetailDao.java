@@ -11,7 +11,7 @@ public interface AccOutdetailDao extends DAO<AccOutdetail> {
 	 * @create author kezhiyi
 	 * @create date 2016年9月13日
 	 */ 
-	public void addAccOutdetail(PageData pd);
+	public boolean addAccOutdetail(PageData pd);
 	
 	/** 修改转出明细信息状态 
 	 * @return modifyAccOutdetailStatus修改转出明细信息状态 

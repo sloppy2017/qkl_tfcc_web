@@ -86,7 +86,8 @@
          update tb_acc_outdetail 
          set status = #{status},
              modify_time = now(),
-             cntflag = 1
+             cntflag = '1',
+             confirm_time = now()
          where order_ids = #{orderId}     
      </update>
 <!--      根据订单id查询转出记录 -->

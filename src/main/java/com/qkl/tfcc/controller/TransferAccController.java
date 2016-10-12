@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.alibaba.fastjson.JSONObject;
 import com.qkl.tfcc.api.common.CodeConstant;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
+import com.qkl.tfcc.provider.dao.InterfaceLogDao;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
+import com.qkl.util.help.DateUtil;
+import com.qkl.util.help.pager.PageData;
 /**
  * 用户的控制类
  * <p>Description： 用户的控制类 </p>
@@ -40,6 +44,8 @@ public class TransferAccController extends BaseAction{
     private SysGenCodeService sysGenCodeService;
     @Autowired
     private AccOutdetailService accOutdetailService;
+    @Autowired
+    private InterfaceLogDao interfaceLogDao;
     
     /**
      * @describe:转账回调接口
@@ -55,13 +61,22 @@ public class TransferAccController extends BaseAction{
         logBefore(logger,"TransferAccController.callback()");
         try {
             pd = this.getPageData();
+            //参数解析
+            JSONObject params = new JSONObject();
+            params.put("orderId", pd.get("orderId"));
+            params.put("status", pd.get("status"));
+            params.put("ts", pd.get("ts"));
+            params.put("sign", pd.get("sign"));
+            logger.info("转账回调-----请求参数：params="+params.toJSONString());
+            
             if(pd.get("orderId")==null||pd.get("status")==null||pd.get("value")==null||pd.get("ts")==null||pd.get("sign")==null){
                 ar.setErrorCode(CodeConstant.PARAM_ERROR);
                 ar.setMessage("传递参数有误");
                 ar.setSuccess(false);
-                logger.info("---------转账回调----------传递参数有误：orderId="+pd.get("orderId")+"---status="+pd.get("status")+"--ts="+pd.get("ts")+"--sign="+pd.get("sign"));
+                logger.info("---------转账回调----------传递参数有误,含有空值：orderId="+pd.get("orderId")+"---status="+pd.get("status")+"--ts="+pd.get("ts")+"--sign="+pd.get("sign"));
                 return ar;
             }
+            
             String pri = null;
             List<Map<String, Object>> codeList =  sysGenCodeService.findByGroupCode("DIGITAL_SIGN", Constant.VERSION_NO);
             for(Map<String, Object> codeMap:codeList){
@@ -77,11 +92,31 @@ public class TransferAccController extends BaseAction{
                     ar.setMessage("转账成功");
                     ar.setSuccess(true);
                     logger.info("转账回调------转账成功success---------");
+                  //添加日志
+                    PageData pd = new PageData();
+                    pd.put("log_titile", "转账回调--更新库成功");
+                    pd.put("log_content",params.toJSONString());
+                    pd.put("syscode", Constant.CUR_SYS_CODE);
+                    pd.put("create_time", DateUtil.getCurrDateTime());
+                    pd.put("modify_time", DateUtil.getCurrDateTime());
+                    pd.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
+                    pd.put("log_status", "1");//转账日志状态：1-成功 0-失败 2-转账中
+                    interfaceLogDao.insertSelective(pd);
                     return ar;
                 }else{
                     ar.setMessage("转账失败");
                     ar.setSuccess(false);
                     logger.info("转账回调------转账失败fail---------");
+                    //添加日志
+                    PageData pd = new PageData();
+                    pd.put("log_titile", "转账回调--更新库失败");
+                    pd.put("log_content",params.toJSONString());
+                    pd.put("syscode", Constant.CUR_SYS_CODE);
+                    pd.put("create_time", DateUtil.getCurrDateTime());
+                    pd.put("modify_time", DateUtil.getCurrDateTime());
+                    pd.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
+                    pd.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
+                    interfaceLogDao.insertSelective(pd);
                     return ar;
                 }
             }else{
@@ -89,6 +124,16 @@ public class TransferAccController extends BaseAction{
                 ar.setErrorCode(CodeConstant.SIGN_ERROR);
                 ar.setMessage("签名认证失败");
                 logger.info("转账回调------签名认证失败fail---------");
+              //添加日志
+                PageData pd = new PageData();
+                pd.put("log_titile", "转账回调--签名认证失败");
+                pd.put("log_content",params.toJSONString());
+                pd.put("syscode", Constant.CUR_SYS_CODE);
+                pd.put("create_time", DateUtil.getCurrDateTime());
+                pd.put("modify_time", DateUtil.getCurrDateTime());
+                pd.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
+                pd.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
+                interfaceLogDao.insertSelective(pd);
                 return ar; 
             }
         } catch (Exception e) {

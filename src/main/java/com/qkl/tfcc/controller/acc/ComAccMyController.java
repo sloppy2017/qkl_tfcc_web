@@ -1,40 +1,29 @@
 package com.qkl.tfcc.controller.acc;
+
 import java.math.BigDecimal;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.dubbo.common.json.JSON;
-import com.alibaba.dubbo.common.json.JSONArray;
-import com.alibaba.dubbo.common.json.JSONObject;
-import com.alibaba.dubbo.common.json.ParseException;
+import com.alibaba.fastjson.JSONObject;
 import com.qkl.tfcc.api.common.Constant;
-import com.qkl.tfcc.api.entity.Page;
-import com.qkl.tfcc.api.po.acc.AccDetail;
-import com.qkl.tfcc.api.po.acc.ComAccMy;
 import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.acc.api.ComAccMyService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.provider.dao.AccDao;
+import com.qkl.tfcc.provider.dao.InterfaceLogDao;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
 import com.qkl.util.help.StringUtil;
 import com.qkl.util.help.pager.PageData;
-
-
 
 
 @Controller
@@ -51,6 +40,8 @@ public class ComAccMyController extends BaseAction {
 	private AccService accService;
 	@Autowired
 	private AccDao accDao;
+	@Autowired
+	private InterfaceLogDao interfaceLogDao;
 	
 	
 	@RequestMapping(value="/findMyAcc",method=RequestMethod.POST)
@@ -170,28 +161,33 @@ public class ComAccMyController extends BaseAction {
 											||StringUtil.isEmpty(pri)||StringUtil.isEmpty(salt)||StringUtil.isEmpty(admin_user)) {
 										ar.setSuccess(false);
 										ar.setMessage("转账失败");
+										logger.info("申请转账失败----原因：调用接口参数含有null或空字符串------url="+url+"--sender="+sender+"--recipient="+recipient+"--pri="+pri+"--salt="+salt+"--admin_user="+admin_user);
 										return ar;
 									}
 									
 									//调用转账接口
 									String turnOut =APIHttpClient.turnOut(url, null, sender, recipient, money, pri, salt, admin_user);
-									JSONObject objJson = (JSONObject)JSON.parse(turnOut);
+									JSONObject objJson = JSONObject.parseObject(turnOut);
 									String status = objJson.getString("status");
 									if ("failed".equals(status)) {
-										ar.setSuccess(false);
-										ar.setMessage("转账失败");
+									    ar.setSuccess(false);
+                                        ar.setMessage("转账失败");
+                                        logger.info("调用转账接口失败！--------fail-----返回串："+objJson.toString());
+                                        //添加日志
+									    PageData pd = new PageData();
+									    pd.put("log_titile", "调用转账接口失败");
+									    pd.put("log_content", objJson.toJSONString());
+									    pd.put("syscode", Constant.CUR_SYS_CODE);
+									    pd.put("create_time", DateUtil.getCurrDateTime());
+									    pd.put("modify_time", DateUtil.getCurrDateTime());
+									    pd.put("log_type", "1");//接口日志类型：1-转账申请2-转账回调
+									    pd.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
+									    interfaceLogDao.insertSelective(pd);
+									    
 										return ar;
 									}if ("success".equals(status)) {
-									    logger.info("调用转账接口成功---------success----------");
-									    pd.put("userCode", userCode);
-									    //更新账户表，转出冻结
-									    boolean transferResult = accDao.transfering(pd);
-									    logger.info("调用转账接口---------更新账户表，转出冻结-----------结果--transferResult="+transferResult);
-										String order_ids = objJson.getString("orderIds");
-										//AccDetail accDetail = new AccDetail();
-										//accDetail.setUserCode(userCode);
-										//AccDetail detail = accService.findAccDetail(accDetail, Constant.VERSION_NO);
-										
+									    logger.info("调用转账接口成功---------success-----返回串："+objJson.toString());
+										pd.put("userCode", userCode);
 										pd.put("subAccno", "010401");//普通会员转出至R8账户
 										pd.put("outamnt", bigDecimal);
 										pd.put("outdate",DateUtil.getCurrentDate());
@@ -201,10 +197,20 @@ public class ComAccMyController extends BaseAction {
 										pd.put("createTime", DateUtil.getCurrentDate());
 										pd.put("modifyTime", DateUtil.getCurrentDate());
 										pd.put("operator", user.getPhone());
-										pd.put("order_ids", order_ids);
-									//	int num = cams.saveOutAcc(pd);
-										boolean outdetail = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
-										logger.info("调用转账接口---------添加转出记录结果-----------outdetail="+outdetail);
+										pd.put("order_ids", objJson.getString("orderIds"));
+										pd.put("sender", sender);
+										pd.put("recipient", recipient);
+										accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
+										//添加日志
+										PageData log = new PageData();
+								        log.put("log_titile", "调用转账接口成功");
+								        log.put("log_content", objJson.toString());
+								        log.put("syscode", Constant.CUR_SYS_CODE);
+								        log.put("create_time", DateUtil.getCurrDateTime());
+								        log.put("modify_time", DateUtil.getCurrDateTime());
+								        log.put("log_type", "1");//接口日志类型：1-转账申请2-转账回调
+								        log.put("log_status", "2");//转账日志状态：1-成功 0-失败 2-转账中
+								        interfaceLogDao.insertSelective(pd);
 										ar.setSuccess(true);
 										ar.setMessage("转账申请提交成功");
 										return ar;
@@ -216,61 +222,11 @@ public class ComAccMyController extends BaseAction {
 						
 					} catch (Exception e) {
 						e.printStackTrace();
+						ar.setSuccess(false);
+                        ar.setMessage("系统异常！");
 					}
 		return ar;
 	}
-	/*@RequestMapping(value="/acccompare",method=RequestMethod.POST)
-	@ResponseBody
-	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
-		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
-		pd=this.getPageData();
-		Map<String, Object> findNum = cams.findNum(user.getUserCode());
-		Iterator<Entry<String, Object>> iterator = findNum.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<String, Object> entry = iterator.next();
-			String key = entry.getKey();
-			if (key=="findTTReward"||"findTTReward".equals(key)) {
-			 //BigDecimal value = (BigDecimal) entry.getValue();
-				String string = entry.getValue().toString();
-				BigDecimal bigDecimal2 = new BigDecimal(string);
-				String money = pd.get("money").toString();
-				if (money!=null&&"".equals(money)) {
-					BigDecimal bigDecimal = new BigDecimal(money);
-					int compareTo = bigDecimal.compareTo(bigDecimal2);
-					if (compareTo==1) {
-						ar.setMessage("您的可用余额不足");
-						ar.setSuccess(true);
-					}
-				}
-				
-				
-				
-			}
-		}
-		return ar;
-	}
-	*/
-	
-	
-	/*@RequestMapping(value="/fall",method=RequestMethod.POST)
-	@ResponseBody
-	public AjaxResponse findAll(HttpServletRequest request,Page page){
-		AjaxResponse ar = new AjaxResponse();
-		List<PageData> findAll=null;
-		try {
-			
-			
-			findAll = cams.findAll(page);
-			ar.setSuccess(true);
-			ar.setMessage("查询成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			ar.setSuccess(false);
-			ar.setMessage("查询失败");
-		}
-		ar.setData(findAll);
-		return ar;
-	}*/
 	/*public static void main(String[] args) {
 		String turnOut = APIHttpClient.turnOut(null, null,  "sender", "recipient", "10", null,null,null);
 		try {
