@@ -7,9 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
 import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.AccOutdetailDao;
+import com.qkl.util.help.DateUtil;
 import com.qkl.util.help.pager.PageData;
 
 
@@ -27,13 +29,12 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
 	@Override
 	@Transactional(propagation =Propagation.REQUIRED)
 	public boolean addAccOutdetail(PageData pd, String versionNo) {
-		try{			
-			accOutdetailDao.addAccOutdetail(pd);
-			return true;
-		}catch(Exception e){
-			loger.debug("addAccOutdetail fail,reason is "+e.getMessage());
-			return false;
-		}
+	    //更新账户表，转出冻结
+        boolean transferResult = accDao.transfering(pd);
+        loger.info("调用转账接口---------更新账户表，转出冻结-----------结果--transferResult="+transferResult);
+		boolean accOutdetailResult = accOutdetailDao.addAccOutdetail(pd);
+		loger.info("调用转账接口---------添加转出记录结果-----------accOutdetailResult="+accOutdetailResult);
+		return (transferResult&&accOutdetailResult);
 	}
 
 	@Override

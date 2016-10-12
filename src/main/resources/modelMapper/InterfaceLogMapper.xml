@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="InterfaceLog" >
+  <!-- <resultMap id="BaseResultMap" type="InterfaceLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="log_titile" property="logTitile" jdbcType="VARCHAR" />
+    <result column="log_content" property="logContent" jdbcType="VARCHAR" />
+    <result column="syscode" property="syscode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="log_type" property="logType" jdbcType="VARCHAR" />
+  </resultMap> -->
+  <sql id="Base_Column_List" >
+    id, log_titile, log_content, syscode, create_time, update_time, modify_time, log_type,log_status
+  </sql>
+  <select id="selectById" resultType="pd" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_interface_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listPageLog" resultType="pd" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_interface_log
+    where 1=1
+    <if test="log_titile != null and log_titile != ''" >
+       and  log_titile 
+    </if>
+    <if test="log_content != null and log_content != '' " >
+       and  log_content 
+    </if>
+    <if test="syscode != null and syscode != ''" >
+       and  syscode 
+    </if>
+    <if test="startTime != null startTime != '' " >
+       and  create_time &gt;= #{startTime}
+    </if>
+    <if test="endTime != null and endTime !='' " >
+       and  SUBSTRING(create_time,1,10) &lt;= #{endTime}
+    </if>
+    <if test="log_type != null and log_type != '' " >
+       and  log_type = #{log_type}
+    </if>
+    <if test="log_status != null and log_status !=''" >
+       and  log_status = #{log_status}
+    </if>
+  </select>
+  <select id="listAllLog" resultType="pd" parameterType="java.lang.Long" >
+    select 
+    id, log_titile, log_content, syscode, date_format(create_time,'%Y-%m-%d %T'), l
+    (case when log_type = '1' then '转账申请' when log_type = '2' then '转账回调' else '其他' end)log_type,
+    (case when log_status='1' then '成功' when log_status='0' then '失败' when log_status='2' then '转账中' end)log_status
+    from tb_interface_log
+    where 1=1
+    <if test="log_titile != null and log_titile != ''" >
+       and  log_titile 
+    </if>
+    <if test="log_content != null and log_content != '' " >
+       and  log_content 
+    </if>
+    <if test="syscode != null and syscode != ''" >
+       and  syscode 
+    </if>
+    <if test="startTime != null startTime != '' " >
+       and  create_time &gt;= #{startTime}
+    </if>
+    <if test="endTime != null and endTime !='' " >
+       and  SUBSTRING(create_time,1,10) &lt;= #{endTime}
+    </if>
+    <if test="log_type != null and log_type != '' " >
+       and  log_type = #{log_type}
+    </if>
+    <if test="log_status != null and log_status !=''" >
+       and  log_status = #{log_status}
+    </if>
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tb_interface_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pd" >
+    insert into tb_interface_log (log_titile, log_content, 
+      syscode, create_time, modify_time, log_type,log_status)
+    values (#{log_titile,jdbcType=VARCHAR}, #{log_content,jdbcType=VARCHAR}, 
+      #{syscode,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP},
+      #{modify_time,jdbcType=TIMESTAMP}, #{log_type,jdbcType=VARCHAR},#{log_status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pd" >
+    insert into tb_interface_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="log_titile != null" >
+        log_titile,
+      </if>
+      <if test="log_content != null" >
+        log_content,
+      </if>
+      <if test="syscode != null" >
+        syscode,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+      <if test="log_type != null" >
+        log_type,
+      </if>
+      <if test="log_status != null" >
+        log_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="log_titile != null" >
+        #{log_titile,jdbcType=VARCHAR},
+      </if>
+      <if test="log_content != null" >
+        #{log_content,jdbcType=VARCHAR},
+      </if>
+      <if test="syscode != null" >
+        #{syscode,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="log_type != null" >
+        #{log_type,jdbcType=VARCHAR},
+      </if>
+      <if test="log_status != null" >
+        #{log_status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

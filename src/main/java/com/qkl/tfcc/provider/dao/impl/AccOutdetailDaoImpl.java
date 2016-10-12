@@ -21,8 +21,8 @@ public class AccOutdetailDaoImpl extends DaoSupport<AccOutdetail> implements
 	
 	
 	@Override
-	public void addAccOutdetail(PageData pd) {
-		getSqlSession().insert(namespace+"."+"add", pd);	
+	public boolean addAccOutdetail(PageData pd) {
+		return getSqlSession().insert(namespace+"."+"add", pd)>0;	
 	}
 
 	@Override

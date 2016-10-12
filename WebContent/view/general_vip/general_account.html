@@ -100,17 +100,39 @@
                           </div>
                           <div class="d-accts">
                               <label>对方账户</label>
-                              <input type="text" class="d-acct">
+                              <input type="text" class="d-acct" placeholder="请输入对方账户名称">
                           </div>
                           <div class="trans-money">
                                 <label>转账额度</label>
-                                <input type="text" class="min-num"> - <input type="text" class="max-num">
+                                <input type="text" class="min-num" placeholder="请输入数字"> - <input type="text" class="max-num" placeholder="请输入数字">
                           </div>
-                          <p>查看</p>
+                          <div class="trans-serach-btn">查询</div>
                      </div>
                 </div>
-            </div>
-            
+                               
+              <!--   查询列表 -->              
+                      <!--table pageing start-->
+                               
+                            <div class="table-list">
+                                <table class="result-tab" style="width:100%;border:5px;cellspacing:0px;">
+                                    <thead>
+                                        
+                                          <tr><th>序号</th><th>日期</th><th>转账额度 </th><th>对方账户名</th><th>转账状态</th><th>备注</th></tr>   
+                                    </thead>
+                                    <tbody id="showData">
+                                        
+                                    </tbody>
+                                    <tfoot id="tfoot" style="width:100%;display: none"><tr><td colspan="5" style="text-align: center;background-color: #eee;">没有符合条件的数据</td></tr></tfoot>
+                                </table>
+                                <div class="pages1">
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        <!--table paging end-->                     
+            </div>            
             <div class="trans-account">
                 <div class="main-top"><span>您当前的位置：</span><span>我的账户&gt;</span><span class="c28">转账</span></div>
                 <div class="trans-wrap">

@@ -179,7 +179,8 @@
         UPDATE tb_acc t
         SET 
         t.avb_amnt = t.avb_amnt - #{money},
-        t.froze_amnt_out = t.froze_amnt_out+#{money}
+        t.froze_amnt_out = ifnull(t.froze_amnt_out,0) + #{money},
+        t.modify_time = now()
         where t.user_code = #{userCode}
         and t.avb_amnt &gt;=#{money}
     </update>
@@ -187,7 +188,8 @@
     <update id="transferSuccess" parameterType="pd">
         UPDATE tb_acc t
         SET t.froze_amnt_out = t.froze_amnt_out - #{value},
-        t.total_amnt = t.total_amnt - #{value}
+        t.total_amnt = t.total_amnt - #{value},
+        t.modify_time = now()
         where t.user_code = #{userCode}
         and t.froze_amnt_out &gt;=#{value}
     </update>
@@ -196,7 +198,8 @@
          UPDATE tb_acc t
          SET 
          t.avb_amnt = t.avb_amnt + #{value},
-         t.froze_amnt_out = t.froze_amnt_out - #{value}
+         t.froze_amnt_out = t.froze_amnt_out - #{value},
+         t.modify_time = now()
          where t.user_code = #{userCode}
          and t.froze_amnt_out &gt;=#{value}
     </update>
