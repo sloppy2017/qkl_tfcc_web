@@ -42,11 +42,11 @@
 	margin-top: -12px;
 	vertical-align: middle;
 	color:#575757;
+	
 }
 .my-sum ul .zhuanzhang{
 	width:100px;
-	height:30px;
-	border:1px solid #ddd;
+	height:30px;	
 	color:#fff;
 	border-radius:8px;
 	line-height: 30px;
@@ -98,7 +98,7 @@
 }
 .trans-serach-btn{
 	position:absolute;
-	left:800px;
+    left: 950px;
 	top:120px;
 	width:100px;
 	height:32px;
