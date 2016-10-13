@@ -206,6 +206,7 @@
 	    if(!validPhone){
 	        return;
 	    }
+
 	    $.ajax({
 	        type:'POST',
 	        url:'/service/user/isExistPhone?phone='+$.trim(phoneNote.val()),
@@ -297,13 +298,14 @@
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
-				/*var checkedss = $('.myagree input[type=checkbox]');*/
+	    var checkedss = $('.myagree .myagree-box');
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
 			return;
 		}
-	/*		if(checkedss.checked==false){
+		
+		if(!checkedss.checked){
 			return;
-		}*/
+		}
 		$('.form1 .submit').unbind("click");
 		$('.form1 .submit a').css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
 		$('.form1 .submit a').css("background-size","50px 60px");
@@ -393,9 +395,9 @@ $('.hid-x').click(function(){
 	$('.myagree-hid').hide();
 })
 
-$('.myagree input').click(function(){
-	this.checked = !this.checked; 
-})
+//$('.myagree input').click(function(){
+//	this.checked = !this.checked; 
+//})
   //绑定输入框，这里只能 是ID
    $("#ref_phone").keydown(function(event){
 	    event=document.all?window.event:event;
