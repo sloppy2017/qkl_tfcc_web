@@ -252,9 +252,6 @@ $(function(){
   */
   
   
-  
-  
-  
   /* 列表查询*/
   $(".trans-serach-btn").click(function(){
       var showcnt =10; //每页页数初始值
@@ -305,8 +302,6 @@ $(function(){
           }
       });
   }
-
-
   
   
   
