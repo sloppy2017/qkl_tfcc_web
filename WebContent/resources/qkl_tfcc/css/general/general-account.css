@@ -110,27 +110,6 @@
 	cursor:pointer
 }
 
-.table-list {
-    margin: 22px 20px;
-    height: 370px;
-    
-    
-}
-.result-tab {
-    border-collapse: collapse;
-}
-.result-tab tr:nth-child(odd) {
-    background: #f6fafe;
-}
-.result-tab tr th {
-    font-size: 14px;
-    color: #575757;
-    border: none;
-}
-.result-tab tr {
-    height: 42px;
-    border: 1px solid #ddd;
-}
 .d-accts label, .trans-money label{
 	margin-right:20px;
 }
@@ -141,10 +120,6 @@
 .trans-money input{
 	height:30px;
 }
-
-
-
-
 
 .my-award{
 	margin: 0 20px;
