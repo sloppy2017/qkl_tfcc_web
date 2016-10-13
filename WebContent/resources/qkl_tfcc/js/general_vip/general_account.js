@@ -107,7 +107,7 @@ $(function(){
 		 //alert(money);
 		 $.ajax({
 			    type:'post',
-			    url:'/service/comacc/acccompare?money='+money+'&zhanghao='+zhanghao,
+			    url:'/service/comacc/turnOut?money='+money+'&zhanghao='+zhanghao,
 		 		//data:{'money':money},
 			    dataType:'json',
 			    success:function(data){   
@@ -264,9 +264,11 @@ $(function(){
   	
   function reload_table(currentPage,showCount) {
      // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
+//	  alert("currentPage="+currentPage+"--showCount="+showCount);
+	  var url ='/service/comacc/findout?'+$("#form").serialize()+'&currentPage='+currentPage+'&showCount='+showCount;
       $.ajax({
           type: 'post',
-          url: '/service/comacc/findout?'+$("#form").serialize()+'&currentPage='+currentPage+'&showCount='+showCount,
+          url: url,
           dataType: 'json',
           /*data: {
               str:str,
@@ -278,6 +280,7 @@ $(function(){
               if(outList.length==0||outList==null){
                   $("#tfoot").show();
                   $("#showData").hide();
+                  $(".pages1").hide();
                   return;
               }
               var rsStr = "";
@@ -295,6 +298,7 @@ $(function(){
               $("#showData").show();
               $("#tfoot").hide();
               $(".pages1").html(data.data.page.pageStr);
+              $(".pages1").show();
 
           }, 
           error: function (data) {

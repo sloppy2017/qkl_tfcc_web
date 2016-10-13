@@ -87,7 +87,7 @@ public class StockController extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);
-			ar.setMessage("系统异常");
+			ar.setMessage("网络繁忙，请稍候重试！");
 		}	
 		
 		return ar;
@@ -163,7 +163,7 @@ public class StockController extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);
-			ar.setMessage("系统异常");
+			ar.setMessage("网络繁忙，请稍候重试！");
 		}	
 		
 		return ar;

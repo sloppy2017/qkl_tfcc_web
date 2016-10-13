@@ -216,7 +216,6 @@ $(".sel a").click(function(){//查询列表
     }
 });
 function reload_table(currentPage,showCount) {
-    var rsStr = "";
     // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
     $.ajax({
         type: 'post',
@@ -230,19 +229,16 @@ function reload_table(currentPage,showCount) {
         success: function (data) {
         	 console.log(data.data);
             var tviplist = data.data.tradeInfo;
-            var tablecols = "<tr> \n"
-                + " <th>订单号</th> \n"
-                + "<th>交易数量</th> \n"
-                + "<th>交易金额</th> \n"
-                +"<th>购买时间</th>\n"
-                +"<th>交易时间</th>\n"
-                +"<th>收款账号</th>\n"
-                +"<th>收款银行</th>\n"
-                +"<th>状态</th>\n"
-                + "</tr> \n";
-            rsStr= tablecols;
+            if(tviplist.length==0||tviplist==null){
+                $("#tfoot").show();
+                $("#showData").hide();
+                $(".pages1").hide();
+                return;
+            }
+            var rsStr = "";
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
+                rsStr = rsStr + "<th>" + (i+1) + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].orderno + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].txnum + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].txamnt + "</th>";
@@ -253,9 +249,11 @@ function reload_table(currentPage,showCount) {
                 rsStr = rsStr + "<th>" + tviplist[i].status + "</th>";
                 rsStr = rsStr + "</tr>";
             }
-            $(".result-tab").html( rsStr);
-           // console.log(data.data.page.pageStr);
+            $("#tfoot").hide();
+            $("#showData").html(rsStr);
+            $("#showData").show();
            $(".pages1").html(data.data.page.pageStr);
+           $(".pages1").show();
 
         },
         error: function (data) {

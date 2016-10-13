@@ -49,7 +49,7 @@ public class LPmemberController extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);
-			ar.setMessage("查询失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 		}
 		ar.setData(lpNum);
 		return ar;
@@ -85,7 +85,7 @@ public class LPmemberController extends BaseAction {
 			
 		} catch (Exception e) {
 			ar.setSuccess(false);
-			ar.setMessage("查询失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 			e.printStackTrace();
 		}
 		return ar;

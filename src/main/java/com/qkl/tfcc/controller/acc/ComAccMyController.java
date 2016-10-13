@@ -17,10 +17,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.user.User;
+import com.qkl.tfcc.api.po.user.UserDetail;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
 import com.qkl.tfcc.api.service.acc.api.AccService;
 import com.qkl.tfcc.api.service.acc.api.ComAccMyService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
+import com.qkl.tfcc.api.service.user.api.UserService;
 import com.qkl.tfcc.provider.dao.AccDao;
 import com.qkl.tfcc.provider.dao.InterfaceLogDao;
 import com.qkl.tfcc.web.BaseAction;
@@ -47,6 +49,8 @@ public class ComAccMyController extends BaseAction {
 	private AccDao accDao;
 	@Autowired
 	private InterfaceLogDao interfaceLogDao;
+	@Autowired
+	private UserService userService;
 	
 	
 	@RequestMapping(value="/findMyAcc",method=RequestMethod.POST)
@@ -69,7 +73,7 @@ public class ComAccMyController extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);
-			ar.setMessage("查询失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 		}
 		ar.setData(nums);
 		return ar;	
@@ -104,14 +108,14 @@ public class ComAccMyController extends BaseAction {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        ar.setSuccess(false);
-	        ar.setMessage("系统异常，请联系客服！");
+	        ar.setMessage("网络繁忙，请稍候重试！");
 	    }
 	    return ar;	
 	}
 
-	@RequestMapping(value="/acccompare",method=RequestMethod.POST)
+	@RequestMapping(value="/turnOut",method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse findAccOut(HttpServletRequest request){//比较转账数额的大小
+	public AjaxResponse turnOut(HttpServletRequest request){//比较转账数额的大小
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		String userCode="";
         if(user==null){
@@ -119,6 +123,7 @@ public class ComAccMyController extends BaseAction {
         }else{
             userCode =user.getUserCode();
         }
+        UserDetail userDetail =  userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
 		pd=this.getPageData();
 		Map<String, Object> findNum = cams.findMyAcc(userCode);
 		String string = findNum.get("avb_amnt").toString();//获取可用余额
@@ -172,11 +177,17 @@ public class ComAccMyController extends BaseAction {
 									
 									//调用转账接口
 									String turnOut =APIHttpClient.turnOut(url, null, sender, recipient, money, pri, salt, admin_user);
+									if(turnOut == null){
+									    logger.info("------------网络异常，调用转账接口失败----------------------turnOut="+turnOut);
+									    ar.setMessage("网络异常，请稍后再试！");
+									    ar.setSuccess(false);
+									    return ar;
+									}
 									JSONObject objJson = JSONObject.parseObject(turnOut);
 									String status = objJson.getString("status");
 									if ("failed".equals(status)) {
 									    ar.setSuccess(false);
-                                        ar.setMessage("转账失败");
+                                        ar.setMessage(objJson.getJSONObject("data").getString("error_code"));
                                         logger.info("调用转账接口失败！--------fail-----返回串："+objJson.toString());
                                         //添加日志
 									    PageData log = new PageData();
@@ -212,7 +223,7 @@ public class ComAccMyController extends BaseAction {
 										pd.put("status", 2);//1成功0失败2转出中
 										pd.put("createTime", DateUtil.getCurrentDate());
 										pd.put("modifyTime", DateUtil.getCurrentDate());
-										pd.put("operator", user.getPhone());
+										pd.put("operator", userDetail.getPhone());
 										pd.put("order_ids", objJson.getString("orderIds"));
 										pd.put("sender", sender);
 										pd.put("recipient", recipient);
@@ -229,7 +240,7 @@ public class ComAccMyController extends BaseAction {
 					} catch (Exception e) {
 						e.printStackTrace();
 						ar.setSuccess(false);
-                        ar.setMessage("系统异常！");
+                        ar.setMessage("网络繁忙，请稍候重试！");
 					}
 		return ar;
 	}
@@ -250,14 +261,14 @@ public class ComAccMyController extends BaseAction {
 			pd=this.getPageData();
 			pd.put("userCode", userCode);
 			page.setPd(pd);
-			page.setShowCount(1);
+//			page.setShowCount(1);
 			outList = cams.listPageAccOut(page,Constant.VERSION_NO);
 			ar.setSuccess(true);
 			ar.setMessage("查询成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			ar.setSuccess(false);
-			ar.setMessage("查询失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 		}
 		map.put("outList", outList);
 		map.put("page", page);

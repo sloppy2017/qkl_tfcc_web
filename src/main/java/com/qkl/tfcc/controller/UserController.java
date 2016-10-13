@@ -127,7 +127,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }   
         ar.setData(data);
         return ar;
@@ -210,7 +210,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }finally{
             logAfter(logger);
         }
@@ -399,7 +399,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }
         return ar;
     }
@@ -910,7 +910,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }
         return ar;
     }
@@ -971,7 +971,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }
         return ar;
     }
@@ -1031,7 +1031,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }
         return ar;
     }
@@ -1118,7 +1118,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }
         return ar;
     }
@@ -1226,7 +1226,7 @@ public class UserController extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
             ar.setSuccess(false);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
         }
         return ar;
     }
