@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.qkl.tfcc.api.common.CodeConstant;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.entity.Page;
 import com.qkl.tfcc.api.po.user.User;
@@ -187,7 +188,18 @@ public class ComAccMyController extends BaseAction {
 									String status = objJson.getString("status");
 									if ("failed".equals(status)) {
 									    ar.setSuccess(false);
-                                        ar.setMessage(objJson.getJSONObject("data").getString("error_code"));
+									    if(objJson.getJSONObject("data").getString("error_code").contains("PERMISSION_DENIED")){
+									        ar.setMessage(CodeConstant.PERMISSION_DENIED);
+									    }else if(objJson.getJSONObject("data").getString("error_code").contains("INVALID_PARAMS")){
+									        ar.setMessage(CodeConstant.INVALID_PARAMS);
+									    }else if(objJson.getJSONObject("data").getString("error_code").contains("NOT_ENOUGH_BALANCE")){
+                                            ar.setMessage(CodeConstant.NOT_ENOUGH_BALANCE);
+                                        }else if(objJson.getJSONObject("data").getString("error_code").contains("USER_NOT_FOUND")){
+                                            ar.setMessage(CodeConstant.USER_NOT_FOUND);
+                                        }else{
+                                            ar.setMessage(objJson.getJSONObject("data").getString("error_code"));
+                                        }
+                                        
                                         logger.info("调用转账接口失败！--------fail-----返回串："+objJson.toString());
                                         //添加日志
 									    PageData log = new PageData();

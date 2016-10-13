@@ -11,7 +11,6 @@
 		<script src="../../resources/qkl_tfcc/js/common/jquery-1.7.1.min.js"></script>
 		<script src="../../resources/qkl_tfcc/js/date/dateRange.js"></script>
 		<script src="../../resources/qkl_tfcc/js/date/monthPicker.js"></script>
-
 		<style type="text/css">
 			.form1 .btn1 {
 				width: 160px;
@@ -94,14 +93,15 @@
 									<div>
 										<p>手机号</p>
 										<span class="txt">通过手机接收动态验证码，进行密码修改等操作</span >
-                        		<span  class="status">已绑定</span>
+                        		         <span  class="status">已绑定</span>
 										<a href="javascript:void(0);" onclick="setPhone()" class="btn phone">修改</a>
 									</div>
 								</li>
 								<li>
 									<div>
-										<p>登录密码</p><span class="txt"> 为保证账户安全，可设置更复杂的登录密码</span>
-										  <span class="status">已开启</span>
+										<p>登录密码</p>
+                                        <span class="txt">为保证账户安全，可设置更复杂的登录密码</span> 
+										<span class="status">已开启</span>
 										<a href="javascript:" class="btn pwd">修改</a>
 									</div>
 								</li>
@@ -145,7 +145,8 @@
 								<div><label for="">新手机号</label>
 									<input type="text" class="phone-safety valid" id="phone" name="phone" placeholder="请输入新手机号" onfocus="if($('#phone').hasClass('errorTip')){this.value='';$('#phone').removeClass('errorTip');}" maxlength="11">
 								</div>
-								<div><label for=""> 验证码</label><input type="text" id="yzm" name="yzm" class="valid" placeholder="请输入验证码" onfocus="if($('#yzm').hasClass('errorTip')){this.value='';$('#yzm').removeClass('errorTip');}" maxlength="6"><input type="button" class="btn1 yzm-safety" value="获取验证码" onclick="getVCode($('#phone').val())"></div>
+								<div><label for=""> 验证码</label> 
+                                     <input type="text" id="yzm" name="yzm" class="valid" placeholder="请输入验证码" onfocus="if($('#yzm').hasClass('errorTip')){this.value='';$('#yzm').removeClass('errorTip');}" maxlength="6"><input type="button" class="btn1 yzm-safety" value="获取验证码" onclick="getVCode($('#phone').val())"></div>
 								<div>
 									<a class="save" href="javascript:void(0);" onclick="modifyPhone()">提交</a>
 									<a href="general_safety.html" class="rest">返回</a>
@@ -160,19 +161,19 @@
 								<div>
 									<label>原登录密码</label>
 									<input type="password" id="oldpassword" name="oldpassword" placeholder="请输入原登录密码" maxlength="20">
-									<p style="margin-top: 0px;margin-left: 123px;" class="error"></p>
+									<p  class="error"></p>
 								</div>
 
 								<div>
 									<label>新登录密码</label>
 									<input type="password" id="newpassword" name="newpassword" placeholder="请输入新登录密码" maxlength="20">
-									<p style="margin-top: 0px;margin-left: 123px;" class="error"></p>
+									<p  class="error"></p>
 								</div>
 								<div>
 									<label>确认登录密码</label>
 									<input type="password" id="resnewpassword" name="resnewpassword" placeholder="请输入确认密码" maxlength="20">
 									<span>请输入6-20位字母，数字或者字符组合</span>
-									<p style="margin-top: 0px;margin-left: 123px;" class="error"></p>
+									<p class="error"></p>
 								</div>
 								<div>
 									<a href="javascript:void(0);" class="save" onclick="modifypwd()">保存</a>
