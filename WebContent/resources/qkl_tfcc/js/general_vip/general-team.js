@@ -160,6 +160,7 @@ function reload_table(currentPage,showCount) {
             rsStr= tablecols;*/
             for (var i = 0; i < tviplist.length; i++) {
                 rsStr = rsStr + "<tr class='ss'>";
+                rsStr = rsStr + "<th>" + (i+1) + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
                 rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";

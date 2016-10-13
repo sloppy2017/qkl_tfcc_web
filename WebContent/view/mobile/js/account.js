@@ -77,6 +77,7 @@ var validate={
 	var usercode = sessionStorage.getItem("usercode");
 	var userPhone = sessionStorage.getItem("userPhone");
 	var zongUse;
+	var avb_amnt;
 	
    //我的帐户交互
 	$.ajax({
@@ -86,11 +87,11 @@ var validate={
    	  		 "userCode": usercode
    	  	},
    	  success:function(msg1){
-   	  	 
   			console.log(msg1);
 			console.log(msg1.data);
 			if ( msg1.success == true ) {
 			zongUse = msg1.data.total_amnt ;
+			avb_amnt = msg1.data.avb_amnt ;
 		    $('#total1').html( msg1.data.total_amnt );
             $('#available').html( msg1.data.avb_amnt );
             $('#frozen').html( msg1.data.froze_amnt );
@@ -145,21 +146,41 @@ var validate={
   				window.location.href="login.html";
   			}
   		}
-  		
-  		
   	});
    };
   });
- 
-  
-   
    // 提交转账
    $('#submit1').on("click",function(){
-   	  if( parseInt( $('#lines').val() )  > zongUse ){
-   	  	alert( '可用额度不足' );
-   	  }else{
-   	  	alert( '此功能未开通' );
-   	  }
+   	if( $('#otherAccount').val() != '' ){
+   		if( $('#lines').val() > 0 && $('#lines').val() <= avb_amnt ){
+   			$.ajax({
+		   	 	type:"post",
+		   	 	url:webURL+"/service/comacc/turnOut",
+		   	 	data:{
+		   	 		"userCode":usercode,
+		            "avb_amnt":avb_amnt,
+		            "money": parseInt( $('#lines').val() ),
+		            "zhanghao":$('#otherAccount').val(),
+		            "mobileflag": 1
+		   	 	},
+		   	 	success:function(data){
+		   	 		console.log( data );
+		   	 		if( data.success == true ){
+ 		   	 		   alert( data.message );
+  				       window.location.href="Myaccount.html";
+  			      }else{
+ 			      	   alert( data.message );
+  			      }
+		   	 	}
+		   	 });
+   		}else{
+   			alert( '你的转账额度为0或超过你的可用额度' );
+   		};	
+   	}else{
+   		alert( '对方账户为空' );
+   	}
+   	
+   	 
    });
    
    $('.transferHead').on('click',function(){

@@ -60,7 +60,7 @@ public class BankAccController extends BaseAction {
 			ar.setData(bankAccInfo);
 		} catch (Exception e) {
 			ar.setSuccess(false);
-			ar.setMessage("查询失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 			e.printStackTrace();
 		}
 	   return ar;
@@ -78,7 +78,7 @@ public class BankAccController extends BaseAction {
 			//ar.setData(findUserDetailByUserCode);
 		} catch (Exception e) {
 			ar.setSuccess(false);
-			ar.setMessage("查询失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 			e.printStackTrace();
 		}
 	   return ar;
@@ -148,7 +148,7 @@ public class BankAccController extends BaseAction {
 			 
 		} catch (Exception e) {
 			ar.setSuccess(false);
-			ar.setMessage("查询失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 			e.printStackTrace();
 		}
 		
@@ -239,7 +239,7 @@ public class BankAccController extends BaseAction {
 			
 		} catch (Exception e) {
 			ar.setSuccess(false);
-			ar.setMessage("购买失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 			e.printStackTrace();
 		}
 		
@@ -281,7 +281,7 @@ public class BankAccController extends BaseAction {
 			ar.setData(txamnt);
 		} catch (Exception e) {
 			ar.setSuccess(false);
-			ar.setMessage("获取购买金额失败");
+			ar.setMessage("网络繁忙，请稍候重试！");
 			e.printStackTrace();
 		}
 		return ar;
@@ -305,7 +305,7 @@ public class BankAccController extends BaseAction {
             ar.setData(resList);
         } catch (Exception e) {
             ar.setSuccess(false);
-            ar.setMessage("查询失败");
+            ar.setMessage("网络繁忙，请稍候重试！");
             e.printStackTrace();
         }
        return ar;

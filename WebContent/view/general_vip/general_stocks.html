@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/reset.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/general/equity.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/page.css">
     <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
 </head>
 <body>
@@ -90,13 +91,14 @@
                     </div>
                 </div>
                 <div class="table-list">
-                    <table class="result-tab" width="100%"  cellpadding="0" cellspacing="0">
+                    <table class="result-tab" width="98%"  cellpadding="0" cellspacing="0">
                         <thead>
-
+                            <tr><th width="5%">序号</th><th width="15%">订单号</th><th width="10%">交易数量</th><th width="10%">交易金额</th><th width="15%">购买时间</th><th width="15%">交易时间</th><th width="10%">收款账号</th><th width="10%">收款银行</th><th width="10%">状态</th></tr> 
                         </thead>
-                        <tbody>
-
+                        <tbody id="showData">
+                                        
                         </tbody>
+                        <tfoot id="tfoot" style="width:100%;display: none"><tr><td colspan="9" style="text-align: center;background-color: #eee;">没有符合条件的数据</td></tr></tfoot>
                     </table>
                     <div class="pages1">
                     </div>

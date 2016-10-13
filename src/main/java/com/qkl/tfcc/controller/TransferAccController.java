@@ -140,7 +140,7 @@ public class TransferAccController extends BaseAction{
             e.printStackTrace();
             ar.setSuccess(false);
             ar.setErrorCode(CodeConstant.SYS_ERROR);
-            ar.setMessage("系统异常");
+            ar.setMessage("网络繁忙，请稍候重试！");
             logger.info("转账回调------系统异常---------");
         }finally{
             logAfter(logger);

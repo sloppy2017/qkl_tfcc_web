@@ -98,6 +98,7 @@
 	    <if test="pd.endTime != null and pd.endTime !=''" >
 	       and  substring(outdate,1,10) &gt;= #{pd.endTime}
 	    </if>
+	    order by create_time desc
     </select>
     
     <select id="getAmnt" parameterType="pd" resultType="pd">

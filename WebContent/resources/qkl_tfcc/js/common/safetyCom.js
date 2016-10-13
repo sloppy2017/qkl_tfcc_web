@@ -58,31 +58,47 @@ function getVCode(phone) {
     if(!validPhone){
         return;
     }
-	curCount = count;
-    //删除input的属性值是在60内不能重新点击
-    $(".yzm-safety").attr("disabled", "true");
-    $(".yzm-safety").val("请在" + curCount + "秒内输入验证码");
-    clearInterval(InterValObj);
-    InterValObj=setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-    //向后台发送处理数据
-    
+    //查询新手机号是否已注册
     $.ajax({
         type:'POST',
-        url:'/service/user/sendsms?phone='+phone,
+        url:'/service/user/isExistPhone?phone='+phone,
 //         data:{phone:newPhone},
         dataType:'JSON',
         success: function (json) {
-            // 验证码发送成功，把验证码先存到页面一个变量中       
-             if(json.success){
-                // settime(this);
-             }else{
-                 alert(json.message);
-             }
-            //console.log(data);
+        	if(json.success){
+        		alert(json.message);
+        	}else{
+        		curCount = count;
+        	    //删除input的属性值是在60内不能重新点击
+        	    $(".yzm-safety").attr("disabled", "true");
+        	    $(".yzm-safety").val("请在" + curCount + "秒内输入验证码");
+        	    clearInterval(InterValObj);
+        	    InterValObj=setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+        	    //向后台发送处理数据
+        	    
+        	    $.ajax({
+        	        type:'POST',
+        	        url:'/service/user/sendsms?phone='+phone,
+//        	         data:{phone:newPhone},
+        	        dataType:'JSON',
+        	        success: function (json) {
+        	            // 验证码发送成功，把验证码先存到页面一个变量中       
+        	             if(json.success){
+        	                // settime(this);
+        	             }else{
+        	                 alert(json.message);
+        	             }
+        	            //console.log(data);
+        	        },
+        	        error: function (a,b,c) {
+        	     	   //console.log(a.readyState+"\n"+b+"\n"+c);
+        	            console.log("获取短信验证码失败");
+        	        }
+        	    });
+        	}
+        	
         },
         error: function (a,b,c) {
-     	   //console.log(a.readyState+"\n"+b+"\n"+c);
-            console.log("获取短信验证码失败");
         }
     });
 }
