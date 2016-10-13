@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/reset.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/common/common.css">
     <link rel="stylesheet" href="/resources/qkl_tfcc/css/general/general-account.css">
+    <link rel="stylesheet" href="/resources/qkl_tfcc/css/general/equity.css">
     <script src="/resources/qkl_tfcc/js/common/jquery-1.8.3.min.js"></script>
 </head>
 <body>
@@ -94,7 +95,7 @@
                        <div class="ser-tit">
                             <div class="trans-status">
                                  <span>转账状态</span>
-                                  <input id ="all" type="radio" name="status" value="">全部
+                                  <input id ="all" type="radio" name="status" value="" checked="checked">全部
                                   <input id ="success" type="radio" name="status" value="1"> 成功
                                   <input id ="failed" type="radio" name="status" value="0"> 失败
                                   <input id ="transfering" type="radio" name="status" value="2"> 转账中
@@ -111,7 +112,7 @@
                                   <label>日期</label>
                                   <input id="startTime" name="startTime" type="text" class="min-num" placeholder="请输入开始日期" maxlength="10"> - <input id="endTime" name="endTime" type="text" class="max-num" placeholder="请输入结束日期" maxlength="10">
                             </div> -->
-                            <div class="trans-serach-btn" onclick="getOut()">查询</div>
+                            <div class="trans-serach-btn">查询</div>
                        </div>
                   </div>
                </form>                
@@ -122,12 +123,12 @@
                                 <table class="result-tab" style="width:100%;border:5px;cellspacing:0px;">
                                     <thead>
                                         
-                                          <tr><th>序号</th><th>日期</th><th>转账额度 </th><th>对方账户名</th><th>转账状态</th><th>备注</th></tr>   
+                                          <tr><th width="10%">序号</th><th width="20%">日期</th><th width="20%">转账额度 </th><th width="20%">对方账户名</th><th width="10%">转账状态</th><th width="20%">备注</th></tr>   
                                     </thead>
                                     <tbody id="showData">
                                         
                                     </tbody>
-                                    <tfoot id="tfoot" style="width:100%;display: none"><tr><td colspan="5" style="text-align: center;background-color: #eee;">没有符合条件的数据</td></tr></tfoot>
+                                    <tfoot id="tfoot" style="width:100%;display: none"><tr><td colspan="6" style="text-align: center;background-color: #eee;">没有符合条件的数据</td></tr></tfoot>
                                 </table>
                                 <div class="pages1">
                                     
@@ -187,7 +188,7 @@
 <script src="/resources/qkl_tfcc/js/invest/in-account.js"></script>
 <script src="/resources/qkl_tfcc/js/general_vip/general_account.js"></script>
 <script type="text/javascript">
-  function getOut(){
+  /* function reload_table(){
       var url = "/service/comacc/findout?"+$("#form").serialize();
       $.post(url,function(data){
     	  var outList = data.data;
@@ -212,7 +213,7 @@
           $("#tfoot").hide();
           $(".pages1").html(data.page.pageStr);
       });
-  }
+  } */
 </script>
 </body>
 </html>
