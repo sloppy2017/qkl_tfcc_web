@@ -202,10 +202,10 @@
       //非空时做格式校验
       var validWxnum = true;
       var zipCode = true;
-      if($("#wxnum").val().trim()!=''){
+      if($.trim($("#wxnum").val())!=''){
           validWxnum = valid_wxnum($("#wxnum"));
       }
-      if($("#zipCode").val().trim()!=''){
+      if($.trim($("#zipCode").val())!=''){
           zipCode = valid_zipCode($("#zipCode"));
       }
       if(!(validWxnum&&zipCode)){

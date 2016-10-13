@@ -95,6 +95,7 @@
 .d-accts input{
 	width:240px;
 	height:30px;
+	line-height:30px;
 }
 .trans-serach-btn{
 	position:absolute;
@@ -119,6 +120,7 @@
 }
 .trans-money input{
 	height:30px;
+	line-height:30px;
 }
 
 .my-award{

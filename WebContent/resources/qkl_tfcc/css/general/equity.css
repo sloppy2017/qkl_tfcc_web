@@ -57,6 +57,7 @@
 .mid-r input{
     width:178px;
     height:30px;
+    line-height:30px;
 }
 .main-btm{
     margin-left: 20px;
@@ -92,6 +93,7 @@
 .main-btm .search select{
     width: 120px;
     height:30px;
+    line-height:30px;
     text-indent: 12px;
 }
 
