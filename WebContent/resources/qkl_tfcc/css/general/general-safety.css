@@ -69,6 +69,12 @@
 .form1 div{
 	margin:20px 0;
 	width:800px;
+	position:relative;
+}
+.form1 div p{
+	position:absolute;
+	left:128px;
+	top:28px;
 }
 .form1 input{
 	width:260px;
