@@ -77,7 +77,7 @@ var validate={
 	var usercode = sessionStorage.getItem("usercode");
 	var userPhone = sessionStorage.getItem("userPhone");
 	var zongUse;
-	var avb_amnt;
+	var avbAmnt;
 	
    //我的帐户交互
 	$.ajax({
@@ -91,7 +91,7 @@ var validate={
 			console.log(msg1.data);
 			if ( msg1.success == true ) {
 			zongUse = msg1.data.total_amnt ;
-			avb_amnt = msg1.data.avb_amnt ;
+			avbAmnt = msg1.data.avb_amnt ;
 		    $('#total1').html( msg1.data.total_amnt );
             $('#available').html( msg1.data.avb_amnt );
             $('#frozen').html( msg1.data.froze_amnt );
@@ -152,22 +152,23 @@ var validate={
    // 提交转账
    $('#submit1').on("click",function(){
    	if( $('#otherAccount').val() != '' ){
-   		if( $('#lines').val() > 0 && $('#lines').val() <= avb_amnt ){
+   		if( parseInt( $('#lines').val() ) > 0 && parseInt( $('#lines').val() ) <= avbAmnt ){
    			$.ajax({
 		   	 	type:"post",
 		   	 	url:webURL+"/service/comacc/turnOut",
 		   	 	data:{
 		   	 		"userCode":usercode,
-		            "avb_amnt":avb_amnt,
+		            "avb_amnt":avbAmnt,
 		            "money": parseInt( $('#lines').val() ),
 		            "zhanghao":$('#otherAccount').val(),
 		            "mobileflag": 1
 		   	 	},
 		   	 	success:function(data){
 		   	 		console.log( data );
+		   	 		console.log( avbAmnt );
 		   	 		if( data.success == true ){
  		   	 		   alert( data.message );
-  				       window.location.href="Myaccount.html";
+ 				       window.location.href="Myaccount.html";
   			      }else{
  			      	   alert( data.message );
   			      }
