@@ -298,14 +298,14 @@
 		var validResPassword = valid_resPassword($(this).parent().find("input[name='resPassword']"));
 		var validYzm = valid_yzm($(this).parent().find("input[name='yzm']"));
 		var validPhone1 = valid_phone1($(this).parent().find("input[name='phone1']"));
-	    var checkedss = $('.myagree .myagree-box');
+//	    var checkedss = $('.myagree .myagree-box');
 		if(!(validPhone&&validPassword&&validResPassword&&validYzm&&validPhone1)){
 			return;
 		}
 		
-		if(!checkedss.checked){
-			return;
-		}
+//		if(!checkedss.checked){
+//			return;
+//		}
 		$('.form1 .submit').unbind("click");
 		$('.form1 .submit a').css("background-image","url(../../resources/qkl_tfcc/imgs/grey.png)");
 		$('.form1 .submit a').css("background-size","50px 60px");
