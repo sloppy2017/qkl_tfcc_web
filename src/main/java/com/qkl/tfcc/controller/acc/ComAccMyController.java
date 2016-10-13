@@ -117,6 +117,19 @@ public class ComAccMyController extends BaseAction {
 	@RequestMapping(value="/turnOut",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse turnOut(HttpServletRequest request){//比较转账数额的大小
+	    String is_turn = "0";
+        List<Map<String, Object>> codeList =  sysGenCodeService.findByGroupCode("TURN_FLAG", Constant.VERSION_NO);
+        for(Map<String, Object> codeMap:codeList){
+            if("IS_TURN".equals(codeMap.get("codeName"))){
+                is_turn = codeMap.get("codeValue").toString();
+            }
+        }
+        if(is_turn.equals("0")){
+            ar.setSuccess(false);
+            ar.setMessage("暂未开放，敬请期待！");
+            return ar;
+        }
+        
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		String userCode="";
         if(user==null){
