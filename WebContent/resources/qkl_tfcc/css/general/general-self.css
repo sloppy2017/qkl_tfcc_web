@@ -43,9 +43,9 @@
     font-size: 14px;
 }
 .form input{
-
     width:260px;
     height:40px;
+    line-height:40px;
     margin-right: 14px;
 }
 .form label{

@@ -1,221 +1,252 @@
 <!DOCTYPE>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>个人中心</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-          <link rel="icon" href="/resources/qkl_tfcc/imgs/logo.ico" type="image/x-icon">
-        <link rel="stylesheet" href="../../resources/qkl_tfcc/css/common/reset.css">
-        <link rel="stylesheet" href="../../resources/qkl_tfcc/css/common/common.css">
-        <link rel="stylesheet" href="../../resources/qkl_tfcc/css/general/general-self.css">
-        <link rel="stylesheet" href="../../resources/qkl_tfcc/css/date/monthPicker.css">
-        <script src="../../resources/qkl_tfcc/js/common/jquery-1.9.1.min.js"></script>
-        <!--<script src="/resources/qkl_tfcc/js/date/dateRange.js"></script>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>个人中心</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="icon" href="/resources/qkl_tfcc/imgs/logo.ico" type="image/x-icon">
+		<link rel="stylesheet" href="../../resources/qkl_tfcc/css/common/reset.css">
+		<link rel="stylesheet" href="../../resources/qkl_tfcc/css/common/common.css">
+		<link rel="stylesheet" href="../../resources/qkl_tfcc/css/general/general-self.css">
+		<link rel="stylesheet" href="../../resources/qkl_tfcc/css/date/monthPicker.css">
+		<script src="../../resources/qkl_tfcc/js/common/jquery-1.9.1.min.js"></script>
+		<!--<script src="/resources/qkl_tfcc/js/date/dateRange.js"></script>
         <script src="/resources/qkl_tfcc/js/date/monthPicker.js"></script>-->
-        <style type="text/css">
-            .hide{display: none;}
-            #networkName,#companyName{display: none;}
-        </style>
-    </head>
-<body>
-<div class="mark2">
-    <div class="mark2-box">
-        <div class="success-icon"></div>
-        <p>个人信息修改成功</p>
-        <div class="achieve"><p>完成</p></div>
-    </div>
-</div>
-<div class="header fix">
-    <div class="logo fl">
-        <img src="../../resources/qkl_tfcc/imgs/reglogos_02.png" alt="">
-    </div>
-    <div class="nav-right fl">
-        <div class="top">
-            <span class="yearTime"></span>
-            <span class="dateTime"></span>
-            <span class="weekTime"></span>
-            <span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
-            <span class="exit"><a href="/service/user/logout">【退出】</a></span>
-        </div>
-        <div class="nav fix">
-            <ul class="fl">
-             <li><a  href="../general_vip/general_stocks.html">我要购买</a></li>
-                <li ><a href="../general_vip/general_team.html">我的团队</a></li>
-                <li ><a  href="../general_vip/general_account.html">我的账户</a></li>
-                <li ><a  class="active" href="../general_vip/general_myself.html">个人中心</a></li>
-                <li><a  href="../general_vip/general_safety.html">安全中心</a></li>
-                <li><a href="http://www.sanjielian.com" target="new_window">数字钱包</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="main fl" >
-        <div class="mains">
-            <div class="main-top">你当前的位置：<span>个人中心</span></div>
-                
-                <div class="main-photo">
-                  <div class="pic fl">
-                      <p>个人头像</p>
-                      <div style="vertical-align: middle;line-height:114px;text-align: center;">
-                          <span onclick="delPic()" style="position: absolute;margin-left: 104px;"><img alt="" src="/resources/qkl_tfcc/imgs/close.gif" width="18px;"></span>
-                          <img id="headPicId" src=""  width="122px" height="122px">
-                      </div>
-                  </div>
-                  <div class="upload fl">
-                    <p>上传头像</p>
-                      <form id="imgForm"  method="post">
-  <!--                       <input type="file" value="选择文件"> -->
-                        <label class="text_center;" style="color: red">原图上传：(请上传122*122规格的图片)</label><br>
-                        <input type="file" id="tp" name="tp" onchange="uploadimg(this)"><br><br>
-                      </form>
-                  </div>
-                </div>
-                <form id="form"  class="form" method="post">
-<!--                 <div id="networkName"><label >网点名称</label><input type="text" id="branch_name" name="branch_name" placeholder="" disabled="disabled"></div> -->
-                <div id="companyName"><label >公司名称</label><input type="text" id="crop_name" name="crop_name" placeholder="" disabled="disabled"></div>
-                <div><label >姓名</label><input type="text" id="realName" name="realName" placeholder="未实名认证" disabled="disabled"><span class="hint"></span></div>
-                <div><label >身份证号码</label><input type="text" id="idno" name="idno" placeholder="未实名认证"  disabled="disabled"></div>
-                <div><label >手机号</label><input type="text" id="phone" name="phone" placeholder=""  disabled="disabled"><span class="hint"> 前往 "安全中心" 进行修改。</span></div>
-                <div><label >微信号</label><input type="text" id="wxnum" name="wxnum" placeholder="请输入微信号" maxlength="15"></div>
-                <div><label >支付宝账号</label><input type="text" id="bankaccno" name="bankaccno" placeholder="请输入支付宝账号" maxlength="25"></div>
-                <div><label >通讯地址</label><input type="text" id="mailAddrss" name="mailAddrss" placeholder="请输入通讯地址" maxlength="50"></div>
-                <div><label >邮编</label><input type="text" id="zipCode" name="zipCode" placeholder="请输入邮编" maxlength="6"></div>
-                <div><a href="javascript:save()"></a></div>
-                <!--头像地址 -->
-                <input type="hidden" id="imgAddrss" name="imgAddrss" >
-                <input type="hidden" id="userCode" name="userCode" >
-                <input type="hidden" id="realName1" name="realName" >
-                <input type="hidden" id="idno1" name="idno" >
-            </form>
-            <iframe class="hide" name="aaa" ></iframe>
-        </div>
-    </div>
-    <div class="side-bar fl">
-        <div class="fl">
-            <div class="myImg">
-                <div>
-                    <img id="left_headPicId" src=""  width="122" alt="">
-                </div>
-                <p>普通会员</p>
-            </div>
+		<style type="text/css">
+			.hide {
+				display: none;
+			}
+			
+			#networkName,
+			#companyName {
+				display: none;
+			}
+		</style>
+	</head>
 
-            <div class="qr-code">
-                <div>
-                    <img src="../../resources/qkl_tfcc/imgs/ma.jpg" alt="">
-                </div>
-                <p>我的二维码</p>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../../resources/qkl_tfcc/js/date/dateCom.js"></script>
+	<body>
+		<div class="mark2">
+			<div class="mark2-box">
+				<div class="success-icon"></div>
+				<p>个人信息修改成功</p>
+				<div class="achieve">
+					<p>完成</p>
+				</div>
+			</div>
+		</div>
+		<div class="header fix">
+			<div class="logo fl">
+				<img src="../../resources/qkl_tfcc/imgs/reglogos_02.png" alt="">
+			</div>
+			<div class="nav-right fl">
+				<div class="top">
+					<span class="yearTime"></span>
+					<span class="dateTime"></span>
+					<span class="weekTime"></span>
+					<span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;尊敬的 <span id="user"></span> ，您好！&nbsp;欢迎使用本系统</span>
+					<span class="exit"><a href="/service/user/logout">【退出】</a></span>
+				</div>
+				<div class="nav fix">
+					<ul class="fl">
+						<li>
+							<a href="../general_vip/general_stocks.html">我要购买</a>
+						</li>
+						<li>
+							<a href="../general_vip/general_team.html">我的团队</a>
+						</li>
+						<li>
+							<a href="../general_vip/general_account.html">我的账户</a>
+						</li>
+						<li>
+							<a class="active" href="../general_vip/general_myself.html">个人中心</a>
+						</li>
+						<li>
+							<a href="../general_vip/general_safety.html">安全中心</a>
+						</li>
+						<li>
+							<a href="http://www.sanjielian.com" target="new_window">数字钱包</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="main fl">
+				<div class="mains">
+					<div class="main-top">你当前的位置：<span>个人中心</span></div>
 
-<script type="text/javascript" >
-   $(function(){
-    　   　toMyself();
-    }); 
-  function uploadimg(obj){
-      var filepath =$("input[type='file'][name='tp']").val();
-      if(filepath==""){
-          alert("请选择文件！");
-          return;
-      }
-      var userCode = $("#userCode").val();
-      $('#imgForm').attr("target","aaa");
-      $('#imgForm').attr("enctype","multipart/form-data");
-      var form  = document.getElementById("imgForm");
-      form.action = "/service/user/upload?filepath="+filepath+"&userCode="+userCode;
-      form.submit();  
-  }
-  function delPic(){
-      if($.trim($("#imgAddrss").val())==''){
-          return;
-      }
-      var imgAddrss = $("#imgAddrss").val();
-      var userCode = $("#userCode").val();
-      var url = "/service/user/delPic";
-      $.post(url,{"imgAddrss":imgAddrss,"userCode":userCode},function(data){
-          if(data.success){
-              $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
-              $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");//删除后设置为默认图片
-              $("#imgAddrss").val("");
-          }
-          if(!data.success){
-              alert(data.message);
-          }
-          
-      });
-  }
-  
-  function toMyself(){
-      var url = "/service/user/toMyself";
-      $.getJSON(url,function(data){
-          if(data.success){
-              $("#realName").val(data.data.realName);
-              $("#realName1").val(data.data.realName);
-              if(data.data.userType==1&&(data.data.realName==null||data.data.realName=='')){//普通会员未认证时提示认证
-                  $("#realName").next().text("您还未实名认证，为保障你的交易顺利进行，请及时前往\"安全中心\"进行认证");
-              }
-              $("#idno").val(data.data.idno);
-              $("#idno1").val(data.data.idno);
-              $("#phone").val(data.data.phone);
-              $("#wxnum").val(data.data.wxnum);
-              $("#bankaccno").val(data.data.bankaccno);
-              $("#mailAddrss").val(data.data.mailAddrss);
-              $("#zipCode").val(data.data.zipCode);
-              $("#imgAddrss").val(data.data.imgAddrss);
-              $("#userCode").val(data.data.userCode);
-              if(data.data.imgAddrss){
-                  $("#imgAddrss").val(data.data.imgAddrss);
-                  $("#headPicId").attr("src",data.data.imgAddrss);
-                  $("#left_headPicId").attr("src",data.data.imgAddrss);
-              }else{
-            	  $("#headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
-                  $("#left_headPicId").attr("src","/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
-              }
-              if(data.data.userType==2){//网点会员
-                  $("#networkName").css("display","block");
-                  $("#branch_name").val(data.data.branchName);
-                  $("#idno").prev("label").html("法人身份证号");
-                  $("#mailAddrss").prev("label").html("公司地址");
-              }else if(data.data.userType==4){//投资公司
-                  $("#companyName").css("display","block");
-                  $("#crop_name").val(data.data.branchName);
-                  $("#realName").prev("label").html("法人姓名");
-                  $("#idno").prev("label").html("法人身份证号");
-                  $("#mailAddrss").prev("label").html("公司地址");
-              }
-              if(data.data.userName){
-                  $("#user").html(data.data.userName);
-              }else if(data.data.realName){
-                  $("#user").html(data.data.realName);
-              }else{
-                  $("#user").html(data.data.phone);
-              }
-          }
-          
-      })
-  }
-  
-  function save(){
-      //非空时做格式校验
-      var validWxnum = true;
-      var zipCode = true;
-      if($("#wxnum").val().trim()!=''){
-          validWxnum = valid_wxnum($("#wxnum"));
-      }
-      if($("#zipCode").val().trim()!=''){
-          zipCode = valid_zipCode($("#zipCode"));
-      }
-      if(!(validWxnum&&zipCode)){
-          return;
-      }
-      var url = "/service/user/modifyuser";
-      $.post(url,$("#form").serialize(),function(json){
-          alert(json.message);
-      });
-      /* $.ajax({
+					<div class="main-photo">
+						<div class="pic fl">
+							<p>个人头像</p>
+							<div style="vertical-align: middle;line-height:114px;text-align: center;">
+								<span onclick="delPic()" style="position: absolute;margin-left: 104px;">
+                               <img alt="" src="/resources/qkl_tfcc/imgs/close.gif" width="18px;">
+                            </span>
+								<img id="headPicId" src="" width="122px" height="122px">
+							</div>
+						</div>
+						<div class="upload fl">
+							<p>上传头像</p>
+							<form id="imgForm" method="post">
+								<!--                       <input type="file" value="选择文件"> -->
+								<label class="text_center;" style="color: red">原图上传：(请上传122*122规格的图片)</label><br>
+								<input type="file" id="tp" name="tp" onchange="uploadimg(this)"><br><br>
+							</form>
+						</div>
+					</div>
+					<form id="form" class="form" method="post">
+						<!--                 <div id="networkName"><label >网点名称</label><input type="text" id="branch_name" name="branch_name" placeholder="" disabled="disabled"></div> -->
+						<div id="companyName"><label>公司名称</label><input type="text" id="crop_name" name="crop_name" placeholder="" disabled="disabled"></div>
+						<div><label>姓名</label><input type="text" id="realName" name="realName" placeholder="未实名认证" disabled="disabled"><span class="hint"></span></div>
+						<div><label>身份证号码</label><input type="text" id="idno" name="idno" placeholder="未实名认证" disabled="disabled"></div>
+						<div><label>手机号</label><input type="text" id="phone" name="phone" placeholder="" disabled="disabled"><span class="hint"> 前往 "安全中心" 进行修改。</span></div>
+						<div><label>微信号</label><input type="text" id="wxnum" name="wxnum" placeholder="请输入微信号" maxlength="15"></div>
+						<div><label>支付宝账号</label><input type="text" id="bankaccno" name="bankaccno" placeholder="请输入支付宝账号" maxlength="25"></div>
+						<div><label>通讯地址</label><input type="text" id="mailAddrss" name="mailAddrss" placeholder="请输入通讯地址" maxlength="50"></div>
+						<div><label>邮编</label><input type="text" id="zipCode" name="zipCode" placeholder="请输入邮编" maxlength="6"></div>
+						<div>
+							<a href="javascript:save()"></a>
+						</div>
+						<!--头像地址 -->
+						<input type="hidden" id="imgAddrss" name="imgAddrss">
+						<input type="hidden" id="userCode" name="userCode">
+						<input type="hidden" id="realName1" name="realName">
+						<input type="hidden" id="idno1" name="idno">
+					</form>
+					<iframe class="hide" name="aaa"></iframe>
+				</div>
+			</div>
+			<div class="side-bar fl">
+				<div class="fl">
+					<div class="myImg">
+						<div>
+							<img id="left_headPicId" src="" width="122" alt="">
+						</div>
+						<p>普通会员</p>
+					</div>
+
+					<div class="qr-code">
+						<div>
+							<img src="../../resources/qkl_tfcc/imgs/ma.jpg" alt="">
+						</div>
+						<p>我的二维码</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../resources/qkl_tfcc/js/date/dateCom.js"></script>
+
+		<script type="text/javascript">
+			$(function() {　　
+				toMyself();
+			});
+
+			function uploadimg(obj) {
+				var filepath = $("input[type='file'][name='tp']").val();
+				if(filepath == "") {
+					alert("请选择文件！");
+					return;
+				}
+				var userCode = $("#userCode").val();
+				$('#imgForm').attr("target", "aaa");
+				$('#imgForm').attr("enctype", "multipart/form-data");
+				var form = document.getElementById("imgForm");
+				form.action = "/service/user/upload?filepath=" + filepath + "&userCode=" + userCode;
+				form.submit();
+			}
+
+			function delPic() {
+				if($.trim($("#imgAddrss").val()) == '') {
+					return;
+				}
+				var imgAddrss = $("#imgAddrss").val();
+				var userCode = $("#userCode").val();
+				var url = "/service/user/delPic";
+				$.post(url, {
+					"imgAddrss": imgAddrss,
+					"userCode": userCode
+				}, function(data) {
+					if(data.success) {
+						$("#headPicId").attr("src", "/resources/qkl_tfcc/imgs/LPtouxiang.jpg"); //删除后设置为默认图片
+						$("#left_headPicId").attr("src", "/resources/qkl_tfcc/imgs/LPtouxiang.jpg"); //删除后设置为默认图片
+						$("#imgAddrss").val("");
+					}
+					if(!data.success) {
+						alert(data.message);
+					}
+
+				});
+			}
+
+			function toMyself() {
+				var url = "/service/user/toMyself";
+				$.getJSON(url, function(data) {
+					if(data.success) {
+						$("#realName").val(data.data.realName);
+						$("#realName1").val(data.data.realName);
+						if(data.data.userType == 1 && (data.data.realName == null || data.data.realName == '')) { //普通会员未认证时提示认证
+							$("#realName").next().text("您还未实名认证，为保障你的交易顺利进行，请及时前往\"安全中心\"进行认证");
+						}
+						$("#idno").val(data.data.idno);
+						$("#idno1").val(data.data.idno);
+						$("#phone").val(data.data.phone);
+						$("#wxnum").val(data.data.wxnum);
+						$("#bankaccno").val(data.data.bankaccno);
+						$("#mailAddrss").val(data.data.mailAddrss);
+						$("#zipCode").val(data.data.zipCode);
+						$("#imgAddrss").val(data.data.imgAddrss);
+						$("#userCode").val(data.data.userCode);
+						if(data.data.imgAddrss) {
+							$("#imgAddrss").val(data.data.imgAddrss);
+							$("#headPicId").attr("src", data.data.imgAddrss);
+							$("#left_headPicId").attr("src", data.data.imgAddrss);
+						} else {
+							$("#headPicId").attr("src", "/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
+							$("#left_headPicId").attr("src", "/resources/qkl_tfcc/imgs/LPtouxiang.jpg");
+						}
+						if(data.data.userType == 2) { //网点会员
+							$("#networkName").css("display", "block");
+							$("#branch_name").val(data.data.branchName);
+							$("#idno").prev("label").html("法人身份证号");
+							$("#mailAddrss").prev("label").html("公司地址");
+						} else if(data.data.userType == 4) { //投资公司
+							$("#companyName").css("display", "block");
+							$("#crop_name").val(data.data.branchName);
+							$("#realName").prev("label").html("法人姓名");
+							$("#idno").prev("label").html("法人身份证号");
+							$("#mailAddrss").prev("label").html("公司地址");
+						}
+						if(data.data.userName) {
+							$("#user").html(data.data.userName);
+						} else if(data.data.realName) {
+							$("#user").html(data.data.realName);
+						} else {
+							$("#user").html(data.data.phone);
+						}
+					}
+
+				})
+			}
+
+			function save() {
+				//非空时做格式校验
+				var validWxnum = true;
+				var zipCode = true;
+				if($.trim($("#wxnum").val()) != '') {
+					validWxnum = valid_wxnum($("#wxnum"));
+				}
+				if($.trim($("#zipCode").val()) != '') {
+					zipCode = valid_zipCode($("#zipCode"));
+				}
+				if(!(validWxnum && zipCode)) {
+					return;
+				}
+				var url = "/service/user/modifyuser";
+				$.post(url, $("#form").serialize(), function(json) {
+					alert(json.message);
+				});
+				/* $.ajax({
           type: "POST",
           url: url,
           data:{"phone":"1231654"},
@@ -226,107 +257,111 @@
               alert(1313);
           }
        }); */
-  }
- //微信号码
-  $('#wxnum').blur(function(){
-      $(this).val($(this).val().trim());
-      if($(this).val()==''){
-          return;
-      }
-      valid_wxnum($(this));
-  });
-  function valid_wxnum($this){
-	    var reg=/^[a-zA-Z\d_]{5,}$/;
-	    var reg_mail = /^([a-z0-9A-Z]+[-|\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\.)+[a-zA-Z]{2,}$/;
-	    if(!reg.test($this.val())&&!reg_mail.test($this.val())){
-	        $this.val('请输入正确的微信号');
-	        $this.addClass('errorTip');
-	        return false;
-	    }else {
-          if($this.hasClass('errorTip')){
-              $this.removeClass('errorTip');
-          }
-          return true;
-      }
-  }
-  //支付宝
-  /* $('#bankaccno').blur(function(){
-      $(this).val($(this).val().trim());
-      if($(this).val()==''){
-          return;
-      }
-      valid_bankaccno($(this));
-  });
-  function valid_bankaccno($this){
-      var reg = /^(((13[0-9]{1})|159|153)+\d{8})$/;
-      if(!reg.test($this.val())){
-          $this.val('请输入正确的支付宝号');
-          $this.addClass('errorTip');
-          return false;
-      }else {
-          if($this.hasClass('errorTip')){
-              $this.removeClass('errorTip');
-          }
-          return true;
-      }
-  } */
-  //通讯地址
-  /* $('#mailAddrss').blur(function(){
-      $(this).val($(this).val().trim());
-      if($(this).val()==''){
-          return;
-      }
-      valid_mailAddrss($(this));
-  });
-  function valid_mailAddrss($this){
-       var reg=/[\u4e00-\u9fa5]/;
-          if ($this.val() == '') {
-              $this.val('通讯地址不能为空');
-              $this.addClass('errorTip');
-              return false;
-          }if(!reg.test($this.val())){
-              $this.val('通讯地址格式有误');
-              $this.addClass('errorTip');
-              return false;
-          }else {
-              if($this.hasClass('errorTip')){
-                  $this.removeClass('errorTip');
-              }
-              return true;
-          }
-  } */
-  //邮编
-  $('#zipCode').blur(function(){
-      $(this).val($(this).val().trim());
-      if($(this).val()==''){
-          return;
-      }
-      valid_zipCode($(this));
-  });
-  function valid_zipCode($this){
-      var reg=/^\d{6}(?!\d)$/;
-      if ($this.val() == '') {
-          $this.val('邮编不可以为空');
-          $this.addClass('errorTip');
-          return false;
-      }if(!reg.test($this.val())){
-          $this.val('请输入正确的邮编');
-          $this.addClass('errorTip');
-          return false;
-      }else {
-          if($this.hasClass('errorTip')){
-              $this.removeClass('errorTip');
-          }
-         return true;
-      }
-  }
-  $("input[disabled!='disabled']").focus(function(){
-      if($(this).hasClass('errorTip')){
-          $(this).removeClass('errorTip');
-          $(this).val('');
-      }
-      
-  });
-</script>
-</body>
+			}
+			//微信号码
+			$('#wxnum').blur(function() {
+				$(this).val($.trim($(this).val()));
+				if($(this).val() == '') {
+					return;
+				}
+				valid_wxnum($(this));
+			});
+
+			function valid_wxnum($this) {
+				var reg = /^[a-zA-Z\d_]{5,}$/;
+				var reg_mail = /^([a-z0-9A-Z]+[-|\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\.)+[a-zA-Z]{2,}$/;
+				if(!reg.test($this.val()) && !reg_mail.test($this.val())) {
+					$this.val('请输入正确的微信号');
+					$this.addClass('errorTip');
+					return false;
+				} else {
+					if($this.hasClass('errorTip')) {
+						$this.removeClass('errorTip');
+					}
+					return true;
+				}
+			}
+			//支付宝
+			/* $('#bankaccno').blur(function(){
+			    $(this).val($(this).val().trim());
+			    if($(this).val()==''){
+			        return;
+			    }
+			    valid_bankaccno($(this));
+			});
+			function valid_bankaccno($this){
+			    var reg = /^(((13[0-9]{1})|159|153)+\d{8})$/;
+			    if(!reg.test($this.val())){
+			        $this.val('请输入正确的支付宝号');
+			        $this.addClass('errorTip');
+			        return false;
+			    }else {
+			        if($this.hasClass('errorTip')){
+			            $this.removeClass('errorTip');
+			        }
+			        return true;
+			    }
+			} */
+			//通讯地址
+			/* $('#mailAddrss').blur(function(){
+			    $(this).val($(this).val().trim());
+			    if($(this).val()==''){
+			        return;
+			    }
+			    valid_mailAddrss($(this));
+			});
+			function valid_mailAddrss($this){
+			     var reg=/[\u4e00-\u9fa5]/;
+			        if ($this.val() == '') {
+			            $this.val('通讯地址不能为空');
+			            $this.addClass('errorTip');
+			            return false;
+			        }if(!reg.test($this.val())){
+			            $this.val('通讯地址格式有误');
+			            $this.addClass('errorTip');
+			            return false;
+			        }else {
+			            if($this.hasClass('errorTip')){
+			                $this.removeClass('errorTip');
+			            }
+			            return true;
+			        }
+			} */
+			//邮编
+			$('#zipCode').blur(function() {
+				$(this).val($.trim($(this).val()));
+				if($(this).val() == '') {
+					return;
+				}
+				valid_zipCode($(this));
+			});
+
+			function valid_zipCode($this) {
+				var reg = /^\d{6}(?!\d)$/;
+				if($this.val() == '') {
+					$this.val('邮编不可以为空');
+					$this.addClass('errorTip');
+					return false;
+				}
+				if(!reg.test($this.val())) {
+					$this.val('请输入正确的邮编');
+					$this.addClass('errorTip');
+					return false;
+				} else {
+					if($this.hasClass('errorTip')) {
+						$this.removeClass('errorTip');
+					}
+					return true;
+				}
+			}
+			$("input[disabled!='disabled']").focus(function() {
+				if($(this).hasClass('errorTip')) {
+					$(this).removeClass('errorTip');
+					$(this).val('');
+				}
+
+			});
+		</script>
+	</body>
+
 </html>

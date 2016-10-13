@@ -252,99 +252,48 @@ $(function(){
   */
   
   
-  
-  
-  
-/* 列表查询*/
-
-  var str='';
-  var flag =true;
-
+  /* 列表查询*/
   $(".trans-serach-btn").click(function(){
       var showcnt =10; //每页页数初始值
-      var  myselect=document.getElementById("showcnt");
-      if(myselect==null||myselect=="null"){
-      }else{
-          showcnt=myselect.options[myselect.selectedIndex].value;
-      }
-      
-      str='';
-     /* if(document.getElementById("quan").checked==true){
-          document.getElementById("lva").checked =true;
-          document.getElementById("lvb").checked =true;
-          document.getElementById("lvc").checked =true;
-      }*/
-      
-      if(document.getElementById("quan").checked==true){
-          str = str+'ALL,';
-      }
-      else{
-          if(document.getElementById("lva").checked==true){
-              str = str+"A,";
-          }
-          if(document.getElementById("lvb").checked==true){
-              str = str+"B,";
-          }
-          if(document.getElementById("lvc").checked==true){
-              str = str+"C,";
-          }
-      }
-    // alert("str is "+str);
-      
-     
-      if(flag){
-          reload_table(1,showcnt);
-      }
-      
+      var currentPage = 1;
+      reload_table(currentPage,showcnt);
       //$('.page1 ul li').click(function(){
       //    $(this).addClass('bg-color').siblings().removeClass('bg-color');
       //});
-
-
   });
   	
   function reload_table(currentPage,showCount) {
-      var rsStr = "";
      // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
       $.ajax({
           type: 'post',
-          url: '/service/team/findVipPage?str='+str+'&currentPage='+currentPage+'&showCount='+showCount,
+          url: '/service/comacc/findout?'+$("#form").serialize()+'&currentPage='+currentPage+'&showCount='+showCount,
           dataType: 'json',
-          data: {
+          /*data: {
               str:str,
               currentPage: currentPage,
               showCount: showCount
-          },
+          },*/
           success: function (data) {
-              var tviplist = data.data.tviplist;
-              if(tviplist.length==0||tviplist==null){
-//          		alert("没有符合条件的会员信息");
-          		$("#tfoot").show();
-          		$("#showData").hide();
-          		return;
-          	}
-              /*var tablecols = "<tr> \n"
-                  + " <th>会员级别</th> \n"
-                  + "<th>会员账号</th> \n"
-                  +"<th>会员姓名 </th>\n"
-                  + "<th>购买数量</th> \n"
-                  + "<th>注册时间</th> \n"
-//                  +"<th>购买量(股)</th>\n"
-                  + "</tr> \n";
-              rsStr= tablecols;*/
-              for (var i = 0; i < tviplist.length; i++) {
+        	  var outList = data.data.outList;
+              if(outList.length==0||outList==null){
+                  $("#tfoot").show();
+                  $("#showData").hide();
+                  return;
+              }
+              var rsStr = "";
+              for (var i = 0; i < outList.length; i++) {
                   rsStr = rsStr + "<tr class='ss'>";
-                  rsStr = rsStr + "<th>" + tviplist[i].rela_level + "</th>";
-                  rsStr = rsStr + "<th>" + tviplist[i].phone + "</th>";
-                  rsStr = rsStr + "<th>" + tviplist[i].real_name + "</th>";
-                  rsStr = rsStr + "<th>" + tviplist[i].buyNum + "</th>";
-                  rsStr = rsStr + "<th>" + tviplist[i].rg_time + "</th>";
+                  rsStr = rsStr + "<th>" + (i+1) + "</th>";
+                  rsStr = rsStr + "<th>" + outList[i].outdate + "</th>";
+                  rsStr = rsStr + "<th>" + outList[i].outamnt + "</th>";
+                  rsStr = rsStr + "<th>" + outList[i].recipient + "</th>";
+                  rsStr = rsStr + "<th>" + outList[i].out_status + "</th>";
+                  rsStr = rsStr + "<th>" + outList[i].order_ids + "</th>";
                   rsStr = rsStr + "</tr>";
               }
               $("#showData").html( rsStr);
               $("#showData").show();
               $("#tfoot").hide();
-//              console.log(data.data.page.pageStr);
               $(".pages1").html(data.data.page.pageStr);
 
           }, 
@@ -353,8 +302,6 @@ $(function(){
           }
       });
   }
-
-
   
   
   

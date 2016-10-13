@@ -1,3 +1,4 @@
+
 .main-top{
 	width:100%;
 	height:52px;
@@ -55,7 +56,7 @@
     left:900px;
     top:10px;
     font-size:14px;
-    background: dodgerblue;
+    background: #2b71b1;;
     cursor:pointer;
  }
  
@@ -95,42 +96,22 @@
 .d-accts input{
 	width:240px;
 	height:30px;
+	line-height:30px;
 }
 .trans-serach-btn{
 	position:absolute;
-    left: 950px;
+    left: 960px;
 	top:120px;
 	width:100px;
 	height:32px;
 	line-height:32px;
-    background: dodgerblue;
+    background:#2b71b1;;
 	color:#fff;
 	text-align:center;
 	border-radius:8px; 
 	cursor:pointer
 }
 
-.table-list {
-    margin: 22px 20px;
-    height: 370px;
-    
-    
-}
-.result-tab {
-    border-collapse: collapse;
-}
-.result-tab tr:nth-child(odd) {
-    background: #f6fafe;
-}
-.result-tab tr th {
-    font-size: 14px;
-    color: #575757;
-    border: none;
-}
-.result-tab tr {
-    height: 42px;
-    border: 1px solid #ddd;
-}
 .d-accts label, .trans-money label{
 	margin-right:20px;
 }
@@ -140,11 +121,8 @@
 }
 .trans-money input{
 	height:30px;
+	line-height:30px;
 }
-
-
-
-
 
 .my-award{
 	margin: 0 20px;
@@ -225,6 +203,7 @@
 .trans-tfcc input,.trans-jfcc input{
 	width:180px;
 	height:26px;
+	line-height:26px;
 }
 .t_trans{
 	color:#2b71b1;

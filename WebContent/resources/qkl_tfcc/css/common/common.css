@@ -175,3 +175,67 @@
     
     
 }
+
+
+/* 分页部分 */
+/*分页*/
+.table-list{
+    margin: 22px 0px;
+    height:370px;
+}
+.result-tab{
+    border-collapse: collapse;
+}
+.result-tab tr{
+    height:42px;
+    border:1px solid #ddd;
+}
+.result-tab tr:nth-child(odd){
+	 background:#f6fafe;
+}
+.result-tab tr th{
+    font-size: 14px;
+    color:#575757;
+    border:none;
+}
+
+.pages1{
+    margin-top:20px;
+    height:32px;
+}
+ .pages1 ul {
+   width: 1040px;
+    margin: 0 auto;
+}
+ .pages1 ul li{
+ 	float:left;
+    margin: 0px 5px;
+    height: 32px;
+    line-height: 32px;
+    width: 57px;
+    border: 1px solid #ddd;
+    text-align: center;
+    cussor:pointer;
+}
+ .pages1 ul li input{
+    height:28px;
+  	text-indent:8px;
+    border:none;
+    margin: 1px 6px;
+}
+ .pages1 ul li a{
+    display: block;
+    height:32px;
+}
+ .pages1 ul li select{
+    height: 32px;
+    border: none;
+    text-indent: 12px;
+    line-height: 32px;
+}
+.bg-color{
+    background: cyan;
+}
+
+
+
