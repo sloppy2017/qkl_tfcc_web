@@ -229,7 +229,7 @@
   }
  //微信号码
   $('#wxnum').blur(function(){
-      $(this).val($(this).val().trim());
+      $(this).val($.trim($(this).val()));
       if($(this).val()==''){
           return;
       }
@@ -297,7 +297,7 @@
   } */
   //邮编
   $('#zipCode').blur(function(){
-      $(this).val($(this).val().trim());
+      $(this).val($.trim($(this).val()));
       if($(this).val()==''){
           return;
       }
