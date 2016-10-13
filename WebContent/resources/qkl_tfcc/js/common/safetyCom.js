@@ -54,7 +54,6 @@ function valid_phone(){
 }
 //获取验证码
 function getVCode(phone) {
-	console.log(phone);
 	var validPhone = valid_phone();//验证手机号是否正确
     if(!validPhone){
         return;
@@ -155,7 +154,7 @@ function getUserInfo(){
     		  $('.renzhen').unbind("click");
     		  $("#renzheng").text("已验证");
     		  $("#renzheng").next("a").text("已认证");
-    		  $("#renzheng .renzhen").css("background","url('/resources/qkl_tfcc/imgs/grey.png') no-repeat 0px");
+    		  $("#renzheng").next().css("background","url('/resources/qkl_tfcc/imgs/grey.png') no-repeat 0px");
     		    		  
     	  }
       }else{
