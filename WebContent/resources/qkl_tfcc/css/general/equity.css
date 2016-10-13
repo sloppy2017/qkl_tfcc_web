@@ -79,11 +79,15 @@
 }
 .main-btm .search a{
     display: inline-block;
-    height:28px;
+    height:30px;
     width:100px;
-    border: 1px solid #ddd;
+    line-height:30px;
+	color:#fff;
+	font-size:14px;
     text-align: center;
     margin-left: 480px;
+    background:#2b71b1;;
+    border-radius:8px;
 }
 .main-btm .search select{
     width: 120px;
@@ -92,60 +96,3 @@
 }
 
 
-    /*分页*/
-/* .table-list{
-    margin: 22px 0px;
-    height:370px;
-}
-.result-tab{
-    border-collapse: collapse;
-}
-.result-tab tr{
-    height:42px;
-    border:1px solid #ddd;
-}
-.result-tab tr:nth-child(odd){
-    background:#f6fafe;
-}
-.result-tab tr th{
-    font-size: 14px;
-    color:#575757;
-    border:none;
-}
-
-.pages1{
-    margin-top:20px;
-    height:32px;
-}
-.main-btm .pages1 ul {
-    width: 1040px;
-    margin: 0 auto;
-}
-.main-btm .pages1 ul li{
-    margin: 0px 5px;
-    height: 32px;
-    line-height: 32px;
-    width: 57px;
-    float: left;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-.main-btm .pages1 ul li input{
-    height:28px;
-    text-indent:8px;
-    border:none;
-    margin: 1px 6px;
-}
-.main-btm .pages1 ul li a{
-    display: block;
-    height:32px;
-}
-.main-btm .pages1 ul li select{
-    height: 32px;
-    border: none;
-    text-indent: 12px;
-    line-height: 32px;
-}
-.bg-color{
-    background: cyan;
-} */

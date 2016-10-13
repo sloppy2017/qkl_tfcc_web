@@ -65,13 +65,12 @@
     text-align: center;
 }
 .main-middle .huiyuan .act{
-    color:blue;
-   /*  border-bottom:3px solid red; */
-   height:30px;
+    color:#2b71b1;;
+    height:30px;
      border-radius:8px 8px 0px 0px;
      margin-top: 60px;
      line-height:30px;
-     border:1px solid blue;
+     border:1px solid #2b71b1;;
      border-bottom:none;
 }
  .btm{
@@ -96,11 +95,12 @@
     display: block;
     font-size: 14px;
     width:100px;
-    height:28px;
-    color:#575757;
-    border:1px solid #ddd;
+    height:30px;
+    color:#fff;
+    background:#2b71b1;;
+    border-radius:8px;
     text-align: center;
-    line-height: 28px;
+    line-height:30px;
     margin-left: 222px;
 }
  .btm ul input{
@@ -157,6 +157,14 @@
     margin-left: -38px;
 }
 
+.btm .pages1 ul li{
+     margin: 0px 5px;
+    height: 32px;
+    line-height: 32px;
+    width: 57px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
 
 /*分页*/
 /* .table-list{
@@ -213,8 +221,8 @@
 }
 .bg-color{
     background: cyan;
-} */
-
+}
+ */
 
 
 

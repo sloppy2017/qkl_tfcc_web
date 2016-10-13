@@ -208,12 +208,14 @@
     margin: 0 auto;
 }
  .pages1 ul li{
-     margin: 0px 5px;
+ 	float:left;
+    margin: 0px 5px;
     height: 32px;
     line-height: 32px;
     width: 57px;
     border: 1px solid #ddd;
     text-align: center;
+    cussor:pointer;
 }
  .pages1 ul li input{
     height:28px;
