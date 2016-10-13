@@ -170,7 +170,7 @@ function getUserInfo(){
     		  $('.renzhen').unbind("click");
     		  $("#renzheng").text("已验证");
     		  $("#renzheng").next("a").text("已认证");
-    		  $("#renzheng .renzhen").css("background","url('/resources/qkl_tfcc/imgs/grey.png') no-repeat 0px");
+    		  $("#renzheng").next().css("background","url('/resources/qkl_tfcc/imgs/grey.png') no-repeat 0px");
     		    		  
     	  }
       }else{
