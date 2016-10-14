@@ -30,9 +30,9 @@ public class SmsJob {
 	 * 创建日期：2016-9-19 下午18:27:20 <br>
 	 * 创建人 zhangchunming<br>
 	 */
-	@Scheduled(cron="0 0/5 *  * * ?")//配置时间表达式，每5分钟执行一次任务
+//	@Scheduled(cron="0 0/5 *  * * ?")//配置时间表达式，每5分钟执行一次任务
 	public void sendSms() throws Exception{
-	    logger.debug("---------------------------------------------定时器发送短信------start------"+DateUtil.getCurrDateTime()+"---------------------------------------");
+	    /*logger.debug("---------------------------------------------定时器发送短信------start------"+DateUtil.getCurrDateTime()+"---------------------------------------");
 	    List<PageData> smsList = smsService.getSmsNoSend(null);
 	    PageData pd = new PageData();
         for(PageData tpd:smsList){
@@ -51,7 +51,7 @@ public class SmsJob {
             }
             smsService.updateSms(pd);
         }
-        logger.debug("---------------------------------------------定时器发送短信------end----------"+DateUtil.getCurrDateTime()+"-----------------------------------");
+        logger.debug("---------------------------------------------定时器发送短信------end----------"+DateUtil.getCurrDateTime()+"-----------------------------------");*/
 	}
 	public static void main(String[] args) {
         PageData pd = new PageData();

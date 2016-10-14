@@ -16,9 +16,34 @@
 	<task:annotation-driven />
     <!--  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	<context:component-scan base-package="com.qkl.tfcc.quartz.job" /> -->
-    <context:annotation-config/>  
-        <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
-    <context:component-scan base-package="com.qkl.tfcc.quartz.job"/>
+<!--     <context:annotation-config/>   -->
+       <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
+<!--      <context:component-scan base-package="com.qkl.tfcc.quartz.job"/> -->
+    
+    
+    <!-- 1、Scheduler的配置 -->
+    <!-- <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+       <property name="triggers">  
+           <list>  
+              <ref bean="testTrigger"/>  
+           </list>  
+       </property>  
+       <property name="autoStartup" value="true"/>  
+    </bean>
+    2、Trigger的配置
+    <bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+       <property name="jobDetail" ref="testJobDetail"/>  
+       <property name="cronExpression" value="0 14 10 14 * ?"/>每隔1秒钟触发一次  
+    </bean>
+    3、JobDetail的配置  
+    <bean id="testJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+        <property name="targetObject" ref="thawJob"/>  
+        <property name="targetMethod" value="execute"/>  
+        <property name="concurrent" value="false"/>
+        是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程  
+    </bean>
+    4、业务类的配置  
+    <bean id="thawJob" class="com.qkl.tfcc.quartz.job.ThawJob"/> -->
 </beans>
 
 

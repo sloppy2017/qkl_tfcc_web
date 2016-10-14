@@ -18,8 +18,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.qkl.tfcc.api.common.CodeConstant;
 import com.qkl.tfcc.api.common.Constant;
 import com.qkl.tfcc.api.service.acc.api.AccOutdetailService;
+import com.qkl.tfcc.api.service.sms.api.SmsService;
 import com.qkl.tfcc.api.service.sys.api.SysGenCodeService;
 import com.qkl.tfcc.provider.dao.InterfaceLogDao;
+import com.qkl.tfcc.sms.SmsSend;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
@@ -46,6 +48,8 @@ public class TransferAccController extends BaseAction{
     private AccOutdetailService accOutdetailService;
     @Autowired
     private InterfaceLogDao interfaceLogDao;
+    @Autowired
+    private SmsService smsService;
     
     /**
      * @describe:转账回调接口
@@ -92,7 +96,7 @@ public class TransferAccController extends BaseAction{
                     ar.setMessage("转账成功");
                     ar.setSuccess(true);
                     logger.info("转账回调------转账成功success---------");
-                  //添加日志
+                    //添加日志
                     PageData pd = new PageData();
                     pd.put("log_titile", "转账回调--更新库成功");
                     pd.put("log_content",params.toJSONString());
@@ -102,6 +106,15 @@ public class TransferAccController extends BaseAction{
                     pd.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
                     pd.put("log_status", "1");//转账日志状态：1-成功 0-失败 2-转账中
                     interfaceLogDao.insertSelective(pd);
+                    String orderId = params.getString("orderIds");//获取订单号
+                    PageData turnOutInfo = accOutdetailService.getTurnOutInfo(orderId, Constant.VERSION_NO);
+                    if(turnOutInfo!=null&&turnOutInfo.get("phone")!=null&&turnOutInfo.get("recipient")!=null&&turnOutInfo.get("outamnt")!=null){
+                        int num = smsService.getBlackPhone(turnOutInfo.getString("phone"));
+                        if(num==0){//非黑名单用户才能发送短信
+                            String content = "尊敬的【"+turnOutInfo.getString("phone")+"】会员您好，您已成功向三界链钱包账户【"+turnOutInfo.getString("recipient")+"】转出【"+turnOutInfo.getString("outamnt")+"】三界宝数字资产。";
+                            SmsSend.sendSms(turnOutInfo.getString("phone"), content); 
+                        }
+                    }
                     return ar;
                 }else{
                     ar.setMessage("转账失败");

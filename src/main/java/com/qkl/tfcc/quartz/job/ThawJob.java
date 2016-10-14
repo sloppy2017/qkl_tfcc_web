@@ -35,9 +35,9 @@ public class ThawJob {
 	 * 创建日期：2016-9-19 下午18:27:20 <br>
 	 * 创建人 zhangchunming<br>
 	 */
-//    @Scheduled(cron="0 0 10  * * ?")//配置时间表达式，每天凌晨1分钟执行一次任务
-	public void thaw() throws Exception{
-        /*logger.debug("---------------------------------------------每月1日定时器解冻余额----thaw--start------"+DateUtil.getCurrDateTime()+"---------------------------------------");
+    @Scheduled(cron="59 59 23  0/2 * ?")//配置时间表达式，每天凌晨1分钟执行一次任务
+	public void execute() throws Exception{
+        logger.debug("---------------------------------------------每月1日定时器解冻余额----thaw--start------"+DateUtil.getCurrDateTime()+"---------------------------------------");
 	    List<Map<String, Object>> codeList =  sysGenCodeService.findByGroupCode("RATIO", Constant.VERSION_NO);
 	    for(Map<String, Object> codeMap:codeList){
 	        if("THAW_RATIO".equals(codeMap.get("codeName"))){
@@ -52,6 +52,6 @@ public class ThawJob {
 	            logger.debug("---------------------------------------------每月1日定时器解冻余额---thaw---fail------"+DateUtil.getCurrDateTime()+"---------------------------------------");
 	        }
 	    }
-	    logger.debug("---------------------------------------------每月1日定时器解冻余额---thaw---end------"+DateUtil.getCurrDateTime()+"---------------------------------------");*/
+	    logger.debug("---------------------------------------------每月1日定时器解冻余额---thaw---end------"+DateUtil.getCurrDateTime()+"---------------------------------------");
 	}
 }
