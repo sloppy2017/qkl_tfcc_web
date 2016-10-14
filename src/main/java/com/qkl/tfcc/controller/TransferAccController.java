@@ -51,6 +51,8 @@ public class TransferAccController extends BaseAction{
     @Autowired
     private SmsService smsService;
     
+    private static int txcount=0;
+    
     /**
      * @describe:转账回调接口
      * @author: zhangchunming
@@ -63,9 +65,10 @@ public class TransferAccController extends BaseAction{
     @ResponseBody
     public AjaxResponse callback(HttpServletRequest request,HttpServletResponse response){
         logBefore(logger,"TransferAccController.callback()");
+        PageData pd = new PageData();
+    	pd = this.getPageData();
         try {
-            pd = this.getPageData();
-            //参数解析
+       //参数解析
             JSONObject params = new JSONObject();
             params.put("orderId", pd.get("orderId"));
             params.put("status", pd.get("status"));
@@ -97,15 +100,16 @@ public class TransferAccController extends BaseAction{
                     ar.setSuccess(true);
                     logger.info("转账回调------转账成功success---------");
                     //添加日志
-                    PageData pd = new PageData();
-                    pd.put("log_titile", "转账回调--更新库成功");
-                    pd.put("log_content",params.toJSONString());
-                    pd.put("syscode", Constant.CUR_SYS_CODE);
-                    pd.put("create_time", DateUtil.getCurrDateTime());
-                    pd.put("modify_time", DateUtil.getCurrDateTime());
-                    pd.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
-                    pd.put("log_status", "1");//转账日志状态：1-成功 0-失败 2-转账中
-                    interfaceLogDao.insertSelective(pd);
+                    PageData pd_log = new PageData();
+                    pd_log.put("log_titile", "转账回调--更新库成功");
+                    pd_log.put("log_content",params.toJSONString());
+                    pd_log.put("syscode", Constant.CUR_SYS_CODE);
+                    pd_log.put("create_time", DateUtil.getCurrDateTime());
+                    pd_log.put("modify_time", DateUtil.getCurrDateTime());
+                    pd_log.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
+                    pd_log.put("log_status", "1");//转账日志状态：1-成功 0-失败 2-转账中
+                    interfaceLogDao.insertSelective(pd_log);
+                    logger.info("转账回调------转账成功success---------pd id is "+pd.getString("orderId"));
                     String orderId = params.getString("orderIds");//获取订单号
                     PageData turnOutInfo = accOutdetailService.getTurnOutInfo(orderId, Constant.VERSION_NO);
                     if(turnOutInfo!=null&&turnOutInfo.get("phone")!=null&&turnOutInfo.get("recipient")!=null&&turnOutInfo.get("outamnt")!=null){
@@ -119,17 +123,17 @@ public class TransferAccController extends BaseAction{
                 }else{
                     ar.setMessage("转账失败");
                     ar.setSuccess(false);
-                    logger.info("转账回调------转账失败fail---------");
+                    logger.info("转账回调------转账失败fail---------pd id is "+pd.getString("orderId"));
                     //添加日志
-                    PageData pd = new PageData();
-                    pd.put("log_titile", "转账回调--更新库失败");
-                    pd.put("log_content",params.toJSONString());
-                    pd.put("syscode", Constant.CUR_SYS_CODE);
-                    pd.put("create_time", DateUtil.getCurrDateTime());
-                    pd.put("modify_time", DateUtil.getCurrDateTime());
-                    pd.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
-                    pd.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
-                    interfaceLogDao.insertSelective(pd);
+                    PageData pd_log = new PageData();
+                    pd_log.put("log_titile", "转账回调--更新库失败");
+                    pd_log.put("log_content",params.toJSONString());
+                    pd_log.put("syscode", Constant.CUR_SYS_CODE);
+                    pd_log.put("create_time", DateUtil.getCurrDateTime());
+                    pd_log.put("modify_time", DateUtil.getCurrDateTime());
+                    pd_log.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
+                    pd_log.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
+                    interfaceLogDao.insertSelective(pd_log);
                     return ar;
                 }
             }else{
@@ -138,15 +142,15 @@ public class TransferAccController extends BaseAction{
                 ar.setMessage("签名认证失败");
                 logger.info("转账回调------签名认证失败fail---------");
               //添加日志
-                PageData pd = new PageData();
-                pd.put("log_titile", "转账回调--签名认证失败");
-                pd.put("log_content",params.toJSONString());
-                pd.put("syscode", Constant.CUR_SYS_CODE);
-                pd.put("create_time", DateUtil.getCurrDateTime());
-                pd.put("modify_time", DateUtil.getCurrDateTime());
-                pd.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
-                pd.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
-                interfaceLogDao.insertSelective(pd);
+                PageData pd_log = new PageData();
+                pd_log.put("log_titile", "转账回调--签名认证失败");
+                pd_log.put("log_content",params.toJSONString());
+                pd_log.put("syscode", Constant.CUR_SYS_CODE);
+                pd_log.put("create_time", DateUtil.getCurrDateTime());
+                pd_log.put("modify_time", DateUtil.getCurrDateTime());
+                pd_log.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
+                pd_log.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
+                interfaceLogDao.insertSelective(pd_log);
                 return ar; 
             }
         } catch (Exception e) {
@@ -156,6 +160,8 @@ public class TransferAccController extends BaseAction{
             ar.setMessage("网络繁忙，请稍候重试！");
             logger.info("转账回调------系统异常---------");
         }finally{
+        	txcount++;
+        	logger.info("------------finally txcount is "+txcount+", pd value is -=="+pd.toString());
             logAfter(logger);
         }   
         return ar;
