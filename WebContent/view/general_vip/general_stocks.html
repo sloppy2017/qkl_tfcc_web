@@ -65,10 +65,12 @@
                         <div>
                             <label >需支付金额（元）</label><input  name="txamnt" type="text" autocomplete="off" readonly="readonly" placeholder="￥0.00">
                         </div>
-                        <div><label >我的支付宝</label><input  name="payno" type="text"  placeholder="支付宝账号"></div>
                         <div>
-
-                          <a id="buy" onclick=userRequest()>确认购买</a>
+                            <label >我的支付宝</label><input  name="payno" type="text"  placeholder="支付宝账号">
+                        </div>
+                        <div>
+                        
+                          <a id="buy" href="javascript:void(0);" onclick="userRequest()" >确认购买</a>
                           
                          <!--  <a href="https://auth.alipay.com/login/index.htm" target="new_window" id="pay">支付宝</a> -->
 
@@ -87,7 +89,7 @@
                             <option value="9">已取消</option>
                             <option value="0">待付款</option>
                         </select>
-                        <a   href="#" >查询</a>
+                        <a href="#" class="search-btn-a" >查询</a>
                     </div>
                 </div>
                 <div class="table-list">

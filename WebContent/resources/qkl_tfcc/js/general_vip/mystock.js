@@ -195,7 +195,7 @@ function getUserInfo(){
 
 var str='';
 var flag =true;
-$(".sel a").click(function(){//查询列表
+$(".sel .search-btn-a").click(function(){//查询列表
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
     if(myselect==null||myselect=="null"){
@@ -257,7 +257,7 @@ function reload_table(currentPage,showCount) {
 
         },
         error: function (data) {
-
+        	alert("错误")
         }
     });
 }
