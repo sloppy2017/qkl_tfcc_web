@@ -53,7 +53,10 @@ if (!isPlaceholder()) {//不支持placeholder 用jquery来完成
                             if($(this).val()=="") $(this).val($(this).attr("placeholder"));  
                         });  
                     }  
-            });  
+            });
+           /* $("input[type='password']").each(function(){
+            	$(this).val('');
+            });*/
             //对password框的特殊处理1.创建一个text框 2获取焦点和失去焦点的时候切换  
             var pwdField    = $("input[type=password]");  
             var pwdVal      = pwdField.attr('placeholder');  

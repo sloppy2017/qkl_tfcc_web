@@ -163,7 +163,19 @@ public class BankAccController extends BaseAction {
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		
 		try {
-			pd=this.getPageData();
+		    String is_sell = "0";
+		    List<Map<String, Object>> codeList =  sysGenCodeService.findByGroupCode("SELL_FLAG", Constant.VERSION_NO);
+	        for(Map<String, Object> codeMap:codeList){
+	            if("IS_SELL".equals(codeMap.get("codeName"))){
+	                is_sell = codeMap.get("codeValue").toString();
+	            }
+	        }
+		    if(is_sell.equals("0")){
+		        ar.setSuccess(false);
+		        ar.setMessage("已售罄！");
+		        return ar;
+		    }
+		    pd=this.getPageData();
 			BankAccInfo bankAccInfo = bankAccService.findBankInfo(Constant.VERSION_NO);
 			pd.put("order_no", OrderGenerater.generateOrderNo());
 			pd.put("revorgname",bankAccInfo.getOrgName());

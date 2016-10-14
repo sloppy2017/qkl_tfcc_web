@@ -88,13 +88,13 @@
 		//密码正则6-16字母数字或特殊字符
 		var result = password_valid($.trim($this.val()));
 		if ($this.val() == '') {
-			$this.next().html('请输入密码');
+			$this.parent().find(".error1").html('请输入密码');
 			return false;
 		} else if (!result) {
-			$this.next().html('请输入6~20位字母、数字或字符组合');
+			$this.parent().find(".error1").html('请输入6~20位字母、数字或字符组合');
 			return false;
 		} else {
-			$this.next().empty();
+			$this.parent().find(".error1").empty();
 			return true;
 		}
 	}
@@ -108,16 +108,16 @@
 		var result = password_valid($.trim($this.val()));
 		var pVal = 	$.trim($this.parent().prev().children("input[name='password']").val());
 		if ($this.val() == '') {
-			$this.next().html('请输入确认密码');
+			$this.parent().find(".error1").html('请输入确认密码');
 			return false;
 		}else if(!result){
-			$this.next().html('请输入6~20位字母、数字或字符组合');
+			$this.parent().find(".error1").html('请输入6~20位字母、数字或字符组合');
 			return false;
 		}else if($this.val()!=pVal){
-			$this.next().html('两次密码不一致');
+			$this.parent().find(".error1").html('两次密码不一致');
 			return false;
 		}else{
-			$this.next().empty();
+			$this.parent().find(".error1").empty();
 			return true;
 		}
 	}	
@@ -411,5 +411,3 @@ $('.hid-x').click(function(){
 			$(".form3 .submit").click();
 		}
 	});
-
-
