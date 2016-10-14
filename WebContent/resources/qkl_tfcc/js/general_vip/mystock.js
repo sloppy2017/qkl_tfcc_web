@@ -196,6 +196,7 @@ function getUserInfo(){
 var str='';
 var flag =true;
 $(".sel .search-btn-a").click(function(){//查询列表
+	/*alert(11111)*/
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
     if(myselect==null||myselect=="null"){
@@ -215,8 +216,9 @@ $(".sel .search-btn-a").click(function(){//查询列表
         reload_table(1,showcnt);
     }
 });
+
 function reload_table(currentPage,showCount) {
-    // alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);
+  /* alert("currentPage:"+currentPage+"---showCount:"+showCount+"---str:"+str);*/
     $.ajax({
         type: 'post',
         url: '/service/bankaccinfo/searchSel?str='+str+'&currentPage='+currentPage+'&showCount='+showCount,
@@ -227,8 +229,7 @@ function reload_table(currentPage,showCount) {
             showCount: showCount
         },
         success: function (data) {
-        	 console.log(data.data);
-            var tviplist = data.data.tradeInfo;
+             var tviplist = data.data.tradeInfo;
             if(tviplist.length==0||tviplist==null){
                 $("#tfoot").show();
                 $("#showData").hide();
@@ -252,8 +253,8 @@ function reload_table(currentPage,showCount) {
             $("#tfoot").hide();
             $("#showData").html(rsStr);
             $("#showData").show();
-           $(".pages1").html(data.data.page.pageStr);
-           $(".pages1").show();
+            $(".pages1").html(data.data.page.pageStr);
+            $(".pages1").show();
 
         },
         error: function (data) {
