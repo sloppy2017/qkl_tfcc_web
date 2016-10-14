@@ -291,7 +291,7 @@ $(function(){
                   rsStr = rsStr + "<th>" + outList[i].outamnt + "</th>";
                   rsStr = rsStr + "<th>" + outList[i].recipient + "</th>";
                   rsStr = rsStr + "<th>" + outList[i].out_status + "</th>";
-                  rsStr = rsStr + "<th>" + outList[i].order_ids + "</th>";
+                  rsStr = rsStr + "<th>" + outList[i].remark1 + "</th>";
                   rsStr = rsStr + "</tr>";
               }
               $("#showData").html( rsStr);

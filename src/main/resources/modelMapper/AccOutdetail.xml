@@ -60,7 +60,8 @@
 	 operator,
 	 order_ids,
 	 sender,
-	 recipient)
+	 recipient,
+	 remark1)
 	 values(
 	 #{userCode},
 	 #{subAccno},
@@ -74,8 +75,8 @@
 	 #{operator},
 	 #{order_ids},
 	 #{sender},
-	 #{recipient}
-	 )	 
+	 #{recipient},
+	 #{remark1})	 
 	 </insert>
 	
 	
@@ -98,5 +99,22 @@
 	 <select id="getAccOutDetailByOrderId" parameterType="java.lang.String" resultType="pd">
 	    select * from tb_acc_outdetail where order_ids = #{orderId}     
 	 </select>
-
+     <select id="getTurnOutInfo" parameterType="java.lang.String" resultType="pd">
+        select a.order_ids,a.outamnt,a.recipient,b.phone 
+        from tb_acc_outdetail a,tb_user_detail b 
+        where 1=1
+        and a.user_code = b.user_code 
+        and order_ids = #{orderId}     
+     </select>
+     <!-- 根据流水号修改转出记录 -->
+     <update id="updateStatusByFlowId" parameterType="pd" >    
+         update tb_acc_outdetail 
+         set 
+             modify_time = now(),
+             <if test="status != null and status != ''">
+                status = #{status},
+             </if>    
+             order_ids = #{order_ids}
+         where remark1 = #{remark1}     
+     </update>
 </mapper>     

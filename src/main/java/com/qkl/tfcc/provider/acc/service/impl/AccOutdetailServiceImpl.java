@@ -81,4 +81,22 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
         }
     }
 
+    @Override
+    public PageData getTurnOutInfo(String orderId, String versionNo) {
+        return accOutdetailDao.getTurnOutInfo(orderId);
+    }
+
+    @Override
+    public boolean turnOutBack(PageData pd, String versionNo) {
+        boolean transResult = accDao.transferfail(pd);
+        boolean backResult = accOutdetailDao.updateStatusByFlowId(pd);
+        return (backResult&&transResult);
+    }
+
+    @Override
+    public boolean turnOutUpdate(PageData pd, String versionNo) {
+        boolean backResult = accOutdetailDao.updateStatusByFlowId(pd);
+        return backResult;
+    }
+
 }

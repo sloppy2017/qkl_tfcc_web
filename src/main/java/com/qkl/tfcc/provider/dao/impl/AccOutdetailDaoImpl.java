@@ -41,4 +41,14 @@ public class AccOutdetailDaoImpl extends DaoSupport<AccOutdetail> implements
         return getSqlSession().selectOne(namespace+"."+"getAccOutDetailByOrderId", orderId);
     }
 
+    @Override
+    public PageData getTurnOutInfo(String orderId) {
+        return getSqlSession().selectOne(namespace+"."+"getTurnOutInfo", orderId);
+    }
+
+    @Override
+    public boolean updateStatusByFlowId(PageData pd) {
+        return getSqlSession().update(namespace+"."+"updateStatusByFlowId", pd)>0;
+    }
+
 }

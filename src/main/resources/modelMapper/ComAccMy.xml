@@ -77,7 +77,7 @@
     <select id="listPageAccOut" parameterType="page"  resultType="pd">
 	    select outamnt,date_format(outdate,'%Y-%m-%d %T') outdate ,
 	    (case when `status`='1' then '转账成功' when `status`='0' then '转账失败' when `status`='2' then '转账中' end) out_status,
-	    recipient,order_ids from tb_acc_outdetail 
+	    recipient,order_ids,remark1 from tb_acc_outdetail 
 	    where 1=1
 	    and user_code = #{pd.userCode}
 	    <if test="pd.status != null and pd.status !=''" >

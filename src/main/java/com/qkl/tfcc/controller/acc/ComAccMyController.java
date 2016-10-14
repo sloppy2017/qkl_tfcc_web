@@ -30,6 +30,7 @@ import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.APIHttpClient;
 import com.qkl.util.help.AjaxResponse;
 import com.qkl.util.help.DateUtil;
+import com.qkl.util.help.OrderGenerater;
 import com.qkl.util.help.StringUtil;
 import com.qkl.util.help.pager.PageData;
 
@@ -129,7 +130,8 @@ public class ComAccMyController extends BaseAction {
             ar.setMessage("暂未开放，敬请期待！");
             return ar;
         }
-        
+        PageData pd= new PageData();
+        pd= this.getPageData();
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		String userCode="";
         if(user==null){
@@ -138,7 +140,6 @@ public class ComAccMyController extends BaseAction {
             userCode =user.getUserCode();
         }
         UserDetail userDetail =  userService.findUserDetailByUserCode(userCode, Constant.VERSION_NO);
-		pd=this.getPageData();
 		Map<String, Object> findNum = cams.findMyAcc(userCode);
 		String string = findNum.get("avb_amnt").toString();//获取可用余额
 		String money = pd.getString("money");//获取输入的SAN数量
@@ -188,13 +189,42 @@ public class ComAccMyController extends BaseAction {
 										logger.info("申请转账失败----原因：调用接口参数含有null或空字符串------url="+url+"--sender="+sender+"--recipient="+recipient+"--pri="+pri+"--salt="+salt+"--admin_user="+admin_user);
 										return ar;
 									}
-									
+									/*************************************转账中**************************************/
+									String  flowNo = OrderGenerater.generateOrderNo();//获取流水号
+									pd.put("userCode", userCode);
+                                    pd.put("subAccno", "010401");//普通会员转出至R8账户
+                                    pd.put("outamnt", bigDecimal);
+                                    pd.put("outdate",DateUtil.getCurrentDate());
+                                    pd.put("cntflag", 0);
+                                    pd.put("targetSystem","R8");
+                                    pd.put("status", 2);//1成功0失败2转出中
+                                    pd.put("createTime", DateUtil.getCurrentDate());
+                                    pd.put("modifyTime", DateUtil.getCurrentDate());
+                                    pd.put("operator", userDetail.getPhone());
+                                    pd.put("order_ids", "");//默认置空
+                                    pd.put("sender", sender);
+                                    pd.put("recipient", recipient);
+                                    pd.put("remark1", flowNo);//流水号
+                                    boolean result = accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
+                                    if(!result){
+                                        ar.setMessage("您的余额不足");
+                                        ar.setSuccess(false);
+                                        return ar;
+                                    }
+                                    /*************************************转账中**************************************/
 									//调用转账接口
 									String turnOut =APIHttpClient.turnOut(url, null, sender, recipient, money, pri, salt, admin_user);
 									if(turnOut == null){
 									    logger.info("------------网络异常，调用转账接口失败----------------------turnOut="+turnOut);
 									    ar.setMessage("网络异常，请稍后再试！");
 									    ar.setSuccess(false);
+									    //更新账户
+                                        PageData accData = new PageData();
+                                        accData.put("userCode", userCode);
+                                        accData.put("value", money);
+                                        accData.put("status", "0");
+                                        accData.put("remark1", flowNo);//流水号
+                                        accOutdetailService.turnOutBack(accData, Constant.VERSION_NO);
 									    return ar;
 									}
 									JSONObject objJson = JSONObject.parseObject(turnOut);
@@ -204,7 +234,16 @@ public class ComAccMyController extends BaseAction {
 									    if(objJson.getJSONObject("data").getString("error_code").contains("PERMISSION_DENIED")){
 									        ar.setMessage(CodeConstant.PERMISSION_DENIED);
 									    }else if(objJson.getJSONObject("data").getString("error_code").contains("INVALID_PARAMS")){
-									        ar.setMessage(CodeConstant.INVALID_PARAMS);
+									        if(objJson.getJSONObject("data").getString("message").contains("invalid params")){
+									            ar.setMessage(CodeConstant.INVALID_PARAMS.get("invalid params").toString());
+									        }else if(objJson.getJSONObject("data").getString("message").contains("sender and receiver must be different")){
+									            ar.setMessage(CodeConstant.INVALID_PARAMS.get("sender and receiver must be different").toString());
+									        }else if(objJson.getJSONObject("data").getString("message").contains("receiver not found")){
+                                                ar.setMessage(CodeConstant.INVALID_PARAMS.get("receiver not found").toString());
+                                            }else{
+                                                ar.setMessage(objJson.getJSONObject("data").getString("message"));
+                                            }
+									        
 									    }else if(objJson.getJSONObject("data").getString("error_code").contains("NOT_ENOUGH_BALANCE")){
                                             ar.setMessage(CodeConstant.NOT_ENOUGH_BALANCE);
                                         }else if(objJson.getJSONObject("data").getString("error_code").contains("USER_NOT_FOUND")){
@@ -224,7 +263,13 @@ public class ComAccMyController extends BaseAction {
 									    log.put("log_type", "1");//接口日志类型：1-转账申请2-转账回调
 									    log.put("log_status", "0");//转账日志状态：1-成功 0-失败 2-转账中
 									    interfaceLogDao.insertSelective(log);
-									    
+									    //更新账户
+									    PageData accData = new PageData();
+									    accData.put("userCode", userCode);
+									    accData.put("value", money);
+									    accData.put("status", "0");
+									    accData.put("remark1", flowNo);//流水号
+									    accOutdetailService.turnOutBack(accData, Constant.VERSION_NO);
 										return ar;
 									}if ("success".equals(status)) {
 									    logger.info("调用转账接口成功---------success-----返回串："+objJson.toString());
@@ -239,7 +284,7 @@ public class ComAccMyController extends BaseAction {
                                         log.put("log_status", "2");//转账日志状态：1-成功 0-失败 2-转账中
                                         interfaceLogDao.insertSelective(log);
                                         
-										pd.put("userCode", userCode);
+										/*pd.put("userCode", userCode);
 										pd.put("subAccno", "010401");//普通会员转出至R8账户
 										pd.put("outamnt", bigDecimal);
 										pd.put("outdate",DateUtil.getCurrentDate());
@@ -252,7 +297,12 @@ public class ComAccMyController extends BaseAction {
 										pd.put("order_ids", objJson.getString("orderIds"));
 										pd.put("sender", sender);
 										pd.put("recipient", recipient);
-										accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);
+										accOutdetailService.addAccOutdetail(pd, Constant.VERSION_NO);*/
+                                        //更新账户
+                                        PageData accData = new PageData();
+                                        accData.put("order_ids", objJson.getString("orderIds"));
+                                        accData.put("remark1", flowNo);//流水号
+                                        accOutdetailService.turnOutUpdate(accData, Constant.VERSION_NO);
 										ar.setSuccess(true);
 										ar.setMessage("转账申请提交成功");
 										return ar;
