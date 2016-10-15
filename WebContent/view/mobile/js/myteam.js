@@ -2,6 +2,19 @@ $(document).ready(function(){
 	$(".uesr_phone").html(userPhone);
 	var orderStatus="ALL";
 	var num=1;
+	var totalPage=0;
+	$.ajax({
+		type:"post",
+		url:webURL+"/service/team/findVipPage",
+		async:false,
+		data:{"str":orderStatus,"currentPage":num,"showCount":10,"userCode":usercode},
+		success:function(msg){
+			console.log(msg);
+			totalPage=msg.data.page.totalPage;
+		}
+	});
+	
+	
 	vip();
 	function vip(){
 	$.ajax({
@@ -29,9 +42,10 @@ $(document).ready(function(){
 	}
 });
 }
+	
 	//订单页码插件调用
 	$.jqPaginator('#pagination1', {
-		        totalPages: 100,
+		        totalPages: totalPage,
 		        visiblePages:5,
 		        currentPage: 1, 
 		         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
