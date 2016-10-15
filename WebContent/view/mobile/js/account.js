@@ -173,11 +173,9 @@ var validate={
 		   	 	success:function(data){
 		   	 		console.log( data );
 		   	 		console.log( avbAmnt );
-		   	 		if( data.success == true ){
+		   	 		if( data.message == "转账申请提交成功" ){
  		   	 		   alert( data.message );
   		   	 		   window.location.href="Myaccount.html";
- 		   	 		    
- 		   	 		   
   			      }else{
  			      	   alert( data.message );
   			      }
