@@ -2,13 +2,25 @@ $(document).ready(function(){
 	$(".uesr_phone").html(userPhone);
 	 var num=1;
 	 var num1=1;
-	 console.log(usercode);
+//	 console.log(usercode);
+		
 	//收款账号
 	gathering();
-	
+	var orderStatus="";
+	var totalPage=0;
+	$.ajax({
+		type:"post",
+		url:webURL+"/service/bankaccinfo/searchSel",
+		async:false,
+		data:{"str":orderStatus,"currentPage":num,"showCount":10,"userCode":usercode},
+		success:function(msg){
+			console.log(msg);
+			totalPage=msg.data.page.totalPage;
+		}
+	});
 //订单页码插件调用
 	$.jqPaginator('#paginationNews', {
-		        totalPages: 100,
+		        totalPages: totalPage,
 		        visiblePages:5,
 		        currentPage: 1, 
 		         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -20,7 +32,7 @@ $(document).ready(function(){
 					 orderStatus=$("#orderStatus option:selected").val();
 //					 console.log(orderStatus);
 //					 console.log(num)
-		         orderInquiry(orderStatus,num)
+		         orderInquiry(orderStatus,num);
 		    }
 		   });
 //订单查询
@@ -40,7 +52,7 @@ $("#orderCancel").click(function(){
 	orderInquiry(orderStatus,1);
 })
 var sprSchoolName=1;
-console.log(usercode);
+//console.log(usercode);
 
 //==================
 //收款账号
@@ -51,7 +63,7 @@ function gathering(){
 	async:true,
 	data:{"userCode":usercode},
 	success:function(msg){
-		console.log(msg);
+//		console.log(msg);
 		var orgName=msg.data.orgName;
 		var bankaccno=msg.data.bankaccno;
 		$("#gatherUser").html(orgName);
@@ -71,7 +83,7 @@ function orderInquiry(orderStatus,num){
 		success:function(msg){
 			console.log(msg);
 			var msgdata=msg.data.tradeInfo;
-			console.log(msg)
+//			console.log(msg)
 		$.each(msgdata,function(i,n) {
 			var msgStatus=msgdata[i].status;
 			var msgTxamnt=parseInt(msgdata[i].txamnt);

@@ -2,16 +2,27 @@ $(document).ready(function(){
 	$(".uesr_phone").html(userPhone);
 	 var num=1;
 	 var orderStatus="";
+	 var totalPage=0;
+	$.ajax({
+		type:"post",
+		url:webURL+"/service/comacc/findout",
+		async:false,
+		data:{"status":orderStatus,"currentPage":num,"showCount":10,"userCode":usercode},
+		success:function(msg){
+			console.log(msg);
+			totalPage=msg.data.page.totalPage;
+		}
+	});
 //订单页码插件调用
 	$.jqPaginator('#paginationNews', {
-		        totalPages: 100,
+		        totalPages: totalPage,
 		        visiblePages:5,
 		        currentPage: 1, 
 		         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
 		         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
 		         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
 		         onPageChange: function (num, type){
-		        	 $("tr").remove(".table_tr");
+		         	$("tr").remove(".table_tr"); 
 		         	$(".table_order1").find("tr").remove(".table_tr");
 		         	 serverTitle=$("#server_title").val();
 					 orderStatus=$("#orderStatus option:selected").val();
@@ -45,7 +56,7 @@ var sprSchoolName=1;
 //==================
 //订单查询
 function orderInquiry(orderStatus,num){
-	 $("tr").remove(".table_tr");
+	 $("tr").remove("tbody");
 //	console.log(usercode);
 	$.ajax({
 		type:"post",
@@ -61,7 +72,7 @@ function orderInquiry(orderStatus,num){
 		    var msgtxnum=msgdata[i].outamnt;
 		    var revbankaccno=msgdata[i].recipient;
 		    var mstxdate=msgdata[i].outdate;
-		    var msgtime = mstxdate.replace(/年/, "-").replace(/月/, "-").replace(/日/,"")
+		    var msgtime = mstxdate.replace(/年/, "-").replace(/月/, "-").replace(/日/,"");
 			var ajaxwrap="<tr class='table_tr'><td class='order_time'>"+msgtime+"</td><td>"+msgtxnum+"</td><td class='zhifub'>"+revbankaccno+"</td><td>"+msgStatus+"</td></tr>"
 		$(".transfer_table").find("tbody").append(ajaxwrap);
 		});
