@@ -117,4 +117,11 @@
              order_ids = #{order_ids}
          where remark1 = #{remark1}     
      </update>
+     <select id="findIsExistTransfering" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) cnt
+        from tb_acc_outdetail 
+        where 1=1
+        and  `status` = 2
+        and user_code = #{userCode} 
+     </select>
 </mapper>     

@@ -101,4 +101,9 @@ public class AccOutdetailServiceImpl implements AccOutdetailService {
         return backResult;
     }
 
+    @Override
+    public boolean findIsExistTransfering(String userCode, String versionNo) {
+        return accOutdetailDao.findIsExistTransfering(userCode);
+    }
+
 }

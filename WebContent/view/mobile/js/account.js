@@ -70,8 +70,8 @@ var validate={
            return false;
        }
        return true;
-	 }		
-	};
+	 }	
+};
 	
     //通过session获取usercode
 	var usercode = sessionStorage.getItem("usercode");
@@ -151,15 +151,22 @@ var validate={
   });
    // 提交转账
    $('#submit1').on("click",function(){
+   	 var flo = $('#lines').val() ;
+     var myreg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){0,4})?$/;
    	if( $('#otherAccount').val() != '' ){
-   		if( parseInt( $('#lines').val() ) > 0 && parseInt( $('#lines').val() ) <= avbAmnt ){
+   	  if(myreg.test(flo) ) {
+   	  	
+   	  
+   		if( flo > 0 && flo <= avbAmnt ){
+   			 $('#submit1').attr('disabled',"true");
+   	         $('#submit1').css('background','#CCCCCC'); 
    			$.ajax({
 		   	 	type:"post",
 		   	 	url:webURL+"/service/comacc/turnOut",
 		   	 	data:{
 		   	 		"userCode":usercode,
 		            "avb_amnt":avbAmnt,
-		            "money": parseInt( $('#lines').val() ),
+		            "money": flo,
 		            "zhanghao":$('#otherAccount').val(),
 		            "mobileflag": 1
 		   	 	},
@@ -168,7 +175,9 @@ var validate={
 		   	 		console.log( avbAmnt );
 		   	 		if( data.success == true ){
  		   	 		   alert( data.message );
- 				       window.location.href="Myaccount.html";
+  		   	 		   window.location.href="Myaccount.html";
+ 		   	 		    
+ 		   	 		   
   			      }else{
  			      	   alert( data.message );
   			      }
@@ -176,9 +185,12 @@ var validate={
 		   	 });
    		}else{
    			alert( '你的转账额度为0或超过你的可用额度' );
-   		};	
+   		  };
+   		}else{
+   			alert( '转账额度格式有误，小数点后最多保留四位' );
+   		};
    	}else{
-   		alert( '对方账户为空' );
+   		alert( '账户为空' );
    	}
    	
    	 

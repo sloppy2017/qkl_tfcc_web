@@ -51,4 +51,13 @@ public interface AccOutdetailDao extends DAO<AccOutdetail> {
 	 * @return: boolean
 	 */
 	public boolean updateStatusByFlowId(PageData pd);
+	/**
+	 * @describe:查询是否有转账中的数据
+	 * @author: zhangchunming
+	 * @date: 2016年10月15日上午11:34:23
+	 * @param userCode
+	 * @return
+	 * @return: boolean
+	 */
+	public boolean findIsExistTransfering(String userCode);
 }

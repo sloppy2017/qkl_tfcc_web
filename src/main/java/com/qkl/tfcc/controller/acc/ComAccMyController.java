@@ -189,6 +189,15 @@ public class ComAccMyController extends BaseAction {
 										logger.info("申请转账失败----原因：调用接口参数含有null或空字符串------url="+url+"--sender="+sender+"--recipient="+recipient+"--pri="+pri+"--salt="+salt+"--admin_user="+admin_user);
 										return ar;
 									}
+									/*************************************查询是否有转账中的数据**************************************/
+									boolean isExistTransfering = accOutdetailService.findIsExistTransfering(userCode,Constant.VERSION_NO);
+									if(isExistTransfering){
+									    ar.setSuccess(false);
+									    ar.setMessage("系统存在处理中订单，请稍候重试！");
+									    return ar;
+									}
+									/*************************************查询是否有转账中的数据**************************************/
+									
 									/*************************************转账中**************************************/
 									String  flowNo = OrderGenerater.generateOrderNo();//获取流水号
 									pd.put("userCode", userCode);

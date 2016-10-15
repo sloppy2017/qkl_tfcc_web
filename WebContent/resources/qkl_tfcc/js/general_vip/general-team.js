@@ -1,6 +1,6 @@
 var str='';
 var flag =true;
-$(".type-btn button").click(function(){
+$(".type-btn").click(function(){
     var showcnt =10; //每页页数初始值
     var  myselect=document.getElementById("showcnt");
     if(myselect==null||myselect=="null"){

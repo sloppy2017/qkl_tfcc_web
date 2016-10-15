@@ -51,4 +51,9 @@ public class AccOutdetailDaoImpl extends DaoSupport<AccOutdetail> implements
         return getSqlSession().update(namespace+"."+"updateStatusByFlowId", pd)>0;
     }
 
+    @Override
+    public boolean findIsExistTransfering(String userCode) {
+        return (Integer)getSqlSession().selectOne(namespace+"."+"findIsExistTransfering", userCode)>0;
+    }
+
 }

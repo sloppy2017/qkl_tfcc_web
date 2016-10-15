@@ -89,11 +89,12 @@ $(function(){
 			  alert('转账额度不能为空');
 			  return false;
 		  }
-		  
+		  if(money=="0"){
+			  alert('转账额度不能为0');
+			  return false;
+		  }
 		  if(!myreg.test(money)){
-			  alert('转账额度格式有误，小数点后最多保留四位');
-			 // $('#zhuanzhang').val("小数点后最多保留四位");
-			//  $('#zhuanzhang').addClass("errorTip");
+			  alert('转账额度格式有误，请输入数字且小数点后最多保留四位');
 	          return false;
 	      }
 		  ++lock;
