@@ -100,6 +100,7 @@ public class SmsSend {
     }
 	// 封装手机参数
 	public static NameValuePair[] PackMobileParas(String phone, String content){
+	    System.out.println("发送短信参数：phone="+phone+",content="+content);
 	    NameValuePair[] data = {//提交短信
                 new NameValuePair("account", account), 
 //              new NameValuePair("password", "密码"), //密码可以使用明文密码或使用32位MD5加密

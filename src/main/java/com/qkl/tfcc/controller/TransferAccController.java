@@ -109,8 +109,8 @@ public class TransferAccController extends BaseAction{
                     pd_log.put("log_type", "2");//接口日志类型：1-转账申请2-转账回调
                     pd_log.put("log_status", "1");//转账日志状态：1-成功 0-失败 2-转账中
                     interfaceLogDao.insertSelective(pd_log);
-                    logger.info("转账回调------转账成功success---------pd id is "+pd.getString("orderId"));
-                    String orderId = params.getString("orderIds");//获取订单号
+                    logger.info("转账回调------转账成功success---------pd orderId is "+pd.getString("orderId"));
+                    String orderId = params.getString("orderId");//获取订单号
                     PageData turnOutInfo = accOutdetailService.getTurnOutInfo(orderId, Constant.VERSION_NO);
                     if(turnOutInfo!=null&&turnOutInfo.get("phone")!=null&&turnOutInfo.get("recipient")!=null&&turnOutInfo.get("outamnt")!=null){
                         int num = smsService.getBlackPhone(turnOutInfo.getString("phone"));

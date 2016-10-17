@@ -104,7 +104,7 @@
         from tb_acc_outdetail a,tb_user_detail b 
         where 1=1
         and a.user_code = b.user_code 
-        and order_ids = #{orderId}     
+        and a.order_ids = #{orderId}     
      </select>
      <!-- 根据流水号修改转出记录 -->
      <update id="updateStatusByFlowId" parameterType="pd" >    
