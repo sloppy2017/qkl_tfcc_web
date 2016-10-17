@@ -1,5 +1,6 @@
 package com.qkl.tfcc.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -114,9 +115,12 @@ public class TransferAccController extends BaseAction{
                     PageData turnOutInfo = accOutdetailService.getTurnOutInfo(orderId, Constant.VERSION_NO);
                     if(turnOutInfo!=null&&turnOutInfo.get("phone")!=null&&turnOutInfo.get("recipient")!=null&&turnOutInfo.get("outamnt")!=null){
                         int num = smsService.getBlackPhone(turnOutInfo.getString("phone"));
+                        logger.info("短信黑名单查询----------num="+num);
                         if(num==0){//非黑名单用户才能发送短信
-                            String content = "尊敬的【"+turnOutInfo.getString("phone")+"】会员您好，您已成功向三界链钱包账户【"+turnOutInfo.getString("recipient")+"】转出【"+turnOutInfo.getString("outamnt")+"】三界宝数字资产。";
+                            logger.info("转账回调成功发送短信-----------------start------------------");
+                            String content = "尊敬的【"+turnOutInfo.getString("phone")+"】会员您好，您已成功向三界链钱包账户【"+turnOutInfo.getString("recipient")+"】转出【"+((BigDecimal)turnOutInfo.get("outamnt")).toString()+"】三界宝数字资产。";
                             SmsSend.sendSms(turnOutInfo.getString("phone"), content); 
+                            logger.info("转账回调成功发送短信-----------------end------------------phone="+turnOutInfo.getString("phone")+",content="+content);
                         }
                     }
                     return ar;
@@ -165,5 +169,10 @@ public class TransferAccController extends BaseAction{
             logAfter(logger);
         }   
         return ar;
+    }
+    public static void main(String[] args) {
+        BigDecimal bd = new BigDecimal("123");
+        String str = bd.toString();
+        System.out.println("str==="+str); 
     }
 }

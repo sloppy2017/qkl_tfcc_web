@@ -77,7 +77,7 @@ $(function(){
   var lock=0;
   function tijiao(){//输入转账的金额和我的账户余额比较
 		 var zhanghao= $('#zhanghao').val();//钱包账号
-		  var money= $('#zhuanzhang').val();//转帐额度
+		  var money= ""+$('#zhuanzhang').val();//转帐额度
 		  var myreg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){0,4})?$/;
 
 		  
