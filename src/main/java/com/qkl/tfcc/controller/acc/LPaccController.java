@@ -13,6 +13,7 @@ import com.qkl.tfcc.api.po.user.User;
 import com.qkl.tfcc.api.service.acc.api.LPaccService;
 import com.qkl.tfcc.web.BaseAction;
 import com.qkl.util.help.AjaxResponse;
+import com.qkl.util.help.pager.PageData;
 
 
 @Controller
@@ -34,6 +35,7 @@ public class LPaccController extends BaseAction {
 	        }else{
 	            userCode =user.getUserCode();
 	        }
+	        PageData pd = new PageData();
 			pd = this.getPageData();
 			long Balance = lpService.findLPBalance(userCode);
 			pd.put("Balance", Balance);
@@ -56,6 +58,7 @@ public class LPaccController extends BaseAction {
 		List<PageData> RewardInfo=null;
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
+			PageData pd = new PageData();
 			pd=this.getPageData();
 			pd.put("userCode", user.getUserCode());
 			page.setPd(pd);

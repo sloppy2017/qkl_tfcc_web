@@ -99,6 +99,7 @@ public class StockController extends BaseAction {
 		AjaxResponse ar = new AjaxResponse();
 		
 		try {
+		    PageData pd = new PageData();
 			 pd = this.getPageData();
 			if(bankAccInfo==null){
 				bankAccInfo = bankAccService.findBankAccInfo("", Constant.VERSION_NO);

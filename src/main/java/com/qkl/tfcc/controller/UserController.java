@@ -157,7 +157,8 @@ public class UserController extends BaseAction{
     @RequestMapping(value="/modifyuser", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse modifyuser(UserDetail mUserDetail,HttpServletRequest request){
-        logBefore(logger, "修改用户信息");        
+        logBefore(logger, "修改用户信息");     
+        AjaxResponse ar = new AjaxResponse();
         try {
             UserDetail tUserDetail = new UserDetail();
             
@@ -987,6 +988,7 @@ public class UserController extends BaseAction{
     @RequestMapping(value="/realname", method=RequestMethod.POST)
     @ResponseBody
     public AjaxResponse realname(HttpServletRequest request,HttpServletResponse response){
+        AjaxResponse ar = new AjaxResponse();
         try {
             User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
             String userCode="";
@@ -1383,7 +1385,9 @@ public class UserController extends BaseAction{
     @ResponseBody
     public AjaxResponse delPic(){
         logBefore(logger, "删除图片");
+        AjaxResponse ar = new AjaxResponse();
         try{
+            PageData pd = new PageData();
             pd = this.getPageData();
             String imgAddrss = pd.getString("imgAddrss");
             if(!StringUtil.isEmpty(imgAddrss)){
@@ -1455,6 +1459,7 @@ public class UserController extends BaseAction{
     @ResponseBody
     public AjaxResponse toMyself(HttpServletRequest request){
         logBefore(logger,"去往用户中兴");
+        AjaxResponse ar = new AjaxResponse();
         /*UserDetail userDetail = JSON.parseObject(params,UserDetail.class);
         if(userDetail==null||StringUtil.isEmpty(userDetail.getUserCode())){
             ar.setSuccess(false);
@@ -1478,6 +1483,7 @@ public class UserController extends BaseAction{
     @ResponseBody
     public AjaxResponse getHeadPic(HttpServletRequest request){
         logBefore(logger,"获取用户信息");
+        AjaxResponse ar = new AjaxResponse();
         Map<String,String> map = new HashMap<String,String>();
         UserDetail userDetail = findUserDetail(request);
         if(userDetail != null){
@@ -1504,6 +1510,8 @@ public class UserController extends BaseAction{
     @RequestMapping(value="/isExistPhone", method=RequestMethod.POST)
     @ResponseBody
     public AjaxResponse isExistPhone(){
+        AjaxResponse ar = new AjaxResponse();
+        PageData pd = new PageData();
         pd = this.getPageData();
         String phone = pd.getString("phone").trim();
         if(StringUtil.isEmpty(phone)){

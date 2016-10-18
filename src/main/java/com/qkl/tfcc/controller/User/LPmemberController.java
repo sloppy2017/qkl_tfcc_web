@@ -71,6 +71,7 @@ public class LPmemberController extends BaseAction {
                 userCode =user.getUserCode();
             }
 			String userName = request.getParameter("userName");
+			PageData pd = new PageData();
 			pd=this.getPageData();
 			map.put("userCode", userCode);
 			//pd.put("userCode", user.getUserCode());

@@ -70,6 +70,7 @@ public class BankAccController extends BaseAction {
 	/*@RequestMapping(value="/bankaccno",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse findBankaccNo(HttpServletRequest request,HttpServletResponse response){//查询购买人的支付宝账号
+		AjaxResponse ar = new AjaxResponse();
 		try {
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			//UserDetail findUserDetailByUserCode = userDetailServiceImpl.findUserDetailByUserCode(user.getUserCode(), Constant.VERSION_NO);
@@ -99,6 +100,7 @@ public class BankAccController extends BaseAction {
 			}else{
 				userCode =user.getUserCode();
 			}
+			PageData pd = new PageData();
 			 pd=this.getPageData();
 			 //String parameter = request.getParameter("searchSel");
 			 pd.put("userCode", userCode);
@@ -160,6 +162,7 @@ public class BankAccController extends BaseAction {
 	@RequestMapping(value="/tradebuy",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse buyTfcc(HttpServletRequest request){//购买tfcc
+	    AjaxResponse ar = new AjaxResponse();
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		
 		try {
@@ -175,6 +178,7 @@ public class BankAccController extends BaseAction {
 		        ar.setMessage("已售罄！");
 		        return ar;
 		    }
+		    PageData pd = new PageData();
 		    pd=this.getPageData();
 			BankAccInfo bankAccInfo = bankAccService.findBankInfo(Constant.VERSION_NO);
 			pd.put("order_no", OrderGenerater.generateOrderNo());
@@ -262,8 +266,10 @@ public class BankAccController extends BaseAction {
 	@RequestMapping(value="/PayMoney",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse requirePayMoney(HttpServletRequest request){//获取购买金额
+	    AjaxResponse ar = new AjaxResponse();
 		//User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		try {
+		    PageData pd = new PageData();
 			pd=this.getPageData();
 			String txnums = pd.getString("txnum");
 			

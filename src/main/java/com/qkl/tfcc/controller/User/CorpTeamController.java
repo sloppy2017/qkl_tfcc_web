@@ -65,6 +65,7 @@ public class CorpTeamController extends BaseAction {
             userCode =user.getUserCode();
         }
 		//String userCode="10000000001";
+        PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("userCode", userCode);
 		//pd.put("userCode", userCode);

@@ -66,6 +66,7 @@ public class TransferAccController extends BaseAction{
     @ResponseBody
     public AjaxResponse callback(HttpServletRequest request,HttpServletResponse response){
         logBefore(logger,"TransferAccController.callback()");
+        AjaxResponse ar = new AjaxResponse();
         PageData pd = new PageData();
     	pd = this.getPageData();
         try {

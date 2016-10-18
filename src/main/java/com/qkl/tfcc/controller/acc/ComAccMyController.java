@@ -83,6 +83,7 @@ public class ComAccMyController extends BaseAction {
 	@RequestMapping(value="/getAmnt",method=RequestMethod.POST)
 	@ResponseBody
 	public  AjaxResponse getAmnt(HttpServletRequest request){
+	    AjaxResponse ar = new AjaxResponse();
 	    try {
 	        User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 	        String userCode="";	       
@@ -118,6 +119,7 @@ public class ComAccMyController extends BaseAction {
 	@RequestMapping(value="/turnOut",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse turnOut(HttpServletRequest request){//比较转账数额的大小
+	    AjaxResponse ar = new AjaxResponse();
 	    String is_turn = "0";
         List<Map<String, Object>> codeList =  sysGenCodeService.findByGroupCode("TURN_FLAG", Constant.VERSION_NO);
         for(Map<String, Object> codeMap:codeList){
@@ -332,6 +334,7 @@ public class ComAccMyController extends BaseAction {
 	@RequestMapping(value="/findout",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse findOutList(HttpServletRequest request,Page page){
+	    AjaxResponse ar = new AjaxResponse();
 	    Map<String,Object> map = new HashMap<String, Object>();
 		User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 		String userCode="";
@@ -342,6 +345,7 @@ public class ComAccMyController extends BaseAction {
         }
 		List<PageData> outList=null;
 		try {
+		    PageData pd = new PageData();
 			pd=this.getPageData();
 			pd.put("userCode", userCode);
 			page.setPd(pd);

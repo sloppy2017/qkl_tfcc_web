@@ -60,8 +60,10 @@ public class AccController extends BaseAction{
     @ResponseBody
     public AjaxResponse modifyuser(HttpServletRequest request){
         logBefore(logger, "投资机构发放tfcc给普通会员");
+        AjaxResponse ar = new AjaxResponse();
         Map<String,String> resMap = new HashMap<String, String>();
         try {
+             PageData pd = new PageData();
              pd = this.getPageData();
              if(pd.get("params") == null){
                  ar.setSuccess(false);

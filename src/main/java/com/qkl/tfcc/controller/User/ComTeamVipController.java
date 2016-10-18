@@ -47,6 +47,7 @@ public class ComTeamVipController extends BaseAction{
 			}else{
 				userCode =user.getUserCode();
 			}
+			PageData pd = new PageData();
 			pd=this.getPageData();			
 			pd.put("userCode", userCode);
 			count = vipservice.findcount(userCode);
@@ -68,6 +69,7 @@ public class ComTeamVipController extends BaseAction{
     	AjaxResponse ar = new AjaxResponse();    	
     	Map<String,Object> map = new HashMap<String, Object>();
 		try {
+		    PageData pd = new PageData();
 			pd = this.getPageData();
 			User user = (User)request.getSession().getAttribute(Constant.LOGIN_USER);
 			String userCode="";
