@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Order">
+
+<insert id="addPayOrder" parameterType="com.qkl.util.help.pager.PageData" >
+     insert into ORDER_INFO (user_code,user_name,ORDER_TYPE,target_Amnt,NEW_NUM,price,USERWALLET_ID,project_id,ORDER_CONTENT,
+     ORDER_TIME,ORDER_STATUS,CREATE_TIME,UPDATE_TIME)
+     values(
+     #{userCode},
+     #{userName},
+     #{orderType},
+     #{targetAmnt},
+     #{newNum},
+     #{price},
+     #{userwalletId},
+     #{projectId},
+     #{orderContent},
+     #{orderTime},
+     #{orderStatus},  
+     #{createTime},
+     #{updateTime}
+     )   
+     </insert>
+     
+     
+      <update id="updateOrderProof" parameterType="com.qkl.util.help.pager.PageData" >    
+	     update ORDER_INFO 
+	     set ORDER_FILEPATH = #{orderFilepath},
+	         ORDER_STATUS = #{orderStatus},
+	          UPDATE_TIME = #{updateTime}
+	     where ORDERINFO_ID = #{orderinfoId}     
+     </update>
+     
+
+  <select id="listOrder" parameterType="java.util.Map" resultType="pd" >
+		select  
+		a.ORDERINFO_ID,a.USER_CODE,a.USER_NAME,
+		a.ORDER_TYPE,a.target_Amnt,a.NEW_NUM,a.price,a.USERWALLET_ID,a.PROJECT_ID,a.ORDER_CONTENT,
+		a.ORDER_FILEPATH,
+		DATE_FORMAT(a.ORDER_TIME,'%Y-%m-%d') ORDER_TIME,a.ORDER_STATUS,b.project_name			
+		from ORDER_INFO a  ,pro_crowdfunding  b
+		where a.PROJECT_ID = b.project_id
+
+		and a.USER_CODE=#{pd.userCode}	
+	       <if test="pd.orderType != null and pd.orderType != ''">
+            and a.ORDER_TYPE = #{pd.orderType}
+          </if>
+            <if test="pd.orderContent != null and pd.orderContent != ''">
+             and (a.ORDER_CONTENT like concat('%', #{pd.orderContent}, '%'))  
+          </if>
+           <if test="pd.orderBegintime != null and pd.orderBegintime != ''">
+              and  a.ORDER_TIME &gt;=#{pd.orderBegintime}
+          </if>
+          <if test="pd.orderEndtime != null and pd.orderEndtime != ''">
+              and  a.ORDER_TIME &lt;=#{pd.orderEndtime}
+          </if> 
+      limit #{currentResult},#{showCount}
+	</select> 
+   
+	<select id="showOrder" parameterType="com.qkl.util.help.pager.PageData" resultType="com.qkl.util.help.pager.PageData" >
+       select  
+		ORDERINFO_ID,USER_CODE,USER_NAME,
+		ORDER_TYPE,target_Amnt,NEW_NUM,price,USERWALLET_ID,PROJECT_ID,ORDER_CONTENT,
+		ORDER_FILEPATH,
+		DATE_FORMAT(ORDER_TIME,'%Y-%m-%d') ORDER_TIME,ORDER_STATUS
+		from ORDER_INFO
+		where ORDERINFO_ID=#{orderinfoId}
+		and user_code =#{userCode}
+    </select> 
+	 
+	 
+	 <select id="showMaxOrder" parameterType="com.qkl.util.help.pager.PageData" resultType="com.qkl.util.help.pager.PageData" >
+        select  
+		ORDERINFO_ID,USER_CODE,USER_NAME,
+		ORDER_TYPE,target_Amnt,NEW_NUM,price,USERWALLET_ID,PROJECT_ID,ORDER_CONTENT,
+		ORDER_FILEPATH,
+		DATE_FORMAT(ORDER_TIME,'%Y-%m-%d') ORDER_TIME,ORDER_STATUS
+		from ORDER_INFO
+		where 1=1
+		and user_code =#{userCode}
+		order by ORDERINFO_ID desc LIMIT 0,1
+    </select>
+	 
+	 
+	 <select id="myOrderCount"  parameterType="com.qkl.util.help.pager.PageData"   resultType="java.util.Map">
+    	    select count(1) cnt FROM ORDER_INFO 
+            where 1=1 
+            and user_code =#{userCode}
+           <if test="orderType != null and orderType != ''">
+            and ORDER_TYPE = #{orderType}
+          </if>
+            <if test="orderContent != null and orderContent != ''">
+             and (ORDER_CONTENT like concat('%', #{orderContent}, '%'))  
+          </if>
+           <if test="orderBegintime != null and orderBegintime != ''">
+              and  ORDER_TIME &gt;=#{orderBegintime}
+          </if>
+          <if test="orderEndtime != null and orderEndtime != ''">
+              and  ORDER_TIME &lt;=#{orderEndtime}
+          </if>
+             limit 1
+  </select>
+	 
+	 
+	  <select id="myOrderAmnt"  parameterType="com.qkl.util.help.pager.PageData"   resultType="java.util.Map">
+    	    select 
+    	    sum(case when ORDER_STATUS in ('1','2') then NEW_NUM else 0 end) allamnt,
+    	    sum(case when ORDER_STATUS in ('1','') then NEW_NUM else 0 end) prossamnt,
+    	    sum(case when ORDER_STATUS in ('2','') then NEW_NUM else 0 end) succamnt
+    	     FROM ORDER_INFO 
+            where 1=1 
+            and user_code =#{userCode}       
+            limit 1
+  </select>
+
+</mapper>     
